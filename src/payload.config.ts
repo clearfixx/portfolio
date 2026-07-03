@@ -5,22 +5,20 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
-import { BlogPosts } from './collections/BlogPosts'
-import { Categories } from './collections/Categories'
-import { Media } from './collections/Media'
-import { Projects } from './collections/Projects'
-import { ProjectVersions } from './collections/ProjectVersions'
-import { TechStack } from './collections/TechStack'
-import { Users } from './collections/Users'
-import { Testimonials } from './collections/Testimonials'
-import { ContactMessages } from './collections/ContactMessages'
-import { Notifications } from './collections/Notifications'
-import { SiteSettings } from './globals/SiteSettings'
-import { Homepage } from './globals/Homepage'
-import { SEO } from './globals/SEO'
-import { Social } from './globals/Social'
-import { Contact } from './globals/Contact'
-import { Analytics } from './globals/Analytics'
+import {
+  BlogPosts,
+  Categories,
+  ContactMessages,
+  Media,
+  Notifications,
+  Projects,
+  ProjectVersions,
+  TechStack,
+  Testimonials,
+  Users,
+} from './collections'
+
+import { Analytics, Contact, Homepage, SEO, SiteSettings, Social } from './globals'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
