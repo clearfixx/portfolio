@@ -107,11 +107,13 @@ export interface Config {
     'site-settings': SiteSetting;
     homepage: Homepage;
     seo: Seo;
+    social: Social;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     homepage: HomepageSelect<false> | HomepageSelect<true>;
     seo: SeoSelect<false> | SeoSelect<true>;
+    social: SocialSelect<false> | SocialSelect<true>;
   };
   locale: null;
   widgets: {
@@ -1042,6 +1044,24 @@ export interface Seo {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "social".
+ */
+export interface Social {
+  id: number;
+  githubUrl?: string | null;
+  linkedinUrl?: string | null;
+  /**
+   * X / Twitter profile URL.
+   */
+  xUrl?: string | null;
+  instagramUrl?: string | null;
+  dribbbleUrl?: string | null;
+  youtubeUrl?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
@@ -1108,6 +1128,21 @@ export interface SeoSelect<T extends boolean = true> {
   defaultOgImage?: T;
   robots?: T;
   sitemapEnabled?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "social_select".
+ */
+export interface SocialSelect<T extends boolean = true> {
+  githubUrl?: T;
+  linkedinUrl?: T;
+  xUrl?: T;
+  instagramUrl?: T;
+  dribbbleUrl?: T;
+  youtubeUrl?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

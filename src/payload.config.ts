@@ -18,6 +18,7 @@ import { Notifications } from './collections/Notifications'
 import { SiteSettings } from './globals/SiteSettings'
 import { Homepage } from './globals/Homepage'
 import { SEO } from './globals/SEO'
+import { Social } from './globals/Social'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -41,7 +42,7 @@ export default buildConfig({
     ContactMessages,
     Notifications,
   ],
-  globals: [SiteSettings, Homepage, SEO],
+  globals: [SiteSettings, Homepage, SEO, Social],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
