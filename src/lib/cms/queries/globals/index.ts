@@ -1,6 +1,6 @@
 import type { Analytics, Contact, Homepage, Seo, SiteSetting, Social } from '@/payload-types'
 
-import { getPayloadClient } from '../client'
+import { getPayloadClient } from '../../client'
 
 /**
  * Global CMS queries.
