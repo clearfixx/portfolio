@@ -108,12 +108,14 @@ export interface Config {
     homepage: Homepage;
     seo: Seo;
     social: Social;
+    contact: Contact;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     homepage: HomepageSelect<false> | HomepageSelect<true>;
     seo: SeoSelect<false> | SeoSelect<true>;
     social: SocialSelect<false> | SocialSelect<true>;
+    contact: ContactSelect<false> | ContactSelect<true>;
   };
   locale: null;
   widgets: {
@@ -1062,6 +1064,22 @@ export interface Social {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface Contact {
+  id: number;
+  email: string;
+  phone?: string | null;
+  location?: string | null;
+  /**
+   * Enable or disable the public contact form.
+   */
+  contactFormEnabled?: boolean | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
@@ -1143,6 +1161,19 @@ export interface SocialSelect<T extends boolean = true> {
   instagramUrl?: T;
   dribbbleUrl?: T;
   youtubeUrl?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact_select".
+ */
+export interface ContactSelect<T extends boolean = true> {
+  email?: T;
+  phone?: T;
+  location?: T;
+  contactFormEnabled?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
