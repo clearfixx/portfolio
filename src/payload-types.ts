@@ -72,6 +72,7 @@ export interface Config {
     categories: Category;
     'tech-stack': TechStack;
     projects: Project;
+    'project-versions': ProjectVersion;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +85,7 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'tech-stack': TechStackSelect<false> | TechStackSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
+    'project-versions': ProjectVersionsSelect<false> | ProjectVersionsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -355,6 +357,42 @@ export interface Project {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "project-versions".
+ */
+export interface ProjectVersion {
+  id: number;
+  project: number | Project;
+  /**
+   * Version number or label, e.g. 1.0.0, Phase 2.2, MVP.
+   */
+  version: string;
+  title: string;
+  releaseDate?: string | null;
+  summary: string;
+  highlights?:
+    | {
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  breakingChanges?:
+    | {
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  isStable?: boolean | null;
+  /**
+   * Marks the current visible project version.
+   */
+  isCurrent?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -396,6 +434,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'projects';
         value: number | Project;
+      } | null)
+    | ({
+        relationTo: 'project-versions';
+        value: number | ProjectVersion;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -574,6 +616,35 @@ export interface ProjectsSelect<T extends boolean = true> {
         metaDescription?: T;
         ogImage?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "project-versions_select".
+ */
+export interface ProjectVersionsSelect<T extends boolean = true> {
+  project?: T;
+  version?: T;
+  title?: T;
+  releaseDate?: T;
+  summary?: T;
+  highlights?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  breakingChanges?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  isStable?: T;
+  isCurrent?: T;
   updatedAt?: T;
   createdAt?: T;
 }

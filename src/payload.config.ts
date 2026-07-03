@@ -8,6 +8,7 @@ import sharp from 'sharp'
 import { Categories } from './collections/Categories'
 import { Media } from './collections/Media'
 import { Projects } from './collections/Projects'
+import { ProjectVersions } from './collections/ProjectVersions'
 import { TechStack } from './collections/TechStack'
 import { Users } from './collections/Users'
 
@@ -21,7 +22,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Categories, TechStack, Projects],
+  collections: [Users, Media, Categories, TechStack, Projects, ProjectVersions],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
