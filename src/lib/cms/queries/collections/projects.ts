@@ -1,6 +1,12 @@
 import type { Project } from '@/payload-types'
 
-import { getPayloadClient } from '../../client'
+import {
+  countCollection,
+  findCollectionDocs,
+  findOneCollection,
+  publishedOnly,
+  andWhere,
+} from '../shared'
 
 const DEFAULT_PROJECT_LIMIT = 12
 const DEFAULT_FEATURED_PROJECT_LIMIT = 6
@@ -12,50 +18,32 @@ const DEFAULT_FEATURED_PROJECT_LIMIT = 6
  * Pages ask for portfolio data, this layer speaks CMS. 🛰️
  */
 export async function getProjects(limit = DEFAULT_PROJECT_LIMIT): Promise<Project[]> {
-  const payload = await getPayloadClient()
-
-  const projects = await payload.find({
+  return findCollectionDocs({
     collection: 'projects',
     depth: 2,
     limit,
     sort: '-publishedAt',
-    where: {
-      publishedAt: {
-        exists: true,
-      },
-    },
+    where: publishedOnly(),
   })
-
-  return projects.docs
 }
 
 export async function getFeaturedProjects(
   limit = DEFAULT_FEATURED_PROJECT_LIMIT,
 ): Promise<Project[]> {
-  const payload = await getPayloadClient()
-
-  const projects = await payload.find({
+  return findCollectionDocs({
     collection: 'projects',
     depth: 2,
     limit,
     sort: '-publishedAt',
-    where: {
-      and: [
-        {
-          isFeatured: {
-            equals: true,
-          },
+    where: andWhere(
+      {
+        isFeatured: {
+          equals: true,
         },
-        {
-          publishedAt: {
-            exists: true,
-          },
-        },
-      ],
-    },
+      },
+      publishedOnly(),
+    ),
   })
-
-  return projects.docs
 }
 
 export async function getLatestProjects(limit = 3): Promise<Project[]> {
@@ -63,42 +51,23 @@ export async function getLatestProjects(limit = 3): Promise<Project[]> {
 }
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
-  const payload = await getPayloadClient()
-
-  const projects = await payload.find({
+  return findOneCollection({
     collection: 'projects',
     depth: 3,
-    limit: 1,
-    where: {
-      and: [
-        {
-          slug: {
-            equals: slug,
-          },
+    where: andWhere(
+      {
+        slug: {
+          equals: slug,
         },
-        {
-          publishedAt: {
-            exists: true,
-          },
-        },
-      ],
-    },
+      },
+      publishedOnly(),
+    ),
   })
-
-  return projects.docs[0] ?? null
 }
 
 export async function getProjectsCount(): Promise<number> {
-  const payload = await getPayloadClient()
-
-  const projects = await payload.count({
+  return countCollection({
     collection: 'projects',
-    where: {
-      publishedAt: {
-        exists: true,
-      },
-    },
+    where: publishedOnly(),
   })
-
-  return projects.totalDocs
 }
