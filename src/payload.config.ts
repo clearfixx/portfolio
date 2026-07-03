@@ -20,6 +20,7 @@ import { Homepage } from './globals/Homepage'
 import { SEO } from './globals/SEO'
 import { Social } from './globals/Social'
 import { Contact } from './globals/Contact'
+import { Analytics } from './globals/Analytics'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -43,7 +44,7 @@ export default buildConfig({
     ContactMessages,
     Notifications,
   ],
-  globals: [SiteSettings, Homepage, SEO, Social, Contact],
+  globals: [SiteSettings, Homepage, SEO, Social, Contact, Analytics],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

@@ -109,6 +109,7 @@ export interface Config {
     seo: Seo;
     social: Social;
     contact: Contact;
+    analytics: Analytics;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
@@ -116,6 +117,7 @@ export interface Config {
     seo: SeoSelect<false> | SeoSelect<true>;
     social: SocialSelect<false> | SocialSelect<true>;
     contact: ContactSelect<false> | ContactSelect<true>;
+    analytics: AnalyticsSelect<false> | AnalyticsSelect<true>;
   };
   locale: null;
   widgets: {
@@ -1080,6 +1082,27 @@ export interface Contact {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "analytics".
+ */
+export interface Analytics {
+  id: number;
+  /**
+   * Enable or disable analytics on the public website.
+   */
+  enabled?: boolean | null;
+  /**
+   * Google Analytics measurement ID, e.g. G-XXXXXXXXXX.
+   */
+  googleAnalyticsId?: string | null;
+  /**
+   * Plausible Analytics domain, e.g. example.com.
+   */
+  plausibleDomain?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
@@ -1174,6 +1197,18 @@ export interface ContactSelect<T extends boolean = true> {
   phone?: T;
   location?: T;
   contactFormEnabled?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "analytics_select".
+ */
+export interface AnalyticsSelect<T extends boolean = true> {
+  enabled?: T;
+  googleAnalyticsId?: T;
+  plausibleDomain?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
