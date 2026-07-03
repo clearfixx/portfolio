@@ -158,7 +158,33 @@ export interface User {
  */
 export interface Media {
   id: number;
+  /**
+   * Accessible alternative text. Required for public images.
+   */
   alt: string;
+  /**
+   * Optional human-readable image caption.
+   */
+  caption?: string | null;
+  /**
+   * Optional author, source, or attribution note.
+   */
+  credit?: string | null;
+  /**
+   * Simple folder/group key, e.g. projects, blog, seo, homepage.
+   */
+  folder?: string | null;
+  tags?:
+    | {
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Allow this media item to be used on public pages.
+   */
+  isPublic?: boolean | null;
+  sortOrder?: number | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -297,6 +323,10 @@ export interface Project {
    * Technologies used in this project.
    */
   techStack?: (number | TechStack)[] | null;
+  /**
+   * Articles related to this project.
+   */
+  relatedBlogPosts?: (number | BlogPost)[] | null;
   github?: {
     /**
      * Public GitHub repository URL.
@@ -359,42 +389,6 @@ export interface Project {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "project-versions".
- */
-export interface ProjectVersion {
-  id: number;
-  project: number | Project;
-  /**
-   * Version number or label, e.g. 1.0.0, Phase 2.2, MVP.
-   */
-  version: string;
-  title: string;
-  releaseDate?: string | null;
-  summary: string;
-  highlights?:
-    | {
-        title: string;
-        description?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  breakingChanges?:
-    | {
-        title: string;
-        description?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  isStable?: boolean | null;
-  /**
-   * Marks the current visible project version.
-   */
-  isCurrent?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blog-posts".
  */
 export interface BlogPost {
@@ -450,6 +444,42 @@ export interface BlogPost {
     metaDescription?: string | null;
     ogImage?: (number | null) | Media;
   };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "project-versions".
+ */
+export interface ProjectVersion {
+  id: number;
+  project: number | Project;
+  /**
+   * Version number or label, e.g. 1.0.0, Phase 2.2, MVP.
+   */
+  version: string;
+  title: string;
+  releaseDate?: string | null;
+  summary: string;
+  highlights?:
+    | {
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  breakingChanges?:
+    | {
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  isStable?: boolean | null;
+  /**
+   * Marks the current visible project version.
+   */
+  isCurrent?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -575,6 +605,17 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  caption?: T;
+  credit?: T;
+  folder?: T;
+  tags?:
+    | T
+    | {
+        label?: T;
+        id?: T;
+      };
+  isPublic?: T;
+  sortOrder?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -639,6 +680,7 @@ export interface ProjectsSelect<T extends boolean = true> {
   releasedAt?: T;
   category?: T;
   techStack?: T;
+  relatedBlogPosts?: T;
   github?:
     | T
     | {
