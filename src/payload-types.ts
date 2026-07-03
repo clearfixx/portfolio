@@ -73,6 +73,7 @@ export interface Config {
     'tech-stack': TechStack;
     projects: Project;
     'project-versions': ProjectVersion;
+    'blog-posts': BlogPost;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     'tech-stack': TechStackSelect<false> | TechStackSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     'project-versions': ProjectVersionsSelect<false> | ProjectVersionsSelect<true>;
+    'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -393,6 +395,66 @@ export interface ProjectVersion {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-posts".
+ */
+export interface BlogPost {
+  id: number;
+  title: string;
+  /**
+   * URL-friendly identifier. Auto-generated from title when empty.
+   */
+  slug: string;
+  /**
+   * Short summary for blog cards, previews, and SEO snippets.
+   */
+  excerpt: string;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  coverImage?: (number | null) | Media;
+  status: 'draft' | 'published' | 'archived';
+  publishedAt?: string | null;
+  author?: (number | null) | User;
+  /**
+   * Use categories with type "Blog" or "Shared".
+   */
+  category?: (number | null) | Category;
+  /**
+   * Optional project connected to this article or dev note.
+   */
+  relatedProject?: (number | null) | Project;
+  tags?:
+    | {
+        label: string;
+        /**
+         * URL-friendly tag identifier. Auto-generated from label when empty.
+         */
+        slug: string;
+        id?: string | null;
+      }[]
+    | null;
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -438,6 +500,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'project-versions';
         value: number | ProjectVersion;
+      } | null)
+    | ({
+        relationTo: 'blog-posts';
+        value: number | BlogPost;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -645,6 +711,38 @@ export interface ProjectVersionsSelect<T extends boolean = true> {
       };
   isStable?: T;
   isCurrent?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-posts_select".
+ */
+export interface BlogPostsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  excerpt?: T;
+  content?: T;
+  coverImage?: T;
+  status?: T;
+  publishedAt?: T;
+  author?: T;
+  category?: T;
+  relatedProject?: T;
+  tags?:
+    | T
+    | {
+        label?: T;
+        slug?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

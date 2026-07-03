@@ -5,6 +5,7 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
+import { BlogPosts } from './collections/BlogPosts'
 import { Categories } from './collections/Categories'
 import { Media } from './collections/Media'
 import { Projects } from './collections/Projects'
@@ -22,7 +23,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Categories, TechStack, Projects, ProjectVersions],
+  collections: [Users, Media, Categories, TechStack, Projects, ProjectVersions, BlogPosts],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
