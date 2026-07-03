@@ -69,6 +69,9 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    categories: Category;
+    'tech-stack': TechStack;
+    projects: Project;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,13 +81,16 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    'tech-stack': TechStackSelect<false> | TechStackSelect<true>;
+    projects: ProjectsSelect<false> | ProjectsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: string;
+    defaultIDType: number;
   };
   fallbackLocale: null;
   globals: {};
@@ -122,7 +128,7 @@ export interface UserAuthOperations {
  * via the `definition` "users".
  */
 export interface User {
-  id: string;
+  id: number;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -147,7 +153,7 @@ export interface User {
  * via the `definition` "media".
  */
 export interface Media {
-  id: string;
+  id: number;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -163,10 +169,196 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: number;
+  title: string;
+  /**
+   * URL-friendly identifier. Auto-generated from title when empty.
+   */
+  slug: string;
+  description?: string | null;
+  type: 'project' | 'blog' | 'tech-stack' | 'shared';
+  /**
+   * Optional parent category.
+   */
+  parent?: (number | null) | Category;
+  sortOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tech-stack".
+ */
+export interface TechStack {
+  id: number;
+  name: string;
+  /**
+   * Used as the icon key for AppIcon, e.g. nextjs, react, typescript.
+   */
+  slug: string;
+  /**
+   * Short tooltip-friendly description.
+   */
+  description?: string | null;
+  /**
+   * Optional brand color, e.g. #3178C6.
+   */
+  color?: string | null;
+  /**
+   * Use categories with type "Tech Stack" or "Shared".
+   */
+  category?: (number | null) | Category;
+  /**
+   * Official website URL.
+   */
+  officialUrl?: string | null;
+  /**
+   * Official documentation URL.
+   */
+  documentationUrl?: string | null;
+  /**
+   * Show in highlighted homepage sections.
+   */
+  featured?: boolean | null;
+  /**
+   * Allow this technology to appear on public pages.
+   */
+  visible?: boolean | null;
+  sortOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects".
+ */
+export interface Project {
+  id: number;
+  title: string;
+  /**
+   * URL-friendly identifier. Auto-generated from title when empty.
+   */
+  slug: string;
+  /**
+   * Short project summary for cards, lists, and SEO previews.
+   */
+  excerpt: string;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Primary image for project cards and list pages.
+   */
+  coverImage?: (number | null) | Media;
+  /**
+   * Large visual for featured homepage/project sections.
+   */
+  featuredImage?: (number | null) | Media;
+  stage: 'idea' | 'planning' | 'development' | 'testing' | 'released' | 'maintenance' | 'archived';
+  /**
+   * Project completion percentage from 0 to 100.
+   */
+  progress?: number | null;
+  /**
+   * Current public or internal version, e.g. 1.0.0.
+   */
+  currentVersion?: string | null;
+  /**
+   * Show this project in featured sections.
+   */
+  isFeatured?: boolean | null;
+  publishedAt?: string | null;
+  startedAt?: string | null;
+  releasedAt?: string | null;
+  /**
+   * Use categories with type "Project" or "Shared".
+   */
+  category?: (number | null) | Category;
+  /**
+   * Technologies used in this project.
+   */
+  techStack?: (number | TechStack)[] | null;
+  github?: {
+    /**
+     * Public GitHub repository URL.
+     */
+    url?: string | null;
+    /**
+     * GitHub owner or organization name.
+     */
+    owner?: string | null;
+    /**
+     * GitHub repository name.
+     */
+    repo?: string | null;
+    /**
+     * Allow frontend to fetch and show live GitHub stats.
+     */
+    showStats?: boolean | null;
+  };
+  links?:
+    | {
+        label: string;
+        /**
+         * If empty, frontend should show disabled CTA with "Невдовзі".
+         */
+        url?: string | null;
+        type: 'github' | 'live' | 'documentation' | 'case-study' | 'figma' | 'other';
+        isEnabled?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  gallery?:
+    | {
+        image: number | Media;
+        caption?: string | null;
+        alt: string;
+        sortOrder?: number | null;
+        isFeatured?: boolean | null;
+        deviceFrame: 'none' | 'desktop' | 'laptop' | 'tablet' | 'mobile';
+        id?: string | null;
+      }[]
+    | null;
+  highlights?:
+    | {
+        title: string;
+        description: string;
+        /**
+         * Icon key for frontend icon mapping.
+         */
+        icon?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: string;
+  id: number;
   key: string;
   data:
     | {
@@ -183,20 +375,32 @@ export interface PayloadKv {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: string;
+  id: number;
   document?:
     | ({
         relationTo: 'users';
-        value: string | User;
+        value: number | User;
       } | null)
     | ({
         relationTo: 'media';
-        value: string | Media;
+        value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'categories';
+        value: number | Category;
+      } | null)
+    | ({
+        relationTo: 'tech-stack';
+        value: number | TechStack;
+      } | null)
+    | ({
+        relationTo: 'projects';
+        value: number | Project;
       } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   updatedAt: string;
   createdAt: string;
@@ -206,10 +410,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   key?: string | null;
   value?:
@@ -229,7 +433,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -274,6 +478,104 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories_select".
+ */
+export interface CategoriesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  type?: T;
+  parent?: T;
+  sortOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tech-stack_select".
+ */
+export interface TechStackSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  description?: T;
+  color?: T;
+  category?: T;
+  officialUrl?: T;
+  documentationUrl?: T;
+  featured?: T;
+  visible?: T;
+  sortOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects_select".
+ */
+export interface ProjectsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  excerpt?: T;
+  description?: T;
+  coverImage?: T;
+  featuredImage?: T;
+  stage?: T;
+  progress?: T;
+  currentVersion?: T;
+  isFeatured?: T;
+  publishedAt?: T;
+  startedAt?: T;
+  releasedAt?: T;
+  category?: T;
+  techStack?: T;
+  github?:
+    | T
+    | {
+        url?: T;
+        owner?: T;
+        repo?: T;
+        showStats?: T;
+      };
+  links?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        type?: T;
+        isEnabled?: T;
+        id?: T;
+      };
+  gallery?:
+    | T
+    | {
+        image?: T;
+        caption?: T;
+        alt?: T;
+        sortOrder?: T;
+        isFeatured?: T;
+        deviceFrame?: T;
+        id?: T;
+      };
+  highlights?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        icon?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
