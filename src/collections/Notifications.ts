@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { authenticatedAccess, publicAccess } from '@/access'
+import { authenticatedAccess } from '@/access'
 
 export const Notifications: CollectionConfig = {
   slug: 'notifications',
