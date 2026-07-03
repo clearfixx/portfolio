@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { authenticatedAccess, publicAccess } from '@/access'
 
 export const Media: CollectionConfig = {
   slug: 'media',
@@ -7,10 +8,10 @@ export const Media: CollectionConfig = {
     defaultColumns: ['filename', 'alt', 'folder', 'isPublic', 'sortOrder'],
   },
   access: {
-    read: () => true,
-    create: ({ req }) => Boolean(req.user),
-    update: ({ req }) => Boolean(req.user),
-    delete: ({ req }) => Boolean(req.user),
+    read: publicAccess,
+    create: authenticatedAccess,
+    update: authenticatedAccess,
+    delete: authenticatedAccess,
   },
   fields: [
     {

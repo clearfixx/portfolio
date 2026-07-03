@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { authenticatedAccess, publicAccess } from '@/access'
 
 import { formatSlug } from '@/utils/formatSlug'
 
@@ -9,10 +10,10 @@ export const Projects: CollectionConfig = {
     defaultColumns: ['title', 'slug', 'stage', 'progress', 'isFeatured', 'publishedAt'],
   },
   access: {
-    read: () => true,
-    create: ({ req }) => Boolean(req.user),
-    update: ({ req }) => Boolean(req.user),
-    delete: ({ req }) => Boolean(req.user),
+    read: publicAccess,
+    create: authenticatedAccess,
+    update: authenticatedAccess,
+    delete: authenticatedAccess,
   },
   fields: [
     {

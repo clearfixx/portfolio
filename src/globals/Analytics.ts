@@ -1,12 +1,13 @@
 import type { GlobalConfig } from 'payload'
+import { authenticatedAccess, publicAccess } from '@/access'
 
 export const Analytics: GlobalConfig = {
   slug: 'analytics',
   label: 'Analytics',
 
   access: {
-    read: () => true,
-    update: ({ req }) => Boolean(req.user),
+    read: publicAccess,
+    update: authenticatedAccess,
   },
 
   fields: [

@@ -1,12 +1,13 @@
 import type { GlobalConfig } from 'payload'
+import { authenticatedAccess, publicAccess } from '@/access'
 
 export const SEO: GlobalConfig = {
   slug: 'seo',
   label: 'SEO',
 
   access: {
-    read: () => true,
-    update: ({ req }) => Boolean(req.user),
+    read: publicAccess,
+    update: authenticatedAccess,
   },
 
   fields: [

@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { authenticatedAccess, publicAccess } from '@/access'
 
 export const ContactMessages: CollectionConfig = {
   slug: 'contact-messages',
@@ -7,10 +8,10 @@ export const ContactMessages: CollectionConfig = {
     defaultColumns: ['name', 'email', 'subject', 'status', 'source', 'createdAt'],
   },
   access: {
-    read: ({ req }) => Boolean(req.user),
-    create: () => true,
-    update: ({ req }) => Boolean(req.user),
-    delete: ({ req }) => Boolean(req.user),
+    read: authenticatedAccess,
+    create: publicAccess,
+    update: authenticatedAccess,
+    delete: authenticatedAccess,
   },
   fields: [
     {

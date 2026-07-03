@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { authenticatedAccess, publicAccess } from '@/access'
 
 export const Notifications: CollectionConfig = {
   slug: 'notifications',
@@ -7,10 +8,10 @@ export const Notifications: CollectionConfig = {
     defaultColumns: ['title', 'type', 'status', 'relatedCollection', 'createdAt'],
   },
   access: {
-    read: ({ req }) => Boolean(req.user),
-    create: ({ req }) => Boolean(req.user),
-    update: ({ req }) => Boolean(req.user),
-    delete: ({ req }) => Boolean(req.user),
+    read: authenticatedAccess,
+    create: authenticatedAccess,
+    update: authenticatedAccess,
+    delete: authenticatedAccess,
   },
   fields: [
     {

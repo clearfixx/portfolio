@@ -1,12 +1,13 @@
 import type { GlobalConfig } from 'payload'
+import { authenticatedAccess, publicAccess } from '@/access'
 
 export const Contact: GlobalConfig = {
   slug: 'contact',
   label: 'Contact',
 
   access: {
-    read: () => true,
-    update: ({ req }) => Boolean(req.user),
+    read: publicAccess,
+    update: authenticatedAccess,
   },
 
   fields: [
