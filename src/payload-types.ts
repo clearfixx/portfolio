@@ -76,6 +76,7 @@ export interface Config {
     'blog-posts': BlogPost;
     testimonials: Testimonial;
     'contact-messages': ContactMessage;
+    notifications: Notification;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -92,6 +93,7 @@ export interface Config {
     'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     'contact-messages': ContactMessagesSelect<false> | ContactMessagesSelect<true>;
+    notifications: NotificationsSelect<false> | NotificationsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -532,6 +534,27 @@ export interface ContactMessage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "notifications".
+ */
+export interface Notification {
+  id: number;
+  title: string;
+  message: string;
+  type: 'contact' | 'testimonial' | 'system';
+  status: 'unread' | 'read' | 'archived';
+  /**
+   * Collection that generated this notification.
+   */
+  relatedCollection?: ('contact-messages' | 'testimonials' | 'projects' | 'blog-posts' | 'system') | null;
+  /**
+   * Payload document ID associated with this notification.
+   */
+  relatedDocumentId?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -589,6 +612,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'contact-messages';
         value: number | ContactMessage;
+      } | null)
+    | ({
+        relationTo: 'notifications';
+        value: number | Notification;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -872,6 +899,20 @@ export interface ContactMessagesSelect<T extends boolean = true> {
   status?: T;
   source?: T;
   archivedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "notifications_select".
+ */
+export interface NotificationsSelect<T extends boolean = true> {
+  title?: T;
+  message?: T;
+  type?: T;
+  status?: T;
+  relatedCollection?: T;
+  relatedDocumentId?: T;
   updatedAt?: T;
   createdAt?: T;
 }

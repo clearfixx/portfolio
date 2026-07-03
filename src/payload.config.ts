@@ -14,6 +14,7 @@ import { TechStack } from './collections/TechStack'
 import { Users } from './collections/Users'
 import { Testimonials } from './collections/Testimonials'
 import { ContactMessages } from './collections/ContactMessages'
+import { Notifications } from './collections/Notifications'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -35,6 +36,7 @@ export default buildConfig({
     BlogPosts,
     Testimonials,
     ContactMessages,
+    Notifications,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
