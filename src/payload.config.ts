@@ -13,6 +13,7 @@ import { ProjectVersions } from './collections/ProjectVersions'
 import { TechStack } from './collections/TechStack'
 import { Users } from './collections/Users'
 import { Testimonials } from './collections/Testimonials'
+import { ContactMessages } from './collections/ContactMessages'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -33,6 +34,7 @@ export default buildConfig({
     ProjectVersions,
     BlogPosts,
     Testimonials,
+    ContactMessages,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
