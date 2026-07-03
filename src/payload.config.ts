@@ -15,6 +15,7 @@ import { Users } from './collections/Users'
 import { Testimonials } from './collections/Testimonials'
 import { ContactMessages } from './collections/ContactMessages'
 import { Notifications } from './collections/Notifications'
+import { SiteSettings } from './globals/SiteSettings'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -38,6 +39,7 @@ export default buildConfig({
     ContactMessages,
     Notifications,
   ],
+  globals: [SiteSettings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
