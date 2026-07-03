@@ -58,7 +58,8 @@ export const Homepage: GlobalConfig = {
       relationTo: 'projects',
       hasMany: true,
       admin: {
-        description: 'Selected projects for the homepage. If empty, frontend can fallback to featured projects.',
+        description:
+          'Selected projects for the homepage. If empty, frontend can fallback to featured projects.',
       },
     },
     {

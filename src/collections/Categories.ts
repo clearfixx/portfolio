@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { authenticatedAccess, publicAccess } from '@/access'
 
-import { formatSlug } from '@/utils/formatSlug'
+import { slugField } from '@/fields'
 
 export const Categories: CollectionConfig = {
   slug: 'categories',
@@ -21,30 +21,7 @@ export const Categories: CollectionConfig = {
       type: 'text',
       required: true,
     },
-    {
-      name: 'slug',
-      type: 'text',
-      required: true,
-      unique: true,
-      admin: {
-        description: 'URL-friendly identifier. Auto-generated from title when empty.',
-      },
-      hooks: {
-        beforeValidate: [
-          ({ value, siblingData }) => {
-            if (typeof value === 'string' && value.length > 0) {
-              return formatSlug(value)
-            }
-
-            if (typeof siblingData?.title === 'string') {
-              return formatSlug(siblingData.title)
-            }
-
-            return value
-          },
-        ],
-      },
-    },
+    slugField({ sourceField: 'title' }),
     {
       name: 'description',
       type: 'textarea',

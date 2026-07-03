@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { authenticatedAccess, publicAccess } from '@/access'
 
-import { formatSlug } from '@/utils/formatSlug'
+import { slugField } from '@/fields'
 
 export const TechStack: CollectionConfig = {
   slug: 'tech-stack',
@@ -21,30 +21,10 @@ export const TechStack: CollectionConfig = {
       type: 'text',
       required: true,
     },
-    {
-      name: 'slug',
-      type: 'text',
-      required: true,
-      unique: true,
-      admin: {
-        description: 'Used as the icon key for AppIcon, e.g. nextjs, react, typescript.',
-      },
-      hooks: {
-        beforeValidate: [
-          ({ value, siblingData }) => {
-            if (typeof value === 'string' && value.length > 0) {
-              return formatSlug(value)
-            }
-
-            if (typeof siblingData?.name === 'string') {
-              return formatSlug(siblingData.name)
-            }
-
-            return value
-          },
-        ],
-      },
-    },
+    slugField({
+      sourceField: 'name',
+      description: 'Used as the icon key for AppIcon, e.g. nextjs, react, typescript.',
+    }),
     {
       name: 'description',
       type: 'textarea',
