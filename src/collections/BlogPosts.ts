@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { authenticatedAccess, publicAccess } from '@/access'
 
-import { slugField } from '@/fields'
+import { seoField, slugField } from '@/fields'
 import { formatSlug } from '@/utils/formatSlug'
 
 export const BlogPosts: CollectionConfig = {
@@ -135,24 +135,6 @@ export const BlogPosts: CollectionConfig = {
         },
       ],
     },
-    {
-      name: 'seo',
-      type: 'group',
-      fields: [
-        {
-          name: 'metaTitle',
-          type: 'text',
-        },
-        {
-          name: 'metaDescription',
-          type: 'textarea',
-        },
-        {
-          name: 'ogImage',
-          type: 'upload',
-          relationTo: 'media',
-        },
-      ],
-    },
+    seoField(),
   ],
 }
