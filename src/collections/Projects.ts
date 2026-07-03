@@ -189,6 +189,15 @@ export const Projects: CollectionConfig = {
       },
     },
     {
+      name: 'relatedBlogPosts',
+      type: 'relationship',
+      relationTo: 'blog-posts',
+      hasMany: true,
+      admin: {
+        description: 'Articles related to this project.',
+      },
+    },
+    {
       name: 'github',
       type: 'group',
       fields: [
