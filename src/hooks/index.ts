@@ -1,0 +1,1 @@
+export { formatSlugHook } from './formatSlugHook'

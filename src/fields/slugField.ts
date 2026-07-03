@@ -1,6 +1,6 @@
 import type { TextField } from 'payload'
 
-import { formatSlug } from '@/utils/formatSlug'
+import { formatSlugHook } from '@/hooks'
 
 type SlugFieldOptions = {
   sourceField: string
@@ -21,20 +21,6 @@ export const slugField = ({
     description,
   },
   hooks: {
-    beforeValidate: [
-      ({ value, siblingData }) => {
-        if (typeof value === 'string' && value.length > 0) {
-          return formatSlug(value)
-        }
-
-        const sourceValue = siblingData?.[sourceField]
-
-        if (typeof sourceValue === 'string') {
-          return formatSlug(sourceValue)
-        }
-
-        return value
-      },
-    ],
+    beforeValidate: [formatSlugHook({ sourceField })],
   },
 })
