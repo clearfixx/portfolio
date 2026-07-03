@@ -16,6 +16,7 @@ import { Testimonials } from './collections/Testimonials'
 import { ContactMessages } from './collections/ContactMessages'
 import { Notifications } from './collections/Notifications'
 import { SiteSettings } from './globals/SiteSettings'
+import { Homepage } from './globals/Homepage'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -39,7 +40,7 @@ export default buildConfig({
     ContactMessages,
     Notifications,
   ],
-  globals: [SiteSettings],
+  globals: [SiteSettings, Homepage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

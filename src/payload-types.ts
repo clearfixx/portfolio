@@ -105,9 +105,11 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     'site-settings': SiteSetting;
+    homepage: Homepage;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    homepage: HomepageSelect<false> | HomepageSelect<true>;
   };
   locale: null;
   widgets: {
@@ -979,6 +981,48 @@ export interface SiteSetting {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage".
+ */
+export interface Homepage {
+  id: number;
+  hero: {
+    eyebrow?: string | null;
+    title: string;
+    subtitle: string;
+    primaryCtaLabel?: string | null;
+    primaryCtaUrl?: string | null;
+    secondaryCtaLabel?: string | null;
+    secondaryCtaUrl?: string | null;
+    image?: (number | null) | Media;
+  };
+  /**
+   * Selected projects for the homepage. If empty, frontend can fallback to featured projects.
+   */
+  featuredProjects?: (number | Project)[] | null;
+  /**
+   * Selected technologies for the homepage skills section.
+   */
+  selectedTechStack?: (number | TechStack)[] | null;
+  testimonialsSection?: {
+    enabled?: boolean | null;
+    title?: string | null;
+    description?: string | null;
+  };
+  socialFeedsSection?: {
+    enabled?: boolean | null;
+    title?: string | null;
+    description?: string | null;
+  };
+  contactSection?: {
+    enabled?: boolean | null;
+    title?: string | null;
+    description?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
@@ -987,6 +1031,50 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   logo?: T;
   defaultLanguage?: T;
   maintenanceMode?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage_select".
+ */
+export interface HomepageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        eyebrow?: T;
+        title?: T;
+        subtitle?: T;
+        primaryCtaLabel?: T;
+        primaryCtaUrl?: T;
+        secondaryCtaLabel?: T;
+        secondaryCtaUrl?: T;
+        image?: T;
+      };
+  featuredProjects?: T;
+  selectedTechStack?: T;
+  testimonialsSection?:
+    | T
+    | {
+        enabled?: T;
+        title?: T;
+        description?: T;
+      };
+  socialFeedsSection?:
+    | T
+    | {
+        enabled?: T;
+        title?: T;
+        description?: T;
+      };
+  contactSection?:
+    | T
+    | {
+        enabled?: T;
+        title?: T;
+        description?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
