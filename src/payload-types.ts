@@ -106,10 +106,12 @@ export interface Config {
   globals: {
     'site-settings': SiteSetting;
     homepage: Homepage;
+    seo: Seo;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     homepage: HomepageSelect<false> | HomepageSelect<true>;
+    seo: SeoSelect<false> | SeoSelect<true>;
   };
   locale: null;
   widgets: {
@@ -1023,6 +1025,23 @@ export interface Homepage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "seo".
+ */
+export interface Seo {
+  id: number;
+  defaultMetaTitle: string;
+  defaultMetaDescription: string;
+  defaultOgImage?: (number | null) | Media;
+  /**
+   * Default robots behavior for public pages.
+   */
+  robots: 'index-follow' | 'noindex-follow' | 'noindex-nofollow';
+  sitemapEnabled?: boolean | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
@@ -1075,6 +1094,20 @@ export interface HomepageSelect<T extends boolean = true> {
         title?: T;
         description?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "seo_select".
+ */
+export interface SeoSelect<T extends boolean = true> {
+  defaultMetaTitle?: T;
+  defaultMetaDescription?: T;
+  defaultOgImage?: T;
+  robots?: T;
+  sitemapEnabled?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
