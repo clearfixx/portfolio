@@ -1,67 +1,116 @@
-# Payload Blank Template
+# Portfolio
 
-This template comes configured with the bare minimum to get started on anything you need.
+Personal developer portfolio built with Next.js, Payload CMS, and PostgreSQL.
 
-## Quick start
+This project follows a simple rule:
 
-This template can be deployed directly from our Cloud hosting and it will setup MongoDB and cloud S3 object storage for media.
+> Release first. Polish later.
 
-## Quick Start - local setup
+---
 
-To spin up this template locally, follow these steps:
+## Stack
 
-### Clone
+- Next.js
+- React
+- TypeScript
+- Payload CMS
+- PostgreSQL
+- Tailwind CSS
+- shadcn/ui
+- Framer Motion
 
-After you click the `Deploy` button above, you'll want to have standalone copy of this repo on your machine. If you've already cloned this repo, skip to [Development](#development).
+---
 
-### Development
+## Architecture
 
-1. First [clone the repo](#clone) if you have not done so already
-2. `cd my-project && cp .env.example .env` to copy the example environment variables. You'll need to add the `MONGODB_URL` from your Cloud project to your `.env` if you want to use S3 storage and the MongoDB database that was created for you.
+This is a pragmatic single-application portfolio.
 
-3. `pnpm install && pnpm dev` to install dependencies and start the dev server
-4. open `http://localhost:3000` to open the app in your browser
+It is not DSS Universe, not a social network, and not a custom CMS experiment.
 
-That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
+Payload CMS is responsible for:
 
-#### Docker (Optional)
+- admin panel
+- admin/authors authentication
+- collections
+- globals
+- CRUD
+- media management
+- API layer
+- access control
 
-If you prefer to use Docker for local development instead of a local MongoDB instance, the provided docker-compose.yml file can be used.
+NestJS is intentionally not used in v1.0.
 
-To do so, follow these steps:
+---
 
-- Modify the `MONGODB_URL` in your `.env` file to `mongodb://127.0.0.1/<dbname>`
-- Modify the `docker-compose.yml` file's `MONGODB_URL` to match the above `<dbname>`
-- Run `docker-compose up` to start the database, optionally pass `-d` to run in the background.
+## Local Development
 
-## How it works
+Start PostgreSQL with Docker:
 
-The Payload config is tailored specifically to the needs of most websites. It is pre-configured in the following ways:
+```bash
+docker start portfolio_postgres
 
-### Collections
+Install dependencies:
 
-See the [Collections](https://payloadcms.com/docs/configuration/collections) docs for details on how to extend this functionality.
+pnpm install
 
-- #### Users (Authentication)
+Run development server:
 
-  Users are auth-enabled collections that have access to the admin panel.
+pnpm dev
 
-  For additional help, see the official [Auth Example](https://github.com/payloadcms/payload/tree/3.x/examples/auth) or the [Authentication](https://payloadcms.com/docs/authentication/overview#authentication-overview) docs.
+Open:
 
-- #### Media
+http://localhost:3000
+http://localhost:3000/admin
+Environment
 
-  This is the uploads enabled collection. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
+Copy the example file:
 
-### Docker
+cp .env.example .env
 
-Alternatively, you can use [Docker](https://www.docker.com) to spin up this template locally. To do so, follow these steps:
+Required variables:
 
-1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
+DATABASE_URL=postgres://portfolio:portfolio@127.0.0.1:5434/portfolio
+PAYLOAD_SECRET=replace-with-a-secure-random-secret
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+Useful Commands
+pnpm dev
+pnpm build
+pnpm lint
+pnpm generate:types
+pnpm generate:importmap
+Documentation
 
-That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
+Project documentation lives in:
 
-## Questions
+docs/STACK.md
+docs/ARCHITECTURE.md
+v1.0 Scope
 
-If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
+Included:
+
+landing page
+projects
+blog
+contact messages
+testimonials
+media
+admin/authors
+site settings
+
+Not included:
+
+public registration
+user profiles
+comments
+likes
+subscriptions
+chat
+marketplace
+custom CMS from scratch
+NestJS backend
+Main Rule
+
+Keep the project simple enough to ship.
+
+Release first. Polish later.
+```
