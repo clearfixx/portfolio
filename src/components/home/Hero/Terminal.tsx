@@ -12,7 +12,6 @@ const bootLines = [
 
 function getInitialCompletedLines() {
   if (typeof window === 'undefined') return []
-
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? bootLines : []
 }
 
@@ -39,7 +38,7 @@ export function Terminal() {
         setLineIndex((value) => value + 1)
         setCharIndex(0)
       },
-      charIndex < currentLine.length ? 32 : 420,
+      charIndex < currentLine.length ? 28 : 320,
     )
 
     return () => window.clearTimeout(timeout)
@@ -47,29 +46,31 @@ export function Terminal() {
 
   return (
     <div className="hero-terminal">
-      <div className="panel-header">
+      <div className="hero-card__header">
         <span>System Status</span>
-        <strong>ONLINE</strong>
+        <strong>Online</strong>
       </div>
 
       <div className="hero-terminal__body">
         {completedLines.map((line) => (
-          <p className="terminal-line terminal-line--done" key={line}>
+          <p key={line}>
             <span>&gt;</span> {line} <strong>[ OK ]</strong>
           </p>
         ))}
 
         {!isComplete && (
-          <p className="terminal-line">
+          <p>
             <span>&gt;</span> {typedLine}
             <i aria-hidden="true" />
           </p>
         )}
+
+        {isComplete && <p className="hero-terminal__welcome">Welcome, visitor! 👋</p>}
       </div>
 
-      <div className="terminal-progress">
+      <div className="hero-terminal__footer">
         <span>
-          Initialization <strong>{isComplete ? '100%' : `${completedLines.length * 20}%`}</strong>
+          100% <strong>{isComplete ? 'Ready' : 'Loading'}</strong>
         </span>
         <div>
           <i style={{ width: `${isComplete ? 100 : completedLines.length * 20}%` }} />
