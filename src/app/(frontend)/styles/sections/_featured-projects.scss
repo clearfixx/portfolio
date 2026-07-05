@@ -1,0 +1,103 @@
+/* Other sections */
+
+.site-footer {
+  border-top: 1px solid rgba(105, 239, 255, 0.12);
+  color: var(--color-text-muted);
+}
+
+.site-footer__inner {
+  display: flex;
+  min-height: 88px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 14px;
+}
+
+.home-section {
+  padding: 72px 0;
+}
+
+.section-heading {
+  max-width: 680px;
+  margin-bottom: 28px;
+}
+
+.section-heading__eyebrow,
+.project-card__stage {
+  margin: 0 0 12px;
+  color: var(--color-teal);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.section-heading__title {
+  margin: 0;
+  font-size: clamp(32px, 4vw, 52px);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.project-grid,
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.project-card,
+.testimonial-card,
+.tech-card,
+.home-contact__inner {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  padding: 24px;
+}
+
+.project-card__title,
+.tech-card h3 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.project-card__excerpt,
+.tech-card p,
+.testimonial-card__message,
+.home-contact__text {
+  color: var(--color-text-muted);
+}
+
+.tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.tech-card {
+  flex: 1 1 220px;
+}
+
+.testimonial-card__message {
+  margin: 0;
+}
+
+.testimonial-card__author {
+  margin: 24px 0 0;
+  font-weight: 700;
+}
+
+.testimonial-card__author span {
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.home-contact__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}

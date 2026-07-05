@@ -1,0 +1,142 @@
+/* Phase 3.2 Hero refinement — closer to approved mockup */
+
+.logo__mark {
+  position: relative;
+  width: auto;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--color-teal);
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+}
+
+.logo__mark::before {
+  content: '[ ';
+  margin-right: 2px;
+}
+
+.logo__mark::after {
+  content: ' ]';
+  margin-left: 2px;
+  color: var(--color-white);
+}
+
+.logo__mark::after,
+.logo__mark::before {
+  font-weight: 200;
+  font-size: 35px;
+}
+
+.logo__mark span {
+  color: var(--color-teal);
+}
+
+.logo__name {
+  font-size: 17px;
+}
+
+.logo__role {
+  color: var(--color-text);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.logo__role i {
+  margin-left: 6px;
+}
+
+.home-hero__grid {
+  grid-template-columns: 310px minmax(440px, 1fr) 400px;
+  gap: 26px;
+}
+
+.home-hero__center {
+  padding-inline: 8px;
+}
+
+.home-hero__title {
+  max-width: 620px;
+  font-size: clamp(42px, 4.6vw, 64px);
+  line-height: 1.05;
+}
+
+.home-hero__subtitle {
+  max-width: 560px;
+  font-size: 16px;
+}
+
+.hero-terminal__body {
+  min-height: 220px;
+  font-size: 12px;
+}
+
+.terminal-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.terminal-line > span {
+  flex: 0 0 auto;
+}
+
+.terminal-line strong {
+  white-space: nowrap;
+}
+
+.hero-editor__code {
+  min-height: 350px;
+  font-size: 11px;
+}
+
+.hero-status-card {
+  min-height: 92px;
+}
+
+.scroll-indicator {
+  flex-direction: column;
+  gap: 12px;
+  outline: none;
+}
+
+.scroll-indicator:focus,
+.scroll-indicator:focus-visible {
+  outline: none;
+}
+
+.scroll-indicator i {
+  width: 1px;
+  height: 58px;
+  border: 0;
+  border-radius: 0;
+  background: linear-gradient(180deg, transparent, var(--color-cyan), transparent);
+}
+
+.scroll-indicator i::before {
+  top: auto;
+  bottom: 0;
+  width: 9px;
+  height: 9px;
+  animation: scrollOrb 1.6s ease-in-out infinite;
+}
+
+@keyframes scrollOrb {
+  0% {
+    opacity: 0.25;
+    transform: translate(-50%, -34px) scale(0.7);
+  }
+
+  45% {
+    opacity: 1;
+    transform: translate(-50%, -10px) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 2px) scale(0.7);
+  }
+}
