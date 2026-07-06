@@ -8,20 +8,37 @@ type FeaturedProjectsProps = {
 }
 
 export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
-  if (projects.length === 0) {
-    return null
-  }
+  const [primaryProject, ...secondaryProjects] = projects
 
   return (
-    <section className="home-section" id="projects">
+    <section className="featured-projects-section" id="projects">
       <div className="site-container">
         <FeaturedProjectsIntro />
 
-        <div className="project-grid">
-          {projects.map((project) => (
-            <ProjectCard project={project} key={project.id} />
-          ))}
-        </div>
+        {projects.length > 0 ? (
+          <div className="featured-projects__layout">
+            <ProjectCard project={primaryProject} variant="primary" />
+
+            {secondaryProjects.length > 0 ? (
+              <div className="featured-projects__secondary-grid">
+                {secondaryProjects.map((project) => (
+                  <ProjectCard project={project} key={project.id} />
+                ))}
+              </div>
+            ) : null}
+          </div>
+        ) : (
+          <div className="featured-projects__empty">
+            <p className="featured-projects__empty-kicker">Mission archive is empty</p>
+
+            <h3>Featured projects have not been added yet.</h3>
+
+            <p>
+              Тут поки ще немає контенту, але незабаром буде багато цікавого: проєкти,
+              експерименти, технічні кейси та живі статуси розробки.
+            </p>
+          </div>
+        )}
       </div>
     </section>
   )
