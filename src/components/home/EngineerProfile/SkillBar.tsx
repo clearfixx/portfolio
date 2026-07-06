@@ -8,11 +8,11 @@ export function SkillBar({ label, value }: SkillBarProps) {
     <div className="skill-bar">
       <div className="skill-bar__header">
         <span>{label}</span>
-        <span>{value}%</span>
+        <strong>{value}%</strong>
       </div>
 
       <div className="skill-bar__track">
-        <div
+        <span
           className="skill-bar__fill"
           style={{
             width: `${value}%`,

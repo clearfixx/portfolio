@@ -5,8 +5,12 @@ export function DiagnosticsPanel() {
   return (
     <aside className="engineer-profile__diagnostics">
       <div className="engineer-profile__diagnostics-header">
-        <p>System Diagnostics</p>
-        <span>PASS</span>
+        <div>
+          <p>System Diagnostics</p>
+          <span>Core engineering strengths</span>
+        </div>
+
+        <strong>PASS</strong>
       </div>
 
       <div className="engineer-profile__diagnostics-list">
