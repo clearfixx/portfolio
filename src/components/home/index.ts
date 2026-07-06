@@ -6,3 +6,5 @@ export { Hero } from './Hero'
 
 export { TechStackSection } from './TechStackSection'
 export { TestimonialsSection } from './TestimonialsSection'
+
+export { EngineerProfile } from './EngineerProfile'
