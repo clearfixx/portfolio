@@ -1,4 +1,5 @@
 import { engineerProfile } from './data'
+import { SkillBar } from './SkillBar'
 
 export function DiagnosticsPanel() {
   return (
@@ -10,10 +11,7 @@ export function DiagnosticsPanel() {
 
       <div className="engineer-profile__diagnostics-list">
         {engineerProfile.diagnostics.map((item) => (
-          <div className="engineer-profile__diagnostic" key={item.label}>
-            <span>{item.label}</span>
-            <strong>{item.value}</strong>
-          </div>
+          <SkillBar key={item.label} label={item.label} value={item.level} />
         ))}
       </div>
     </aside>

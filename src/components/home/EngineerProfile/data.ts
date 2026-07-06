@@ -13,16 +13,24 @@ export const engineerProfile = {
   ],
   diagnostics: [
     {
+      label: 'Architecture',
+      level: 95,
+    },
+    {
       label: 'Frontend',
-      value: 'React / Next.js / TypeScript',
+      level: 94,
     },
     {
       label: 'Backend',
-      value: 'Payload CMS / Node.js',
+      level: 82,
     },
     {
-      label: 'Design System',
-      value: 'DSS interface language',
+      label: 'UI / UX',
+      level: 88,
+    },
+    {
+      label: 'DevOps',
+      level: 70,
     },
   ],
 }
