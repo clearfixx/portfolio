@@ -96,7 +96,59 @@
 }
 
 .home-contact__inner {
-  display: flex;
+  display: flex;.featured-projects__intro {
+  margin-bottom: 34px;
+}
+
+.featured-projects__eyebrow {
+  margin: 0 0 18px;
+  color: var(--color-teal);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.featured-projects__intro-grid {
+  display: grid;
+  align-items: end;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.55fr);
+  gap: 36px;
+}
+
+.featured-projects__title {
+  margin: 0;
+  max-width: 760px;
+  color: var(--color-white);
+  font-size: clamp(44px, 4.4vw, 72px);
+  font-weight: 900;
+  letter-spacing: -0.075em;
+  line-height: 0.92;
+
+  span {
+    display: block;
+    color: var(--color-violet);
+    text-shadow: 0 0 28px rgba(157, 124, 255, 0.28);
+  }
+}
+
+.featured-projects__description {
+  margin: 0;
+  max-width: 430px;
+  color: var(--color-text-muted);
+  font-size: 15px;
+  line-height: 1.72;
+}
+
+@media (max-width: 900px) {
+  .featured-projects__intro-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-projects__description {
+    max-width: 620px;
+  }
+}
   align-items: center;
   justify-content: space-between;
   gap: 32px;
