@@ -252,3 +252,22 @@
     max-width: 620px;
   }
 }
+
+.featured-project-card__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    border: 1px solid rgba(157, 124, 255, 0.28);
+    border-radius: 999px;
+    padding: 6px 9px;
+    background: rgba(157, 124, 255, 0.08);
+    color: #ddd6ff;
+    font-size: 10px;
+    font-weight: 850;
+  }
+}

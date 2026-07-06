@@ -1,33 +1,34 @@
 import {
   ContactCTA,
+  CurrentMission,
   FeaturedProjects,
   Hero,
-  TechStackSection,
   TestimonialsSection,
 } from '@/components/home'
 import {
   getApprovedTestimonials,
   getContact,
   getFeaturedProjects,
-  getFeaturedTechStack,
   getHomepage,
 } from '@/lib/cms'
 
 export default async function HomePage() {
-  const [homepage, featuredProjects, featuredTechStack, testimonials, contact] = await Promise.all([
-    getHomepage(),
-    getFeaturedProjects(),
-    getFeaturedTechStack(),
-    getApprovedTestimonials(),
-    getContact(),
-  ])
+  const [homepage, testimonials, contact] = await Promise.all([
+  getHomepage(),
+  getApprovedTestimonials(),
+  getContact(),
+])
 
   return (
     <>
       <Hero hero={homepage.hero} />
-      <FeaturedProjects projects={featuredProjects} />
-      <TechStackSection technologies={featuredTechStack} />
+
+      <CurrentMission />
+
+      <FeaturedProjects />
+
       <TestimonialsSection testimonials={testimonials} />
+
       <ContactCTA contact={contact} contactSection={homepage.contactSection} />
     </>
   )
