@@ -124,36 +124,6 @@ export function Hero({ hero }: HeroProps) {
           ))}
           <em>and more...</em>
         </div>
-
-        <div className="hero-dashboard">
-          <aside>
-            <span>Current Mission</span>
-            <h2>
-              Building <strong>DSS Universe</strong>
-            </h2>
-            <p>A next-generation Decision Support System for the football industry.</p>
-            <a href="#projects">View Mission ↗</a>
-          </aside>
-
-          <div className="hero-dashboard__preview">
-            <div className="hero-dashboard__top">DSS Universe Dashboard</div>
-            <div className="hero-dashboard__stats">
-              <span>
-                Matches <strong>1,250</strong>
-              </span>
-              <span>
-                Players <strong>320</strong>
-              </span>
-              <span>
-                Reports <strong>84</strong>
-              </span>
-              <span>
-                Accuracy <strong>92%</strong>
-              </span>
-            </div>
-            <div className="hero-dashboard__chart" />
-          </div>
-        </div>
       </div>
     </section>
   )

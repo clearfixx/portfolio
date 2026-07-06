@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 
 import { SiteShell } from '@/components/layout'
 
-import './styles.css'
+import './styles.scss'
 
 export const metadata: Metadata = {
   description: 'Personal portfolio powered by Next.js and Payload.',

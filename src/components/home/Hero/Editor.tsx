@@ -107,6 +107,7 @@ export function Editor() {
         <span>Ln 14, Col 1</span>
         <span>Spaces: 2</span>
         <span>UTF-8</span>
+        <span>Typescript</span>
         <strong>● No errors</strong>
       </div>
     </div>
