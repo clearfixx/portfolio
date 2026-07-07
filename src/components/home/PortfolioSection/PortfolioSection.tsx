@@ -1,9 +1,9 @@
-import type { ReactNode } from 'react'
+import type { ComponentType, ReactNode, SVGProps } from 'react'
 
 import { SectionFooter } from './SectionFooter'
 
 type PortfolioSectionFooter = {
-  icon: ReactNode
+  icon: ComponentType<SVGProps<SVGSVGElement>>
   label: string
   text: string
 }

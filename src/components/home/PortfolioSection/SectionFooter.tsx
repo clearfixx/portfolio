@@ -1,17 +1,19 @@
-import type { ReactNode } from 'react'
+import type { ComponentType, SVGProps } from 'react'
+
+type SectionFooterIcon = ComponentType<SVGProps<SVGSVGElement>>
 
 type SectionFooterProps = {
-  icon: ReactNode
+  icon: SectionFooterIcon
   label: string
   text: string
 }
 
-export function SectionFooter({ icon, label, text }: SectionFooterProps) {
+export function SectionFooter({ icon: Icon, label, text }: SectionFooterProps) {
   return (
     <footer className="portfolio-section__footer">
       <div className="portfolio-section__footer-capsule">
         <span className="portfolio-section__footer-icon" aria-hidden="true">
-          {icon}
+          <Icon className="portfolio-section__footer-icon-svg" />
         </span>
 
         <span className="portfolio-section__footer-content">
