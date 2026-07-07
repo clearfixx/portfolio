@@ -178,6 +178,15 @@
   }
 }
 
+.current-mission__stack-label {
+  margin: 1.45rem 0 0.75rem;
+  color: rgb(122 245 235);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
 .current-mission__tech-list {
   display: flex;
   flex-wrap: wrap;

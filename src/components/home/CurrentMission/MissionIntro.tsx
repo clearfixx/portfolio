@@ -3,12 +3,6 @@ import { missionTechStack } from './data'
 export function MissionIntro() {
   return (
     <div className="current-mission__content">
-      <p className="current-mission__eyebrow">Current Mission</p>
-
-      <h2 className="current-mission__title" id="current-mission-title">
-        Building <span>DSS Universe</span>
-      </h2>
-
       <p className="current-mission__tagline">Years of ideas. One platform.</p>
 
       <div className="current-mission__copy">
@@ -23,6 +17,8 @@ export function MissionIntro() {
         </p>
       </div>
 
+      <p className="current-mission__stack-label">Mission stack</p>
+
       <ul className="current-mission__tech-list" aria-label="Mission tech stack">
         {missionTechStack.map((technology) => (
           <li className="current-mission__tech-item" key={technology}>
@@ -32,7 +28,7 @@ export function MissionIntro() {
       </ul>
 
       <a className="current-mission__link" href="/projects/dss-universe">
-        View Mission
+        View Mission Control
         <span aria-hidden="true">↗</span>
       </a>
     </div>
