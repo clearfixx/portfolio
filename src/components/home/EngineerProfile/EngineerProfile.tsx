@@ -1,16 +1,25 @@
-import { DiagnosticsPanel } from './DiagnosticsPanel'
 import { EngineerIntro } from './EngineerIntro'
-import { ProfileCard } from './ProfileCard'
+import { JourneyPanel } from './JourneyPanel'
+import { PhilosophyPanel } from './PhilosophyPanel'
+import { ProfilePanel } from './ProfilePanel'
 
 export function EngineerProfile() {
   return (
     <section className="engineer-profile-section" id="engineer-profile">
       <div className="site-container">
-        <EngineerIntro />
+        <div className="engineer-profile__frame">
+          <div className="engineer-profile__section-index" aria-hidden="true">
+            <span>01</span>
+            <i />
+          </div>
 
-        <div className="engineer-profile__layout">
-          <ProfileCard />
-          <DiagnosticsPanel />
+          <EngineerIntro />
+
+          <div className="engineer-profile__grid">
+            <ProfilePanel />
+            <JourneyPanel />
+            <PhilosophyPanel />
+          </div>
         </div>
       </div>
     </section>
