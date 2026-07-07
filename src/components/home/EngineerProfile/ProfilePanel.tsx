@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 const profileStats = [
   {
     label: 'Years Exp.',
@@ -22,13 +24,19 @@ export function ProfilePanel() {
     <article className="engineer-profile__panel engineer-profile__profile-panel">
       <div className="engineer-profile__photo-card">
         <div className="engineer-profile__photo-meta">
-          <span>PROFILE_ID</span>
-          <strong>AK-1987</strong>
+          <span>{'{'}PROFILE_ID{'}'}</span>
+          <strong>AK_10061988</strong>
         </div>
 
         <div className="engineer-profile__photo-stage">
-          <div className="engineer-profile__photo-placeholder">
-            <span>AK</span>
+          <div className="engineer-profile__photo-image">
+            <Image
+              alt="Portrait of Andrii Kulahin"
+              fill
+              priority
+              sizes="(max-width: 1180px) 100vw, 32vw"
+              src="/images/profile/engineer-profile.png"
+            />
           </div>
 
           <span className="engineer-profile__hud-corner engineer-profile__hud-corner--top-left" />
