@@ -15,6 +15,7 @@ type PortfolioSectionProps = {
   description: string
   number: string
   footer: PortfolioSectionFooter
+  headerAction?: ReactNode
   children: ReactNode
 }
 
@@ -25,6 +26,7 @@ export function PortfolioSection({
   description,
   number,
   footer,
+  headerAction,
   children,
 }: PortfolioSectionProps) {
   const titleId = `${id}-title`
@@ -38,18 +40,24 @@ export function PortfolioSection({
             <i />
           </div>
 
-          <header className="portfolio-section__header">
-            <p className="portfolio-section__eyebrow">
-              <span>{'//'}</span>
-              <span>{eyebrow}</span>
-            </p>
+          <div className="portfolio-section__header-row">
+            <header className="portfolio-section__header">
+              <p className="portfolio-section__eyebrow">
+                <span>{'//'}</span>
+                <span>{eyebrow}</span>
+              </p>
 
-            <h2 className="portfolio-section__title" id={titleId}>
-              {title}
-            </h2>
+              <h2 className="portfolio-section__title" id={titleId}>
+                {title}
+              </h2>
 
-            <p className="portfolio-section__description">{description}</p>
-          </header>
+              <p className="portfolio-section__description">{description}</p>
+            </header>
+
+            {headerAction ? (
+              <div className="portfolio-section__header-action">{headerAction}</div>
+            ) : null}
+          </div>
 
           <div className="portfolio-section__body">{children}</div>
 
