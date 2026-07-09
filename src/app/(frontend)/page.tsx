@@ -16,11 +16,19 @@ export default async function HomePage() {
   return (
     <>
       <Hero hero={homepage.hero} />
+
       <CurrentMission />
+
       <FeaturedProjects />
+
       <EngineerProfile />
+
       <SkillsTechnologies />
+
+      <DeliveryPipeline />
+
       <InsightsTrust />
+
       <ContactCTA contact={contact} contactSection={homepage.contactSection} />
     </>
   )
