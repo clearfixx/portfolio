@@ -1,3 +1,25 @@
+export type CodeTokenType =
+  | 'keyword'
+  | 'type'
+  | 'property'
+  | 'string'
+  | 'function'
+  | 'boolean'
+  | 'operator'
+  | 'punctuation'
+  | 'comment'
+  | 'plain'
+
+export type CodeToken = {
+  value: string
+  type?: CodeTokenType
+}
+
+export type InsightArticleImage = {
+  src: string
+  alt: string
+}
+
 export type InsightArticle = {
   id: string
   title: string
@@ -11,8 +33,9 @@ export type InsightArticle = {
 
 export type FeaturedInsightArticle = InsightArticle & {
   label: string
+  image?: InsightArticleImage
   codeTitle: string
-  codeLines: string[]
+  codeLines: CodeToken[][]
 }
 
 export type ClientFeedbackItem = {
@@ -41,17 +64,58 @@ export const featuredInsightArticle: FeaturedInsightArticle = {
   href: '/articles/building-maintainable-ui-systems',
   icon: 'terminal',
   label: 'Featured',
+
+  // Коли буде реальна картинка статті, просто додаси:
+  // image: {
+  //   src: '/images/articles/maintainable-ui-systems.webp',
+  //   alt: 'Maintainable UI systems article preview',
+  // },
+
   codeTitle: 'components/Button.tsx',
   codeLines: [
-    'type ButtonProps = {',
-    "  variant?: 'primary' | 'secondary'",
-    "  size?: 'sm' | 'md' | 'lg'",
-    '  loading?: boolean',
-    '}',
-    '',
-    'export function Button(props) {',
-    '  return <button {...props} />',
-    '}',
+    [
+      { value: 'type', type: 'keyword' },
+      { value: ' ButtonProps ', type: 'type' },
+      { value: '= ', type: 'operator' },
+      { value: '{', type: 'punctuation' },
+    ],
+    [
+      { value: '  variant', type: 'property' },
+      { value: '?: ', type: 'operator' },
+      { value: "'primary'", type: 'string' },
+      { value: ' | ', type: 'operator' },
+      { value: "'secondary'", type: 'string' },
+    ],
+    [
+      { value: '  size', type: 'property' },
+      { value: '?: ', type: 'operator' },
+      { value: "'sm'", type: 'string' },
+      { value: ' | ', type: 'operator' },
+      { value: "'md'", type: 'string' },
+      { value: ' | ', type: 'operator' },
+      { value: "'lg'", type: 'string' },
+    ],
+    [
+      { value: '  loading', type: 'property' },
+      { value: '?: ', type: 'operator' },
+      { value: 'boolean', type: 'type' },
+    ],
+    [{ value: '}', type: 'punctuation' }],
+    [],
+    [
+      { value: 'export', type: 'keyword' },
+      { value: ' function ', type: 'keyword' },
+      { value: 'Button', type: 'function' },
+      { value: '(props) ', type: 'plain' },
+      { value: '{', type: 'punctuation' },
+    ],
+    [
+      { value: '  return ', type: 'keyword' },
+      { value: '<button ', type: 'function' },
+      { value: '{...props}', type: 'property' },
+      { value: ' />', type: 'function' },
+    ],
+    [{ value: '}', type: 'punctuation' }],
   ],
 }
 

@@ -206,24 +206,6 @@
   font-weight: 700;
 }
 
-.insights-trust__code-card pre {
-  overflow: hidden;
-  margin: 0;
-  padding: 18px;
-  color: rgba(221, 232, 245, 0.78);
-  font-size: 0.82rem;
-  line-height: 1.75;
-}
-
-.insights-trust__code-card code {
-  font-family:
-    'SFMono-Regular',
-    Consolas,
-    'Liberation Mono',
-    Menlo,
-    monospace;
-}
-
 .insights-trust__article-list {
   position: relative;
   z-index: 1;
@@ -592,4 +574,56 @@
   .insights-trust__metric:last-child {
     border-bottom: 0;
   }
+}
+
+.insights-trust__code-card pre {
+  overflow: auto;
+  margin: 0;
+  padding: 18px;
+  color: rgba(221, 232, 245, 0.78);
+  font-size: 0.82rem;
+  line-height: 1.75;
+}
+
+.insights-trust__code-card code {
+  font-family:
+    'SFMono-Regular',
+    Consolas,
+    'Liberation Mono',
+    Menlo,
+    monospace;
+}
+
+.insights-trust__code-line {
+  display: block;
+  min-height: 1.75em;
+  white-space: pre;
+}
+
+.insights-trust__token {
+  color: rgba(221, 232, 245, 0.76);
+}
+
+.insights-trust__token--keyword {
+  color: #c678dd;
+}
+
+.insights-trust__token--type {
+  color: #61afef;
+}
+
+.insights-trust__token--property {
+  color: #e5c07b;
+}
+
+.insights-trust__token--string {
+  color: #98c379;
+}
+
+.insights-trust__token--function {
+  color: #56b6c2;
+}
+
+.insights-trust__token--punctuation {
+  color: rgba(221, 232, 245, 0.72);
 }
