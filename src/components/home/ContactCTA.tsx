@@ -80,18 +80,8 @@ function MailIcon(props: IconProps) {
 
 function TelegramIcon(props: IconProps) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.8"
-      {...props}
-    >
-      <path d="M21 4 3 11.2l7 2.1L17 8l-4.7 6.5L18 20l3-16Z" />
-      <path d="m10 13.3 2.3 6.7" />
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" {...props}>
+      <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0Zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635Z" />
     </svg>
   )
 }
@@ -209,57 +199,24 @@ function LockIcon(props: IconProps) {
 
 function GithubIcon(props: IconProps) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.8"
-      {...props}
-    >
-      <path d="M12 2.8a9.2 9.2 0 0 0-2.9 17.9c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.1-3.4-1.1-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 0 1.6 1.1 1.6 1.1.9 1.5 2.4 1.1 3 .8.1-.7.4-1.1.7-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7 3.6 3.6 0 0 1 .1-2.7s.9-.3 2.8 1a9.6 9.6 0 0 1 5.1 0c1.9-1.3 2.8-1 2.8-1a3.6 3.6 0 0 1 .1 2.7 3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.8 1 .8 2v2.4c0 .3.2.6.8.5A9.2 9.2 0 0 0 12 2.8Z" />
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" {...props}>
+      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12Z" />
     </svg>
   )
 }
 
 function LinkedinIcon(props: IconProps) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.8"
-      {...props}
-    >
-      <path d="M5 9v10" />
-      <path d="M5 5.5v.1" />
-      <path d="M10 19v-6.2c0-2.1 1.4-3.8 3.5-3.8s3.5 1.7 3.5 3.8V19" />
-      <path d="M10 9v10" />
-      <path d="M3 3h18v18H3V3Z" />
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" {...props}>
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065Zm1.782 13.019H3.555V9h3.564v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z" />
     </svg>
   )
 }
 
 function XIcon(props: IconProps) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.8"
-      {...props}
-    >
-      <path d="m5 5 14 14" />
-      <path d="m19 5-6.2 7.1" />
-      <path d="m11.2 14-6.2 5" />
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" {...props}>
+      <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932 6.064-6.933Zm-1.293 19.494h2.039L6.486 3.24H4.298l13.31 17.407Z" />
     </svg>
   )
 }
@@ -350,46 +307,9 @@ function ContactChannelItem({ channel }: { channel: ContactChannel }) {
 function KyivMap() {
   return (
     <div className="contact-cta__map-panel">
-      <svg className="contact-cta__map-svg" viewBox="0 0 760 470" aria-hidden="true">
-        <path
-          className="contact-cta__map-zone"
-          d="M54 82 168 52l92 42 110-28 112 46 132-18 88 74-18 154-82 86-145 15-108-39-117 38-124-54-58-116 4-170Z"
-        />
-        <path
-          className="contact-cta__river"
-          d="M426 22c-28 44-22 86 11 128 32 41 40 86 10 134-32 51-25 96 22 134"
-        />
-        <path
-          className="contact-cta__road contact-cta__road--primary"
-          d="M90 330c91-66 170-87 265-91 101-5 190-43 292-130"
-        />
-        <path
-          className="contact-cta__road"
-          d="M76 176c92 26 166 61 229 104 70 47 161 68 288 73"
-        />
-        <path
-          className="contact-cta__road"
-          d="M146 82c19 76 43 137 72 182 36 56 46 102 30 146"
-        />
-        <path
-          className="contact-cta__road"
-          d="M316 76c-15 70-8 126 23 168 39 53 44 107 18 162"
-        />
-        <path
-          className="contact-cta__road"
-          d="M574 102c-47 54-72 112-75 174-3 59-20 106-53 140"
-        />
-        <path
-          className="contact-cta__route"
-          d="M118 386c75-68 146-113 213-136 78-28 171-23 278 12"
-        />
-        <circle className="contact-cta__node" cx="170" cy="146" r="5" />
-        <circle className="contact-cta__node" cx="246" cy="244" r="5" />
-        <circle className="contact-cta__node" cx="330" cy="128" r="5" />
-        <circle className="contact-cta__node" cx="512" cy="210" r="5" />
-        <circle className="contact-cta__node" cx="620" cy="320" r="5" />
-        <circle className="contact-cta__node" cx="376" cy="318" r="5" />
-      </svg>
+      <div className="contact-cta__map-image" aria-hidden="true" />
+
+      <div className="contact-cta__map-overlay" aria-hidden="true" />
 
       <div className="contact-cta__pin" aria-hidden="true">
         <PinIcon />
@@ -483,7 +403,7 @@ export function ContactCTA({ contact, contactSection }: ContactCTAProps) {
               <input name="email" type="email" placeholder="Your Email" autoComplete="email" />
             </label>
 
-            <label className="contact-cta__field">
+            <label className="contact-cta__field contact-cta__field--select">
               <span className="contact-cta__field-icon">
                 <LayersIcon />
               </span>

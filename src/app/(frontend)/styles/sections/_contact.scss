@@ -4,6 +4,18 @@
   gap: 28px;
 }
 
+.contact-cta .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 .contact-cta__title-accent {
   color: #13f2e3;
 }
@@ -23,7 +35,28 @@
 }
 
 .contact-cta__map-panel {
-  min-height: 520px;
+  min-height: 560px;
+}
+
+.contact-cta__map-image {
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/contact/kyiv-map.png');
+  background-position: 44% 50%;
+  background-size: cover;
+  opacity: 0.82;
+  transform: scale(1.04);
+}
+
+.contact-cta__map-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(4, 12, 24, 0.58) 0%, transparent 24%),
+    radial-gradient(circle at 37% 53%, rgba(19, 242, 227, 0.08), transparent 32%),
+    linear-gradient(90deg, rgba(4, 12, 24, 0.02), rgba(4, 12, 24, 0.46) 64%, rgba(4, 12, 24, 0.82)),
+    linear-gradient(180deg, rgba(4, 12, 24, 0.08), rgba(4, 12, 24, 0.38));
 }
 
 .contact-cta__map-panel::before,
@@ -33,67 +66,18 @@
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(35, 238, 224, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(35, 238, 224, 0.06) 1px, transparent 1px);
+    linear-gradient(rgba(35, 238, 224, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(35, 238, 224, 0.055) 1px, transparent 1px);
   background-size: 42px 42px;
-  mask-image: linear-gradient(135deg, black, transparent 74%);
-  opacity: 0.5;
-}
-
-.contact-cta__map-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  padding: 26px;
-}
-
-.contact-cta__map-zone {
-  fill: rgba(21, 242, 227, 0.04);
-  stroke: rgba(21, 242, 227, 0.22);
-  stroke-width: 1.4;
-}
-
-.contact-cta__river {
-  fill: none;
-  stroke: rgba(21, 242, 227, 0.12);
-  stroke-linecap: round;
-  stroke-width: 32;
-}
-
-.contact-cta__road,
-.contact-cta__route {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.contact-cta__road {
-  stroke: rgba(21, 242, 227, 0.22);
-  stroke-width: 2;
-}
-
-.contact-cta__road--primary {
-  stroke: rgba(21, 242, 227, 0.46);
-  stroke-width: 3;
-}
-
-.contact-cta__route {
-  stroke: rgba(155, 92, 255, 0.5);
-  stroke-dasharray: 7 10;
-  stroke-width: 2;
-}
-
-.contact-cta__node {
-  fill: #13f2e3;
-  filter: drop-shadow(0 0 14px rgba(19, 242, 227, 0.9));
+  mask-image: linear-gradient(135deg, black, transparent 76%);
+  opacity: 0.46;
 }
 
 .contact-cta__pin {
   position: absolute;
-  left: 35%;
-  top: 47%;
-  z-index: 2;
+  left: 38%;
+  top: 53%;
+  z-index: 3;
   display: grid;
   width: 72px;
   height: 72px;
@@ -105,12 +89,12 @@
 .contact-cta__pin svg {
   position: relative;
   z-index: 2;
-  width: 62px;
-  height: 62px;
-  fill: rgba(19, 242, 227, 0.14);
+  width: 66px;
+  height: 66px;
+  fill: rgba(19, 242, 227, 0.16);
   stroke: currentColor;
   stroke-width: 1.5;
-  filter: drop-shadow(0 0 22px rgba(19, 242, 227, 0.85));
+  filter: drop-shadow(0 0 22px rgba(19, 242, 227, 0.88));
 }
 
 .contact-cta__pin span,
@@ -119,12 +103,12 @@
   content: '';
   position: absolute;
   border-radius: 999px;
-  border: 1px solid rgba(19, 242, 227, 0.35);
+  border: 1px solid rgba(19, 242, 227, 0.36);
 }
 
 .contact-cta__pin span {
   inset: 47px 14px 8px;
-  background: rgba(19, 242, 227, 0.16);
+  background: rgba(19, 242, 227, 0.18);
   filter: blur(3px);
 }
 
@@ -134,14 +118,14 @@
 
 .contact-cta__pin::after {
   inset: 38px 2px -4px;
-  opacity: 0.55;
+  opacity: 0.56;
 }
 
 .contact-cta__location-badge {
   position: absolute;
   left: 28px;
   bottom: 28px;
-  z-index: 3;
+  z-index: 5;
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -153,6 +137,7 @@
   font-size: 0.98rem;
   font-weight: 800;
   box-shadow: 0 0 34px rgba(19, 242, 227, 0.12);
+  backdrop-filter: blur(14px);
 }
 
 .contact-cta__location-badge svg {
@@ -164,10 +149,10 @@
 
 .contact-cta__contact-card {
   position: absolute;
-  top: 56px;
-  right: 56px;
-  z-index: 4;
-  width: min(380px, calc(100% - 72px));
+  top: 50%;
+  right: 34px;
+  z-index: 5;
+  width: min(370px, calc(100% - 72px));
   border: 1px solid rgba(27, 234, 223, 0.24);
   border-radius: 18px;
   padding: 22px;
@@ -175,8 +160,9 @@
     radial-gradient(circle at 0% 0%, rgba(155, 92, 255, 0.13), transparent 38%),
     rgba(5, 13, 25, 0.92);
   box-shadow:
-    0 28px 80px rgba(0, 0, 0, 0.32),
+    0 28px 80px rgba(0, 0, 0, 0.34),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transform: translateY(-50%);
   backdrop-filter: blur(18px);
 }
 
@@ -372,10 +358,10 @@
   cursor: pointer;
 }
 
-.contact-cta__field:has(select)::after {
+.contact-cta__field--select::after {
   content: '';
   position: absolute;
-  top: 24px;
+  top: 23px;
   right: 20px;
   width: 8px;
   height: 8px;
@@ -469,12 +455,18 @@
     min-height: 680px;
   }
 
+  .contact-cta__map-image {
+    background-position: center;
+    transform: scale(1.18);
+  }
+
   .contact-cta__contact-card {
     top: auto;
     right: 20px;
     bottom: 92px;
     left: 20px;
     width: auto;
+    transform: none;
   }
 
   .contact-cta__location-badge {
@@ -484,7 +476,7 @@
 
   .contact-cta__pin {
     left: 50%;
-    top: 34%;
+    top: 30%;
   }
 
   .contact-cta__form-panel {
@@ -514,4 +506,9 @@
   .contact-cta__field textarea {
     min-height: 140px;
   }
+}
+
+.contact-cta__social-link svg {
+  fill: currentColor;
+  stroke: none;
 }
