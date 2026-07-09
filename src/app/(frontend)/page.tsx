@@ -7,6 +7,7 @@ import {
   Hero,
   InsightsTrust,
   SkillsTechnologies,
+  SiteFooter,
 } from '@/components/home'
 import { getContact, getHomepage } from '@/lib/cms'
 
@@ -30,6 +31,8 @@ export default async function HomePage() {
       <InsightsTrust />
 
       <ContactCTA contact={contact} contactSection={homepage.contactSection} />
+
+      <SiteFooter />
     </>
   )
 }
