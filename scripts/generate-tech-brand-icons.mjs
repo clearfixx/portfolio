@@ -21,33 +21,32 @@ const brandIcons = [
 
 const utilityIcons = `
     case 'vscode':
-      return (
-        <svg className="skills-tech__utility-svg" viewBox="0 0 32 32" aria-hidden="true">
+  return (
+    <svg className="skills-tech__utility-svg skills-tech__utility-svg--vscode" viewBox="0 0 32 32" aria-hidden="true">
           <path d="M22 7 10 16l12 9V7Z" />
           <path d="M10 16 5 12v8l5-4Z" />
           <path d="M22 7l5 2v14l-5 2" />
         </svg>
       )
-    case 'aws':
+        case 'aws':
       return (
         <svg className="skills-tech__utility-svg skills-tech__utility-svg--aws" viewBox="0 0 32 32" aria-hidden="true">
-          <path d="M7 13h18" />
-          <path d="M9 19c4 3 10 3 14 0" />
-          <path d="M21 18l3 1-2 3" />
-          <text x="16" y="15.5" textAnchor="middle">aws</text>
+          <text x="16" y="14.2" textAnchor="middle">aws</text>
+          <path d="M8.2 19.1c4.8 3 10.8 3 15.6 0" />
+          <path d="M21.6 18.2l3.2.7-1.7 2.8" />
         </svg>
       )
     case 'cicd':
-      return (
-        <svg className="skills-tech__utility-svg" viewBox="0 0 32 32" aria-hidden="true">
+  return (
+    <svg className="skills-tech__utility-svg skills-tech__utility-svg--cicd" viewBox="0 0 32 32" aria-hidden="true">
           <path d="M8 18c0-4 4-7 8-2s8 2 8-2" />
           <path d="M24 14c0 4-4 7-8 2S8 14 8 18" />
           <path d="m22 10 3 4-3 4M10 22l-3-4 3-4" />
         </svg>
       )
     case 'monitoring':
-      return (
-        <svg className="skills-tech__utility-svg" viewBox="0 0 32 32" aria-hidden="true">
+  return (
+    <svg className="skills-tech__utility-svg skills-tech__utility-svg--monitoring" viewBox="0 0 32 32" aria-hidden="true">
           <path d="M5 24h22" />
           <path d="M8 20l5-6 4 4 6-9" />
           <path d="M8 8v16M27 8v16" />
@@ -65,7 +64,7 @@ const brandCases = brandIcons
 
     return `    case '${id}':
       return (
-        <svg className="skills-tech__brand-svg" viewBox="0 0 24 24" aria-hidden="true">
+        <svg className="skills-tech__brand-svg skills-tech__brand-svg--${id}" viewBox="0 0 24 24" aria-hidden="true">
           <path d="${icon.path}" />
         </svg>
       )`

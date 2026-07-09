@@ -714,15 +714,52 @@
   filter: drop-shadow(0 0 7px color-mix(in srgb, currentColor 38%, transparent));
 }
 
-.skills-tech__utility-svg--aws text {
-  fill: currentColor;
-  stroke: none;
-  font-family: Arial, sans-serif;
-  font-size: 8px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  text-transform: lowercase;
+.skills-tech__brand-svg,
+.skills-tech__utility-svg {
+  transform-origin: center;
+  shape-rendering: geometricPrecision;
 }
+
+.skills-tech__brand-svg--nextjs {
+  transform: scale(0.94);
+}
+
+.skills-tech__brand-svg--react {
+  transform: scale(0.98);
+}
+
+.skills-tech__brand-svg--typescript {
+  transform: scale(0.94);
+}
+
+.skills-tech__brand-svg--scss {
+  transform: scale(0.92);
+}
+
+.skills-tech__brand-svg--nestjs {
+  transform: scale(0.96);
+}
+
+.skills-tech__brand-svg--nodejs {
+  transform: scale(0.92);
+}
+
+.skills-tech__brand-svg--prisma {
+  transform: scale(0.94);
+}
+
+.skills-tech__brand-svg--postgresql {
+  transform: scale(0.97);
+}
+
+.skills-tech__brand-svg--prettier {
+  transform: scale(0.86);
+}
+
+.skills-tech__utility-svg--vscode {
+  transform: scale(0.95);
+}
+а
 
 .skills-tech__badge-label {
   font-size: 0.66rem;
@@ -730,7 +767,7 @@
 }
 
 .skills-tech__details {
-  margin-top: auto;
+  margin-top: 0.7rem;//auto;
   padding-top: 0.78rem;
 }
 
@@ -1242,4 +1279,43 @@
   .skills-tech__dna-node-description {
     font-size: 9px;
   }
+}
+
+.skills-tech__utility-svg--aws {
+  transform: scale(1.22);
+}
+
+.skills-tech__utility-svg--aws text {
+  fill: currentColor;
+  stroke: none;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: -0.07em;
+  text-transform: lowercase;
+}
+
+.skills-tech__utility-svg--aws path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.55;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.skills-tech__brand-svg--github {
+  opacity: 0.82;
+  transform: scale(0.9);
+}
+
+.skills-tech__brand-svg--postgresql {
+  transform: scale(1.04);
+}
+
+.skills-tech__brand-svg--nestjs {
+  transform: scale(1.02);
+}
+
+.skills-tech__brand-svg--scss {
+  transform: scale(0.98);
 }
