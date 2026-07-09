@@ -58,11 +58,20 @@ const ReplyIcon = (props: IconProps) => (
 )
 
 const RepostIcon = (props: IconProps) => (
-  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" {...props}>
-    <path d="M17 1v6h-6" />
-    <path d="m7 23v-6h6" />
-    <path d="M20 7a8 8 0 0 0-14.9-2" />
-    <path d="M4 17a8 8 0 0 0 14.9 2" />
+  <svg
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+    fill="none"
+    stroke="currentColor"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="1.8"
+    {...props}
+  >
+    <path d="m17 2 4 4-4 4" />
+    <path d="M3 10V8a4 4 0 0 1 4-4h14" />
+    <path d="m7 22-4-4 4-4" />
+    <path d="M21 14v2a4 4 0 0 1-4 4H3" />
   </svg>
 )
 
@@ -113,7 +122,10 @@ function FooterSocialLinkItem({ social }: { social: FooterSocialLink }) {
 
 function SnapshotCard({ snapshot }: { snapshot: FooterSnapshot }) {
   return (
-    <article className={`site-footer__snapshot site-footer__snapshot--${snapshot.kind}`}>
+    <article
+      className={`site-footer__snapshot site-footer__snapshot--${snapshot.kind}`}
+      aria-label={snapshot.title}
+    >
       <div className="site-footer__snapshot-screen" aria-hidden="true">
         {snapshot.kind === 'quote' ? (
           <div className="site-footer__snapshot-quote">
@@ -132,11 +144,6 @@ function SnapshotCard({ snapshot }: { snapshot: FooterSnapshot }) {
             <i />
           </>
         )}
-      </div>
-
-      <div className="site-footer__snapshot-copy">
-        <strong>{snapshot.title}</strong>
-        {snapshot.subtitle ? <span>{snapshot.subtitle}</span> : null}
       </div>
     </article>
   )
@@ -278,7 +285,7 @@ export function SiteFooter() {
                 </div>
 
                 <p>
-                  Weekly notes on engineering, architecture and building better products.
+                  Notes on engineering, architecture and better products.
                 </p>
               </div>
 
@@ -289,12 +296,12 @@ export function SiteFooter() {
                 </label>
 
                 <button type="button">Join</button>
-              </form>
 
-              <p className="site-footer__newsletter-note">
-                <LockIcon />
-                No spam. Unsubscribe anytime.
-              </p>
+                <p className="site-footer__newsletter-note">
+                  <LockIcon />
+                  No spam. Unsubscribe anytime.
+                </p>
+              </form>
             </div>
           </section>
         </div>
