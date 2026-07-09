@@ -1,6 +1,7 @@
 import {
   ContactCTA,
   CurrentMission,
+  DeliveryPipeline,
   FeaturedProjects,
   EngineerProfile,
   Hero,

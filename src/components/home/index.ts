@@ -1,5 +1,6 @@
 export { ContactCTA } from './ContactCTA'
 export { CurrentMission } from './CurrentMission'
+export { DeliveryPipeline } from './DeliveryPipeline'
 export { FeaturedProjects } from './FeaturedProjects'
 export { Hero } from './Hero'
 export { TechStackSection } from './TechStackSection'

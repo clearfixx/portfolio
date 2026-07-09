@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import type { SVGProps } from 'react'
 
@@ -8,6 +9,7 @@ import {
   featuredInsightArticle,
   insightArticles,
   trustMetrics,
+  type CodeToken,
   type InsightArticle,
   type TrustMetric,
 } from './data'
@@ -23,7 +25,16 @@ function ArrowUpRightIcon(props: SVGProps<SVGSVGElement>) {
 
 function ShieldCheckIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.8"
+      {...props}
+    >
       <path d="M12 3 19 6v5c0 4.4-2.8 8.4-7 10-4.2-1.6-7-5.6-7-10V6l7-3Z" />
       <path d="m8.8 12.2 2 2 4.5-5" />
     </svg>
@@ -112,6 +123,12 @@ const metricIcons = {
   users: UsersIcon,
 }
 
+function getCodeTokenClassName(token: CodeToken) {
+  return token.type
+    ? `insights-trust__token insights-trust__token--${token.type}`
+    : 'insights-trust__token'
+}
+
 function ArticleMeta() {
   return (
     <div className="insights-trust__article-meta">
@@ -119,13 +136,69 @@ function ArticleMeta() {
         <CalendarIcon />
         {featuredInsightArticle.date}
       </span>
+
       <span>
         <ClockIcon />
         {featuredInsightArticle.readTime}
       </span>
+
       <span className="insights-trust__article-category">{featuredInsightArticle.category}</span>
     </div>
   )
+}
+
+function FeaturedCodePreview() {
+  return (
+    <div className="insights-trust__code-card" aria-label="Article code preview">
+      <div className="insights-trust__code-topbar">
+        <span />
+        <span />
+        <span />
+        <strong>{featuredInsightArticle.codeTitle}</strong>
+      </div>
+
+      <pre>
+        <code>
+          {featuredInsightArticle.codeLines.map((line, lineIndex) => (
+            <span
+              className="insights-trust__code-line"
+              key={`${featuredInsightArticle.id}-line-${lineIndex}`}
+            >
+              {line.length > 0
+                ? line.map((token, tokenIndex) => (
+                    <span
+                      className={getCodeTokenClassName(token)}
+                      key={`${featuredInsightArticle.id}-line-${lineIndex}-token-${tokenIndex}`}
+                    >
+                      {token.value}
+                    </span>
+                  ))
+                : '\u00A0'}
+            </span>
+          ))}
+        </code>
+      </pre>
+    </div>
+  )
+}
+
+function FeaturedArticleMedia() {
+  if (featuredInsightArticle.image) {
+    return (
+      <div className="insights-trust__image-card">
+        <Image
+          src={featuredInsightArticle.image.src}
+          alt={featuredInsightArticle.image.alt}
+          fill
+          sizes="(max-width: 860px) 100vw, 360px"
+        />
+
+        <span className="insights-trust__image-scanline" aria-hidden="true" />
+      </div>
+    )
+  }
+
+  return <FeaturedCodePreview />
 }
 
 function FeaturedArticle() {
@@ -141,18 +214,7 @@ function FeaturedArticle() {
         <ArticleMeta />
       </div>
 
-      <div className="insights-trust__code-card" aria-hidden="true">
-        <div className="insights-trust__code-topbar">
-          <span />
-          <span />
-          <span />
-          <strong>{featuredInsightArticle.codeTitle}</strong>
-        </div>
-
-        <pre>
-          <code>{featuredInsightArticle.codeLines.join('\n')}</code>
-        </pre>
-      </div>
+      <FeaturedArticleMedia />
     </article>
   )
 }
@@ -175,6 +237,7 @@ function CompactArticle({ article, index }: { article: InsightArticle; index: nu
 
       <span className="insights-trust__article-details">
         <span>{article.date}</span>
+
         <span>
           <ClockIcon />
           {article.readTime}
@@ -210,7 +273,7 @@ export function InsightsTrust() {
         </>
       }
       description="Build notes, engineering thoughts and client feedback collected from real project work."
-      number="05"
+      number="06"
       footer={{
         icon: ShieldCheckIcon,
         label: 'Real projects. Real feedback. Real impact.',

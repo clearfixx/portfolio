@@ -370,7 +370,7 @@ export function ContactCTA({ contact, contactSection }: ContactCTAProps) {
         </>
       }
       description="If you need a scalable product, clean architecture and reliable delivery — I’m ready to discuss your project."
-      number="06"
+      number="07"
       footer={{
         icon: LinkIcon,
         label: 'Mission link',
