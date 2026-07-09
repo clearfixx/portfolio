@@ -8,3 +8,4 @@ export { TechStackSection } from './TechStackSection'
 export { TestimonialsSection } from './TestimonialsSection'
 
 export { EngineerProfile } from './EngineerProfile'
+export { SkillsTechnologies } from './SkillsTechnologies'

@@ -16,13 +16,13 @@
 
 .logo__mark::before {
   content: '[ ';
-  margin-right: 2px;
+  margin-right: 0px;
 }
 
 .logo__mark::after {
   content: ' ]';
-  margin-left: 2px;
-  color: var(--color-white);
+  margin-left: 0px;
+  // color: var(--color-white);
 }
 
 .logo__mark::after,

@@ -5,6 +5,7 @@ import {
   EngineerProfile,
   Hero,
   TestimonialsSection,
+  SkillsTechnologies,
 } from '@/components/home'
 import { getApprovedTestimonials, getContact, getHomepage } from '@/lib/cms'
 
@@ -26,6 +27,8 @@ export default async function HomePage() {
       <TestimonialsSection testimonials={testimonials} />
 
       <EngineerProfile />
+
+      <SkillsTechnologies />
 
       <ContactCTA contact={contact} contactSection={homepage.contactSection} />
     </>

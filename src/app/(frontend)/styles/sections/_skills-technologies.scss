@@ -1,0 +1,493 @@
+.skills-tech__layout {
+  display: grid;
+  grid-template-areas:
+    "frontend dna backend"
+    "workflow dna devops"
+    "architecture architecture focus";
+  grid-template-columns: minmax(0, 1fr) minmax(26rem, 1.35fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.skills-tech__card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgb(122 245 235 / 18%);
+  border-radius: 1rem;
+  padding: 1.2rem;
+  background:
+    radial-gradient(circle at 12% 0%, rgb(122 245 235 / 8%), transparent 34%),
+    linear-gradient(180deg, rgb(9 17 30 / 84%), rgb(5 10 19 / 94%));
+}
+
+.skills-tech__card--frontend {
+  grid-area: frontend;
+}
+
+.skills-tech__card--workflow {
+  grid-area: workflow;
+}
+
+.skills-tech__card--backend {
+  grid-area: backend;
+}
+
+.skills-tech__card--devops {
+  grid-area: devops;
+}
+
+.skills-tech__card--architecture {
+  grid-area: architecture;
+}
+
+.skills-tech__card--focus {
+  grid-area: focus;
+}
+
+.skills-tech__card--blue {
+  border-color: rgb(56 142 255 / 24%);
+}
+
+.skills-tech__card--purple {
+  border-color: rgb(176 102 255 / 26%);
+}
+
+.skills-tech__card--green {
+  border-color: rgb(92 255 172 / 22%);
+}
+
+.skills-tech__card-header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.9rem;
+  align-items: start;
+  margin-bottom: 1.1rem;
+}
+
+.skills-tech__card-number {
+  color: rgb(122 245 235);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.skills-tech__card h3 {
+  margin: 0;
+  color: rgb(243 247 250);
+  font-size: clamp(1.05rem, 1.4vw, 1.35rem);
+  line-height: 1.1;
+}
+
+.skills-tech__card p {
+  max-width: 25rem;
+  margin: 0.45rem 0 0;
+  color: rgb(166 180 193 / 84%);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.skills-tech__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.skills-tech__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgb(122 245 235 / 18%);
+  border-radius: 0.75rem;
+  padding: 0.55rem 0.7rem;
+  background: rgb(4 11 20 / 68%);
+  color: rgb(224 234 240);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.skills-tech__badge-mark {
+  display: inline-grid;
+  width: 1.55rem;
+  height: 1.55rem;
+  place-items: center;
+  border-radius: 999px;
+  background: rgb(122 245 235 / 12%);
+  color: rgb(122 245 235);
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 900;
+}
+
+.skills-tech__details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin: 1.15rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid rgb(122 245 235 / 12%);
+}
+
+.skills-tech__details div {
+  min-width: 0;
+}
+
+.skills-tech__details dt {
+  color: rgb(122 245 235 / 72%);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.skills-tech__details dd {
+  margin: 0.25rem 0 0;
+  color: rgb(243 247 250);
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.skills-tech__dna {
+  position: relative;
+  grid-area: dna;
+  min-height: 30rem;
+  overflow: hidden;
+  border: 1px solid rgb(122 245 235 / 18%);
+  border-radius: 1.15rem;
+  background:
+    radial-gradient(circle at 50% 39%, rgb(122 245 235 / 12%), transparent 31%),
+    radial-gradient(circle at 50% 65%, rgb(176 102 255 / 11%), transparent 33%),
+    linear-gradient(180deg, rgb(8 17 29 / 88%), rgb(4 9 18 / 94%));
+}
+
+.skills-tech__dna::before {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgb(122 245 235 / 5%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(122 245 235 / 5%) 1px, transparent 1px);
+  background-size: 32px 32px;
+  content: "";
+  opacity: 0.22;
+}
+
+.skills-tech__dna-diagram {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.skills-tech__dna-grid path {
+  fill: none;
+  stroke: rgb(122 245 235 / 9%);
+  stroke-width: 1;
+}
+
+.skills-tech__dna-connectors path {
+  fill: none;
+  stroke: rgb(122 245 235 / 19%);
+  stroke-width: 1;
+  stroke-dasharray: 4 9;
+  stroke-linecap: round;
+}
+
+.skills-tech__dna-strand-glow {
+  fill: none;
+  stroke-width: 17;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0.24;
+  filter: blur(13px);
+  animation: skillsDnaDraw 1.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.skills-tech__dna-strand-glow--cyan {
+  stroke: rgb(122 245 235);
+  animation-delay: 0.08s;
+}
+
+.skills-tech__dna-strand-glow--purple {
+  stroke: rgb(176 102 255);
+  animation-delay: 0.2s;
+}
+
+.skills-tech__dna-strand {
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: skillsDnaDraw 1.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.skills-tech__dna-strand--cyan {
+  stroke: url("#dna-cyan-gradient");
+  filter: drop-shadow(0 0 12px rgb(122 245 235 / 34%));
+  animation-delay: 0.08s;
+}
+
+.skills-tech__dna-strand--purple {
+  stroke: url("#dna-purple-gradient");
+  filter: drop-shadow(0 0 12px rgb(176 102 255 / 28%));
+  animation-delay: 0.2s;
+}
+
+.skills-tech__dna-energy {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 0.075 0.925;
+  stroke-dashoffset: 1;
+  opacity: 0;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: skillsDnaEnergyFlow 6.8s linear infinite;
+}
+
+.skills-tech__dna-energy--cyan {
+  stroke: rgb(205 255 250 / 76%);
+  filter: drop-shadow(0 0 11px rgb(122 245 235 / 72%));
+  animation-delay: 2.05s;
+}
+
+.skills-tech__dna-energy--purple {
+  stroke: rgb(214 164 255 / 66%);
+  filter: drop-shadow(0 0 11px rgb(176 102 255 / 62%));
+  animation-delay: 4.1s;
+}
+
+.skills-tech__dna-link {
+  stroke: rgb(224 234 240 / 18%);
+  stroke-width: 1;
+  stroke-linecap: round;
+  opacity: 0;
+  transform: scaleX(0.86);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: skillsDnaLinkReveal 0.48s ease-out forwards;
+}
+
+@for $i from 1 through 8 {
+  .skills-tech__dna-link--#{$i} {
+    animation-delay: #{1.22 + ($i * 0.045)}s;
+  }
+}
+
+.skills-tech__dna-node {
+  color: rgb(122 245 235);
+}
+
+.skills-tech__dna-node--backend,
+.skills-tech__dna-node--reliability {
+  color: rgb(56 142 255);
+}
+
+.skills-tech__dna-node--performance {
+  color: rgb(176 102 255);
+}
+
+.skills-tech__dna-node--growth {
+  color: rgb(255 176 56);
+}
+
+.skills-tech__dna-node-glow {
+  fill: currentColor;
+  opacity: 0.14;
+  filter: blur(7px);
+}
+
+.skills-tech__dna-node-shell {
+  fill: rgb(5 12 22 / 78%);
+  stroke: currentColor;
+  stroke-width: 1.2;
+}
+
+.skills-tech__dna-node-icon {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.skills-tech__dna-node-label {
+  fill: rgb(243 247 250);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.skills-tech__dna-node-description {
+  fill: rgb(166 180 193 / 72%);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.skills-tech__dna-caption {
+  position: absolute;
+  top: 48.2%;
+  right: 50%;
+  z-index: 3;
+  display: grid;
+  min-width: 13.5rem;
+  padding: 0;
+  gap: 0.22rem;
+  justify-items: center;
+  background: transparent;
+  text-align: center;
+  transform: translate(50%, -50%);
+  pointer-events: none;
+}
+
+.skills-tech__dna-caption::after {
+  width: 2rem;
+  height: 1px;
+  margin-top: 0.32rem;
+  background: rgb(122 245 235 / 76%);
+  box-shadow: 0 0 12px rgb(122 245 235 / 36%);
+  content: "";
+}
+
+.skills-tech__dna-caption strong {
+  color: rgb(248 252 255 / 98%);
+  font-size: clamp(0.8rem, 1.14vw, 0.96rem);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-shadow:
+    0 1px 0 rgb(4 9 18),
+    0 0 12px rgb(4 9 18 / 96%),
+    0 0 24px rgb(4 9 18 / 82%),
+    0 0 16px rgb(122 245 235 / 18%);
+}
+
+.skills-tech__dna-caption span {
+  color: rgb(184 198 210 / 78%);
+  font-family: var(--font-mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
+  text-shadow:
+    0 1px 0 rgb(4 9 18),
+    0 0 14px rgb(4 9 18 / 92%),
+    0 0 20px rgb(4 9 18 / 76%);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+
+@keyframes skillsDnaDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes skillsDnaLinkReveal {
+  to {
+    opacity: 0.68;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes skillsDnaEnergyFlow {
+  0% {
+    opacity: 0;
+    stroke-dashoffset: 1;
+  }
+
+  12% {
+    opacity: 0;
+  }
+
+  18% {
+    opacity: 0.72;
+  }
+
+  42% {
+    opacity: 0.18;
+  }
+
+  56% {
+    opacity: 0;
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    opacity: 0;
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills-tech__dna-strand-glow,
+  .skills-tech__dna-strand,
+  .skills-tech__dna-link,
+  .skills-tech__dna-energy {
+    animation: none;
+  }
+
+  .skills-tech__dna-strand-glow,
+  .skills-tech__dna-strand {
+    stroke-dashoffset: 0;
+  }
+
+  .skills-tech__dna-link {
+    opacity: 0.68;
+    transform: none;
+  }
+
+  .skills-tech__dna-energy {
+    display: none;
+  }
+}
+
+@media (width <= 1080px) {
+  .skills-tech__layout {
+    grid-template-areas:
+      "dna dna"
+      "frontend backend"
+      "workflow devops"
+      "architecture focus";
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skills-tech__dna {
+    min-height: 24rem;
+  }
+}
+
+@media (width <= 680px) {
+  .skills-tech__layout {
+    grid-template-areas:
+      "dna"
+      "frontend"
+      "backend"
+      "workflow"
+      "devops"
+      "architecture"
+      "focus";
+    grid-template-columns: 1fr;
+  }
+
+  .skills-tech__dna {
+    min-height: 20rem;
+  }
+
+  .skills-tech__dna-caption {
+    min-width: 11rem;
+    padding-inline: 0.6rem;
+  }
+
+  .skills-tech__details {
+    grid-template-columns: 1fr;
+  }
+
+  .skills-tech__dna-node-label {
+    font-size: 12px;
+  }
+
+  .skills-tech__dna-node-description {
+    font-size: 9px;
+  }
+}

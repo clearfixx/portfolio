@@ -1,27 +1,29 @@
-import { EngineerIntro } from './EngineerIntro'
+import { UserIcon } from '@/components/icons'
+
+import { PortfolioSection } from '../PortfolioSection'
 import { JourneyPanel } from './JourneyPanel'
 import { PhilosophyPanel } from './PhilosophyPanel'
 import { ProfilePanel } from './ProfilePanel'
 
 export function EngineerProfile() {
   return (
-    <section className="engineer-profile-section" id="engineer-profile">
-      <div className="site-container">
-        <div className="engineer-profile__frame">
-          <div className="engineer-profile__section-index" aria-hidden="true">
-            <span>01</span>
-            <i />
-          </div>
-
-          <EngineerIntro />
-
-          <div className="engineer-profile__grid">
-            <ProfilePanel />
-            <JourneyPanel />
-            <PhilosophyPanel />
-          </div>
-        </div>
+    <PortfolioSection
+      id="engineer-profile"
+      eyebrow="About me"
+      title="Engineer Profile"
+      description="A builder of scalable systems and meaningful digital experiences."
+      number="01"
+      footer={{
+        icon: UserIcon,
+        label: 'Engineer mindset',
+        text: 'turning complex ideas into clean, maintainable systems.',
+      }}
+    >
+      <div className="engineer-profile__grid">
+        <ProfilePanel />
+        <JourneyPanel />
+        <PhilosophyPanel />
       </div>
-    </section>
+    </PortfolioSection>
   )
 }
