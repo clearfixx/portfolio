@@ -7,13 +7,13 @@
 .portfolio-section__frame {
   position: relative;
   // overflow: hidden;ß
-  border: 1px solid rgb(122 245 235 / 18%);
+  border: 1px solid rgb(var(--rgb-aqua) / 18%);
   border-radius: 1.25rem;
   padding: 1.75rem;
   background:
-    radial-gradient(circle at 14% 8%, rgb(122 245 235 / 7%), transparent 30%),
-    radial-gradient(circle at 86% 14%, rgb(132 92 255 / 7%), transparent 28%),
-    linear-gradient(180deg, rgb(5 11 22 / 72%), rgb(3 8 16 / 86%));
+    radial-gradient(circle at 14% 8%, rgb(var(--rgb-aqua) / 7%), transparent 30%),
+    radial-gradient(circle at 86% 14%, rgb(var(--rgb-purple-blue) / 7%), transparent 28%),
+    linear-gradient(180deg, rgb(var(--rgb-section-surface-top) / 72%), rgb(var(--rgb-section-surface-bottom) / 86%));
 }
 
 .portfolio-section__frame::before {
@@ -21,11 +21,11 @@
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(rgb(122 245 235 / 3%) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(122 245 235 / 3%) 1px, transparent 1px);
+    linear-gradient(rgb(var(--rgb-aqua) / 3%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--rgb-aqua) / 3%) 1px, transparent 1px);
   background-size: 56px 56px;
   content: '';
-  mask-image: linear-gradient(180deg, black, transparent 78%);
+  mask-image: linear-gradient(180deg, rgb(var(--rgb-black)), transparent 78%);
 }
 
 .portfolio-section__number {
@@ -36,7 +36,7 @@
   display: flex;
   align-items: center;
   gap: 0.7rem;
-  color: rgb(122 245 235);
+  color: rgb(var(--rgb-aqua));
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.14em;
@@ -46,7 +46,7 @@
   display: block;
   width: 1.8rem;
   height: 1px;
-  background: rgb(122 245 235 / 58%);
+  background: rgb(var(--rgb-aqua) / 58%);
 }
 
 .portfolio-section__header,
@@ -64,7 +64,7 @@
   display: inline-flex;
   gap: 0.45rem;
   margin: 0;
-  color: rgb(122 245 235);
+  color: rgb(var(--rgb-aqua));
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.11em;
@@ -72,12 +72,12 @@
 }
 
 .portfolio-section__eyebrow span:first-child {
-  color: rgb(132 92 255);
+  color: rgb(var(--rgb-purple-blue));
 }
 
 .portfolio-section__title {
   margin: 0.55rem 0 0;
-  color: rgb(245 250 255);
+  color: rgb(var(--rgb-text-bright));
   font-size: clamp(2.6rem, 4vw, 4rem);
   line-height: 1;
   letter-spacing: -0.07em;
@@ -86,7 +86,7 @@
 .portfolio-section__description {
   max-width: 620px;
   margin: 0.6rem 0 0;
-  color: rgb(165 177 192);
+  color: rgb(var(--rgb-text-muted));
   font-size: 0.98rem;
   line-height: 1.6;
 }
@@ -105,14 +105,14 @@
   position: relative;
   top: 3.5rem;
   overflow: hidden;
-  background-color: hsl(222.86deg 70% 3.92%);
+  background-color: rgb(var(--rgb-canvas));
   gap: 0.85rem;
-  border: 1px solid rgb(122 245 235 / 22%);
+  border: 1px solid rgb(var(--rgb-aqua) / 22%);
   border-radius: 999px;
   padding: 0.65rem 0.9rem;
-  // background: rgb(122 245 235 / 5%);
-  color: rgb(165 177 192);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 4%);
+  // background: rgb(var(--rgb-aqua) / 5%);
+  color: rgb(var(--rgb-text-muted));
+  box-shadow: inset 0 1px 0 rgb(var(--rgb-white) / 4%);
 }
 
 .portfolio-section__footer-icon {
@@ -120,10 +120,10 @@
   width: 2rem;
   height: 2rem;
   place-items: center;
-  border: 1px solid rgb(122 245 235 / 24%);
+  border: 1px solid rgb(var(--rgb-aqua) / 24%);
   border-radius: 999px;
-  background: rgb(122 245 235 / 8%);
-  color: rgb(122 245 235);
+  background: rgb(var(--rgb-aqua) / 8%);
+  color: rgb(var(--rgb-aqua));
   font-size: 1rem;
 }
 
@@ -137,12 +137,12 @@
 }
 
 .portfolio-section__footer-content strong {
-  color: rgb(245 250 255);
+  color: rgb(var(--rgb-text-bright));
   font-weight: 900;
 }
 
 .portfolio-section__footer-content span {
-  color: rgb(165 177 192);
+  color: rgb(var(--rgb-text-muted));
 }
 
 .portfolio-section__frame::after {
@@ -152,13 +152,13 @@
   width: 31rem;
   height: 11rem;
   pointer-events: none;
-  background-image: radial-gradient(circle, rgb(122 245 235 / 72%) 1px, transparent 1.7px);
+  background-image: radial-gradient(circle, rgb(var(--rgb-aqua) / 72%) 1px, transparent 1.7px);
   background-size: 1.85rem 1.85rem;
   content: '';
   opacity: 0.42;
   mask-image:
-    radial-gradient(ellipse at center, black 0 42%, transparent 72%),
-    linear-gradient(90deg, transparent, black 18%, black 82%, transparent);
+    radial-gradient(ellipse at center, rgb(var(--rgb-black)) 0 42%, transparent 72%),
+    linear-gradient(90deg, transparent, rgb(var(--rgb-black)) 18%, rgb(var(--rgb-black)) 82%, transparent);
 }
 
 @media (max-width: 760px) {

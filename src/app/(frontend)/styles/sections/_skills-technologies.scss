@@ -12,21 +12,21 @@
 .skills-tech__card {
   position: relative;
   overflow: hidden;
-  border: 1px solid rgb(122 245 235 / 18%);
+  border: 1px solid rgb(var(--rgb-aqua) / 18%);
   border-radius: 1rem;
   padding: 1.05rem;
   background:
-    radial-gradient(circle at 12% 0%, rgb(122 245 235 / 8%), transparent 34%),
-    linear-gradient(180deg, rgb(9 17 30 / 84%), rgb(5 10 19 / 94%));
+    radial-gradient(circle at 12% 0%, rgb(var(--rgb-aqua) / 8%), transparent 34%),
+    linear-gradient(180deg, rgb(var(--rgb-surface-card) / 84%), rgb(var(--rgb-surface-photo) / 94%));
 }
 
 .skills-tech__card::before {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, transparent, rgb(122 245 235 / 6%), transparent),
-    linear-gradient(rgb(122 245 235 / 3%) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(122 245 235 / 3%) 1px, transparent 1px);
+    linear-gradient(90deg, transparent, rgb(var(--rgb-aqua) / 6%), transparent),
+    linear-gradient(rgb(var(--rgb-aqua) / 3%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--rgb-aqua) / 3%) 1px, transparent 1px);
   background-size: 100% 100%, 28px 28px, 28px 28px;
   content: "";
   opacity: 0.28;
@@ -58,19 +58,19 @@
 }
 
 .skills-tech__card--blue {
-  border-color: rgb(56 142 255 / 24%);
+  border-color: rgb(var(--rgb-blue) / 24%);
 }
 
 .skills-tech__card--purple {
-  border-color: rgb(176 102 255 / 26%);
+  border-color: rgb(var(--rgb-purple-bright) / 26%);
 }
 
 .skills-tech__card--green {
-  border-color: rgb(92 255 172 / 22%);
+  border-color: rgb(var(--rgb-mint) / 22%);
 }
 
 .skills-tech__card--orange {
-  border-color: rgb(255 176 56 / 22%);
+  border-color: rgb(var(--rgb-amber) / 22%);
 }
 
 .skills-tech__card > * {
@@ -89,7 +89,7 @@
   place-items: center;
   border: 1px solid currentColor;
   border-radius: 0.35rem;
-  color: rgb(122 245 235 / 72%);
+  color: rgb(var(--rgb-aqua) / 72%);
   opacity: 0.8;
 }
 
@@ -117,33 +117,33 @@
   width: 3.25rem;
   height: 3.25rem;
   place-items: center;
-  border: 1px solid rgb(122 245 235 / 18%);
+  border: 1px solid rgb(var(--rgb-aqua) / 18%);
   border-radius: 0.65rem;
   background:
     radial-gradient(circle at 50% 0%, currentColor 0%, transparent 56%),
-    rgb(4 13 23 / 76%);
-  color: rgb(122 245 235);
-  box-shadow: inset 0 0 22px rgb(122 245 235 / 8%);
+    rgb(var(--rgb-surface-popover) / 76%);
+  color: rgb(var(--rgb-aqua));
+  box-shadow: inset 0 0 22px rgb(var(--rgb-aqua) / 8%);
 }
 
 .skills-tech__card--blue .skills-tech__card-icon,
 .skills-tech__card--blue .skills-tech__card-action {
-  color: rgb(56 142 255 / 86%);
+  color: rgb(var(--rgb-blue) / 86%);
 }
 
 .skills-tech__card--purple .skills-tech__card-icon,
 .skills-tech__card--purple .skills-tech__card-action {
-  color: rgb(176 102 255 / 86%);
+  color: rgb(var(--rgb-purple-bright) / 86%);
 }
 
 .skills-tech__card--green .skills-tech__card-icon,
 .skills-tech__card--green .skills-tech__card-action {
-  color: rgb(92 255 172 / 82%);
+  color: rgb(var(--rgb-mint) / 82%);
 }
 
 .skills-tech__card--orange .skills-tech__card-icon,
 .skills-tech__card--orange .skills-tech__card-action {
-  color: rgb(255 176 56 / 84%);
+  color: rgb(var(--rgb-amber) / 84%);
 }
 
 .skills-tech__card-icon svg {
@@ -169,7 +169,7 @@
 }
 
 .skills-tech__card-number {
-  color: rgb(122 245 235);
+  color: rgb(var(--rgb-aqua));
   font-family: var(--font-mono);
   font-size: 1rem;
   font-weight: 800;
@@ -177,7 +177,7 @@
 
 .skills-tech__card h3 {
   margin: 0;
-  color: rgb(243 247 250);
+  color: rgb(var(--rgb-text-panel));
   font-size: clamp(1rem, 1.25vw, 1.22rem);
   line-height: 1.1;
 }
@@ -186,7 +186,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.38rem;
-  color: rgb(184 198 210 / 72%);
+  color: rgb(var(--rgb-text-subtle) / 72%);
   font-family: var(--font-mono);
   font-size: 0.64rem;
   letter-spacing: 0.06em;
@@ -202,25 +202,25 @@
 }
 
 .skills-tech__card--cyan .skills-tech__card-stack-badge span {
-  color: rgb(122 245 235);
+  color: rgb(var(--rgb-aqua));
 }
 
 .skills-tech__card--blue .skills-tech__card-stack-badge span {
-  color: rgb(56 142 255);
+  color: rgb(var(--rgb-blue));
 }
 
 .skills-tech__card--purple .skills-tech__card-stack-badge span {
-  color: rgb(176 102 255);
+  color: rgb(var(--rgb-purple-bright));
 }
 
 .skills-tech__card--green .skills-tech__card-stack-badge span {
-  color: rgb(92 255 172);
+  color: rgb(var(--rgb-mint));
 }
 
 .skills-tech__card p {
   max-width: 25rem;
   margin: 0.45rem 0 0;
-  color: rgb(166 180 193 / 84%);
+  color: rgb(var(--rgb-text-muted-alt) / 84%);
   font-size: 0.82rem;
   line-height: 1.55;
 }
@@ -241,13 +241,13 @@
   align-content: center;
   justify-items: center;
   gap: 0.42rem;
-  border: 1px solid rgb(122 245 235 / 14%);
+  border: 1px solid rgb(var(--rgb-aqua) / 14%);
   border-radius: 0.75rem;
   padding: 0.7rem 0.55rem;
   background:
     radial-gradient(circle at 50% 0%, currentColor 0%, transparent 62%),
-    rgb(4 11 20 / 64%);
-  color: rgb(122 245 235);
+    rgb(var(--rgb-surface-ink) / 64%);
+  color: rgb(var(--rgb-aqua));
   text-align: center;
   transition:
     border-color 180ms ease,
@@ -257,7 +257,7 @@
 
 .skills-tech__badge:hover {
   border-color: currentColor;
-  box-shadow: 0 0 22px rgb(122 245 235 / 12%);
+  box-shadow: 0 0 22px rgb(var(--rgb-aqua) / 12%);
   transform: translateY(-2px);
 }
 
@@ -286,7 +286,7 @@
 }
 
 .skills-tech__badge-label {
-  color: rgb(224 234 240);
+  color: rgb(var(--rgb-text-pale-alt));
   font-size: 0.72rem;
   font-weight: 700;
   line-height: 1.1;
@@ -307,7 +307,7 @@
 .skills-tech__badge--postgresql,
 .skills-tech__badge--cicd,
 .skills-tech__badge--monitoring {
-  color: rgb(56 142 255 / 92%);
+  color: rgb(var(--rgb-blue) / 92%);
 }
 
 .skills-tech__badge--scss,
@@ -327,7 +327,7 @@
 .skills-tech__badge--eslint,
 .skills-tech__badge--prettier,
 .skills-tech__badge--prisma {
-  color: rgb(176 102 255 / 92%);
+  color: rgb(var(--rgb-purple-bright) / 92%);
 }
 
 .skills-tech__details {
@@ -336,12 +336,12 @@
   gap: 0.7rem;
   margin: 1.05rem 0 0;
   padding-top: 0.9rem;
-  border-top: 1px solid rgb(122 245 235 / 12%);
+  border-top: 1px solid rgb(var(--rgb-aqua) / 12%);
 }
 
 .skills-tech__details div {
   min-width: 0;
-  border-right: 1px solid rgb(122 245 235 / 8%);
+  border-right: 1px solid rgb(var(--rgb-aqua) / 8%);
 }
 
 .skills-tech__details div:last-child {
@@ -349,7 +349,7 @@
 }
 
 .skills-tech__details dt {
-  color: rgb(122 245 235 / 72%);
+  color: rgb(var(--rgb-aqua) / 72%);
   font-family: var(--font-mono);
   font-size: 0.58rem;
   letter-spacing: 0.08em;
@@ -359,7 +359,7 @@
 .skills-tech__details dd {
   display: grid;
   margin: 0.25rem 0 0;
-  color: rgb(243 247 250);
+  color: rgb(var(--rgb-text-panel));
   font-size: 1.25rem;
   font-weight: 800;
   line-height: 1.05;
@@ -367,14 +367,14 @@
 
 .skills-tech__details dd > span {
   margin-top: 0.18rem;
-  color: rgb(166 180 193 / 76%);
+  color: rgb(var(--rgb-text-muted-alt) / 76%);
   font-size: 0.68rem;
   font-weight: 600;
 }
 
 .skills-tech__detail-list {
   gap: 0.26rem;
-  color: rgb(210 224 232);
+  color: rgb(var(--rgb-text-pale));
   font-size: 0.72rem;
   font-weight: 700;
 }
@@ -391,8 +391,8 @@
   width: 0.32rem;
   height: 0.32rem;
   border-radius: 999px;
-  background: rgb(122 245 235);
-  box-shadow: 0 0 10px rgb(122 245 235 / 58%);
+  background: rgb(var(--rgb-aqua));
+  box-shadow: 0 0 10px rgb(var(--rgb-aqua) / 58%);
   content: "";
 }
 
@@ -400,13 +400,13 @@
 .skills-tech__workflow {
   margin-top: 1rem;
   padding-top: 0.85rem;
-  border-top: 1px solid rgb(122 245 235 / 12%);
+  border-top: 1px solid rgb(var(--rgb-aqua) / 12%);
 }
 
 .skills-tech__pill-group h4,
 .skills-tech__workflow h4 {
   margin: 0 0 0.55rem;
-  color: rgb(122 245 235 / 78%);
+  color: rgb(var(--rgb-aqua) / 78%);
   font-family: var(--font-mono);
   font-size: 0.58rem;
   letter-spacing: 0.08em;
@@ -420,11 +420,11 @@
 }
 
 .skills-tech__pills span {
-  border: 1px solid rgb(122 245 235 / 16%);
+  border: 1px solid rgb(var(--rgb-aqua) / 16%);
   border-radius: 999px;
   padding: 0.38rem 0.65rem;
-  background: rgb(4 11 20 / 66%);
-  color: rgb(210 224 232 / 88%);
+  background: rgb(var(--rgb-surface-ink) / 66%);
+  color: rgb(var(--rgb-text-pale) / 88%);
   font-family: var(--font-mono);
   font-size: 0.66rem;
 }
@@ -440,7 +440,7 @@
   display: grid;
   justify-items: center;
   gap: 0.35rem;
-  color: rgb(210 224 232 / 88%);
+  color: rgb(var(--rgb-text-pale) / 88%);
   font-size: 0.66rem;
   text-align: center;
 }
@@ -449,7 +449,7 @@
   position: absolute;
   top: 0.72rem;
   right: -0.45rem;
-  color: rgb(122 245 235 / 72%);
+  color: rgb(var(--rgb-aqua) / 72%);
   content: "→";
   font-family: var(--font-mono);
   font-size: 0.85rem;
@@ -460,10 +460,10 @@
   width: 1.9rem;
   height: 1.9rem;
   place-items: center;
-  border: 1px solid rgb(92 255 172 / 18%);
+  border: 1px solid rgb(var(--rgb-mint) / 18%);
   border-radius: 0.55rem;
-  background: rgb(4 11 20 / 66%);
-  color: rgb(92 255 172);
+  background: rgb(var(--rgb-surface-ink) / 66%);
+  color: rgb(var(--rgb-mint));
 }
 
 .skills-tech__workflow-step svg {
@@ -483,13 +483,13 @@
   align-items: center;
   margin-top: 0.9rem;
   padding-top: 0.8rem;
-  border-top: 1px solid rgb(122 245 235 / 10%);
-  color: rgb(166 180 193 / 78%);
+  border-top: 1px solid rgb(var(--rgb-aqua) / 10%);
+  color: rgb(var(--rgb-text-muted-alt) / 78%);
   font-size: 0.68rem;
 }
 
 .skills-tech__focus-line strong {
-  color: rgb(92 255 172 / 78%);
+  color: rgb(var(--rgb-mint) / 78%);
   font-family: var(--font-mono);
   font-size: 0.58rem;
   letter-spacing: 0.08em;
@@ -508,7 +508,7 @@
   width: 0.25rem;
   height: 0.25rem;
   border-radius: 999px;
-  background: rgb(122 245 235 / 72%);
+  background: rgb(var(--rgb-aqua) / 72%);
   content: "";
 }
 
@@ -561,10 +561,10 @@
   gap: 0.65rem;
   align-items: start;
   min-width: 0;
-  border: 1px solid rgb(122 245 235 / 12%);
+  border: 1px solid rgb(var(--rgb-aqua) / 12%);
   border-radius: 0.75rem;
   padding: 0.72rem;
-  background: rgb(4 11 20 / 54%);
+  background: rgb(var(--rgb-surface-ink) / 54%);
 }
 
 .skills-tech__principle > span,
@@ -573,7 +573,7 @@
   width: 1.9rem;
   height: 1.9rem;
   place-items: center;
-  color: rgb(122 245 235);
+  color: rgb(var(--rgb-aqua));
 }
 
 .skills-tech__principle svg,
@@ -590,7 +590,7 @@
 .skills-tech__principle h4,
 .skills-tech__focus-item h4 {
   margin: 0;
-  color: rgb(243 247 250);
+  color: rgb(var(--rgb-text-panel));
   font-size: 0.76rem;
   line-height: 1.2;
 }
@@ -598,7 +598,7 @@
 .skills-tech__principle p,
 .skills-tech__focus-item p {
   margin: 0.25rem 0 0;
-  color: rgb(166 180 193 / 76%);
+  color: rgb(var(--rgb-text-muted-alt) / 76%);
   font-size: 0.66rem;
   line-height: 1.35;
 }
@@ -644,7 +644,7 @@
       color-mix(in srgb, currentColor 18%, transparent),
       transparent 58%
     ),
-    rgb(4 13 23 / 78%);
+    rgb(var(--rgb-surface-popover) / 78%);
   box-shadow:
     inset 0 0 16px color-mix(in srgb, currentColor 8%, transparent),
     0 0 14px color-mix(in srgb, currentColor 9%, transparent);
@@ -695,7 +695,7 @@
 .skills-tech__badge {
   min-height: 4.15rem;
   gap: 0.32rem;
-  border-color: rgb(122 245 235 / 11%);
+  border-color: rgb(var(--rgb-aqua) / 11%);
   border-radius: 0.66rem;
   padding: 0.52rem 0.42rem;
   background:
@@ -704,7 +704,7 @@
       color-mix(in srgb, currentColor 14%, transparent),
       transparent 60%
     ),
-    rgb(4 11 20 / 66%);
+    rgb(var(--rgb-surface-ink) / 66%);
   box-shadow: inset 0 0 14px color-mix(in srgb, currentColor 6%, transparent);
 }
 
@@ -894,10 +894,10 @@
 .skills-tech__principle,
 .skills-tech__focus-item {
   gap: 0.5rem;
-  border-color: rgb(122 245 235 / 10%);
+  border-color: rgb(var(--rgb-aqua) / 10%);
   border-radius: 0.62rem;
   padding: 0.56rem;
-  background: rgb(4 11 20 / 48%);
+  background: rgb(var(--rgb-surface-ink) / 48%);
 }
 
 .skills-tech__principle > span,
@@ -930,20 +930,20 @@
   grid-area: dna;
   min-height: 30rem;
   overflow: hidden;
-  border: 1px solid rgb(122 245 235 / 18%);
+  border: 1px solid rgb(var(--rgb-aqua) / 18%);
   border-radius: 1.15rem;
   background:
-    radial-gradient(circle at 50% 39%, rgb(122 245 235 / 12%), transparent 31%),
-    radial-gradient(circle at 50% 65%, rgb(176 102 255 / 11%), transparent 33%),
-    linear-gradient(180deg, rgb(8 17 29 / 88%), rgb(4 9 18 / 94%));
+    radial-gradient(circle at 50% 39%, rgb(var(--rgb-aqua) / 12%), transparent 31%),
+    radial-gradient(circle at 50% 65%, rgb(var(--rgb-purple-bright) / 11%), transparent 33%),
+    linear-gradient(180deg, rgb(8 17 29 / 88%), rgb(var(--rgb-canvas-deep) / 94%));
 }
 
 .skills-tech__dna::before {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(rgb(122 245 235 / 5%) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(122 245 235 / 5%) 1px, transparent 1px);
+    linear-gradient(rgb(var(--rgb-aqua) / 5%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--rgb-aqua) / 5%) 1px, transparent 1px);
   background-size: 32px 32px;
   content: "";
   opacity: 0.22;
@@ -959,13 +959,13 @@
 
 .skills-tech__dna-grid path {
   fill: none;
-  stroke: rgb(122 245 235 / 9%);
+  stroke: rgb(var(--rgb-aqua) / 9%);
   stroke-width: 1;
 }
 
 .skills-tech__dna-connectors path {
   fill: none;
-  stroke: rgb(122 245 235 / 19%);
+  stroke: rgb(var(--rgb-aqua) / 19%);
   stroke-width: 1;
   stroke-dasharray: 4 9;
   stroke-linecap: round;
@@ -983,12 +983,12 @@
 }
 
 .skills-tech__dna-strand-glow--cyan {
-  stroke: rgb(122 245 235);
+  stroke: rgb(var(--rgb-aqua));
   animation-delay: 0.08s;
 }
 
 .skills-tech__dna-strand-glow--purple {
-  stroke: rgb(176 102 255);
+  stroke: rgb(var(--rgb-purple-bright));
   animation-delay: 0.2s;
 }
 
@@ -1003,13 +1003,13 @@
 
 .skills-tech__dna-strand--cyan {
   stroke: url("#dna-cyan-gradient");
-  filter: drop-shadow(0 0 12px rgb(122 245 235 / 34%));
+  filter: drop-shadow(0 0 12px rgb(var(--rgb-aqua) / 34%));
   animation-delay: 0.08s;
 }
 
 .skills-tech__dna-strand--purple {
   stroke: url("#dna-purple-gradient");
-  filter: drop-shadow(0 0 12px rgb(176 102 255 / 28%));
+  filter: drop-shadow(0 0 12px rgb(var(--rgb-purple-bright) / 28%));
   animation-delay: 0.2s;
 }
 
@@ -1027,18 +1027,18 @@
 
 .skills-tech__dna-energy--cyan {
   stroke: rgb(205 255 250 / 76%);
-  filter: drop-shadow(0 0 11px rgb(122 245 235 / 72%));
+  filter: drop-shadow(0 0 11px rgb(var(--rgb-aqua) / 72%));
   animation-delay: 2.05s;
 }
 
 .skills-tech__dna-energy--purple {
   stroke: rgb(214 164 255 / 66%);
-  filter: drop-shadow(0 0 11px rgb(176 102 255 / 62%));
+  filter: drop-shadow(0 0 11px rgb(var(--rgb-purple-bright) / 62%));
   animation-delay: 4.1s;
 }
 
 .skills-tech__dna-link {
-  stroke: rgb(224 234 240 / 18%);
+  stroke: rgb(var(--rgb-text-pale-alt) / 18%);
   stroke-width: 1;
   stroke-linecap: round;
   opacity: 0;
@@ -1055,20 +1055,20 @@
 }
 
 .skills-tech__dna-node {
-  color: rgb(122 245 235);
+  color: rgb(var(--rgb-aqua));
 }
 
 .skills-tech__dna-node--backend,
 .skills-tech__dna-node--reliability {
-  color: rgb(56 142 255);
+  color: rgb(var(--rgb-blue));
 }
 
 .skills-tech__dna-node--performance {
-  color: rgb(176 102 255);
+  color: rgb(var(--rgb-purple-bright));
 }
 
 .skills-tech__dna-node--growth {
-  color: rgb(255 176 56);
+  color: rgb(var(--rgb-amber));
 }
 
 .skills-tech__dna-node-glow {
@@ -1092,13 +1092,13 @@
 }
 
 .skills-tech__dna-node-label {
-  fill: rgb(243 247 250);
+  fill: rgb(var(--rgb-text-panel));
   font-size: 14px;
   font-weight: 800;
 }
 
 .skills-tech__dna-node-description {
-  fill: rgb(166 180 193 / 72%);
+  fill: rgb(var(--rgb-text-muted-alt) / 72%);
   font-size: 10px;
   font-weight: 600;
 }
@@ -1123,8 +1123,8 @@
   width: 2rem;
   height: 1px;
   margin-top: 0.32rem;
-  background: rgb(122 245 235 / 76%);
-  box-shadow: 0 0 12px rgb(122 245 235 / 36%);
+  background: rgb(var(--rgb-aqua) / 76%);
+  box-shadow: 0 0 12px rgb(var(--rgb-aqua) / 36%);
   content: "";
 }
 
@@ -1136,21 +1136,21 @@
   text-transform: uppercase;
   white-space: nowrap;
   text-shadow:
-    0 1px 0 rgb(4 9 18),
-    0 0 12px rgb(4 9 18 / 96%),
-    0 0 24px rgb(4 9 18 / 82%),
-    0 0 16px rgb(122 245 235 / 18%);
+    0 1px 0 rgb(var(--rgb-canvas-deep)),
+    0 0 12px rgb(var(--rgb-canvas-deep) / 96%),
+    0 0 24px rgb(var(--rgb-canvas-deep) / 82%),
+    0 0 16px rgb(var(--rgb-aqua) / 18%);
 }
 
 .skills-tech__dna-caption span {
-  color: rgb(184 198 210 / 78%);
+  color: rgb(var(--rgb-text-subtle) / 78%);
   font-family: var(--font-mono);
   font-size: 0.52rem;
   letter-spacing: 0.1em;
   text-shadow:
-    0 1px 0 rgb(4 9 18),
-    0 0 14px rgb(4 9 18 / 92%),
-    0 0 20px rgb(4 9 18 / 76%);
+    0 1px 0 rgb(var(--rgb-canvas-deep)),
+    0 0 14px rgb(var(--rgb-canvas-deep) / 92%),
+    0 0 20px rgb(var(--rgb-canvas-deep) / 76%);
   text-transform: uppercase;
   white-space: nowrap;
 }

@@ -21,7 +21,7 @@
   height: 2px;
   overflow: hidden;
   pointer-events: none;
-  background: rgba(47, 245, 255, 0.08);
+  background: rgb(var(--rgb-header-cyan) / 8%);
 }
 
 .site-header__progress-bar {
@@ -30,19 +30,19 @@
   height: 100%;
   background: linear-gradient(
     90deg,
-    rgba(47, 245, 255, 0.15),
-    rgba(47, 245, 255, 0.95),
-    rgba(123, 92, 255, 0.8)
+    rgb(var(--rgb-header-cyan) / 15%),
+    rgb(var(--rgb-header-cyan) / 95%),
+    rgb(var(--rgb-progress-purple) / 80%)
   );
-  box-shadow: 0 0 14px rgba(47, 245, 255, 0.55);
+  box-shadow: 0 0 14px rgb(var(--rgb-header-cyan) / 55%);
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 90ms linear;
 }
 
 .site-header--scrolled {
-  border-color: rgba(105, 239, 255, 0.14);
-  background: rgba(3, 7, 17, 0.76);
+  border-color: rgb(var(--rgb-cyan) / 14%);
+  background: rgb(var(--rgb-header-scrolled) / var(--header-scrolled-opacity));
   backdrop-filter: blur(22px);
 }
 
@@ -64,7 +64,7 @@
   width: 72px;
   height: 44px;
   color: var(--color-cyan);
-  filter: drop-shadow(0 0 16px rgba(105, 239, 255, 0.42));
+  filter: drop-shadow(0 0 16px rgb(var(--rgb-cyan) / 42%));
 }
 
 .logo__content {
@@ -94,7 +94,7 @@
   height: 10px;
   border-radius: 50%;
   background: var(--color-teal);
-  box-shadow: 0 0 14px rgba(80, 255, 212, 0.85);
+  box-shadow: 0 0 14px rgb(var(--rgb-teal) / 85%);
 }
 
 .navbar {
@@ -125,7 +125,7 @@
 
 .theme-toggle:hover {
   transform: translateY(-1px);
-  border-color: rgba(47, 245, 255, 0.55);
+  border-color: rgb(var(--rgb-header-cyan) / 55%);
 }
 
 .theme-toggle__icon {
@@ -163,7 +163,7 @@ html[data-theme='light'] .theme-toggle__icon--moon {
 
 .navbar__link {
   position: relative;
-  color: #9fb4c5;
+  color: rgb(var(--rgb-nav-link));
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -180,7 +180,7 @@ html[data-theme='light'] .theme-toggle__icon--moon {
 }
 
 .navbar__link:hover {
-  color: white;
+  color: rgb(var(--rgb-nav-link-hover));
   transform: translateY(-1px);
 }
 
@@ -227,12 +227,12 @@ html[data-theme='light'] .theme-toggle__icon--moon {
   width: 44px;
   height: 44px;
   place-items: center;
-  border: 1px solid rgba(105, 239, 255, 0.18);
+  border: 1px solid rgb(var(--rgb-cyan) / 18%);
   border-radius: 50%;
-  background: rgba(4, 14, 25, 0.74);
-  color: #d9f7ff;
+  background: rgb(var(--rgb-surface-control) / 74%);
+  color: rgb(var(--rgb-text-cyan-soft));
   cursor: pointer;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 1px 0 rgb(var(--rgb-white) / 5%);
   transition:
     border-color 180ms var(--ease-out),
     color 180ms var(--ease-out),
@@ -241,9 +241,9 @@ html[data-theme='light'] .theme-toggle__icon--moon {
 }
 
 .theme-toggle:hover {
-  border-color: rgba(105, 239, 255, 0.42);
+  border-color: rgb(var(--rgb-cyan) / 42%);
   color: var(--color-cyan);
-  box-shadow: 0 0 20px rgba(105, 239, 255, 0.16);
+  box-shadow: 0 0 20px rgb(var(--rgb-cyan) / 16%);
   transform: translateY(-1px);
 }
 
@@ -253,16 +253,16 @@ html[data-theme='light'] .theme-toggle__icon--moon {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  border: 1px solid rgba(105, 239, 255, 0.26);
+  border: 1px solid rgb(var(--rgb-cyan) / 26%);
   border-radius: 6px;
   padding: 0 19px 0 21px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.016)),
-    rgba(4, 14, 25, 0.78);
+    linear-gradient(180deg, rgb(var(--rgb-white) / 5.5%), rgb(var(--rgb-white) / 1.6%)),
+    rgb(var(--rgb-surface-control) / 78%);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    0 0 22px rgba(105, 239, 255, 0.12);
-  color: #e8fbff;
+    inset 0 1px 0 rgb(var(--rgb-white) / 6%),
+    0 0 22px rgb(var(--rgb-cyan) / 12%);
+  color: rgb(var(--rgb-text-cta));
   font-size: 14px;
   font-weight: 800;
   letter-spacing: 0.01em;
@@ -274,8 +274,8 @@ html[data-theme='light'] .theme-toggle__icon--moon {
 }
 
 .lets-talk:hover {
-  border-color: rgba(105, 239, 255, 0.48);
+  border-color: rgb(var(--rgb-cyan) / 48%);
   color: var(--color-cyan);
-  box-shadow: 0 0 24px rgba(105, 239, 255, 0.18);
+  box-shadow: 0 0 24px rgb(var(--rgb-cyan) / 18%);
   transform: translateY(-1px);
 }

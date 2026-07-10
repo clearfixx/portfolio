@@ -10,11 +10,11 @@
 .engineer-profile__panel {
   position: relative;
   overflow: hidden;
-  border: 1px solid rgb(122 245 235 / 18%);
+  border: 1px solid rgb(var(--rgb-aqua) / 18%);
   border-radius: 0.9rem;
   background:
-    radial-gradient(circle at 18% 0%, rgb(122 245 235 / 8%), transparent 32%),
-    linear-gradient(180deg, rgb(9 17 30 / 78%), rgb(5 10 19 / 90%));
+    radial-gradient(circle at 18% 0%, rgb(var(--rgb-aqua) / 8%), transparent 32%),
+    linear-gradient(180deg, rgb(var(--rgb-surface-card) / 78%), rgb(var(--rgb-surface-photo) / 90%));
   box-shadow: none;
 }
 
@@ -36,7 +36,7 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0.7rem;
-  color: rgb(122 245 235 / 76%);
+  color: rgb(var(--rgb-aqua) / 76%);
   font-size: 0.67rem;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -45,20 +45,20 @@
 }
 
 .engineer-profile__photo-meta strong {
-  color: rgb(122 245 235);
+  color: rgb(var(--rgb-aqua));
 }
 
 .engineer-profile__photo-stage {
   position: relative;
   min-height: 350px;
   overflow: hidden;
-  border: 1px solid rgb(122 245 235 / 18%);
+  border: 1px solid rgb(var(--rgb-aqua) / 18%);
   border-radius: 0.65rem;
   background:
-    linear-gradient(rgb(122 245 235 / 7%) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(122 245 235 / 7%) 1px, transparent 1px),
-    radial-gradient(circle at 50% 20%, rgb(122 245 235 / 20%), transparent 34%),
-    linear-gradient(145deg, rgb(12 24 38), rgb(5 10 19));
+    linear-gradient(rgb(var(--rgb-aqua) / 7%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--rgb-aqua) / 7%) 1px, transparent 1px),
+    radial-gradient(circle at 50% 20%, rgb(var(--rgb-aqua) / 20%), transparent 34%),
+    linear-gradient(145deg, rgb(12 24 38), rgb(var(--rgb-surface-photo)));
   background-size:
     34px 34px,
     34px 34px,
@@ -72,11 +72,11 @@
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(rgb(122 245 235 / 10%) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(122 245 235 / 10%) 1px, transparent 1px),
-    linear-gradient(90deg, transparent 0 42%, rgb(122 245 235 / 11%) 42% 43%, transparent 43%),
-    radial-gradient(circle at 50% 52%, rgb(122 245 235 / 14%), transparent 25%),
-    linear-gradient(180deg, transparent 72%, rgb(5 10 19 / 46%));
+    linear-gradient(rgb(var(--rgb-aqua) / 10%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--rgb-aqua) / 10%) 1px, transparent 1px),
+    linear-gradient(90deg, transparent 0 42%, rgb(var(--rgb-aqua) / 11%) 42% 43%, transparent 43%),
+    radial-gradient(circle at 50% 52%, rgb(var(--rgb-aqua) / 14%), transparent 25%),
+    linear-gradient(180deg, transparent 72%, rgb(var(--rgb-surface-photo) / 46%));
   background-size:
     38px 38px,
     38px 38px,
@@ -92,8 +92,8 @@
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(180deg, transparent 0 50%, rgb(122 245 235 / 22%) 50% 50.5%, transparent 50.5%),
-    radial-gradient(circle at 50% 54%, transparent 0 11%, rgb(122 245 235 / 42%) 11.4% 11.8%, transparent 12.2% 17%, rgb(122 245 235 / 24%) 17.4% 17.8%, transparent 18.2%);
+    linear-gradient(180deg, transparent 0 50%, rgb(var(--rgb-aqua) / 22%) 50% 50.5%, transparent 50.5%),
+    radial-gradient(circle at 50% 54%, transparent 0 11%, rgb(var(--rgb-aqua) / 42%) 11.4% 11.8%, transparent 12.2% 17%, rgb(var(--rgb-aqua) / 24%) 17.4% 17.8%, transparent 18.2%);
   content: '';
   left: 70%;
 }
@@ -103,7 +103,7 @@
   inset: 0.65rem;
   overflow: hidden;
   border-radius: 0.5rem;
-  background: rgb(4 9 18);
+  background: rgb(var(--rgb-canvas-deep));
 }
 
 .engineer-profile__photo-image img {
@@ -121,9 +121,9 @@
   background: linear-gradient(
     180deg,
     transparent 0 44%,
-    rgb(122 245 235 / 0%) 45%,
-    rgb(122 245 235 / 34%) 50%,
-    rgb(122 245 235 / 0%) 55%,
+    rgb(var(--rgb-aqua) / 0%) 45%,
+    rgb(var(--rgb-aqua) / 34%) 50%,
+    rgb(var(--rgb-aqua) / 0%) 55%,
     transparent 100%
   );
   content: '';
@@ -137,8 +137,8 @@
   z-index: 2;
   pointer-events: none;
   background:
-    radial-gradient(circle at 52% 34%, transparent 0 24%, rgb(4 9 18 / 2%) 36%, rgb(4 9 18 / 36%) 100%),
-    linear-gradient(90deg, rgb(122 245 235 / 12%), transparent 22%, transparent 72%, rgb(132 92 255 / 14%));
+    radial-gradient(circle at 52% 34%, transparent 0 24%, rgb(var(--rgb-canvas-deep) / 2%) 36%, rgb(var(--rgb-canvas-deep) / 36%) 100%),
+    linear-gradient(90deg, rgb(var(--rgb-aqua) / 12%), transparent 22%, transparent 72%, rgb(var(--rgb-purple-blue) / 14%));
   content: '';
 }
 
@@ -181,7 +181,7 @@
 .engineer-profile__hud-corner--top-right,
 .engineer-profile__hud-corner--bottom-right,
 .engineer-profile__hud-corner--bottom-left {
-  border-color: rgb(122 245 235 / 35%);
+  border-color: rgb(var(--rgb-aqua) / 35%);
 }
 
 .engineer-profile__reticle {
@@ -191,9 +191,9 @@
   z-index: 3;
   width: 3.7rem;
   height: 3.7rem;
-  border: 1px solid rgb(122 245 235 / 34%);
+  border: 1px solid rgb(var(--rgb-aqua) / 34%);
   border-radius: 999px;
-  box-shadow: 0 0 22px rgb(122 245 235 / 16%);
+  box-shadow: 0 0 22px rgb(var(--rgb-aqua) / 16%);
   transform: translate(-50%, -50%);
   animation: engineer-profile-reticle 4.8s ease-in-out infinite;
 }
@@ -201,7 +201,7 @@
 .engineer-profile__reticle::before,
 .engineer-profile__reticle::after {
   position: absolute;
-  background: rgb(122 245 235 / 34%);
+  background: rgb(var(--rgb-aqua) / 34%);
   content: '';
 }
 
@@ -227,11 +227,11 @@
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  border: 1px solid rgb(122 245 235 / 28%);
+  border: 1px solid rgb(var(--rgb-aqua) / 28%);
   border-radius: 0.45rem;
   padding: 0.42rem 0.6rem;
   background: rgb(0 35 28 / 74%);
-  color: rgb(122 245 235);
+  color: rgb(var(--rgb-aqua));
   font-size: 0.62rem;
   font-weight: 900;
   letter-spacing: 0.12em;
@@ -253,7 +253,7 @@
 .engineer-profile__profile-content h3,
 .engineer-profile__panel-header h3 {
   margin: 0;
-  color: rgb(245 250 255);
+  color: rgb(var(--rgb-text-bright));
   letter-spacing: -0.05em;
 }
 
@@ -264,7 +264,7 @@
 
 .engineer-profile__role {
   margin: 0.4rem 0 0;
-  color: rgb(122 245 235);
+  color: rgb(var(--rgb-aqua));
   font-size: 0.95rem;
   font-weight: 800;
 }
@@ -277,9 +277,9 @@
 
 .engineer-profile__bio {
   margin: 1rem 0 0;
-  border-top: 1px solid rgb(122 245 235 / 14%);
+  border-top: 1px solid rgb(var(--rgb-aqua) / 14%);
   padding-top: 1rem;
-  color: rgb(165 177 192);
+  color: rgb(var(--rgb-text-muted));
   font-size: 0.88rem;
   line-height: 1.65;
 }
@@ -289,13 +289,13 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 0;
   margin-top: 1rem;
-  border-top: 1px solid rgb(122 245 235 / 12%);
+  border-top: 1px solid rgb(var(--rgb-aqua) / 12%);
   padding-top: 0.9rem;
 }
 
 .engineer-profile__stat {
   border: 0;
-  border-right: 1px solid rgb(122 245 235 / 10%);
+  border-right: 1px solid rgb(var(--rgb-aqua) / 10%);
   border-radius: 0;
   padding: 0.15rem 0.35rem;
   background: transparent;
@@ -308,7 +308,7 @@
 
 .engineer-profile__stat strong {
   display: block;
-  color: rgb(245 250 255);
+  color: rgb(var(--rgb-text-bright));
   font-size: 0.95rem;
   line-height: 1;
 }
@@ -316,7 +316,7 @@
 .engineer-profile__stat span {
   display: block;
   margin-top: 0.28rem;
-  color: rgb(154 170 185);
+  color: rgb(var(--rgb-text-dim));
   font-size: 0.63rem;
 }
 
@@ -329,7 +329,7 @@
 }
 
 .engineer-profile__panel-header h3 {
-  color: rgb(122 245 235);
+  color: rgb(var(--rgb-aqua));
   font-size: 0.9rem;
   font-weight: 900;
   letter-spacing: 0.08em;
@@ -337,7 +337,7 @@
 }
 
 .engineer-profile__panel-header span {
-  color: rgb(154 170 185 / 76%);
+  color: rgb(var(--rgb-text-dim) / 76%);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -355,7 +355,7 @@
 }
 
 .journey__year {
-  color: rgb(122 245 235);
+  color: rgb(var(--rgb-aqua));
   font-size: 1rem;
   font-weight: 900;
   letter-spacing: 0.06em;
@@ -372,12 +372,12 @@
   z-index: 1;
   width: 0.74rem;
   height: 0.74rem;
-  border: 1px solid rgb(122 245 235 / 92%);
+  border: 1px solid rgb(var(--rgb-aqua) / 92%);
   border-radius: 999px;
   background: rgb(8 13 24);
   box-shadow:
-    0 0 0 4px rgb(122 245 235 / 8%),
-    0 0 18px rgb(122 245 235 / 28%);
+    0 0 0 4px rgb(var(--rgb-aqua) / 8%),
+    0 0 18px rgb(var(--rgb-aqua) / 28%);
   animation: engineer-profile-dot-pulse 5.5s ease-in-out infinite;
 }
 
@@ -386,7 +386,7 @@
   top: 0.75rem;
   width: 1px;
   height: calc(100% + 0.7rem);
-  background: linear-gradient(180deg, rgb(122 245 235 / 54%), rgb(122 245 235 / 12%));
+  background: linear-gradient(180deg, rgb(var(--rgb-aqua) / 54%), rgb(var(--rgb-aqua) / 12%));
 }
 
 .journey__content {
@@ -395,7 +395,7 @@
 
 .journey__content h4 {
   margin: -0.2rem 0 0;
-  color: rgb(245 250 255);
+  color: rgb(var(--rgb-text-bright));
   font-size: 0.9rem;
   line-height: 1.35;
   letter-spacing: -0.02em;
@@ -403,17 +403,17 @@
 
 .journey__content p {
   margin: 0.42rem 0 0;
-  color: rgb(154 170 185);
+  color: rgb(var(--rgb-text-dim));
   font-size: 0.78rem;
   line-height: 1.5;
 }
 
 .journey__item--accent .journey__dot {
   border-color: rgb(207 183 255);
-  background: rgb(132 92 255);
+  background: rgb(var(--rgb-purple-blue));
   box-shadow:
-    0 0 0 5px rgb(132 92 255 / 18%),
-    0 0 24px rgb(132 92 255 / 76%);
+    0 0 0 5px rgb(var(--rgb-purple-blue) / 18%),
+    0 0 24px rgb(var(--rgb-purple-blue) / 76%);
   animation: engineer-profile-accent-pulse 3.2s ease-in-out infinite;
 }
 
@@ -428,7 +428,7 @@
   justify-content: center;
   gap: 0.7rem;
   margin-top: 0.2rem;
-  color: rgb(122 245 235);
+  color: rgb(var(--rgb-aqua));
   font-size: 0.62rem;
   font-weight: 900;
   letter-spacing: 0.12em;
@@ -439,7 +439,7 @@
 .journey__footer::after {
   width: 2.6rem;
   height: 1px;
-  background: rgb(122 245 235 / 30%);
+  background: rgb(var(--rgb-aqua) / 30%);
   content: '';
 }
 
@@ -454,12 +454,12 @@
   grid-template-columns: auto 1fr;
   gap: 0.9rem;
   min-height: 5.35rem;
-  border: 1px solid rgb(122 245 235 / 12%);
+  border: 1px solid rgb(var(--rgb-aqua) / 12%);
   border-radius: 0.75rem;
   padding: 0.9rem 2.6rem 0.9rem 0.9rem;
   background:
-    radial-gradient(circle at 0% 50%, rgb(122 245 235 / 7%), transparent 34%),
-    rgb(255 255 255 / 2%);
+    radial-gradient(circle at 0% 50%, rgb(var(--rgb-aqua) / 7%), transparent 34%),
+    rgb(var(--rgb-white) / 2%);
   transition:
     border-color 180ms ease,
     background 180ms ease,
@@ -467,10 +467,10 @@
 }
 
 .philosophy-card:hover {
-  border-color: rgb(122 245 235 / 24%);
+  border-color: rgb(var(--rgb-aqua) / 24%);
   background:
-    radial-gradient(circle at 0% 50%, rgb(122 245 235 / 10%), transparent 36%),
-    rgb(255 255 255 / 3%);
+    radial-gradient(circle at 0% 50%, rgb(var(--rgb-aqua) / 10%), transparent 36%),
+    rgb(var(--rgb-white) / 3%);
   transform: translateY(-1px);
 }
 
@@ -479,13 +479,13 @@
   width: 2.65rem;
   height: 2.65rem;
   place-items: center;
-  border: 1px solid rgb(122 245 235 / 22%);
+  border: 1px solid rgb(var(--rgb-aqua) / 22%);
   border-radius: 0.72rem;
   background:
-    linear-gradient(135deg, rgb(122 245 235 / 12%), rgb(132 92 255 / 8%)),
-    rgb(122 245 235 / 4%);
-  color: rgb(122 245 235);
-  box-shadow: inset 0 0 20px rgb(122 245 235 / 5%);
+    linear-gradient(135deg, rgb(var(--rgb-aqua) / 12%), rgb(var(--rgb-purple-blue) / 8%)),
+    rgb(var(--rgb-aqua) / 4%);
+  color: rgb(var(--rgb-aqua));
+  box-shadow: inset 0 0 20px rgb(var(--rgb-aqua) / 5%);
 }
 
 .philosophy-card__icon svg {
@@ -496,14 +496,14 @@
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 1.55;
-  filter: drop-shadow(0 0 8px rgb(122 245 235 / 24%));
+  filter: drop-shadow(0 0 8px rgb(var(--rgb-aqua) / 24%));
 }
 
 .philosophy-card__number {
   position: absolute;
   top: 0.95rem;
   right: 0.95rem;
-  color: rgb(122 245 235 / 70%);
+  color: rgb(var(--rgb-aqua) / 70%);
   font-family: var(--font-geist-mono), monospace;
   font-size: 0.68rem;
   font-weight: 800;
@@ -512,14 +512,14 @@
 
 .philosophy-card h4 {
   margin: 0;
-  color: rgb(245 250 255);
+  color: rgb(var(--rgb-text-bright));
   font-size: 0.9rem;
   letter-spacing: -0.02em;
 }
 
 .philosophy-card p {
   margin: 0.35rem 0 0;
-  color: rgb(154 170 185);
+  color: rgb(var(--rgb-text-dim));
   font-size: 0.76rem;
   line-height: 1.45;
 }
@@ -527,28 +527,28 @@
 .engineer-profile__terminal {
   margin-top: 1rem;
   overflow: hidden;
-  border: 1px solid rgb(122 245 235 / 22%);
+  border: 1px solid rgb(var(--rgb-aqua) / 22%);
   border-radius: 0.8rem;
   background:
-    radial-gradient(circle at 100% 0%, rgb(122 245 235 / 8%), transparent 28%),
+    radial-gradient(circle at 100% 0%, rgb(var(--rgb-aqua) / 8%), transparent 28%),
     rgb(2 7 13 / 90%);
   box-shadow:
-    0 0 24px rgb(122 245 235 / 6%),
-    inset 0 0 0 1px rgb(255 255 255 / 2%);
+    0 0 24px rgb(var(--rgb-aqua) / 6%),
+    inset 0 0 0 1px rgb(var(--rgb-white) / 2%);
 }
 
 .engineer-profile__terminal-top {
   display: flex;
   gap: 0.35rem;
   padding: 0.75rem 0.85rem;
-  border-bottom: 1px solid rgb(122 245 235 / 10%);
+  border-bottom: 1px solid rgb(var(--rgb-aqua) / 10%);
 }
 
 .engineer-profile__terminal-top span {
   width: 0.52rem;
   height: 0.52rem;
   border-radius: 999px;
-  background: rgb(122 245 235 / 42%);
+  background: rgb(var(--rgb-aqua) / 42%);
 }
 
 .engineer-profile__terminal-body {
@@ -583,7 +583,7 @@
 }
 
 .engineer-profile__terminal-line span {
-  color: rgb(122 245 235);
+  color: rgb(var(--rgb-aqua));
 }
 
 .engineer-profile__cursor {
@@ -591,9 +591,9 @@
   width: 0.55rem;
   height: 1em;
   margin-left: 0.35rem;
-  background: rgb(122 245 235);
+  background: rgb(var(--rgb-aqua));
   vertical-align: -0.15em;
-  box-shadow: 0 0 12px rgb(122 245 235 / 52%);
+  box-shadow: 0 0 12px rgb(var(--rgb-aqua) / 52%);
   animation: engineer-profile-cursor 1s steps(2, end) infinite;
 }
 
@@ -628,28 +628,28 @@
 @keyframes engineer-profile-dot-pulse {
   0%, 100% {
     box-shadow:
-      0 0 0 4px rgb(122 245 235 / 8%),
-      0 0 16px rgb(122 245 235 / 24%);
+      0 0 0 4px rgb(var(--rgb-aqua) / 8%),
+      0 0 16px rgb(var(--rgb-aqua) / 24%);
   }
 
   50% {
     box-shadow:
-      0 0 0 5px rgb(122 245 235 / 12%),
-      0 0 24px rgb(122 245 235 / 42%);
+      0 0 0 5px rgb(var(--rgb-aqua) / 12%),
+      0 0 24px rgb(var(--rgb-aqua) / 42%);
   }
 }
 
 @keyframes engineer-profile-accent-pulse {
   0%, 100% {
     box-shadow:
-      0 0 0 5px rgb(132 92 255 / 18%),
-      0 0 22px rgb(132 92 255 / 62%);
+      0 0 0 5px rgb(var(--rgb-purple-blue) / 18%),
+      0 0 22px rgb(var(--rgb-purple-blue) / 62%);
   }
 
   50% {
     box-shadow:
-      0 0 0 7px rgb(132 92 255 / 24%),
-      0 0 32px rgb(132 92 255 / 82%);
+      0 0 0 7px rgb(var(--rgb-purple-blue) / 24%),
+      0 0 32px rgb(var(--rgb-purple-blue) / 82%);
   }
 }
 
@@ -706,10 +706,10 @@
   }
 
   .engineer-profile__stat {
-    border: 1px solid rgb(122 245 235 / 10%);
+    border: 1px solid rgb(var(--rgb-aqua) / 10%);
     border-radius: 0.7rem;
     padding: 0.65rem 0.45rem;
-    background: rgb(255 255 255 / 2%);
+    background: rgb(var(--rgb-white) / 2%);
   }
 
   .engineer-profile__photo-stage {
