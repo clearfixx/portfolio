@@ -140,18 +140,116 @@
 html[data-theme='light'] {
   color-scheme: light;
 
-  /* Current light palette, centralized for the full theme pass. */
-  --rgb-canvas: 127 147 163;
-  --rgb-surface: 14 29 43;
-  --rgb-surface-strong: 8 20 32;
-  --rgb-text: 248 251 255;
-  --rgb-text-muted: 211 222 234;
-  --rgb-border: 33 219 230;
-  --rgb-accent: 24 231 239;
-  --rgb-purple: 139 92 246;
-  --rgb-header-scrolled: 112 123 135;
-  --rgb-nav-link: 27 38 50;
-  --rgb-nav-link-hover: 7 24 36;
-  --surface-opacity: 90%;
-  --header-scrolled-opacity: 63.14%;
+  /*
+   * Light theme: cool paper canvas with white glass surfaces.
+   * Cyan and violet are intentionally darker than in the dark theme
+   * so links, borders, labels, and status text keep enough contrast.
+   */
+
+  /* Canvas and surfaces */
+  --rgb-canvas: 243 248 251;
+  --rgb-canvas-deep: 232 242 247;
+  --rgb-surface: 255 255 255;
+  --rgb-surface-soft: 248 252 254;
+  --rgb-surface-strong: 250 253 255;
+  --rgb-surface-elevated: 255 255 255;
+  --rgb-surface-footer: 235 244 248;
+  --rgb-surface-ink: 229 240 245;
+  --rgb-surface-indigo: 245 241 255;
+  --rgb-surface-overlay: 237 246 249;
+  --rgb-surface-control: 242 249 251;
+  --rgb-surface-control-hover: 231 242 246;
+  --rgb-surface-modal: 252 254 255;
+  --rgb-surface-modal-deep: 238 247 250;
+  --rgb-surface-card: 252 254 255;
+  --rgb-surface-photo: 232 240 245;
+  --rgb-surface-code: 246 250 252;
+  --rgb-surface-footer-deep: 226 238 244;
+  --rgb-surface-popover: 255 255 255;
+  --rgb-surface-badge: 235 246 248;
+
+  /* Neutral text */
+  --rgb-text: 11 34 48;
+  --rgb-text-strong: 5 22 34;
+  --rgb-text-strong-alt: 13 29 42;
+  --rgb-text-bright: 8 27 39;
+  --rgb-text-panel: 14 34 47;
+  --rgb-text-soft: 38 62 77;
+  --rgb-text-pale: 57 82 98;
+  --rgb-text-pale-alt: 44 68 84;
+  --rgb-text-muted: 82 107 123;
+  --rgb-text-muted-alt: 91 114 129;
+  --rgb-text-nav: 56 79 95;
+  --rgb-text-dim: 102 122 135;
+  --rgb-text-cookie-muted: 76 99 115;
+  --rgb-text-subtle: 94 115 129;
+  --rgb-text-steel: 83 103 124;
+
+  /*
+   * Compatibility foreground. Existing component styles use --rgb-white
+   * as their strongest foreground token. In the light theme it becomes ink.
+   * --rgb-black remains absolute black for shadows and overlays.
+   */
+  --rgb-white: 8 25 37;
+
+  /* Brand, accent, and status */
+  --rgb-cyan: 0 130 150;
+  --rgb-aqua: 0 139 132;
+  --rgb-accent: 0 127 133;
+  --rgb-accent-soft: 0 140 145;
+  --rgb-accent-cyan: 0 141 159;
+  --rgb-accent-border: 0 144 150;
+  --rgb-accent-grid: 49 156 162;
+  --rgb-header-cyan: 0 135 150;
+  --rgb-neon-cyan: 0 148 164;
+  --rgb-electric-cyan: 0 146 160;
+  --rgb-terminal-green: 0 126 82;
+  --rgb-teal: 0 136 106;
+  --rgb-success: 0 126 82;
+  --rgb-violet: 112 72 190;
+  --rgb-purple: 122 70 205;
+  --rgb-purple-blue: 99 78 198;
+  --rgb-purple-bright: 135 75 210;
+  --rgb-purple-footer: 132 76 201;
+  --rgb-purple-secondary: 128 89 193;
+  --rgb-blue: 28 101 181;
+  --rgb-mint: 0 144 96;
+  --rgb-amber: 178 105 0;
+  --rgb-status-blue: 38 103 173;
+  --rgb-status-yellow: 163 103 0;
+  --rgb-status-pink: 164 57 152;
+  --rgb-cta-start: 45 225 214;
+  --rgb-cta-end: 0 165 159;
+  --rgb-on-accent: 0 25 31;
+  --rgb-hero-purple: 130 54 190;
+  --rgb-hero-text-pale: 41 70 87;
+  --rgb-warning: 185 111 0;
+  --rgb-progress-purple: 102 74 190;
+  --rgb-text-cyan-soft: 15 78 88;
+  --rgb-text-cta: 7 43 49;
+  --rgb-section-surface-top: 250 253 255;
+  --rgb-section-surface-bottom: 239 247 250;
+
+  /* Code editor */
+  --rgb-editor-caret: 0 130 115;
+  --rgb-editor-line-number: 111 129 142;
+  --rgb-editor-selection: 45 128 196;
+  --rgb-editor-selection-glow: 62 145 210;
+  --rgb-editor-keyword: 145 58 132;
+  --rgb-editor-type: 0 116 101;
+  --rgb-editor-method: 137 105 0;
+  --rgb-editor-string: 171 76 42;
+  --rgb-editor-comment: 71 125 64;
+  --rgb-editor-number: 88 113 42;
+  --rgb-editor-selected-status: 102 72 181;
+  --rgb-typescript: 115 183 229;
+
+  /* Theme-aware shell channels */
+  --rgb-border: 0 138 150;
+  --rgb-header-scrolled: 248 252 254;
+  --rgb-nav-link: 46 69 84;
+  --rgb-nav-link-hover: 6 29 42;
+  --surface-opacity: 92%;
+  --surface-strong-opacity: 96%;
+  --header-scrolled-opacity: 86%;
 }
