@@ -303,3 +303,166 @@
     display: none;
   }
 }
+
+/*
+ * Light theme keeps a bright card shell while preserving a dark product
+ * preview. This creates a clearer visual hierarchy than one large dark slab.
+ */
+html[data-theme='light'] {
+  .featured-projects__view-all {
+    border-color: rgb(var(--rgb-aqua) / 34%);
+    background:
+      linear-gradient(135deg, rgb(255 255 255 / 82%), rgb(239 250 252 / 72%)),
+      rgb(var(--rgb-surface-elevated) / 88%);
+    color: rgb(var(--rgb-text-strong));
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 88%),
+      0 12px 30px rgb(6 30 41 / 7%);
+  }
+
+  .featured-projects__view-all:hover {
+    border-color: rgb(var(--rgb-aqua) / 58%);
+    background:
+      linear-gradient(135deg, rgb(255 255 255 / 94%), rgb(229 249 251 / 86%)),
+      rgb(var(--rgb-surface-elevated));
+  }
+
+  .featured-project-card {
+    border-color: rgb(var(--rgb-aqua) / 24%);
+    background:
+      radial-gradient(circle at 88% 6%, rgb(var(--rgb-aqua) / 9%), transparent 14rem),
+      linear-gradient(180deg, rgb(255 255 255 / 96%), rgb(244 249 251 / 92%));
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 96%),
+      0 18px 48px rgb(7 31 43 / 9%),
+      0 0 0 1px rgb(255 255 255 / 48%);
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+
+  .featured-project-card:hover {
+    border-color: rgb(var(--rgb-aqua) / 42%);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 98%),
+      0 24px 58px rgb(7 31 43 / 13%),
+      0 0 28px rgb(var(--rgb-aqua) / 7%);
+    transform: translateY(-3px);
+  }
+
+  .featured-project-card--violet {
+    border-color: rgb(var(--rgb-purple-bright) / 28%);
+    background:
+      radial-gradient(
+        circle at 88% 6%,
+        rgb(var(--rgb-purple-bright) / 9%),
+        transparent 14rem
+      ),
+      linear-gradient(180deg, rgb(255 255 255 / 96%), rgb(247 244 252 / 92%));
+  }
+
+  .featured-project-card--violet:hover {
+    border-color: rgb(var(--rgb-purple-bright) / 44%);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 98%),
+      0 24px 58px rgb(28 16 46 / 12%),
+      0 0 28px rgb(var(--rgb-purple-bright) / 7%);
+  }
+
+  .featured-project-card__stage,
+  .featured-project-card__percent {
+    border-color: rgb(var(--rgb-aqua) / 28%);
+    background: rgb(var(--rgb-aqua) / 8%);
+  }
+
+  .featured-project-card__percent {
+    color: rgb(var(--rgb-text-strong));
+  }
+
+  .featured-project-card--violet .featured-project-card__stage {
+    border-color: rgb(var(--rgb-purple-bright) / 30%);
+    background: rgb(var(--rgb-purple-bright) / 9%);
+  }
+
+  .featured-project-card__preview,
+  .featured-project-card__image-preview {
+    border-color: rgb(105 239 255 / 17%);
+    background:
+      radial-gradient(circle at 82% 18%, rgb(0 223 223 / 12%), transparent 12rem),
+      linear-gradient(145deg, rgb(11 27 40 / 98%), rgb(4 12 23 / 99%));
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 5%),
+      inset 0 -24px 52px rgb(0 0 0 / 17%),
+      0 10px 28px rgb(5 21 31 / 12%);
+  }
+
+  .featured-project-card--violet .featured-project-card__preview,
+  .featured-project-card--violet .featured-project-card__image-preview {
+    border-color: rgb(168 105 255 / 22%);
+    background:
+      radial-gradient(circle at 82% 18%, rgb(168 105 255 / 13%), transparent 12rem),
+      linear-gradient(145deg, rgb(19 20 42 / 98%), rgb(7 10 24 / 99%));
+  }
+
+  .featured-project-card__preview-sidebar {
+    border-color: rgb(105 239 255 / 12%);
+    background: rgb(255 255 255 / 2.5%);
+  }
+
+  .featured-project-card__preview-content p {
+    color: rgb(242 249 252);
+    text-shadow: 0 2px 22px rgb(0 0 0 / 34%);
+  }
+
+  .featured-project-card__preview-content span {
+    color: rgb(164 187 202);
+  }
+
+  .featured-project-card__icon {
+    border-color: rgb(var(--rgb-aqua) / 30%);
+    background:
+      radial-gradient(circle at 50% 0%, rgb(var(--rgb-aqua) / 12%), transparent 72%),
+      rgb(255 255 255 / 74%);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 86%);
+  }
+
+  .featured-project-card--violet .featured-project-card__icon {
+    border-color: rgb(var(--rgb-purple-bright) / 30%);
+    background:
+      radial-gradient(
+        circle at 50% 0%,
+        rgb(var(--rgb-purple-bright) / 13%),
+        transparent 72%
+      ),
+      rgb(255 255 255 / 74%);
+  }
+
+  .featured-project-card__title {
+    color: rgb(var(--rgb-text-strong));
+  }
+
+  .featured-project-card__excerpt {
+    color: rgb(var(--rgb-text-muted));
+  }
+
+  .featured-project-card__stack li {
+    border-color: rgb(var(--rgb-aqua) / 22%);
+    background: rgb(236 247 249 / 78%);
+    color: rgb(var(--rgb-text-strong));
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 74%);
+  }
+
+  .featured-project-card--violet .featured-project-card__stack li {
+    border-color: rgb(var(--rgb-purple-bright) / 22%);
+    background: rgb(var(--rgb-purple-bright) / 6%);
+  }
+
+  .featured-project-card__progress {
+    background: rgb(var(--rgb-aqua) / 11%);
+  }
+
+  .featured-project-card__link {
+    border-color: rgb(var(--rgb-aqua) / 18%);
+  }
+}
