@@ -13,7 +13,7 @@ import {
 } from './data'
 
 import { Logo } from '@/components/brand'
-import { CookieSettingsButton, CookieSettingBanner } from '@/components/privacy/CookieSettingsButton'
+import { CookieSettingBanner } from '@/components/privacy/CookieSettingsButton'
 
 type IconProps = SVGProps<SVGSVGElement>
 
