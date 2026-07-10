@@ -1,0 +1,14 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.home-hero,
+.portfolio-section {
+  scroll-margin-top: 104px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

@@ -273,7 +273,7 @@ export function InsightsTrust() {
         </>
       }
       description="Build notes, engineering thoughts and client feedback collected from real project work."
-      number="06"
+      number="05"
       footer={{
         icon: ShieldCheckIcon,
         label: 'Real projects. Real feedback. Real impact.',

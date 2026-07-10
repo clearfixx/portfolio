@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState, useSyncExternalStore } from 'react'
 
 const bootLines = [
   'Booting developer environment...',
@@ -10,22 +10,56 @@ const bootLines = [
   'Initializing mission control...',
 ]
 
-function getInitialCompletedLines() {
-  if (typeof window === 'undefined') return []
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? bootLines : []
+const TYPE_SPEED_MS = 28
+const LINE_COMPLETE_DELAY_MS = 320
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
+
+function subscribeToReducedMotion(callback: () => void) {
+  if (typeof window === 'undefined') return () => {}
+
+  const mediaQuery = window.matchMedia(REDUCED_MOTION_QUERY)
+
+  mediaQuery.addEventListener('change', callback)
+
+  return () => {
+    mediaQuery.removeEventListener('change', callback)
+  }
+}
+
+function getReducedMotionSnapshot() {
+  if (typeof window === 'undefined') return false
+
+  return window.matchMedia(REDUCED_MOTION_QUERY).matches
+}
+
+function getReducedMotionServerSnapshot() {
+  return false
 }
 
 export function Terminal() {
+  const prefersReducedMotion = useSyncExternalStore(
+    subscribeToReducedMotion,
+    getReducedMotionSnapshot,
+    getReducedMotionServerSnapshot,
+  )
+
   const [lineIndex, setLineIndex] = useState(0)
   const [charIndex, setCharIndex] = useState(0)
-  const [completedLines, setCompletedLines] = useState<string[]>(getInitialCompletedLines)
+  const [completedLines, setCompletedLines] = useState<string[]>([])
 
   const currentLine = bootLines[lineIndex] ?? ''
-  const typedLine = useMemo(() => currentLine.slice(0, charIndex), [charIndex, currentLine])
-  const isComplete = completedLines.length === bootLines.length
+  const typedLine = currentLine.slice(0, charIndex)
+
+  const visibleCompletedLines = prefersReducedMotion ? bootLines : completedLines
+  const isComplete = prefersReducedMotion || completedLines.length === bootLines.length
+
+  const currentLineProgress = currentLine.length > 0 ? charIndex / currentLine.length : 0
+  const progress = isComplete
+    ? 100
+    : Math.round(((completedLines.length + currentLineProgress) / bootLines.length) * 100)
 
   useEffect(() => {
-    if (isComplete) return
+    if (prefersReducedMotion || isComplete) return
 
     const timeout = window.setTimeout(
       () => {
@@ -38,21 +72,23 @@ export function Terminal() {
         setLineIndex((value) => value + 1)
         setCharIndex(0)
       },
-      charIndex < currentLine.length ? 28 : 320,
+      charIndex < currentLine.length ? TYPE_SPEED_MS : LINE_COMPLETE_DELAY_MS,
     )
 
-    return () => window.clearTimeout(timeout)
-  }, [charIndex, currentLine, isComplete])
+    return () => {
+      window.clearTimeout(timeout)
+    }
+  }, [charIndex, currentLine, isComplete, prefersReducedMotion])
 
   return (
-    <div className="hero-terminal">
+    <div className="hero-terminal" aria-label="System boot sequence">
       <div className="hero-card__header">
         <span>System Status</span>
         <strong>Online</strong>
       </div>
 
       <div className="hero-terminal__body">
-        {completedLines.map((line) => (
+        {visibleCompletedLines.map((line) => (
           <p key={line}>
             <span>&gt;</span> {line} <strong>[ OK ]</strong>
           </p>
@@ -70,10 +106,11 @@ export function Terminal() {
 
       <div className="hero-terminal__footer">
         <span>
-          100% <strong>{isComplete ? 'Ready' : 'Loading'}</strong>
+          {progress}% <strong>{isComplete ? 'Ready' : 'Loading'}</strong>
         </span>
+
         <div>
-          <i style={{ width: `${isComplete ? 100 : completedLines.length * 20}%` }} />
+          <i style={{ width: `${progress}%` }} />
         </div>
       </div>
     </div>

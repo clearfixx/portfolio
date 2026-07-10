@@ -103,7 +103,7 @@ function TechIcon({ icon }: { icon: (typeof techStack)[number]['icon'] }) {
 
 export function Hero({ hero }: HeroProps) {
   return (
-    <section className="home-hero">
+    <section className="home-hero" id="hero">
       <Background />
       <div className="hero-orb" aria-hidden="true" />
 

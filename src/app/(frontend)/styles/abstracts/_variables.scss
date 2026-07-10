@@ -1,4 +1,6 @@
 :root {
+
+  color-scheme: dark;
   --color-bg: #030711;
   --color-surface: rgba(5, 14, 27, 0.82);
   --color-surface-strong: rgba(7, 18, 34, 0.94);
@@ -17,4 +19,22 @@
   --radius-xl: 32px;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --shadow-glow: 0 0 42px rgba(105, 239, 255, 0.16);
+}
+
+html[data-theme='light'] {
+  color-scheme: light;
+
+ --color-bg: #7f93a3;
+  --color-surface: rgba(14, 29, 43, 0.9);
+  --color-surface-strong: rgba(8, 20, 32, 0.94);
+  --color-border: rgba(33, 219, 230, 0.32);
+  --color-text: #f8fbff;
+  --color-text-muted: #d3deea;
+  --color-accent: #18e7ef;
+  --color-accent-purple: #8b5cf6;
+  .site-header--scrolled {
+    background: hsl(211.3deg 9.31% 48.43% / 63.14%);
+  }
+  .navbar__link { color: #1b2632; }
+  .navbar__link.is-active { color: var(--color-accent) }
 }

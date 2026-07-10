@@ -11,7 +11,7 @@ export function CurrentMission() {
       eyebrow="Current Mission"
       title="Building DSS Universe"
       description="A live preview of my flagship platform — a modular ecosystem for research, community, AI, education, CMS, and developer tools."
-      number="02"
+      number="01"
       footer={{
         icon: RocketIcon,
         label: 'Mission Status',

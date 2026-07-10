@@ -1,6 +1,4 @@
 import type { ReactNode } from 'react'
-
-import { SiteFooter } from './SiteFooter'
 import { SiteHeader } from './SiteHeader'
 
 type SiteShellProps = {
@@ -12,7 +10,6 @@ export function SiteShell({ children }: SiteShellProps) {
     <div className="site-shell">
       <SiteHeader />
       <main className="site-main">{children}</main>
-      <SiteFooter />
     </div>
   )
 }

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
-
 import { SiteShell } from '@/components/layout'
+import { CookieConsent } from '@/components/privacy/CookieConsent'
+import { ThemeProvider } from '@/components/theme/ThemeProvider'
 
 import './styles.scss'
 
@@ -16,9 +17,12 @@ type RootLayoutProps = {
 
 export default async function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
-        <SiteShell>{children}</SiteShell>
+        <ThemeProvider>
+          <SiteShell>{children}</SiteShell>
+          <CookieConsent />
+        </ThemeProvider>
       </body>
     </html>
   )

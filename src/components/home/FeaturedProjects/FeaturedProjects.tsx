@@ -11,7 +11,7 @@ export function FeaturedProjects() {
       eyebrow="Engineering Portfolio"
       title="Selected Projects"
       description="A showcase of products I've built across different domains. Each project is a reflection of solving real problems with code."
-      number="03"
+      number="02"
       headerAction={
         <a className="featured-projects__view-all" href="/projects">
           View all projects

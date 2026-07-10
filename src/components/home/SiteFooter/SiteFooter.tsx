@@ -12,6 +12,9 @@ import {
   type FooterSocialLink,
 } from './data'
 
+import { Logo } from '@/components/brand'
+import { CookieSettingsButton, CookieSettingBanner } from '@/components/privacy/CookieSettingsButton'
+
 type IconProps = SVGProps<SVGSVGElement>
 
 const GithubIcon = (props: IconProps) => (
@@ -291,11 +294,11 @@ export function SiteFooter() {
 
               <form className="site-footer__newsletter-form">
                 <label className="site-footer__newsletter-field">
-                  <span className="sr-only">Your email</span>
-                  <input type="email" name="email" placeholder="Your email" />
+                  <span className="sr-only">What&apos;s a good email address?</span>
+                  <input type="email" name="email" placeholder="What&apos;s a good email address?" />
                 </label>
 
-                <button type="button">Join</button>
+                <button type="button">Gimme!</button>
 
                 <p className="site-footer__newsletter-note">
                   <LockIcon />
@@ -307,11 +310,10 @@ export function SiteFooter() {
         </div>
 
         <div className="site-footer__bottom">
-          <Link className="site-footer__mark" href="/">
-            <span>[AK]</span>
-          </Link>
+          <Logo />
 
           <nav className="site-footer__nav" aria-label="Footer navigation">
+            <CookieSettingBanner />
             {footerLinks.map((link) => (
               <Link key={link.id} href={link.href}>
                 {link.label}
@@ -320,7 +322,7 @@ export function SiteFooter() {
           </nav>
 
           <p className="site-footer__copyright">
-            © 2026 Built with <span>❤️</span>, clean architecture and <em>∞</em> coffee.
+            © 2026 Built with <span>❤️</span>, clean architecture and <em>lot</em> of <span>☕️</span>.
           </p>
         </div>
       </div>

@@ -12,7 +12,7 @@ export function EngineerProfile() {
       eyebrow="About me"
       title="Engineer Profile"
       description="A builder of scalable systems and meaningful digital experiences."
-      number="01"
+      number="03"
       footer={{
         icon: UserIcon,
         label: 'Engineer mindset',
