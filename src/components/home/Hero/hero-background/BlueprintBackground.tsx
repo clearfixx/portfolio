@@ -64,6 +64,23 @@ type SignalStyle = {
   glow: string
 }
 
+type PointerInteraction = Point & {
+  influence: number
+}
+
+type PointerState = {
+  targetX: number
+  targetY: number
+  currentX: number
+  currentY: number
+  targetRatioX: number
+  targetRatioY: number
+  currentRatioX: number
+  currentRatioY: number
+  targetInfluence: number
+  currentInfluence: number
+}
+
 const DESKTOP_FPS = 30
 const MOBILE_FPS = 24
 const DESKTOP_DPR = 1.35
@@ -86,6 +103,12 @@ const SIGNAL_TAIL_LENGTH = 0.045
 const SIGNAL_TAIL_STEPS = 7
 const NODE_FLASH_WINDOW = 0.026
 const ROUTE_OPACITY_FACTOR = 0.64
+
+const POINTER_PARALLAX_X = 7
+const POINTER_PARALLAX_Y = 5
+const GRID_PARALLAX_FACTOR = 0.34
+const POINTER_REACTION_RADIUS = 150
+const POINTER_FOLLOW_SPEED = 0.012
 
 const ROUTE_LAYOUTS: RouteLayout[] = [
   {
@@ -178,6 +201,10 @@ const LIGHT_PALETTE: BlueprintPalette = {
 
 function clamp01(value: number) {
   return Math.min(1, Math.max(0, value))
+}
+
+function lerp(from: number, to: number, amount: number) {
+  return from + (to - from) * amount
 }
 
 function progressBetween(time: number, start: number, end: number) {
@@ -483,6 +510,7 @@ function drawNodes(
   time: number,
   animated: boolean,
   frame: IntroFrame,
+  pointer: PointerInteraction,
 ) {
   const constructionProgress = getRouteConstructionProgress(
     route,
@@ -507,8 +535,32 @@ function drawNodes(
       animated && frame.ambientMix > 0
         ? Math.sin(time * 0.0018 + node.phase) * 0.55 * frame.ambientMix
         : 0
-    const radius = ((node.core ? 3.2 : 2.1) + ambientPulse * 0.35) * (0.58 + reveal * 0.42)
+    const pointerDistance = Math.hypot(node.x - pointer.x, node.y - pointer.y)
+    const pointerProximity =
+      pointer.influence > 0
+        ? easeOutCubic(1 - pointerDistance / POINTER_REACTION_RADIUS) *
+          pointer.influence *
+          frame.ambientMix
+        : 0
+    const radius =
+      ((node.core ? 3.2 : 2.1) + ambientPulse * 0.35 + pointerProximity * 0.48) *
+      (0.58 + reveal * 0.42)
     const color = node.core ? palette.nodeCore : palette.node
+
+    if (pointerProximity > 0.01) {
+      context.save()
+      context.globalCompositeOperation = 'lighter'
+      context.globalAlpha = reveal * route.intensity * pointerProximity * 0.18
+      context.strokeStyle = palette.signalCyan
+      context.shadowColor = palette.signalCyanGlow
+      context.shadowBlur = 10 * pointerProximity
+      context.lineWidth = 0.7
+
+      context.beginPath()
+      context.arc(node.x, node.y, radius + 4 + pointerProximity * 2.8, 0, Math.PI * 2)
+      context.stroke()
+      context.restore()
+    }
 
     context.globalAlpha = reveal * route.intensity
 
@@ -701,6 +753,7 @@ export function BlueprintBackground() {
     if (!canvas || !host || !context) return
 
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const interactionQuery = window.matchMedia('(hover: hover) and (pointer: fine)')
     const themeRoot = document.documentElement
 
     let width = 1
@@ -712,21 +765,82 @@ export function BlueprintBackground() {
     let introElapsed = motionQuery.matches ? INTRO_END : 0
     let ambientElapsed = 0
     let reducedMotion = motionQuery.matches
+    let canInteract = interactionQuery.matches && !reducedMotion
     let isIntersecting = true
     let isDocumentVisible = document.visibilityState === 'visible'
+    const pointer: PointerState = {
+      targetX: 0,
+      targetY: 0,
+      currentX: 0,
+      currentY: 0,
+      targetRatioX: 0.5,
+      targetRatioY: 0.5,
+      currentRatioX: 0.5,
+      currentRatioY: 0.5,
+      targetInfluence: 0,
+      currentInfluence: 0,
+    }
 
     const targetFps = () => (width <= MOBILE_BREAKPOINT ? MOBILE_FPS : DESKTOP_FPS)
 
+    const resetPointer = () => {
+      pointer.targetX = 0
+      pointer.targetY = 0
+      pointer.targetRatioX = 0.5
+      pointer.targetRatioY = 0.5
+      pointer.targetInfluence = 0
+    }
+
+    const updatePointer = (elapsed: number) => {
+      const follow = 1 - Math.exp(-Math.max(0, elapsed) * POINTER_FOLLOW_SPEED)
+
+      pointer.currentX = lerp(pointer.currentX, pointer.targetX, follow)
+      pointer.currentY = lerp(pointer.currentY, pointer.targetY, follow)
+      pointer.currentRatioX = lerp(pointer.currentRatioX, pointer.targetRatioX, follow)
+      pointer.currentRatioY = lerp(pointer.currentRatioY, pointer.targetRatioY, follow)
+      pointer.currentInfluence = lerp(
+        pointer.currentInfluence,
+        pointer.targetInfluence,
+        follow,
+      )
+    }
+
     const draw = (time: number, animated: boolean) => {
       const introFrame = getIntroFrame(introElapsed, reducedMotion)
+      const interactionMix = pointer.currentInfluence * introFrame.ambientMix
+      const networkOffsetX = pointer.currentX * POINTER_PARALLAX_X * interactionMix
+      const networkOffsetY = pointer.currentY * POINTER_PARALLAX_Y * interactionMix
+      const gridOffsetX = networkOffsetX * GRID_PARALLAX_FACTOR
+      const gridOffsetY = networkOffsetY * GRID_PARALLAX_FACTOR
+      const pointerInteraction: PointerInteraction = {
+        x: pointer.currentRatioX * width - networkOffsetX,
+        y: pointer.currentRatioY * height - networkOffsetY,
+        influence: interactionMix,
+      }
 
       context.clearRect(0, 0, width, height)
+
+      context.save()
+      context.translate(gridOffsetX, gridOffsetY)
       drawGrid(context, width, height, palette, introFrame.gridOpacity)
+      context.restore()
+
       drawBootScan(context, width, height, palette, introFrame)
+
+      context.save()
+      context.translate(networkOffsetX, networkOffsetY)
 
       routes.forEach((route) => {
         drawRoute(context, route, palette, time, animated, introFrame)
-        drawNodes(context, route, palette, time, animated, introFrame)
+        drawNodes(
+          context,
+          route,
+          palette,
+          time,
+          animated,
+          introFrame,
+          pointerInteraction,
+        )
       })
 
       routes.forEach((route, routeIndex) => {
@@ -747,6 +861,8 @@ export function BlueprintBackground() {
         animated,
         introFrame.ambientMix,
       )
+
+      context.restore()
     }
 
     const stopLoop = () => {
@@ -766,6 +882,7 @@ export function BlueprintBackground() {
         const elapsedSinceLastFrame = lastFrame === 0 ? 0 : Math.min(time - lastFrame, 80)
 
         lastFrame = time
+        updatePointer(elapsedSinceLastFrame || 16)
         introElapsed = Math.min(INTRO_END, introElapsed + elapsedSinceLastFrame)
 
         if (introElapsed >= INTRO_AMBIENT_START) {
@@ -816,12 +933,40 @@ export function BlueprintBackground() {
 
     const handleMotionChange = (event: MediaQueryListEvent) => {
       reducedMotion = event.matches
+      canInteract = interactionQuery.matches && !reducedMotion
 
       if (reducedMotion) {
         introElapsed = INTRO_END
+        resetPointer()
       }
 
       syncLoop()
+    }
+
+    const handleInteractionChange = (event: MediaQueryListEvent) => {
+      canInteract = event.matches && !reducedMotion
+
+      if (!canInteract) {
+        resetPointer()
+      }
+    }
+
+    const handlePointerMove = (event: PointerEvent) => {
+      if (!canInteract) return
+
+      const bounds = host.getBoundingClientRect()
+      const ratioX = clamp01((event.clientX - bounds.left) / Math.max(1, bounds.width))
+      const ratioY = clamp01((event.clientY - bounds.top) / Math.max(1, bounds.height))
+
+      pointer.targetX = ratioX * 2 - 1
+      pointer.targetY = ratioY * 2 - 1
+      pointer.targetRatioX = ratioX
+      pointer.targetRatioY = ratioY
+      pointer.targetInfluence = 1
+    }
+
+    const handlePointerLeave = () => {
+      resetPointer()
     }
 
     const handleVisibilityChange = () => {
@@ -851,6 +996,9 @@ export function BlueprintBackground() {
       attributeFilter: ['data-theme'],
     })
     motionQuery.addEventListener('change', handleMotionChange)
+    interactionQuery.addEventListener('change', handleInteractionChange)
+    host.addEventListener('pointermove', handlePointerMove, { passive: true })
+    host.addEventListener('pointerleave', handlePointerLeave)
     document.addEventListener('visibilitychange', handleVisibilityChange)
 
     resize()
@@ -862,6 +1010,9 @@ export function BlueprintBackground() {
       intersectionObserver.disconnect()
       themeObserver.disconnect()
       motionQuery.removeEventListener('change', handleMotionChange)
+      interactionQuery.removeEventListener('change', handleInteractionChange)
+      host.removeEventListener('pointermove', handlePointerMove)
+      host.removeEventListener('pointerleave', handlePointerLeave)
       document.removeEventListener('visibilitychange', handleVisibilityChange)
     }
   }, [])
