@@ -6,27 +6,64 @@
  */
 
 :root {
-  --ui-theme-transition-duration: 240ms;
-  --ui-theme-transition-easing: cubic-bezier(0.22, 1, 0.36, 1);
+  --ui-theme-transition-duration: 220ms;
+  --ui-theme-transition-easing: ease-in-out;
 }
 
 /*
- * Theme transitions are opt-in and live only for the short period in which
- * ThemeToggle changes data-theme. This avoids permanent transition overrides
- * on cards, buttons and future motion-system components.
+ * Theme changes use one compositor-friendly document snapshot instead of
+ * transitioning every node in the page. The fallback remains an instant theme
+ * switch in browsers without the View Transitions API.
  */
-html.is-theme-transitioning,
-html.is-theme-transitioning *,
-html.is-theme-transitioning *::before,
-html.is-theme-transitioning *::after {
+::view-transition-image-pair(root) {
+  isolation: auto;
+}
+
+::view-transition-old(root) {
+  animation: ui-theme-fade-out var(--ui-theme-transition-duration)
+    var(--ui-theme-transition-easing) both;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  animation: ui-theme-fade-in var(--ui-theme-transition-duration)
+    var(--ui-theme-transition-easing) both;
+  mix-blend-mode: normal;
+}
+
+@keyframes ui-theme-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes ui-theme-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/*
+ * The header starts with an explicit transparent color and zero blur, making
+ * both values interpolable when the scrolled class is toggled.
+ */
+.site-header {
+  background-color: transparent;
+  -webkit-backdrop-filter: blur(0);
+  backdrop-filter: blur(0);
   transition:
-    background-color var(--ui-theme-transition-duration) var(--ui-theme-transition-easing),
-    border-color var(--ui-theme-transition-duration) var(--ui-theme-transition-easing),
-    color var(--ui-theme-transition-duration) var(--ui-theme-transition-easing),
-    box-shadow var(--ui-theme-transition-duration) var(--ui-theme-transition-easing),
-    fill var(--ui-theme-transition-duration) var(--ui-theme-transition-easing),
-    stroke var(--ui-theme-transition-duration) var(--ui-theme-transition-easing),
-    opacity var(--ui-theme-transition-duration) var(--ui-theme-transition-easing) !important;
+    background-color 300ms ease-in-out,
+    border-color 300ms ease-in-out,
+    -webkit-backdrop-filter 300ms ease-in-out,
+    backdrop-filter 300ms ease-in-out;
+}
+
+.site-header.site-header--scrolled {
+  background-color: rgb(
+    var(--rgb-header-scrolled) / var(--header-scrolled-opacity)
+  );
+  -webkit-backdrop-filter: blur(22px);
+  backdrop-filter: blur(22px);
 }
 
 /*
@@ -80,10 +117,12 @@ html.is-theme-transitioning *::after {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html.is-theme-transitioning,
-  html.is-theme-transitioning *,
-  html.is-theme-transitioning *::before,
-  html.is-theme-transitioning *::after {
-    transition: none !important;
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 1ms;
+  }
+
+  .site-header {
+    transition: none;
   }
 }

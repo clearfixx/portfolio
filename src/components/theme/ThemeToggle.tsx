@@ -1,11 +1,58 @@
 'use client'
 
 import { useTheme } from 'next-themes'
+import { useSyncExternalStore } from 'react'
 
-const THEME_TRANSITION_CLASS = 'is-theme-transitioning'
-const THEME_TRANSITION_MS = 260
+type ThemeViewTransition = {
+  finished: Promise<void>
+}
 
-let transitionTimeout: number | undefined
+type ThemeTransitionDocument = Document & {
+  startViewTransition?: (
+    updateCallback: () => void | Promise<void>,
+  ) => ThemeViewTransition
+}
+
+function subscribeToHydration() {
+  return () => undefined
+}
+
+function getHydratedSnapshot() {
+  return true
+}
+
+function getServerHydratedSnapshot() {
+  return false
+}
+
+function waitForTheme(theme: string) {
+  return new Promise<void>((resolve) => {
+    const root = document.documentElement
+
+    if (root.dataset.theme === theme) {
+      resolve()
+      return
+    }
+
+    const observer = new MutationObserver(() => {
+      if (root.dataset.theme !== theme) return
+
+      window.clearTimeout(timeoutId)
+      observer.disconnect()
+      resolve()
+    })
+
+    const timeoutId = window.setTimeout(() => {
+      observer.disconnect()
+      resolve()
+    }, 160)
+
+    observer.observe(root, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    })
+  })
+}
 
 function SunIcon() {
   return (
@@ -37,35 +84,40 @@ function MoonIcon() {
 
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme()
-  const nextTheme = resolvedTheme === 'light' ? 'dark' : 'light'
+  const isHydrated = useSyncExternalStore(
+    subscribeToHydration,
+    getHydratedSnapshot,
+    getServerHydratedSnapshot,
+  )
+  const isThemeReady = isHydrated && resolvedTheme !== undefined
+  const isLightTheme = isThemeReady && resolvedTheme === 'light'
+  const nextTheme = isLightTheme ? 'dark' : 'light'
 
   const toggleTheme = () => {
-    const root = document.documentElement
+    if (!isThemeReady) return
+
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const transitionDocument = document as ThemeTransitionDocument
 
-    window.clearTimeout(transitionTimeout)
-
-    if (prefersReducedMotion) {
-      root.classList.remove(THEME_TRANSITION_CLASS)
+    if (prefersReducedMotion || !transitionDocument.startViewTransition) {
       setTheme(nextTheme)
       return
     }
 
-    root.classList.add(THEME_TRANSITION_CLASS)
-    setTheme(nextTheme)
+    const transition = transitionDocument.startViewTransition(async () => {
+      setTheme(nextTheme)
+      await waitForTheme(nextTheme)
+    })
 
-    transitionTimeout = window.setTimeout(() => {
-      root.classList.remove(THEME_TRANSITION_CLASS)
-      transitionTimeout = undefined
-    }, THEME_TRANSITION_MS)
+    void transition.finished.catch(() => undefined)
   }
 
   return (
     <button
       className="theme-toggle"
       type="button"
-      aria-label={`Switch to ${nextTheme} theme`}
-      aria-pressed={resolvedTheme === 'light'}
+      aria-label={isThemeReady ? `Switch to ${nextTheme} theme` : 'Toggle color theme'}
+      aria-pressed={isThemeReady ? isLightTheme : undefined}
       onClick={toggleTheme}
     >
       <span className="theme-toggle__icon theme-toggle__icon--moon">
