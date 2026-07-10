@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from 'react'
 
+export { BlueprintBackground as Background } from './hero-background/BlueprintBackground'
+
 type Particle = {
   x: number
   y: number
@@ -24,7 +26,8 @@ function waveY(width: number, height: number, x: number, lane: number, time: num
   return center + Math.sin((x / width) * Math.PI * 2.4 + phase) * amplitude
 }
 
-export function Background() {
+/** Temporary rollback target while the Phase 5.0.1 prototype is reviewed. */
+export function LegacyBackground() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
   useEffect(() => {

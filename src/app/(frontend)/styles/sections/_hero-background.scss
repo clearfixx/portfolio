@@ -1,0 +1,58 @@
+/*
+ * Phase 5.0.1 — Hero background prototype
+ *
+ * The canvas owns only the blueprint grid and route system. Content stays in
+ * the regular DOM above it, and the legacy ambient orb is deliberately muted.
+ */
+
+.hero-background--blueprint {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0.92;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgb(var(--rgb-black)) 7%,
+    rgb(var(--rgb-black)) 88%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgb(var(--rgb-black)) 7%,
+    rgb(var(--rgb-black)) 88%,
+    transparent 100%
+  );
+}
+
+.home-hero > .hero-orb {
+  opacity: 0.46;
+  animation-duration: 14s;
+}
+
+html[data-theme='light'] {
+  .hero-background--blueprint {
+    opacity: 0.78;
+  }
+
+  .home-hero > .hero-orb {
+    opacity: 0.16;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-background--blueprint {
+    opacity: 0.7;
+  }
+
+  .home-hero > .hero-orb {
+    opacity: 0.28;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero > .hero-orb {
+    animation: none;
+  }
+}

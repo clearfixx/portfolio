@@ -61,10 +61,13 @@ function ArchitectureIcon(props: IconProps) {
       strokeWidth="1.8"
       {...props}
     >
-      <path d="m7 8 5-3 5 3-5 3-5-3Z" />
-      <path d="m4 14 5-3 5 3-5 3-5-3Z" />
-      <path d="m10 14 5-3 5 3-5 3-5-3Z" />
-      <path d="M12 11v4" />
+      <rect x="9" y="3.5" width="6" height="4" rx="1" />
+      <path d="M12 7.5V11" />
+      <path d="M5 11h14" />
+      <path d="M5 11v4M12 11v4M19 11v4" />
+      <rect x="2" y="15" width="6" height="5" rx="1" />
+      <rect x="9" y="15" width="6" height="5" rx="1" />
+      <rect x="16" y="15" width="6" height="5" rx="1" />
     </svg>
   )
 }
@@ -104,6 +107,7 @@ function CodeIcon(props: IconProps) {
     >
       <path d="m9 7-5 5 5 5" />
       <path d="m15 7 5 5-5 5" />
+      <path className="delivery-pipeline__icon-accent" d="m14 5-4 14" />
     </svg>
   )
 }
@@ -120,11 +124,11 @@ function RocketIcon(props: IconProps) {
       strokeWidth="1.8"
       {...props}
     >
-      <path d="M14 4c2.7 0 4.7.6 6 1.8-1.2 4.6-3.7 8.1-7.4 10.4L8 11.6C10.3 7.8 12.3 5.3 14 4Z" />
-      <path d="M8 11.6 4.7 12.8 3 17l4.2-1.7" />
-      <path d="m12.6 16.2-1.4 4.1L15.4 18l1-3.2" />
-      <path d="M15 8.5h.1" />
-      <path d="M5 20c1.2-.3 2.1-.9 2.7-1.7" />
+      <path d="M12 2.8c2.7 1.9 4.3 5.2 4.3 8.8v4.2L12 18l-4.3-2.2v-4.2c0-3.6 1.6-6.9 4.3-8.8Z" />
+      <circle cx="12" cy="10.2" r="2" />
+      <path d="m7.8 13.8-3 2.3v3.2l4.3-1.8" />
+      <path d="m16.2 13.8 3 2.3v3.2l-4.3-1.8" />
+      <path className="delivery-pipeline__icon-accent" d="M9.5 18.3 12 21.5l2.5-3.2" />
     </svg>
   )
 }
@@ -141,8 +145,10 @@ function ProgressIcon(props: IconProps) {
       strokeWidth="1.8"
       {...props}
     >
-      <path d="M12 3a9 9 0 1 1-8.5 12" />
-      <path d="M12 3v9l6 2" />
+      <circle cx="12" cy="12" r="7.5" />
+      <path d="M12 8v4.5l3 1.8" />
+      <path d="M12 5.7v1M18.3 12h-1" />
+      <path d="M12 18.3v-1M5.7 12h1" />
     </svg>
   )
 }

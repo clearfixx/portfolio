@@ -362,6 +362,10 @@
   height: 38px;
 }
 
+.delivery-pipeline__icon-accent {
+  stroke: rgb(var(--rgb-accent));
+}
+
 .delivery-pipeline__phase--progress .delivery-pipeline__phase-icon,
 .delivery-pipeline__phase--pending .delivery-pipeline__phase-icon {
   color: rgb(var(--rgb-purple));
