@@ -34,32 +34,68 @@ export function PortfolioSection({
   return (
     <section className="portfolio-section" id={id} aria-labelledby={titleId}>
       <div className="site-container">
-        <div className="portfolio-section__frame">
-          <div className="portfolio-section__number" aria-hidden="true">
+        <div
+          className="portfolio-section__frame"
+          data-motion="scale-in"
+          data-motion-duration="section"
+        >
+          <div
+          className="portfolio-section__number"
+          aria-hidden="true"
+          data-motion="fade"
+          data-motion-delay="1"
+        >
             <span>{number}</span>
             <i />
           </div>
 
           <div className="portfolio-section__header-row">
             <header className="portfolio-section__header">
-              <p className="portfolio-section__eyebrow">
+              <p
+              className="portfolio-section__eyebrow"
+              data-motion="fade"
+              data-motion-delay="1"
+            >
                 <span>{'//'}</span>
                 <span>{eyebrow}</span>
               </p>
 
-              <h2 className="portfolio-section__title" id={titleId}>
+              <h2
+              className="portfolio-section__title"
+              id={titleId}
+              data-motion="rise"
+              data-motion-delay="2"
+            >
                 {title}
               </h2>
 
-              <p className="portfolio-section__description">{description}</p>
+              <p
+              className="portfolio-section__description"
+              data-motion="rise"
+              data-motion-delay="3"
+            >
+              {description}
+            </p>
             </header>
 
             {headerAction ? (
-              <div className="portfolio-section__header-action">{headerAction}</div>
+              <div
+              className="portfolio-section__header-action"
+              data-motion="slide-right"
+              data-motion-delay="3"
+            >
+              {headerAction}
+            </div>
             ) : null}
           </div>
 
-          <div className="portfolio-section__body">{children}</div>
+          <div
+          className="portfolio-section__body"
+          data-motion="rise"
+          data-motion-delay="4"
+        >
+          {children}
+        </div>
 
           <SectionFooter {...footer} />
         </div>
