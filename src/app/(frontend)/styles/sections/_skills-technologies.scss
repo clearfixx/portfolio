@@ -1,3 +1,5 @@
+@use '../abstracts/mixins' as ui;
+
 .skills-tech__layout {
   display: grid;
   grid-template-areas:
@@ -236,6 +238,8 @@
 }
 
 .skills-tech__badge {
+  @include ui.interactive;
+
   display: grid;
   min-height: 5.05rem;
   align-content: center;
@@ -249,10 +253,6 @@
     rgb(var(--rgb-surface-ink) / 64%);
   color: rgb(var(--rgb-aqua));
   text-align: center;
-  transition:
-    border-color 180ms ease,
-    transform 180ms ease,
-    box-shadow 180ms ease;
 }
 
 .skills-tech__badge:hover {
@@ -262,10 +262,7 @@
 }
 
 .skills-tech__badge-icon {
-  display: grid;
-  width: 2.25rem;
-  height: 2.25rem;
-  place-items: center;
+  @include ui.icon-tile(2.25rem, 0);
 }
 
 .skills-tech__badge-icon svg {
@@ -420,9 +417,9 @@
 }
 
 .skills-tech__pills span {
+  @include ui.pill($padding-inline: 0.65rem, $padding-block: 0.38rem);
+
   border: 1px solid rgb(var(--rgb-aqua) / 16%);
-  border-radius: 999px;
-  padding: 0.38rem 0.65rem;
   background: rgb(var(--rgb-surface-ink) / 66%);
   color: rgb(var(--rgb-text-pale) / 88%);
   font-family: var(--font-mono);

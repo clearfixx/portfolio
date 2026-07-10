@@ -1,0 +1,81 @@
+@mixin interactive(
+  $duration: 180ms,
+  $timing: ease,
+  $properties: (border-color, background, color, box-shadow, transform)
+) {
+  transition-property: $properties;
+  transition-duration: $duration;
+  transition-timing-function: $timing;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition-duration: 0.01ms;
+  }
+}
+
+@mixin focus-ring($color, $offset: 3px) {
+  &:focus-visible {
+    outline: 2px solid $color;
+    outline-offset: $offset;
+  }
+}
+
+@mixin inline-control($gap: 0.75rem, $justify: center) {
+  display: inline-flex;
+  align-items: center;
+
+  @if $justify != null {
+    justify-content: $justify;
+  }
+
+  gap: $gap;
+}
+
+@mixin action-control(
+  $min-height: 3rem,
+  $radius: 0.625rem,
+  $padding-inline: 1.25rem,
+  $padding-block: 0,
+  $gap: 0.75rem
+) {
+  @include inline-control($gap: $gap);
+  @include interactive;
+
+  min-height: $min-height;
+  border-radius: $radius;
+  padding: $padding-block $padding-inline;
+  text-decoration: none;
+}
+
+@mixin pill(
+  $min-height: auto,
+  $radius: 999px,
+  $padding-inline: 0.75rem,
+  $padding-block: 0,
+  $gap: 0.5rem
+) {
+  @include inline-control($gap: $gap);
+
+  min-height: $min-height;
+  border-radius: $radius;
+  padding: $padding-block $padding-inline;
+  white-space: nowrap;
+}
+
+@mixin icon-tile($size, $radius) {
+  display: grid;
+  flex: 0 0 auto;
+  width: $size;
+  height: $size;
+  place-items: center;
+  border-radius: $radius;
+}
+
+@mixin status-dot($size, $color, $glow-color: $color, $glow: 16px) {
+  display: block;
+  flex: 0 0 auto;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background: $color;
+  box-shadow: 0 0 $glow $glow-color;
+}

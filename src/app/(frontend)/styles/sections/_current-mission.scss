@@ -1,3 +1,5 @@
+@use '../abstracts/mixins' as ui;
+
 .current-mission-section {
   position: relative;
   overflow: hidden;
@@ -197,9 +199,9 @@
 }
 
 .current-mission__tech-item {
+  @include ui.pill($padding-inline: 13px, $padding-block: 8px);
+
   border: 1px solid rgb(var(--rgb-violet) / 34%);
-  border-radius: 999px;
-  padding: 8px 13px;
   background:
     linear-gradient(180deg, rgb(var(--rgb-white) / 4.5%), rgb(var(--rgb-white) / 1%)),
     rgb(var(--rgb-violet) / 11%);
@@ -210,15 +212,11 @@
 }
 
 .current-mission__link {
-  display: inline-flex;
-  height: 48px;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
+  @include ui.action-control($min-height: 48px, $radius: 9px, $padding-inline: 23px);
+  @include ui.focus-ring(rgb(var(--rgb-cyan) / 72%));
+
   margin-top: 34px;
   border: 1px solid rgb(var(--rgb-cyan) / 36%);
-  border-radius: 9px;
-  padding: 0 23px;
   background: rgb(var(--rgb-cyan) / 4.5%);
   color: var(--color-cyan);
   font-size: 14px;
@@ -264,13 +262,9 @@
 }
 
 .dss-preview__online {
-  display: inline-flex;
-  height: 28px;
-  align-items: center;
-  gap: 8px;
+  @include ui.pill($min-height: 28px, $padding-inline: 12px, $gap: 8px);
+
   border: 1px solid rgb(var(--rgb-teal) / 28%);
-  border-radius: 999px;
-  padding: 0 12px;
   background: rgb(var(--rgb-teal) / 4.5%);
   color: var(--color-teal);
   font-size: 10px;
@@ -278,22 +272,15 @@
   text-transform: uppercase;
 
   span {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--color-teal);
-    box-shadow: 0 0 13px rgb(var(--rgb-teal) / 90%);
+    @include ui.status-dot(7px, var(--color-teal), rgb(var(--rgb-teal) / 90%), 13px);
   }
 }
 
 .dss-preview__icon-button,
 .dss-preview__avatar {
-  display: grid;
-  width: 28px;
-  height: 28px;
-  place-items: center;
+  @include ui.icon-tile(28px, 50%);
+
   border: 1px solid rgb(var(--rgb-violet) / 22%);
-  border-radius: 999px;
   background: rgb(var(--rgb-surface-indigo) / 66%);
   color: #bdb5e8;
   font-size: 11px;

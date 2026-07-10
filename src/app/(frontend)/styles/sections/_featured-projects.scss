@@ -1,3 +1,5 @@
+@use '../abstracts/mixins' as ui;
+
 // .featured-projects__header-action {
 //   position: absolute;
 //   top: 4.4rem;
@@ -6,24 +8,23 @@
 // }
 
 .featured-projects__view-all {
-  display: inline-flex;
-  align-items: center;
-  gap: 1.4rem;
+  @include ui.action-control(
+    $min-height: 3.25rem,
+    $radius: 0.45rem,
+    $padding-inline: 1.5rem,
+    $padding-block: 1rem,
+    $gap: 1.4rem
+  );
+  @include ui.focus-ring(rgb(var(--rgb-aqua) / 72%));
   border: 1px solid rgb(var(--rgb-aqua) / 48%);
   border-radius: 0.45rem;
-  padding: 1rem 1.5rem;
   background: hsl(179.75deg 100% 47.06% / 8%);
   color: rgb(var(--rgb-white));
   font-size: 0.9rem;
   font-weight: 900;
-  text-decoration: none;
   box-shadow:
     inset 0 1px 0 rgb(var(--rgb-white) / 5%),
     0 0 24px rgb(var(--rgb-aqua) / 8%);
-  transition:
-    border-color 180ms ease,
-    background 180ms ease,
-    transform 180ms ease;
 }
 
 .featured-projects__view-all:hover {
@@ -88,12 +89,9 @@
 
 .featured-project-card__stage,
 .featured-project-card__percent {
-  display: inline-flex;
-  align-items: center;
-  min-height: 1.7rem;
+  @include ui.pill($min-height: 1.7rem, $padding-inline: 0.65rem);
+
   border: 1px solid rgb(var(--rgb-aqua) / 24%);
-  border-radius: 999px;
-  padding: 0 0.65rem;
   background: rgb(var(--rgb-aqua) / 6%);
   color: rgb(var(--rgb-aqua));
   font-size: 0.62rem;
@@ -175,13 +173,9 @@
 }
 
 .featured-project-card__icon {
-  display: grid;
-  flex: 0 0 auto;
-  width: 2.55rem;
-  height: 2.55rem;
-  place-items: center;
+  @include ui.icon-tile(2.55rem, 0.7rem);
+
   border: 1px solid rgb(var(--rgb-aqua) / 38%);
-  border-radius: 0.7rem;
   color: rgb(var(--rgb-aqua));
   background: rgb(var(--rgb-aqua) / 6%);
 }
@@ -217,9 +211,9 @@
 }
 
 .featured-project-card__stack li {
+  @include ui.pill($radius: 0.35rem, $padding-inline: 0.55rem, $padding-block: 0.4rem);
+
   border: 1px solid rgb(var(--rgb-aqua) / 26%);
-  border-radius: 0.35rem;
-  padding: 0.4rem 0.55rem;
   background: rgb(4 13 24 / 72%);
   color: rgb(220 228 238);
   font-size: 0.68rem;
@@ -258,9 +252,11 @@
 }
 
 .featured-project-card__link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @include ui.inline-control($justify: space-between);
+  @include ui.interactive;
+  @include ui.focus-ring(rgb(var(--rgb-aqua) / 72%));
+
+  width: 100%;
   margin-top: 1rem;
   border-top: 1px solid rgb(var(--rgb-aqua) / 18%);
   padding-top: 1rem;

@@ -1,3 +1,5 @@
+@use '../abstracts/mixins' as ui;
+
 .contact-cta {
   display: grid;
   grid-template-columns: minmax(0, 1.28fr) minmax(360px, 0.92fr);
@@ -122,13 +124,12 @@
 }
 
 .contact-cta__location-badge {
+  @include ui.inline-control($gap: 12px, $justify: null);
+
   position: absolute;
   left: 28px;
   bottom: 28px;
   z-index: 5;
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
   border: 1px solid rgb(var(--rgb-accent) / 45%);
   border-radius: 10px;
   padding: 14px 18px;
@@ -190,12 +191,9 @@
 }
 
 .contact-cta__channel-icon {
-  display: grid;
-  width: 44px;
-  height: 44px;
-  place-items: center;
+  @include ui.icon-tile(44px, 11px);
+
   border: 1px solid rgb(var(--rgb-accent-border) / 24%);
-  border-radius: 11px;
   background: rgb(var(--rgb-accent-soft) / 8%);
   color: rgb(var(--rgb-accent));
 }
@@ -236,19 +234,13 @@
 }
 
 .contact-cta__social-link {
-  display: grid;
-  width: 46px;
-  height: 46px;
-  place-items: center;
+  @include ui.icon-tile(46px, 50%);
+  @include ui.interactive;
+  @include ui.focus-ring(rgb(var(--rgb-accent) / 72%));
+
   border: 1px solid rgb(var(--rgb-accent-border) / 20%);
-  border-radius: 50%;
   background: rgb(var(--rgb-surface-control-hover) / 82%);
   color: rgb(var(--rgb-text-strong) / 88%);
-  transition:
-    border-color 180ms ease,
-    color 180ms ease,
-    transform 180ms ease,
-    background 180ms ease;
 }
 
 .contact-cta__social-link:hover {
@@ -259,26 +251,18 @@
 }
 
 .contact-cta__availability {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
+  @include ui.pill($radius: 10px, $padding-inline: 16px, $padding-block: 10px, $gap: 9px);
+
   min-width: 152px;
   margin: 22px auto 0;
   border: 1px solid rgb(var(--rgb-accent) / 34%);
-  border-radius: 10px;
-  padding: 10px 16px;
   color: rgb(var(--rgb-accent));
   font-size: 0.92rem;
   font-weight: 800;
 }
 
 .contact-cta__availability span {
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: rgb(var(--rgb-success));
-  box-shadow: 0 0 16px rgb(var(--rgb-success) / 80%);
+  @include ui.status-dot(8px, rgb(var(--rgb-success)), rgb(var(--rgb-success) / 80%));
 }
 
 .contact-cta__form-panel {
@@ -400,14 +384,10 @@
 }
 
 .contact-cta__submit {
-  display: inline-flex;
-  min-height: 56px;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
+  @include ui.action-control($min-height: 56px);
+  @include ui.focus-ring(rgb(var(--rgb-accent) / 72%));
+
   border: 0;
-  border-radius: 10px;
-  padding: 0 24px;
   background: linear-gradient(135deg, rgb(var(--rgb-cta-start)), rgb(var(--rgb-cta-end)));
   color: rgb(var(--rgb-on-accent));
   cursor: pointer;
@@ -418,9 +398,6 @@
   box-shadow:
     0 0 30px rgb(var(--rgb-accent) / 18%),
     inset 0 1px 0 rgb(var(--rgb-white) / 34%);
-  transition:
-    transform 180ms ease,
-    box-shadow 180ms ease;
 }
 
 .contact-cta__submit:hover {
