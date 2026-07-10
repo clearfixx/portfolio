@@ -1,0 +1,89 @@
+:root {
+  --motion-duration-fast: 180ms;
+  --motion-duration-ui: 260ms;
+  --motion-duration-reveal: 520ms;
+  --motion-duration-section: 680ms;
+  --motion-stagger-tight: 45ms;
+  --motion-stagger-default: 70ms;
+  --motion-stagger-wide: 110ms;
+  --motion-distance-sm: 8px;
+  --motion-distance-default: 16px;
+  --motion-distance-lg: 24px;
+  --motion-ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-motion] {
+  --motion-delay: 0ms;
+  --motion-duration: var(--motion-duration-reveal);
+
+  transition:
+    opacity var(--motion-duration) var(--motion-ease-standard) var(--motion-delay),
+    transform var(--motion-duration) var(--motion-ease-standard) var(--motion-delay);
+}
+
+html[data-motion-ready='true'] [data-motion]:not([data-motion-state='visible']) {
+  opacity: 0;
+  transform: translate3d(0, var(--motion-distance-default), 0);
+  will-change: opacity, transform;
+}
+
+html[data-motion-ready='true']
+  [data-motion='fade']:not([data-motion-state='visible']) {
+  transform: none;
+}
+
+html[data-motion-ready='true']
+  [data-motion='slide-left']:not([data-motion-state='visible']) {
+  transform: translate3d(calc(var(--motion-distance-lg) * -1), 0, 0);
+}
+
+html[data-motion-ready='true']
+  [data-motion='slide-right']:not([data-motion-state='visible']) {
+  transform: translate3d(var(--motion-distance-lg), 0, 0);
+}
+
+html[data-motion-ready='true']
+  [data-motion='scale-in']:not([data-motion-state='visible']) {
+  transform: scale(0.98);
+  transform-origin: center;
+}
+
+[data-motion-state='visible'] {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+[data-motion-duration='fast'] {
+  --motion-duration: var(--motion-duration-fast);
+}
+
+[data-motion-duration='ui'] {
+  --motion-duration: var(--motion-duration-ui);
+}
+
+[data-motion-duration='section'] {
+  --motion-duration: var(--motion-duration-section);
+}
+
+@for $step from 1 through 6 {
+  [data-motion-delay='#{$step}'] {
+    --motion-delay: calc(var(--motion-stagger-default) * #{$step});
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-motion] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --motion-distance-default: 12px;
+    --motion-distance-lg: 16px;
+  }
+}
