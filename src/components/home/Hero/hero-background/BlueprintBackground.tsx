@@ -79,12 +79,13 @@ const INTRO_PULSE_END = 3180
 const INTRO_AMBIENT_START = 2940
 const INTRO_END = 3480
 
-const AMBIENT_SIGNAL_INTERVAL = 3400
-const AMBIENT_SIGNAL_DURATION = 10800
+const AMBIENT_SIGNAL_INTERVAL = 5200
+const AMBIENT_SIGNAL_DURATION = 17000
 const AMBIENT_SIGNAL_HISTORY = 4
 const SIGNAL_TAIL_LENGTH = 0.045
 const SIGNAL_TAIL_STEPS = 7
 const NODE_FLASH_WINDOW = 0.026
+const ROUTE_OPACITY_FACTOR = 0.64
 
 const ROUTE_LAYOUTS: RouteLayout[] = [
   {
@@ -439,14 +440,14 @@ function drawRoute(
   context.lineJoin = 'round'
 
   traceRoute(context, route, 1)
-  context.globalAlpha = frame.guideOpacity * route.intensity
+  context.globalAlpha = frame.guideOpacity * route.intensity * ROUTE_OPACITY_FACTOR
   context.strokeStyle = palette.route
   context.lineWidth = 1
   context.stroke()
 
   if (constructionProgress > 0) {
     traceRoute(context, route, constructionProgress)
-    context.globalAlpha = route.intensity
+    context.globalAlpha = route.intensity * ROUTE_OPACITY_FACTOR
     context.strokeStyle = palette.routeActive
     context.lineWidth = 1.35
     context.stroke()
@@ -454,7 +455,7 @@ function drawRoute(
     traceRoute(context, route, constructionProgress)
     context.setLineDash([8, 18])
     context.lineDashOffset = animated ? -(time * 0.012) : 0
-    context.globalAlpha = 0.9 * route.intensity
+    context.globalAlpha = 0.9 * route.intensity * ROUTE_OPACITY_FACTOR
     context.strokeStyle = palette.routeActive
     context.lineWidth = 1
     context.stroke()
