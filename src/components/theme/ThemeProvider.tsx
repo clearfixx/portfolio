@@ -14,7 +14,6 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       defaultTheme="dark"
       enableSystem={false}
       storageKey="portfolio-theme"
-      disableTransitionOnChange
     >
       {children}
     </NextThemesProvider>

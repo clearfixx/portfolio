@@ -2,6 +2,11 @@
 
 import { useTheme } from 'next-themes'
 
+const THEME_TRANSITION_CLASS = 'is-theme-transitioning'
+const THEME_TRANSITION_MS = 260
+
+let transitionTimeout: number | undefined
+
 function SunIcon() {
   return (
     <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none">
@@ -32,16 +37,35 @@ function MoonIcon() {
 
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme()
+  const nextTheme = resolvedTheme === 'light' ? 'dark' : 'light'
 
   const toggleTheme = () => {
-    setTheme(resolvedTheme === 'light' ? 'dark' : 'light')
+    const root = document.documentElement
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    window.clearTimeout(transitionTimeout)
+
+    if (prefersReducedMotion) {
+      root.classList.remove(THEME_TRANSITION_CLASS)
+      setTheme(nextTheme)
+      return
+    }
+
+    root.classList.add(THEME_TRANSITION_CLASS)
+    setTheme(nextTheme)
+
+    transitionTimeout = window.setTimeout(() => {
+      root.classList.remove(THEME_TRANSITION_CLASS)
+      transitionTimeout = undefined
+    }, THEME_TRANSITION_MS)
   }
 
   return (
     <button
       className="theme-toggle"
       type="button"
-      aria-label="Toggle color theme"
+      aria-label={`Switch to ${nextTheme} theme`}
+      aria-pressed={resolvedTheme === 'light'}
       onClick={toggleTheme}
     >
       <span className="theme-toggle__icon theme-toggle__icon--moon">

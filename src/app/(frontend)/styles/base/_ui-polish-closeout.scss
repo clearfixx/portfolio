@@ -1,0 +1,89 @@
+/*
+ * Phase 4.0.3 — UI polish closeout
+ *
+ * This file intentionally loads last. It contains cross-section interaction
+ * rules only: theme switching, keyboard focus and disabled states.
+ */
+
+:root {
+  --ui-theme-transition-duration: 240ms;
+  --ui-theme-transition-easing: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/*
+ * Theme transitions are opt-in and live only for the short period in which
+ * ThemeToggle changes data-theme. This avoids permanent transition overrides
+ * on cards, buttons and future motion-system components.
+ */
+html.is-theme-transitioning,
+html.is-theme-transitioning *,
+html.is-theme-transitioning *::before,
+html.is-theme-transitioning *::after {
+  transition:
+    background-color var(--ui-theme-transition-duration) var(--ui-theme-transition-easing),
+    border-color var(--ui-theme-transition-duration) var(--ui-theme-transition-easing),
+    color var(--ui-theme-transition-duration) var(--ui-theme-transition-easing),
+    box-shadow var(--ui-theme-transition-duration) var(--ui-theme-transition-easing),
+    fill var(--ui-theme-transition-duration) var(--ui-theme-transition-easing),
+    stroke var(--ui-theme-transition-duration) var(--ui-theme-transition-easing),
+    opacity var(--ui-theme-transition-duration) var(--ui-theme-transition-easing) !important;
+}
+
+/*
+ * Do not keep the browser's mouse-focus rectangle, but preserve a clear and
+ * consistent keyboard focus state.
+ */
+:where(a, button, input, textarea, select, summary, [tabindex]):focus:not(:focus-visible) {
+  outline: none;
+}
+
+:where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+  outline: 2px solid rgb(var(--rgb-cyan) / 78%);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgb(var(--rgb-cyan) / 12%);
+}
+
+/*
+ * Navbar links occupy the full header height. A regular outline therefore
+ * creates a large rectangle, so keyboard focus is represented by a compact
+ * underline around the label instead.
+ */
+.navbar__link:focus-visible {
+  outline: none;
+  box-shadow: none;
+  text-decoration-line: underline;
+  text-decoration-color: rgb(var(--rgb-cyan) / 92%);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 8px;
+}
+
+/* Form controls get a slightly stronger border without changing dimensions. */
+:where(input, textarea, select):focus-visible {
+  border-color: rgb(var(--rgb-cyan) / 58%);
+}
+
+/* Shared disabled behaviour for native and ARIA controls. */
+:where(button, input, textarea, select):disabled,
+:where([role='button'], a)[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.52;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+:where([role='button'], a)[aria-disabled='true'] {
+  pointer-events: none;
+}
+
+:where(button, [role='button'], summary, select) {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.is-theme-transitioning,
+  html.is-theme-transitioning *,
+  html.is-theme-transitioning *::before,
+  html.is-theme-transitioning *::after {
+    transition: none !important;
+  }
+}
