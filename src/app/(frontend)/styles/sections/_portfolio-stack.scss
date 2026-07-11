@@ -1,9 +1,8 @@
 /*
- * Phase 5.1.2 — sticky portfolio stack prototype.
+ * Phase 5.1.3 — optimized sticky portfolio stack polish.
  *
- * Short chapters pin below the navigation. Chapters taller than the viewport
- * receive an adaptive negative top offset so their full content scrolls past
- * before the next layer covers them.
+ * Tall chapters retain their adaptive negative top offset. Scroll-linked
+ * polish is limited to compositor-friendly transform and subtle opacity.
  */
 
 .portfolio-stack {
@@ -18,27 +17,46 @@
 .portfolio-stack .scroll-stack__item {
   position: sticky;
   top: var(--scroll-stack-item-top, var(--portfolio-stack-top));
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
   transform-origin: center top;
+  backface-visibility: hidden;
+}
+
+.portfolio-stack[data-stack-runtime='active'] .scroll-stack__item {
+  will-change: transform, opacity;
 }
 
 .portfolio-stack .scroll-stack__item:nth-child(1) {
   z-index: 1;
-  transform: scale(0.986);
 }
 
 .portfolio-stack .scroll-stack__item:nth-child(2) {
   z-index: 2;
-  transform: scale(0.993);
 }
 
 .portfolio-stack .scroll-stack__item:nth-child(3) {
   z-index: 3;
 }
 
+.portfolio-stack
+  .scroll-stack__item[data-stack-state='covered'] {
+  pointer-events: none;
+}
+
 .portfolio-stack .portfolio-section__frame {
   box-shadow:
-    0 -1rem 2.5rem rgb(0 0 0 / 16%),
-    0 1.25rem 3rem rgb(0 0 0 / 28%);
+    0 -1rem 2.5rem rgb(0 0 0 / 14%),
+    0 1.25rem 3rem rgb(0 0 0 / 24%),
+    0 0 0 1px rgb(var(--rgb-aqua) / 5%);
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .portfolio-stack {
+    --portfolio-stack-top: 5rem;
+    --portfolio-stack-step: 0.65rem;
+    --portfolio-stack-bottom-gap: 1rem;
+  }
 }
 
 @media (max-width: 1023px), (max-height: 680px), (prefers-reduced-motion: reduce) {
@@ -52,7 +70,10 @@
     position: relative;
     top: auto;
     z-index: auto;
-    transform: none;
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto;
+    will-change: auto;
   }
 
   .portfolio-stack .portfolio-section__frame {
