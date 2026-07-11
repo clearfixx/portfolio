@@ -61,14 +61,32 @@
 }
 
 .logo__mark {
+  display: inline-flex;
   width: 72px;
   height: 44px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
   color: var(--color-cyan);
   filter: drop-shadow(0 0 16px rgb(var(--rgb-cyan) / 42%));
 }
 
+.logo__mark > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.logo__identity {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
 .logo__content {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 2px;
 }
 
