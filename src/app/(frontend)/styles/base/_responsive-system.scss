@@ -1,0 +1,1998 @@
+/*
+ * Responsive System — mobile/tablet production pass.
+ *
+ * Imported last so these rules intentionally override desktop geometry
+ * without rewriting every section stylesheet.
+ */
+
+html {
+  min-width: 320px;
+  overflow-x: clip;
+}
+
+body,
+.site-shell {
+  min-width: 320px;
+}
+
+.site-shell {
+  overflow-x: clip;
+}
+
+.site-main,
+.site-main > *,
+.site-container,
+.portfolio-section__frame,
+.portfolio-section__body {
+  min-width: 0;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+input,
+textarea,
+select,
+button {
+  max-width: 100%;
+}
+
+body.mobile-navigation-open {
+  overflow: hidden;
+}
+
+/* Mobile navigation primitives */
+.navbar__mobile-toggle,
+.mobile-navigation {
+  display: none;
+}
+
+.navbar__mobile-toggle {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border: 1px solid rgb(var(--rgb-cyan) / 24%);
+  border-radius: 10px;
+  background:
+    linear-gradient(
+      180deg,
+      rgb(var(--rgb-white) / 5%),
+      rgb(var(--rgb-white) / 1.5%)
+    ),
+    rgb(var(--rgb-surface-control) / 88%);
+  color: rgb(var(--rgb-text-bright));
+  box-shadow:
+    inset 0 1px 0 rgb(var(--rgb-white) / 5%),
+    0 0 20px rgb(var(--rgb-cyan) / 8%);
+  cursor: pointer;
+}
+
+.navbar__mobile-toggle span {
+  position: absolute;
+  left: 50%;
+  width: 20px;
+  height: 1.5px;
+  border-radius: 999px;
+  background: currentColor;
+  transform: translateX(-50%);
+}
+
+.navbar__mobile-toggle span:nth-child(1) {
+  top: 15px;
+}
+
+.navbar__mobile-toggle span:nth-child(2) {
+  top: 22px;
+  width: 14px;
+  margin-left: 3px;
+  background: rgb(var(--rgb-cyan));
+}
+
+.navbar__mobile-toggle span:nth-child(3) {
+  top: 29px;
+}
+
+.mobile-navigation {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: block;
+}
+
+.mobile-navigation__backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: rgb(var(--rgb-black) / 66%);
+  backdrop-filter: blur(5px);
+  cursor: default;
+  animation: mobile-nav-backdrop-in 220ms ease both;
+}
+
+.mobile-navigation__panel {
+  position: absolute;
+  inset: 0 0 0 auto;
+  display: flex;
+  width: min(88vw, 390px);
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  flex-direction: column;
+  border-left: 1px solid rgb(var(--rgb-cyan) / 22%);
+  padding:
+    max(20px, env(safe-area-inset-top))
+    max(20px, env(safe-area-inset-right))
+    max(20px, env(safe-area-inset-bottom))
+    20px;
+  background:
+    radial-gradient(
+      circle at 80% 5%,
+      rgb(var(--rgb-purple-blue) / 16%),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 10% 20%,
+      rgb(var(--rgb-cyan) / 10%),
+      transparent 28%
+    ),
+    rgb(var(--rgb-canvas) / 97%);
+  box-shadow: -32px 0 80px rgb(var(--rgb-black) / 48%);
+  animation: mobile-nav-panel-in 320ms var(--motion-ease-standard, ease) both;
+}
+
+.mobile-navigation__panel::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgb(var(--rgb-cyan) / 3%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--rgb-cyan) / 3%) 1px, transparent 1px);
+  background-size: 42px 42px;
+  content: '';
+  mask-image: linear-gradient(180deg, rgb(var(--rgb-black)), transparent 80%);
+}
+
+.mobile-navigation__header,
+.mobile-navigation__links,
+.mobile-navigation__footer {
+  position: relative;
+  z-index: 1;
+}
+
+.mobile-navigation__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid rgb(var(--rgb-cyan) / 14%);
+  padding-bottom: 22px;
+}
+
+.mobile-navigation__header > div {
+  display: grid;
+  gap: 7px;
+}
+
+.mobile-navigation__header span,
+.mobile-navigation__theme span {
+  color: rgb(var(--rgb-cyan));
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.mobile-navigation__header strong {
+  color: rgb(var(--rgb-text-bright));
+  font-size: clamp(1.8rem, 8vw, 2.5rem);
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+.mobile-navigation__close {
+  position: relative;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgb(var(--rgb-cyan) / 20%);
+  border-radius: 10px;
+  background: rgb(var(--rgb-white) / 3%);
+  color: rgb(var(--rgb-text-bright));
+  cursor: pointer;
+}
+
+.mobile-navigation__close span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 19px;
+  height: 1.5px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.mobile-navigation__close span:first-child {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.mobile-navigation__close span:last-child {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.mobile-navigation__links {
+  display: grid;
+  margin-top: 26px;
+}
+
+.mobile-navigation__link {
+  display: grid;
+  min-height: 68px;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  border-bottom: 1px solid rgb(var(--rgb-cyan) / 11%);
+  color: rgb(var(--rgb-text-muted));
+}
+
+.mobile-navigation__link > span {
+  color: rgb(var(--rgb-cyan) / 60%);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.mobile-navigation__link strong {
+  color: inherit;
+  font-size: 1.08rem;
+  letter-spacing: -0.02em;
+}
+
+.mobile-navigation__link svg {
+  color: rgb(var(--rgb-cyan) / 54%);
+  transition: transform 180ms ease;
+}
+
+.mobile-navigation__link.is-active {
+  color: rgb(var(--rgb-cyan));
+}
+
+.mobile-navigation__link.is-active strong {
+  text-shadow: 0 0 18px rgb(var(--rgb-cyan) / 28%);
+}
+
+.mobile-navigation__footer {
+  display: grid;
+  gap: 14px;
+  margin-top: auto;
+  padding-top: 28px;
+}
+
+.mobile-navigation__theme {
+  display: flex;
+  min-height: 66px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border: 1px solid rgb(var(--rgb-cyan) / 14%);
+  border-radius: 12px;
+  padding: 10px 11px 10px 16px;
+  background: rgb(var(--rgb-white) / 2.5%);
+}
+
+.mobile-navigation__theme > div {
+  display: grid;
+  gap: 5px;
+}
+
+.mobile-navigation__theme strong {
+  color: rgb(var(--rgb-text-bright));
+  font-size: 0.88rem;
+}
+
+.mobile-navigation__cta {
+  display: flex;
+  min-height: 52px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border: 1px solid rgb(var(--rgb-cyan) / 34%);
+  border-radius: 10px;
+  padding: 0 17px;
+  background:
+    linear-gradient(
+      135deg,
+      rgb(var(--rgb-cyan) / 18%),
+      rgb(var(--rgb-purple-blue) / 10%)
+    ),
+    rgb(var(--rgb-surface-control) / 82%);
+  color: rgb(var(--rgb-text-bright));
+  font-size: 0.92rem;
+  font-weight: 850;
+}
+
+@keyframes mobile-nav-backdrop-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mobile-nav-panel-in {
+  from {
+    opacity: 0.7;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Wide laptop / small desktop */
+@media (max-width: 1320px) {
+  :root {
+    --container-padding: 24px;
+  }
+
+  .site-header__inner {
+    min-height: 80px;
+    gap: 22px;
+  }
+
+  .logo {
+    gap: 12px;
+  }
+
+  .logo__mark {
+    width: 64px;
+    height: 40px;
+  }
+
+  .logo__name {
+    font-size: 18px;
+  }
+
+  .logo__role {
+    font-size: 12px;
+  }
+
+  .navbar {
+    gap: 24px;
+  }
+
+  .navbar__links {
+    gap: 24px;
+  }
+
+  .navbar__link {
+    min-height: 80px;
+    font-size: 12px;
+  }
+
+  .hero-main {
+    grid-template-columns: minmax(280px, 0.78fr) minmax(0, 1.22fr);
+    align-items: start;
+  }
+
+  .hero-mission {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    max-width: 980px;
+    padding-left: 0;
+  }
+
+  .hero-system {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .hero-workspace {
+    grid-column: 2;
+    grid-row: 2;
+    grid-template-columns: minmax(0, 1fr) 146px;
+  }
+
+  .hero-mission__actions {
+    margin-top: 30px;
+  }
+
+  .hero-scroll {
+    margin-top: 34px;
+  }
+
+  .portfolio-section__frame {
+    padding: clamp(1.25rem, 2.2vw, 1.75rem);
+  }
+
+  .featured-projects__grid,
+  .featured-projects__cards,
+  .projects-grid {
+    gap: 18px;
+  }
+}
+
+/* Tablet landscape / compact laptop */
+@media (max-width: 1100px) {
+  :root {
+    --container-padding: 22px;
+  }
+
+  .hero-main {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-mission,
+  .hero-system,
+  .hero-workspace {
+    grid-column: 1;
+  }
+
+  .hero-mission {
+    grid-row: 1;
+  }
+
+  .hero-system {
+    grid-row: 2;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-workspace {
+    grid-row: 3;
+    grid-template-columns: minmax(0, 1fr) 180px;
+  }
+
+  .hero-terminal {
+    min-height: 100%;
+  }
+
+  .current-mission__layout,
+  .current-mission__grid,
+  .current-mission__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .current-mission__content {
+    max-width: 760px;
+  }
+
+  .featured-projects__grid,
+  .featured-projects__cards,
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skills-tech__layout,
+  .skills-technologies__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .skills-tech__cards,
+  .skills-technologies__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contact-cta__layout,
+  .contact-cta__grid,
+  .home-contact__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer__grid,
+  .site-footer__columns,
+  .site-footer__main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile navigation + tablet portrait */
+@media (max-width: 900px) {
+  :root {
+    --container-padding: 20px;
+  }
+
+  .home-hero,
+  .portfolio-section {
+    scroll-margin-top: 78px;
+  }
+
+  .site-header {
+    background: rgb(var(--rgb-header-scrolled) / 88%);
+    backdrop-filter: blur(18px);
+  }
+
+  .site-header__inner {
+    min-height: 72px;
+    gap: 16px;
+  }
+
+  .site-header__progress {
+    height: 2px;
+  }
+
+  .navbar {
+    margin-left: auto;
+  }
+
+  .navbar__links,
+  .navbar__actions {
+    display: none;
+  }
+
+  .navbar__mobile-toggle {
+    display: grid;
+  }
+
+  .logo__mark {
+    width: 60px;
+    height: 38px;
+  }
+
+  .logo__content {
+    gap: 1px;
+  }
+
+  .logo__name {
+    font-size: 16px;
+  }
+
+  .logo__role {
+    font-size: 11px;
+  }
+
+  .home-hero {
+    min-height: auto;
+    padding: 94px 0 24px;
+  }
+
+  .hero-main {
+    gap: 18px;
+  }
+
+  .hero-system {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-status-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-mission__name {
+    font-size: clamp(2.7rem, 8.5vw, 4.4rem);
+  }
+
+  .hero-mission__title {
+    max-width: 760px;
+    margin-top: 22px;
+    font-size: clamp(1.65rem, 5vw, 2.5rem);
+    line-height: 1.34;
+  }
+
+  .hero-mission__actions {
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 26px;
+  }
+
+  .hero-scroll {
+    display: none;
+  }
+
+  .hero-editor {
+    height: 540px;
+    min-height: 540px;
+    max-height: 540px;
+  }
+
+  .hero-tech {
+    height: auto;
+    flex-wrap: wrap;
+    gap: 12px 22px;
+    padding-block: 16px;
+  }
+
+  .hero-dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-dashboard__stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .portfolio-section {
+    padding: 1rem 0 3.5rem;
+  }
+
+  .portfolio-section__header-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1.3rem;
+  }
+
+  .portfolio-section__header-action {
+    padding-right: 0;
+  }
+
+  .portfolio-section__title {
+    max-width: 780px;
+    font-size: clamp(2.35rem, 8vw, 3.5rem);
+  }
+
+  .portfolio-section__footer-capsule {
+    top: 2rem;
+    max-width: 100%;
+  }
+
+  .dss-preview {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .dss-preview__sidebar {
+    display: none;
+  }
+
+  .dss-preview__workspace,
+  .dss-preview__content,
+  .dss-preview__shell {
+    grid-template-columns: 1fr;
+  }
+
+  .dss-preview__metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dss-preview__main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-projects__grid,
+  .featured-projects__cards,
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-project-card,
+  .project-card {
+    min-width: 0;
+  }
+
+  .featured-project-card__layout,
+  .featured-project-card__body,
+  .project-card__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .engineer-profile__photo-stage {
+    min-height: min(420px, 64vw);
+  }
+
+  .skills-tech__cards,
+  .skills-technologies__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .engineering-dna,
+  .skills-tech__dna {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .delivery-pipeline__metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .delivery-pipeline__metric {
+    border-right: 0;
+    border-bottom: 1px solid rgb(var(--rgb-accent-border) / 14%);
+  }
+
+  .delivery-pipeline__metric:last-child {
+    border-bottom: 0;
+  }
+
+  .delivery-pipeline__status-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .delivery-pipeline__phases {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .delivery-pipeline__rail {
+    display: none;
+  }
+
+  .delivery-pipeline__flow {
+    padding-top: 0;
+  }
+
+  .insights-trust,
+  .contact-cta__layout,
+  .contact-cta__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .insights-trust__featured-article {
+    grid-template-columns: 1fr;
+  }
+
+  .insights-trust__article-row {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .insights-trust__article-index {
+    display: none;
+  }
+
+  .insights-trust__article-details {
+    grid-column: 2 / 3;
+    min-width: 0;
+    text-align: left;
+  }
+
+  .insights-trust__article-details span {
+    justify-content: flex-start;
+  }
+
+  .contact-cta__map-panel,
+  .contact-cta__form-panel {
+    min-width: 0;
+  }
+
+  .site-footer__grid,
+  .site-footer__columns,
+  .site-footer__main {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer__panel,
+  .site-footer__newsletter,
+  .site-footer__bottom {
+    min-width: 0;
+  }
+
+  .cookie-consent,
+  .cookie-consent__dialog,
+  .cookie-settings {
+    max-width: calc(100vw - 32px);
+  }
+}
+
+/* Phones */
+@media (max-width: 640px) {
+  :root {
+    --container-padding: 16px;
+  }
+
+  .site-header__inner {
+    min-height: 64px;
+  }
+
+  .home-hero,
+  .portfolio-section {
+    scroll-margin-top: 70px;
+  }
+
+  .logo {
+    gap: 8px;
+  }
+
+  .logo__mark {
+    width: 56px;
+    height: 34px;
+  }
+
+  .logo__content {
+    display: none;
+  }
+
+  .navbar__mobile-toggle {
+    width: 44px;
+    height: 44px;
+  }
+
+  .home-hero {
+    padding-top: 82px;
+  }
+
+  .hero-mission__intro {
+    margin-bottom: 12px;
+    font-size: 0.98rem;
+  }
+
+  .hero-mission__name {
+    font-size: clamp(2.45rem, 13vw, 3.55rem);
+    line-height: 0.98;
+  }
+
+  .hero-mission__title {
+    margin-top: 18px;
+    font-size: clamp(1.45rem, 7vw, 2rem);
+    line-height: 1.3;
+  }
+
+  .hero-mission__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .hero-button {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .hero-terminal {
+    min-height: 290px;
+  }
+
+  .hero-card__header,
+  .hero-terminal__body,
+  .hero-terminal__footer {
+    padding-inline: 14px;
+  }
+
+  .hero-stats__grid,
+  .hero-status-list,
+  .hero-dashboard__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-editor {
+    height: 460px;
+    min-height: 460px;
+    max-height: 460px;
+  }
+
+  .hero-editor__head {
+    height: 50px;
+    flex-basis: 50px;
+    gap: 10px;
+    padding-inline: 13px;
+  }
+
+  .hero-editor__head em {
+    display: none;
+  }
+
+  .hero-editor__code {
+    padding: 15px 12px 22px;
+    font-size: 10px;
+  }
+
+  .hero-editor__code code {
+    grid-template-columns: 24px minmax(0, 1fr);
+  }
+
+  .hero-editor__footer {
+    gap: 14px;
+    overflow: hidden;
+    padding-inline: 12px;
+  }
+
+  .hero-editor__footer span:nth-child(n + 3) {
+    display: none;
+  }
+
+  .hero-tech {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-tech span {
+    grid-column: 1 / -1;
+    font-size: 12px;
+  }
+
+  .hero-tech strong,
+  .hero-tech em {
+    margin: 0;
+    font-size: 13px;
+  }
+
+  .hero-dashboard {
+    gap: 18px;
+    padding: 16px;
+  }
+
+  .portfolio-section {
+    padding: 0.75rem 0 3rem;
+  }
+
+  .portfolio-section__frame {
+    border-radius: 0.9rem;
+    padding: 0.95rem;
+  }
+
+  .portfolio-section__frame::after {
+    display: none;
+  }
+
+  .portfolio-section__eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.09em;
+  }
+
+  .portfolio-section__title {
+    margin-top: 0.45rem;
+    font-size: clamp(2rem, 11vw, 2.8rem);
+    letter-spacing: -0.055em;
+  }
+
+  .portfolio-section__description {
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .portfolio-section__footer {
+    justify-content: stretch;
+  }
+
+  .portfolio-section__footer-capsule {
+    top: 1.65rem;
+    width: 100%;
+    align-items: center;
+    border-radius: 0.8rem;
+    padding: 0.65rem 0.75rem;
+  }
+
+  .portfolio-section__footer-content {
+    min-width: 0;
+    font-size: 0.72rem;
+  }
+
+  .current-mission__content {
+    padding-inline: 2px;
+  }
+
+  .dss-preview__topbar,
+  .dss-preview__heading,
+  .dss-preview__footer {
+    padding-inline: 12px;
+  }
+
+  .dss-preview__topbar > *:not(:first-child):not(:last-child) {
+    display: none;
+  }
+
+  .dss-preview__metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .dss-preview__metric-card,
+  .dss-preview__card {
+    min-width: 0;
+  }
+
+  .featured-project-card,
+  .project-card {
+    border-radius: 0.8rem;
+  }
+
+  .featured-project-card__preview,
+  .project-card__preview {
+    min-height: 220px;
+  }
+
+  .engineer-profile__profile-panel,
+  .engineer-profile__journey-panel,
+  .engineer-profile__philosophy-panel {
+    padding: 0.85rem;
+  }
+
+  .engineer-profile__photo-stage {
+    min-height: 300px;
+  }
+
+  .engineer-profile__photo-image img {
+    transform: scale(1.08);
+  }
+
+  .engineer-profile__reticle {
+    display: none;
+  }
+
+  .engineer-profile__stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .journey__item {
+    grid-template-columns: 2.8rem 0.9rem minmax(0, 1fr);
+    gap: 0.55rem;
+  }
+
+  .journey__year {
+    font-size: 0.82rem;
+  }
+
+  .philosophy-card {
+    grid-template-columns: auto minmax(0, 1fr);
+    padding: 0.8rem 2.15rem 0.8rem 0.8rem;
+  }
+
+  .skills-tech__card,
+  .skills-technologies__card {
+    min-width: 0;
+    padding: 1rem;
+  }
+
+  .delivery-pipeline {
+    gap: 18px;
+  }
+
+  .delivery-pipeline__metric,
+  .delivery-pipeline__status-panel,
+  .delivery-pipeline__phase {
+    padding: 16px;
+  }
+
+  .delivery-pipeline__metric {
+    min-height: 0;
+  }
+
+  .delivery-pipeline__metric-icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .delivery-pipeline__radar {
+    width: 150px;
+    height: 150px;
+  }
+
+  .delivery-pipeline__phases {
+    grid-template-columns: 1fr;
+  }
+
+  .delivery-pipeline__phase-icon {
+    width: 66px;
+    height: 66px;
+  }
+
+  .insights-trust {
+    gap: 16px;
+  }
+
+  .insights-trust__panel {
+    border-radius: 14px;
+  }
+
+  .insights-trust__panel-header {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 18px 16px 14px;
+  }
+
+  .insights-trust__featured-article {
+    margin: 0 12px 12px;
+    padding: 16px;
+  }
+
+  .insights-trust__featured-copy h3 {
+    font-size: clamp(1.55rem, 8vw, 2.1rem);
+  }
+
+  .insights-trust__code-card {
+    min-height: 220px;
+  }
+
+  .insights-trust__code-card pre {
+    padding: 14px;
+    font-size: 0.72rem;
+  }
+
+  .insights-trust__article-list,
+  .insights-trust__feedback-list {
+    padding: 0 12px 14px;
+  }
+
+  .insights-trust__article-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .insights-trust__article-icon {
+    display: none;
+  }
+
+  .insights-trust__article-content {
+    grid-column: 1;
+  }
+
+  .insights-trust__article-details {
+    grid-column: 1;
+  }
+
+  .insights-trust__article-arrow {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  .insights-trust__feedback-card {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .insights-trust__quote-mark {
+    display: none;
+  }
+
+  .insights-trust__feedback-content {
+    grid-column: 2;
+  }
+
+  .insights-trust__verified {
+    position: static;
+    grid-column: 2;
+  }
+
+  .insights-trust__metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .insights-trust__metric {
+    border-right: 0;
+    border-bottom: 1px solid rgb(var(--rgb-accent-border) / 12%);
+    padding: 14px 0;
+  }
+
+  .insights-trust__metric:last-child {
+    border-bottom: 0;
+  }
+
+  .contact-cta__map-panel,
+  .contact-cta__form-panel {
+    border-radius: 14px;
+    padding: 16px;
+  }
+
+  .contact-cta__form,
+  .contact-cta__fields {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-cta__field,
+  .contact-cta__form button,
+  .contact-cta__submit {
+    width: 100%;
+  }
+
+  .site-footer {
+    padding-inline: 0;
+  }
+
+  .site-footer__grid,
+  .site-footer__columns,
+  .site-footer__main {
+    gap: 16px;
+  }
+
+  .site-footer__panel,
+  .site-footer__newsletter {
+    padding: 16px;
+  }
+
+  .site-footer__newsletter form,
+  .site-footer__newsletter-row {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer__newsletter input,
+  .site-footer__newsletter button {
+    width: 100%;
+  }
+
+  .site-footer__bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .cookie-consent,
+  .cookie-consent__dialog,
+  .cookie-settings {
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    width: auto;
+    max-width: none;
+  }
+}
+
+/* Small phones */
+@media (max-width: 400px) {
+  :root {
+    --container-padding: 12px;
+  }
+
+  .mobile-navigation__panel {
+    width: 100%;
+    border-left: 0;
+    padding-inline: 16px;
+  }
+
+  .hero-mission__name {
+    font-size: clamp(2.25rem, 13vw, 3rem);
+  }
+
+  .hero-mission__title {
+    font-size: clamp(1.3rem, 7vw, 1.75rem);
+  }
+
+  .hero-editor {
+    height: 420px;
+    min-height: 420px;
+    max-height: 420px;
+  }
+
+  .portfolio-section__frame {
+    padding: 0.8rem;
+  }
+
+  .portfolio-section__title {
+    font-size: clamp(1.85rem, 11vw, 2.45rem);
+  }
+
+  .engineer-profile__photo-stage {
+    min-height: 270px;
+  }
+
+  .journey__item {
+    grid-template-columns: 2.5rem 0.8rem minmax(0, 1fr);
+  }
+}
+
+/* Touch devices should not depend on hover-only movement. */
+@media (hover: none) {
+  .hero-button:hover,
+  .featured-project-card:hover,
+  .project-card:hover,
+  .philosophy-card:hover,
+  .insights-trust__article-row:hover,
+  .lets-talk:hover,
+  .theme-toggle:hover {
+    transform: none;
+  }
+
+  .mobile-navigation__link {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-navigation__backdrop,
+  .mobile-navigation__panel {
+    animation: none;
+  }
+}
+
+/* Phase 5.2.1 — mobile repair */
+
+/*
+ * Current Mission / DSS preview
+ *
+ * The sidebar disappears on mobile, therefore the desktop two-column body
+ * must collapse as well. Otherwise the hidden sidebar keeps an empty track
+ * and squeezes the actual dashboard outside the visible area.
+ */
+@media (max-width: 900px) {
+  .dss-preview {
+    height: auto;
+    min-height: 0;
+  }
+
+  .dss-preview__body {
+    display: block;
+    min-width: 0;
+  }
+
+  .dss-preview__sidebar {
+    display: none;
+  }
+
+  .dss-preview__workspace {
+    width: 100%;
+    min-width: 0;
+    padding: 14px;
+  }
+
+  .dss-preview__heading,
+  .dss-preview__metrics,
+  .dss-preview__main-grid,
+  .dss-preview__footer {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .dss-preview__metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dss-preview__main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dss-preview__footer {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .dss-preview__footer dl {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .featured-project-card__preview {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 220px;
+  }
+
+  .featured-project-card__preview-sidebar {
+    display: none;
+  }
+
+  .featured-project-card__preview-content {
+    min-width: 0;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .featured-project-card__preview-content p {
+    max-width: 100%;
+  }
+
+  /*
+   * Delivery Pipeline has no scrollytelling on tablet/mobile. Its content
+   * must therefore remain fully visible regardless of the initial runtime
+   * data state.
+   */
+  .delivery-pipeline-scroll {
+    min-height: 0 !important;
+  }
+
+  .delivery-pipeline-scroll > [data-pipeline-stage] {
+    position: relative !important;
+    top: auto !important;
+  }
+
+  .delivery-pipeline-scroll [data-pipeline-phase] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .delivery-pipeline-scroll
+    [data-pipeline-phase]
+    .delivery-pipeline__phase-number,
+  .delivery-pipeline-scroll
+    [data-pipeline-phase]
+    .delivery-pipeline__phase-icon,
+  .delivery-pipeline-scroll [data-pipeline-phase] h3,
+  .delivery-pipeline-scroll [data-pipeline-phase] ul,
+  .delivery-pipeline-scroll
+    [data-pipeline-phase]
+    .delivery-pipeline__phase-status {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    transition-delay: 0ms !important;
+  }
+
+  .delivery-pipeline__phase {
+    min-height: 0;
+  }
+
+  /*
+   * Footer uses its own concrete layout nodes. Collapse those nodes instead
+   * of relying on generic grid aliases.
+   */
+  .site-footer__top {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+  }
+
+  .site-footer__panel,
+  .site-footer__newsletter,
+  .site-footer__bottom {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .site-footer__snapshot-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .site-footer__newsletter {
+    display: grid;
+    grid-template-columns: 1fr !important;
+    align-items: start;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .site-footer__newsletter-copy {
+    min-width: 0;
+  }
+
+  .site-footer__newsletter-copy p {
+    max-width: none;
+  }
+
+  .site-footer__newsletter-form {
+    display: grid;
+    width: 100%;
+    min-width: 0;
+    grid-template-columns: 1fr !important;
+    gap: 10px;
+  }
+
+  .site-footer__newsletter-field,
+  .site-footer__newsletter-field input,
+  .site-footer__newsletter-form button {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .site-footer__newsletter-note {
+    grid-column: 1;
+    margin: 0;
+    white-space: normal;
+  }
+
+  .site-footer__bottom {
+    display: grid;
+    min-height: 0;
+    grid-template-columns: 1fr !important;
+    justify-items: center;
+    gap: 18px;
+    padding: 20px 16px !important;
+    text-align: center;
+  }
+
+  .site-footer__nav {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: stretch;
+    gap: 10px;
+  }
+
+  .site-footer__nav > * {
+    display: flex;
+    min-width: 0;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(var(--rgb-accent-border) / 16%);
+    border-radius: 9px;
+    padding: 8px 10px;
+    background: rgb(var(--rgb-white) / 2.5%);
+    font-size: 0.82rem;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .site-footer__copyright {
+    max-width: 34ch;
+    text-align: center !important;
+    line-height: 1.55;
+  }
+}
+
+@media (max-width: 640px) {
+  .dss-preview__topbar {
+    min-height: 48px;
+    padding-inline: 12px;
+  }
+
+  .dss-preview__topbar-title {
+    overflow: hidden;
+    max-width: 54%;
+    font-size: 0.66rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .dss-preview__icon-button {
+    display: none;
+  }
+
+  .dss-preview__workspace {
+    padding: 12px;
+  }
+
+  .dss-preview__metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .dss-preview__activity-card li {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .dss-preview__activity-card time {
+    display: none;
+  }
+
+  .dss-preview__footer dl {
+    grid-template-columns: 1fr;
+  }
+
+  .dss-preview__footer a {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .featured-project-card__preview,
+  .featured-project-card__image-preview {
+    min-height: 190px;
+  }
+
+  .site-footer__snapshot-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .site-footer__newsletter {
+    margin-top: 12px;
+  }
+
+  .site-footer__newsletter-title {
+    align-items: flex-start;
+  }
+
+  .site-footer__newsletter-form button {
+    height: 48px;
+  }
+
+  .site-footer__nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 380px) {
+  .site-footer__nav {
+    grid-template-columns: 1fr;
+  }
+
+  .dss-preview__online {
+    padding-inline: 8px;
+    font-size: 0.62rem;
+  }
+}
+
+/* End Phase 5.2.1 */
+
+/* Phase 5.2.2 — tablet and mobile repair */
+
+/*
+ * iPad / tablet Hero
+ *
+ * Keep Mission across the full first row, then place System and Workspace
+ * side-by-side. This avoids the extremely tall single-column desktop
+ * dashboard seen around 1024px while retaining the full Hero experience.
+ */
+@media (min-width: 901px) and (max-width: 1180px) {
+  .home-hero {
+    min-height: auto;
+    padding-bottom: 24px;
+  }
+
+  .hero-main {
+    display: grid;
+    grid-template-columns:
+      minmax(300px, 0.78fr)
+      minmax(0, 1.22fr) !important;
+    grid-template-rows: auto auto;
+    align-items: stretch;
+    gap: 18px;
+  }
+
+  .hero-mission {
+    grid-column: 1 / -1 !important;
+    grid-row: 1 !important;
+    width: 100%;
+    max-width: 820px;
+    padding-left: 0;
+  }
+
+  .hero-mission__name {
+    font-size: clamp(3.5rem, 6vw, 5.4rem);
+  }
+
+  .hero-mission__title {
+    max-width: 720px;
+    font-size: clamp(1.75rem, 3vw, 2.55rem);
+  }
+
+  .hero-scroll {
+    margin-top: 26px;
+  }
+
+  .hero-system {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    display: grid;
+    min-width: 0;
+    grid-template-columns: 1fr !important;
+    align-content: start;
+    gap: 14px;
+  }
+
+  .hero-terminal {
+    min-width: 0;
+    min-height: 300px;
+  }
+
+  .hero-side-card,
+  .hero-stats {
+    min-width: 0;
+  }
+
+  .hero-stats__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-workspace {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    display: grid;
+    min-width: 0;
+    grid-template-columns:
+      minmax(0, 1fr)
+      118px !important;
+    gap: 10px;
+  }
+
+  .hero-editor {
+    height: 560px;
+    min-height: 560px;
+    max-height: 560px;
+  }
+
+  .hero-status-list {
+    display: grid;
+    min-width: 0;
+    grid-template-columns: 1fr !important;
+    gap: 8px;
+  }
+
+  .hero-status-card {
+    min-width: 0;
+    min-height: 0;
+    padding: 11px 9px;
+  }
+
+  .hero-status-card svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .hero-status-card span {
+    font-size: 0.58rem;
+  }
+
+  .hero-status-card strong {
+    font-size: 0.7rem;
+  }
+
+  .hero-status-card p {
+    font-size: 0.58rem;
+  }
+
+  .hero-tech {
+    margin-top: 16px;
+  }
+}
+
+/*
+ * Phones: keep Current Mission content and CTA, but remove the full
+ * Mission Control desktop simulation together with all reserved height.
+ */
+@media (max-width: 767px) {
+  #current-mission .current-mission {
+    display: block !important;
+    width: 100%;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  #current-mission .current-mission__content {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  #current-mission .current-mission > .dss-preview,
+  #current-mission .dss-preview {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+  }
+
+  #current-mission .portfolio-section__body {
+    min-height: 0 !important;
+  }
+}
+
+/*
+ * Tablet/mobile Pipeline fallback.
+ *
+ * Scrollytelling is desktop-only. Below 1281px every phase is a normal,
+ * fully readable card regardless of stale runtime data attributes.
+ */
+@media (max-width: 1280px), (max-height: 759px), (pointer: coarse) {
+  .delivery-pipeline-scroll {
+    min-height: 0 !important;
+  }
+
+  .delivery-pipeline-scroll > [data-pipeline-stage],
+  .delivery-pipeline-scroll [data-pipeline-stage] {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .delivery-pipeline-scroll [data-pipeline-phase],
+  .delivery-pipeline-scroll
+    [data-pipeline-phase][data-pipeline-state='upcoming'],
+  .delivery-pipeline-scroll
+    [data-pipeline-phase][data-pipeline-state='active'],
+  .delivery-pipeline-scroll
+    [data-pipeline-phase][data-pipeline-state='complete'],
+  .delivery-pipeline-scroll
+    [data-pipeline-phase][data-pipeline-state='completed'] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .delivery-pipeline-scroll
+    [data-pipeline-phase]
+    .delivery-pipeline__phase-number,
+  .delivery-pipeline-scroll
+    [data-pipeline-phase]
+    .delivery-pipeline__phase-icon,
+  .delivery-pipeline-scroll [data-pipeline-phase] h3,
+  .delivery-pipeline-scroll [data-pipeline-phase] ul,
+  .delivery-pipeline-scroll
+    [data-pipeline-phase]
+    .delivery-pipeline__phase-status {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    transition-delay: 0ms !important;
+  }
+
+  .delivery-pipeline-scroll
+    [data-pipeline-phase]
+    .delivery-pipeline__phase-icon {
+    visibility: visible !important;
+  }
+
+  .delivery-pipeline__phase {
+    min-height: 0;
+  }
+}
+
+/* End Phase 5.2.2 */
+
+/* Phase 5.2.3 — tablet Hero composition */
+
+/*
+ * Tablet Hero:
+ * - Mission occupies the upper-left area.
+ * - System Status sits below it.
+ * - Workspace/editor fills the complete right column.
+ *
+ * This uses the large empty area beside the copy instead of centering the
+ * typography and keeps the visual language close to the desktop Hero.
+ */
+@media (min-width: 901px) and (max-width: 1180px) {
+  .hero-main {
+    display: grid;
+    grid-template-columns:
+      minmax(300px, 0.78fr)
+      minmax(0, 1.22fr) !important;
+    grid-template-rows: auto auto;
+    align-items: start;
+    gap: 18px;
+  }
+
+  .hero-mission {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: 100%;
+    max-width: none;
+    align-self: start;
+    padding-right: 8px;
+  }
+
+  .hero-mission__name {
+    max-width: 100%;
+    font-size: clamp(3.2rem, 5.2vw, 4.8rem);
+  }
+
+  .hero-mission__title {
+    max-width: 100%;
+    font-size: clamp(1.55rem, 2.45vw, 2.15rem);
+    line-height: 1.34;
+  }
+
+  .hero-mission__actions {
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .hero-scroll {
+    margin-top: 24px;
+  }
+
+  .hero-system {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    min-width: 0;
+    align-self: stretch;
+  }
+
+  .hero-workspace {
+    grid-column: 2 !important;
+    grid-row: 1 / span 2 !important;
+    display: grid;
+    min-width: 0;
+    align-self: stretch;
+    grid-template-columns:
+      minmax(0, 1fr)
+      116px !important;
+    gap: 10px;
+  }
+
+  .hero-editor {
+    height: 100%;
+    min-height: 650px;
+    max-height: none;
+  }
+
+  .hero-status-list {
+    display: grid;
+    min-width: 0;
+    height: 100%;
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .hero-status-card {
+    min-width: 0;
+    min-height: 0;
+  }
+
+  .hero-tech {
+    grid-column: 1 / -1;
+    margin-top: 16px;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1024px) {
+  .hero-main {
+    grid-template-columns:
+      minmax(280px, 0.72fr)
+      minmax(0, 1.28fr) !important;
+  }
+
+  .hero-mission__name {
+    font-size: clamp(3rem, 5vw, 4.15rem);
+  }
+
+  .hero-mission__title {
+    font-size: clamp(1.45rem, 2.35vw, 1.95rem);
+  }
+
+  .hero-workspace {
+    grid-template-columns:
+      minmax(0, 1fr)
+      104px !important;
+  }
+
+  .hero-editor {
+    min-height: 620px;
+  }
+
+  .hero-status-card {
+    padding: 10px 7px;
+  }
+
+  .hero-status-card span,
+  .hero-status-card p {
+    font-size: 0.54rem;
+  }
+
+  .hero-status-card strong {
+    font-size: 0.66rem;
+  }
+}
+
+/* End Phase 5.2.3 */
+
+/* Phase 5.2.4 — desktop sticky recovery */
+
+/*
+ * The responsive layer must not create a clipped/scrolling ancestor above
+ * viewport-driven sticky scenes. Mobile keeps horizontal clipping because
+ * Sticky Stack and Pipeline scrollytelling are disabled there.
+ */
+@media (min-width: 901px) {
+  html,
+  body,
+  .site-shell,
+  .site-main {
+    overflow: visible !important;
+  }
+
+  .site-shell,
+  .site-main,
+  .site-main > main,
+  .site-main > section {
+    contain: none !important;
+  }
+}
+
+@media (min-width: 1024px) and (min-height: 681px) and (pointer: fine) {
+  .portfolio-stack,
+  .portfolio-stack.scroll-stack {
+    overflow: visible !important;
+    contain: none !important;
+  }
+
+  .portfolio-stack > .scroll-stack__item,
+  .portfolio-stack .scroll-stack__item {
+    position: sticky !important;
+    top: var(--scroll-stack-item-top, var(--portfolio-stack-top)) !important;
+  }
+}
+
+@media (min-width: 1281px) and (min-height: 760px) and (pointer: fine) {
+  .delivery-pipeline-scroll {
+    overflow: visible !important;
+    contain: none !important;
+  }
+
+  .delivery-pipeline-scroll[data-pipeline-enabled='true'] {
+    min-height: 280vh !important;
+  }
+
+  .delivery-pipeline-scroll[data-pipeline-enabled='true']
+    > [data-pipeline-stage] {
+    position: sticky !important;
+    top: var(--pipeline-sticky-top) !important;
+  }
+}
+
+@media (max-width: 900px) {
+  html,
+  .site-shell {
+    overflow-x: clip;
+  }
+}
+
+/* End Phase 5.2.4 */

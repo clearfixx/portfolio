@@ -235,7 +235,11 @@ export function DeliveryPipelineMotion({
     modeQuery.addEventListener('change', handleModeChange)
 
     scene.dataset.pipelineRuntime = modeQuery.matches ? 'active' : 'idle'
-    scheduleUpdate(true)
+    if (modeQuery.matches) {
+      scheduleUpdate(true)
+    } else {
+      resetScene()
+    }
 
     return () => {
       cancelAnimationFrame(animationFrame)
