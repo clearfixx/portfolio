@@ -1,16 +1,27 @@
 'use client'
 
-import Link from 'next/link'
-import { openCookiePreferences, openCookieConsentBanner } from './cookieConsentStore'
+import { openCookieConsentBanner, openCookiePreferences } from './cookieConsentStore'
 
 export function CookieSettingsButton() {
   return (
-    <Link href="" className="footer-link footer-link--button" onClick={openCookiePreferences}>Privacy</Link>
+    <button
+      className="footer-link footer-link--button"
+      type="button"
+      onClick={openCookiePreferences}
+    >
+      Privacy
+    </button>
   )
 }
 
 export function CookieSettingBanner() {
   return (
-    <Link href={''} className="footer-link footer-link--button" onClick={openCookieConsentBanner}>Privacy Settings</Link>
+    <button
+      className="footer-link footer-link--button"
+      type="button"
+      onClick={openCookieConsentBanner}
+    >
+      Privacy Settings
+    </button>
   )
 }
