@@ -1,0 +1,61 @@
+/*
+ * Phase 5.1.2 — sticky portfolio stack prototype.
+ *
+ * Short chapters pin below the navigation. Chapters taller than the viewport
+ * receive an adaptive negative top offset so their full content scrolls past
+ * before the next layer covers them.
+ */
+
+.portfolio-stack {
+  --portfolio-stack-top: 5.75rem;
+  --portfolio-stack-step: 0.9rem;
+  --portfolio-stack-bottom-gap: 1.5rem;
+
+  position: relative;
+  isolation: isolate;
+}
+
+.portfolio-stack .scroll-stack__item {
+  position: sticky;
+  top: var(--scroll-stack-item-top, var(--portfolio-stack-top));
+  transform-origin: center top;
+}
+
+.portfolio-stack .scroll-stack__item:nth-child(1) {
+  z-index: 1;
+  transform: scale(0.986);
+}
+
+.portfolio-stack .scroll-stack__item:nth-child(2) {
+  z-index: 2;
+  transform: scale(0.993);
+}
+
+.portfolio-stack .scroll-stack__item:nth-child(3) {
+  z-index: 3;
+}
+
+.portfolio-stack .portfolio-section__frame {
+  box-shadow:
+    0 -1rem 2.5rem rgb(0 0 0 / 16%),
+    0 1.25rem 3rem rgb(0 0 0 / 28%);
+}
+
+@media (max-width: 1023px), (max-height: 680px), (prefers-reduced-motion: reduce) {
+  .portfolio-stack {
+    --portfolio-stack-top: 0;
+    --portfolio-stack-step: 0;
+    --portfolio-stack-bottom-gap: 0;
+  }
+
+  .portfolio-stack .scroll-stack__item {
+    position: relative;
+    top: auto;
+    z-index: auto;
+    transform: none;
+  }
+
+  .portfolio-stack .portfolio-section__frame {
+    box-shadow: none;
+  }
+}

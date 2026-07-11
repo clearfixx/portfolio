@@ -9,6 +9,8 @@ import {
   SkillsTechnologies,
   SiteFooter,
 } from '@/components/home'
+import { ScrollStack } from '@/components/motion'
+
 import { getContact, getHomepage } from '@/lib/cms'
 
 export default async function HomePage() {
@@ -20,11 +22,13 @@ export default async function HomePage() {
 
       <CurrentMission />
 
-      <FeaturedProjects />
+      <ScrollStack className="portfolio-stack">
+        <FeaturedProjects />
 
-      <EngineerProfile />
+        <EngineerProfile />
 
-      <SkillsTechnologies />
+        <SkillsTechnologies />
+      </ScrollStack>
 
       <DeliveryPipeline />
 
