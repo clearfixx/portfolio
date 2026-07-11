@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import type { ComponentType, SVGProps } from 'react'
 
 import { PortfolioSection } from '@/components/home/PortfolioSection'
@@ -290,7 +291,16 @@ function ContactChannelItem({ channel }: { channel: ContactChannel }) {
 function KyivMap() {
   return (
     <div className="contact-cta__map-panel">
-      <div className="contact-cta__map-image" aria-hidden="true" />
+      <Image
+        className="contact-cta__map-image"
+        src="/images/contact/kyiv-map.png"
+        alt=""
+        aria-hidden="true"
+        fill
+        loading="lazy"
+        quality={72}
+        sizes="(max-width: 1180px) 100vw, 56vw"
+      />
 
       <div className="contact-cta__map-overlay" aria-hidden="true" />
 
