@@ -1,0 +1,377 @@
+/*
+ * Phase 5.1.6 — remaining homepage choreography.
+ *
+ * All internal reveals are driven by the shared one-shot MotionRuntime.
+ * No scroll listeners, filters, blur or layout-affecting animation.
+ */
+
+html[data-motion-ready='true'] {
+  /* Featured Projects */
+  #projects .portfolio-section__body {
+    .featured-project-card {
+      opacity: 0;
+      transform: translate3d(0, 18px, 0);
+      transition:
+        opacity var(--motion-duration-section) var(--motion-ease-standard),
+        transform var(--motion-duration-section) var(--motion-ease-standard);
+    }
+
+    .featured-project-card:nth-child(2) {
+      transition-delay: calc(var(--motion-stagger-default) * 1);
+    }
+
+    .featured-project-card:nth-child(3) {
+      transition-delay: calc(var(--motion-stagger-default) * 2);
+    }
+
+    .featured-project-card__progress span {
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform var(--motion-duration-section)
+        var(--motion-ease-standard);
+    }
+
+    &[data-motion-state='visible'] {
+      .featured-project-card {
+        opacity: 1;
+        transform: none;
+      }
+
+      .featured-project-card__progress span {
+        transform: scaleX(1);
+        transition-delay: calc(var(--motion-stagger-default) * 3);
+      }
+    }
+  }
+
+  /* Engineer Profile */
+  #engineer-profile .portfolio-section__body {
+    .engineer-profile__grid > * {
+      opacity: 0;
+      transform: translate3d(0, 16px, 0);
+      transition:
+        opacity var(--motion-duration-section) var(--motion-ease-standard),
+        transform var(--motion-duration-section) var(--motion-ease-standard);
+    }
+
+    .engineer-profile__grid > :nth-child(2) {
+      transition-delay: calc(var(--motion-stagger-default) * 1);
+    }
+
+    .engineer-profile__grid > :nth-child(3) {
+      transition-delay: calc(var(--motion-stagger-default) * 2);
+    }
+
+    .journey__item {
+      opacity: 0;
+      transform: translate3d(-10px, 0, 0);
+      transition:
+        opacity var(--motion-duration-reveal) var(--motion-ease-standard),
+        transform var(--motion-duration-reveal) var(--motion-ease-standard);
+    }
+
+    @for $index from 2 through 6 {
+      .journey__item:nth-child(#{$index}) {
+        transition-delay: calc(
+          var(--motion-stagger-tight) * #{$index - 1}
+        );
+      }
+    }
+
+    .philosophy-card {
+      opacity: 0;
+      transform: translate3d(0, 10px, 0);
+      transition:
+        opacity var(--motion-duration-reveal) var(--motion-ease-standard),
+        transform var(--motion-duration-reveal) var(--motion-ease-standard);
+    }
+
+    @for $index from 2 through 4 {
+      .philosophy-card:nth-child(#{$index}) {
+        transition-delay: calc(
+          var(--motion-stagger-tight) * #{$index - 1}
+        );
+      }
+    }
+
+    .engineer-profile__terminal-line {
+      opacity: 0;
+      transform: translate3d(-8px, 0, 0);
+      transition:
+        opacity var(--motion-duration-ui) var(--motion-ease-standard),
+        transform var(--motion-duration-ui) var(--motion-ease-standard);
+    }
+
+    .engineer-profile__terminal-line:nth-child(2) {
+      transition-delay: calc(var(--motion-stagger-tight) * 1);
+    }
+
+    .engineer-profile__terminal-line:nth-child(3) {
+      transition-delay: calc(var(--motion-stagger-tight) * 2);
+    }
+
+    &[data-motion-state='visible'] {
+      .engineer-profile__grid > *,
+      .journey__item,
+      .philosophy-card,
+      .engineer-profile__terminal-line {
+        opacity: 1;
+        transform: none;
+      }
+
+      .journey__item {
+        transition-delay: calc(var(--motion-stagger-default) * 2);
+      }
+
+      .philosophy-card,
+      .engineer-profile__terminal-line {
+        transition-delay: calc(var(--motion-stagger-default) * 3);
+      }
+    }
+  }
+
+  /* Skills & Technologies */
+  #skills-technologies .portfolio-section__body {
+    .skills-tech__card,
+    .skills-tech__layout > :last-child {
+      opacity: 0;
+      transform: translate3d(0, 16px, 0);
+      transition:
+        opacity var(--motion-duration-section) var(--motion-ease-standard),
+        transform var(--motion-duration-section) var(--motion-ease-standard);
+    }
+
+    @for $index from 2 through 6 {
+      .skills-tech__card:nth-child(#{$index}) {
+        transition-delay: calc(
+          var(--motion-stagger-default) * #{$index - 1}
+        );
+      }
+    }
+
+    .skills-tech__layout > :last-child {
+      transform: translate3d(0, 12px, 0) scale(0.985);
+      transition-delay: calc(var(--motion-stagger-default) * 4);
+    }
+
+    &[data-motion-state='visible'] {
+      .skills-tech__card,
+      .skills-tech__layout > :last-child {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  }
+
+  /* Insights & Trust */
+  #insights .portfolio-section__body {
+    .insights-trust__panel--articles,
+    .insights-trust__panel--feedback {
+      opacity: 0;
+      transition:
+        opacity var(--motion-duration-section) var(--motion-ease-standard),
+        transform var(--motion-duration-section) var(--motion-ease-standard);
+    }
+
+    .insights-trust__panel--articles {
+      transform: translate3d(-18px, 0, 0);
+    }
+
+    .insights-trust__panel--feedback {
+      transform: translate3d(18px, 0, 0);
+      transition-delay: calc(var(--motion-stagger-default) * 1);
+    }
+
+    .insights-trust__featured-article,
+    .insights-trust__article-row,
+    .insights-trust__feedback-card,
+    .insights-trust__metric {
+      opacity: 0;
+      transform: translate3d(0, 10px, 0);
+      transition:
+        opacity var(--motion-duration-reveal) var(--motion-ease-standard),
+        transform var(--motion-duration-reveal) var(--motion-ease-standard);
+    }
+
+    @for $index from 2 through 5 {
+      .insights-trust__article-row:nth-child(#{$index}),
+      .insights-trust__feedback-card:nth-child(#{$index}),
+      .insights-trust__metric:nth-child(#{$index}) {
+        transition-delay: calc(
+          var(--motion-stagger-tight) * #{$index - 1}
+        );
+      }
+    }
+
+    &[data-motion-state='visible'] {
+      .insights-trust__panel--articles,
+      .insights-trust__panel--feedback,
+      .insights-trust__featured-article,
+      .insights-trust__article-row,
+      .insights-trust__feedback-card,
+      .insights-trust__metric {
+        opacity: 1;
+        transform: none;
+      }
+
+      .insights-trust__featured-article,
+      .insights-trust__article-row {
+        transition-delay: calc(var(--motion-stagger-default) * 2);
+      }
+
+      .insights-trust__feedback-card,
+      .insights-trust__metric {
+        transition-delay: calc(var(--motion-stagger-default) * 3);
+      }
+    }
+  }
+
+  /* Contact */
+  #contact .portfolio-section__body {
+    .contact-cta__map-panel,
+    .contact-cta__form-panel {
+      opacity: 0;
+      transition:
+        opacity var(--motion-duration-section) var(--motion-ease-standard),
+        transform var(--motion-duration-section) var(--motion-ease-standard);
+    }
+
+    .contact-cta__map-panel {
+      transform: translate3d(-18px, 0, 0);
+    }
+
+    .contact-cta__form-panel {
+      transform: translate3d(18px, 0, 0);
+      transition-delay: calc(var(--motion-stagger-default) * 1);
+    }
+
+    .contact-cta__form-header,
+    .contact-cta__field,
+    .contact-cta__form button,
+    .contact-cta__availability {
+      opacity: 0;
+      transform: translate3d(0, 8px, 0);
+      transition:
+        opacity var(--motion-duration-reveal) var(--motion-ease-standard),
+        transform var(--motion-duration-reveal) var(--motion-ease-standard);
+    }
+
+    @for $index from 2 through 6 {
+      .contact-cta__field:nth-child(#{$index}) {
+        transition-delay: calc(
+          var(--motion-stagger-tight) * #{$index - 1}
+        );
+      }
+    }
+
+    &[data-motion-state='visible'] {
+      .contact-cta__map-panel,
+      .contact-cta__form-panel,
+      .contact-cta__form-header,
+      .contact-cta__field,
+      .contact-cta__form button,
+      .contact-cta__availability {
+        opacity: 1;
+        transform: none;
+      }
+
+      .contact-cta__form-header,
+      .contact-cta__field,
+      .contact-cta__form button,
+      .contact-cta__availability {
+        transition-delay: calc(var(--motion-stagger-default) * 2);
+      }
+    }
+  }
+
+  /* Footer */
+  .site-footer[data-motion] {
+    .site-footer__panel,
+    .site-footer__post,
+    .site-footer__snapshot,
+    .site-footer__newsletter,
+    .site-footer__bottom {
+      opacity: 0;
+      transform: translate3d(0, 14px, 0);
+      transition:
+        opacity var(--motion-duration-section) var(--motion-ease-standard),
+        transform var(--motion-duration-section) var(--motion-ease-standard);
+    }
+
+    .site-footer__panel:nth-child(2) {
+      transition-delay: calc(var(--motion-stagger-default) * 1);
+    }
+
+    .site-footer__panel:nth-child(3) {
+      transition-delay: calc(var(--motion-stagger-default) * 2);
+    }
+
+    @for $index from 2 through 4 {
+      .site-footer__post:nth-child(#{$index}),
+      .site-footer__snapshot:nth-child(#{$index}) {
+        transition-delay: calc(
+          var(--motion-stagger-tight) * #{$index - 1}
+        );
+      }
+    }
+
+    .site-footer__newsletter {
+      transition-delay: calc(var(--motion-stagger-default) * 3);
+    }
+
+    .site-footer__bottom {
+      transition-delay: calc(var(--motion-stagger-default) * 4);
+    }
+
+    &[data-motion-state='visible'] {
+      .site-footer__panel,
+      .site-footer__post,
+      .site-footer__snapshot,
+      .site-footer__newsletter,
+      .site-footer__bottom {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-motion-ready='true'] {
+    #projects,
+    #engineer-profile,
+    #skills-technologies,
+    #insights,
+    #contact,
+    .site-footer {
+      .featured-project-card,
+      .featured-project-card__progress span,
+      .engineer-profile__grid > *,
+      .journey__item,
+      .philosophy-card,
+      .engineer-profile__terminal-line,
+      .skills-tech__card,
+      .skills-tech__layout > :last-child,
+      .insights-trust__panel,
+      .insights-trust__featured-article,
+      .insights-trust__article-row,
+      .insights-trust__feedback-card,
+      .insights-trust__metric,
+      .contact-cta__map-panel,
+      .contact-cta__form-panel,
+      .contact-cta__form-header,
+      .contact-cta__field,
+      .contact-cta__form button,
+      .contact-cta__availability,
+      .site-footer__panel,
+      .site-footer__post,
+      .site-footer__snapshot,
+      .site-footer__newsletter,
+      .site-footer__bottom {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+  }
+}

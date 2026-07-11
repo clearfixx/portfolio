@@ -154,7 +154,12 @@ function SnapshotCard({ snapshot }: { snapshot: FooterSnapshot }) {
 
 export function SiteFooter() {
   return (
-    <footer className="site-footer" aria-label="Site footer">
+    <footer
+      className="site-footer"
+      aria-label="Site footer"
+      data-motion="rise"
+      data-motion-duration="section"
+    >
       <div className="site-container">
         <div className="site-footer__top">
           <section className="site-footer__panel site-footer__profile">
