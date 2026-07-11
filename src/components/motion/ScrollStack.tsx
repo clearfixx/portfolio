@@ -8,7 +8,7 @@ type ScrollStackProps = {
 }
 
 const STACK_MODE_QUERY =
-  '(min-width: 1024px) and (min-height: 681px) and (prefers-reduced-motion: no-preference)'
+  '(min-width: 1024px) and (min-height: 681px) and (pointer: fine) and (prefers-reduced-motion: no-preference)'
 
 const clamp = (value: number, min: number, max: number) =>
   Math.min(Math.max(value, min), max)
@@ -62,6 +62,8 @@ export function ScrollStack({ children, className }: ScrollStackProps) {
         if (item.dataset.stackState !== 'active') {
           item.dataset.stackState = 'active'
         }
+
+      item.removeAttribute('inert')
       })
     }
 
@@ -163,6 +165,11 @@ export function ScrollStack({ children, className }: ScrollStackProps) {
         if (item.dataset.stackState !== nextState) {
           item.dataset.stackState = nextState
         }
+
+      item.toggleAttribute(
+        'inert',
+        nextState === 'covered',
+      )
       })
     }
 
@@ -192,7 +199,13 @@ export function ScrollStack({ children, className }: ScrollStackProps) {
 
     const handleScroll = () => scheduleUpdate()
     const handleResize = () => scheduleUpdate(true)
-    const handleModeChange = () => scheduleUpdate(true)
+    const handleModeChange = () => {
+      root.dataset.stackRuntime =
+        stackIsNearViewport && stackModeQuery.matches
+          ? 'active'
+          : 'idle'
+      scheduleUpdate(true)
+    }
 
     const resizeObserver =
       'ResizeObserver' in window

@@ -9,7 +9,7 @@ type DeliveryPipelineMotionProps = {
 }
 
 const PIPELINE_MODE_QUERY =
-  '(min-width: 1281px) and (min-height: 760px) and (prefers-reduced-motion: no-preference)'
+  '(min-width: 1281px) and (min-height: 760px) and (pointer: fine) and (prefers-reduced-motion: no-preference)'
 
 const PHASE_COUNT = 5
 const clamp = (value: number, min: number, max: number) =>
@@ -189,6 +189,11 @@ export function DeliveryPipelineMotion({
     const handleScroll = () => scheduleUpdate()
     const handleResize = () => scheduleUpdate(true)
     const handleModeChange = () => {
+      scene.dataset.pipelineRuntime =
+        sceneIsNearViewport && modeQuery.matches
+          ? 'active'
+          : 'idle'
+
       if (!modeQuery.matches) {
         resetScene()
       }
