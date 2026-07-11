@@ -2,6 +2,7 @@ import type { ComponentType, SVGProps } from 'react'
 
 import { PortfolioSection } from '@/components/home/PortfolioSection'
 
+import { DeliveryPipelineMotion } from './DeliveryPipelineMotion'
 import {
   deliveryPhases,
   pipelineMetrics,
@@ -273,6 +274,10 @@ function PipelineStatusPanel() {
       </div>
 
       <div className="delivery-pipeline__radar" aria-hidden="true">
+        <b
+          className="delivery-pipeline__radar-sweep"
+          data-pipeline-radar-sweep
+        />
         <span />
         <span />
         <span />
@@ -284,7 +289,7 @@ function PipelineStatusPanel() {
         <strong>
           92% <em>+8%</em>
         </strong>
-        <i />
+        <i data-pipeline-velocity-bar />
       </div>
 
       <p>Last updated: 2 min ago</p>
@@ -292,11 +297,21 @@ function PipelineStatusPanel() {
   )
 }
 
-function DeliveryPhaseCard({ phase }: { phase: DeliveryPhase }) {
+function DeliveryPhaseCard({
+  phase,
+  index,
+}: {
+  phase: DeliveryPhase
+  index: number
+}) {
   const Icon = phaseIcons[phase.icon]
 
   return (
-    <article className={`delivery-pipeline__phase delivery-pipeline__phase--${phase.status}`}>
+    <article
+      className={`delivery-pipeline__phase delivery-pipeline__phase--${phase.status}`}
+      data-pipeline-phase={index}
+      data-pipeline-state="upcoming"
+    >
       <span className="delivery-pipeline__phase-number">{phase.number}</span>
 
       <div className="delivery-pipeline__phase-icon">
@@ -338,7 +353,7 @@ export function DeliveryPipeline() {
         text: 'Clear scope. Clean build. Reliable launch.',
       }}
     >
-      <div className="delivery-pipeline">
+      <DeliveryPipelineMotion className="delivery-pipeline">
         <div className="delivery-pipeline__metrics">
           {pipelineMetrics.map((metric) => (
             <PipelineMetricCard metric={metric} key={metric.id} />
@@ -349,20 +364,32 @@ export function DeliveryPipeline() {
           <PipelineStatusPanel />
 
           <div className="delivery-pipeline__flow">
-            <div className="delivery-pipeline__rail" aria-hidden="true">
-              {deliveryPhases.map((phase) => (
-                <span key={phase.id} />
+            <div
+              className="delivery-pipeline__rail"
+              aria-hidden="true"
+              data-pipeline-rail
+            >
+              {deliveryPhases.map((phase, index) => (
+                <span
+                  data-pipeline-node={index}
+                  data-pipeline-state="upcoming"
+                  key={phase.id}
+                />
               ))}
             </div>
 
             <div className="delivery-pipeline__phases">
-              {deliveryPhases.map((phase) => (
-                <DeliveryPhaseCard phase={phase} key={phase.id} />
+              {deliveryPhases.map((phase, index) => (
+                <DeliveryPhaseCard
+                  phase={phase}
+                  index={index}
+                  key={phase.id}
+                />
               ))}
             </div>
           </div>
         </div>
-      </div>
+      </DeliveryPipelineMotion>
     </PortfolioSection>
   )
 }
