@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import type { ReactNode } from 'react'
 import { SiteShell } from '@/components/layout'
 import { CookieConsent } from '@/components/privacy/CookieConsent'
@@ -6,6 +7,12 @@ import { ThemeProvider } from '@/components/theme/ThemeProvider'
 import { getSeo, getSiteSettings } from '@/lib/cms'
 
 import './styles.scss'
+
+const inter = Inter({
+  display: 'swap',
+  subsets: ['latin'],
+  variable: '--font-inter',
+})
 
 const fallbackSiteUrl = 'http://localhost:3000'
 
@@ -74,7 +81,7 @@ type RootLayoutProps = {
 
 export default async function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html className={inter.variable} lang="en" suppressHydrationWarning>
       <body>
         <ThemeProvider>
           <SiteShell>{children}</SiteShell>
