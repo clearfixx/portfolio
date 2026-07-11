@@ -1,6 +1,7 @@
 import type { ComponentType, SVGProps } from 'react'
 
 import { PortfolioSection } from '@/components/home/PortfolioSection'
+import { ProjectTypeSelect } from '@/components/home/ProjectTypeSelect'
 
 type ContactCTAProps = {
   contact?: unknown
@@ -140,24 +141,6 @@ function UserIcon(props: IconProps) {
   )
 }
 
-function LayersIcon(props: IconProps) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.8"
-      {...props}
-    >
-      <path d="m12 3 9 5-9 5-9-5 9-5Z" />
-      <path d="m3 12 9 5 9-5" />
-      <path d="m3 16 9 5 9-5" />
-    </svg>
-  )
-}
 
 function MessageIcon(props: IconProps) {
   return (
@@ -403,22 +386,7 @@ export function ContactCTA({ contact, contactSection }: ContactCTAProps) {
               <input name="email" type="email" placeholder="Your Email" autoComplete="email" />
             </label>
 
-            <label className="contact-cta__field contact-cta__field--select">
-              <span className="contact-cta__field-icon">
-                <LayersIcon />
-              </span>
-              <span className="sr-only">Project Type</span>
-              <select name="projectType" defaultValue="">
-                <option value="" disabled>
-                  Project Type
-                </option>
-                <option value="website">Website</option>
-                <option value="web-app">Web App</option>
-                <option value="architecture">Architecture Review</option>
-                <option value="consultation">Consultation</option>
-                <option value="other">Other</option>
-              </select>
-            </label>
+            <ProjectTypeSelect />
 
             <label className="contact-cta__field contact-cta__field--message">
               <span className="contact-cta__field-icon">
