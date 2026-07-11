@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useSyncExternalStore } from 'react'
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 
 import {
   CookieConsentDraft,
@@ -77,6 +77,8 @@ export function CookieConsent() {
   const [isPreferencesOpen, setIsPreferencesOpen] = useState(false)
   const [draft, setDraft] = useState<CookieConsentDraft>(defaultDraft)
   const [isBannerForcedOpen, setIsBannerForcedOpen] = useState(false)
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const previousFocusRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     const getDraftFromSavedConsent = () => {
@@ -110,6 +112,77 @@ export function CookieConsent() {
       window.removeEventListener('portfolio:open-cookie-consent-banner', handleOpenConsentBanner)
     }
   }, [])
+
+  useEffect(() => {
+    if (!isPreferencesOpen) {
+      return
+    }
+
+    const dialog = dialogRef.current
+
+    if (!dialog) {
+      return
+    }
+
+    previousFocusRef.current =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null
+
+    const getFocusableElements = () =>
+      Array.from(
+        dialog.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      )
+
+    getFocusableElements()[0]?.focus()
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        setIsPreferencesOpen(false)
+        return
+      }
+
+      if (event.key !== 'Tab') {
+        return
+      }
+
+      const focusableElements = getFocusableElements()
+      const firstFocusableElement = focusableElements[0]
+      const lastFocusableElement = focusableElements.at(-1)
+
+      if (!firstFocusableElement || !lastFocusableElement) {
+        return
+      }
+
+      if (!dialog.contains(document.activeElement)) {
+        event.preventDefault()
+        ;(event.shiftKey ? lastFocusableElement : firstFocusableElement).focus()
+        return
+      }
+
+      if (event.shiftKey && document.activeElement === firstFocusableElement) {
+        event.preventDefault()
+        lastFocusableElement.focus()
+        return
+      }
+
+      if (!event.shiftKey && document.activeElement === lastFocusableElement) {
+        event.preventDefault()
+        firstFocusableElement.focus()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+
+      const previousFocus = previousFocusRef.current
+      previousFocusRef.current = null
+      previousFocus?.focus()
+    }
+  }, [isPreferencesOpen])
 
   const closePreferences = () => {
     setIsPreferencesOpen(false)
@@ -192,7 +265,13 @@ export function CookieConsent() {
       ) : null}
 
       {isPreferencesOpen ? (
-        <div className="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title">
+        <div
+          ref={dialogRef}
+          className="cookie-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="cookie-modal-title"
+        >
           <div className="cookie-modal__backdrop" onClick={closePreferences} />
 
           <section className="cookie-modal__panel">
