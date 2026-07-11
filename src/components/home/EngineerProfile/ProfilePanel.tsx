@@ -33,7 +33,7 @@ export function ProfilePanel() {
             <Image
               alt="Portrait of Andrii Kulahin"
               fill
-              priority
+              loading="lazy"
               sizes="(max-width: 1180px) 100vw, 32vw"
               src="/images/profile/engineer-profile.png"
             />
