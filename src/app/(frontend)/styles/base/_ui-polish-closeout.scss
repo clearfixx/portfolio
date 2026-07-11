@@ -6,7 +6,7 @@
  */
 
 :root {
-  --ui-theme-transition-duration: 220ms;
+  --ui-theme-transition-duration: 440ms;
   --ui-theme-transition-easing: ease-in-out;
 }
 
@@ -126,3 +126,91 @@
     transition: none;
   }
 }
+
+/*
+ * Phase 6.0.1 — navbar and theme transition closeout
+ *
+ * Keep these interaction overrides in the final-loaded UI polish layer.
+ * This avoids coupling the audit fix to the formatting of _layout.scss.
+ */
+
+.navbar__link {
+  transition:
+    color 360ms var(--ease-out),
+    text-shadow 360ms var(--ease-out),
+    transform 240ms var(--ease-out);
+}
+
+.navbar__link::after {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 54px;
+  height: 1px;
+  background: var(--color-cyan);
+  box-shadow: 0 0 14px var(--color-cyan);
+  content: '';
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) scaleX(0.24);
+  transform-origin: center;
+  transition:
+    opacity 260ms var(--ease-out),
+    transform 380ms var(--ease-out),
+    box-shadow 380ms var(--ease-out);
+}
+
+.navbar__link::before {
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-cyan);
+  content: '';
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) scale(0.35);
+  transition:
+    opacity 240ms var(--ease-out),
+    transform 360ms var(--ease-out);
+}
+
+.navbar__link.is-active::after {
+  opacity: 1;
+  transform: translateX(-50%) scaleX(1);
+}
+
+.navbar__link.is-active::before {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+.theme-toggle__icon {
+  will-change: opacity, transform;
+  transition:
+    opacity 320ms var(--ease-out),
+    transform 360ms var(--ease-out);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--ui-theme-transition-duration);
+  animation-timing-function: var(--ui-theme-transition-easing);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar__link,
+  .navbar__link::before,
+  .navbar__link::after,
+  .theme-toggle__icon {
+    transition: none;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.01ms;
+  }
+}
+

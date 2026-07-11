@@ -126,6 +126,7 @@ export function Navbar() {
       return
     }
 
+    const menuToggle = menuToggleRef.current
     const body = document.body
     const previousOverflow = body.style.overflow
     const previousTouchAction = body.style.touchAction
@@ -194,7 +195,7 @@ export function Navbar() {
 
       if (restoreMenuFocusRef.current) {
         window.requestAnimationFrame(() => {
-          menuToggleRef.current?.focus()
+          menuToggle?.focus()
         })
       }
 
