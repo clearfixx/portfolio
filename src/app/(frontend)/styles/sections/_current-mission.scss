@@ -882,3 +882,206 @@
     inset -8px -8px 18px rgb(var(--rgb-canvas) / 42%),
     0 0 22px rgb(var(--rgb-violet) / 28%);
 }
+
+/* Phase 5.1.4 — Current Mission choreography */
+
+html[data-motion-ready='true'] {
+  .current-mission__content[data-motion] {
+    > .current-mission__tagline,
+    > .current-mission__copy,
+    > .current-mission__stack-label,
+    > .current-mission__tech-list,
+    > .current-mission__link {
+      opacity: 0;
+      transform: translate3d(0, var(--motion-distance-sm), 0);
+      transition:
+        opacity var(--motion-duration-reveal) var(--motion-ease-standard),
+        transform var(--motion-duration-reveal) var(--motion-ease-standard);
+    }
+
+    > .current-mission__copy {
+      transition-delay: calc(var(--motion-stagger-default) * 1);
+    }
+
+    > .current-mission__stack-label {
+      transition-delay: calc(var(--motion-stagger-default) * 2);
+    }
+
+    > .current-mission__tech-list {
+      transition-delay: calc(var(--motion-stagger-default) * 3);
+    }
+
+    > .current-mission__link {
+      transition-delay: calc(var(--motion-stagger-default) * 4);
+    }
+
+    &[data-motion-state='visible'] {
+      > .current-mission__tagline,
+      > .current-mission__copy,
+      > .current-mission__stack-label,
+      > .current-mission__tech-list,
+      > .current-mission__link {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  }
+
+  .dss-preview[data-motion] {
+    position: relative;
+    isolation: isolate;
+
+    &::after {
+      position: absolute;
+      z-index: 8;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 18%;
+      background: linear-gradient(
+        180deg,
+        transparent,
+        rgb(var(--rgb-cyan) / 7%),
+        rgb(var(--rgb-cyan) / 2%),
+        transparent
+      );
+      content: '';
+      opacity: 0;
+      pointer-events: none;
+      transform: translate3d(0, -140%, 0);
+    }
+
+    .dss-preview__topbar,
+    .dss-preview__sidebar,
+    .dss-preview__heading,
+    .dss-preview__metrics,
+    .dss-preview__main-grid,
+    .dss-preview__footer {
+      opacity: 0;
+      transform: translate3d(0, 10px, 0);
+      transition:
+        opacity var(--motion-duration-reveal) var(--motion-ease-standard),
+        transform var(--motion-duration-reveal) var(--motion-ease-standard);
+    }
+
+    .dss-preview__sidebar,
+    .dss-preview__heading {
+      transition-delay: calc(var(--motion-stagger-default) * 1);
+    }
+
+    .dss-preview__metrics {
+      transition-delay: calc(var(--motion-stagger-default) * 2);
+    }
+
+    .dss-preview__main-grid {
+      transition-delay: calc(var(--motion-stagger-default) * 3);
+    }
+
+    .dss-preview__footer {
+      transition-delay: calc(var(--motion-stagger-default) * 4);
+    }
+
+    .dss-preview__metric-card {
+      opacity: 0;
+      transform: translate3d(0, 7px, 0);
+      transition:
+        opacity var(--motion-duration-ui) var(--motion-ease-standard),
+        transform var(--motion-duration-ui) var(--motion-ease-standard);
+    }
+
+    .dss-preview__metric-card:nth-child(2) {
+      transition-delay: calc(var(--motion-stagger-tight) * 1);
+    }
+
+    .dss-preview__metric-card:nth-child(3) {
+      transition-delay: calc(var(--motion-stagger-tight) * 2);
+    }
+
+    .dss-preview__metric-card:nth-child(4) {
+      transition-delay: calc(var(--motion-stagger-tight) * 3);
+    }
+
+    .dss-preview__profile-xp p span,
+    .dss-preview__missions-card li p span,
+    .dss-preview__metric-card i {
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform var(--motion-duration-section)
+        var(--motion-ease-standard);
+    }
+
+    &[data-motion-state='visible'] {
+      &::after {
+        animation: current-mission-scan 1.25s
+          var(--motion-ease-standard)
+          calc(var(--motion-stagger-default) * 4)
+          both;
+      }
+
+      .dss-preview__topbar,
+      .dss-preview__sidebar,
+      .dss-preview__heading,
+      .dss-preview__metrics,
+      .dss-preview__main-grid,
+      .dss-preview__footer,
+      .dss-preview__metric-card {
+        opacity: 1;
+        transform: none;
+      }
+
+      .dss-preview__profile-xp p span,
+      .dss-preview__missions-card li p span,
+      .dss-preview__metric-card i {
+        transform: scaleX(1);
+        transition-delay: calc(var(--motion-stagger-default) * 5);
+      }
+    }
+  }
+}
+
+@keyframes current-mission-scan {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -140%, 0);
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  82% {
+    opacity: 0.75;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 620%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-motion-ready='true'] {
+    .current-mission__content[data-motion] > *,
+    .dss-preview[data-motion] .dss-preview__topbar,
+    .dss-preview[data-motion] .dss-preview__sidebar,
+    .dss-preview[data-motion] .dss-preview__heading,
+    .dss-preview[data-motion] .dss-preview__metrics,
+    .dss-preview[data-motion] .dss-preview__main-grid,
+    .dss-preview[data-motion] .dss-preview__footer,
+    .dss-preview[data-motion] .dss-preview__metric-card,
+    .dss-preview[data-motion] .dss-preview__profile-xp p span,
+    .dss-preview[data-motion] .dss-preview__missions-card li p span,
+    .dss-preview[data-motion] .dss-preview__metric-card i {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .dss-preview[data-motion]::after {
+      display: none;
+      animation: none;
+    }
+  }
+}
+
+/* End Phase 5.1.4 */

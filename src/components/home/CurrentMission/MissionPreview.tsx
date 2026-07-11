@@ -3,7 +3,13 @@ import { activeMissions, dssActivities, dssHealthItems, dssMetrics, dssNavSectio
 
 export function MissionPreview() {
   return (
-    <div className="dss-preview" aria-label="DSS Universe mission control preview">
+    <div
+      className="dss-preview"
+      aria-label="DSS Universe mission control preview"
+      data-motion="slide-right"
+      data-motion-duration="section"
+      data-motion-delay="2"
+    >
       <header className="dss-preview__topbar">
         <span className="dss-preview__topbar-title">Mission Control Preview</span>
 

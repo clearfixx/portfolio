@@ -2,7 +2,12 @@ import { missionTechStack } from './data'
 
 export function MissionIntro() {
   return (
-    <div className="current-mission__content">
+    <div
+      className="current-mission__content"
+      data-motion="slide-left"
+      data-motion-duration="section"
+      data-motion-delay="1"
+    >
       <p className="current-mission__tagline">Years of ideas. One platform.</p>
 
       <div className="current-mission__copy">
