@@ -145,7 +145,8 @@ export function CookieConsent() {
     closePreferences()
   }
 
-  const shouldShowBanner = consent === null || isBannerForcedOpen
+  const shouldShowBanner =
+    !isPreferencesOpen && (consent === null || isBannerForcedOpen)
 
   if (!shouldShowBanner && !isPreferencesOpen) {
     return null
