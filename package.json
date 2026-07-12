@@ -15,7 +15,7 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "test": "pnpm run test:int && pnpm run test:e2e",
     "test:e2e": "cross-env NODE_OPTIONS=\"--no-deprecation --import=tsx/esm\" playwright test --config=playwright.config.ts",
-    "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts",
+    "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --passWithNoTests --config ./vitest.config.mts",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "lint:fix": "eslint . --fix",
@@ -24,7 +24,12 @@
     "test:links": "cross-env NODE_OPTIONS=\"--no-deprecation --import=tsx/esm\" playwright test tests/e2e/links.e2e.spec.ts --config=playwright.config.ts",
     "test:contact": "cross-env NODE_OPTIONS=\"--no-deprecation --import=tsx/esm\" playwright test tests/e2e/contact-form.e2e.spec.ts --config=playwright.config.ts",
     "test:newsletter": "cross-env NODE_OPTIONS=\"--no-deprecation --import=tsx/esm\" playwright test tests/e2e/newsletter.e2e.spec.ts --config=playwright.config.ts",
-    "test:api-security": "cross-env NODE_OPTIONS=\"--no-deprecation --import=tsx/esm\" playwright test tests/e2e/public-api-security.e2e.spec.ts --config=playwright.config.ts"
+    "test:api-security": "cross-env NODE_OPTIONS=\"--no-deprecation --import=tsx/esm\" playwright test tests/e2e/public-api-security.e2e.spec.ts --config=playwright.config.ts",
+    "check:env": "node scripts/check-environment.mjs",
+    "check:env:production": "node scripts/check-environment.mjs --production",
+    "test:regression": "pnpm run test:e2e",
+    "verify": "pnpm run check:env && pnpm run lint && pnpm run typecheck && pnpm run test:int && pnpm run test:regression && pnpm run build",
+    "verify:production": "pnpm run check:env:production && pnpm run lint && pnpm run typecheck && pnpm run test:int && pnpm run test:regression && pnpm run build"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "3.85.2",
