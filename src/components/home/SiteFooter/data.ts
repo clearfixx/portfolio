@@ -49,13 +49,13 @@ export const footerSocialLinks: FooterSocialLink[] = [
   {
     id: 'linkedin',
     label: 'LinkedIn',
-    href: '#',
+    href: 'https://ua.linkedin.com/',
     icon: 'linkedin',
   },
   {
     id: 'x',
     label: 'X',
-    href: '#',
+    href: 'https://x.com/',
     icon: 'x',
   },
   {
