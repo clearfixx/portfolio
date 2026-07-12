@@ -88,7 +88,7 @@ test.describe('Build Notes newsletter', () => {
 
     await expect(email).toHaveAttribute(
       'placeholder',
-      "Field Email can't be empty",
+      "Enter your email address",
     )
     await expect(email).toHaveAttribute('aria-invalid', 'true')
     await expect(email).toBeFocused()

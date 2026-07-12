@@ -1,7 +1,14 @@
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 
+import {
+  publicApiResponse,
+  readPublicApiJson,
+} from '@/lib/server/publicApi'
+
 export const runtime = 'nodejs'
+
+const MAX_CONTACT_BODY_BYTES = 8 * 1024
 
 const projectTypes = {
   website: 'Website',
@@ -35,15 +42,16 @@ function normalizeString(value: unknown) {
   return typeof value === 'string' ? value.trim() : ''
 }
 
-function isProjectType(value: string): value is ProjectType {
+function isProjectType(
+  value: string,
+): value is ProjectType {
   return value in projectTypes
 }
 
-function isCaptchaProof(value: unknown): value is CaptchaProof {
-  if (
-    !value ||
-    typeof value !== 'object'
-  ) {
+function isCaptchaProof(
+  value: unknown,
+): value is CaptchaProof {
+  if (!value || typeof value !== 'object') {
     return false
   }
 
@@ -61,49 +69,37 @@ function isCaptchaProof(value: unknown): value is CaptchaProof {
   )
 }
 
-function jsonResponse(
-  body: {
-    ok: boolean
-    message: string
-  },
-  status: number,
-) {
-  return Response.json(body, {
-    status,
-    headers: {
-      'Cache-Control': 'no-store',
-    },
-  })
-}
-
 export async function POST(request: Request) {
-  let body: ContactRequest
-
-  try {
-    body = (await request.json()) as ContactRequest
-  } catch {
-    return jsonResponse(
+  const parsed =
+    await readPublicApiJson<ContactRequest>(
+      request,
       {
-        ok: false,
-        message: 'Invalid request payload.',
+        maxBytes: MAX_CONTACT_BODY_BYTES,
       },
-      400,
     )
+
+  if (!parsed.ok) {
+    return parsed.response
   }
 
+  const { data: body, requestId } = parsed
   const name = normalizeString(body.name)
-  const email = normalizeString(body.email).toLowerCase()
-  const projectType = normalizeString(body.projectType)
+  const email =
+    normalizeString(body.email).toLowerCase()
+  const projectType = normalizeString(
+    body.projectType,
+  )
   const message = normalizeString(body.message)
   const website = normalizeString(body.website)
 
   if (website) {
-    return jsonResponse(
+    return publicApiResponse(
       {
         ok: true,
         message: 'Message received.',
       },
       200,
+      requestId,
     )
   }
 
@@ -117,12 +113,14 @@ export async function POST(request: Request) {
     message.length > 1000 ||
     !isCaptchaProof(body.captcha)
   ) {
-    return jsonResponse(
+    return publicApiResponse(
       {
         ok: false,
-        message: 'Please review the form fields and human verification.',
+        message:
+          'Please review the form fields and human verification.',
       },
       422,
+      requestId,
     )
   }
 
@@ -137,28 +135,31 @@ export async function POST(request: Request) {
       data: {
         name,
         email,
-        subject: `${projectTypes[projectType]} enquiry`,
+        subject:
+          `${projectTypes[projectType]} enquiry`,
         message,
         status: 'new',
         source: 'portfolio-contact-form',
       },
     })
 
-    return jsonResponse(
+    return publicApiResponse(
       {
         ok: true,
         message: 'Message sent successfully.',
       },
       201,
+      requestId,
     )
   } catch {
-    return jsonResponse(
+    return publicApiResponse(
       {
         ok: false,
         message:
           'Unable to send your message right now. Please try again later.',
       },
       500,
+      requestId,
     )
   }
 }

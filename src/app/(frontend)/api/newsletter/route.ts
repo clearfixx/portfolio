@@ -1,7 +1,14 @@
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 
+import {
+  publicApiResponse,
+  readPublicApiJson,
+} from '@/lib/server/publicApi'
+
 export const runtime = 'nodejs'
+
+const MAX_NEWSLETTER_BODY_BYTES = 2 * 1024
 
 type NewsletterRequest = {
   email?: unknown
@@ -14,46 +21,33 @@ function normalizeString(value: unknown) {
   return typeof value === 'string' ? value.trim() : ''
 }
 
-function jsonResponse(
-  body: {
-    ok: boolean
-    message: string
-  },
-  status: number,
-) {
-  return Response.json(body, {
-    status,
-    headers: {
-      'Cache-Control': 'no-store',
-    },
-  })
-}
-
 export async function POST(request: Request) {
-  let body: NewsletterRequest
-
-  try {
-    body = (await request.json()) as NewsletterRequest
-  } catch {
-    return jsonResponse(
+  const parsed =
+    await readPublicApiJson<NewsletterRequest>(
+      request,
       {
-        ok: false,
-        message: 'Invalid request payload.',
+        maxBytes: MAX_NEWSLETTER_BODY_BYTES,
       },
-      400,
     )
+
+  if (!parsed.ok) {
+    return parsed.response
   }
 
-  const email = normalizeString(body.email).toLowerCase()
+  const { data: body, requestId } = parsed
+  const email =
+    normalizeString(body.email).toLowerCase()
   const website = normalizeString(body.website)
 
   if (website) {
-    return jsonResponse(
+    return publicApiResponse(
       {
         ok: true,
-        message: 'You’re subscribed to Build Notes.',
+        message:
+          'You\u2019re subscribed to Build Notes.',
       },
       200,
+      requestId,
     )
   }
 
@@ -62,12 +56,13 @@ export async function POST(request: Request) {
     email.length > 254 ||
     !emailPattern.test(email)
   ) {
-    return jsonResponse(
+    return publicApiResponse(
       {
         ok: false,
         message: 'Enter a valid email address.',
       },
       422,
+      requestId,
     )
   }
 
@@ -93,12 +88,14 @@ export async function POST(request: Request) {
 
     if (subscriber) {
       if (subscriber.status === 'active') {
-        return jsonResponse(
+        return publicApiResponse(
           {
             ok: true,
-            message: 'You’re already subscribed to Build Notes.',
+            message:
+              'You\u2019re already subscribed to Build Notes.',
           },
           200,
+          requestId,
         )
       }
 
@@ -114,12 +111,13 @@ export async function POST(request: Request) {
         },
       })
 
-      return jsonResponse(
+      return publicApiResponse(
         {
           ok: true,
           message: 'Welcome back to Build Notes.',
         },
         200,
+        requestId,
       )
     }
 
@@ -134,21 +132,24 @@ export async function POST(request: Request) {
       },
     })
 
-    return jsonResponse(
+    return publicApiResponse(
       {
         ok: true,
-        message: 'You’re subscribed to Build Notes.',
+        message:
+          'You\u2019re subscribed to Build Notes.',
       },
       201,
+      requestId,
     )
   } catch {
-    return jsonResponse(
+    return publicApiResponse(
       {
         ok: false,
         message:
           'Unable to subscribe right now. Please try again later.',
       },
       500,
+      requestId,
     )
   }
 }
