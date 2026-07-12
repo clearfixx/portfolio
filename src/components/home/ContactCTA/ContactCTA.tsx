@@ -1,17 +1,13 @@
 import Image from 'next/image'
 
 import {
-  ArrowUpRightIcon,
-  ContactUserIcon,
   LinkIcon,
-  LockIcon,
-  MailIcon,
-  MessageIcon,
   PinIcon,
 } from '@/components/icons'
 
 import { PortfolioSection } from '@/components/home/PortfolioSection'
-import { ProjectTypeSelect } from '@/components/home/ProjectTypeSelect'
+
+import { ContactForm } from './ContactForm'
 
 import {
   contactChannels,
@@ -142,44 +138,7 @@ export function ContactCTA({ contact, contactSection }: ContactCTAProps) {
             <p>Tell me what you’re building, what you need, and where you need help.</p>
           </div>
 
-          <form className="contact-cta__form">
-            <label className="contact-cta__field">
-              <span className="contact-cta__field-icon">
-                <ContactUserIcon />
-              </span>
-              <span className="sr-only">Your Name</span>
-              <input name="name" type="text" placeholder="Your Name" autoComplete="name" />
-            </label>
-
-            <label className="contact-cta__field">
-              <span className="contact-cta__field-icon">
-                <MailIcon />
-              </span>
-              <span className="sr-only">Your Email</span>
-              <input name="email" type="email" placeholder="Your Email" autoComplete="email" />
-            </label>
-
-            <ProjectTypeSelect />
-
-            <label className="contact-cta__field contact-cta__field--message">
-              <span className="contact-cta__field-icon">
-                <MessageIcon />
-              </span>
-              <span className="sr-only">Message</span>
-              <textarea name="message" placeholder="Message" maxLength={1000} />
-              <span className="contact-cta__counter">0 / 1000</span>
-            </label>
-
-            <button className="contact-cta__submit" type="button">
-              Start the conversation
-              <ArrowUpRightIcon />
-            </button>
-
-            <p className="contact-cta__privacy">
-              <LockIcon />
-              Your message is private and secure.
-            </p>
-          </form>
+          <ContactForm />
         </section>
       </div>
     </PortfolioSection>

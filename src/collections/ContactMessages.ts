@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { authenticatedAccess, publicAccess } from '@/access'
+import { authenticatedAccess } from '@/access'
 
 export const ContactMessages: CollectionConfig = {
   slug: 'contact-messages',
@@ -9,7 +9,7 @@ export const ContactMessages: CollectionConfig = {
   },
   access: {
     read: authenticatedAccess,
-    create: publicAccess,
+    create: () => false,
     update: authenticatedAccess,
     delete: authenticatedAccess,
   },

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useId, useRef, useState } from 'react'
+
 import type { KeyboardEvent, SVGProps } from 'react'
 
 const projectTypeOptions = [
@@ -10,6 +11,13 @@ const projectTypeOptions = [
   { value: 'consultation', label: 'Consultation' },
   { value: 'other', label: 'Other' },
 ] as const
+
+type ProjectTypeSelectProps = {
+  invalid?: boolean
+  errorMessage?: string
+  errorId?: string
+  onValueChange?: (value: string) => void
+}
 
 function LayersIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -30,25 +38,36 @@ function LayersIcon(props: SVGProps<SVGSVGElement>) {
   )
 }
 
-export function ProjectTypeSelect() {
+export function ProjectTypeSelect({
+  invalid = false,
+  errorMessage,
+  errorId,
+  onValueChange,
+}: ProjectTypeSelectProps) {
   const rootRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLButtonElement>(null)
   const labelId = useId()
   const valueId = useId()
   const listboxId = useId()
-
   const [isOpen, setIsOpen] = useState(false)
   const [value, setValue] = useState('')
   const [activeIndex, setActiveIndex] = useState(0)
 
-  const selectedIndex = projectTypeOptions.findIndex((option) => option.value === value)
-  const selectedOption = selectedIndex >= 0 ? projectTypeOptions[selectedIndex] : null
+  const selectedIndex = projectTypeOptions.findIndex(
+    (option) => option.value === value,
+  )
+  const selectedOption =
+    selectedIndex >= 0 ? projectTypeOptions[selectedIndex] : null
 
   useEffect(() => {
-    const handlePointerDown = (event: PointerEvent) => {
+    const handlePointerDown = (event: globalThis.PointerEvent) => {
       const root = rootRef.current
 
-      if (!root || !(event.target instanceof Node) || root.contains(event.target)) {
+      if (
+        !root ||
+        !(event.target instanceof Node) ||
+        root.contains(event.target)
+      ) {
         return
       }
 
@@ -80,6 +99,7 @@ export function ProjectTypeSelect() {
 
     setValue(option.value)
     setActiveIndex(index)
+    onValueChange?.(option.value)
     closeListbox()
 
     window.requestAnimationFrame(() => {
@@ -90,11 +110,17 @@ export function ProjectTypeSelect() {
   const moveActiveOption = (direction: 1 | -1) => {
     setActiveIndex((currentIndex) => {
       const optionCount = projectTypeOptions.length
-      return (currentIndex + direction + optionCount) % optionCount
+
+      return (
+        (currentIndex + direction + optionCount) %
+        optionCount
+      )
     })
   }
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
+  const handleKeyDown = (
+    event: KeyboardEvent<HTMLButtonElement>,
+  ) => {
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault()
@@ -106,7 +132,6 @@ export function ProjectTypeSelect() {
 
         moveActiveOption(1)
         return
-
       case 'ArrowUp':
         event.preventDefault()
 
@@ -117,7 +142,6 @@ export function ProjectTypeSelect() {
 
         moveActiveOption(-1)
         return
-
       case 'Home':
         if (!isOpen) {
           return
@@ -126,7 +150,6 @@ export function ProjectTypeSelect() {
         event.preventDefault()
         setActiveIndex(0)
         return
-
       case 'End':
         if (!isOpen) {
           return
@@ -135,7 +158,6 @@ export function ProjectTypeSelect() {
         event.preventDefault()
         setActiveIndex(projectTypeOptions.length - 1)
         return
-
       case 'Enter':
       case ' ':
         event.preventDefault()
@@ -147,7 +169,6 @@ export function ProjectTypeSelect() {
 
         openListbox()
         return
-
       case 'Escape':
         if (!isOpen) {
           return
@@ -156,11 +177,9 @@ export function ProjectTypeSelect() {
         event.preventDefault()
         closeListbox()
         return
-
       case 'Tab':
         closeListbox()
         return
-
       default:
         break
     }
@@ -175,8 +194,11 @@ export function ProjectTypeSelect() {
     }
 
     const query = event.key.toLocaleLowerCase()
-    const matchingIndex = projectTypeOptions.findIndex((option) =>
-      option.label.toLocaleLowerCase().startsWith(query),
+    const matchingIndex = projectTypeOptions.findIndex(
+      (option) =>
+        option.label
+          .toLocaleLowerCase()
+          .startsWith(query),
     )
 
     if (matchingIndex < 0) {
@@ -195,12 +217,22 @@ export function ProjectTypeSelect() {
     ? `${listboxId}-option-${activeIndex}`
     : undefined
 
+  const placeholder =
+    invalid && errorMessage
+      ? errorMessage
+      : 'Project Type'
+
   return (
     <div
       ref={rootRef}
-      className={`contact-cta__field contact-cta__select${isOpen ? ' is-open' : ''}`}
+      className={`contact-cta__field contact-cta__select${
+        isOpen ? ' is-open' : ''
+      }${invalid ? ' is-invalid' : ''}`}
     >
-      <span className="contact-cta__field-icon" aria-hidden="true">
+      <span
+        className="contact-cta__field-icon"
+        aria-hidden="true"
+      >
         <LayersIcon />
       </span>
 
@@ -208,19 +240,28 @@ export function ProjectTypeSelect() {
         Project Type
       </span>
 
-      <input type="hidden" name="projectType" value={value} />
+      <input
+        type="hidden"
+        name="projectType"
+        value={value}
+        required
+      />
 
       <button
         ref={triggerRef}
         className="contact-cta__select-trigger"
         type="button"
         role="combobox"
+        data-contact-field="projectType"
         aria-autocomplete="none"
         aria-haspopup="listbox"
         aria-controls={listboxId}
         aria-expanded={isOpen}
         aria-activedescendant={activeDescendant}
         aria-labelledby={`${labelId} ${valueId}`}
+        aria-required="true"
+        aria-invalid={invalid}
+        aria-describedby={invalid ? errorId : undefined}
         onClick={() => {
           if (isOpen) {
             closeListbox()
@@ -236,11 +277,19 @@ export function ProjectTypeSelect() {
           className="contact-cta__select-value"
           data-placeholder={selectedOption ? undefined : 'true'}
         >
-          {selectedOption?.label ?? 'Project Type'}
+          {selectedOption?.label ?? placeholder}
         </span>
-
-        <span className="contact-cta__select-chevron" aria-hidden="true" />
+        <span
+          className="contact-cta__select-chevron"
+          aria-hidden="true"
+        />
       </button>
+
+      {errorId ? (
+        <span id={errorId} className="sr-only">
+          {invalid ? errorMessage : ''}
+        </span>
+      ) : null}
 
       {isOpen ? (
         <ul
@@ -270,7 +319,10 @@ export function ProjectTypeSelect() {
                 }}
               >
                 <span>{option.label}</span>
-                <span className="contact-cta__select-check" aria-hidden="true">
+                <span
+                  className="contact-cta__select-check"
+                  aria-hidden="true"
+                >
                   ✓
                 </span>
               </li>
