@@ -234,7 +234,7 @@
 .insights-trust__article-row:hover {
   transform: translateY(-2px);
   border-color: rgb(var(--rgb-accent-soft) / 42%);
-  background: rgba(9, 25, 43, 0.92);
+  background: rgb(var(--rgb-surface-badge)/82%);//rgba(9, 25, 43, 0.92);
 }
 
 .insights-trust__article-index {
