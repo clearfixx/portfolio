@@ -1060,3 +1060,59 @@
 .site-footer__newsletter-note {
   grid-column: 1 / -1;
 }
+
+/* Phase 6.0.2.7 — Build Notes newsletter states */
+.site-footer__newsletter-form[aria-busy='true'] {
+  opacity: 0.78;
+}
+
+.site-footer__newsletter-form button:disabled {
+  cursor: wait;
+  transform: none;
+}
+
+.site-footer__newsletter-field.is-invalid input {
+  border-color: rgb(var(--rgb-danger, 255 92 92) / 78%);
+  background:
+    linear-gradient(
+      90deg,
+      rgb(var(--rgb-danger, 255 92 92) / 7%),
+      transparent 58%
+    ),
+    rgb(var(--rgb-surface-overlay) / 88%);
+  box-shadow:
+    0 0 0 3px rgb(var(--rgb-danger, 255 92 92) / 8%),
+    0 0 22px rgb(var(--rgb-danger, 255 92 92) / 7%);
+}
+
+.site-footer__newsletter-field.is-invalid input::placeholder {
+  color: rgb(var(--rgb-danger, 255 92 92) / 88%);
+  opacity: 1;
+}
+
+.site-footer__newsletter-honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.site-footer__newsletter-note[data-state='submitting'] {
+  color: rgb(var(--rgb-text-soft) / 72%);
+}
+
+.site-footer__newsletter-note[data-state='success'] {
+  color: rgb(var(--rgb-success));
+}
+
+.site-footer__newsletter-note[data-state='error'] {
+  color: rgb(var(--rgb-danger, 255 92 92));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-footer__newsletter-form,
+  .site-footer__newsletter-field input {
+    transition: none;
+  }
+}

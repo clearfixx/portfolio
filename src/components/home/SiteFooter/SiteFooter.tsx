@@ -6,11 +6,12 @@ import {
   ArrowUpRightIcon,
   GithubIcon,
   LinkedinIcon,
-  LockIcon,
   MailIcon,
   TelegramIcon,
   XIcon,
 } from '@/components/icons'
+
+import { NewsletterForm } from './NewsletterForm'
 
 import {
   footerBio,
@@ -262,19 +263,7 @@ export function SiteFooter() {
                 </p>
               </div>
 
-              <form className="site-footer__newsletter-form">
-                <label className="site-footer__newsletter-field">
-                  <span className="sr-only">What&apos;s a good email address?</span>
-                  <input type="email" name="email" placeholder="What&apos;s a good email address?" />
-                </label>
-
-                <button type="button">Gimme!</button>
-
-                <p className="site-footer__newsletter-note">
-                  <LockIcon />
-                  No spam. Unsubscribe anytime.
-                </p>
-              </form>
+              <NewsletterForm />
             </div>
           </section>
         </div>
