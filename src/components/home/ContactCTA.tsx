@@ -244,7 +244,7 @@ const socialLinks: SocialLink[] = [
   {
     id: 'linkedin',
     label: 'LinkedIn',
-    href: '#',
+    href: 'https://ua.linkedin.com/',
     icon: LinkedinIcon,
   },
   {
@@ -256,7 +256,7 @@ const socialLinks: SocialLink[] = [
   {
     id: 'x',
     label: 'X',
-    href: '#',
+    href: 'https://x.com/',
     icon: XIcon,
   },
 ]
