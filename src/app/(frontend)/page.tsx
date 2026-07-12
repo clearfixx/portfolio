@@ -13,14 +13,14 @@ import { getHomepageContent } from '@/lib/cms'
 import { ScrollStack } from '@/components/motion'
 
 export default async function HomePage() {
-  const { contact, hero, homepage } = await getHomepageContent()
+  const { contact, featuredProjects, hero, homepage } = await getHomepageContent()
 
   return (
     <>
       <Hero content={hero} />
       <CurrentMission />
       <ScrollStack className="portfolio-stack">
-        <FeaturedProjects />
+        <FeaturedProjects projects={featuredProjects} />
         <EngineerProfile />
         <SkillsTechnologies />
       </ScrollStack>

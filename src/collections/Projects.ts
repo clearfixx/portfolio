@@ -31,6 +31,14 @@ export const Projects: CollectionConfig = {
       },
     },
     {
+      name: 'cardTagline',
+      type: 'textarea',
+      admin: {
+        description:
+          'Short marketing line used in featured project previews. Keep it concise and outcome-focused.',
+      },
+    },
+    {
       name: 'description',
       type: 'richText',
       required: true,

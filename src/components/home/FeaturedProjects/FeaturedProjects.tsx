@@ -1,11 +1,14 @@
-import Link from 'next/link'
 import { CubeIcon } from '@/components/icons'
+import type { FeaturedProjectViewModel } from '@/lib/cms/homepage'
 
 import { PortfolioSection } from '../PortfolioSection'
-import { featuredProjects } from './data'
 import { ProjectCard } from './ProjectCard'
 
-export function FeaturedProjects() {
+type FeaturedProjectsProps = {
+  projects: FeaturedProjectViewModel[]
+}
+
+export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
   return (
     <PortfolioSection
       id="projects"
@@ -13,23 +16,23 @@ export function FeaturedProjects() {
       title="Selected Projects"
       description="A showcase of products I've built across different domains. Each project is a reflection of solving real problems with code."
       number="02"
-      headerAction={
-        <Link className="featured-projects__view-all" href="/projects">
-          View all projects
-          <span aria-hidden="true">→</span>
-        </Link>
-      }
       footer={{
         icon: CubeIcon,
         label: 'From ideas to production',
         text: 'building digital products that solve real problems.',
       }}
     >
-      <div className="featured-projects__grid">
-        {featuredProjects.map((project, index) => (
-          <ProjectCard index={index + 1} project={project} key={project.id} />
-        ))}
-      </div>
+      {projects.length > 0 ? (
+        <div className="featured-projects__grid">
+          {projects.map((project, index) => (
+            <ProjectCard index={index + 1} project={project} key={project.id} />
+          ))}
+        </div>
+      ) : (
+        <p className="featured-projects__empty" role="status">
+          Project case studies are being prepared for publication.
+        </p>
+      )}
     </PortfolioSection>
   )
 }

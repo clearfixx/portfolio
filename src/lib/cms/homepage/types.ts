@@ -45,3 +45,24 @@ export type HeroViewModel = {
   techStack: HeroTechItem[]
   telemetry: HeroTelemetryViewModel
 }
+export type FeaturedProjectAccent = 'cyan' | 'violet'
+
+export type FeaturedProjectImage = {
+  alt: string
+  src: string
+}
+
+export type FeaturedProjectViewModel = {
+  accent: FeaturedProjectAccent
+  excerpt: string
+  href?: string
+  id: string
+  image?: FeaturedProjectImage
+  linkLabel: string
+  previewLabel: string
+  progress: number
+  stack: string[]
+  stage: string
+  status: string
+  title: string
+}
