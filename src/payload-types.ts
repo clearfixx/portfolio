@@ -1073,8 +1073,17 @@ export interface Homepage {
   }
   contactSection?: {
     enabled?: boolean | null
+    eyebrow?: string | null
     title?: string | null
+    /**
+     * Exact phrase inside the title that receives accent emphasis.
+     */
+    titleAccent?: string | null
     description?: string | null
+    formTitle?: string | null
+    formDescription?: string | null
+    footerLabel?: string | null
+    footerText?: string | null
   }
   updatedAt?: string | null
   createdAt?: string | null
@@ -1149,6 +1158,10 @@ export interface Social {
   id: number
   githubUrl?: string | null
   linkedinUrl?: string | null
+  /**
+   * Public Telegram profile or contact URL.
+   */
+  telegramUrl?: string | null
   /**
    * X / Twitter profile URL.
    */
@@ -1249,8 +1262,14 @@ export interface HomepageSelect<T extends boolean = true> {
     | T
     | {
         enabled?: T
+        eyebrow?: T
         title?: T
+        titleAccent?: T
         description?: T
+        formTitle?: T
+        formDescription?: T
+        footerLabel?: T
+        footerText?: T
       }
   updatedAt?: T
   createdAt?: T
@@ -1312,6 +1331,7 @@ export interface SeoSelect<T extends boolean = true> {
 export interface SocialSelect<T extends boolean = true> {
   githubUrl?: T
   linkedinUrl?: T
+  telegramUrl?: T
   xUrl?: T
   instagramUrl?: T
   dribbbleUrl?: T

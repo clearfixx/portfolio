@@ -1,3 +1,4 @@
+export { buildContactSectionViewModel } from './contact'
 export {
   buildFeaturedProjectViewModel,
   buildFeaturedProjectViewModels,
@@ -8,6 +9,12 @@ export { buildHeroViewModel, calculateExperienceYears, getSelectedTechStack } fr
 export { getHomepageContent } from './getHomepageContent'
 export type { HomepageContent } from './getHomepageContent'
 export type {
+  ContactAvailabilityTone,
+  ContactChannelIcon,
+  ContactChannelViewModel,
+  ContactSectionViewModel,
+  ContactSocialIcon,
+  ContactSocialLinkViewModel,
   FeaturedProjectAccent,
   FeaturedProjectImage,
   FeaturedProjectViewModel,

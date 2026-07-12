@@ -1,5 +1,3 @@
-import type { Contact, Homepage } from '@/payload-types'
-
 import {
   getContact,
   getFeaturedProjects,
@@ -7,26 +5,28 @@ import {
   getHomepage,
   getProfile,
   getProjectsCount,
+  getSocial,
 } from '../queries'
+import { buildContactSectionViewModel } from './contact'
 import { buildFeaturedProjectViewModels, getSelectedFeaturedProjects } from './featured-projects'
 import { buildHeroViewModel, getSelectedTechStack } from './hero'
-import type { FeaturedProjectViewModel, HeroViewModel } from './types'
+import type { ContactSectionViewModel, FeaturedProjectViewModel, HeroViewModel } from './types'
 
 const FEATURED_PROJECT_LIMIT = 3
 
 export type HomepageContent = {
-  contact: Contact
+  contact: ContactSectionViewModel
   featuredProjects: FeaturedProjectViewModel[]
   hero: HeroViewModel
-  homepage: Homepage
 }
 
 export async function getHomepageContent(): Promise<HomepageContent> {
-  const [homepage, contact, profile, projectsCount] = await Promise.all([
+  const [homepage, contact, profile, projectsCount, social] = await Promise.all([
     getHomepage(),
     getContact(),
     getProfile(),
     getProjectsCount(),
+    getSocial(),
   ])
 
   const selectedTechStack = getSelectedTechStack(homepage.selectedTechStack)
@@ -43,7 +43,12 @@ export async function getHomepageContent(): Promise<HomepageContent> {
   ])
 
   return {
-    contact,
+    contact: buildContactSectionViewModel({
+      contact,
+      homepage,
+      profile,
+      social,
+    }),
     featuredProjects: buildFeaturedProjectViewModels(projects),
     hero: buildHeroViewModel({
       homepage,
@@ -51,6 +56,5 @@ export async function getHomepageContent(): Promise<HomepageContent> {
       projectsCount,
       technologies,
     }),
-    homepage,
   }
 }

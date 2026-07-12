@@ -66,3 +66,50 @@ export type FeaturedProjectViewModel = {
   status: string
   title: string
 }
+export type ContactChannelIcon = 'clock' | 'mail' | 'phone' | 'pin' | 'telegram'
+
+export type ContactSocialIcon = 'github' | 'linkedin' | 'telegram' | 'x'
+
+export type ContactAvailabilityTone = 'available' | 'focused' | 'unavailable'
+
+export type ContactChannelViewModel = {
+  external: boolean
+  href?: string
+  icon: ContactChannelIcon
+  id: string
+  label: string
+  value: string
+}
+
+export type ContactSocialLinkViewModel = {
+  href: string
+  icon: ContactSocialIcon
+  id: string
+  label: string
+}
+
+export type ContactSectionViewModel = {
+  availability: {
+    label: string
+    tone: ContactAvailabilityTone
+  }
+  channels: ContactChannelViewModel[]
+  description: string
+  eyebrow: string
+  footer: {
+    label: string
+    text: string
+  }
+  form: {
+    description: string
+    enabled: boolean
+    title: string
+  }
+  location?: string
+  socialLinks: ContactSocialLinkViewModel[]
+  title: {
+    accent?: string
+    leading: string
+    trailing?: string
+  }
+}

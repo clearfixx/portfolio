@@ -20,6 +20,13 @@ export const Social: GlobalConfig = {
       type: 'text',
     },
     {
+      name: 'telegramUrl',
+      type: 'text',
+      admin: {
+        description: 'Public Telegram profile or contact URL.',
+      },
+    },
+    {
       name: 'xUrl',
       type: 'text',
       admin: {

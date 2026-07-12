@@ -141,12 +141,48 @@ export const Homepage: GlobalConfig = {
           defaultValue: true,
         },
         {
+          name: 'eyebrow',
+          type: 'text',
+          defaultValue: 'CONTACT',
+        },
+        {
           name: 'title',
           type: 'text',
+          defaultValue: "Not enough? Let's talk.",
+        },
+        {
+          name: 'titleAccent',
+          type: 'text',
+          defaultValue: "Let's talk.",
+          admin: {
+            description: 'Exact phrase inside the title that receives accent emphasis.',
+          },
         },
         {
           name: 'description',
           type: 'textarea',
+          defaultValue:
+            'If you need a scalable product, clean architecture and reliable delivery — I’m ready to discuss your project.',
+        },
+        {
+          name: 'formTitle',
+          type: 'text',
+          defaultValue: 'Start the conversation',
+        },
+        {
+          name: 'formDescription',
+          type: 'textarea',
+          defaultValue: 'Tell me what you’re building, what you need, and where you need help.',
+        },
+        {
+          name: 'footerLabel',
+          type: 'text',
+          defaultValue: 'Mission link',
+        },
+        {
+          name: 'footerText',
+          type: 'text',
+          defaultValue: 'Open for freelance, product work and collaboration.',
         },
       ],
     },

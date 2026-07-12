@@ -1,34 +1,55 @@
+import type { ComponentType, SVGProps } from 'react'
 import Image from 'next/image'
 
 import {
+  ClockIcon,
+  GithubIcon,
   LinkIcon,
+  LinkedinIcon,
+  MailIcon,
+  PhoneIcon,
   PinIcon,
+  TelegramIcon,
+  XIcon,
 } from '@/components/icons'
-
 import { PortfolioSection } from '@/components/home/PortfolioSection'
+import type {
+  ContactChannelIcon,
+  ContactChannelViewModel,
+  ContactSectionViewModel,
+  ContactSocialIcon,
+} from '@/lib/cms/homepage'
 
 import { ContactForm } from './ContactForm'
 
-import {
-  contactChannels,
-  socialLinks,
-  type ContactChannel,
-} from './data'
+type IconComponent = ComponentType<SVGProps<SVGSVGElement>>
 
 type ContactCTAProps = {
-  contact?: unknown
-  contactSection?: unknown
+  content: ContactSectionViewModel
 }
 
-function ContactChannelItem({ channel }: { channel: ContactChannel }) {
-  const Icon = channel.icon
+const CHANNEL_ICONS: Record<ContactChannelIcon, IconComponent> = {
+  clock: ClockIcon,
+  mail: MailIcon,
+  phone: PhoneIcon,
+  pin: PinIcon,
+  telegram: TelegramIcon,
+}
 
+const SOCIAL_ICONS: Record<ContactSocialIcon, IconComponent> = {
+  github: GithubIcon,
+  linkedin: LinkedinIcon,
+  telegram: TelegramIcon,
+  x: XIcon,
+}
+
+function ContactChannelItem({ channel }: { channel: ContactChannelViewModel }) {
+  const Icon = CHANNEL_ICONS[channel.icon]
   const content = (
     <>
       <span className="contact-cta__channel-icon">
         <Icon />
       </span>
-
       <span className="contact-cta__channel-copy">
         <span>{channel.label}</span>
         <strong>{channel.value}</strong>
@@ -38,7 +59,12 @@ function ContactChannelItem({ channel }: { channel: ContactChannel }) {
 
   if (channel.href) {
     return (
-      <a className="contact-cta__channel" href={channel.href} target="_blank" rel="noreferrer">
+      <a
+        className="contact-cta__channel"
+        href={channel.href}
+        rel={channel.external ? 'noreferrer' : undefined}
+        target={channel.external ? '_blank' : undefined}
+      >
         {content}
       </a>
     )
@@ -47,7 +73,7 @@ function ContactChannelItem({ channel }: { channel: ContactChannel }) {
   return <div className="contact-cta__channel">{content}</div>
 }
 
-function KyivMap() {
+function ContactMap({ content }: { content: ContactSectionViewModel }) {
   return (
     <div className="contact-cta__map-panel">
       <Image
@@ -68,78 +94,100 @@ function KyivMap() {
         <span />
       </div>
 
-      <div className="contact-cta__location-badge">
-        <PinIcon />
-        Kyiv, Ukraine
-      </div>
+      {content.location ? (
+        <div className="contact-cta__location-badge">
+          <PinIcon />
+          {content.location}
+        </div>
+      ) : null}
 
       <div className="contact-cta__contact-card">
-        <div className="contact-cta__channels">
-          {contactChannels.map((channel) => (
-            <ContactChannelItem channel={channel} key={channel.id} />
-          ))}
-        </div>
+        {content.channels.length > 0 ? (
+          <div className="contact-cta__channels">
+            {content.channels.map((channel) => (
+              <ContactChannelItem channel={channel} key={channel.id} />
+            ))}
+          </div>
+        ) : (
+          <p className="contact-cta__empty" role="status">
+            Contact details are being updated.
+          </p>
+        )}
 
-        <div className="contact-cta__socials" aria-label="Social links">
-          {socialLinks.map((social) => {
-            const Icon = social.icon
+        {content.socialLinks.length > 0 ? (
+          <div className="contact-cta__socials" aria-label="Social links">
+            {content.socialLinks.map((social) => {
+              const Icon = SOCIAL_ICONS[social.icon]
 
-            return (
-              <a
-                className="contact-cta__social-link"
-                href={social.href}
-                key={social.id}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={social.label}
-              >
-                <Icon />
-              </a>
-            )
-          })}
-        </div>
+              return (
+                <a
+                  className="contact-cta__social-link"
+                  href={social.href}
+                  key={social.id}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={social.label}
+                >
+                  <Icon />
+                </a>
+              )
+            })}
+          </div>
+        ) : null}
 
-        <div className="contact-cta__availability">
+        <div
+          className={`contact-cta__availability contact-cta__availability--${content.availability.tone}`}
+        >
           <span />
-          Available
+          {content.availability.label}
         </div>
       </div>
     </div>
   )
 }
 
-export function ContactCTA({ contact, contactSection }: ContactCTAProps) {
-  void contact
-  void contactSection
+function ContactTitle({ title }: { title: ContactSectionViewModel['title'] }) {
+  return (
+    <>
+      {title.leading}
+      {title.accent ? (
+        <>
+          {title.leading ? ' ' : null}
+          <span className="contact-cta__title-accent">{title.accent}</span>
+        </>
+      ) : null}
+      {title.trailing ? ` ${title.trailing}` : null}
+    </>
+  )
+}
 
+export function ContactCTA({ content }: ContactCTAProps) {
   return (
     <PortfolioSection
       id="contact"
-      eyebrow="CONTACT"
-      title={
-        <>
-          Not enough? <span className="contact-cta__title-accent">Let&apos;s talk.</span>
-        </>
-      }
-      description="If you need a scalable product, clean architecture and reliable delivery — I’m ready to discuss your project."
+      eyebrow={content.eyebrow}
+      title={<ContactTitle title={content.title} />}
+      description={content.description}
       number="07"
       footer={{
         icon: LinkIcon,
-        label: 'Mission link',
-        text: 'Open for freelance, product work and collaboration.',
+        label: content.footer.label,
+        text: content.footer.text,
       }}
     >
-      <div className="contact-cta">
-        <KyivMap />
+      <div className={`contact-cta${content.form.enabled ? '' : ' contact-cta--channels-only'}`}>
+        <ContactMap content={content} />
 
-        <section className="contact-cta__form-panel" aria-labelledby="contact-form-title">
-          <div className="contact-cta__form-header">
-            <h3 id="contact-form-title">Start the conversation</h3>
-            <p>Tell me what you’re building, what you need, and where you need help.</p>
-          </div>
+        {content.form.enabled ? (
+          <section className="contact-cta__form-panel" aria-labelledby="contact-form-title">
+            <div className="contact-cta__form-header">
+              <h3 id="contact-form-title">{content.form.title}</h3>
+              <p>{content.form.description}</p>
+            </div>
 
-          <ContactForm />
-        </section>
+            <ContactForm />
+          </section>
+        ) : null}
       </div>
     </PortfolioSection>
   )

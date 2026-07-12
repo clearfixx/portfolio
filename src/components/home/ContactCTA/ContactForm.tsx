@@ -1,12 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import type {
-  ChangeEvent,
-  SubmitEvent,
-  KeyboardEvent,
-  PointerEvent,
-} from 'react'
+import type { ChangeEvent, SubmitEvent, KeyboardEvent, PointerEvent } from 'react'
 
 import {
   ArrowUpRightIcon,
@@ -93,17 +88,8 @@ function validateForm(
   return errors
 }
 
-function focusFirstInvalidField(
-  form: HTMLFormElement,
-  errors: FormErrors,
-) {
-  const order: FieldName[] = [
-    'name',
-    'email',
-    'projectType',
-    'message',
-    'captcha',
-  ]
+function focusFirstInvalidField(form: HTMLFormElement, errors: FormErrors) {
+  const order: FieldName[] = ['name', 'email', 'projectType', 'message', 'captcha']
 
   const selectors: Record<FieldName, string> = {
     name: '[name="name"]',
@@ -120,9 +106,7 @@ function focusFirstInvalidField(
   }
 
   window.requestAnimationFrame(() => {
-    form
-      .querySelector<HTMLElement>(selectors[firstInvalid])
-      ?.focus()
+    form.querySelector<HTMLElement>(selectors[firstInvalid])?.focus()
   })
 }
 
@@ -162,9 +146,7 @@ export function ContactForm() {
     }
   }
 
-  const handleCaptchaPointerDown = (
-    event: PointerEvent<HTMLLabelElement>,
-  ) => {
+  const handleCaptchaPointerDown = (event: PointerEvent<HTMLLabelElement>) => {
     captchaInteractionRef.current = {
       kind: 'pointer',
       at: performance.now(),
@@ -172,9 +154,7 @@ export function ContactForm() {
     }
   }
 
-  const handleCaptchaKeyDown = (
-    event: KeyboardEvent<HTMLInputElement>,
-  ) => {
+  const handleCaptchaKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key !== ' ') {
       return
     }
@@ -186,9 +166,7 @@ export function ContactForm() {
     }
   }
 
-  const handleCaptchaChange = (
-    event: ChangeEvent<HTMLInputElement>,
-  ) => {
+  const handleCaptchaChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.currentTarget.checked) {
       captchaProofRef.current = null
       setCaptchaChecked(false)
@@ -199,9 +177,7 @@ export function ContactForm() {
     const now = performance.now()
     const interaction = captchaInteractionRef.current
     const elapsedMs = Math.round(now - formStartedAtRef.current)
-    const interactionAge = interaction
-      ? now - interaction.at
-      : Number.POSITIVE_INFINITY
+    const interactionAge = interaction ? now - interaction.at : Number.POSITIVE_INFINITY
 
     const isHumanInteraction =
       event.nativeEvent.isTrusted &&
@@ -241,11 +217,7 @@ export function ContactForm() {
 
     const form = event.currentTarget
     const formData = new FormData(form)
-    const nextErrors = validateForm(
-      formData,
-      captchaChecked,
-      captchaProofRef.current,
-    )
+    const nextErrors = validateForm(formData, captchaChecked, captchaProofRef.current)
 
     if (Object.keys(nextErrors).length > 0) {
       setErrors(nextErrors)
@@ -278,9 +250,7 @@ export function ContactForm() {
       const result = (await response.json().catch(() => ({}))) as ContactResponse
 
       if (!response.ok) {
-        throw new Error(
-          result.message || 'Unable to send your message right now.',
-        )
+        throw new Error(result.message || 'Unable to send your message right now.')
       }
 
       form.reset()
@@ -296,25 +266,14 @@ export function ContactForm() {
       setFeedback('Message sent. I’ll get back to you as soon as possible.')
     } catch (error) {
       setSubmitState('error')
-      setFeedback(
-        error instanceof Error
-          ? error.message
-          : 'Unable to send your message right now.',
-      )
+      setFeedback(error instanceof Error ? error.message : 'Unable to send your message right now.')
     }
   }
 
   return (
-    <form
-      className="contact-cta__form"
-      aria-busy={isSubmitting}
-      noValidate
-      onSubmit={handleSubmit}
-    >
+    <form className="contact-cta__form" aria-busy={isSubmitting} noValidate onSubmit={handleSubmit}>
       <fieldset className="contact-cta__fieldset" disabled={isSubmitting}>
-        <label
-          className={`contact-cta__field${errors.name ? ' is-invalid' : ''}`}
-        >
+        <label className={`contact-cta__field${errors.name ? ' is-invalid' : ''}`}>
           <span className="contact-cta__field-icon">
             <ContactUserIcon />
           </span>
@@ -338,9 +297,7 @@ export function ContactForm() {
           </span>
         </label>
 
-        <label
-          className={`contact-cta__field${errors.email ? ' is-invalid' : ''}`}
-        >
+        <label className={`contact-cta__field${errors.email ? ' is-invalid' : ''}`}>
           <span className="contact-cta__field-icon">
             <MailIcon />
           </span>
@@ -405,23 +362,11 @@ export function ContactForm() {
 
         <label className="contact-cta__honeypot" aria-hidden="true">
           <span>Website</span>
-          <input
-            name="website"
-            type="text"
-            autoComplete="off"
-            tabIndex={-1}
-          />
+          <input name="website" type="text" autoComplete="off" tabIndex={-1} />
         </label>
 
-        <div
-          className={`contact-cta__captcha${
-            errors.captcha ? ' is-invalid' : ''
-          }`}
-        >
-          <label
-            className="contact-cta__captcha-control"
-            onPointerDown={handleCaptchaPointerDown}
-          >
+        <div className={`contact-cta__captcha${errors.captcha ? ' is-invalid' : ''}`}>
+          <label className="contact-cta__captcha-control" onPointerDown={handleCaptchaPointerDown}>
             <input
               className="contact-cta__captcha-input"
               name="captcha"
@@ -434,16 +379,9 @@ export function ContactForm() {
               onChange={handleCaptchaChange}
             />
             <span className="contact-cta__captcha-box" aria-hidden="true" />
-            <span
-              id="contact-captcha-copy"
-              className="contact-cta__captcha-copy"
-            >
-              <strong>
-                {errors.captcha ?? 'I am human'}
-              </strong>
-              <span>
-                Simple interaction verification
-              </span>
+            <span id="contact-captcha-copy" className="contact-cta__captcha-copy">
+              <strong>{errors.captcha ?? 'I am human'}</strong>
+              <span>Simple interaction verification</span>
             </span>
           </label>
         </div>

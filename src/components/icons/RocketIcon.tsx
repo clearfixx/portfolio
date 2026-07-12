@@ -24,18 +24,8 @@ export function RocketIcon(props: SVGProps<SVGSVGElement>) {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <path
-        d="M8.5 15.5 6.8 17.2"
-        stroke="currentColor"
-        strokeWidth="1.7"
-        strokeLinecap="round"
-      />
-      <path
-        d="M16.7 7.3h.01"
-        stroke="currentColor"
-        strokeWidth="2.4"
-        strokeLinecap="round"
-      />
+      <path d="M8.5 15.5 6.8 17.2" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+      <path d="M16.7 7.3h.01" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
     </svg>
   )
 }
