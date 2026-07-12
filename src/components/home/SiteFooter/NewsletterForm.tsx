@@ -58,7 +58,7 @@ export function NewsletterForm() {
     const email = readFormValue(formData, 'email').toLowerCase()
 
     if (!email) {
-      setFieldError("Field Email can't be empty")
+      setFieldError("Enter your email address")
       setSubmitState('error')
       setFeedback('Enter your email address.')
       focusEmailField(form)
