@@ -145,26 +145,26 @@ export const footerLinks: FooterLink[] = [
   {
     id: 'home',
     label: 'Home',
-    href: '/',
+    href: '/#hero',
   },
   {
     id: 'projects',
     label: 'Projects',
-    href: '/projects',
+    href: '/#projects',
   },
   {
-    id: 'articles',
-    label: 'Articles',
-    href: '/blog',
+    id: 'about',
+    label: 'About',
+    href: '/#engineer-profile',
+  },
+  {
+    id: 'stack',
+    label: 'Stack',
+    href: '/#skills-technologies',
   },
   {
     id: 'contact',
     label: 'Contact',
     href: '/#contact',
-  },
-  {
-    id: 'privacy',
-    label: 'Privacy',
-    href: '/privacy',
   },
 ]
