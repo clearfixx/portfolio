@@ -20,7 +20,8 @@
     "format:check": "prettier . --check",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
-    "lighthouse": "lhci autorun"
+    "lighthouse": "lhci autorun",
+    "test:links": "cross-env NODE_OPTIONS=\"--no-deprecation --import=tsx/esm\" playwright test tests/e2e/links.e2e.spec.ts --config=playwright.config.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "3.85.2",

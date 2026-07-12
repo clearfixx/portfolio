@@ -14,6 +14,7 @@ import {
 
 import {
   footerBio,
+  footerFeedLinks,
   footerLinks,
   footerSnapshots,
   footerSocialLinks,
@@ -181,7 +182,7 @@ export function SiteFooter() {
                 </div>
               </div>
 
-              <a href="#" className="site-footer__view-link">
+              <a href={footerFeedLinks.x} className="site-footer__view-link">
                 View more on X
                 <ArrowUpRightIcon />
               </a>
@@ -237,7 +238,7 @@ export function SiteFooter() {
                 </div>
               </div>
 
-              <a href="#" className="site-footer__view-link">
+              <a href={footerFeedLinks.instagram} className="site-footer__view-link">
                 View on Instagram
                 <ArrowUpRightIcon />
               </a>

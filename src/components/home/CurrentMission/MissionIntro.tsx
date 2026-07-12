@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { missionTechStack } from './data'
 
 export function MissionIntro() {
@@ -32,10 +33,10 @@ export function MissionIntro() {
         ))}
       </ul>
 
-      <a className="current-mission__link" href="/projects/dss-universe">
+      <Link className="current-mission__link" href="/projects/dss-universe">
         View Mission Control
         <span aria-hidden="true">↗</span>
-      </a>
+      </Link>
     </div>
   )
 }

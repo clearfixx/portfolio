@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { SidebarSection } from './SidebarSection'
 import { activeMissions, dssActivities, dssHealthItems, dssMetrics, dssNavSections } from './data'
 
@@ -204,10 +205,10 @@ export function MissionPreview() {
               </div>
             </dl>
 
-            <a href="/projects/dss-universe">
+            <Link href="/projects/dss-universe">
               Explore DSS
               <span aria-hidden="true">↗</span>
-            </a>
+            </Link>
           </footer>
         </div>
       </div>

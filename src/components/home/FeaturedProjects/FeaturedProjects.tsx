@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { CubeIcon } from '@/components/icons'
 
 import { PortfolioSection } from '../PortfolioSection'
@@ -13,10 +14,10 @@ export function FeaturedProjects() {
       description="A showcase of products I've built across different domains. Each project is a reflection of solving real problems with code."
       number="02"
       headerAction={
-        <a className="featured-projects__view-all" href="/projects">
+        <Link className="featured-projects__view-all" href="/projects">
           View all projects
           <span aria-hidden="true">→</span>
-        </a>
+        </Link>
       }
       footer={{
         icon: CubeIcon,

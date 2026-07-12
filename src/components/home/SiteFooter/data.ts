@@ -168,3 +168,8 @@ export const footerLinks: FooterLink[] = [
     href: '/#contact',
   },
 ]
+
+export const footerFeedLinks = {
+  x: footerSocialLinks.find((social) => social.id === 'x')?.href ?? 'https://x.com/',
+  instagram: 'https://www.instagram.com/',
+} as const
