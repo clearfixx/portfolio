@@ -108,6 +108,7 @@ export interface Config {
   globals: {
     'site-settings': SiteSetting;
     homepage: Homepage;
+    profile: Profile;
     seo: Seo;
     social: Social;
     contact: Contact;
@@ -116,6 +117,7 @@ export interface Config {
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     homepage: HomepageSelect<false> | HomepageSelect<true>;
+    profile: ProfileSelect<false> | ProfileSelect<true>;
     seo: SeoSelect<false> | SeoSelect<true>;
     social: SocialSelect<false> | SocialSelect<true>;
     contact: ContactSelect<false> | ContactSelect<true>;
@@ -1029,7 +1031,15 @@ export interface Homepage {
   hero: {
     eyebrow?: string | null;
     title: string;
+    /**
+     * Exact phrase inside the title that receives strong emphasis.
+     */
+    titleAccent?: string | null;
     subtitle: string;
+    /**
+     * Exact phrase inside the subtitle that receives accent emphasis.
+     */
+    subtitleAccent?: string | null;
     primaryCtaLabel?: string | null;
     primaryCtaUrl?: string | null;
     secondaryCtaLabel?: string | null;
@@ -1058,6 +1068,51 @@ export interface Homepage {
     enabled?: boolean | null;
     title?: string | null;
     description?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "profile".
+ */
+export interface Profile {
+  id: number;
+  name: string;
+  role: string;
+  location?: string | null;
+  status?: ('available' | 'focused' | 'unavailable') | null;
+  portrait?: (number | null) | Media;
+  shortBio?: string | null;
+  availability?: string | null;
+  /**
+   * Used to derive the public years-of-experience metric.
+   */
+  careerStartedAt?: string | null;
+  /**
+   * Optional fallback for the Hero secondary CTA.
+   */
+  cvFile?: (number | null) | Media;
+  /**
+   * Optional manual public metrics. Derived collection and experience metrics stay in code.
+   */
+  metrics?:
+    | {
+        key: string;
+        label: string;
+        value: number;
+        suffix?: string | null;
+        enabled?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Optional truthful activity note. Leave disabled until a manual note or live integration exists.
+   */
+  heroActivity?: {
+    enabled?: boolean | null;
+    label?: string | null;
+    detail?: string | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1158,7 +1213,9 @@ export interface HomepageSelect<T extends boolean = true> {
     | {
         eyebrow?: T;
         title?: T;
+        titleAccent?: T;
         subtitle?: T;
+        subtitleAccent?: T;
         primaryCtaLabel?: T;
         primaryCtaUrl?: T;
         secondaryCtaLabel?: T;
@@ -1187,6 +1244,41 @@ export interface HomepageSelect<T extends boolean = true> {
         enabled?: T;
         title?: T;
         description?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "profile_select".
+ */
+export interface ProfileSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  location?: T;
+  status?: T;
+  portrait?: T;
+  shortBio?: T;
+  availability?: T;
+  careerStartedAt?: T;
+  cvFile?: T;
+  metrics?:
+    | T
+    | {
+        key?: T;
+        label?: T;
+        value?: T;
+        suffix?: T;
+        enabled?: T;
+        id?: T;
+      };
+  heroActivity?:
+    | T
+    | {
+        enabled?: T;
+        label?: T;
+        detail?: T;
       };
   updatedAt?: T;
   createdAt?: T;

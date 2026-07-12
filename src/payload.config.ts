@@ -18,8 +18,7 @@ import {
   Testimonials,
   Users,
 } from './collections'
-
-import { Analytics, Contact, Homepage, SEO, SiteSettings, Social } from './globals'
+import { Analytics, Contact, Homepage, Profile, SEO, SiteSettings, Social } from './globals'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -44,7 +43,7 @@ export default buildConfig({
     NewsletterSubscribers,
     Notifications,
   ],
-  globals: [SiteSettings, Homepage, SEO, Social, Contact, Analytics],
+  globals: [SiteSettings, Homepage, Profile, SEO, Social, Contact, Analytics],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

@@ -1,34 +1,72 @@
-import type { Homepage } from '@/payload-types'
+import type { ReactNode } from 'react'
+
+import type { HeroViewModel } from '@/lib/cms'
 
 type MissionProps = {
-  hero: Homepage['hero']
+  content: HeroViewModel
 }
 
-export function Mission({ hero }: MissionProps) {
+function renderAccent(
+  text: string,
+  accent: string | undefined,
+  element: 'em' | 'strong',
+): ReactNode {
+  if (!accent) return text
+
+  const index = text.toLocaleLowerCase().indexOf(accent.toLocaleLowerCase())
+
+  if (index < 0) return text
+
+  const before = text.slice(0, index)
+  const match = text.slice(index, index + accent.length)
+  const after = text.slice(index + accent.length)
+
+  if (element === 'strong') {
+    return (
+      <>
+        {before}
+        <strong>{match}</strong>
+        {after}
+      </>
+    )
+  }
+
+  return (
+    <>
+      {before}
+      <em>{match}</em>
+      {after}
+    </>
+  )
+}
+
+export function Mission({ content }: MissionProps) {
+  const subtitleLines = content.headline.subtitle.split(/\r?\n/)
+
   return (
     <main className="hero-mission">
-      <p className="hero-mission__intro">👋 Hi, I&apos;m</p>
-
+      <p className="hero-mission__intro">{content.eyebrow}</p>
       <h1 className="hero-mission__name">
-        Andrii <strong>Kulahin.</strong>
+        {content.name.leading ? `${content.name.leading} ` : ''}
+        <strong>{content.name.accent}</strong>
       </h1>
-
       <p className="hero-mission__title">
-        I don&apos;t just build <strong>websites.</strong>
-        <br />I build <em>systems</em>
-        <br />that solve real problems.
+        {renderAccent(content.headline.title, content.headline.titleAccent, 'strong')}
+        {subtitleLines.map((line, index) => (
+          <span key={`${line}-${index}`}>
+            <br />
+            {renderAccent(line, content.headline.subtitleAccent, 'em')}
+          </span>
+        ))}
       </p>
-
       <div className="hero-mission__actions">
-        <a className="hero-button hero-button--primary" href={hero?.primaryCtaUrl ?? '#projects'}>
-          {hero?.primaryCtaLabel ?? 'Explore My Work'}
+        <a className="hero-button hero-button--primary" href={content.primaryAction.href}>
+          {content.primaryAction.label}
         </a>
-
-        <a className="hero-button hero-button--secondary" href={hero?.secondaryCtaUrl ?? '#contact'}>
-          {hero?.secondaryCtaLabel ?? 'Download CV'} <span>↓</span>
+        <a className="hero-button hero-button--secondary" href={content.secondaryAction.href}>
+          {content.secondaryAction.label} <span>↓</span>
         </a>
       </div>
-
       <a className="hero-scroll" href="#projects">
         <span>Scroll to explore</span>
         <i />

@@ -2,40 +2,31 @@ import {
   ContactCTA,
   CurrentMission,
   DeliveryPipeline,
-  FeaturedProjects,
   EngineerProfile,
+  FeaturedProjects,
   Hero,
   InsightsTrust,
-  SkillsTechnologies,
   SiteFooter,
+  SkillsTechnologies,
 } from '@/components/home'
+import { getHomepageContent } from '@/lib/cms'
 import { ScrollStack } from '@/components/motion'
 
-import { getContact, getHomepage } from '@/lib/cms'
-
 export default async function HomePage() {
-  const [homepage, contact] = await Promise.all([getHomepage(), getContact()])
+  const { contact, hero, homepage } = await getHomepageContent()
 
   return (
     <>
-      <Hero hero={homepage.hero} />
-
+      <Hero content={hero} />
       <CurrentMission />
-
       <ScrollStack className="portfolio-stack">
         <FeaturedProjects />
-
         <EngineerProfile />
-
         <SkillsTechnologies />
       </ScrollStack>
-
       <DeliveryPipeline />
-
       <InsightsTrust />
-
       <ContactCTA contact={contact} contactSection={homepage.contactSection} />
-
       <SiteFooter />
     </>
   )

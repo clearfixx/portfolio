@@ -1,4 +1,4 @@
-import type { Homepage } from '@/payload-types'
+import type { HeroTechIcon, HeroViewModel } from '@/lib/cms'
 
 import { Background } from './Background'
 import { Mission } from './Mission'
@@ -6,21 +6,10 @@ import { System } from './System'
 import { Workspace } from './Workspace'
 
 type HeroProps = {
-  hero: Homepage['hero']
+  content: HeroViewModel
 }
 
-const techStack = [
-  { label: 'Next.js', icon: 'next' },
-  { label: 'TypeScript', icon: 'ts' },
-  { label: 'Node.js', icon: 'node' },
-  { label: 'PostgreSQL', icon: 'postgres' },
-  { label: 'Prisma', icon: 'prisma' },
-  { label: 'Tailwind', icon: 'tailwind' },
-  { label: 'Docker', icon: 'docker' },
-  { label: 'GitHub', icon: 'github' },
-] as const
-
-function TechIcon({ icon }: { icon: (typeof techStack)[number]['icon'] }) {
+function TechIcon({ icon }: { icon: HeroTechIcon }) {
   if (icon === 'next') {
     return (
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -93,37 +82,47 @@ function TechIcon({ icon }: { icon: (typeof techStack)[number]['icon'] }) {
     )
   }
 
+  if (icon === 'github') {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9 19c-5 1.5-5-2.5-7-3" />
+        <path d="M15 22v-3.5c0-1 .1-1.5-.5-2 3.5-.4 7.5-1.7 7.5-7.5A5.8 5.8 0 0 0 20.5 5c.2-.8.2-2-.3-3 0 0-1-.3-3.2 1.2a11 11 0 0 0-5.8 0C9 1.7 8 2 8 2c-.5 1-.5 2.2-.3 3A5.8 5.8 0 0 0 6 9c0 5.8 4 7.1 7.5 7.5-.4.4-.6.9-.6 1.7V22" />
+      </svg>
+    )
+  }
+
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M9 19c-5 1.5-5-2.5-7-3" />
-      <path d="M15 22v-3.5c0-1 .1-1.5-.5-2 3.5-.4 7.5-1.7 7.5-7.5A5.8 5.8 0 0 0 20.5 5c.2-.8.2-2-.3-3 0 0-1-.3-3.2 1.2a11 11 0 0 0-5.8 0C9 1.7 8 2 8 2c-.5 1-.5 2.2-.3 3A5.8 5.8 0 0 0 6 9c0 5.8 4 7.1 7.5 7.5-.4.4-.6.9-.6 1.7V22" />
+      <path d="M9 7L4 12l5 5" />
+      <path d="M15 7l5 5-5 5" />
+      <path d="M13 5l-2 14" />
     </svg>
   )
 }
 
-export function Hero({ hero }: HeroProps) {
+export function Hero({ content }: HeroProps) {
   return (
     <section className="home-hero" id="hero">
       <Background />
       <div className="hero-orb" aria-hidden="true" />
-
       <div className="site-container hero-shell">
         <div className="hero-main">
-          <System />
-          <Mission hero={hero} />
+          <System telemetry={content.telemetry} />
+          <Mission content={content} />
           <Workspace />
         </div>
-
-        <div className="hero-tech">
-          <span>Tech Stack</span>
-          {techStack.map((item) => (
-            <strong key={item.label}>
-              <TechIcon icon={item.icon} />
-              {item.label}
-            </strong>
-          ))}
-          <em>and more...</em>
-        </div>
+        {content.techStack.length > 0 ? (
+          <div className="hero-tech">
+            <span>Tech Stack</span>
+            {content.techStack.map((item) => (
+              <strong key={item.id}>
+                <TechIcon icon={item.icon} />
+                {item.label}
+              </strong>
+            ))}
+            <em>and more...</em>
+          </div>
+        ) : null}
       </div>
     </section>
   )
