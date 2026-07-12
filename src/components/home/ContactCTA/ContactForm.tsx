@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import type {
   ChangeEvent,
-  FormEvent,
+  SubmitEvent,
   KeyboardEvent,
   PointerEvent,
 } from 'react'
@@ -232,7 +232,7 @@ export function ContactForm() {
     clearFieldError('captcha')
   }
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     if (isSubmitting) {

@@ -57,7 +57,7 @@ function KyivMap() {
         aria-hidden="true"
         fill
         loading="lazy"
-        quality={72}
+        quality={75}
         sizes="(max-width: 1180px) 100vw, 56vw"
       />
 
