@@ -5,10 +5,23 @@ import {
   publicApiResponse,
   readPublicApiJson,
 } from '@/lib/server/publicApi'
+import {
+  checkRecentPublicApiSubmission,
+  consumePublicApiRateLimit,
+  createPublicApiClientKey,
+  createPublicApiValueKey,
+  publicApiRateLimitResponse,
+  recordRecentPublicApiSubmission,
+} from '@/lib/server/publicApiRateLimit'
 
 export const runtime = 'nodejs'
 
 const MAX_CONTACT_BODY_BYTES = 8 * 1024
+const CONTACT_CLIENT_LIMIT = 8
+const CONTACT_CLIENT_WINDOW_MS =
+  10 * 60 * 1000
+const CONTACT_DUPLICATE_WINDOW_MS =
+  30 * 60 * 1000
 
 const projectTypes = {
   website: 'Website',
@@ -39,7 +52,9 @@ type CaptchaProof = {
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 function normalizeString(value: unknown) {
-  return typeof value === 'string' ? value.trim() : ''
+  return typeof value === 'string'
+    ? value.trim()
+    : ''
 }
 
 function isProjectType(
@@ -55,7 +70,8 @@ function isCaptchaProof(
     return false
   }
 
-  const proof = value as Record<string, unknown>
+  const proof =
+    value as Record<string, unknown>
 
   return (
     proof.checked === true &&
@@ -83,14 +99,35 @@ export async function POST(request: Request) {
   }
 
   const { data: body, requestId } = parsed
+
+  const clientLimit =
+    consumePublicApiRateLimit({
+      scope: 'contact:client',
+      key: createPublicApiClientKey(request),
+      limit: CONTACT_CLIENT_LIMIT,
+      windowMs:
+        CONTACT_CLIENT_WINDOW_MS,
+    })
+
+  if (!clientLimit.allowed) {
+    return publicApiRateLimitResponse(
+      requestId,
+      clientLimit,
+    )
+  }
+
   const name = normalizeString(body.name)
   const email =
     normalizeString(body.email).toLowerCase()
   const projectType = normalizeString(
     body.projectType,
   )
-  const message = normalizeString(body.message)
-  const website = normalizeString(body.website)
+  const message = normalizeString(
+    body.message,
+  )
+  const website = normalizeString(
+    body.website,
+  )
 
   if (website) {
     return publicApiResponse(
@@ -124,6 +161,30 @@ export async function POST(request: Request) {
     )
   }
 
+  const duplicateKey =
+    createPublicApiValueKey(
+      [
+        email,
+        projectType,
+        message.toLocaleLowerCase(),
+      ].join('\n'),
+    )
+
+  const duplicateCheck =
+    checkRecentPublicApiSubmission({
+      scope: 'contact:duplicate',
+      key: duplicateKey,
+      ttlMs:
+        CONTACT_DUPLICATE_WINDOW_MS,
+    })
+
+  if (!duplicateCheck.allowed) {
+    return publicApiRateLimitResponse(
+      requestId,
+      duplicateCheck,
+    )
+  }
+
   try {
     const payload = await getPayload({
       config: configPromise,
@@ -141,6 +202,13 @@ export async function POST(request: Request) {
         status: 'new',
         source: 'portfolio-contact-form',
       },
+    })
+
+    recordRecentPublicApiSubmission({
+      scope: 'contact:duplicate',
+      key: duplicateKey,
+      ttlMs:
+        CONTACT_DUPLICATE_WINDOW_MS,
     })
 
     return publicApiResponse(

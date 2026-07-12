@@ -5,10 +5,22 @@ import {
   publicApiResponse,
   readPublicApiJson,
 } from '@/lib/server/publicApi'
+import {
+  consumePublicApiRateLimit,
+  createPublicApiClientKey,
+  createPublicApiValueKey,
+  publicApiRateLimitResponse,
+} from '@/lib/server/publicApiRateLimit'
 
 export const runtime = 'nodejs'
 
 const MAX_NEWSLETTER_BODY_BYTES = 2 * 1024
+const NEWSLETTER_CLIENT_LIMIT = 20
+const NEWSLETTER_CLIENT_WINDOW_MS =
+  10 * 60 * 1000
+const NEWSLETTER_EMAIL_LIMIT = 5
+const NEWSLETTER_EMAIL_WINDOW_MS =
+  60 * 60 * 1000
 
 type NewsletterRequest = {
   email?: unknown
@@ -18,7 +30,9 @@ type NewsletterRequest = {
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 function normalizeString(value: unknown) {
-  return typeof value === 'string' ? value.trim() : ''
+  return typeof value === 'string'
+    ? value.trim()
+    : ''
 }
 
 export async function POST(request: Request) {
@@ -26,7 +40,8 @@ export async function POST(request: Request) {
     await readPublicApiJson<NewsletterRequest>(
       request,
       {
-        maxBytes: MAX_NEWSLETTER_BODY_BYTES,
+        maxBytes:
+          MAX_NEWSLETTER_BODY_BYTES,
       },
     )
 
@@ -35,9 +50,28 @@ export async function POST(request: Request) {
   }
 
   const { data: body, requestId } = parsed
+
+  const clientLimit =
+    consumePublicApiRateLimit({
+      scope: 'newsletter:client',
+      key: createPublicApiClientKey(request),
+      limit: NEWSLETTER_CLIENT_LIMIT,
+      windowMs:
+        NEWSLETTER_CLIENT_WINDOW_MS,
+    })
+
+  if (!clientLimit.allowed) {
+    return publicApiRateLimitResponse(
+      requestId,
+      clientLimit,
+    )
+  }
+
   const email =
     normalizeString(body.email).toLowerCase()
-  const website = normalizeString(body.website)
+  const website = normalizeString(
+    body.website,
+  )
 
   if (website) {
     return publicApiResponse(
@@ -59,10 +93,27 @@ export async function POST(request: Request) {
     return publicApiResponse(
       {
         ok: false,
-        message: 'Enter a valid email address.',
+        message:
+          'Enter a valid email address.',
       },
       422,
       requestId,
+    )
+  }
+
+  const emailLimit =
+    consumePublicApiRateLimit({
+      scope: 'newsletter:email',
+      key: createPublicApiValueKey(email),
+      limit: NEWSLETTER_EMAIL_LIMIT,
+      windowMs:
+        NEWSLETTER_EMAIL_WINDOW_MS,
+    })
+
+  if (!emailLimit.allowed) {
+    return publicApiRateLimitResponse(
+      requestId,
+      emailLimit,
     )
   }
 
@@ -72,7 +123,8 @@ export async function POST(request: Request) {
     })
 
     const existing = await payload.find({
-      collection: 'newsletter-subscribers',
+      collection:
+        'newsletter-subscribers',
       overrideAccess: true,
       depth: 0,
       limit: 1,
@@ -100,7 +152,8 @@ export async function POST(request: Request) {
       }
 
       await payload.update({
-        collection: 'newsletter-subscribers',
+        collection:
+          'newsletter-subscribers',
         id: subscriber.id,
         overrideAccess: true,
         data: {
@@ -114,7 +167,8 @@ export async function POST(request: Request) {
       return publicApiResponse(
         {
           ok: true,
-          message: 'Welcome back to Build Notes.',
+          message:
+            'Welcome back to Build Notes.',
         },
         200,
         requestId,
@@ -122,7 +176,8 @@ export async function POST(request: Request) {
     }
 
     await payload.create({
-      collection: 'newsletter-subscribers',
+      collection:
+        'newsletter-subscribers',
       overrideAccess: true,
       data: {
         email,
