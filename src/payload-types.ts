@@ -1139,6 +1139,10 @@ export interface Profile {
    */
   careerStartedAt?: string | null
   /**
+   * Completed projects not represented by published Projects records. The public Projects metric adds this value to the published portfolio count.
+   */
+  completedProjectsOutsidePortfolio?: number | null
+  /**
    * Optional fallback for the Hero secondary CTA.
    */
   cvFile?: (number | null) | Media
@@ -1371,6 +1375,7 @@ export interface ProfileSelect<T extends boolean = true> {
   shortBio?: T
   availability?: T
   careerStartedAt?: T
+  completedProjectsOutsidePortfolio?: T
   cvFile?: T
   metrics?:
     | T

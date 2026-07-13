@@ -36,3 +36,4 @@ export type {
   HeroTelemetryViewModel,
   HeroViewModel,
 } from './types'
+export { calculateCompletedProjectsTotal } from './project-metrics'

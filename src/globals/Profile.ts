@@ -71,6 +71,17 @@ export const Profile: GlobalConfig = {
       },
     },
     {
+      name: 'completedProjectsOutsidePortfolio',
+      label: 'Completed Projects Outside Portfolio',
+      type: 'number',
+      min: 0,
+      defaultValue: 0,
+      admin: {
+        description:
+          'Completed projects not represented by published Projects records. The public Projects metric adds this value to the published portfolio count.',
+      },
+    },
+    {
       name: 'cvFile',
       type: 'upload',
       relationTo: 'media',

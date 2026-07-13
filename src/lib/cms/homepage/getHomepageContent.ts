@@ -12,6 +12,7 @@ import { buildCurrentMissionViewModel } from './current-mission'
 import { buildEngineerProfileViewModel } from './engineer-profile'
 import { buildFeaturedProjectViewModels, getSelectedFeaturedProjects } from './featured-projects'
 import { buildHeroViewModel, getSelectedTechStack } from './hero'
+import { calculateCompletedProjectsTotal } from './project-metrics'
 import type {
   ContactSectionViewModel,
   CurrentMissionViewModel,
@@ -31,13 +32,18 @@ export type HomepageContent = {
 }
 
 export async function getHomepageContent(): Promise<HomepageContent> {
-  const [homepage, contact, profile, projectsCount, social] = await Promise.all([
+  const [homepage, contact, profile, publishedProjectsCount, social] = await Promise.all([
     getHomepage(),
     getContact(),
     getProfile(),
     getProjectsCount(),
     getSocial(),
   ])
+
+  const completedProjectsCount = calculateCompletedProjectsTotal(
+    profile.completedProjectsOutsidePortfolio,
+    publishedProjectsCount,
+  )
 
   const selectedTechStack = getSelectedTechStack(homepage.selectedTechStack)
   const selectedFeaturedProjects = getSelectedFeaturedProjects(homepage.featuredProjects).slice(
@@ -63,13 +69,13 @@ export async function getHomepageContent(): Promise<HomepageContent> {
     engineerProfile: buildEngineerProfileViewModel({
       homepage,
       profile,
-      projectsCount,
+      projectsCount: completedProjectsCount,
     }),
     featuredProjects: buildFeaturedProjectViewModels(projects),
     hero: buildHeroViewModel({
       homepage,
       profile,
-      projectsCount,
+      projectsCount: completedProjectsCount,
       technologies,
     }),
   }
