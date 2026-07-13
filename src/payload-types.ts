@@ -1022,6 +1022,18 @@ export interface SiteSetting {
   siteDescription: string
   logo?: (number | null) | Media
   defaultLanguage: 'en' | 'uk'
+  footer?: {
+    navigation?:
+      | {
+          label: string
+          href: string
+          id?: string | null
+        }[]
+      | null
+    copyrightPrefix?: string | null
+    copyrightEmphasis?: string | null
+    copyrightSuffix?: string | null
+  }
   /**
    * Temporarily hide the public website.
    */
@@ -1252,6 +1264,47 @@ export interface Homepage {
     title?: string | null
     description?: string | null
   }
+  footerSection?: {
+    enabled?: boolean | null
+    availabilityLabel?: string | null
+    connectLabel?: string | null
+    xTitle?: string | null
+    xHandle?: string | null
+    xLinkLabel?: string | null
+    /**
+     * Curated manual posts. This is not presented as a live X API integration.
+     */
+    xPosts?:
+      | {
+          content: string
+          publishedAt: string
+          replies?: number | null
+          reposts?: number | null
+          likes?: number | null
+          id?: string | null
+        }[]
+      | null
+    snapshotsTitle?: string | null
+    snapshotsSubtitle?: string | null
+    instagramLinkLabel?: string | null
+    /**
+     * Optional Media overrides the decorative frontend preset.
+     */
+    snapshots?:
+      | {
+          title: string
+          subtitle?: string | null
+          kind: 'code' | 'ui' | 'desk' | 'quote' | 'terminal' | 'coffee'
+          image?: (number | null) | Media
+          id?: string | null
+        }[]
+      | null
+    newsletterTitle?: string | null
+    newsletterDescription?: string | null
+    newsletterPlaceholder?: string | null
+    newsletterButtonLabel?: string | null
+    newsletterNote?: string | null
+  }
   contactSection?: {
     enabled?: boolean | null
     eyebrow?: string | null
@@ -1425,6 +1478,20 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   siteDescription?: T
   logo?: T
   defaultLanguage?: T
+  footer?:
+    | T
+    | {
+        navigation?:
+          | T
+          | {
+              label?: T
+              href?: T
+              id?: T
+            }
+        copyrightPrefix?: T
+        copyrightEmphasis?: T
+        copyrightSuffix?: T
+      }
   maintenanceMode?: T
   updatedAt?: T
   createdAt?: T
@@ -1611,6 +1678,43 @@ export interface HomepageSelect<T extends boolean = true> {
         enabled?: T
         title?: T
         description?: T
+      }
+  footerSection?:
+    | T
+    | {
+        enabled?: T
+        availabilityLabel?: T
+        connectLabel?: T
+        xTitle?: T
+        xHandle?: T
+        xLinkLabel?: T
+        xPosts?:
+          | T
+          | {
+              content?: T
+              publishedAt?: T
+              replies?: T
+              reposts?: T
+              likes?: T
+              id?: T
+            }
+        snapshotsTitle?: T
+        snapshotsSubtitle?: T
+        instagramLinkLabel?: T
+        snapshots?:
+          | T
+          | {
+              title?: T
+              subtitle?: T
+              kind?: T
+              image?: T
+              id?: T
+            }
+        newsletterTitle?: T
+        newsletterDescription?: T
+        newsletterPlaceholder?: T
+        newsletterButtonLabel?: T
+        newsletterNote?: T
       }
   contactSection?:
     | T

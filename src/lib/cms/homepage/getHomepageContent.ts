@@ -9,6 +9,7 @@ import {
   getProjectsCount,
   getSocial,
   getVisibleTechStack,
+  getSiteSettings,
 } from '../queries'
 import { buildContactSectionViewModel } from './contact'
 import { buildCurrentMissionViewModel } from './current-mission'
@@ -18,6 +19,7 @@ import { buildFeaturedProjectViewModels, getSelectedFeaturedProjects } from './f
 import { buildHeroViewModel, getSelectedTechStack } from './hero'
 import { buildInsightsTrustViewModel } from './insights-trust'
 import { buildSkillsSectionViewModel } from './skills'
+import { buildSiteFooterViewModel } from './site-footer'
 import { calculateCompletedProjectsTotal } from './project-metrics'
 import type {
   ContactSectionViewModel,
@@ -28,6 +30,7 @@ import type {
   InsightsTrustViewModel,
   SkillsSectionViewModel,
   DeliveryPipelineViewModel,
+  SiteFooterViewModel,
 } from './types'
 
 const FEATURED_PROJECT_LIMIT = 3
@@ -41,6 +44,7 @@ export type HomepageContent = {
   hero: HeroViewModel
   insightsTrust: InsightsTrustViewModel | null
   skills: SkillsSectionViewModel
+  siteFooter: SiteFooterViewModel | null
 }
 
 export async function getHomepageContent(): Promise<HomepageContent> {
@@ -52,6 +56,7 @@ export async function getHomepageContent(): Promise<HomepageContent> {
     social,
     publishedArticles,
     approvedTestimonials,
+    siteSettings,
   ] = await Promise.all([
     getHomepage(),
     getContact(),
@@ -60,6 +65,7 @@ export async function getHomepageContent(): Promise<HomepageContent> {
     getSocial(),
     getPublishedBlogPosts(6),
     getApprovedTestimonials(6),
+    getSiteSettings(),
   ])
 
   const completedProjectsCount = calculateCompletedProjectsTotal(
@@ -97,6 +103,13 @@ export async function getHomepageContent(): Promise<HomepageContent> {
       projectsCount: completedProjectsCount,
     }),
     featuredProjects: buildFeaturedProjectViewModels(projects),
+    siteFooter: buildSiteFooterViewModel({
+      contact,
+      homepage,
+      profile,
+      siteSettings,
+      social,
+    }),
     skills: buildSkillsSectionViewModel(homepage, visibleTechStack),
     insightsTrust: buildInsightsTrustViewModel({
       articles: publishedArticles,

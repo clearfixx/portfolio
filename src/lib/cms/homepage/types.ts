@@ -393,3 +393,88 @@ export type DeliveryPipelineViewModel = {
   phases: DeliveryPipelinePhaseViewModel[]
   title: DeliveryPipelineTitleViewModel
 }
+
+export type SiteFooterSocialIcon = 'github' | 'linkedin' | 'mail' | 'telegram' | 'x'
+
+export type SiteFooterSocialLinkViewModel = {
+  external: boolean
+  href: string
+  icon: SiteFooterSocialIcon
+  id: string
+  label: string
+}
+
+export type SiteFooterPostViewModel = {
+  content: string
+  date: string
+  id: string
+  likes: number
+  replies: number
+  reposts: number
+  time: string
+}
+
+export type SiteFooterSnapshotKind = 'code' | 'coffee' | 'desk' | 'quote' | 'terminal' | 'ui'
+
+export type SiteFooterImageViewModel = {
+  alt: string
+  src: string
+}
+
+export type SiteFooterSnapshotViewModel = {
+  id: string
+  image?: SiteFooterImageViewModel
+  kind: SiteFooterSnapshotKind
+  subtitle?: string
+  title: string
+}
+
+export type SiteFooterLinkViewModel = {
+  href: string
+  id: string
+  label: string
+}
+
+export type SiteFooterViewModel = {
+  copyright: {
+    emphasis: string
+    prefix: string
+    suffix: string
+    year: number
+  }
+  newsletter: {
+    buttonLabel: string
+    description: string
+    note: string
+    placeholder: string
+    title: string
+  }
+  navigation: SiteFooterLinkViewModel[]
+  profile: {
+    availability: {
+      active: boolean
+      detail: string
+      label: string
+    }
+    connectLabel: string
+    description: string[]
+    image: SiteFooterImageViewModel
+    name: string
+    role: string
+    socialLinks: SiteFooterSocialLinkViewModel[]
+  }
+  snapshots: {
+    href?: string
+    items: SiteFooterSnapshotViewModel[]
+    linkLabel: string
+    subtitle: string
+    title: string
+  }
+  xFeed: {
+    handle: string
+    href?: string
+    linkLabel: string
+    posts: SiteFooterPostViewModel[]
+    title: string
+  }
+}

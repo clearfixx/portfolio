@@ -744,6 +744,165 @@ export const Homepage: GlobalConfig = {
       ],
     },
     {
+      name: 'footerSection',
+      label: 'Site Footer',
+      type: 'group',
+      fields: [
+        {
+          name: 'enabled',
+          type: 'checkbox',
+          defaultValue: true,
+        },
+        {
+          name: 'availabilityLabel',
+          type: 'text',
+          defaultValue: 'Available',
+        },
+        {
+          name: 'connectLabel',
+          type: 'text',
+          defaultValue: 'Connect',
+        },
+        {
+          name: 'xTitle',
+          type: 'text',
+          defaultValue: 'X Signals',
+        },
+        {
+          name: 'xHandle',
+          type: 'text',
+          defaultValue: '@ak_dev',
+        },
+        {
+          name: 'xLinkLabel',
+          type: 'text',
+          defaultValue: 'View more on X',
+        },
+        {
+          name: 'xPosts',
+          type: 'array',
+          maxRows: 4,
+          admin: {
+            description: 'Curated manual posts. This is not presented as a live X API integration.',
+            initCollapsed: true,
+          },
+          fields: [
+            {
+              name: 'content',
+              type: 'textarea',
+              required: true,
+            },
+            {
+              name: 'publishedAt',
+              type: 'date',
+              required: true,
+              admin: {
+                date: {
+                  pickerAppearance: 'dayAndTime',
+                },
+              },
+            },
+            {
+              name: 'replies',
+              type: 'number',
+              min: 0,
+              defaultValue: 0,
+            },
+            {
+              name: 'reposts',
+              type: 'number',
+              min: 0,
+              defaultValue: 0,
+            },
+            {
+              name: 'likes',
+              type: 'number',
+              min: 0,
+              defaultValue: 0,
+            },
+          ],
+        },
+        {
+          name: 'snapshotsTitle',
+          type: 'text',
+          defaultValue: 'Build Snapshots',
+        },
+        {
+          name: 'snapshotsSubtitle',
+          type: 'text',
+          defaultValue: 'Instagram visual log',
+        },
+        {
+          name: 'instagramLinkLabel',
+          type: 'text',
+          defaultValue: 'View on Instagram',
+        },
+        {
+          name: 'snapshots',
+          type: 'array',
+          maxRows: 6,
+          admin: {
+            description: 'Optional Media overrides the decorative frontend preset.',
+            initCollapsed: true,
+          },
+          fields: [
+            {
+              name: 'title',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'subtitle',
+              type: 'text',
+            },
+            {
+              name: 'kind',
+              type: 'select',
+              required: true,
+              options: [
+                { label: 'Code', value: 'code' },
+                { label: 'UI', value: 'ui' },
+                { label: 'Desk', value: 'desk' },
+                { label: 'Quote', value: 'quote' },
+                { label: 'Terminal', value: 'terminal' },
+                { label: 'Coffee', value: 'coffee' },
+              ],
+            },
+            {
+              name: 'image',
+              type: 'upload',
+              relationTo: 'media',
+            },
+          ],
+        },
+        {
+          name: 'newsletterTitle',
+          type: 'text',
+          defaultValue: 'Build Notes',
+        },
+        {
+          name: 'newsletterDescription',
+          type: 'textarea',
+          defaultValue: 'Notes on engineering, architecture and better products.',
+        },
+        {
+          name: 'newsletterPlaceholder',
+          type: 'text',
+          defaultValue: "What's a good email address?",
+        },
+        {
+          name: 'newsletterButtonLabel',
+          type: 'text',
+          defaultValue: 'Gimme!',
+        },
+        {
+          name: 'newsletterNote',
+          type: 'text',
+          defaultValue: 'No spam. Unsubscribe anytime.',
+        },
+      ],
+    },
+    {
       name: 'contactSection',
       type: 'group',
       fields: [

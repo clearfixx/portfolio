@@ -1,3 +1,4 @@
+export { buildSiteFooterViewModel } from './site-footer'
 export { buildDeliveryPipelineViewModel } from './delivery-pipeline'
 export { buildInsightsTrustViewModel } from './insights-trust'
 export { buildSkillsSectionViewModel } from './skills'
@@ -72,4 +73,14 @@ export type {
   DeliveryPipelinePhaseViewModel,
   DeliveryPipelineTitleViewModel,
   DeliveryPipelineViewModel,
+} from './types'
+export type {
+  SiteFooterImageViewModel,
+  SiteFooterLinkViewModel,
+  SiteFooterPostViewModel,
+  SiteFooterSnapshotKind,
+  SiteFooterSnapshotViewModel,
+  SiteFooterSocialIcon,
+  SiteFooterSocialLinkViewModel,
+  SiteFooterViewModel,
 } from './types'

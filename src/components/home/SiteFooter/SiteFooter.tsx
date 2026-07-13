@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type { ComponentType, SVGProps } from 'react'
 
+import { Logo } from '@/components/brand'
 import {
   ArrowUpRightIcon,
   GithubIcon,
@@ -10,40 +11,33 @@ import {
   TelegramIcon,
   XIcon,
 } from '@/components/icons'
+import { CookieSettingBanner } from '@/components/privacy/CookieSettingsButton'
+import type {
+  SiteFooterSnapshotViewModel,
+  SiteFooterSocialIcon,
+  SiteFooterSocialLinkViewModel,
+  SiteFooterViewModel,
+} from '@/lib/cms/homepage'
 
 import { NewsletterForm } from './NewsletterForm'
-
-import {
-  footerBio,
-  footerFeedLinks,
-  footerLinks,
-  footerSnapshots,
-  footerSocialLinks,
-  footerXPosts,
-  type FooterSnapshot,
-  type FooterSocialLink,
-} from './data'
-
-import { Logo } from '@/components/brand'
-import { CookieSettingBanner } from '@/components/privacy/CookieSettingsButton'
 
 type IconProps = SVGProps<SVGSVGElement>
 
 const InstagramIcon = (props: IconProps) => (
-  <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" {...props}>
+  <svg aria-hidden="true" fill="currentColor" viewBox="0 0 24 24" {...props}>
     <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5a3.95 3.95 0 0 0 3.95 3.95h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95h-8.5Zm8.9 1.35a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8A3.2 3.2 0 1 0 12 15.2 3.2 3.2 0 0 0 12 8.8Z" />
   </svg>
 )
 
 const ReplyIcon = (props: IconProps) => (
   <svg
-    viewBox="0 0 24 24"
     aria-hidden="true"
     fill="none"
     stroke="currentColor"
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth="1.8"
+    viewBox="0 0 24 24"
     {...props}
   >
     <path d="M20 15a4 4 0 0 1-4 4H8l-4 3V8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v7Z" />
@@ -52,13 +46,13 @@ const ReplyIcon = (props: IconProps) => (
 
 const RepostIcon = (props: IconProps) => (
   <svg
-    viewBox="0 0 24 24"
     aria-hidden="true"
     fill="none"
     stroke="currentColor"
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth="1.8"
+    viewBox="0 0 24 24"
     {...props}
   >
     <path d="m17 2 4 4-4 4" />
@@ -70,56 +64,66 @@ const RepostIcon = (props: IconProps) => (
 
 const HeartIcon = (props: IconProps) => (
   <svg
-    viewBox="0 0 24 24"
     aria-hidden="true"
     fill="none"
     stroke="currentColor"
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth="1.8"
+    viewBox="0 0 24 24"
     {...props}
   >
     <path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z" />
   </svg>
 )
 
-const iconMap: Record<FooterSocialLink['icon'], ComponentType<IconProps>> = {
+const iconMap: Record<SiteFooterSocialIcon, ComponentType<IconProps>> = {
   github: GithubIcon,
   linkedin: LinkedinIcon,
-  x: XIcon,
-  telegram: TelegramIcon,
   mail: MailIcon,
+  telegram: TelegramIcon,
+  x: XIcon,
 }
 
-function FooterSocialLinkItem({ social }: { social: FooterSocialLink }) {
+function FooterSocialLinkItem({ social }: { social: SiteFooterSocialLinkViewModel }) {
   const Icon = iconMap[social.icon]
 
   return (
     <a
+      aria-label={social.label}
       className="site-footer__social-link"
       href={social.href}
-      target="_blank"
-      rel="noreferrer"
-      aria-label={social.label}
+      rel={social.external ? 'noreferrer' : undefined}
+      target={social.external ? '_blank' : undefined}
     >
       <Icon />
     </a>
   )
 }
 
-function SnapshotCard({ snapshot }: { snapshot: FooterSnapshot }) {
+function SnapshotCard({ snapshot }: { snapshot: SiteFooterSnapshotViewModel }) {
+  const quoteWords = snapshot.title.replace(/[.]/g, '').split(/\s+/).filter(Boolean).slice(0, 3)
+
   return (
     <article
-      className={`site-footer__snapshot site-footer__snapshot--${snapshot.kind}`}
       aria-label={snapshot.title}
+      className={`site-footer__snapshot site-footer__snapshot--${snapshot.kind}`}
     >
-      <div className="site-footer__snapshot-screen" aria-hidden="true">
-        {snapshot.kind === 'quote' ? (
+      <div className="site-footer__snapshot-screen">
+        {snapshot.image ? (
+          <Image
+            alt={snapshot.image.alt}
+            className="site-footer__snapshot-image"
+            fill
+            sizes="(max-width: 760px) 33vw, 180px"
+            src={snapshot.image.src}
+          />
+        ) : snapshot.kind === 'quote' ? (
           <div className="site-footer__snapshot-quote">
             <span>{'//'}</span>
-            <strong>BUILD</strong>
-            <strong>SHIP</strong>
-            <strong>REPEAT</strong>
+            {quoteWords.map((word) => (
+              <strong key={word}>{word.toUpperCase()}</strong>
+            ))}
           </div>
         ) : (
           <>
@@ -136,11 +140,28 @@ function SnapshotCard({ snapshot }: { snapshot: FooterSnapshot }) {
   )
 }
 
-export function SiteFooter() {
+function FooterViewLink({ href, label }: { href?: string; label: string }) {
+  if (!href) {
+    return null
+  }
+
+  return (
+    <a className="site-footer__view-link" href={href} rel="noreferrer" target="_blank">
+      {label}
+      <ArrowUpRightIcon />
+    </a>
+  )
+}
+
+type SiteFooterProps = {
+  content: SiteFooterViewModel
+}
+
+export function SiteFooter({ content }: SiteFooterProps) {
   return (
     <footer
-      className="site-footer"
       aria-label="Site footer"
+      className="site-footer"
       data-motion="rise"
       data-motion-duration="section"
     >
@@ -150,39 +171,50 @@ export function SiteFooter() {
             <div className="site-footer__profile-head">
               <div className="site-footer__avatar-wrap">
                 <Image
+                  alt={content.profile.image.alt}
                   className="site-footer__avatar"
-                  src={footerBio.image}
-                  alt={footerBio.name}
-                  width={148}
                   height={148}
+                  src={content.profile.image.src}
+                  width={148}
                 />
-                <span className="site-footer__avatar-status" aria-hidden="true" />
+                <span
+                  aria-hidden="true"
+                  className={
+                    content.profile.availability.active
+                      ? 'site-footer__avatar-status'
+                      : 'site-footer__avatar-status site-footer__avatar-status--offline'
+                  }
+                />
               </div>
-
               <div className="site-footer__identity">
-                <h2>{footerBio.name}</h2>
-                <p>{footerBio.role}</p>
+                <h2>{content.profile.name}</h2>
+                <p>{content.profile.role}</p>
               </div>
             </div>
 
             <div className="site-footer__bio">
-              {footerBio.description.map((paragraph) => (
+              {content.profile.description.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
 
             <div className="site-footer__availability">
-              <span />
-              <strong>Available</strong>
-              <p>{footerBio.availability}</p>
+              <span
+                className={
+                  content.profile.availability.active
+                    ? undefined
+                    : 'site-footer__availability-dot--offline'
+                }
+              />
+              <strong>{content.profile.availability.label}</strong>
+              <p>{content.profile.availability.detail}</p>
             </div>
 
             <div className="site-footer__connect">
-              <span>Connect</span>
-
+              <span>{content.profile.connectLabel}</span>
               <div className="site-footer__socials">
-                {footerSocialLinks.map((social) => (
-                  <FooterSocialLinkItem social={social} key={social.id} />
+                {content.profile.socialLinks.map((social) => (
+                  <FooterSocialLinkItem key={social.id} social={social} />
                 ))}
               </div>
             </div>
@@ -194,54 +226,51 @@ export function SiteFooter() {
                 <span className="site-footer__panel-icon site-footer__panel-icon--x">
                   <XIcon />
                 </span>
-
                 <div>
-                  <h2>X Signals</h2>
-                  <p>@ak_dev</p>
+                  <h2>{content.xFeed.title}</h2>
+                  <p>{content.xFeed.handle}</p>
                 </div>
               </div>
-
-              <a href={footerFeedLinks.x} className="site-footer__view-link">
-                View more on X
-                <ArrowUpRightIcon />
-              </a>
+              <FooterViewLink href={content.xFeed.href} label={content.xFeed.linkLabel} />
             </header>
 
-            <div className="site-footer__posts">
-              {footerXPosts.map((post) => (
-                <article className="site-footer__post" key={post.id}>
-                  <div className="site-footer__post-head">
-                    <span className="site-footer__post-brand">
-                      <XIcon />
-                    </span>
-
-                    <div className="site-footer__post-copy">
-                      <p>{post.content}</p>
-                      <time>
-                        {post.date} • {post.time}
-                      </time>
+            {content.xFeed.posts.length > 0 ? (
+              <div className="site-footer__posts">
+                {content.xFeed.posts.map((post) => (
+                  <article className="site-footer__post" key={post.id}>
+                    <div className="site-footer__post-head">
+                      <span className="site-footer__post-brand">
+                        <XIcon />
+                      </span>
+                      <div className="site-footer__post-copy">
+                        <p>{post.content}</p>
+                        <time>
+                          {post.date} • {post.time}
+                        </time>
+                      </div>
                     </div>
-                  </div>
-
-                  <div className="site-footer__post-meta" aria-label="Post metrics">
-                    <span>
-                      <ReplyIcon />
-                      {post.replies}
-                    </span>
-
-                    <span>
-                      <RepostIcon />
-                      {post.reposts}
-                    </span>
-
-                    <span className="site-footer__post-like">
-                      <HeartIcon />
-                      {post.likes}
-                    </span>
-                  </div>
-                </article>
-              ))}
-            </div>
+                    <div aria-label="Post metrics" className="site-footer__post-meta">
+                      <span>
+                        <ReplyIcon />
+                        {post.replies}
+                      </span>
+                      <span>
+                        <RepostIcon />
+                        {post.reposts}
+                      </span>
+                      <span className="site-footer__post-like">
+                        <HeartIcon />
+                        {post.likes}
+                      </span>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <p className="site-footer__empty" role="status">
+                Curated build signals will appear here.
+              </p>
+            )}
           </section>
 
           <section className="site-footer__panel site-footer__snapshots">
@@ -250,55 +279,56 @@ export function SiteFooter() {
                 <span className="site-footer__panel-icon site-footer__panel-icon--instagram">
                   <InstagramIcon />
                 </span>
-
                 <div>
-                  <h2>Build Snapshots</h2>
-                  <p>Instagram visual log</p>
+                  <h2>{content.snapshots.title}</h2>
+                  <p>{content.snapshots.subtitle}</p>
                 </div>
               </div>
-
-              <a href={footerFeedLinks.instagram} className="site-footer__view-link">
-                View on Instagram
-                <ArrowUpRightIcon />
-              </a>
+              <FooterViewLink href={content.snapshots.href} label={content.snapshots.linkLabel} />
             </header>
 
-            <div className="site-footer__snapshot-grid">
-              {footerSnapshots.map((snapshot) => (
-                <SnapshotCard snapshot={snapshot} key={snapshot.id} />
-              ))}
-            </div>
+            {content.snapshots.items.length > 0 ? (
+              <div className="site-footer__snapshot-grid">
+                {content.snapshots.items.map((snapshot) => (
+                  <SnapshotCard key={snapshot.id} snapshot={snapshot} />
+                ))}
+              </div>
+            ) : (
+              <p className="site-footer__empty" role="status">
+                Build snapshots are being prepared.
+              </p>
+            )}
 
             <div className="site-footer__newsletter">
               <div className="site-footer__newsletter-copy">
                 <div className="site-footer__newsletter-title">
                   <MailIcon />
-                  <h3>Build Notes</h3>
+                  <h3>{content.newsletter.title}</h3>
                 </div>
-
-                <p>Notes on engineering, architecture and better products.</p>
+                <p>{content.newsletter.description}</p>
               </div>
-
-              <NewsletterForm />
+              <NewsletterForm
+                buttonLabel={content.newsletter.buttonLabel}
+                note={content.newsletter.note}
+                placeholder={content.newsletter.placeholder}
+              />
             </div>
           </section>
         </div>
 
         <div className="site-footer__bottom">
           <Logo />
-
-          <nav className="site-footer__nav" aria-label="Footer navigation">
+          <nav aria-label="Footer navigation" className="site-footer__nav">
             <CookieSettingBanner />
-            {footerLinks.map((link) => (
-              <Link key={link.id} href={link.href}>
+            {content.navigation.map((link) => (
+              <Link href={link.href} key={link.id}>
                 {link.label}
               </Link>
             ))}
           </nav>
-
           <p className="site-footer__copyright">
-            © 2026 Built with <span>❤️</span>, clean architecture and <em>lot</em> of{' '}
-            <span>☕️</span>.
+            © {content.copyright.year} {content.copyright.prefix}{' '}
+            <em>{content.copyright.emphasis}</em> {content.copyright.suffix}
           </p>
         </div>
       </div>

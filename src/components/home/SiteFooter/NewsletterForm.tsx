@@ -1,15 +1,21 @@
 'use client'
 
 import { useState } from 'react'
-import type { SubmitEvent } from 'react'
+import type { FormEvent } from 'react'
 
 import { LockIcon } from '@/components/icons'
 
-type SubmitState = 'idle' | 'submitting' | 'success' | 'error'
+type SubmitState = 'error' | 'idle' | 'submitting' | 'success'
 
 type NewsletterResponse = {
-  ok?: boolean
   message?: string
+  ok?: boolean
+}
+
+type NewsletterFormProps = {
+  buttonLabel: string
+  note: string
+  placeholder: string
 }
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -28,11 +34,10 @@ function focusEmailField(form: HTMLFormElement) {
   }
 }
 
-export function NewsletterForm() {
+export function NewsletterForm({ buttonLabel, note, placeholder }: NewsletterFormProps) {
   const [submitState, setSubmitState] = useState<SubmitState>('idle')
   const [fieldError, setFieldError] = useState('')
   const [feedback, setFeedback] = useState('')
-
   const isSubmitting = submitState === 'submitting'
 
   const clearError = () => {
@@ -46,7 +51,7 @@ export function NewsletterForm() {
     }
   }
 
-  const handleSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     if (isSubmitting) {
@@ -88,7 +93,6 @@ export function NewsletterForm() {
           website: readFormValue(formData, 'website'),
         }),
       })
-
       const result = (await response.json().catch(() => ({}))) as NewsletterResponse
 
       if (!response.ok) {
@@ -104,48 +108,49 @@ export function NewsletterForm() {
     }
   }
 
-  const note = feedback || 'No spam. Unsubscribe anytime.'
+  const statusNote = feedback || note
 
   return (
     <form
-      className="site-footer__newsletter-form"
       aria-busy={isSubmitting}
+      className="site-footer__newsletter-form"
       noValidate
       onSubmit={handleSubmit}
     >
       <label className={`site-footer__newsletter-field${fieldError ? ' is-invalid' : ''}`}>
-        <span className="sr-only">What&apos;s a good email address?</span>
+        <span className="sr-only">{placeholder}</span>
         <input
-          type="email"
-          name="email"
-          placeholder={fieldError || "What's a good email address?"}
-          autoComplete="email"
-          maxLength={254}
-          required
-          aria-invalid={Boolean(fieldError)}
           aria-describedby="newsletter-status"
+          aria-invalid={Boolean(fieldError)}
+          autoComplete="email"
+          disabled={isSubmitting}
+          maxLength={254}
+          name="email"
           onInput={clearError}
+          placeholder={fieldError || placeholder}
+          required
+          type="email"
         />
       </label>
 
-      <label className="site-footer__newsletter-honeypot" aria-hidden="true">
+      <label aria-hidden="true" className="site-footer__newsletter-honeypot">
         <span>Website</span>
-        <input type="text" name="website" autoComplete="off" tabIndex={-1} />
+        <input autoComplete="off" name="website" tabIndex={-1} type="text" />
       </label>
 
-      <button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? 'Wait…' : 'Gimme!'}
+      <button disabled={isSubmitting} type="submit">
+        {isSubmitting ? 'Wait…' : buttonLabel}
       </button>
 
       <p
-        id="newsletter-status"
+        aria-live="polite"
         className="site-footer__newsletter-note"
         data-state={submitState}
+        id="newsletter-status"
         role={submitState === 'error' ? 'alert' : submitState === 'success' ? 'status' : undefined}
-        aria-live="polite"
       >
         <LockIcon />
-        {note}
+        {statusNote}
       </p>
     </form>
   )

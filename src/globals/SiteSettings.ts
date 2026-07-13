@@ -44,6 +44,45 @@ export const SiteSettings: GlobalConfig = {
       ],
     },
     {
+      name: 'footer',
+      label: 'Footer',
+      type: 'group',
+      fields: [
+        {
+          name: 'navigation',
+          type: 'array',
+          maxRows: 8,
+          fields: [
+            {
+              name: 'label',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'href',
+              type: 'text',
+              required: true,
+            },
+          ],
+        },
+        {
+          name: 'copyrightPrefix',
+          type: 'text',
+          defaultValue: 'Built with ❤️, clean architecture and',
+        },
+        {
+          name: 'copyrightEmphasis',
+          type: 'text',
+          defaultValue: 'lot',
+        },
+        {
+          name: 'copyrightSuffix',
+          type: 'text',
+          defaultValue: 'of ☕️.',
+        },
+      ],
+    },
+    {
       name: 'maintenanceMode',
       type: 'checkbox',
       defaultValue: false,

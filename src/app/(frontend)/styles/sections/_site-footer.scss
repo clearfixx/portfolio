@@ -1127,3 +1127,27 @@
     transition: none;
   }
 }
+
+.site-footer__snapshot-screen {
+  position: relative;
+  overflow: hidden;
+}
+
+.site-footer__snapshot-image {
+  object-fit: cover;
+}
+
+.site-footer__avatar-status--offline,
+.site-footer__availability-dot--offline {
+  filter: grayscale(1);
+  opacity: 0.45;
+}
+
+.site-footer__empty {
+  margin: 0;
+  padding: 28px;
+  border: 1px dashed rgb(var(--rgb-accent-border) / 20%);
+  border-radius: 14px;
+  color: rgb(var(--rgb-text-soft) / 64%);
+  text-align: center;
+}
