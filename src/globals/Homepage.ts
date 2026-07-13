@@ -434,7 +434,8 @@ export const Homepage: GlobalConfig = {
       ],
     },
     {
-      name: 'testimonialsSection',
+      name: 'insightsTrustSection',
+      label: 'Insights & Trust',
       type: 'group',
       fields: [
         {
@@ -443,12 +444,119 @@ export const Homepage: GlobalConfig = {
           defaultValue: true,
         },
         {
+          name: 'eyebrow',
+          type: 'text',
+          defaultValue: 'INSIGHTS & TRUST',
+        },
+        {
           name: 'title',
           type: 'text',
+          defaultValue: 'Latest Articles & Client Feedback',
+        },
+        {
+          name: 'titleAccent',
+          type: 'text',
+          defaultValue: 'Articles',
+          admin: {
+            description: 'Exact phrase inside the title that receives the cyan accent.',
+          },
+        },
+        {
+          name: 'titleMuted',
+          type: 'text',
+          defaultValue: 'Feedback',
+          admin: {
+            description: 'Exact phrase inside the title that receives the purple accent.',
+          },
         },
         {
           name: 'description',
           type: 'textarea',
+          defaultValue:
+            'Build notes, engineering thoughts and client feedback collected from real project work.',
+        },
+        {
+          name: 'articlesTitle',
+          type: 'text',
+          defaultValue: 'Latest Articles',
+        },
+        {
+          name: 'featuredLabel',
+          type: 'text',
+          defaultValue: 'Featured',
+        },
+        {
+          name: 'articleLinksEnabled',
+          type: 'checkbox',
+          defaultValue: false,
+          admin: {
+            description:
+              'Enable only after real article index and detail pages replace the current placeholder redirects.',
+          },
+        },
+        {
+          name: 'articlesCtaEnabled',
+          type: 'checkbox',
+          defaultValue: false,
+        },
+        {
+          name: 'articlesCtaLabel',
+          type: 'text',
+          defaultValue: 'View all articles',
+        },
+        {
+          name: 'articlesCtaUrl',
+          type: 'text',
+          defaultValue: '/articles',
+        },
+        {
+          name: 'featuredArticle',
+          type: 'relationship',
+          relationTo: 'blog-posts',
+          admin: {
+            description:
+              'Preferred featured article. Draft, archived, future, or unresolved records are ignored.',
+          },
+        },
+        {
+          name: 'selectedArticles',
+          type: 'relationship',
+          relationTo: 'blog-posts',
+          hasMany: true,
+          admin: {
+            description:
+              'Preferred compact articles. Latest published articles fill any remaining slots.',
+          },
+        },
+        {
+          name: 'feedbackTitle',
+          type: 'text',
+          defaultValue: 'Client Feedback',
+        },
+        {
+          name: 'selectedTestimonials',
+          type: 'relationship',
+          relationTo: 'testimonials',
+          hasMany: true,
+          admin: {
+            description:
+              'Preferred testimonials. Only approved records with approvedAt are rendered.',
+          },
+        },
+        {
+          name: 'trustTitle',
+          type: 'text',
+          defaultValue: 'Trust Signals',
+        },
+        {
+          name: 'footerLabel',
+          type: 'text',
+          defaultValue: 'Real projects. Real feedback. Real impact.',
+        },
+        {
+          name: 'footerText',
+          type: 'text',
+          defaultValue: 'Built with passion. Delivered with precision.',
         },
       ],
     },

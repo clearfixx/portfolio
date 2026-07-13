@@ -13,8 +13,15 @@ import { getHomepageContent } from '@/lib/cms'
 import { ScrollStack } from '@/components/motion'
 
 export default async function HomePage() {
-  const { contact, currentMission, engineerProfile, featuredProjects, hero, skills } =
-    await getHomepageContent()
+  const {
+    contact,
+    currentMission,
+    engineerProfile,
+    featuredProjects,
+    hero,
+    skills,
+    insightsTrust,
+  } = await getHomepageContent()
 
   return (
     <>
@@ -26,7 +33,7 @@ export default async function HomePage() {
         <SkillsTechnologies content={skills} />
       </ScrollStack>
       <DeliveryPipeline />
-      <InsightsTrust />
+      {insightsTrust ? <InsightsTrust content={insightsTrust} /> : null}
       <ContactCTA content={contact} />
       <SiteFooter />
     </>

@@ -1,3 +1,4 @@
+export * from './blog-posts'
 export * from './categories'
 export * from './projects'
 export * from './tech-stack'

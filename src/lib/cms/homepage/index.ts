@@ -1,3 +1,4 @@
+export { buildInsightsTrustViewModel } from './insights-trust'
 export { buildSkillsSectionViewModel } from './skills'
 export { buildContactSectionViewModel } from './contact'
 export { buildCurrentMissionViewModel } from './current-mission'
@@ -48,3 +49,15 @@ export type {
   SkillsSectionViewModel,
 } from './types'
 export { calculateCompletedProjectsTotal } from './project-metrics'
+export type {
+  InsightsArticleIcon,
+  InsightsArticleImageViewModel,
+  InsightsArticleViewModel,
+  InsightsFeedbackViewModel,
+  InsightsFeaturedArticleViewModel,
+  InsightsTitleSegmentViewModel,
+  InsightsTitleTone,
+  InsightsTrustMetricIcon,
+  InsightsTrustMetricViewModel,
+  InsightsTrustViewModel,
+} from './types'

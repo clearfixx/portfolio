@@ -1,18 +1,70 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import type { SVGProps } from 'react'
+import type { ReactNode, SVGProps } from 'react'
 
 import { PortfolioSection } from '@/components/home/PortfolioSection'
+import type {
+  InsightsArticleViewModel,
+  InsightsFeedbackViewModel,
+  InsightsFeaturedArticleViewModel,
+  InsightsTrustMetricViewModel,
+  InsightsTrustViewModel,
+} from '@/lib/cms/homepage'
 
-import {
-  clientFeedback,
-  featuredInsightArticle,
-  insightArticles,
-  trustMetrics,
-  type CodeToken,
-  type InsightArticle,
-  type TrustMetric,
-} from './data'
+type CodeTokenType =
+  'function' | 'keyword' | 'operator' | 'plain' | 'property' | 'punctuation' | 'string' | 'type'
+
+type CodeToken = {
+  type?: CodeTokenType
+  value: string
+}
+
+const CODE_PREVIEW = {
+  lines: [
+    [
+      { value: 'type', type: 'keyword' },
+      { value: ' ButtonProps ', type: 'type' },
+      { value: '= ', type: 'operator' },
+      { value: '{', type: 'punctuation' },
+    ],
+    [
+      { value: '  variant', type: 'property' },
+      { value: '?: ', type: 'operator' },
+      { value: "'primary'", type: 'string' },
+      { value: ' | ', type: 'operator' },
+      { value: "'secondary'", type: 'string' },
+    ],
+    [
+      { value: '  size', type: 'property' },
+      { value: '?: ', type: 'operator' },
+      { value: "'sm'", type: 'string' },
+      { value: ' | ', type: 'operator' },
+      { value: "'md'", type: 'string' },
+      { value: ' | ', type: 'operator' },
+      { value: "'lg'", type: 'string' },
+    ],
+    [
+      { value: '  loading', type: 'property' },
+      { value: '?: ', type: 'operator' },
+      { value: 'boolean', type: 'type' },
+    ],
+    [{ value: '}', type: 'punctuation' }],
+    [],
+    [
+      { value: 'export', type: 'keyword' },
+      { value: ' function ', type: 'keyword' },
+      { value: 'Button', type: 'function' },
+      { value: '(props) ', type: 'plain' },
+      { value: '{', type: 'punctuation' },
+    ],
+    [
+      { value: '  return ', type: 'keyword' },
+      { value: '<button />', type: 'function' },
+    ],
+    [{ value: '}', type: 'punctuation' }],
+  ] satisfies CodeToken[][],
+  title: 'components/Button.tsx',
+} as const
 
 function ArrowUpRightIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -112,13 +164,13 @@ function UsersIcon(props: SVGProps<SVGSVGElement>) {
 }
 
 const articleIcons = {
-  terminal: TerminalIcon,
   cube: CubeIcon,
+  terminal: TerminalIcon,
 }
 
 const metricIcons = {
-  code: CodeIcon,
   calendar: CalendarIcon,
+  code: CodeIcon,
   commit: CommitIcon,
   users: UsersIcon,
 }
@@ -129,46 +181,40 @@ function getCodeTokenClassName(token: CodeToken) {
     : 'insights-trust__token'
 }
 
-function ArticleMeta() {
+function ArticleMeta({ article }: { article: InsightsArticleViewModel }) {
   return (
     <div className="insights-trust__article-meta">
       <span>
         <CalendarIcon />
-        {featuredInsightArticle.date}
+        {article.date}
       </span>
-
       <span>
         <ClockIcon />
-        {featuredInsightArticle.readTime}
+        {article.readTime}
       </span>
-
-      <span className="insights-trust__article-category">{featuredInsightArticle.category}</span>
+      <span className="insights-trust__article-category">{article.category}</span>
     </div>
   )
 }
 
-function FeaturedCodePreview() {
+function FeaturedCodePreview({ articleId }: { articleId: string }) {
   return (
     <div className="insights-trust__code-card" aria-label="Article code preview">
       <div className="insights-trust__code-topbar">
         <span />
         <span />
         <span />
-        <strong>{featuredInsightArticle.codeTitle}</strong>
+        <strong>{CODE_PREVIEW.title}</strong>
       </div>
-
       <pre>
         <code>
-          {featuredInsightArticle.codeLines.map((line, lineIndex) => (
-            <span
-              className="insights-trust__code-line"
-              key={`${featuredInsightArticle.id}-line-${lineIndex}`}
-            >
+          {CODE_PREVIEW.lines.map((line, lineIndex) => (
+            <span className="insights-trust__code-line" key={`${articleId}-line-${lineIndex}`}>
               {line.length > 0
                 ? line.map((token, tokenIndex) => (
                     <span
                       className={getCodeTokenClassName(token)}
-                      key={`${featuredInsightArticle.id}-line-${lineIndex}-token-${tokenIndex}`}
+                      key={`${articleId}-line-${lineIndex}-token-${tokenIndex}`}
                     >
                       {token.value}
                     </span>
@@ -182,74 +228,138 @@ function FeaturedCodePreview() {
   )
 }
 
-function FeaturedArticleMedia() {
-  if (featuredInsightArticle.image) {
+function FeaturedArticleMedia({ article }: { article: InsightsFeaturedArticleViewModel }) {
+  if (article.image) {
     return (
       <div className="insights-trust__image-card">
         <Image
-          src={featuredInsightArticle.image.src}
-          alt={featuredInsightArticle.image.alt}
+          src={article.image.src}
+          alt={article.image.alt}
           fill
           sizes="(max-width: 860px) 100vw, 360px"
         />
-
         <span className="insights-trust__image-scanline" aria-hidden="true" />
       </div>
     )
   }
 
-  return <FeaturedCodePreview />
+  return <FeaturedCodePreview articleId={article.id} />
 }
 
-function FeaturedArticle() {
+function FeaturedArticleContent({ article }: { article: InsightsFeaturedArticleViewModel }) {
+  return (
+    <>
+      <div className="insights-trust__featured-copy">
+        <span className="insights-trust__featured-label">{article.label}</span>
+        <h3>{article.title}</h3>
+        <p>{article.excerpt}</p>
+        <ArticleMeta article={article} />
+      </div>
+      <FeaturedArticleMedia article={article} />
+    </>
+  )
+}
+
+function FeaturedArticle({ article }: { article: InsightsFeaturedArticleViewModel }) {
+  if (article.href) {
+    return (
+      <Link className="insights-trust__featured-article" href={article.href}>
+        <FeaturedArticleContent article={article} />
+      </Link>
+    )
+  }
+
   return (
     <article className="insights-trust__featured-article">
-      <div className="insights-trust__featured-copy">
-        <span className="insights-trust__featured-label">{featuredInsightArticle.label}</span>
-
-        <h3>{featuredInsightArticle.title}</h3>
-
-        <p>{featuredInsightArticle.excerpt}</p>
-
-        <ArticleMeta />
-      </div>
-
-      <FeaturedArticleMedia />
+      <FeaturedArticleContent article={article} />
     </article>
   )
 }
 
-function CompactArticle({ article, index }: { article: InsightArticle; index: number }) {
+function CompactArticleContent({
+  article,
+  index,
+}: {
+  article: InsightsArticleViewModel
+  index: number
+}) {
   const Icon = articleIcons[article.icon]
 
   return (
-    <Link className="insights-trust__article-row" href={article.href}>
+    <>
       <span className="insights-trust__article-index">{String(index + 1).padStart(2, '0')}</span>
-
       <span className="insights-trust__article-icon">
         <Icon />
       </span>
-
       <span className="insights-trust__article-content">
         <strong>{article.title}</strong>
         <span>{article.excerpt}</span>
       </span>
-
       <span className="insights-trust__article-details">
         <span>{article.date}</span>
-
         <span>
           <ClockIcon />
           {article.readTime}
         </span>
       </span>
-
-      <ArrowUpRightIcon className="insights-trust__article-arrow" />
-    </Link>
+      {article.href ? <ArrowUpRightIcon className="insights-trust__article-arrow" /> : null}
+    </>
   )
 }
 
-function TrustMetricCard({ metric }: { metric: TrustMetric }) {
+function CompactArticle({ article, index }: { article: InsightsArticleViewModel; index: number }) {
+  if (article.href) {
+    return (
+      <Link className="insights-trust__article-row" href={article.href}>
+        <CompactArticleContent article={article} index={index} />
+      </Link>
+    )
+  }
+
+  return (
+    <article className="insights-trust__article-row insights-trust__article-row--static">
+      <CompactArticleContent article={article} index={index} />
+    </article>
+  )
+}
+
+function FeedbackAvatar({ feedback }: { feedback: InsightsFeedbackViewModel }) {
+  return (
+    <div className="insights-trust__avatar" aria-hidden="true">
+      {feedback.avatar ? (
+        <Image src={feedback.avatar.src} alt="" fill sizes="58px" />
+      ) : (
+        feedback.initials
+      )}
+    </div>
+  )
+}
+
+function FeedbackCard({ feedback }: { feedback: InsightsFeedbackViewModel }) {
+  return (
+    <article className="insights-trust__feedback-card" key={feedback.id}>
+      <FeedbackAvatar feedback={feedback} />
+      <div className="insights-trust__quote-mark" aria-hidden="true">
+        “
+      </div>
+      <div className="insights-trust__feedback-content">
+        <p>{feedback.quote}</p>
+        <div>
+          <strong>{feedback.author}</strong>
+          <span>{feedback.role}</span>
+        </div>
+      </div>
+      {feedback.verified ? (
+        <span className="insights-trust__verified">
+          <span />
+          Verified
+        </span>
+      ) : null}
+    </article>
+  )
+}
+
+function TrustMetricCard({ metric }: { metric: InsightsTrustMetricViewModel }) {
   const Icon = metricIcons[metric.icon]
 
   return (
@@ -261,89 +371,96 @@ function TrustMetricCard({ metric }: { metric: TrustMetric }) {
   )
 }
 
-export function InsightsTrust() {
+function renderSectionTitle(content: InsightsTrustViewModel): ReactNode {
+  return content.title.map((segment, index) => {
+    if (segment.tone === 'accent') {
+      return (
+        <span className="insights-trust__title-accent" key={`${segment.tone}-${index}`}>
+          {segment.text}
+        </span>
+      )
+    }
+
+    if (segment.tone === 'muted') {
+      return (
+        <span className="insights-trust__title-muted" key={`${segment.tone}-${index}`}>
+          {segment.text}
+        </span>
+      )
+    }
+
+    return segment.text
+  })
+}
+
+type InsightsTrustProps = {
+  content: InsightsTrustViewModel
+}
+
+export function InsightsTrust({ content }: InsightsTrustProps) {
   return (
     <PortfolioSection
       id="insights"
-      eyebrow="INSIGHTS & TRUST"
-      title={
-        <>
-          Latest <span className="insights-trust__title-accent">Articles</span> & Client{' '}
-          <span className="insights-trust__title-muted">Feedback</span>
-        </>
-      }
-      description="Build notes, engineering thoughts and client feedback collected from real project work."
+      eyebrow={content.eyebrow}
+      title={renderSectionTitle(content)}
+      description={content.description}
       number="05"
       footer={{
         icon: ShieldCheckIcon,
-        label: 'Real projects. Real feedback. Real impact.',
-        text: 'Built with passion. Delivered with precision.',
+        label: content.footer.label,
+        text: content.footer.text,
       }}
     >
       <div className="insights-trust">
         <section className="insights-trust__panel insights-trust__panel--articles">
           <div className="insights-trust__panel-header">
-            <h3>Latest Articles</h3>
-
-            <Link href="/articles">
-              View all articles
-              <ArrowUpRightIcon />
-            </Link>
+            <h3>{content.articles.title}</h3>
+            {content.articles.cta ? (
+              <Link href={content.articles.cta.href}>
+                {content.articles.cta.label}
+                <ArrowUpRightIcon />
+              </Link>
+            ) : null}
           </div>
 
-          <FeaturedArticle />
+          {content.articles.featured ? (
+            <FeaturedArticle article={content.articles.featured} />
+          ) : (
+            <p className="insights-trust__empty" role="status">
+              Published engineering notes are being prepared.
+            </p>
+          )}
 
-          <div className="insights-trust__article-list">
-            {insightArticles.map((article, index) => (
-              <CompactArticle article={article} index={index} key={article.id} />
-            ))}
-          </div>
+          {content.articles.items.length > 0 ? (
+            <div className="insights-trust__article-list">
+              {content.articles.items.map((article, index) => (
+                <CompactArticle article={article} index={index} key={article.id} />
+              ))}
+            </div>
+          ) : null}
         </section>
 
         <aside className="insights-trust__panel insights-trust__panel--feedback">
           <div className="insights-trust__panel-header">
-            <h3>Client Feedback</h3>
+            <h3>{content.feedback.title}</h3>
           </div>
 
-          <div className="insights-trust__feedback-list">
-            {clientFeedback.map((feedback) => (
-              <article className="insights-trust__feedback-card" key={feedback.id}>
-                <div className="insights-trust__avatar" aria-hidden="true">
-                  {feedback.author
-                    .split(' ')
-                    .map((part) => part[0])
-                    .join('')
-                    .slice(0, 2)}
-                </div>
-
-                <div className="insights-trust__quote-mark" aria-hidden="true">
-                  “
-                </div>
-
-                <div className="insights-trust__feedback-content">
-                  <p>{feedback.quote}</p>
-
-                  <div>
-                    <strong>{feedback.author}</strong>
-                    <span>{feedback.role}</span>
-                  </div>
-                </div>
-
-                {feedback.verified ? (
-                  <span className="insights-trust__verified">
-                    <span />
-                    Verified
-                  </span>
-                ) : null}
-              </article>
-            ))}
-          </div>
+          {content.feedback.items.length > 0 ? (
+            <div className="insights-trust__feedback-list">
+              {content.feedback.items.map((feedback) => (
+                <FeedbackCard feedback={feedback} key={feedback.id} />
+              ))}
+            </div>
+          ) : (
+            <p className="insights-trust__empty" role="status">
+              Approved client feedback will appear here.
+            </p>
+          )}
 
           <div className="insights-trust__trust-signals">
-            <h3>Trust Signals</h3>
-
+            <h3>{content.metrics.title}</h3>
             <div className="insights-trust__metrics">
-              {trustMetrics.map((metric) => (
+              {content.metrics.items.map((metric) => (
                 <TrustMetricCard metric={metric} key={metric.id} />
               ))}
             </div>

@@ -1168,10 +1168,44 @@ export interface Homepage {
     footerLabel?: string | null
     footerText?: string | null
   }
-  testimonialsSection?: {
+  insightsTrustSection?: {
     enabled?: boolean | null
+    eyebrow?: string | null
     title?: string | null
+    /**
+     * Exact phrase inside the title that receives the cyan accent.
+     */
+    titleAccent?: string | null
+    /**
+     * Exact phrase inside the title that receives the purple accent.
+     */
+    titleMuted?: string | null
     description?: string | null
+    articlesTitle?: string | null
+    featuredLabel?: string | null
+    /**
+     * Enable only after real article index and detail pages replace the current placeholder redirects.
+     */
+    articleLinksEnabled?: boolean | null
+    articlesCtaEnabled?: boolean | null
+    articlesCtaLabel?: string | null
+    articlesCtaUrl?: string | null
+    /**
+     * Preferred featured article. Draft, archived, future, or unresolved records are ignored.
+     */
+    featuredArticle?: (number | null) | BlogPost
+    /**
+     * Preferred compact articles. Latest published articles fill any remaining slots.
+     */
+    selectedArticles?: (number | BlogPost)[] | null
+    feedbackTitle?: string | null
+    /**
+     * Preferred testimonials. Only approved records with approvedAt are rendered.
+     */
+    selectedTestimonials?: (number | Testimonial)[] | null
+    trustTitle?: string | null
+    footerLabel?: string | null
+    footerText?: string | null
   }
   socialFeedsSection?: {
     enabled?: boolean | null
@@ -1475,12 +1509,28 @@ export interface HomepageSelect<T extends boolean = true> {
         footerLabel?: T
         footerText?: T
       }
-  testimonialsSection?:
+  insightsTrustSection?:
     | T
     | {
         enabled?: T
+        eyebrow?: T
         title?: T
+        titleAccent?: T
+        titleMuted?: T
         description?: T
+        articlesTitle?: T
+        featuredLabel?: T
+        articleLinksEnabled?: T
+        articlesCtaEnabled?: T
+        articlesCtaLabel?: T
+        articlesCtaUrl?: T
+        featuredArticle?: T
+        selectedArticles?: T
+        feedbackTitle?: T
+        selectedTestimonials?: T
+        trustTitle?: T
+        footerLabel?: T
+        footerText?: T
       }
   socialFeedsSection?:
     | T

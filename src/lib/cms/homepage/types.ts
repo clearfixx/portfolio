@@ -272,3 +272,79 @@ export type SkillsSectionViewModel = {
   }
   title: string
 }
+
+export type InsightsTitleTone = 'accent' | 'muted' | 'plain'
+
+export type InsightsTitleSegmentViewModel = {
+  text: string
+  tone: InsightsTitleTone
+}
+
+export type InsightsArticleIcon = 'cube' | 'terminal'
+
+export type InsightsArticleImageViewModel = {
+  alt: string
+  src: string
+}
+
+export type InsightsArticleViewModel = {
+  category: string
+  date: string
+  excerpt: string
+  href?: string
+  icon: InsightsArticleIcon
+  id: string
+  image?: InsightsArticleImageViewModel
+  readTime: string
+  title: string
+}
+
+export type InsightsFeaturedArticleViewModel = InsightsArticleViewModel & {
+  label: string
+}
+
+export type InsightsFeedbackViewModel = {
+  author: string
+  avatar?: InsightsArticleImageViewModel
+  id: string
+  initials: string
+  quote: string
+  role: string
+  verified: boolean
+}
+
+export type InsightsTrustMetricIcon = 'calendar' | 'code' | 'commit' | 'users'
+
+export type InsightsTrustMetricViewModel = {
+  icon: InsightsTrustMetricIcon
+  id: string
+  label: string
+  value: string
+}
+
+export type InsightsTrustViewModel = {
+  articles: {
+    cta?: {
+      href: string
+      label: string
+    }
+    featured?: InsightsFeaturedArticleViewModel
+    items: InsightsArticleViewModel[]
+    title: string
+  }
+  description: string
+  eyebrow: string
+  feedback: {
+    items: InsightsFeedbackViewModel[]
+    title: string
+  }
+  footer: {
+    label: string
+    text: string
+  }
+  metrics: {
+    items: InsightsTrustMetricViewModel[]
+    title: string
+  }
+  title: InsightsTitleSegmentViewModel[]
+}

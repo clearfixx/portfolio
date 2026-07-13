@@ -1,5 +1,7 @@
 import {
   getContact,
+  getPublishedBlogPosts,
+  getApprovedTestimonials,
   getFeaturedProjects,
   getFeaturedTechStack,
   getHomepage,
@@ -13,6 +15,7 @@ import { buildCurrentMissionViewModel } from './current-mission'
 import { buildEngineerProfileViewModel } from './engineer-profile'
 import { buildFeaturedProjectViewModels, getSelectedFeaturedProjects } from './featured-projects'
 import { buildHeroViewModel, getSelectedTechStack } from './hero'
+import { buildInsightsTrustViewModel } from './insights-trust'
 import { buildSkillsSectionViewModel } from './skills'
 import { calculateCompletedProjectsTotal } from './project-metrics'
 import type {
@@ -21,6 +24,7 @@ import type {
   EngineerProfileViewModel,
   FeaturedProjectViewModel,
   HeroViewModel,
+  InsightsTrustViewModel,
 } from './types'
 
 const FEATURED_PROJECT_LIMIT = 3
@@ -31,16 +35,27 @@ export type HomepageContent = {
   engineerProfile: EngineerProfileViewModel | null
   featuredProjects: FeaturedProjectViewModel[]
   hero: HeroViewModel
+  insightsTrust: InsightsTrustViewModel | null
   skills: SkillsSectionViewModel
 }
 
 export async function getHomepageContent(): Promise<HomepageContent> {
-  const [homepage, contact, profile, publishedProjectsCount, social] = await Promise.all([
+  const [
+    homepage,
+    contact,
+    profile,
+    publishedProjectsCount,
+    social,
+    publishedArticles,
+    approvedTestimonials,
+  ] = await Promise.all([
     getHomepage(),
     getContact(),
     getProfile(),
     getProjectsCount(),
     getSocial(),
+    getPublishedBlogPosts(6),
+    getApprovedTestimonials(6),
   ])
 
   const completedProjectsCount = calculateCompletedProjectsTotal(
@@ -78,6 +93,13 @@ export async function getHomepageContent(): Promise<HomepageContent> {
     }),
     featuredProjects: buildFeaturedProjectViewModels(projects),
     skills: buildSkillsSectionViewModel(homepage, visibleTechStack),
+    insightsTrust: buildInsightsTrustViewModel({
+      articles: publishedArticles,
+      homepage,
+      profile,
+      projectsCount: completedProjectsCount,
+      testimonials: approvedTestimonials,
+    }),
     hero: buildHeroViewModel({
       homepage,
       profile,
