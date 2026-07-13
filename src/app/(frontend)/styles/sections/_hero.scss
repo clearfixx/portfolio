@@ -99,7 +99,7 @@
 
 .hero-card__header span {
   /* color: #b3c1ce; */
-  color: hsl(201.11deg 44.26% 47.84%)
+  color: hsl(201.11deg 44.26% 47.84%);
 }
 
 .hero-card__header strong {
@@ -127,7 +127,7 @@
 .hero-terminal__body span {
   /* color: rgb(var(--rgb-neon-cyan)); */
   color: rgb(var(--rgb-terminal-green));
-  font-weight: bold
+  font-weight: bold;
 }
 
 .hero-terminal__body strong {
@@ -537,7 +537,6 @@
   line-height: 1.58;
   tab-size: 2;
 }
-
 
 .hero-editor__code::-webkit-scrollbar {
   width: 8px;

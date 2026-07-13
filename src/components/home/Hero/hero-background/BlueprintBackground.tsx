@@ -345,11 +345,7 @@ function getRoutePoint(route: BlueprintRoute, progress: number, wrap = true): Po
   }
 }
 
-function traceRoute(
-  context: CanvasRenderingContext2D,
-  route: BlueprintRoute,
-  progress: number,
-) {
+function traceRoute(context: CanvasRenderingContext2D, route: BlueprintRoute, progress: number) {
   const firstNode = route.nodes[0]
 
   if (!firstNode) return
@@ -455,10 +451,7 @@ function drawRoute(
   frame: IntroFrame,
 ) {
   const firstNode = route.nodes[0]
-  const constructionProgress = getRouteConstructionProgress(
-    route,
-    frame.constructionProgress,
-  )
+  const constructionProgress = getRouteConstructionProgress(route, frame.constructionProgress)
 
   if (!firstNode || frame.guideOpacity <= 0) return
 
@@ -512,10 +505,7 @@ function drawNodes(
   frame: IntroFrame,
   pointer: PointerInteraction,
 ) {
-  const constructionProgress = getRouteConstructionProgress(
-    route,
-    frame.constructionProgress,
-  )
+  const constructionProgress = getRouteConstructionProgress(route, frame.constructionProgress)
 
   context.save()
 
@@ -528,9 +518,7 @@ function drawNodes(
 
     if (reveal <= 0) continue
 
-    const activationWave = clamp01(
-      1 - Math.abs(constructionProgress - node.routeProgress) / 0.065,
-    )
+    const activationWave = clamp01(1 - Math.abs(constructionProgress - node.routeProgress) / 0.065)
     const ambientPulse =
       animated && frame.ambientMix > 0
         ? Math.sin(time * 0.0018 + node.phase) * 0.55 * frame.ambientMix
@@ -798,11 +786,7 @@ export function BlueprintBackground() {
       pointer.currentY = lerp(pointer.currentY, pointer.targetY, follow)
       pointer.currentRatioX = lerp(pointer.currentRatioX, pointer.targetRatioX, follow)
       pointer.currentRatioY = lerp(pointer.currentRatioY, pointer.targetRatioY, follow)
-      pointer.currentInfluence = lerp(
-        pointer.currentInfluence,
-        pointer.targetInfluence,
-        follow,
-      )
+      pointer.currentInfluence = lerp(pointer.currentInfluence, pointer.targetInfluence, follow)
     }
 
     const draw = (time: number, animated: boolean) => {
@@ -832,35 +816,14 @@ export function BlueprintBackground() {
 
       routes.forEach((route) => {
         drawRoute(context, route, palette, time, animated, introFrame)
-        drawNodes(
-          context,
-          route,
-          palette,
-          time,
-          animated,
-          introFrame,
-          pointerInteraction,
-        )
+        drawNodes(context, route, palette, time, animated, introFrame, pointerInteraction)
       })
 
       routes.forEach((route, routeIndex) => {
-        drawCommissioningPulse(
-          context,
-          route,
-          palette,
-          introFrame.commissioningPulse,
-          routeIndex,
-        )
+        drawCommissioningPulse(context, route, palette, introFrame.commissioningPulse, routeIndex)
       })
 
-      drawSignals(
-        context,
-        routes,
-        palette,
-        ambientElapsed,
-        animated,
-        introFrame.ambientMix,
-      )
+      drawSignals(context, routes, palette, ambientElapsed, animated, introFrame.ambientMix)
 
       context.restore()
     }

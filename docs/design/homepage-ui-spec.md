@@ -1,4 +1,5 @@
 # Homepage UI Specification
+
 Version: 1.0
 Status: Approved
 Architecture: Frozen
@@ -78,18 +79,18 @@ The Hero occupies almost the entire first viewport.
 Approximate structure:
 
 ┌──────────────────────────────────────────────────────────────┐
-│ Header                                                       │
+│ Header │
 ├──────────────┬──────────────────────────────┬────────────────┤
-│              │                              │                │
-│              │                              │                │
-│ System       │ Hero                         │ Live Editor    │
-│ Status       │                              │                │
-│              │                              │ Status Cards   │
-│              │                              │                │
+│ │ │ │
+│ │ │ │
+│ System │ Hero │ Live Editor │
+│ Status │ │ │
+│ │ │ Status Cards │
+│ │ │ │
 ├──────────────┴──────────────────────────────┴────────────────┤
-│ Tech Stack                                                  │
+│ Tech Stack │
 ├──────────────────────────────────────────────────────────────┤
-│ Mission Dashboard                                           │
+│ Mission Dashboard │
 └──────────────────────────────────────────────────────────────┘
 
 The layout should look like one dashboard.
@@ -184,15 +185,15 @@ Target feeling:
 
 Apple WWDC
 
-+
+-
 
 Stripe
 
-+
+-
 
 Linear
 
-+
+-
 
 NASA Mission Control
 

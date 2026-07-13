@@ -29,7 +29,11 @@
   border-radius: 18px;
   background:
     linear-gradient(135deg, rgb(var(--rgb-accent-soft) / 7%), transparent 34%),
-    linear-gradient(180deg, rgb(var(--rgb-surface-elevated) / 92%), rgb(var(--rgb-surface-soft) / 95%));
+    linear-gradient(
+      180deg,
+      rgb(var(--rgb-surface-elevated) / 92%),
+      rgb(var(--rgb-surface-soft) / 95%)
+    );
   box-shadow:
     inset 0 1px 0 rgb(var(--rgb-white) / 4%),
     0 18px 50px rgb(var(--rgb-black) / 18%);
@@ -82,7 +86,11 @@
   inset: 0;
   border: 1px solid rgb(var(--rgb-accent-border) / 32%);
   border-radius: 18px;
-  background: linear-gradient(180deg, rgb(var(--rgb-surface-elevated) / 22%), rgb(var(--rgb-surface-soft) / 22%));
+  background: linear-gradient(
+    180deg,
+    rgb(var(--rgb-surface-elevated) / 22%),
+    rgb(var(--rgb-surface-soft) / 22%)
+  );
   box-shadow: 0 0 26px rgb(var(--rgb-accent) / 8%);
 }
 
@@ -451,7 +459,11 @@
 .site-footer__snapshot--desk .site-footer__snapshot-screen {
   background:
     radial-gradient(circle at 50% 50%, rgb(var(--rgb-white) / 8%), transparent 20%),
-    linear-gradient(180deg, rgb(var(--rgb-surface-elevated) / 45%), rgb(var(--rgb-surface-soft) / 95%)),
+    linear-gradient(
+      180deg,
+      rgb(var(--rgb-surface-elevated) / 45%),
+      rgb(var(--rgb-surface-soft) / 95%)
+    ),
     rgb(var(--rgb-surface-footer) / 90%);
 }
 
@@ -493,7 +505,11 @@
 .site-footer__snapshot--coffee .site-footer__snapshot-screen {
   background:
     radial-gradient(circle at 50% 50%, rgba(255, 170, 95, 0.08), transparent 24%),
-    linear-gradient(180deg, rgb(var(--rgb-surface-elevated) / 54%), rgb(var(--rgb-surface-soft) / 96%)),
+    linear-gradient(
+      180deg,
+      rgb(var(--rgb-surface-elevated) / 54%),
+      rgb(var(--rgb-surface-soft) / 96%)
+    ),
     rgb(var(--rgb-surface-footer) / 90%);
 }
 
@@ -507,7 +523,6 @@
   font-weight: 900;
   letter-spacing: 0.08em;
 }
-
 
 .site-footer__newsletter {
   display: grid;
@@ -620,11 +635,11 @@
 
 .site-footer__mark {
   span {
-      .font-white {
-        color: rgb(var(--rgb-text-strong) / 83.92%);
-        margin-left: 3px;
-      }
-      em {
+    .font-white {
+      color: rgb(var(--rgb-text-strong) / 83.92%);
+      margin-left: 3px;
+    }
+    em {
       font-style: normal;
       font-weight: 300;
       margin-right: 5px;
@@ -1074,11 +1089,7 @@
 .site-footer__newsletter-field.is-invalid input {
   border-color: rgb(var(--rgb-danger, 255 92 92) / 78%);
   background:
-    linear-gradient(
-      90deg,
-      rgb(var(--rgb-danger, 255 92 92) / 7%),
-      transparent 58%
-    ),
+    linear-gradient(90deg, rgb(var(--rgb-danger, 255 92 92) / 7%), transparent 58%),
     rgb(var(--rgb-surface-overlay) / 88%);
   box-shadow:
     0 0 0 3px rgb(var(--rgb-danger, 255 92 92) / 8%),

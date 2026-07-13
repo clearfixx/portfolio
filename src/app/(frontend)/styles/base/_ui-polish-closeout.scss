@@ -20,14 +20,14 @@
 }
 
 ::view-transition-old(root) {
-  animation: ui-theme-fade-out var(--ui-theme-transition-duration)
-    var(--ui-theme-transition-easing) both;
+  animation: ui-theme-fade-out var(--ui-theme-transition-duration) var(--ui-theme-transition-easing)
+    both;
   mix-blend-mode: normal;
 }
 
 ::view-transition-new(root) {
-  animation: ui-theme-fade-in var(--ui-theme-transition-duration)
-    var(--ui-theme-transition-easing) both;
+  animation: ui-theme-fade-in var(--ui-theme-transition-duration) var(--ui-theme-transition-easing)
+    both;
   mix-blend-mode: normal;
 }
 
@@ -59,9 +59,7 @@
 }
 
 .site-header.site-header--scrolled {
-  background-color: rgb(
-    var(--rgb-header-scrolled) / var(--header-scrolled-opacity)
-  );
+  background-color: rgb(var(--rgb-header-scrolled) / var(--header-scrolled-opacity));
   -webkit-backdrop-filter: blur(22px);
   backdrop-filter: blur(22px);
 }
@@ -348,4 +346,3 @@
     scroll-behavior: auto;
   }
 }
-

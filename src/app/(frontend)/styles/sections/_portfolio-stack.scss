@@ -39,8 +39,7 @@
   z-index: 3;
 }
 
-.portfolio-stack
-  .scroll-stack__item[data-stack-state='covered'] {
+.portfolio-stack .scroll-stack__item[data-stack-state='covered'] {
   pointer-events: none;
 }
 
@@ -59,7 +58,10 @@
   }
 }
 
-@media (max-width: 1023px), (max-height: 680px), (pointer: coarse), (prefers-reduced-motion: reduce) {
+@media (max-width: 1023px),
+  (max-height: 680px),
+  (pointer: coarse),
+  (prefers-reduced-motion: reduce) {
   .portfolio-stack {
     --portfolio-stack-top: 0;
     --portfolio-stack-step: 0;

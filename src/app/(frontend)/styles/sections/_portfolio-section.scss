@@ -13,7 +13,11 @@
   background:
     radial-gradient(circle at 14% 8%, rgb(var(--rgb-aqua) / 7%), transparent 30%),
     radial-gradient(circle at 86% 14%, rgb(var(--rgb-purple-blue) / 7%), transparent 28%),
-    linear-gradient(180deg, rgb(var(--rgb-section-surface-top) / 72%), rgb(var(--rgb-section-surface-bottom) / 86%));
+    linear-gradient(
+      180deg,
+      rgb(var(--rgb-section-surface-top) / 72%),
+      rgb(var(--rgb-section-surface-bottom) / 86%)
+    );
 }
 
 .portfolio-section__frame::before {
@@ -96,7 +100,7 @@
   margin-top: 1.4rem;
   justify-content: center;
   position: relative;
- margin-top: 0;
+  margin-top: 0;
 }
 
 .portfolio-section__footer-capsule {
@@ -158,7 +162,13 @@
   opacity: 0.42;
   mask-image:
     radial-gradient(ellipse at center, rgb(var(--rgb-black)) 0 42%, transparent 72%),
-    linear-gradient(90deg, transparent, rgb(var(--rgb-black)) 18%, rgb(var(--rgb-black)) 82%, transparent);
+    linear-gradient(
+      90deg,
+      transparent,
+      rgb(var(--rgb-black)) 18%,
+      rgb(var(--rgb-black)) 82%,
+      transparent
+    );
 }
 
 @media (max-width: 760px) {
@@ -200,13 +210,13 @@
   }
 
   .portfolio-section__header-row {
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 
-.portfolio-section__header-action {
-  padding-right: 0;
-}
+  .portfolio-section__header-action {
+    padding-right: 0;
+  }
 }
 
 .portfolio-section__footer-icon-svg {

@@ -1,10 +1,7 @@
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 
-import {
-  publicApiResponse,
-  readPublicApiJson,
-} from '@/lib/server/publicApi'
+import { publicApiResponse, readPublicApiJson } from '@/lib/server/publicApi'
 import {
   checkRecentPublicApiSubmission,
   consumePublicApiRateLimit,
@@ -18,10 +15,8 @@ export const runtime = 'nodejs'
 
 const MAX_CONTACT_BODY_BYTES = 8 * 1024
 const CONTACT_CLIENT_LIMIT = 8
-const CONTACT_CLIENT_WINDOW_MS =
-  10 * 60 * 1000
-const CONTACT_DUPLICATE_WINDOW_MS =
-  30 * 60 * 1000
+const CONTACT_CLIENT_WINDOW_MS = 10 * 60 * 1000
+const CONTACT_DUPLICATE_WINDOW_MS = 30 * 60 * 1000
 
 const projectTypes = {
   website: 'Website',
@@ -52,32 +47,24 @@ type CaptchaProof = {
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 function normalizeString(value: unknown) {
-  return typeof value === 'string'
-    ? value.trim()
-    : ''
+  return typeof value === 'string' ? value.trim() : ''
 }
 
-function isProjectType(
-  value: string,
-): value is ProjectType {
+function isProjectType(value: string): value is ProjectType {
   return value in projectTypes
 }
 
-function isCaptchaProof(
-  value: unknown,
-): value is CaptchaProof {
+function isCaptchaProof(value: unknown): value is CaptchaProof {
   if (!value || typeof value !== 'object') {
     return false
   }
 
-  const proof =
-    value as Record<string, unknown>
+  const proof = value as Record<string, unknown>
 
   return (
     proof.checked === true &&
     proof.trusted === true &&
-    (proof.interaction === 'pointer' ||
-      proof.interaction === 'keyboard') &&
+    (proof.interaction === 'pointer' || proof.interaction === 'keyboard') &&
     typeof proof.elapsedMs === 'number' &&
     Number.isFinite(proof.elapsedMs) &&
     proof.elapsedMs >= 500 &&
@@ -86,13 +73,9 @@ function isCaptchaProof(
 }
 
 export async function POST(request: Request) {
-  const parsed =
-    await readPublicApiJson<ContactRequest>(
-      request,
-      {
-        maxBytes: MAX_CONTACT_BODY_BYTES,
-      },
-    )
+  const parsed = await readPublicApiJson<ContactRequest>(request, {
+    maxBytes: MAX_CONTACT_BODY_BYTES,
+  })
 
   if (!parsed.ok) {
     return parsed.response
@@ -100,34 +83,22 @@ export async function POST(request: Request) {
 
   const { data: body, requestId } = parsed
 
-  const clientLimit =
-    consumePublicApiRateLimit({
-      scope: 'contact:client',
-      key: createPublicApiClientKey(request),
-      limit: CONTACT_CLIENT_LIMIT,
-      windowMs:
-        CONTACT_CLIENT_WINDOW_MS,
-    })
+  const clientLimit = consumePublicApiRateLimit({
+    scope: 'contact:client',
+    key: createPublicApiClientKey(request),
+    limit: CONTACT_CLIENT_LIMIT,
+    windowMs: CONTACT_CLIENT_WINDOW_MS,
+  })
 
   if (!clientLimit.allowed) {
-    return publicApiRateLimitResponse(
-      requestId,
-      clientLimit,
-    )
+    return publicApiRateLimitResponse(requestId, clientLimit)
   }
 
   const name = normalizeString(body.name)
-  const email =
-    normalizeString(body.email).toLowerCase()
-  const projectType = normalizeString(
-    body.projectType,
-  )
-  const message = normalizeString(
-    body.message,
-  )
-  const website = normalizeString(
-    body.website,
-  )
+  const email = normalizeString(body.email).toLowerCase()
+  const projectType = normalizeString(body.projectType)
+  const message = normalizeString(body.message)
+  const website = normalizeString(body.website)
 
   if (website) {
     return publicApiResponse(
@@ -153,36 +124,25 @@ export async function POST(request: Request) {
     return publicApiResponse(
       {
         ok: false,
-        message:
-          'Please review the form fields and human verification.',
+        message: 'Please review the form fields and human verification.',
       },
       422,
       requestId,
     )
   }
 
-  const duplicateKey =
-    createPublicApiValueKey(
-      [
-        email,
-        projectType,
-        message.toLocaleLowerCase(),
-      ].join('\n'),
-    )
+  const duplicateKey = createPublicApiValueKey(
+    [email, projectType, message.toLocaleLowerCase()].join('\n'),
+  )
 
-  const duplicateCheck =
-    checkRecentPublicApiSubmission({
-      scope: 'contact:duplicate',
-      key: duplicateKey,
-      ttlMs:
-        CONTACT_DUPLICATE_WINDOW_MS,
-    })
+  const duplicateCheck = checkRecentPublicApiSubmission({
+    scope: 'contact:duplicate',
+    key: duplicateKey,
+    ttlMs: CONTACT_DUPLICATE_WINDOW_MS,
+  })
 
   if (!duplicateCheck.allowed) {
-    return publicApiRateLimitResponse(
-      requestId,
-      duplicateCheck,
-    )
+    return publicApiRateLimitResponse(requestId, duplicateCheck)
   }
 
   try {
@@ -196,8 +156,7 @@ export async function POST(request: Request) {
       data: {
         name,
         email,
-        subject:
-          `${projectTypes[projectType]} enquiry`,
+        subject: `${projectTypes[projectType]} enquiry`,
         message,
         status: 'new',
         source: 'portfolio-contact-form',
@@ -207,8 +166,7 @@ export async function POST(request: Request) {
     recordRecentPublicApiSubmission({
       scope: 'contact:duplicate',
       key: duplicateKey,
-      ttlMs:
-        CONTACT_DUPLICATE_WINDOW_MS,
+      ttlMs: CONTACT_DUPLICATE_WINDOW_MS,
     })
 
     return publicApiResponse(
@@ -223,8 +181,7 @@ export async function POST(request: Request) {
     return publicApiResponse(
       {
         ok: false,
-        message:
-          'Unable to send your message right now. Please try again later.',
+        message: 'Unable to send your message right now. Please try again later.',
       },
       500,
       requestId,

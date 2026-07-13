@@ -2,10 +2,7 @@ import { expect, test } from '@playwright/test'
 
 const siteUrl = process.env.PLAYWRIGHT_BASE_URL ?? 'http://localhost:3000'
 
-test('homepage has no broken internal links, anchors, or images', async ({
-  page,
-  request,
-}) => {
+test('homepage has no broken internal links, anchors, or images', async ({ page, request }) => {
   const siteOrigin = new URL(siteUrl).origin
   const failedResources = new Set<string>()
 
@@ -34,7 +31,6 @@ test('homepage has no broken internal links, anchors, or images', async ({
   await page.goto(siteUrl, {
     waitUntil: 'domcontentloaded',
   })
-
 
   const hrefs = await page.locator('a[href]').evaluateAll((anchors) =>
     anchors.map((anchor) => ({
@@ -108,9 +104,7 @@ test('homepage has no broken internal links, anchors, or images', async ({
   for (let index = 0; index < (await images.count()); index += 1) {
     const image = images.nth(index)
     const source =
-      (await image.getAttribute('src')) ??
-      (await image.getAttribute('alt')) ??
-      `image ${index + 1}`
+      (await image.getAttribute('src')) ?? (await image.getAttribute('alt')) ?? `image ${index + 1}`
 
     await image.scrollIntoViewIfNeeded()
 
@@ -119,9 +113,7 @@ test('homepage has no broken internal links, anchors, or images', async ({
         () =>
           image.evaluate(
             (element) =>
-              element instanceof HTMLImageElement &&
-              element.complete &&
-              element.naturalWidth > 0,
+              element instanceof HTMLImageElement && element.complete && element.naturalWidth > 0,
           ),
         {
           message: `${source} must load successfully`,

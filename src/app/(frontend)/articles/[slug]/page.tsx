@@ -1,9 +1,6 @@
 import { notFound, redirect } from 'next/navigation'
 
-const articleSlugs = [
-  'portfolio-sections-system-thinking',
-  'building-dss-universe',
-] as const
+const articleSlugs = ['portfolio-sections-system-thinking', 'building-dss-universe'] as const
 
 type ArticlePageProps = {
   params: Promise<{

@@ -1,11 +1,6 @@
 import { notFound, redirect } from 'next/navigation'
 
-const projectSlugs = [
-  'dss-universe',
-  'jdmgram',
-  'gentlemens-barbershop',
-  'kinoplay',
-] as const
+const projectSlugs = ['dss-universe', 'jdmgram', 'gentlemens-barbershop', 'kinoplay'] as const
 
 type ProjectPageProps = {
   params: Promise<{

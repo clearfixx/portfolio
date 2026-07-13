@@ -10,8 +10,7 @@ type ScrollStackProps = {
 const STACK_MODE_QUERY =
   '(min-width: 1024px) and (min-height: 681px) and (pointer: fine) and (prefers-reduced-motion: no-preference)'
 
-const clamp = (value: number, min: number, max: number) =>
-  Math.min(Math.max(value, min), max)
+const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max)
 
 const parseLength = (value: string) => {
   const parsed = Number.parseFloat(value)
@@ -52,34 +51,23 @@ export function ScrollStack({ children, className }: ScrollStackProps) {
 
     const resetVisualState = () => {
       stackItems.forEach((item) => {
-        setStyleIfChanged(
-          item,
-          'transform',
-          'translate3d(0, 0px, 0) scale(1)',
-        )
+        setStyleIfChanged(item, 'transform', 'translate3d(0, 0px, 0) scale(1)')
         setStyleIfChanged(item, 'opacity', '1')
 
         if (item.dataset.stackState !== 'active') {
           item.dataset.stackState = 'active'
         }
 
-      item.removeAttribute('inert')
+        item.removeAttribute('inert')
       })
     }
 
     const syncItemOffsets = () => {
       const rootStyles = window.getComputedStyle(root)
-      const baseTop = parseLength(
-        rootStyles.getPropertyValue('--portfolio-stack-top'),
-      )
-      const step = parseLength(
-        rootStyles.getPropertyValue('--portfolio-stack-step'),
-      )
-      const bottomGap = parseLength(
-        rootStyles.getPropertyValue('--portfolio-stack-bottom-gap'),
-      )
-      const viewportHeight =
-        window.visualViewport?.height ?? window.innerHeight
+      const baseTop = parseLength(rootStyles.getPropertyValue('--portfolio-stack-top'))
+      const step = parseLength(rootStyles.getPropertyValue('--portfolio-stack-step'))
+      const bottomGap = parseLength(rootStyles.getPropertyValue('--portfolio-stack-bottom-gap'))
+      const viewportHeight = window.visualViewport?.height ?? window.innerHeight
 
       stackItems.forEach((item, index) => {
         const itemHeight = item.offsetHeight
@@ -87,12 +75,8 @@ export function ScrollStack({ children, className }: ScrollStackProps) {
         const fullyVisibleTop = viewportHeight - itemHeight - bottomGap
         const resolvedTop = Math.min(desiredTop, fullyVisibleTop)
 
-        item.style.setProperty(
-          '--scroll-stack-item-top',
-          `${Math.round(resolvedTop)}px`,
-        )
-        item.dataset.stackSize =
-          resolvedTop < desiredTop ? 'tall' : 'viewport'
+        item.style.setProperty('--scroll-stack-item-top', `${Math.round(resolvedTop)}px`)
+        item.dataset.stackSize = resolvedTop < desiredTop ? 'tall' : 'viewport'
       })
 
       geometryDirty = false
@@ -104,8 +88,7 @@ export function ScrollStack({ children, className }: ScrollStackProps) {
         return
       }
 
-      const viewportHeight =
-        window.visualViewport?.height ?? window.innerHeight
+      const viewportHeight = window.visualViewport?.height ?? window.innerHeight
       const coverStart = viewportHeight * 0.82
 
       /*
@@ -115,9 +98,7 @@ export function ScrollStack({ children, className }: ScrollStackProps) {
       const nextTops = stackItems.map((_, index) => {
         const nextItem = stackItems[index + 1]
 
-        return nextItem
-          ? nextItem.getBoundingClientRect().top
-          : Number.POSITIVE_INFINITY
+        return nextItem ? nextItem.getBoundingClientRect().top : Number.POSITIVE_INFINITY
       })
 
       stackItems.forEach((item, index) => {
@@ -128,15 +109,10 @@ export function ScrollStack({ children, className }: ScrollStackProps) {
           const nextStickyTop = parseLength(
             nextItem.style.getPropertyValue('--scroll-stack-item-top'),
           )
-          const coverEnd =
-            nextStickyTop + Math.min(56, viewportHeight * 0.07)
+          const coverEnd = nextStickyTop + Math.min(56, viewportHeight * 0.07)
           const coverDistance = Math.max(1, coverStart - coverEnd)
 
-          progress = clamp(
-            (coverStart - nextTops[index]) / coverDistance,
-            0,
-            1,
-          )
+          progress = clamp((coverStart - nextTops[index]) / coverDistance, 0, 1)
         }
 
         /*
@@ -156,20 +132,13 @@ export function ScrollStack({ children, className }: ScrollStackProps) {
         setStyleIfChanged(item, 'opacity', opacity.toFixed(3))
 
         const nextState =
-          visualProgress >= 0.98
-            ? 'covered'
-            : visualProgress > 0.02
-              ? 'covering'
-              : 'active'
+          visualProgress >= 0.98 ? 'covered' : visualProgress > 0.02 ? 'covering' : 'active'
 
         if (item.dataset.stackState !== nextState) {
           item.dataset.stackState = nextState
         }
 
-      item.toggleAttribute(
-        'inert',
-        nextState === 'covered',
-      )
+        item.toggleAttribute('inert', nextState === 'covered')
       })
     }
 
@@ -200,17 +169,12 @@ export function ScrollStack({ children, className }: ScrollStackProps) {
     const handleScroll = () => scheduleUpdate()
     const handleResize = () => scheduleUpdate(true)
     const handleModeChange = () => {
-      root.dataset.stackRuntime =
-        stackIsNearViewport && stackModeQuery.matches
-          ? 'active'
-          : 'idle'
+      root.dataset.stackRuntime = stackIsNearViewport && stackModeQuery.matches ? 'active' : 'idle'
       scheduleUpdate(true)
     }
 
     const resizeObserver =
-      'ResizeObserver' in window
-        ? new ResizeObserver(() => scheduleUpdate(true))
-        : null
+      'ResizeObserver' in window ? new ResizeObserver(() => scheduleUpdate(true)) : null
 
     resizeObserver?.observe(root)
     stackItems.forEach((item) => resizeObserver?.observe(item))
@@ -221,9 +185,7 @@ export function ScrollStack({ children, className }: ScrollStackProps) {
             ([entry]) => {
               stackIsNearViewport = entry?.isIntersecting ?? true
               root.dataset.stackRuntime =
-                stackIsNearViewport && stackModeQuery.matches
-                  ? 'active'
-                  : 'idle'
+                stackIsNearViewport && stackModeQuery.matches ? 'active' : 'idle'
 
               if (stackIsNearViewport) {
                 scheduleUpdate()
@@ -258,12 +220,7 @@ export function ScrollStack({ children, className }: ScrollStackProps) {
   }, [items.length])
 
   return (
-    <div
-      className={rootClassName}
-      data-scroll-stack
-      data-stack-runtime="idle"
-      ref={rootRef}
-    >
+    <div className={rootClassName} data-scroll-stack data-stack-runtime="idle" ref={rootRef}>
       {items.map((item, index) => (
         <div
           className="scroll-stack__item"

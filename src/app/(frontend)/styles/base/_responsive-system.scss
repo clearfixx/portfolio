@@ -59,11 +59,7 @@ body.mobile-navigation-open {
   border: 1px solid rgb(var(--rgb-cyan) / 24%);
   border-radius: 10px;
   background:
-    linear-gradient(
-      180deg,
-      rgb(var(--rgb-white) / 5%),
-      rgb(var(--rgb-white) / 1.5%)
-    ),
+    linear-gradient(180deg, rgb(var(--rgb-white) / 5%), rgb(var(--rgb-white) / 1.5%)),
     rgb(var(--rgb-surface-control) / 88%);
   color: rgb(var(--rgb-text-bright));
   box-shadow:
@@ -127,22 +123,11 @@ body.mobile-navigation-open {
   overscroll-behavior: contain;
   flex-direction: column;
   border-left: 1px solid rgb(var(--rgb-cyan) / 22%);
-  padding:
-    max(20px, env(safe-area-inset-top))
-    max(20px, env(safe-area-inset-right))
-    max(20px, env(safe-area-inset-bottom))
-    20px;
+  padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right))
+    max(20px, env(safe-area-inset-bottom)) 20px;
   background:
-    radial-gradient(
-      circle at 80% 5%,
-      rgb(var(--rgb-purple-blue) / 16%),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 10% 20%,
-      rgb(var(--rgb-cyan) / 10%),
-      transparent 28%
-    ),
+    radial-gradient(circle at 80% 5%, rgb(var(--rgb-purple-blue) / 16%), transparent 30%),
+    radial-gradient(circle at 10% 20%, rgb(var(--rgb-cyan) / 10%), transparent 28%),
     rgb(var(--rgb-canvas) / 97%);
   box-shadow: -32px 0 80px rgb(var(--rgb-black) / 48%);
   animation: mobile-nav-panel-in 320ms var(--motion-ease-standard, ease) both;
@@ -307,11 +292,7 @@ body.mobile-navigation-open {
   border-radius: 10px;
   padding: 0 17px;
   background:
-    linear-gradient(
-      135deg,
-      rgb(var(--rgb-cyan) / 18%),
-      rgb(var(--rgb-purple-blue) / 10%)
-    ),
+    linear-gradient(135deg, rgb(var(--rgb-cyan) / 18%), rgb(var(--rgb-purple-blue) / 10%)),
     rgb(var(--rgb-surface-control) / 82%);
   color: rgb(var(--rgb-text-bright));
   font-size: 0.92rem;
@@ -1379,17 +1360,11 @@ body.mobile-navigation-open {
     transform: none !important;
   }
 
-  .delivery-pipeline-scroll
-    [data-pipeline-phase]
-    .delivery-pipeline__phase-number,
-  .delivery-pipeline-scroll
-    [data-pipeline-phase]
-    .delivery-pipeline__phase-icon,
+  .delivery-pipeline-scroll [data-pipeline-phase] .delivery-pipeline__phase-number,
+  .delivery-pipeline-scroll [data-pipeline-phase] .delivery-pipeline__phase-icon,
   .delivery-pipeline-scroll [data-pipeline-phase] h3,
   .delivery-pipeline-scroll [data-pipeline-phase] ul,
-  .delivery-pipeline-scroll
-    [data-pipeline-phase]
-    .delivery-pipeline__phase-status {
+  .delivery-pipeline-scroll [data-pipeline-phase] .delivery-pipeline__phase-status {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
@@ -1755,38 +1730,26 @@ body.mobile-navigation-open {
   }
 
   .delivery-pipeline-scroll [data-pipeline-phase],
-  .delivery-pipeline-scroll
-    [data-pipeline-phase][data-pipeline-state='upcoming'],
-  .delivery-pipeline-scroll
-    [data-pipeline-phase][data-pipeline-state='active'],
-  .delivery-pipeline-scroll
-    [data-pipeline-phase][data-pipeline-state='complete'],
-  .delivery-pipeline-scroll
-    [data-pipeline-phase][data-pipeline-state='completed'] {
+  .delivery-pipeline-scroll [data-pipeline-phase][data-pipeline-state='upcoming'],
+  .delivery-pipeline-scroll [data-pipeline-phase][data-pipeline-state='active'],
+  .delivery-pipeline-scroll [data-pipeline-phase][data-pipeline-state='complete'],
+  .delivery-pipeline-scroll [data-pipeline-phase][data-pipeline-state='completed'] {
     opacity: 1 !important;
     transform: none !important;
   }
 
-  .delivery-pipeline-scroll
-    [data-pipeline-phase]
-    .delivery-pipeline__phase-number,
-  .delivery-pipeline-scroll
-    [data-pipeline-phase]
-    .delivery-pipeline__phase-icon,
+  .delivery-pipeline-scroll [data-pipeline-phase] .delivery-pipeline__phase-number,
+  .delivery-pipeline-scroll [data-pipeline-phase] .delivery-pipeline__phase-icon,
   .delivery-pipeline-scroll [data-pipeline-phase] h3,
   .delivery-pipeline-scroll [data-pipeline-phase] ul,
-  .delivery-pipeline-scroll
-    [data-pipeline-phase]
-    .delivery-pipeline__phase-status {
+  .delivery-pipeline-scroll [data-pipeline-phase] .delivery-pipeline__phase-status {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
     transition-delay: 0ms !important;
   }
 
-  .delivery-pipeline-scroll
-    [data-pipeline-phase]
-    .delivery-pipeline__phase-icon {
+  .delivery-pipeline-scroll [data-pipeline-phase] .delivery-pipeline__phase-icon {
     visibility: visible !important;
   }
 
@@ -1981,8 +1944,7 @@ body.mobile-navigation-open {
     min-height: 280vh !important;
   }
 
-  .delivery-pipeline-scroll[data-pipeline-enabled='true']
-    > [data-pipeline-stage] {
+  .delivery-pipeline-scroll[data-pipeline-enabled='true'] > [data-pipeline-stage] {
     position: sticky !important;
     top: var(--pipeline-sticky-top) !important;
   }

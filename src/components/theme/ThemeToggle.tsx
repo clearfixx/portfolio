@@ -8,9 +8,7 @@ type ThemeViewTransition = {
 }
 
 type ThemeTransitionDocument = Document & {
-  startViewTransition?: (
-    updateCallback: () => void | Promise<void>,
-  ) => ThemeViewTransition
+  startViewTransition?: (updateCallback: () => void | Promise<void>) => ThemeViewTransition
 }
 
 function subscribeToHydration() {

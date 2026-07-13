@@ -1,7 +1,13 @@
 @mixin interactive(
   $duration: 180ms,
   $timing: ease,
-  $properties: (border-color, background, color, box-shadow, transform)
+  $properties: (
+    border-color,
+    background,
+    color,
+    box-shadow,
+    transform,
+  )
 ) {
   transition-property: $properties;
   transition-duration: $duration;

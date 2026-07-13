@@ -21,8 +21,7 @@ type PublicApiJsonResult<T extends object> =
       response: Response
     }
 
-const jsonContentTypePattern =
-  /^application\/json(?:\s*;|$)/i
+const jsonContentTypePattern = /^application\/json(?:\s*;|$)/i
 
 function firstForwardedValue(value: string | null) {
   return value?.split(',')[0]?.trim() || null
@@ -30,19 +29,10 @@ function firstForwardedValue(value: string | null) {
 
 function resolveRequestOrigin(request: Request) {
   const requestUrl = new URL(request.url)
-  const forwardedHost = firstForwardedValue(
-    request.headers.get('x-forwarded-host'),
-  )
-  const forwardedProto = firstForwardedValue(
-    request.headers.get('x-forwarded-proto'),
-  )
-  const host =
-    forwardedHost ||
-    request.headers.get('host') ||
-    requestUrl.host
-  const protocol =
-    forwardedProto ||
-    requestUrl.protocol.replace(':', '')
+  const forwardedHost = firstForwardedValue(request.headers.get('x-forwarded-host'))
+  const forwardedProto = firstForwardedValue(request.headers.get('x-forwarded-proto'))
+  const host = forwardedHost || request.headers.get('host') || requestUrl.host
+  const protocol = forwardedProto || requestUrl.protocol.replace(':', '')
 
   try {
     return new URL(`${protocol}://${host}`).origin
@@ -65,10 +55,7 @@ function hasAllowedOrigin(request: Request) {
   }
 
   try {
-    return (
-      new URL(origin).origin ===
-      resolveRequestOrigin(request)
-    )
+    return new URL(origin).origin === resolveRequestOrigin(request)
   } catch {
     return false
   }
@@ -94,11 +81,7 @@ export function publicApiResponse(
   })
 }
 
-function publicApiError(
-  message: string,
-  status: number,
-  requestId: string,
-) {
+function publicApiError(message: string, status: number, requestId: string) {
   return {
     ok: false as const,
     response: publicApiResponse(
@@ -119,40 +102,24 @@ export async function readPublicApiJson<T extends object>(
   const requestId = randomUUID()
 
   if (!hasAllowedOrigin(request)) {
-    return publicApiError(
-      'Request origin is not allowed.',
-      403,
-      requestId,
-    )
+    return publicApiError('Request origin is not allowed.', 403, requestId)
   }
 
-  const contentType =
-    request.headers.get('content-type') || ''
+  const contentType = request.headers.get('content-type') || ''
 
   if (!jsonContentTypePattern.test(contentType)) {
-    return publicApiError(
-      'Content-Type must be application/json.',
-      415,
-      requestId,
-    )
+    return publicApiError('Content-Type must be application/json.', 415, requestId)
   }
 
-  const contentLengthHeader =
-    request.headers.get('content-length')
-  const contentLength = contentLengthHeader
-    ? Number(contentLengthHeader)
-    : null
+  const contentLengthHeader = request.headers.get('content-length')
+  const contentLength = contentLengthHeader ? Number(contentLengthHeader) : null
 
   if (
     contentLength !== null &&
     Number.isFinite(contentLength) &&
     contentLength > options.maxBytes
   ) {
-    return publicApiError(
-      'Request payload is too large.',
-      413,
-      requestId,
-    )
+    return publicApiError('Request payload is too large.', 413, requestId)
   }
 
   let rawBody: string
@@ -160,22 +127,11 @@ export async function readPublicApiJson<T extends object>(
   try {
     rawBody = await request.text()
   } catch {
-    return publicApiError(
-      'Invalid request payload.',
-      400,
-      requestId,
-    )
+    return publicApiError('Invalid request payload.', 400, requestId)
   }
 
-  if (
-    Buffer.byteLength(rawBody, 'utf8') >
-    options.maxBytes
-  ) {
-    return publicApiError(
-      'Request payload is too large.',
-      413,
-      requestId,
-    )
+  if (Buffer.byteLength(rawBody, 'utf8') > options.maxBytes) {
+    return publicApiError('Request payload is too large.', 413, requestId)
   }
 
   let parsedBody: unknown
@@ -183,23 +139,11 @@ export async function readPublicApiJson<T extends object>(
   try {
     parsedBody = JSON.parse(rawBody)
   } catch {
-    return publicApiError(
-      'Invalid request payload.',
-      400,
-      requestId,
-    )
+    return publicApiError('Invalid request payload.', 400, requestId)
   }
 
-  if (
-    !parsedBody ||
-    typeof parsedBody !== 'object' ||
-    Array.isArray(parsedBody)
-  ) {
-    return publicApiError(
-      'Invalid request payload.',
-      400,
-      requestId,
-    )
+  if (!parsedBody || typeof parsedBody !== 'object' || Array.isArray(parsedBody)) {
+    return publicApiError('Invalid request payload.', 400, requestId)
   }
 
   return {

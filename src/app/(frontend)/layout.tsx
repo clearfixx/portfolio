@@ -69,8 +69,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: hasOpenGraphImage ? 'summary_large_image' : 'summary',
       title,
       description,
-      images:
-        hasOpenGraphImage && defaultOgImage?.url ? [defaultOgImage.url] : undefined,
+      images: hasOpenGraphImage && defaultOgImage?.url ? [defaultOgImage.url] : undefined,
     },
   }
 }

@@ -27,23 +27,20 @@ The migration must preserve the current visual design and motion system.
 The public page currently loads only two Payload globals:
 
 ```ts
-const [homepage, contact] = await Promise.all([
-  getHomepage(),
-  getContact(),
-])
+const [homepage, contact] = await Promise.all([getHomepage(), getContact()])
 ```
 
 Observed usage:
 
-| Payload value | Current consumer | Actual use |
-| --- | --- | --- |
-| `Homepage.hero` | `Hero` | CTA labels and URLs are consumed; most hero fields are bypassed by hardcoded JSX |
-| `Homepage.featuredProjects` | none | unused |
-| `Homepage.selectedTechStack` | none | unused |
-| `Homepage.testimonialsSection` | none | unused |
-| `Homepage.socialFeedsSection` | none | unused |
-| `Homepage.contactSection` | `ContactCTA` | passed as `unknown`, then intentionally ignored |
-| `Contact` global | `ContactCTA` | passed as `unknown`, then intentionally ignored |
+| Payload value                  | Current consumer | Actual use                                                                       |
+| ------------------------------ | ---------------- | -------------------------------------------------------------------------------- |
+| `Homepage.hero`                | `Hero`           | CTA labels and URLs are consumed; most hero fields are bypassed by hardcoded JSX |
+| `Homepage.featuredProjects`    | none             | unused                                                                           |
+| `Homepage.selectedTechStack`   | none             | unused                                                                           |
+| `Homepage.testimonialsSection` | none             | unused                                                                           |
+| `Homepage.socialFeedsSection`  | none             | unused                                                                           |
+| `Homepage.contactSection`      | `ContactCTA`     | passed as `unknown`, then intentionally ignored                                  |
+| `Contact` global               | `ContactCTA`     | passed as `unknown`, then intentionally ignored                                  |
 
 Every other landing section constructs its own content internally.
 
@@ -368,16 +365,16 @@ CTA labels and URLs are the only meaningful current connection.
 
 ### Target mapping
 
-| UI value | Target source |
-| --- | --- |
-| name and role | `Profile` |
-| greeting, headline, subtitle, CTA | `Homepage.hero` |
-| portrait / visual | `Profile.portrait` or `Homepage.hero.image` depending on final design responsibility |
-| hero technologies | `Homepage.selectedTechStack` relationships |
-| projects count | derived collection count |
-| years of experience | derived from `Profile.careerStartedAt` |
-| manual metrics | `Profile.metrics` |
-| GitHub metrics | future GitHub integration |
+| UI value                          | Target source                                                                        |
+| --------------------------------- | ------------------------------------------------------------------------------------ |
+| name and role                     | `Profile`                                                                            |
+| greeting, headline, subtitle, CTA | `Homepage.hero`                                                                      |
+| portrait / visual                 | `Profile.portrait` or `Homepage.hero.image` depending on final design responsibility |
+| hero technologies                 | `Homepage.selectedTechStack` relationships                                           |
+| projects count                    | derived collection count                                                             |
+| years of experience               | derived from `Profile.careerStartedAt`                                               |
+| manual metrics                    | `Profile.metrics`                                                                    |
+| GitHub metrics                    | future GitHub integration                                                            |
 
 ### Keep as frontend fixture
 
@@ -491,18 +488,18 @@ The UI must visibly communicate that it is a concept/product preview, not curren
 
 ### Project-to-card mapping
 
-| Card field | Project field |
-| --- | --- |
-| `id` | project ID |
-| `title` | `title` |
-| `slug` | `slug` |
-| `excerpt` | `excerpt` |
-| `stage` | `stage` through a frontend label map |
-| `progress` | `progress` |
-| `stack` | populated `techStack[].name` |
-| image | `featuredImage ?? coverImage` |
-| CTA | first appropriate enabled item from `links[]` |
-| tagline | proposed `cardTagline`, otherwise omit |
+| Card field | Project field                                 |
+| ---------- | --------------------------------------------- |
+| `id`       | project ID                                    |
+| `title`    | `title`                                       |
+| `slug`     | `slug`                                        |
+| `excerpt`  | `excerpt`                                     |
+| `stage`    | `stage` through a frontend label map          |
+| `progress` | `progress`                                    |
+| `stack`    | populated `techStack[].name`                  |
+| image      | `featuredImage ?? coverImage`                 |
+| CTA        | first appropriate enabled item from `links[]` |
+| tagline    | proposed `cardTagline`, otherwise omit        |
 
 ### Route guardrail
 
@@ -789,14 +786,14 @@ The following data remains hardcoded:
 
 ### Target mapping
 
-| UI value | Target |
-| --- | --- |
-| email, phone, location, form enabled | `Contact` |
-| availability | new `Contact.availability` or shared `Profile.availability` |
-| social URLs | `Social` |
-| Telegram | new `Social.telegramUrl` |
-| section copy | expanded `Homepage.contactSection` |
-| form labels, field names, validation | frontend contract |
+| UI value                             | Target                                                      |
+| ------------------------------------ | ----------------------------------------------------------- |
+| email, phone, location, form enabled | `Contact`                                                   |
+| availability                         | new `Contact.availability` or shared `Profile.availability` |
+| social URLs                          | `Social`                                                    |
+| Telegram                             | new `Social.telegramUrl`                                    |
+| section copy                         | expanded `Homepage.contactSection`                          |
+| form labels, field names, validation | frontend contract                                           |
 
 Proposed Homepage group extension:
 
@@ -847,14 +844,14 @@ When `contactFormEnabled` is false:
 
 ### Target mapping
 
-| Footer data | Target |
-| --- | --- |
-| name, role, portrait, bio | `Profile` |
-| email and availability | `Contact` / `Profile` |
-| social URLs | `Social` |
+| Footer data                      | Target                                                    |
+| -------------------------------- | --------------------------------------------------------- |
+| name, role, portrait, bio        | `Profile`                                                 |
+| email and availability           | `Contact` / `Profile`                                     |
+| social URLs                      | `Social`                                                  |
 | feed section enablement and copy | `Homepage.socialFeedsSection` or a dedicated footer group |
-| year | derived with `new Date().getFullYear()` |
-| navigation anchors | frontend |
+| year                             | derived with `new Date().getFullYear()`                   |
+| navigation anchors               | frontend                                                  |
 
 ### Social feed decision for v1.0
 

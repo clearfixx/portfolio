@@ -274,10 +274,7 @@ function PipelineStatusPanel() {
       </div>
 
       <div className="delivery-pipeline__radar" aria-hidden="true">
-        <b
-          className="delivery-pipeline__radar-sweep"
-          data-pipeline-radar-sweep
-        />
+        <b className="delivery-pipeline__radar-sweep" data-pipeline-radar-sweep />
         <span />
         <span />
         <span />
@@ -297,13 +294,7 @@ function PipelineStatusPanel() {
   )
 }
 
-function DeliveryPhaseCard({
-  phase,
-  index,
-}: {
-  phase: DeliveryPhase
-  index: number
-}) {
+function DeliveryPhaseCard({ phase, index }: { phase: DeliveryPhase; index: number }) {
   const Icon = phaseIcons[phase.icon]
 
   return (
@@ -364,27 +355,15 @@ export function DeliveryPipeline() {
           <PipelineStatusPanel />
 
           <div className="delivery-pipeline__flow">
-            <div
-              className="delivery-pipeline__rail"
-              aria-hidden="true"
-              data-pipeline-rail
-            >
+            <div className="delivery-pipeline__rail" aria-hidden="true" data-pipeline-rail>
               {deliveryPhases.map((phase, index) => (
-                <span
-                  data-pipeline-node={index}
-                  data-pipeline-state="upcoming"
-                  key={phase.id}
-                />
+                <span data-pipeline-node={index} data-pipeline-state="upcoming" key={phase.id} />
               ))}
             </div>
 
             <div className="delivery-pipeline__phases">
               {deliveryPhases.map((phase, index) => (
-                <DeliveryPhaseCard
-                  phase={phase}
-                  index={index}
-                  key={phase.id}
-                />
+                <DeliveryPhaseCard phase={phase} index={index} key={phase.id} />
               ))}
             </div>
           </div>

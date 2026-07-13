@@ -27,23 +27,19 @@ html[data-motion-ready='true'] [data-motion]:not([data-motion-state='visible']) 
   will-change: opacity, transform;
 }
 
-html[data-motion-ready='true']
-  [data-motion='fade']:not([data-motion-state='visible']) {
+html[data-motion-ready='true'] [data-motion='fade']:not([data-motion-state='visible']) {
   transform: none;
 }
 
-html[data-motion-ready='true']
-  [data-motion='slide-left']:not([data-motion-state='visible']) {
+html[data-motion-ready='true'] [data-motion='slide-left']:not([data-motion-state='visible']) {
   transform: translate3d(calc(var(--motion-distance-lg) * -1), 0, 0);
 }
 
-html[data-motion-ready='true']
-  [data-motion='slide-right']:not([data-motion-state='visible']) {
+html[data-motion-ready='true'] [data-motion='slide-right']:not([data-motion-state='visible']) {
   transform: translate3d(var(--motion-distance-lg), 0, 0);
 }
 
-html[data-motion-ready='true']
-  [data-motion='scale-in']:not([data-motion-state='visible']) {
+html[data-motion-ready='true'] [data-motion='scale-in']:not([data-motion-state='visible']) {
   transform: scale(0.98);
   transform-origin: center;
 }

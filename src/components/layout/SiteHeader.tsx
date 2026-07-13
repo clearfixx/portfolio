@@ -19,32 +19,32 @@ export function SiteHeader() {
     window.addEventListener('scroll', onScroll, { passive: true })
 
     const getScrollProgress = () => {
-    const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight
+      const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight
 
-    if (scrollableHeight <= 0) return 0
+      if (scrollableHeight <= 0) return 0
 
-    return Math.min(Math.max(window.scrollY / scrollableHeight, 0), 1)
-  }
+      return Math.min(Math.max(window.scrollY / scrollableHeight, 0), 1)
+    }
 
-  const updateScrollProgress = () => {
-    window.cancelAnimationFrame(frameRef.current)
+    const updateScrollProgress = () => {
+      window.cancelAnimationFrame(frameRef.current)
 
-    frameRef.current = window.requestAnimationFrame(() => {
-      setScrollProgress(getScrollProgress())
-    })
-  }
+      frameRef.current = window.requestAnimationFrame(() => {
+        setScrollProgress(getScrollProgress())
+      })
+    }
 
-  updateScrollProgress()
+    updateScrollProgress()
 
-  window.addEventListener('scroll', updateScrollProgress, { passive: true })
-  window.addEventListener('resize', updateScrollProgress)
+    window.addEventListener('scroll', updateScrollProgress, { passive: true })
+    window.addEventListener('resize', updateScrollProgress)
 
     return () => {
       window.removeEventListener('scroll', onScroll)
       window.cancelAnimationFrame(frameRef.current)
       window.removeEventListener('scroll', updateScrollProgress)
       window.removeEventListener('resize', updateScrollProgress)
-   }
+    }
   }, [])
 
   return (

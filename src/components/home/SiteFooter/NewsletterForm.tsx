@@ -58,7 +58,7 @@ export function NewsletterForm() {
     const email = readFormValue(formData, 'email').toLowerCase()
 
     if (!email) {
-      setFieldError("Enter your email address")
+      setFieldError('Enter your email address')
       setSubmitState('error')
       setFeedback('Enter your email address.')
       focusEmailField(form)
@@ -92,28 +92,19 @@ export function NewsletterForm() {
       const result = (await response.json().catch(() => ({}))) as NewsletterResponse
 
       if (!response.ok) {
-        throw new Error(
-          result.message || 'Unable to subscribe right now.',
-        )
+        throw new Error(result.message || 'Unable to subscribe right now.')
       }
 
       form.reset()
       setSubmitState('success')
-      setFeedback(
-        result.message || 'You’re subscribed to Build Notes.',
-      )
+      setFeedback(result.message || 'You’re subscribed to Build Notes.')
     } catch (error) {
       setSubmitState('error')
-      setFeedback(
-        error instanceof Error
-          ? error.message
-          : 'Unable to subscribe right now.',
-      )
+      setFeedback(error instanceof Error ? error.message : 'Unable to subscribe right now.')
     }
   }
 
-  const note =
-    feedback || 'No spam. Unsubscribe anytime.'
+  const note = feedback || 'No spam. Unsubscribe anytime.'
 
   return (
     <form
@@ -122,20 +113,12 @@ export function NewsletterForm() {
       noValidate
       onSubmit={handleSubmit}
     >
-      <label
-        className={`site-footer__newsletter-field${
-          fieldError ? ' is-invalid' : ''
-        }`}
-      >
-        <span className="sr-only">
-          What&apos;s a good email address?
-        </span>
+      <label className={`site-footer__newsletter-field${fieldError ? ' is-invalid' : ''}`}>
+        <span className="sr-only">What&apos;s a good email address?</span>
         <input
           type="email"
           name="email"
-          placeholder={
-            fieldError || "What's a good email address?"
-          }
+          placeholder={fieldError || "What's a good email address?"}
           autoComplete="email"
           maxLength={254}
           required
@@ -145,23 +128,12 @@ export function NewsletterForm() {
         />
       </label>
 
-      <label
-        className="site-footer__newsletter-honeypot"
-        aria-hidden="true"
-      >
+      <label className="site-footer__newsletter-honeypot" aria-hidden="true">
         <span>Website</span>
-        <input
-          type="text"
-          name="website"
-          autoComplete="off"
-          tabIndex={-1}
-        />
+        <input type="text" name="website" autoComplete="off" tabIndex={-1} />
       </label>
 
-      <button
-        type="submit"
-        disabled={isSubmitting}
-      >
+      <button type="submit" disabled={isSubmitting}>
         {isSubmitting ? 'Wait…' : 'Gimme!'}
       </button>
 
@@ -169,13 +141,7 @@ export function NewsletterForm() {
         id="newsletter-status"
         className="site-footer__newsletter-note"
         data-state={submitState}
-        role={
-          submitState === 'error'
-            ? 'alert'
-            : submitState === 'success'
-              ? 'status'
-              : undefined
-        }
+        role={submitState === 'error' ? 'alert' : submitState === 'success' ? 'status' : undefined}
         aria-live="polite"
       >
         <LockIcon />

@@ -36,7 +36,16 @@ const InstagramIcon = (props: IconProps) => (
 )
 
 const ReplyIcon = (props: IconProps) => (
-  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" {...props}>
+  <svg
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+    fill="none"
+    stroke="currentColor"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="1.8"
+    {...props}
+  >
     <path d="M20 15a4 4 0 0 1-4 4H8l-4 3V8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v7Z" />
   </svg>
 )
@@ -60,7 +69,16 @@ const RepostIcon = (props: IconProps) => (
 )
 
 const HeartIcon = (props: IconProps) => (
-  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" {...props}>
+  <svg
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+    fill="none"
+    stroke="currentColor"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="1.8"
+    {...props}
+  >
     <path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z" />
   </svg>
 )
@@ -258,9 +276,7 @@ export function SiteFooter() {
                   <h3>Build Notes</h3>
                 </div>
 
-                <p>
-                  Notes on engineering, architecture and better products.
-                </p>
+                <p>Notes on engineering, architecture and better products.</p>
               </div>
 
               <NewsletterForm />
@@ -281,7 +297,8 @@ export function SiteFooter() {
           </nav>
 
           <p className="site-footer__copyright">
-            © 2026 Built with <span>❤️</span>, clean architecture and <em>lot</em> of <span>☕️</span>.
+            © 2026 Built with <span>❤️</span>, clean architecture and <em>lot</em> of{' '}
+            <span>☕️</span>.
           </p>
         </div>
       </div>

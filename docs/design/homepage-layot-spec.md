@@ -1,7 +1,9 @@
 # Homepage Layout Specification
+
 Version: 1.0
 Status: Approved
 Depends on:
+
 - homepage-ui-spec.md
 
 ---
@@ -147,22 +149,22 @@ Never collapse proportions on desktop.
 # Hero Composition
 
 ┌────────────────────────────────────────────────────────────────────┐
-│ Header                                                             │
+│ Header │
 ├──────────────┬────────────────────────────────┬────────────────────┤
-│              │                                │                    │
-│              │                                │                    │
-│ System       │                                │                    │
-│ Status       │                                │                    │
-│              │                                │                    │
-│              │             HERO               │     Live Editor    │
-│              │                                │                    │
-│              │                                │                    │
-│              │                                │                    │
-│              │                                │                    │
+│ │ │ │
+│ │ │ │
+│ System │ │ │
+│ Status │ │ │
+│ │ │ │
+│ │ HERO │ Live Editor │
+│ │ │ │
+│ │ │ │
+│ │ │ │
+│ │ │ │
 ├──────────────┴────────────────────────────────┴────────────────────┤
-│ Tech Stack                                                        │
+│ Tech Stack │
 ├────────────────────────────────────────────────────────────────────┤
-│ Mission Dashboard                                                 │
+│ Mission Dashboard │
 └────────────────────────────────────────────────────────────────────┘
 
 This composition must remain visually balanced.

@@ -1,8 +1,7 @@
 import { expect, test } from '@playwright/test'
 import type { Locator, Page } from '@playwright/test'
 
-const siteUrl =
-  process.env.PLAYWRIGHT_BASE_URL ?? 'http://localhost:3000'
+const siteUrl = process.env.PLAYWRIGHT_BASE_URL ?? 'http://localhost:3000'
 
 async function openNewsletterForm(page: Page) {
   await page.emulateMedia({
@@ -17,10 +16,7 @@ async function openNewsletterForm(page: Page) {
     name: 'Reject optional',
   })
 
-  if (
-    (await rejectOptional.count()) > 0 &&
-    (await rejectOptional.isVisible())
-  ) {
+  if ((await rejectOptional.count()) > 0 && (await rejectOptional.isVisible())) {
     await rejectOptional.click()
   }
 
@@ -48,10 +44,7 @@ function getEmailField(form: Locator) {
   })
 }
 
-async function fillEmail(
-  form: Locator,
-  value: string,
-) {
+async function fillEmail(form: Locator, value: string) {
   const email = getEmailField(form)
 
   await email.fill(value)
@@ -69,10 +62,7 @@ test.describe('Build Notes newsletter', () => {
     let requestCount = 0
 
     page.on('request', (request) => {
-      if (
-        request.method() === 'POST' &&
-        new URL(request.url()).pathname === '/api/newsletter'
-      ) {
+      if (request.method() === 'POST' && new URL(request.url()).pathname === '/api/newsletter') {
         requestCount += 1
       }
     })
@@ -82,20 +72,17 @@ test.describe('Build Notes newsletter', () => {
 
     await expect(form).toHaveAttribute('novalidate', '')
 
-    await form.getByRole('button', {
-      name: 'Gimme!',
-    }).click()
+    await form
+      .getByRole('button', {
+        name: 'Gimme!',
+      })
+      .click()
 
-    await expect(email).toHaveAttribute(
-      'placeholder',
-      "Enter your email address",
-    )
+    await expect(email).toHaveAttribute('placeholder', 'Enter your email address')
     await expect(email).toHaveAttribute('aria-invalid', 'true')
     await expect(email).toBeFocused()
 
-    await expect(form.getByRole('alert')).toContainText(
-      'Enter your email address.',
-    )
+    await expect(form.getByRole('alert')).toContainText('Enter your email address.')
 
     expect(requestCount).toBe(0)
   })
@@ -104,28 +91,21 @@ test.describe('Build Notes newsletter', () => {
     let requestCount = 0
 
     page.on('request', (request) => {
-      if (
-        request.method() === 'POST' &&
-        new URL(request.url()).pathname === '/api/newsletter'
-      ) {
+      if (request.method() === 'POST' && new URL(request.url()).pathname === '/api/newsletter') {
         requestCount += 1
       }
     })
 
     const form = await openNewsletterForm(page)
-    const email = await fillEmail(
-      form,
-      'not-an-email',
-    )
+    const email = await fillEmail(form, 'not-an-email')
 
-    await form.getByRole('button', {
-      name: 'Gimme!',
-    }).click()
+    await form
+      .getByRole('button', {
+        name: 'Gimme!',
+      })
+      .click()
 
-    await expect(email).toHaveAttribute(
-      'placeholder',
-      'Enter a valid email address',
-    )
+    await expect(email).toHaveAttribute('placeholder', 'Enter a valid email address')
     await expect(email).toHaveAttribute('aria-invalid', 'true')
     await expect(email).toBeFocused()
 
@@ -153,18 +133,15 @@ test.describe('Build Notes newsletter', () => {
     })
 
     const form = await openNewsletterForm(page)
-    const email = await fillEmail(
-      form,
-      'newsletter-test@example.com',
-    )
+    const email = await fillEmail(form, 'newsletter-test@example.com')
 
-    await form.getByRole('button', {
-      name: 'Gimme!',
-    }).click()
+    await form
+      .getByRole('button', {
+        name: 'Gimme!',
+      })
+      .click()
 
-    await expect(form.getByRole('status')).toContainText(
-      "You're subscribed to Build Notes.",
-    )
+    await expect(form.getByRole('status')).toContainText("You're subscribed to Build Notes.")
 
     expect(submittedBody).toEqual({
       email: 'newsletter-test@example.com',
@@ -188,14 +165,13 @@ test.describe('Build Notes newsletter', () => {
     })
 
     const form = await openNewsletterForm(page)
-    const email = await fillEmail(
-      form,
-      'existing@example.com',
-    )
+    const email = await fillEmail(form, 'existing@example.com')
 
-    await form.getByRole('button', {
-      name: 'Gimme!',
-    }).click()
+    await form
+      .getByRole('button', {
+        name: 'Gimme!',
+      })
+      .click()
 
     await expect(form.getByRole('status')).toContainText(
       "You're already subscribed to Build Notes.",
@@ -217,14 +193,13 @@ test.describe('Build Notes newsletter', () => {
     })
 
     const form = await openNewsletterForm(page)
-    const email = await fillEmail(
-      form,
-      'retry@example.com',
-    )
+    const email = await fillEmail(form, 'retry@example.com')
 
-    await form.getByRole('button', {
-      name: 'Gimme!',
-    }).click()
+    await form
+      .getByRole('button', {
+        name: 'Gimme!',
+      })
+      .click()
 
     await expect(form.getByRole('alert')).toContainText(
       'Unable to subscribe right now. Please try again later.',

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 export const SmallLogo = () => {
-  <svg
+  ;<svg
     xmlns="http://www.w3.org/2000/svg"
     width="176"
     height="124"
@@ -22,10 +22,7 @@ export const SmallLogo = () => {
       </linearGradient>
     </defs>
 
-    <path
-      d="M23 42H34V46H27V87H34V91H23V42Z"
-      fill="url(#ak-cyan)"
-    />
+    <path d="M23 42H34V46H27V87H34V91H23V42Z" fill="url(#ak-cyan)" />
 
     <path
       fillRule="evenodd"
@@ -34,23 +31,16 @@ export const SmallLogo = () => {
       fill="url(#ak-cyan)"
     />
 
-    <path
-      d="M91.5 40H102.8V91H91.5V40Z"
-      fill="url(#ak-silver)"
-    />
+    <path d="M91.5 40H102.8V91H91.5V40Z" fill="url(#ak-silver)" />
 
     <path
       d="M103 62.2L121.3 40H135.4L114.3 64.2L136.8 91H122.1L103 67.2V62.2Z"
       fill="url(#ak-silver)"
     />
 
-    <path
-      d="M153 42H142V46H149V87H142V91H153V42Z"
-      fill="url(#ak-cyan)"
-    />
+    <path d="M153 42H142V46H149V87H142V91H153V42Z" fill="url(#ak-cyan)" />
   </svg>
 }
-
 
 export function Logo() {
   return (
@@ -66,21 +56,32 @@ export function Logo() {
           aria-label="AK logo"
         >
           <defs>
-            <linearGradient id="ak-cyan" x1="0" y1="38" x2="0" y2="92" gradientUnits="userSpaceOnUse">
+            <linearGradient
+              id="ak-cyan"
+              x1="0"
+              y1="38"
+              x2="0"
+              y2="92"
+              gradientUnits="userSpaceOnUse"
+            >
               <stop offset="0" stopColor="#31FFF2" />
               <stop offset="1" stopColor="#18DCD8" />
             </linearGradient>
 
-            <linearGradient id="ak-silver" x1="0" y1="38" x2="0" y2="92" gradientUnits="userSpaceOnUse">
+            <linearGradient
+              id="ak-silver"
+              x1="0"
+              y1="38"
+              x2="0"
+              y2="92"
+              gradientUnits="userSpaceOnUse"
+            >
               <stop offset="0" stopColor="#F4F7FA" />
               <stop offset="1" stopColor="#C9D1DC" />
             </linearGradient>
           </defs>
 
-          <path
-            d="M23 42H34V46H27V87H34V91H23V42Z"
-            fill="url(#ak-cyan)"
-          />
+          <path d="M23 42H34V46H27V87H34V91H23V42Z" fill="url(#ak-cyan)" />
 
           <path
             fillRule="evenodd"
@@ -89,20 +90,14 @@ export function Logo() {
             fill="url(#ak-cyan)"
           />
 
-          <path
-            d="M91.5 40H102.8V91H91.5V40Z"
-            fill="url(#ak-silver)"
-          />
+          <path d="M91.5 40H102.8V91H91.5V40Z" fill="url(#ak-silver)" />
 
           <path
             d="M103 62.2L121.3 40H135.4L114.3 64.2L136.8 91H122.1L103 67.2V62.2Z"
             fill="url(#ak-silver)"
           />
 
-          <path
-            d="M153 42H142V46H149V87H142V91H153V42Z"
-            fill="url(#ak-cyan)"
-          />
+          <path d="M153 42H142V46H149V87H142V91H153V42Z" fill="url(#ak-cyan)" />
         </svg>
       </span>
 

@@ -63,10 +63,7 @@ export function MotionRuntime() {
       intersectionObserver.observe(element)
     }
 
-    if (
-      !reducedMotionQuery.matches &&
-      'IntersectionObserver' in window
-    ) {
+    if (!reducedMotionQuery.matches && 'IntersectionObserver' in window) {
       intersectionObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -114,8 +111,7 @@ export function MotionRuntime() {
         relatedMotionElements.add(target)
       }
 
-      const closestMotionElement =
-        target.closest<HTMLElement>(MOTION_SELECTOR)
+      const closestMotionElement = target.closest<HTMLElement>(MOTION_SELECTOR)
 
       if (closestMotionElement) {
         relatedMotionElements.add(closestMotionElement)
@@ -143,9 +139,7 @@ export function MotionRuntime() {
                   prepareElement(node as HTMLElement)
                 }
 
-                node
-                  .querySelectorAll<HTMLElement>(MOTION_SELECTOR)
-                  .forEach(prepareElement)
+                node.querySelectorAll<HTMLElement>(MOTION_SELECTOR).forEach(prepareElement)
               })
             })
           })
@@ -160,9 +154,7 @@ export function MotionRuntime() {
       getMotionElements().forEach(reveal)
     }
 
-    const handleReducedMotionChange = (
-      event: MediaQueryListEvent,
-    ) => {
+    const handleReducedMotionChange = (event: MediaQueryListEvent) => {
       if (!event.matches) {
         return
       }
@@ -177,8 +169,7 @@ export function MotionRuntime() {
         return
       }
 
-      const motionElement =
-        event.target.closest<HTMLElement>(MOTION_SELECTOR)
+      const motionElement = event.target.closest<HTMLElement>(MOTION_SELECTOR)
 
       if (motionElement) {
         reveal(motionElement)
@@ -190,10 +181,7 @@ export function MotionRuntime() {
       revealHashTarget()
     }
 
-    reducedMotionQuery.addEventListener(
-      'change',
-      handleReducedMotionChange,
-    )
+    reducedMotionQuery.addEventListener('change', handleReducedMotionChange)
     document.addEventListener('focusin', handleFocusIn)
     window.addEventListener('hashchange', revealHashTarget)
     window.addEventListener('pageshow', handlePageShow)
@@ -202,10 +190,7 @@ export function MotionRuntime() {
     return () => {
       intersectionObserver?.disconnect()
       mutationObserver?.disconnect()
-      reducedMotionQuery.removeEventListener(
-        'change',
-        handleReducedMotionChange,
-      )
+      reducedMotionQuery.removeEventListener('change', handleReducedMotionChange)
       document.removeEventListener('focusin', handleFocusIn)
       window.removeEventListener('hashchange', revealHashTarget)
       window.removeEventListener('pageshow', handlePageShow)

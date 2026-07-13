@@ -12,8 +12,7 @@ const PIPELINE_MODE_QUERY =
   '(min-width: 1281px) and (min-height: 760px) and (pointer: fine) and (prefers-reduced-motion: no-preference)'
 
 const PHASE_COUNT = 5
-const clamp = (value: number, min: number, max: number) =>
-  Math.min(Math.max(value, min), max)
+const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max)
 
 const parseLength = (value: string) => {
   const parsed = Number.parseFloat(value)
@@ -21,10 +20,7 @@ const parseLength = (value: string) => {
   return Number.isFinite(parsed) ? parsed : 0
 }
 
-export function DeliveryPipelineMotion({
-  children,
-  className,
-}: DeliveryPipelineMotionProps) {
+export function DeliveryPipelineMotion({ children, className }: DeliveryPipelineMotionProps) {
   const sceneRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -36,18 +32,10 @@ export function DeliveryPipelineMotion({
 
     const stage = scene.querySelector<HTMLElement>('[data-pipeline-stage]')
     const rail = scene.querySelector<HTMLElement>('[data-pipeline-rail]')
-    const radarSweep = scene.querySelector<HTMLElement>(
-      '[data-pipeline-radar-sweep]',
-    )
-    const velocityBar = scene.querySelector<HTMLElement>(
-      '[data-pipeline-velocity-bar]',
-    )
-    const nodes = Array.from(
-      scene.querySelectorAll<HTMLElement>('[data-pipeline-node]'),
-    )
-    const phases = Array.from(
-      scene.querySelectorAll<HTMLElement>('[data-pipeline-phase]'),
-    )
+    const radarSweep = scene.querySelector<HTMLElement>('[data-pipeline-radar-sweep]')
+    const velocityBar = scene.querySelector<HTMLElement>('[data-pipeline-velocity-bar]')
+    const nodes = Array.from(scene.querySelectorAll<HTMLElement>('[data-pipeline-node]'))
+    const phases = Array.from(scene.querySelectorAll<HTMLElement>('[data-pipeline-phase]'))
 
     if (
       !stage ||
@@ -111,22 +99,14 @@ export function DeliveryPipelineMotion({
 
     const syncGeometry = () => {
       const sceneStyles = window.getComputedStyle(scene)
-      const desiredTop = parseLength(
-        sceneStyles.getPropertyValue('--pipeline-sticky-top'),
-      )
-      const bottomGap = parseLength(
-        sceneStyles.getPropertyValue('--pipeline-sticky-bottom-gap'),
-      )
-      const viewportHeight =
-        window.visualViewport?.height ?? window.innerHeight
+      const desiredTop = parseLength(sceneStyles.getPropertyValue('--pipeline-sticky-top'))
+      const bottomGap = parseLength(sceneStyles.getPropertyValue('--pipeline-sticky-bottom-gap'))
+      const viewportHeight = window.visualViewport?.height ?? window.innerHeight
       const fullyVisibleTop = viewportHeight - stage.offsetHeight - bottomGap
 
       resolvedTop = Math.min(desiredTop, fullyVisibleTop)
 
-      stage.style.setProperty(
-        '--pipeline-sticky-top',
-        `${Math.round(resolvedTop)}px`,
-      )
+      stage.style.setProperty('--pipeline-sticky-top', `${Math.round(resolvedTop)}px`)
 
       geometryDirty = false
     }
@@ -144,11 +124,7 @@ export function DeliveryPipelineMotion({
 
       const sceneRect = scene.getBoundingClientRect()
       const scrollRange = Math.max(1, scene.offsetHeight - stage.offsetHeight)
-      const progress = clamp(
-        (resolvedTop - sceneRect.top) / scrollRange,
-        0,
-        1,
-      )
+      const progress = clamp((resolvedTop - sceneRect.top) / scrollRange, 0, 1)
       const progressValue = progress.toFixed(4)
 
       if (progressValue !== lastProgressValue) {
@@ -158,10 +134,7 @@ export function DeliveryPipelineMotion({
         velocityBar.style.transform = `scaleX(${(progress * 0.92).toFixed(4)})`
       }
 
-      const nextStep = Math.min(
-        PHASE_COUNT - 1,
-        Math.floor(progress * PHASE_COUNT),
-      )
+      const nextStep = Math.min(PHASE_COUNT - 1, Math.floor(progress * PHASE_COUNT))
 
       setPhaseState(nextStep)
     }
@@ -189,10 +162,7 @@ export function DeliveryPipelineMotion({
     const handleScroll = () => scheduleUpdate()
     const handleResize = () => scheduleUpdate(true)
     const handleModeChange = () => {
-      scene.dataset.pipelineRuntime =
-        sceneIsNearViewport && modeQuery.matches
-          ? 'active'
-          : 'idle'
+      scene.dataset.pipelineRuntime = sceneIsNearViewport && modeQuery.matches ? 'active' : 'idle'
 
       if (!modeQuery.matches) {
         resetScene()
@@ -202,9 +172,7 @@ export function DeliveryPipelineMotion({
     }
 
     const resizeObserver =
-      'ResizeObserver' in window
-        ? new ResizeObserver(() => scheduleUpdate(true))
-        : null
+      'ResizeObserver' in window ? new ResizeObserver(() => scheduleUpdate(true)) : null
 
     resizeObserver?.observe(scene)
     resizeObserver?.observe(stage)

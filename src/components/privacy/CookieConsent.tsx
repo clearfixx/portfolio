@@ -24,12 +24,7 @@ function ShieldIcon() {
         strokeWidth="3"
         strokeLinejoin="round"
       />
-      <path
-        d="M23 31H41V45H23V31Z"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinejoin="round"
-      />
+      <path d="M23 31H41V45H23V31Z" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
       <path
         d="M27 31V25.5C27 22.4 29.2 20 32 20C34.8 20 37 22.4 37 25.5V31"
         stroke="currentColor"
@@ -189,8 +184,8 @@ export function CookieConsent() {
   }
 
   const closeBanner = () => {
-  setIsBannerForcedOpen(false)
-}
+    setIsBannerForcedOpen(false)
+  }
 
   const rejectOptional = () => {
     saveCookieConsent({
@@ -218,8 +213,7 @@ export function CookieConsent() {
     closePreferences()
   }
 
-  const shouldShowBanner =
-    !isPreferencesOpen && (consent === null || isBannerForcedOpen)
+  const shouldShowBanner = !isPreferencesOpen && (consent === null || isBannerForcedOpen)
 
   if (!shouldShowBanner && !isPreferencesOpen) {
     return null
@@ -239,8 +233,8 @@ export function CookieConsent() {
             <h2 id="cookie-consent-title">Cookie preferences</h2>
 
             <p>
-              This site uses necessary storage for core interface behavior. Optional analytics
-              will be enabled only after your consent.
+              This site uses necessary storage for core interface behavior. Optional analytics will
+              be enabled only after your consent.
             </p>
           </div>
 
@@ -384,8 +378,8 @@ export function CookieConsent() {
               <h3>You&apos;re in control</h3>
 
               <p>
-                You can change or withdraw your consent at any time. Your choices are saved on
-                this device.
+                You can change or withdraw your consent at any time. Your choices are saved on this
+                device.
               </p>
             </aside>
           </section>

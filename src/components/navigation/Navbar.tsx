@@ -208,10 +208,7 @@ export function Navbar() {
     setIsMenuOpen(false)
   }
 
-  const handleNavClick = (
-    event: MouseEvent<HTMLAnchorElement>,
-    sectionId: string,
-  ) => {
+  const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     const section = document.getElementById(sectionId)
 
     if (!section) {
@@ -231,9 +228,7 @@ export function Navbar() {
     window.history.pushState(null, '', `#${sectionId}`)
 
     section.scrollIntoView({
-      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
-        ? 'auto'
-        : 'smooth',
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
       block: 'start',
     })
 
@@ -271,19 +266,8 @@ export function Navbar() {
           onClick={(event) => handleNavClick(event, 'contact')}
         >
           Let&apos;s Talk
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            width="16"
-            height="16"
-            fill="none"
-          >
-            <path
-              d="M7 17L17 7"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none">
+            <path d="M7 17L17 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
             <path
               d="M9 7H17V15"
               stroke="currentColor"
@@ -351,34 +335,21 @@ export function Navbar() {
               </button>
             </div>
 
-            <nav
-              className="mobile-navigation__links"
-              aria-label="Mobile navigation"
-            >
+            <nav className="mobile-navigation__links" aria-label="Mobile navigation">
               {navItems.map((item) => {
                 const isActive = activeSection === item.sectionId
 
                 return (
                   <Link
-                    className={`mobile-navigation__link ${
-                      isActive ? 'is-active' : ''
-                    }`}
+                    className={`mobile-navigation__link ${isActive ? 'is-active' : ''}`}
                     href={item.href}
                     key={item.href}
                     aria-current={isActive ? 'page' : undefined}
-                    onClick={(event) =>
-                      handleNavClick(event, item.sectionId)
-                    }
+                    onClick={(event) => handleNavClick(event, item.sectionId)}
                   >
                     <span>{item.index}</span>
                     <strong>{item.label}</strong>
-                    <svg
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      width="18"
-                      height="18"
-                      fill="none"
-                    >
+                    <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none">
                       <path
                         d="M7 17L17 7"
                         stroke="currentColor"
@@ -413,13 +384,7 @@ export function Navbar() {
                 onClick={(event) => handleNavClick(event, 'contact')}
               >
                 Start a conversation
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                >
+                <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none">
                   <path
                     d="M7 17L17 7"
                     stroke="currentColor"

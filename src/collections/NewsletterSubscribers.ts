@@ -6,13 +6,7 @@ export const NewsletterSubscribers: CollectionConfig = {
   slug: 'newsletter-subscribers',
   admin: {
     useAsTitle: 'email',
-    defaultColumns: [
-      'email',
-      'status',
-      'source',
-      'subscribedAt',
-      'createdAt',
-    ],
+    defaultColumns: ['email', 'status', 'source', 'subscribedAt', 'createdAt'],
   },
   access: {
     read: authenticatedAccess,

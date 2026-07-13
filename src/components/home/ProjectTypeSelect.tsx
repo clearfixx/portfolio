@@ -53,21 +53,14 @@ export function ProjectTypeSelect({
   const [value, setValue] = useState('')
   const [activeIndex, setActiveIndex] = useState(0)
 
-  const selectedIndex = projectTypeOptions.findIndex(
-    (option) => option.value === value,
-  )
-  const selectedOption =
-    selectedIndex >= 0 ? projectTypeOptions[selectedIndex] : null
+  const selectedIndex = projectTypeOptions.findIndex((option) => option.value === value)
+  const selectedOption = selectedIndex >= 0 ? projectTypeOptions[selectedIndex] : null
 
   useEffect(() => {
     const handlePointerDown = (event: globalThis.PointerEvent) => {
       const root = rootRef.current
 
-      if (
-        !root ||
-        !(event.target instanceof Node) ||
-        root.contains(event.target)
-      ) {
+      if (!root || !(event.target instanceof Node) || root.contains(event.target)) {
         return
       }
 
@@ -111,16 +104,11 @@ export function ProjectTypeSelect({
     setActiveIndex((currentIndex) => {
       const optionCount = projectTypeOptions.length
 
-      return (
-        (currentIndex + direction + optionCount) %
-        optionCount
-      )
+      return (currentIndex + direction + optionCount) % optionCount
     })
   }
 
-  const handleKeyDown = (
-    event: KeyboardEvent<HTMLButtonElement>,
-  ) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault()
@@ -184,21 +172,13 @@ export function ProjectTypeSelect({
         break
     }
 
-    if (
-      event.key.length !== 1 ||
-      event.altKey ||
-      event.ctrlKey ||
-      event.metaKey
-    ) {
+    if (event.key.length !== 1 || event.altKey || event.ctrlKey || event.metaKey) {
       return
     }
 
     const query = event.key.toLocaleLowerCase()
-    const matchingIndex = projectTypeOptions.findIndex(
-      (option) =>
-        option.label
-          .toLocaleLowerCase()
-          .startsWith(query),
+    const matchingIndex = projectTypeOptions.findIndex((option) =>
+      option.label.toLocaleLowerCase().startsWith(query),
     )
 
     if (matchingIndex < 0) {
@@ -213,14 +193,9 @@ export function ProjectTypeSelect({
     }
   }
 
-  const activeDescendant = isOpen
-    ? `${listboxId}-option-${activeIndex}`
-    : undefined
+  const activeDescendant = isOpen ? `${listboxId}-option-${activeIndex}` : undefined
 
-  const placeholder =
-    invalid && errorMessage
-      ? errorMessage
-      : 'Project Type'
+  const placeholder = invalid && errorMessage ? errorMessage : 'Project Type'
 
   return (
     <div
@@ -229,10 +204,7 @@ export function ProjectTypeSelect({
         isOpen ? ' is-open' : ''
       }${invalid ? ' is-invalid' : ''}`}
     >
-      <span
-        className="contact-cta__field-icon"
-        aria-hidden="true"
-      >
+      <span className="contact-cta__field-icon" aria-hidden="true">
         <LayersIcon />
       </span>
 
@@ -240,12 +212,7 @@ export function ProjectTypeSelect({
         Project Type
       </span>
 
-      <input
-        type="hidden"
-        name="projectType"
-        value={value}
-        required
-      />
+      <input type="hidden" name="projectType" value={value} required />
 
       <button
         ref={triggerRef}
@@ -279,10 +246,7 @@ export function ProjectTypeSelect({
         >
           {selectedOption?.label ?? placeholder}
         </span>
-        <span
-          className="contact-cta__select-chevron"
-          aria-hidden="true"
-        />
+        <span className="contact-cta__select-chevron" aria-hidden="true" />
       </button>
 
       {errorId ? (
@@ -319,10 +283,7 @@ export function ProjectTypeSelect({
                 }}
               >
                 <span>{option.label}</span>
-                <span
-                  className="contact-cta__select-check"
-                  aria-hidden="true"
-                >
+                <span className="contact-cta__select-check" aria-hidden="true">
                   ✓
                 </span>
               </li>

@@ -14,7 +14,9 @@ export function SiteShell({ children }: SiteShellProps) {
       <MotionRuntime />
       <SkipLink />
       <SiteHeader />
-      <main className="site-main" id="main-content" tabIndex={-1}>{children}</main>
+      <main className="site-main" id="main-content" tabIndex={-1}>
+        {children}
+      </main>
     </div>
   )
 }
