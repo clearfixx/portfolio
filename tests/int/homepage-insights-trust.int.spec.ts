@@ -37,7 +37,7 @@ function lexicalContent(words: string): BlogPost['content'] {
       ],
       type: 'root',
     },
-  } as BlogPost['content']
+  } as unknown as BlogPost['content']
 }
 
 describe('homepage insights and trust content', () => {
@@ -53,12 +53,12 @@ describe('homepage insights and trust content', () => {
       category: {
         id: 10,
         title: 'Architecture',
-      },
+      } as unknown as BlogPost['category'],
       coverImage: {
         id: 11,
         alt: 'Architecture diagram',
         url: '/media/article.webp',
-      },
+      } as unknown as BlogPost['coverImage'],
     })
     const compact = asArticle({
       id: 2,
@@ -71,7 +71,7 @@ describe('homepage insights and trust content', () => {
       relatedProject: {
         id: 20,
         title: 'DSS Universe',
-      },
+      } as unknown as BlogPost['relatedProject'],
     })
     const draft = asArticle({
       id: 3,

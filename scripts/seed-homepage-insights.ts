@@ -2,7 +2,7 @@ import process from 'node:process'
 
 import type { BlogPost, Homepage, Testimonial } from '../src/payload-types'
 
-type RelationshipId = number | string
+type RelationshipId = BlogPost['id']
 
 const ARTICLE_SEEDS = [
   {

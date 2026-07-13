@@ -25,6 +25,7 @@ import type {
   FeaturedProjectViewModel,
   HeroViewModel,
   InsightsTrustViewModel,
+  SkillsSectionViewModel,
 } from './types'
 
 const FEATURED_PROJECT_LIMIT = 3
