@@ -1,5 +1,6 @@
 export { buildContactSectionViewModel } from './contact'
 export { buildCurrentMissionViewModel } from './current-mission'
+export { buildEngineerProfileViewModel } from './engineer-profile'
 export {
   buildFeaturedProjectViewModel,
   buildFeaturedProjectViewModels,
@@ -19,6 +20,13 @@ export type {
   CurrentMissionLinkViewModel,
   CurrentMissionProjectViewModel,
   CurrentMissionViewModel,
+  EngineerJourneyItemViewModel,
+  EngineerPrincipleIcon,
+  EngineerPrincipleViewModel,
+  EngineerProfileImageViewModel,
+  EngineerProfileStatViewModel,
+  EngineerProfileStatusTone,
+  EngineerProfileViewModel,
   FeaturedProjectAccent,
   FeaturedProjectImage,
   FeaturedProjectViewModel,

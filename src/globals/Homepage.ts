@@ -155,6 +155,67 @@ export const Homepage: GlobalConfig = {
       },
     },
     {
+      name: 'engineerProfileSection',
+      type: 'group',
+      fields: [
+        {
+          name: 'enabled',
+          type: 'checkbox',
+          defaultValue: true,
+        },
+        {
+          name: 'eyebrow',
+          type: 'text',
+          defaultValue: 'About me',
+        },
+        {
+          name: 'title',
+          type: 'text',
+          defaultValue: 'Engineer Profile',
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+          defaultValue: 'A builder of scalable systems and meaningful digital experiences.',
+        },
+        {
+          name: 'journeyTitle',
+          type: 'text',
+          defaultValue: 'Engineering Journey',
+        },
+        {
+          name: 'journeyMeta',
+          type: 'text',
+          defaultValue: '// my path',
+        },
+        {
+          name: 'journeyFooter',
+          type: 'text',
+          defaultValue: 'MISSION: CONTINUOUS IMPROVEMENT',
+        },
+        {
+          name: 'principlesTitle',
+          type: 'text',
+          defaultValue: 'Engineering Philosophy',
+        },
+        {
+          name: 'principlesMeta',
+          type: 'text',
+          defaultValue: '// principles',
+        },
+        {
+          name: 'footerLabel',
+          type: 'text',
+          defaultValue: 'Engineer mindset',
+        },
+        {
+          name: 'footerText',
+          type: 'text',
+          defaultValue: 'turning complex ideas into clean, maintainable systems.',
+        },
+      ],
+    },
+    {
       name: 'testimonialsSection',
       type: 'group',
       fields: [

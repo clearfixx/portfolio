@@ -115,6 +115,150 @@ export const Profile: GlobalConfig = {
       ],
     },
     {
+      name: 'profileId',
+      type: 'text',
+      defaultValue: 'AK_10061988',
+      admin: {
+        description: 'Public HUD-style identifier shown on the Engineer Profile card.',
+      },
+    },
+    {
+      name: 'fullBio',
+      type: 'textarea',
+      defaultValue:
+        'I build scalable web applications and distributed systems. Architecture first. Quality always.',
+    },
+    {
+      name: 'journey',
+      type: 'array',
+      maxRows: 8,
+      defaultValue: [
+        {
+          year: '2013',
+          title: 'First steps in Web Development',
+          description:
+            'HTML, CSS, JavaScript. Built static websites and learned how the web works.',
+          accent: false,
+        },
+        {
+          year: '2016',
+          title: 'Backend Development',
+          description: 'PHP & MySQL. Building dynamic applications and understanding databases.',
+          accent: false,
+        },
+        {
+          year: '2018',
+          title: 'Frontend Specialization',
+          description:
+            'React & JavaScript. Component architecture and modern frontend development.',
+          accent: false,
+        },
+        {
+          year: '2022',
+          title: 'Fullstack & Architecture',
+          description: 'Next.js, TypeScript, Node.js. Focus on clean architecture and performance.',
+          accent: false,
+        },
+        {
+          year: '2024',
+          title: 'Systems Thinking',
+          description: 'Developer experience, automation, CI/CD and long-term maintainability.',
+          accent: false,
+        },
+        {
+          year: '2026',
+          title: 'Building Portfolio',
+          description: 'Creating a modern portfolio with a unique engineering identity.',
+          accent: true,
+        },
+      ],
+      fields: [
+        {
+          name: 'year',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'title',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+          required: true,
+        },
+        {
+          name: 'accent',
+          type: 'checkbox',
+          defaultValue: false,
+        },
+      ],
+    },
+    {
+      name: 'principles',
+      type: 'array',
+      maxRows: 6,
+      defaultValue: [
+        {
+          icon: 'architecture',
+          title: 'Architecture First',
+          description: 'Every interface should have a clear structure before visual polish begins.',
+        },
+        {
+          icon: 'documentation',
+          title: 'Meaningful UI',
+          description: 'Design is not decoration. It should guide, explain and reduce friction.',
+        },
+        {
+          icon: 'code',
+          title: 'Quality Always',
+          description: 'Clean code, predictable behavior and maintainability matter after launch.',
+        },
+        {
+          icon: 'rocket',
+          title: 'Ship Iteratively',
+          description: 'Small stable steps beat chaotic rewrites and keep the product moving.',
+        },
+      ],
+      fields: [
+        {
+          name: 'icon',
+          type: 'select',
+          required: true,
+          defaultValue: 'architecture',
+          options: [
+            {
+              label: 'Architecture',
+              value: 'architecture',
+            },
+            {
+              label: 'Documentation',
+              value: 'documentation',
+            },
+            {
+              label: 'Code',
+              value: 'code',
+            },
+            {
+              label: 'Rocket',
+              value: 'rocket',
+            },
+          ],
+        },
+        {
+          name: 'title',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+          required: true,
+        },
+      ],
+    },
+    {
       name: 'heroActivity',
       type: 'group',
       admin: {

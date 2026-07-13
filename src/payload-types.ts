@@ -1081,6 +1081,19 @@ export interface Homepage {
    * Selected technologies for the homepage skills section.
    */
   selectedTechStack?: (number | TechStack)[] | null
+  engineerProfileSection?: {
+    enabled?: boolean | null
+    eyebrow?: string | null
+    title?: string | null
+    description?: string | null
+    journeyTitle?: string | null
+    journeyMeta?: string | null
+    journeyFooter?: string | null
+    principlesTitle?: string | null
+    principlesMeta?: string | null
+    footerLabel?: string | null
+    footerText?: string | null
+  }
   testimonialsSection?: {
     enabled?: boolean | null
     title?: string | null
@@ -1139,6 +1152,28 @@ export interface Profile {
         value: number
         suffix?: string | null
         enabled?: boolean | null
+        id?: string | null
+      }[]
+    | null
+  /**
+   * Public HUD-style identifier shown on the Engineer Profile card.
+   */
+  profileId?: string | null
+  fullBio?: string | null
+  journey?:
+    | {
+        year: string
+        title: string
+        description: string
+        accent?: boolean | null
+        id?: string | null
+      }[]
+    | null
+  principles?:
+    | {
+        icon: 'architecture' | 'documentation' | 'code' | 'rocket'
+        title: string
+        description: string
         id?: string | null
       }[]
     | null
@@ -1277,6 +1312,21 @@ export interface HomepageSelect<T extends boolean = true> {
       }
   featuredProjects?: T
   selectedTechStack?: T
+  engineerProfileSection?:
+    | T
+    | {
+        enabled?: T
+        eyebrow?: T
+        title?: T
+        description?: T
+        journeyTitle?: T
+        journeyMeta?: T
+        journeyFooter?: T
+        principlesTitle?: T
+        principlesMeta?: T
+        footerLabel?: T
+        footerText?: T
+      }
   testimonialsSection?:
     | T
     | {
@@ -1330,6 +1380,25 @@ export interface ProfileSelect<T extends boolean = true> {
         value?: T
         suffix?: T
         enabled?: T
+        id?: T
+      }
+  profileId?: T
+  fullBio?: T
+  journey?:
+    | T
+    | {
+        year?: T
+        title?: T
+        description?: T
+        accent?: T
+        id?: T
+      }
+  principles?:
+    | T
+    | {
+        icon?: T
+        title?: T
+        description?: T
         id?: T
       }
   heroActivity?:

@@ -141,3 +141,67 @@ export type CurrentMissionViewModel = {
   project?: CurrentMissionProjectViewModel
   title: string
 }
+export type EngineerProfileStatusTone = 'available' | 'focused' | 'unavailable'
+
+export type EngineerProfileImageViewModel = {
+  alt: string
+  src: string
+}
+
+export type EngineerProfileStatViewModel = {
+  id: string
+  label: string
+  value: string
+}
+
+export type EngineerJourneyItemViewModel = {
+  accent: boolean
+  description: string
+  id: string
+  title: string
+  year: string
+}
+
+export type EngineerPrincipleIcon = 'architecture' | 'code' | 'documentation' | 'rocket'
+
+export type EngineerPrincipleViewModel = {
+  description: string
+  icon: EngineerPrincipleIcon
+  id: string
+  number: string
+  title: string
+}
+
+export type EngineerProfileViewModel = {
+  description: string
+  eyebrow: string
+  footer: {
+    label: string
+    text: string
+  }
+  journey: {
+    footer: string
+    items: EngineerJourneyItemViewModel[]
+    meta: string
+    title: string
+  }
+  principles: {
+    items: EngineerPrincipleViewModel[]
+    meta: string
+    title: string
+  }
+  profile: {
+    bio: string
+    id: string
+    image: EngineerProfileImageViewModel
+    location?: string
+    name: string
+    role: string
+    stats: EngineerProfileStatViewModel[]
+    status: {
+      label: string
+      tone: EngineerProfileStatusTone
+    }
+  }
+  title: string
+}

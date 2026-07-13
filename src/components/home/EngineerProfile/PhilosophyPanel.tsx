@@ -1,34 +1,9 @@
-const philosophy = [
-  {
-    icon: 'architecture',
-    number: '01',
-    title: 'Architecture First',
-    description: 'Every interface should have a clear structure before visual polish begins.',
-  },
-  {
-    icon: 'documentation',
-    number: '02',
-    title: 'Meaningful UI',
-    description: 'Design is not decoration. It should guide, explain and reduce friction.',
-  },
-  {
-    icon: 'code',
-    number: '03',
-    title: 'Quality Always',
-    description: 'Clean code, predictable behavior and maintainability matter after launch.',
-  },
-  {
-    icon: 'rocket',
-    number: '04',
-    title: 'Ship Iteratively',
-    description: 'Small stable steps beat chaotic rewrites and keep the product moving.',
-  },
-]
+import type { EngineerPrincipleIcon, EngineerProfileViewModel } from '@/lib/cms/homepage'
 
-function PhilosophyIcon({ name }: { name: string }) {
+function PhilosophyIcon({ name }: { name: EngineerPrincipleIcon }) {
   if (name === 'architecture') {
     return (
-      <svg aria-hidden="true" viewBox="0 0 32 32" color="">
+      <svg aria-hidden="true" viewBox="0 0 32 32">
         <path d="M16 4 6 9.5v13L16 28l10-5.5v-13L16 4Z" />
         <path d="M16 4v10.5m0 0L6 9.5m10 5 10-5" />
         <path d="M10.5 17.5 16 20.5l5.5-3" />
@@ -67,30 +42,40 @@ function PhilosophyIcon({ name }: { name: string }) {
   )
 }
 
-export function PhilosophyPanel() {
+type PhilosophyPanelProps = {
+  principles: EngineerProfileViewModel['principles']
+}
+
+export function PhilosophyPanel({ principles }: PhilosophyPanelProps) {
   return (
     <article className="engineer-profile__panel engineer-profile__philosophy-panel">
       <header className="engineer-profile__panel-header">
-        <h3>Engineering Philosophy</h3>
-        <span>{'//'} principles</span>
+        <h3>{principles.title}</h3>
+        <span>{principles.meta}</span>
       </header>
 
-      <div className="philosophy-grid">
-        {philosophy.map((item) => (
-          <div className="philosophy-card" key={item.title}>
-            <span className="philosophy-card__icon">
-              <PhilosophyIcon name={item.icon} />
-            </span>
+      {principles.items.length > 0 ? (
+        <div className="philosophy-grid">
+          {principles.items.map((item) => (
+            <div className="philosophy-card" key={item.id}>
+              <span className="philosophy-card__icon">
+                <PhilosophyIcon name={item.icon} />
+              </span>
 
-            <div>
-              <h4>{item.title}</h4>
-              <p>{item.description}</p>
+              <div>
+                <h4>{item.title}</h4>
+                <p>{item.description}</p>
+              </div>
+
+              <span className="philosophy-card__number">{item.number}</span>
             </div>
-
-            <span className="philosophy-card__number">{item.number}</span>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <p className="engineer-profile__empty" role="status">
+          Engineering principles are being updated.
+        </p>
+      )}
 
       <div className="engineer-profile__terminal" aria-label="Engineer terminal preview">
         <div className="engineer-profile__terminal-top">
@@ -107,7 +92,8 @@ export function PhilosophyPanel() {
             <span>✓</span> Compiled successfully
           </p>
           <p className="engineer-profile__terminal-line engineer-profile__terminal-line--ready">
-            <span>→</span> Ready for production<span className="engineer-profile__cursor" />
+            <span>→</span> Ready for production
+            <span className="engineer-profile__cursor" />
           </p>
         </div>
       </div>

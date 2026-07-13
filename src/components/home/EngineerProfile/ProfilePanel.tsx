@@ -1,41 +1,30 @@
 import Image from 'next/image'
 
-const profileStats = [
-  {
-    label: 'Years Exp.',
-    value: '12+',
-  },
-  {
-    label: 'Projects',
-    value: '18+',
-  },
-  {
-    label: 'Commits',
-    value: '6 241+',
-  },
-  {
-    label: 'Coffee',
-    value: '∞',
-  },
-]
+import type { EngineerProfileViewModel } from '@/lib/cms/homepage'
 
-export function ProfilePanel() {
+type ProfilePanelProps = {
+  profile: EngineerProfileViewModel['profile']
+}
+
+export function ProfilePanel({ profile }: ProfilePanelProps) {
   return (
     <article className="engineer-profile__panel engineer-profile__profile-panel">
       <div className="engineer-profile__photo-card">
         <div className="engineer-profile__photo-meta">
-          <span>{'{'}PROFILE_ID{'}'}</span>
-          <strong>AK_10061988</strong>
+          <span>
+            {'{'}PROFILE_ID{'}'}
+          </span>
+          <strong>{profile.id}</strong>
         </div>
 
         <div className="engineer-profile__photo-stage">
           <div className="engineer-profile__photo-image">
             <Image
-              alt="Portrait of Andrii Kulahin"
+              alt={profile.image.alt}
               fill
               loading="lazy"
               sizes="(max-width: 1180px) 100vw, 32vw"
-              src="/images/profile/engineer-profile.png"
+              src={profile.image.src}
             />
           </div>
 
@@ -43,35 +32,35 @@ export function ProfilePanel() {
           <span className="engineer-profile__hud-corner engineer-profile__hud-corner--top-right" />
           <span className="engineer-profile__hud-corner engineer-profile__hud-corner--bottom-left" />
           <span className="engineer-profile__hud-corner engineer-profile__hud-corner--bottom-right" />
-
           <span className="engineer-profile__reticle" aria-hidden="true" />
 
-          <span className="engineer-profile__online-badge">
+          <span
+            className={`engineer-profile__online-badge engineer-profile__online-badge--${profile.status.tone}`}
+          >
             <span />
-            ONLINE
+            {profile.status.label}
           </span>
         </div>
       </div>
 
       <div className="engineer-profile__profile-content">
-        <h3>Andrii Kulahin</h3>
-        <p className="engineer-profile__role">Software Engineer</p>
+        <h3>{profile.name}</h3>
+        <p className="engineer-profile__role">{profile.role}</p>
 
-        <p className="engineer-profile__location">Ukraine, Kyiv 🇺🇦</p>
+        {profile.location ? <p className="engineer-profile__location">{profile.location}</p> : null}
 
-        <p className="engineer-profile__bio">
-          I build scalable web applications and distributed systems. Architecture first. Quality
-          always.
-        </p>
+        <p className="engineer-profile__bio">{profile.bio}</p>
 
-        <div className="engineer-profile__stats">
-          {profileStats.map((stat) => (
-            <div className="engineer-profile__stat" key={stat.label}>
-              <strong>{stat.value}</strong>
-              <span>{stat.label}</span>
-            </div>
-          ))}
-        </div>
+        {profile.stats.length > 0 ? (
+          <div className="engineer-profile__stats">
+            {profile.stats.map((stat) => (
+              <div className="engineer-profile__stat" key={stat.id}>
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+              </div>
+            ))}
+          </div>
+        ) : null}
       </div>
     </article>
   )

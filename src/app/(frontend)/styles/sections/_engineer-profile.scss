@@ -92,8 +92,20 @@
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(180deg, transparent 0 50%, rgb(var(--rgb-aqua) / 22%) 50% 50.5%, transparent 50.5%),
-    radial-gradient(circle at 50% 54%, transparent 0 11%, rgb(var(--rgb-aqua) / 42%) 11.4% 11.8%, transparent 12.2% 17%, rgb(var(--rgb-aqua) / 24%) 17.4% 17.8%, transparent 18.2%);
+    linear-gradient(
+      180deg,
+      transparent 0 50%,
+      rgb(var(--rgb-aqua) / 22%) 50% 50.5%,
+      transparent 50.5%
+    ),
+    radial-gradient(
+      circle at 50% 54%,
+      transparent 0 11%,
+      rgb(var(--rgb-aqua) / 42%) 11.4% 11.8%,
+      transparent 12.2% 17%,
+      rgb(var(--rgb-aqua) / 24%) 17.4% 17.8%,
+      transparent 18.2%
+    );
   content: '';
   left: 70%;
 }
@@ -137,8 +149,19 @@
   z-index: 2;
   pointer-events: none;
   background:
-    radial-gradient(circle at 52% 34%, transparent 0 24%, rgb(var(--rgb-canvas-deep) / 2%) 36%, rgb(var(--rgb-canvas-deep) / 36%) 100%),
-    linear-gradient(90deg, rgb(var(--rgb-aqua) / 12%), transparent 22%, transparent 72%, rgb(var(--rgb-purple-blue) / 14%));
+    radial-gradient(
+      circle at 52% 34%,
+      transparent 0 24%,
+      rgb(var(--rgb-canvas-deep) / 2%) 36%,
+      rgb(var(--rgb-canvas-deep) / 36%) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgb(var(--rgb-aqua) / 12%),
+      transparent 22%,
+      transparent 72%,
+      rgb(var(--rgb-purple-blue) / 14%)
+    );
   content: '';
 }
 
@@ -603,18 +626,21 @@
     opacity: 0;
   }
 
-  8%, 52% {
+  8%,
+  52% {
     opacity: 1;
   }
 
-  64%, 100% {
+  64%,
+  100% {
     transform: translateY(42%);
     opacity: 0;
   }
 }
 
 @keyframes engineer-profile-reticle {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.66;
     transform: translate(-50%, -50%) scale(1);
   }
@@ -626,7 +652,8 @@
 }
 
 @keyframes engineer-profile-dot-pulse {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow:
       0 0 0 4px rgb(var(--rgb-aqua) / 8%),
       0 0 16px rgb(var(--rgb-aqua) / 24%);
@@ -640,7 +667,8 @@
 }
 
 @keyframes engineer-profile-accent-pulse {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow:
       0 0 0 5px rgb(var(--rgb-purple-blue) / 18%),
       0 0 22px rgb(var(--rgb-purple-blue) / 62%);
@@ -654,28 +682,33 @@
 }
 
 @keyframes engineer-profile-terminal-line {
-  0%, 7% {
+  0%,
+  7% {
     opacity: 0;
     transform: translateY(0.25rem);
   }
 
-  12%, 86% {
+  12%,
+  86% {
     opacity: 1;
     transform: translateY(0);
   }
 
-  94%, 100% {
+  94%,
+  100% {
     opacity: 0;
     transform: translateY(-0.1rem);
   }
 }
 
 @keyframes engineer-profile-cursor {
-  0%, 44% {
+  0%,
+  44% {
     opacity: 1;
   }
 
-  45%, 100% {
+  45%,
+  100% {
     opacity: 0;
   }
 }
@@ -691,12 +724,12 @@
 }
 
 @media (max-width: 640px) {
-.engineer-profile__frame {
+  .engineer-profile__frame {
     border-radius: 1rem;
     padding: 1.1rem;
   }
 
-.engineer-profile__heading {
+  .engineer-profile__heading {
     font-size: clamp(2.5rem, 13vw, 3.4rem);
   }
 
@@ -720,4 +753,31 @@
     grid-template-columns: 3rem 1rem minmax(0, 1fr);
     gap: 0.65rem;
   }
+}
+.engineer-profile__empty {
+  margin: 0;
+  padding: 1.2rem;
+  border: 1px solid rgb(var(--rgb-aqua) / 12%);
+  border-radius: 0.8rem;
+  color: rgb(var(--rgb-text-dim));
+  line-height: 1.55;
+  text-align: center;
+}
+
+.engineer-profile__online-badge--focused {
+  color: rgb(var(--rgb-purple));
+}
+
+.engineer-profile__online-badge--focused > span {
+  background: rgb(var(--rgb-purple));
+  box-shadow: 0 0 14px rgb(var(--rgb-purple) / 72%);
+}
+
+.engineer-profile__online-badge--unavailable {
+  color: rgb(var(--rgb-text-dim));
+}
+
+.engineer-profile__online-badge--unavailable > span {
+  background: rgb(var(--rgb-text-dim));
+  box-shadow: none;
 }
