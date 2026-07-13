@@ -1151,6 +1151,46 @@ export interface Homepage {
         }[]
       | null
   }
+  deliveryPipelineSection?: {
+    enabled?: boolean | null
+    eyebrow?: string | null
+    title?: string | null
+    /**
+     * Exact phrase inside the title that receives the cyan accent.
+     */
+    titleAccent?: string | null
+    description?: string | null
+    footerLabel?: string | null
+    footerText?: string | null
+    /**
+     * Up to three delivery values. The icon is derived from the stable metric key.
+     */
+    metrics?:
+      | {
+          key: 'predictable' | 'milestones' | 'maintainable'
+          title: string
+          description: string
+          id?: string | null
+        }[]
+      | null
+    /**
+     * Exactly five unique phases are required because the desktop motion runtime uses five fixed activation steps.
+     */
+    phases?:
+      | {
+          key: 'discovery' | 'architecture' | 'interface' | 'development' | 'launch'
+          title: string
+          status: 'complete' | 'progress' | 'pending'
+          items?:
+            | {
+                label: string
+                id?: string | null
+              }[]
+            | null
+          id?: string | null
+        }[]
+      | null
+  }
   /**
    * Selected technologies used in the Hero telemetry strip.
    */
@@ -1488,6 +1528,39 @@ export interface HomepageSelect<T extends boolean = true> {
                     title?: T
                     description?: T
                     icon?: T
+                    id?: T
+                  }
+              id?: T
+            }
+      }
+  deliveryPipelineSection?:
+    | T
+    | {
+        enabled?: T
+        eyebrow?: T
+        title?: T
+        titleAccent?: T
+        description?: T
+        footerLabel?: T
+        footerText?: T
+        metrics?:
+          | T
+          | {
+              key?: T
+              title?: T
+              description?: T
+              id?: T
+            }
+        phases?:
+          | T
+          | {
+              key?: T
+              title?: T
+              status?: T
+              items?:
+                | T
+                | {
+                    label?: T
                     id?: T
                   }
               id?: T

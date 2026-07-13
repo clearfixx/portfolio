@@ -21,6 +21,7 @@ export default async function HomePage() {
     hero,
     skills,
     insightsTrust,
+    deliveryPipeline,
   } = await getHomepageContent()
 
   return (
@@ -32,7 +33,7 @@ export default async function HomePage() {
         <EngineerProfile content={engineerProfile} />
         <SkillsTechnologies content={skills} />
       </ScrollStack>
-      <DeliveryPipeline />
+      {deliveryPipeline ? <DeliveryPipeline content={deliveryPipeline} /> : null}
       {insightsTrust ? <InsightsTrust content={insightsTrust} /> : null}
       <ContactCTA content={contact} />
       <SiteFooter />

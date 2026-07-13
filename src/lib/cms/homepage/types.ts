@@ -348,3 +348,48 @@ export type InsightsTrustViewModel = {
   }
   title: InsightsTitleSegmentViewModel[]
 }
+
+export type DeliveryPipelineMetricKey = 'maintainable' | 'milestones' | 'predictable'
+
+export type DeliveryPipelineMetricIcon = 'flag' | 'progress' | 'shield'
+
+export type DeliveryPipelineMetricViewModel = {
+  description: string
+  icon: DeliveryPipelineMetricIcon
+  id: DeliveryPipelineMetricKey
+  title: string
+}
+
+export type DeliveryPipelinePhaseKey =
+  'architecture' | 'development' | 'discovery' | 'interface' | 'launch'
+
+export type DeliveryPipelinePhaseIcon = 'architecture' | 'code' | 'interface' | 'rocket' | 'search'
+
+export type DeliveryPipelinePhaseStatus = 'complete' | 'pending' | 'progress'
+
+export type DeliveryPipelinePhaseViewModel = {
+  icon: DeliveryPipelinePhaseIcon
+  id: DeliveryPipelinePhaseKey
+  items: string[]
+  number: string
+  status: DeliveryPipelinePhaseStatus
+  title: string
+}
+
+export type DeliveryPipelineTitleViewModel = {
+  accent?: string
+  leading: string
+  trailing?: string
+}
+
+export type DeliveryPipelineViewModel = {
+  description: string
+  eyebrow: string
+  footer: {
+    label: string
+    text: string
+  }
+  metrics: DeliveryPipelineMetricViewModel[]
+  phases: DeliveryPipelinePhaseViewModel[]
+  title: DeliveryPipelineTitleViewModel
+}

@@ -3,13 +3,12 @@ import type { ComponentType, SVGProps } from 'react'
 import { PortfolioSection } from '@/components/home/PortfolioSection'
 
 import { DeliveryPipelineMotion } from './DeliveryPipelineMotion'
-import {
-  deliveryPhases,
-  pipelineMetrics,
-  type DeliveryPhase,
-  type DeliveryPhaseStatus,
-  type PipelineMetric,
-} from './data'
+import type {
+  DeliveryPipelineMetricViewModel as PipelineMetric,
+  DeliveryPipelinePhaseStatus as DeliveryPhaseStatus,
+  DeliveryPipelinePhaseViewModel as DeliveryPhase,
+  DeliveryPipelineViewModel,
+} from '@/lib/cms/homepage'
 
 type IconProps = SVGProps<SVGSVGElement>
 
@@ -325,28 +324,35 @@ function DeliveryPhaseCard({ phase, index }: { phase: DeliveryPhase; index: numb
   )
 }
 
-export function DeliveryPipeline() {
+type DeliveryPipelineProps = {
+  content: DeliveryPipelineViewModel
+}
+
+export function DeliveryPipeline({ content }: DeliveryPipelineProps) {
   return (
     <PortfolioSection
       id="delivery"
-      eyebrow="DELIVERY PIPELINE"
+      eyebrow={content.eyebrow}
       title={
         <>
-          From rough idea to{' '}
-          <span className="delivery-pipeline__title-accent">production-ready</span> system.
+          {content.title.leading}
+          {content.title.accent ? (
+            <span className="delivery-pipeline__title-accent">{content.title.accent}</span>
+          ) : null}
+          {content.title.trailing}
         </>
       }
-      description="A clear build process for turning vague requirements into stable, maintainable products."
+      description={content.description}
       number="05"
       footer={{
         icon: LayersIcon,
-        label: 'Structured process',
-        text: 'Clear scope. Clean build. Reliable launch.',
+        label: content.footer.label,
+        text: content.footer.text,
       }}
     >
       <DeliveryPipelineMotion className="delivery-pipeline">
         <div className="delivery-pipeline__metrics">
-          {pipelineMetrics.map((metric) => (
+          {content.metrics.map((metric) => (
             <PipelineMetricCard metric={metric} key={metric.id} />
           ))}
         </div>
@@ -356,13 +362,13 @@ export function DeliveryPipeline() {
 
           <div className="delivery-pipeline__flow">
             <div className="delivery-pipeline__rail" aria-hidden="true" data-pipeline-rail>
-              {deliveryPhases.map((phase, index) => (
+              {content.phases.map((phase, index) => (
                 <span data-pipeline-node={index} data-pipeline-state="upcoming" key={phase.id} />
               ))}
             </div>
 
             <div className="delivery-pipeline__phases">
-              {deliveryPhases.map((phase, index) => (
+              {content.phases.map((phase, index) => (
                 <DeliveryPhaseCard phase={phase} index={index} key={phase.id} />
               ))}
             </div>

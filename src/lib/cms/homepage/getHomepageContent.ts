@@ -12,6 +12,7 @@ import {
 } from '../queries'
 import { buildContactSectionViewModel } from './contact'
 import { buildCurrentMissionViewModel } from './current-mission'
+import { buildDeliveryPipelineViewModel } from './delivery-pipeline'
 import { buildEngineerProfileViewModel } from './engineer-profile'
 import { buildFeaturedProjectViewModels, getSelectedFeaturedProjects } from './featured-projects'
 import { buildHeroViewModel, getSelectedTechStack } from './hero'
@@ -26,6 +27,7 @@ import type {
   HeroViewModel,
   InsightsTrustViewModel,
   SkillsSectionViewModel,
+  DeliveryPipelineViewModel,
 } from './types'
 
 const FEATURED_PROJECT_LIMIT = 3
@@ -33,6 +35,7 @@ const FEATURED_PROJECT_LIMIT = 3
 export type HomepageContent = {
   contact: ContactSectionViewModel
   currentMission: CurrentMissionViewModel | null
+  deliveryPipeline: DeliveryPipelineViewModel | null
   engineerProfile: EngineerProfileViewModel | null
   featuredProjects: FeaturedProjectViewModel[]
   hero: HeroViewModel
@@ -87,6 +90,7 @@ export async function getHomepageContent(): Promise<HomepageContent> {
       social,
     }),
     currentMission: buildCurrentMissionViewModel(homepage),
+    deliveryPipeline: buildDeliveryPipelineViewModel(homepage),
     engineerProfile: buildEngineerProfileViewModel({
       homepage,
       profile,

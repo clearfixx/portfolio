@@ -1,3 +1,4 @@
+export { buildDeliveryPipelineViewModel } from './delivery-pipeline'
 export { buildInsightsTrustViewModel } from './insights-trust'
 export { buildSkillsSectionViewModel } from './skills'
 export { buildContactSectionViewModel } from './contact'
@@ -60,4 +61,15 @@ export type {
   InsightsTrustMetricIcon,
   InsightsTrustMetricViewModel,
   InsightsTrustViewModel,
+} from './types'
+export type {
+  DeliveryPipelineMetricIcon,
+  DeliveryPipelineMetricKey,
+  DeliveryPipelineMetricViewModel,
+  DeliveryPipelinePhaseIcon,
+  DeliveryPipelinePhaseKey,
+  DeliveryPipelinePhaseStatus,
+  DeliveryPipelinePhaseViewModel,
+  DeliveryPipelineTitleViewModel,
+  DeliveryPipelineViewModel,
 } from './types'

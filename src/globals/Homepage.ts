@@ -364,6 +364,170 @@ export const Homepage: GlobalConfig = {
       ],
     },
     {
+      name: 'deliveryPipelineSection',
+      label: 'Delivery Pipeline',
+      type: 'group',
+      fields: [
+        {
+          name: 'enabled',
+          type: 'checkbox',
+          defaultValue: true,
+        },
+        {
+          name: 'eyebrow',
+          type: 'text',
+          defaultValue: 'DELIVERY PIPELINE',
+        },
+        {
+          name: 'title',
+          type: 'text',
+          defaultValue: 'From rough idea to production-ready system.',
+        },
+        {
+          name: 'titleAccent',
+          type: 'text',
+          defaultValue: 'production-ready',
+          admin: {
+            description: 'Exact phrase inside the title that receives the cyan accent.',
+          },
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+          defaultValue:
+            'A clear build process for turning vague requirements into stable, maintainable products.',
+        },
+        {
+          name: 'footerLabel',
+          type: 'text',
+          defaultValue: 'Structured process',
+        },
+        {
+          name: 'footerText',
+          type: 'text',
+          defaultValue: 'Clear scope. Clean build. Reliable launch.',
+        },
+        {
+          name: 'metrics',
+          type: 'array',
+          maxRows: 3,
+          admin: {
+            description:
+              'Up to three delivery values. The icon is derived from the stable metric key.',
+            initCollapsed: true,
+          },
+          fields: [
+            {
+              name: 'key',
+              type: 'select',
+              required: true,
+              options: [
+                {
+                  label: 'Predictable delivery',
+                  value: 'predictable',
+                },
+                {
+                  label: 'Clear milestones',
+                  value: 'milestones',
+                },
+                {
+                  label: 'Maintainable result',
+                  value: 'maintainable',
+                },
+              ],
+            },
+            {
+              name: 'title',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'description',
+              type: 'textarea',
+              required: true,
+            },
+          ],
+        },
+        {
+          name: 'phases',
+          type: 'array',
+          minRows: 5,
+          maxRows: 5,
+          admin: {
+            description:
+              'Exactly five unique phases are required because the desktop motion runtime uses five fixed activation steps.',
+            initCollapsed: true,
+          },
+          fields: [
+            {
+              name: 'key',
+              type: 'select',
+              required: true,
+              options: [
+                {
+                  label: 'Discovery',
+                  value: 'discovery',
+                },
+                {
+                  label: 'Architecture',
+                  value: 'architecture',
+                },
+                {
+                  label: 'Interface',
+                  value: 'interface',
+                },
+                {
+                  label: 'Development',
+                  value: 'development',
+                },
+                {
+                  label: 'Launch',
+                  value: 'launch',
+                },
+              ],
+            },
+            {
+              name: 'title',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'status',
+              type: 'select',
+              required: true,
+              defaultValue: 'pending',
+              options: [
+                {
+                  label: 'Complete',
+                  value: 'complete',
+                },
+                {
+                  label: 'In progress',
+                  value: 'progress',
+                },
+                {
+                  label: 'Pending',
+                  value: 'pending',
+                },
+              ],
+            },
+            {
+              name: 'items',
+              type: 'array',
+              minRows: 1,
+              fields: [
+                {
+                  name: 'label',
+                  type: 'text',
+                  required: true,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
       name: 'selectedTechStack',
       type: 'relationship',
       relationTo: 'tech-stack',
