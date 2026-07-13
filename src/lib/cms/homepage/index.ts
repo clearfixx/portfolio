@@ -1,3 +1,4 @@
+export { buildSkillsSectionViewModel } from './skills'
 export { buildContactSectionViewModel } from './contact'
 export { buildCurrentMissionViewModel } from './current-mission'
 export { buildEngineerProfileViewModel } from './engineer-profile'
@@ -35,5 +36,15 @@ export type {
   HeroTelemetryItem,
   HeroTelemetryViewModel,
   HeroViewModel,
+  SkillCard,
+  SkillCardIcon,
+  SkillCardKey,
+  SkillCardTone,
+  SkillDetail,
+  SkillFocusItem,
+  SkillPrinciple,
+  SkillTechnology,
+  SkillWorkflowStep,
+  SkillsSectionViewModel,
 } from './types'
 export { calculateCompletedProjectsTotal } from './project-metrics'

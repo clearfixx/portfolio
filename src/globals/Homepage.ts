@@ -146,12 +146,230 @@ export const Homepage: GlobalConfig = {
       },
     },
     {
+      name: 'skillsSection',
+      type: 'group',
+      fields: [
+        {
+          name: 'eyebrow',
+          type: 'text',
+          defaultValue: 'Skills & Technologies',
+        },
+        {
+          name: 'title',
+          type: 'text',
+          defaultValue: 'My Engineering Toolkit',
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+          defaultValue:
+            'The technologies, tools and practices I use to design, build and ship scalable digital products.',
+        },
+        {
+          name: 'footerLabel',
+          type: 'text',
+          defaultValue: 'Technology is just a tool.',
+        },
+        {
+          name: 'footerText',
+          type: 'text',
+          defaultValue: 'Problem solving is the craft.',
+        },
+        {
+          name: 'cards',
+          type: 'array',
+          admin: {
+            description:
+              'Card order controls the public layout. Presentation tone and icon are derived from the card key.',
+            initCollapsed: true,
+          },
+          fields: [
+            {
+              name: 'key',
+              type: 'select',
+              required: true,
+              options: [
+                { label: 'Frontend', value: 'frontend' },
+                { label: 'Tools & Workflow', value: 'workflow' },
+                { label: 'Backend', value: 'backend' },
+                { label: 'DevOps & Cloud', value: 'devops' },
+                { label: 'Architectural Approach', value: 'architecture' },
+                { label: 'Current Focus', value: 'focus' },
+              ],
+            },
+            {
+              name: 'title',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'badge',
+              type: 'text',
+            },
+            {
+              name: 'description',
+              type: 'textarea',
+              required: true,
+            },
+            {
+              name: 'technologies',
+              type: 'relationship',
+              relationTo: 'tech-stack',
+              hasMany: true,
+              admin: {
+                description:
+                  'Visible technologies shown in this card. When empty, the frontend uses the default slug group for this card key.',
+              },
+            },
+            {
+              name: 'pillsTitle',
+              type: 'text',
+            },
+            {
+              name: 'pills',
+              type: 'array',
+              fields: [
+                {
+                  name: 'label',
+                  type: 'text',
+                  required: true,
+                },
+              ],
+            },
+            {
+              name: 'details',
+              type: 'array',
+              fields: [
+                {
+                  name: 'label',
+                  type: 'text',
+                  required: true,
+                },
+                {
+                  name: 'value',
+                  type: 'text',
+                },
+                {
+                  name: 'caption',
+                  type: 'text',
+                },
+                {
+                  name: 'items',
+                  type: 'array',
+                  fields: [
+                    {
+                      name: 'label',
+                      type: 'text',
+                      required: true,
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              name: 'workflowTitle',
+              type: 'text',
+            },
+            {
+              name: 'workflow',
+              type: 'array',
+              fields: [
+                {
+                  name: 'label',
+                  type: 'text',
+                  required: true,
+                },
+                {
+                  name: 'icon',
+                  type: 'select',
+                  required: true,
+                  options: [
+                    { label: 'Plan', value: 'plan' },
+                    { label: 'Code', value: 'code' },
+                    { label: 'Commit', value: 'commit' },
+                    { label: 'Review', value: 'review' },
+                    { label: 'Deploy', value: 'deploy' },
+                  ],
+                },
+              ],
+            },
+            {
+              name: 'focusLine',
+              type: 'array',
+              fields: [
+                {
+                  name: 'label',
+                  type: 'text',
+                  required: true,
+                },
+              ],
+            },
+            {
+              name: 'principles',
+              type: 'array',
+              fields: [
+                {
+                  name: 'title',
+                  type: 'text',
+                  required: true,
+                },
+                {
+                  name: 'description',
+                  type: 'textarea',
+                  required: true,
+                },
+                {
+                  name: 'icon',
+                  type: 'select',
+                  required: true,
+                  options: [
+                    { label: 'Layers', value: 'layers' },
+                    { label: 'Cube', value: 'cube' },
+                    { label: 'Scale', value: 'scale' },
+                    { label: 'Wrench', value: 'wrench' },
+                    { label: 'Flask', value: 'flask' },
+                  ],
+                },
+              ],
+            },
+            {
+              name: 'focusItems',
+              type: 'array',
+              fields: [
+                {
+                  name: 'title',
+                  type: 'text',
+                  required: true,
+                },
+                {
+                  name: 'description',
+                  type: 'textarea',
+                  required: true,
+                },
+                {
+                  name: 'icon',
+                  type: 'select',
+                  required: true,
+                  options: [
+                    { label: 'AI', value: 'ai' },
+                    { label: 'System', value: 'system' },
+                    { label: 'Automation', value: 'automation' },
+                    { label: 'Performance', value: 'performance' },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
       name: 'selectedTechStack',
       type: 'relationship',
       relationTo: 'tech-stack',
       hasMany: true,
       admin: {
-        description: 'Selected technologies for the homepage skills section.',
+        description: 'Selected technologies used in the Hero telemetry strip.',
       },
     },
     {

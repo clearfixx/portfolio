@@ -1,31 +1,40 @@
 import { StackIcon } from '@/components/icons'
+import type { SkillsSectionViewModel } from '@/lib/cms/homepage'
 
 import { PortfolioSection } from '../PortfolioSection'
 import { EngineeringDna } from './EngineeringDna'
 import { SkillCard } from './SkillCard'
-import { skillCards } from './data'
 
-export function SkillsTechnologies() {
+type SkillsTechnologiesProps = {
+  content: SkillsSectionViewModel
+}
+
+export function SkillsTechnologies({ content }: SkillsTechnologiesProps) {
   return (
     <PortfolioSection
       id="skills-technologies"
-      eyebrow="Skills & Technologies"
-      title="My Engineering Toolkit"
-      description="The technologies, tools and practices I use to design, build and ship scalable digital products."
+      eyebrow={content.eyebrow}
+      title={content.title}
+      description={content.description}
       number="04"
       footer={{
         icon: StackIcon,
-        label: 'Technology is just a tool.',
-        text: 'Problem solving is the craft.',
+        label: content.footer.label,
+        text: content.footer.text,
       }}
     >
-      <div className="skills-tech__layout">
-        {skillCards.map((card) => (
-          <SkillCard key={card.id} card={card} />
-        ))}
-
-        <EngineeringDna />
-      </div>
+      {content.cards.length > 0 ? (
+        <div className="skills-tech__layout">
+          {content.cards.map((card) => (
+            <SkillCard key={card.id} card={card} />
+          ))}
+          <EngineeringDna />
+        </div>
+      ) : (
+        <p className="skills-tech__empty" role="status">
+          Skills and technology details are being prepared for publication.
+        </p>
+      )}
     </PortfolioSection>
   )
 }

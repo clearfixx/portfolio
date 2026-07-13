@@ -1077,8 +1077,82 @@ export interface Homepage {
    * Selected projects for the homepage. If empty, frontend can fallback to featured projects.
    */
   featuredProjects?: (number | Project)[] | null
+  skillsSection?: {
+    eyebrow?: string | null
+    title?: string | null
+    description?: string | null
+    footerLabel?: string | null
+    footerText?: string | null
+    /**
+     * Card order controls the public layout. Presentation tone and icon are derived from the card key.
+     */
+    cards?:
+      | {
+          key: 'frontend' | 'workflow' | 'backend' | 'devops' | 'architecture' | 'focus'
+          title: string
+          badge?: string | null
+          description: string
+          /**
+           * Visible technologies shown in this card. When empty, the frontend uses the default slug group for this card key.
+           */
+          technologies?: (number | TechStack)[] | null
+          pillsTitle?: string | null
+          pills?:
+            | {
+                label: string
+                id?: string | null
+              }[]
+            | null
+          details?:
+            | {
+                label: string
+                value?: string | null
+                caption?: string | null
+                items?:
+                  | {
+                      label: string
+                      id?: string | null
+                    }[]
+                  | null
+                id?: string | null
+              }[]
+            | null
+          workflowTitle?: string | null
+          workflow?:
+            | {
+                label: string
+                icon: 'plan' | 'code' | 'commit' | 'review' | 'deploy'
+                id?: string | null
+              }[]
+            | null
+          focusLine?:
+            | {
+                label: string
+                id?: string | null
+              }[]
+            | null
+          principles?:
+            | {
+                title: string
+                description: string
+                icon: 'layers' | 'cube' | 'scale' | 'wrench' | 'flask'
+                id?: string | null
+              }[]
+            | null
+          focusItems?:
+            | {
+                title: string
+                description: string
+                icon: 'ai' | 'system' | 'automation' | 'performance'
+                id?: string | null
+              }[]
+            | null
+          id?: string | null
+        }[]
+      | null
+  }
   /**
-   * Selected technologies for the homepage skills section.
+   * Selected technologies used in the Hero telemetry strip.
    */
   selectedTechStack?: (number | TechStack)[] | null
   engineerProfileSection?: {
@@ -1315,6 +1389,76 @@ export interface HomepageSelect<T extends boolean = true> {
         footerText?: T
       }
   featuredProjects?: T
+  skillsSection?:
+    | T
+    | {
+        eyebrow?: T
+        title?: T
+        description?: T
+        footerLabel?: T
+        footerText?: T
+        cards?:
+          | T
+          | {
+              key?: T
+              title?: T
+              badge?: T
+              description?: T
+              technologies?: T
+              pillsTitle?: T
+              pills?:
+                | T
+                | {
+                    label?: T
+                    id?: T
+                  }
+              details?:
+                | T
+                | {
+                    label?: T
+                    value?: T
+                    caption?: T
+                    items?:
+                      | T
+                      | {
+                          label?: T
+                          id?: T
+                        }
+                    id?: T
+                  }
+              workflowTitle?: T
+              workflow?:
+                | T
+                | {
+                    label?: T
+                    icon?: T
+                    id?: T
+                  }
+              focusLine?:
+                | T
+                | {
+                    label?: T
+                    id?: T
+                  }
+              principles?:
+                | T
+                | {
+                    title?: T
+                    description?: T
+                    icon?: T
+                    id?: T
+                  }
+              focusItems?:
+                | T
+                | {
+                    title?: T
+                    description?: T
+                    icon?: T
+                    id?: T
+                  }
+              id?: T
+            }
+      }
   selectedTechStack?: T
   engineerProfileSection?:
     | T

@@ -1,4 +1,10 @@
-import type { SkillCard as SkillCardType, SkillCardIcon, SkillFocusItem, SkillPrinciple, SkillWorkflowStep } from './data'
+import type {
+  SkillCard as SkillCardType,
+  SkillCardIcon,
+  SkillFocusItem,
+  SkillPrinciple,
+  SkillWorkflowStep,
+} from '@/lib/cms/homepage'
 import { TechnologyBadge } from './TechnologyBadge'
 
 type SkillCardProps = {

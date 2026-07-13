@@ -205,3 +205,70 @@ export type EngineerProfileViewModel = {
   }
   title: string
 }
+
+export type SkillCardKey = 'architecture' | 'backend' | 'devops' | 'focus' | 'frontend' | 'workflow'
+
+export type SkillCardTone = 'blue' | 'cyan' | 'green' | 'orange' | 'purple'
+
+export type SkillCardIcon = 'browser' | 'cloud' | 'focus' | 'layers' | 'server' | 'workflow'
+
+export type SkillTechnology = {
+  id: string
+  name: string
+  shortName?: string
+}
+
+export type SkillDetail = {
+  caption?: string
+  items?: string[]
+  label: string
+  value?: string
+}
+
+export type SkillWorkflowStep = {
+  icon: 'code' | 'commit' | 'deploy' | 'plan' | 'review'
+  label: string
+}
+
+export type SkillPrinciple = {
+  description: string
+  icon: 'cube' | 'flask' | 'layers' | 'scale' | 'wrench'
+  title: string
+}
+
+export type SkillFocusItem = {
+  description: string
+  icon: 'ai' | 'automation' | 'performance' | 'system'
+  title: string
+}
+
+export type SkillCard = {
+  area: SkillCardKey
+  badge: string
+  description: string
+  details?: SkillDetail[]
+  focusItems?: SkillFocusItem[]
+  focusLine?: string[]
+  icon: SkillCardIcon
+  id: string
+  number: string
+  pills?: string[]
+  pillsTitle?: string
+  principles?: SkillPrinciple[]
+  technologies?: SkillTechnology[]
+  title: string
+  tone: SkillCardTone
+  workflow?: SkillWorkflowStep[]
+  workflowTitle?: string
+}
+
+export type SkillsSectionViewModel = {
+  cards: SkillCard[]
+  description: string
+  eyebrow: string
+  footer: {
+    label: string
+    text: string
+  }
+  title: string
+}

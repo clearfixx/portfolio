@@ -1,4 +1,4 @@
-import type { SkillTechnology } from './data'
+import type { SkillTechnology } from '@/lib/cms/homepage'
 import { TechBrandIcon } from './TechBrandIcon'
 
 type TechnologyBadgeProps = {

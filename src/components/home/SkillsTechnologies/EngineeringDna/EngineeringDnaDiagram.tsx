@@ -124,7 +124,6 @@ function renderNodeIcon(id: string) {
   }
 }
 
-
 function getNodeTextX(node: DnaNode) {
   const iconEdgeOffset = 29
 
