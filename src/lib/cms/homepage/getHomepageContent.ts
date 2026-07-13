@@ -8,14 +8,21 @@ import {
   getSocial,
 } from '../queries'
 import { buildContactSectionViewModel } from './contact'
+import { buildCurrentMissionViewModel } from './current-mission'
 import { buildFeaturedProjectViewModels, getSelectedFeaturedProjects } from './featured-projects'
 import { buildHeroViewModel, getSelectedTechStack } from './hero'
-import type { ContactSectionViewModel, FeaturedProjectViewModel, HeroViewModel } from './types'
+import type {
+  ContactSectionViewModel,
+  CurrentMissionViewModel,
+  FeaturedProjectViewModel,
+  HeroViewModel,
+} from './types'
 
 const FEATURED_PROJECT_LIMIT = 3
 
 export type HomepageContent = {
   contact: ContactSectionViewModel
+  currentMission: CurrentMissionViewModel | null
   featuredProjects: FeaturedProjectViewModel[]
   hero: HeroViewModel
 }
@@ -49,6 +56,7 @@ export async function getHomepageContent(): Promise<HomepageContent> {
       profile,
       social,
     }),
+    currentMission: buildCurrentMissionViewModel(homepage),
     featuredProjects: buildFeaturedProjectViewModels(projects),
     hero: buildHeroViewModel({
       homepage,

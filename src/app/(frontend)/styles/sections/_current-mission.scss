@@ -438,9 +438,8 @@
   color: #d9e3f4;
   border-color: rgba(217, 227, 244, 0.18);
   background: rgba(217, 227, 244, 0.06);
-}а
-
-.dss-preview__nav-icon,
+}
+а .dss-preview__nav-icon,
 .dss-preview__nav-dot {
   width: 7px;
   height: 7px;
@@ -582,9 +581,28 @@
     width: 44px;
     height: 22px;
     background:
-      linear-gradient(135deg, transparent 0 19%, rgb(var(--rgb-cyan) / 75%) 20% 23%, transparent 24% 38%, rgb(var(--rgb-cyan) / 75%) 39% 42%, transparent 43% 57%, rgb(var(--rgb-cyan) / 75%) 58% 61%, transparent 62%),
+      linear-gradient(
+        135deg,
+        transparent 0 19%,
+        rgb(var(--rgb-cyan) / 75%) 20% 23%,
+        transparent 24% 38%,
+        rgb(var(--rgb-cyan) / 75%) 39% 42%,
+        transparent 43% 57%,
+        rgb(var(--rgb-cyan) / 75%) 58% 61%,
+        transparent 62%
+      ),
       linear-gradient(180deg, rgb(var(--rgb-cyan) / 14%), transparent);
-    clip-path: polygon(0 70%, 18% 50%, 35% 62%, 52% 32%, 68% 48%, 84% 18%, 100% 34%, 100% 100%, 0 100%);
+    clip-path: polygon(
+      0 70%,
+      18% 50%,
+      35% 62%,
+      52% 32%,
+      68% 48%,
+      84% 18%,
+      100% 34%,
+      100% 100%,
+      0 100%
+    );
     opacity: 0.9;
   }
 }
@@ -724,7 +742,8 @@
 
 .dss-preview__health-ring {
   display: grid;
-  place-items: center;width: 82px;
+  place-items: center;
+  width: 82px;
   height: 82px;
   margin: 10px auto;
   border-radius: 50%;
@@ -1006,16 +1025,13 @@ html[data-motion-ready='true'] {
     .dss-preview__metric-card i {
       transform: scaleX(0);
       transform-origin: left center;
-      transition: transform var(--motion-duration-section)
-        var(--motion-ease-standard);
+      transition: transform var(--motion-duration-section) var(--motion-ease-standard);
     }
 
     &[data-motion-state='visible'] {
       &::after {
-        animation: current-mission-scan 1.25s
-          var(--motion-ease-standard)
-          calc(var(--motion-stagger-default) * 4)
-          both;
+        animation: current-mission-scan 1.25s var(--motion-ease-standard)
+          calc(var(--motion-stagger-default) * 4) both;
       }
 
       .dss-preview__topbar,
@@ -1085,3 +1101,41 @@ html[data-motion-ready='true'] {
 }
 
 /* End Phase 5.1.4 */
+.current-mission--empty {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.current-mission__empty {
+  margin: 0;
+  padding: clamp(36px, 6vw, 72px);
+  border: 1px solid rgb(var(--rgb-cyan) / 16%);
+  border-radius: 20px;
+  background: rgb(var(--rgb-surface) / 36%);
+  color: rgb(var(--rgb-text-soft) / 72%);
+  text-align: center;
+}
+
+.current-mission__link[aria-disabled='true'] {
+  cursor: default;
+  opacity: 0.58;
+  pointer-events: none;
+}
+
+.dss-preview__activity-meta {
+  color: #8793ad;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.dss-preview__footer-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(105, 239, 255, 0.18);
+  border-radius: 9px;
+  padding: 10px 13px;
+  color: rgba(105, 239, 255, 0.62);
+  font-size: 11px;
+  font-weight: 900;
+  white-space: nowrap;
+}

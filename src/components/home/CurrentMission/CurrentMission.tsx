@@ -1,27 +1,44 @@
 import { RocketIcon } from '@/components/icons'
+import type { CurrentMissionViewModel } from '@/lib/cms/homepage'
 
 import { PortfolioSection } from '../PortfolioSection'
 import { MissionIntro } from './MissionIntro'
 import { MissionPreview } from './MissionPreview'
 
-export function CurrentMission() {
+type CurrentMissionProps = {
+  content: CurrentMissionViewModel | null
+}
+
+export function CurrentMission({ content }: CurrentMissionProps) {
+  if (!content) {
+    return null
+  }
+
   return (
     <PortfolioSection
       id="current-mission"
-      eyebrow="Current Mission"
-      title="Building DSS Universe"
-      description="A live preview of my flagship platform — a modular ecosystem for research, community, AI, education, CMS, and developer tools."
+      eyebrow={content.eyebrow}
+      title={content.title}
+      description={content.description}
       number="01"
       footer={{
         icon: RocketIcon,
-        label: 'Mission Status',
-        text: 'Building the future, one release at a time.',
+        label: content.footer.label,
+        text: content.footer.text,
       }}
     >
-      <div className="current-mission">
-        <MissionIntro />
-        <MissionPreview />
-      </div>
+      {content.project ? (
+        <div className="current-mission">
+          <MissionIntro project={content.project} />
+          <MissionPreview project={content.project} />
+        </div>
+      ) : (
+        <div className="current-mission current-mission--empty">
+          <p className="current-mission__empty" role="status">
+            The current mission is being prepared for publication.
+          </p>
+        </div>
+      )}
     </PortfolioSection>
   )
 }

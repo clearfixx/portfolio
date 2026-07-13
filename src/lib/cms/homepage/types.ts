@@ -113,3 +113,31 @@ export type ContactSectionViewModel = {
     trailing?: string
   }
 }
+export type CurrentMissionLinkViewModel = {
+  external: boolean
+  href: string
+  label: string
+}
+
+export type CurrentMissionProjectViewModel = {
+  cta?: CurrentMissionLinkViewModel
+  excerpt: string
+  id: string
+  progress: number
+  stage: string
+  stack: string[]
+  tagline: string
+  title: string
+  version?: string
+}
+
+export type CurrentMissionViewModel = {
+  description: string
+  eyebrow: string
+  footer: {
+    label: string
+    text: string
+  }
+  project?: CurrentMissionProjectViewModel
+  title: string
+}

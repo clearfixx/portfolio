@@ -1053,6 +1053,26 @@ export interface Homepage {
     secondaryCtaUrl?: string | null
     image?: (number | null) | Media
   }
+  currentMissionSection?: {
+    enabled?: boolean | null
+    eyebrow?: string | null
+    /**
+     * Optional custom title. Leave empty to use “Building {project title}”.
+     */
+    title?: string | null
+    description?: string | null
+    /**
+     * Explicit project shown as the current mission. No automatic project fallback is used.
+     */
+    project?: (number | null) | Project
+    ctaLabel?: string | null
+    /**
+     * Optional safe internal or HTTPS URL. When empty, the preferred enabled project link is used.
+     */
+    ctaUrlOverride?: string | null
+    footerLabel?: string | null
+    footerText?: string | null
+  }
   /**
    * Selected projects for the homepage. If empty, frontend can fallback to featured projects.
    */
@@ -1241,6 +1261,19 @@ export interface HomepageSelect<T extends boolean = true> {
         secondaryCtaLabel?: T
         secondaryCtaUrl?: T
         image?: T
+      }
+  currentMissionSection?:
+    | T
+    | {
+        enabled?: T
+        eyebrow?: T
+        title?: T
+        description?: T
+        project?: T
+        ctaLabel?: T
+        ctaUrlOverride?: T
+        footerLabel?: T
+        footerText?: T
       }
   featuredProjects?: T
   selectedTechStack?: T

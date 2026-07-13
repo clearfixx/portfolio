@@ -75,6 +75,67 @@ export const Homepage: GlobalConfig = {
       ],
     },
     {
+      name: 'currentMissionSection',
+      type: 'group',
+      fields: [
+        {
+          name: 'enabled',
+          type: 'checkbox',
+          defaultValue: true,
+        },
+        {
+          name: 'eyebrow',
+          type: 'text',
+          defaultValue: 'Current Mission',
+        },
+        {
+          name: 'title',
+          type: 'text',
+          admin: {
+            description: 'Optional custom title. Leave empty to use “Building {project title}”.',
+          },
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+          defaultValue:
+            'A live preview of the flagship product currently shaping my engineering roadmap.',
+        },
+        {
+          name: 'project',
+          type: 'relationship',
+          relationTo: 'projects',
+          admin: {
+            description:
+              'Explicit project shown as the current mission. No automatic project fallback is used.',
+          },
+        },
+        {
+          name: 'ctaLabel',
+          type: 'text',
+          defaultValue: 'View Mission Control',
+        },
+        {
+          name: 'ctaUrlOverride',
+          type: 'text',
+          admin: {
+            description:
+              'Optional safe internal or HTTPS URL. When empty, the preferred enabled project link is used.',
+          },
+        },
+        {
+          name: 'footerLabel',
+          type: 'text',
+          defaultValue: 'Mission Status',
+        },
+        {
+          name: 'footerText',
+          type: 'text',
+          defaultValue: 'Building the future, one release at a time.',
+        },
+      ],
+    },
+    {
       name: 'featuredProjects',
       type: 'relationship',
       relationTo: 'projects',

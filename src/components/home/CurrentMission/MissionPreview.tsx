@@ -1,25 +1,36 @@
-import Link from 'next/link'
-import { SidebarSection } from './SidebarSection'
-import { activeMissions, dssActivities, dssHealthItems, dssMetrics, dssNavSections } from './data'
+import type { CurrentMissionProjectViewModel } from '@/lib/cms/homepage'
 
-export function MissionPreview() {
+import {
+  architectureLayers,
+  conceptMetrics,
+  previewNavSections,
+  productAreas,
+} from './mission-preview.fixture'
+import { SidebarSection } from './SidebarSection'
+
+type MissionPreviewProps = {
+  project: CurrentMissionProjectViewModel
+}
+
+export function MissionPreview({ project }: MissionPreviewProps) {
+  const progress = `${project.progress}%`
+
   return (
     <div
       className="dss-preview"
-      aria-label="DSS Universe mission control preview"
+      aria-label={`${project.title} product concept preview`}
       data-motion="slide-right"
       data-motion-duration="section"
       data-motion-delay="2"
     >
       <header className="dss-preview__topbar">
-        <span className="dss-preview__topbar-title">Mission Control Preview</span>
+        <span className="dss-preview__topbar-title">Product Concept Preview</span>
 
         <div className="dss-preview__topbar-actions">
           <span className="dss-preview__online">
             <span aria-hidden="true" />
-            Online
+            Prototype
           </span>
-
           <span className="dss-preview__icon-button" aria-hidden="true">
             ◇
           </span>
@@ -36,11 +47,11 @@ export function MissionPreview() {
             <span className="dss-preview__brand-mark" aria-hidden="true">
               &lt;/&gt;
             </span>
-            <span>DSS Universe</span>
+            <span>{project.title}</span>
           </div>
 
-          <nav className="dss-preview__nav" aria-label="DSS preview navigation">
-            {dssNavSections.map((section) => (
+          <nav className="dss-preview__nav" aria-label="Product concept navigation">
+            {previewNavSections.map((section) => (
               <SidebarSection {...section} key={section.title} />
             ))}
           </nav>
@@ -50,39 +61,37 @@ export function MissionPreview() {
               <span className="dss-preview__profile-avatar" aria-hidden="true">
                 AK
               </span>
-
               <div>
-                <strong>Astronaut AK</strong>
-                <p>DSS Commander</p>
+                <strong>Product Architect</strong>
+                <p>Concept Preview</p>
               </div>
             </div>
 
             <div className="dss-preview__profile-meta">
-              <span>Level 14</span>
-              <span>Clearance A</span>
+              <span>Portfolio Lab</span>
+              <span>Design System</span>
             </div>
 
             <div className="dss-preview__profile-xp">
               <div>
-                <span>Mission XP</span>
-                <strong>84%</strong>
+                <span>Mission Progress</span>
+                <strong>{progress}</strong>
               </div>
               <p>
-                <span />
+                <span style={{ width: progress }} />
               </p>
             </div>
           </div>
 
           <div className="dss-preview__system-card">
             <div>
-              <p>System Status</p>
-              <strong>Online</strong>
-              <span>All systems operational</span>
+              <p>Preview Mode</p>
+              <strong>Blueprint</strong>
+              <span>Concept interface preview</span>
             </div>
-
             <ul>
-              <li>API connected</li>
-              <li>Services synced</li>
+              <li>No live telemetry</li>
+              <li>CMS-backed project data</li>
             </ul>
           </div>
         </aside>
@@ -90,17 +99,20 @@ export function MissionPreview() {
         <div className="dss-preview__workspace">
           <div className="dss-preview__heading">
             <div>
-              <h3>Mission Control</h3>
-              <p>Overview</p>
+              <h3>{project.title}</h3>
+              <p>
+                {project.stage}
+                {project.version ? ` · v${project.version}` : null}
+              </p>
             </div>
           </div>
 
           <div className="dss-preview__metrics">
-            {dssMetrics.map((metric) => (
+            {conceptMetrics.map((metric) => (
               <article className="dss-preview__metric-card" key={metric.label}>
                 <p>{metric.label}</p>
                 <strong>{metric.value}</strong>
-                <span>{metric.change}</span>
+                <span>{metric.detail}</span>
                 <i aria-hidden="true" />
               </article>
             ))}
@@ -109,26 +121,24 @@ export function MissionPreview() {
           <div className="dss-preview__main-grid">
             <article className="dss-preview__activity-card">
               <div className="dss-preview__card-header">
-                <h4>Latest Activity</h4>
-                <span>Live Feed</span>
+                <h4>Product Areas</h4>
+                <span>Concept Map</span>
               </div>
 
               <ul>
-                {dssActivities.map((activity) => (
-                  <li key={activity.title}>
+                {productAreas.map((area) => (
+                  <li key={area.title}>
                     <span
-                      className={`dss-preview__activity-icon dss-preview__activity-icon--${activity.type}`}
+                      className={`dss-preview__activity-icon dss-preview__activity-icon--${area.type}`}
                       aria-hidden="true"
                     >
-                      {activity.icon}
+                      {area.icon}
                     </span>
-
                     <div>
-                      <strong>{activity.title}</strong>
-                      <p>{activity.module}</p>
+                      <strong>{area.title}</strong>
+                      <p>{area.module}</p>
                     </div>
-
-                    <time>{activity.time}</time>
+                    <span className="dss-preview__activity-meta">{area.meta}</span>
                   </li>
                 ))}
               </ul>
@@ -136,17 +146,20 @@ export function MissionPreview() {
 
             <article className="dss-preview__health-card">
               <div className="dss-preview__card-header">
-                <h4>System Health</h4>
-                <span>All Systems</span>
+                <h4>Architecture Layers</h4>
+                <span>Blueprint</span>
               </div>
 
-              <div className="dss-preview__health-ring" aria-hidden="true">
-                <strong>97%</strong>
-                <span>Healthy</span>
+              <div
+                className="dss-preview__health-ring"
+                aria-label={`${project.progress}% project progress`}
+              >
+                <strong>{progress}</strong>
+                <span>Progress</span>
               </div>
 
               <ul>
-                {dssHealthItems.map((item) => (
+                {architectureLayers.map((item) => (
                   <li key={item.label}>
                     <span>{item.label}</span>
                     <strong>{item.value}</strong>
@@ -157,24 +170,20 @@ export function MissionPreview() {
 
             <article className="dss-preview__missions-card">
               <div className="dss-preview__card-header">
-                <h4>Active Missions</h4>
+                <h4>Project Status</h4>
               </div>
 
               <ul>
-                {activeMissions.map((mission) => (
-                  <li key={mission.title}>
-                    <div>
-                      <strong>{mission.title}</strong>
-                      <span>{mission.status}</span>
-                    </div>
-
-                    <p>
-                      <span style={{ width: mission.progress }} />
-                    </p>
-
-                    <em>{mission.progress}</em>
-                  </li>
-                ))}
+                <li>
+                  <div>
+                    <strong>{project.title}</strong>
+                    <span>{project.stage}</span>
+                  </div>
+                  <p>
+                    <span style={{ width: progress }} />
+                  </p>
+                  <em>{progress}</em>
+                </li>
               </ul>
             </article>
           </div>
@@ -183,32 +192,39 @@ export function MissionPreview() {
             <div className="dss-preview__planet" aria-hidden="true" />
 
             <div>
-              <h4>DSS Universe</h4>
-              <p>
-                A modular developer platform that connects research, community, AI tools, academy,
-                and mission control in one unified ecosystem.
-              </p>
+              <h4>{project.title}</h4>
+              <p>{project.excerpt}</p>
             </div>
 
             <dl>
               <div>
-                <dt>Community</dt>
-                <dd>2.4k</dd>
+                <dt>Stage</dt>
+                <dd>{project.stage}</dd>
               </div>
               <div>
-                <dt>Articles</dt>
-                <dd>1,248</dd>
+                <dt>Progress</dt>
+                <dd>{progress}</dd>
               </div>
               <div>
-                <dt>AI Requests</dt>
-                <dd>15.6k</dd>
+                <dt>Version</dt>
+                <dd>{project.version ?? 'Roadmap'}</dd>
               </div>
             </dl>
 
-            <Link href="/projects/dss-universe">
-              Explore DSS
-              <span aria-hidden="true">↗</span>
-            </Link>
+            {project.cta ? (
+              <a
+                href={project.cta.href}
+                rel={project.cta.external ? 'noreferrer' : undefined}
+                target={project.cta.external ? '_blank' : undefined}
+              >
+                {project.cta.label}
+                <span aria-hidden="true">↗</span>
+              </a>
+            ) : (
+              <span className="dss-preview__footer-status" aria-disabled="true">
+                Preview only
+              </span>
+            )}
           </footer>
         </div>
       </div>

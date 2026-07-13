@@ -1,6 +1,6 @@
-import type { dssNavSections } from './data'
+import type { previewNavSections } from './mission-preview.fixture'
 
-type SidebarSectionProps = (typeof dssNavSections)[number]
+type SidebarSectionProps = (typeof previewNavSections)[number]
 
 export function SidebarSection({ title, items }: SidebarSectionProps) {
   return (

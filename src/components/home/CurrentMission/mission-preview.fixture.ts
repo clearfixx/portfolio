@@ -1,15 +1,4 @@
-export const missionTechStack = [
-  'Next.js',
-  'TypeScript',
-  'PostgreSQL',
-  'Tailwind CSS',
-  'Docker',
-  'AI Core',
-  'CMS',
-  'Web3',
-]
-
-export const dssNavSections = [
+export const previewNavSections = [
   {
     title: 'Mission Control',
     items: [
@@ -39,76 +28,70 @@ export const dssNavSections = [
     title: 'Account',
     items: [{ title: 'Settings', icon: '⚙', accent: 'neutral' }],
   },
-]
+] as const
 
-export const dssMetrics = [
-  { label: 'Modules', value: '14', change: '+2 this week' },
-  { label: 'Articles', value: '1,248', change: '+32 this week' },
-  { label: 'Deployments', value: '8', change: '+1 this week' },
-  { label: 'AI Services', value: '23', change: '+7 this week' },
-]
+export const conceptMetrics = [
+  { label: 'Architecture', value: 'Mapped', detail: 'System boundaries' },
+  { label: 'Modules', value: 'Defined', detail: 'Product structure' },
+  { label: 'Delivery', value: 'Planned', detail: 'Release workflow' },
+  { label: 'Interfaces', value: 'Ready', detail: 'Concept preview' },
+] as const
 
-export const dssActivities = [
+export const productAreas = [
   {
-    title: 'Architecture updated',
+    title: 'Architecture workspace',
     module: 'Mission Control',
-    time: '2m ago',
+    meta: 'Core flow',
     type: 'architecture',
     icon: '◇',
   },
   {
-    title: 'Research Lab indexed 32 new articles',
+    title: 'Research knowledge layer',
     module: 'Research Lab',
-    time: '5m ago',
+    meta: 'Product area',
     type: 'research',
     icon: '⌁',
   },
   {
-    title: 'Deployment completed',
-    module: 'Web Development Module',
-    time: '12m ago',
+    title: 'Release workflow',
+    module: 'Engineering',
+    meta: 'Delivery',
     type: 'deployment',
     icon: '↗',
   },
   {
-    title: 'AI embeddings updated',
+    title: 'AI orchestration',
     module: 'AI Core',
-    time: '18m ago',
+    meta: 'Integration',
     type: 'ai',
     icon: '✦',
   },
   {
-    title: 'Community cache rebuilt',
+    title: 'Community experience',
     module: 'Community Hub',
-    time: '25m ago',
+    meta: 'Product area',
     type: 'community',
     icon: '◌',
   },
   {
-    title: 'Design tokens synchronized',
+    title: 'Shared design language',
     module: 'Design System',
-    time: '31m ago',
+    meta: 'Foundation',
     type: 'design',
     icon: '◈',
   },
   {
-    title: 'CMS schema validated',
+    title: 'Content operations',
     module: 'CMS Builder',
-    time: '44m ago',
+    meta: 'Platform',
     type: 'cms',
     icon: '▣',
   },
-]
+] as const
 
-export const dssHealthItems = [
-  { label: 'API', value: '98%' },
-  { label: 'Database', value: '99%' },
-  { label: 'AI Core', value: '96%' },
-  { label: 'Storage', value: '97%' },
-]
-
-export const activeMissions = [
-  { title: 'DSS Universe', status: 'In Progress', progress: '78%' },
-  { title: 'AI Platform', status: 'Planning', progress: '45%' },
-  { title: 'Commerce Engine', status: 'Development', progress: '62%' },
-]
+export const architectureLayers = [
+  { label: 'API', value: 'Defined' },
+  { label: 'Database', value: 'Mapped' },
+  { label: 'AI Core', value: 'Planned' },
+  { label: 'Storage', value: 'Defined' },
+] as const

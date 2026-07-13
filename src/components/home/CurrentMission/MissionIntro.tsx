@@ -1,7 +1,10 @@
-import Link from 'next/link'
-import { missionTechStack } from './data'
+import type { CurrentMissionProjectViewModel } from '@/lib/cms/homepage'
 
-export function MissionIntro() {
+type MissionIntroProps = {
+  project: CurrentMissionProjectViewModel
+}
+
+export function MissionIntro({ project }: MissionIntroProps) {
   return (
     <div
       className="current-mission__content"
@@ -9,34 +12,45 @@ export function MissionIntro() {
       data-motion-duration="section"
       data-motion-delay="1"
     >
-      <p className="current-mission__tagline">Years of ideas. One platform.</p>
+      <p className="current-mission__tagline">{project.tagline}</p>
 
       <div className="current-mission__copy">
+        <p>{project.excerpt}</p>
         <p>
-          A modular developer platform bringing together research, community, AI, education, CMS,
-          and development tools into one connected ecosystem.
-        </p>
-
-        <p>
-          The goal is simple: turn scattered developer workflows into one calm, powerful, and
-          extensible space.
+          {project.stage}
+          {project.version ? ` · Version ${project.version}` : null}
+          {` · ${project.progress}% complete`}
         </p>
       </div>
 
-      <p className="current-mission__stack-label">Mission stack</p>
+      {project.stack.length > 0 ? (
+        <>
+          <p className="current-mission__stack-label">Mission stack</p>
+          <ul className="current-mission__tech-list" aria-label={`${project.title} tech stack`}>
+            {project.stack.map((technology) => (
+              <li className="current-mission__tech-item" key={technology}>
+                {technology}
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : null}
 
-      <ul className="current-mission__tech-list" aria-label="Mission tech stack">
-        {missionTechStack.map((technology) => (
-          <li className="current-mission__tech-item" key={technology}>
-            {technology}
-          </li>
-        ))}
-      </ul>
-
-      <Link className="current-mission__link" href="/projects/dss-universe">
-        View Mission Control
-        <span aria-hidden="true">↗</span>
-      </Link>
+      {project.cta ? (
+        <a
+          className="current-mission__link"
+          href={project.cta.href}
+          rel={project.cta.external ? 'noreferrer' : undefined}
+          target={project.cta.external ? '_blank' : undefined}
+        >
+          {project.cta.label}
+          <span aria-hidden="true">↗</span>
+        </a>
+      ) : (
+        <span className="current-mission__link" aria-disabled="true">
+          Case study in preparation
+        </span>
+      )}
     </div>
   )
 }

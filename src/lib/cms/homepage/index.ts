@@ -1,4 +1,5 @@
 export { buildContactSectionViewModel } from './contact'
+export { buildCurrentMissionViewModel } from './current-mission'
 export {
   buildFeaturedProjectViewModel,
   buildFeaturedProjectViewModels,
@@ -15,6 +16,9 @@ export type {
   ContactSectionViewModel,
   ContactSocialIcon,
   ContactSocialLinkViewModel,
+  CurrentMissionLinkViewModel,
+  CurrentMissionProjectViewModel,
+  CurrentMissionViewModel,
   FeaturedProjectAccent,
   FeaturedProjectImage,
   FeaturedProjectViewModel,
