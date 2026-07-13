@@ -13,7 +13,7 @@ export function SidebarSection({ title, items }: SidebarSectionProps) {
         {items.map((item) => (
           <span
             className={
-              item.active
+              'active' in item && item.active
                 ? `dss-preview__nav-item dss-preview__nav-item--active dss-preview__nav-item--${item.accent}`
                 : `dss-preview__nav-item dss-preview__nav-item--${item.accent}`
             }

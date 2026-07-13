@@ -71,14 +71,20 @@ function getStats({
   projectsCount: number
 }): EngineerProfileStatViewModel[] {
   const stats: EngineerProfileStatViewModel[] = []
-  const experienceYears = calculateExperienceYears(profile.careerStartedAt, now)
+  const careerStartedAt = normalizeText(profile.careerStartedAt)
 
-  if (experienceYears !== null) {
-    stats.push({
-      id: 'experience',
-      label: 'Years Exp.',
-      value: `${experienceYears}+`,
-    })
+  if (careerStartedAt) {
+    const start = new Date(careerStartedAt)
+
+    if (!Number.isNaN(start.getTime()) && start <= now) {
+      const experienceYears = calculateExperienceYears(careerStartedAt, now)
+
+      stats.push({
+        id: 'experience',
+        label: 'Years Exp.',
+        value: `${experienceYears}+`,
+      })
+    }
   }
 
   stats.push({

@@ -2,30 +2,34 @@ import type { SVGProps } from 'react'
 
 export function RocketIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+    <svg
+      aria-hidden="true"
+      fill="none"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <path
-        d="M13.6 4.4c2.1-.9 4.1-1 5.9-.5.5 1.8.4 3.8-.5 5.9-.9 2.1-2.6 4.3-5.2 6.4l-3.5-3.5c2.1-2.6 4.2-4.3 6.3-5.2Z"
+        d="M12.2 6.15C15.05 3.3 18.14 2.55 21 2.8c.25 2.86-.5 5.95-3.35 8.8l-4.1 4.1-5.45-5.45 4.1-4.1Z"
         stroke="currentColor"
-        strokeWidth="1.7"
         strokeLinecap="round"
         strokeLinejoin="round"
+        strokeWidth="1.65"
       />
+      <circle cx="16.35" cy="7.45" r="1.55" stroke="currentColor" strokeWidth="1.65" />
       <path
-        d="M10.3 12.7 7 12l-2.4 2.4 4.1 1.1"
+        d="m9.25 9.1-3.7.75-2.6 2.6 4.85.55M14.9 14.75l-.75 3.7-2.6 2.6-.55-4.85"
         stroke="currentColor"
-        strokeWidth="1.7"
         strokeLinecap="round"
         strokeLinejoin="round"
+        strokeWidth="1.65"
       />
       <path
-        d="M13.8 16.2 15 20.3l2.4-2.4-.7-3.3"
+        d="M7.55 16.45 4.2 19.8M9.2 18.1l-1.65 1.65M5.9 14.8l-1.65 1.65"
         stroke="currentColor"
-        strokeWidth="1.7"
         strokeLinecap="round"
-        strokeLinejoin="round"
+        strokeWidth="1.65"
       />
-      <path d="M8.5 15.5 6.8 17.2" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-      <path d="M16.7 7.3h.01" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
     </svg>
   )
 }

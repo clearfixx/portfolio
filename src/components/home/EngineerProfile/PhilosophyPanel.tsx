@@ -1,3 +1,4 @@
+import { RocketIcon } from '@/components/icons'
 import type { EngineerPrincipleIcon, EngineerProfileViewModel } from '@/lib/cms/homepage'
 
 function PhilosophyIcon({ name }: { name: EngineerPrincipleIcon }) {
@@ -31,15 +32,7 @@ function PhilosophyIcon({ name }: { name: EngineerPrincipleIcon }) {
     )
   }
 
-  return (
-    <svg aria-hidden="true" viewBox="0 0 32 32">
-      <path d="M17 4c4.5 1.1 8 4.6 9 9l-6.5 6.5-7-7L17 4Z" />
-      <path d="m12.5 12.5-5 1.5-2 4 5.5-.7" />
-      <path d="m19.5 19.5-1.5 5-4 2 .7-5.5" />
-      <path d="M11 21 7 25" />
-      <path d="M20 11.5h.01" />
-    </svg>
-  )
+  return <RocketIcon />
 }
 
 type PhilosophyPanelProps = {
