@@ -1,4 +1,12 @@
-import type { CollectionSlug, Payload, SelectType, Sort, Where } from 'payload'
+import type {
+  CollectionSlug,
+  DataFromCollectionSlug,
+  PaginatedDocs,
+  Payload,
+  SelectType,
+  Sort,
+  Where,
+} from 'payload'
 
 import { getPayloadClient } from '../../client'
 
@@ -22,6 +30,27 @@ type CountCollectionOptions<TCollection extends CollectionSlug> = {
   where?: Where
 }
 
+type FindCollectionResult<TCollection extends CollectionSlug> = PaginatedDocs<
+  DataFromCollectionSlug<TCollection>
+>
+
+/**
+ * A deliberately simplified boundary around Payload.find().
+ *
+ * Payload's generated collection and select unions can become too large for
+ * TypeScript when a generic wrapper forwards them directly. The cast is kept
+ * in one place while callers retain collection-specific document types.
+ */
+type PayloadFindBoundary = (options: {
+  collection: CollectionSlug
+  depth?: number
+  limit?: number
+  page?: number
+  select?: SelectType
+  sort?: Sort
+  where?: Where
+}) => Promise<PaginatedDocs<unknown>>
+
 /**
  * Shared collection query helpers.
  *
@@ -41,10 +70,13 @@ export async function findCollection<TCollection extends CollectionSlug>({
   select,
   sort,
   where,
-}: FindCollectionOptions<TCollection>) {
+}: FindCollectionOptions<TCollection>): Promise<
+  FindCollectionResult<TCollection>
+> {
   const payload = await getCMSClient()
+  const find = payload.find as unknown as PayloadFindBoundary
 
-  return payload.find({
+  const result = await find({
     collection,
     depth,
     limit,
@@ -53,11 +85,15 @@ export async function findCollection<TCollection extends CollectionSlug>({
     sort,
     where,
   })
+
+  return result as FindCollectionResult<TCollection>
 }
 
-export async function findCollectionDocs<TCollection extends CollectionSlug>(
+export async function findCollectionDocs<
+  TCollection extends CollectionSlug,
+>(
   options: FindCollectionOptions<TCollection>,
-) {
+): Promise<Array<DataFromCollectionSlug<TCollection>>> {
   const result = await findCollection(options)
 
   return result.docs
@@ -69,7 +105,9 @@ export async function findOneCollection<TCollection extends CollectionSlug>({
   select,
   sort,
   where,
-}: FindOneCollectionOptions<TCollection>) {
+}: FindOneCollectionOptions<TCollection>): Promise<
+  DataFromCollectionSlug<TCollection> | null
+> {
   const docs = await findCollectionDocs({
     collection,
     depth,
