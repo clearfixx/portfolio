@@ -13,6 +13,7 @@ import {
 } from '@/components/icons'
 import { CookieSettingBanner } from '@/components/privacy/CookieSettingsButton'
 import type {
+  SiteFooterGitHubFeedViewModel,
   SiteFooterSnapshotViewModel,
   SiteFooterSocialIcon,
   SiteFooterSocialLinkViewModel,
@@ -115,7 +116,7 @@ function SnapshotCard({ snapshot }: { snapshot: SiteFooterSnapshotViewModel }) {
             alt={snapshot.image.alt}
             className="site-footer__snapshot-image"
             fill
-            sizes="(max-width: 760px) 33vw, 180px"
+            sizes="(max-width: 760px) 82px, 92px"
             src={snapshot.image.src}
           />
         ) : snapshot.kind === 'quote' ? (
@@ -153,11 +154,65 @@ function FooterViewLink({ href, label }: { href?: string; label: string }) {
   )
 }
 
-type SiteFooterProps = {
-  content: SiteFooterViewModel
+function CommitStream({ feed }: { feed: SiteFooterGitHubFeedViewModel }) {
+  return (
+    <section
+      aria-labelledby="site-footer-commit-stream-title"
+      className="site-footer__commits"
+      data-cache-state={feed.state}
+    >
+      <header className="site-footer__commit-header">
+        <div className="site-footer__commit-heading">
+          <span className="site-footer__commit-icon">
+            <GithubIcon />
+          </span>
+          <div>
+            <div className="site-footer__commit-title-row">
+              <h3 id="site-footer-commit-stream-title">{feed.title}</h3>
+              <span className="site-footer__commit-status">{feed.statusLabel}</span>
+            </div>
+            <p>{feed.subtitle}</p>
+          </div>
+        </div>
+
+        <FooterViewLink href={feed.href} label={feed.linkLabel} />
+      </header>
+
+      <div className="site-footer__commit-list">
+        {feed.commits.map((commit) => (
+          <a
+            aria-label={`View ${commit.repository} commit ${commit.shortSha}: ${commit.title}`}
+            className="site-footer__commit"
+            href={commit.href}
+            key={commit.id}
+            rel="noreferrer"
+            target="_blank"
+          >
+            <span aria-hidden="true" className="site-footer__commit-track">
+              <i />
+            </span>
+
+            <span className="site-footer__commit-body">
+              <span className="site-footer__commit-meta">
+                <strong>{commit.repository}</strong>
+                <code>{commit.shortSha}</code>
+              </span>
+              <span className="site-footer__commit-message">{commit.title}</span>
+              <time dateTime={commit.committedAt}>{commit.timeLabel}</time>
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+  )
 }
 
-export function SiteFooter({ content }: SiteFooterProps) {
+type SiteFooterProps = {
+  content: SiteFooterViewModel
+  githubFeed?: SiteFooterGitHubFeedViewModel | null
+}
+
+export function SiteFooter({ content, githubFeed = null }: SiteFooterProps) {
   return (
     <footer
       aria-label="Site footer"
@@ -289,7 +344,7 @@ export function SiteFooter({ content }: SiteFooterProps) {
 
             {content.snapshots.items.length > 0 ? (
               <div className="site-footer__snapshot-grid">
-                {content.snapshots.items.map((snapshot) => (
+                {content.snapshots.items.slice(0, 6).map((snapshot) => (
                   <SnapshotCard key={snapshot.id} snapshot={snapshot} />
                 ))}
               </div>
@@ -298,6 +353,8 @@ export function SiteFooter({ content }: SiteFooterProps) {
                 Build snapshots are being prepared.
               </p>
             )}
+
+            {githubFeed ? <CommitStream feed={githubFeed} /> : null}
 
             <div className="site-footer__newsletter">
               <div className="site-footer__newsletter-copy">

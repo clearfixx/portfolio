@@ -84,3 +84,5 @@ export type {
   SiteFooterSocialLinkViewModel,
   SiteFooterViewModel,
 } from './types'
+export { buildSiteFooterGitHubFeedViewModel, getSiteFooterGitHubFeed } from './github-feed'
+export type { SiteFooterGitHubCommitViewModel, SiteFooterGitHubFeedViewModel } from './types'

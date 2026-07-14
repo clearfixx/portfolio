@@ -9,10 +9,14 @@ import {
   SiteFooter,
   SkillsTechnologies,
 } from '@/components/home'
-import { getHomepageContent } from '@/lib/cms'
 import { ScrollStack } from '@/components/motion'
+import { getHomepageContent, getSiteFooterGitHubFeed } from '@/lib/cms'
+
+export const revalidate = 300
 
 export default async function HomePage() {
+  const [content, githubFeed] = await Promise.all([getHomepageContent(), getSiteFooterGitHubFeed()])
+
   const {
     contact,
     currentMission,
@@ -23,7 +27,7 @@ export default async function HomePage() {
     insightsTrust,
     deliveryPipeline,
     siteFooter,
-  } = await getHomepageContent()
+  } = content
 
   return (
     <>
@@ -37,7 +41,7 @@ export default async function HomePage() {
       {deliveryPipeline ? <DeliveryPipeline content={deliveryPipeline} /> : null}
       {insightsTrust ? <InsightsTrust content={insightsTrust} /> : null}
       <ContactCTA content={contact} />
-      {siteFooter ? <SiteFooter content={siteFooter} /> : null}
+      {siteFooter ? <SiteFooter content={siteFooter} githubFeed={githubFeed} /> : null}
     </>
   )
 }

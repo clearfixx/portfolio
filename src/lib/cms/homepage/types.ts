@@ -435,6 +435,27 @@ export type SiteFooterLinkViewModel = {
   label: string
 }
 
+export type SiteFooterGitHubCommitViewModel = {
+  committedAt: string
+  href: string
+  id: string
+  repository: string
+  repositoryHref: string
+  shortSha: string
+  timeLabel: string
+  title: string
+}
+
+export type SiteFooterGitHubFeedViewModel = {
+  commits: SiteFooterGitHubCommitViewModel[]
+  href: string
+  linkLabel: string
+  state: 'fresh' | 'stale'
+  statusLabel: string
+  subtitle: string
+  title: string
+}
+
 export type SiteFooterViewModel = {
   copyright: {
     emphasis: string
