@@ -1,23 +1,27 @@
-import { readGitHubFeed, type GitHubFeedReadResult } from '@dss-feeds/github-feed/payload'
+import {
+  DEFAULT_GITHUB_FEED_DISPLAY_COMMIT_LIMIT,
+  readGitHubFeed,
+  readGitHubFeedDisplaySettings,
+  type GitHubFeedReadResult,
+} from '@dss-feeds/github-feed/payload'
 
 import { getPayloadClient } from '../client'
 import type { SiteFooterGitHubFeedViewModel } from './types'
-
-const FOOTER_COMMIT_LIMIT = 3
 
 export async function getSiteFooterGitHubFeed(
   now = new Date(),
 ): Promise<SiteFooterGitHubFeedViewModel | null> {
   try {
     const payload = await getPayloadClient()
+    const displaySettings = await readGitHubFeedDisplaySettings({ payload })
     const result = await readGitHubFeed({
       payload,
-      commitCount: FOOTER_COMMIT_LIMIT,
+      commitCount: displaySettings.commitLimit,
       now,
       order: 'desc',
     })
 
-    return buildSiteFooterGitHubFeedViewModel(result, now)
+    return buildSiteFooterGitHubFeedViewModel(result, now, displaySettings.commitLimit)
   } catch {
     return null
   }
@@ -26,6 +30,7 @@ export async function getSiteFooterGitHubFeed(
 export function buildSiteFooterGitHubFeedViewModel(
   result: GitHubFeedReadResult,
   now = new Date(),
+  commitLimit = DEFAULT_GITHUB_FEED_DISPLAY_COMMIT_LIMIT,
 ): SiteFooterGitHubFeedViewModel | null {
   if (
     !result.renderable ||
@@ -35,7 +40,7 @@ export function buildSiteFooterGitHubFeedViewModel(
     return null
   }
 
-  const commits = result.commits.slice(0, FOOTER_COMMIT_LIMIT).map((commit) => ({
+  const commits = result.commits.slice(0, commitLimit).map((commit) => ({
     committedAt: commit.committedAt,
     href: commit.url,
     id: commit.id,
@@ -59,7 +64,6 @@ export function buildSiteFooterGitHubFeedViewModel(
 
 function getRepositoryLabel(repository: string): string {
   const segments = repository.split('/').filter(Boolean)
-
   return segments.at(-1) ?? repository
 }
 

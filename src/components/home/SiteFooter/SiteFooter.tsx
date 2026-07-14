@@ -20,6 +20,8 @@ import type {
   SiteFooterViewModel,
 } from '@/lib/cms/homepage'
 
+import { getSiteFooterXFeed } from '@/lib/cms/homepage/x-feed'
+
 import { NewsletterForm } from './NewsletterForm'
 
 type IconProps = SVGProps<SVGSVGElement>
@@ -212,7 +214,10 @@ type SiteFooterProps = {
   githubFeed?: SiteFooterGitHubFeedViewModel | null
 }
 
-export function SiteFooter({ content, githubFeed = null }: SiteFooterProps) {
+export async function SiteFooter({ content, githubFeed = null }: SiteFooterProps) {
+  const liveXFeed = await getSiteFooterXFeed()
+  const resolvedXFeed = liveXFeed ?? content.xFeed
+
   return (
     <footer
       aria-label="Site footer"
@@ -282,16 +287,16 @@ export function SiteFooter({ content, githubFeed = null }: SiteFooterProps) {
                   <XIcon />
                 </span>
                 <div>
-                  <h2>{content.xFeed.title}</h2>
-                  <p>{content.xFeed.handle}</p>
+                  <h2>{resolvedXFeed.title}</h2>
+                  <p>{resolvedXFeed.handle}</p>
                 </div>
               </div>
-              <FooterViewLink href={content.xFeed.href} label={content.xFeed.linkLabel} />
+              <FooterViewLink href={resolvedXFeed.href} label={resolvedXFeed.linkLabel} />
             </header>
 
-            {content.xFeed.posts.length > 0 ? (
+            {resolvedXFeed.posts.length > 0 ? (
               <div className="site-footer__posts">
-                {content.xFeed.posts.map((post) => (
+                {resolvedXFeed.posts.map((post) => (
                   <article className="site-footer__post" key={post.id}>
                     <div className="site-footer__post-head">
                       <span className="site-footer__post-brand">

@@ -1795,6 +1795,10 @@ export interface DssXFeedSetting {
    */
   rssHubBaseUrl?: string | null;
   postLimit: number;
+  /**
+   * Maximum number of cached posts rendered by public views. This does not reduce the active snapshot.
+   */
+  displayPostLimit: number;
   excludeReplies?: boolean | null;
   excludeReposts?: boolean | null;
   syncIntervalMinutes: number;
@@ -1838,6 +1842,10 @@ export interface DssGithubFeedSetting {
    * Maximum number of normalized commits retained in the active snapshot.
    */
   commitLimit: number;
+  /**
+   * Maximum number of cached commits rendered by public views. This does not reduce the active snapshot.
+   */
+  displayCommitLimit: number;
   /**
    * The scheduled task checks this value before contacting GitHub.
    */
@@ -2289,6 +2297,7 @@ export interface DssXFeedSettingsSelect<T extends boolean = true> {
   nitterBaseUrl?: T;
   rssHubBaseUrl?: T;
   postLimit?: T;
+  displayPostLimit?: T;
   excludeReplies?: T;
   excludeReposts?: T;
   syncIntervalMinutes?: T;
@@ -2315,6 +2324,7 @@ export interface DssGithubFeedSettingsSelect<T extends boolean = true> {
         id?: T;
       };
   commitLimit?: T;
+  displayCommitLimit?: T;
   syncIntervalHours?: T;
   freshForMinutes?: T;
   staleForHours?: T;
