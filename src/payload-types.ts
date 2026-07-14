@@ -78,6 +78,7 @@ export interface Config {
     'contact-messages': ContactMessage;
     'newsletter-subscribers': NewsletterSubscriber;
     notifications: Notification;
+    'dss-x-feed-cache': DssXFeedCache;
     'dss-github-feed-cache': DssGithubFeedCache;
     'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
@@ -98,6 +99,7 @@ export interface Config {
     'contact-messages': ContactMessagesSelect<false> | ContactMessagesSelect<true>;
     'newsletter-subscribers': NewsletterSubscribersSelect<false> | NewsletterSubscribersSelect<true>;
     notifications: NotificationsSelect<false> | NotificationsSelect<true>;
+    'dss-x-feed-cache': DssXFeedCacheSelect<false> | DssXFeedCacheSelect<true>;
     'dss-github-feed-cache': DssGithubFeedCacheSelect<false> | DssGithubFeedCacheSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
@@ -117,6 +119,7 @@ export interface Config {
     social: Social;
     contact: Contact;
     analytics: Analytics;
+    'dss-x-feed-settings': DssXFeedSetting;
     'dss-github-feed-settings': DssGithubFeedSetting;
     'payload-jobs-stats': PayloadJobsStat;
   };
@@ -128,6 +131,7 @@ export interface Config {
     social: SocialSelect<false> | SocialSelect<true>;
     contact: ContactSelect<false> | ContactSelect<true>;
     analytics: AnalyticsSelect<false> | AnalyticsSelect<true>;
+    'dss-x-feed-settings': DssXFeedSettingsSelect<false> | DssXFeedSettingsSelect<true>;
     'dss-github-feed-settings': DssGithubFeedSettingsSelect<false> | DssGithubFeedSettingsSelect<true>;
     'payload-jobs-stats': PayloadJobsStatsSelect<false> | PayloadJobsStatsSelect<true>;
   };
@@ -138,6 +142,7 @@ export interface Config {
   user: User;
   jobs: {
     tasks: {
+      'dss-x-feed-sync': TaskDssXFeedSync;
       'dss-github-feed-sync': TaskDssGithubFeedSync;
       inline: {
         input: unknown;
@@ -605,6 +610,40 @@ export interface Notification {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "dss-x-feed-cache".
+ */
+export interface DssXFeedCache {
+  id: number;
+  key: string;
+  username: string;
+  postCount: number;
+  sourceId: string;
+  sourceStability: 'stable' | 'experimental' | 'composite' | 'unknown';
+  checksum: string;
+  generatedAt: string;
+  freshUntil: string;
+  staleUntil: string;
+  nextSyncAt: string;
+  warnings?:
+    | {
+        message: string;
+        id?: string | null;
+      }[]
+    | null;
+  snapshot:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "dss-github-feed-cache".
  */
 export interface DssGithubFeedCache {
@@ -712,7 +751,7 @@ export interface PayloadJob {
     | {
         executedAt: string;
         completedAt: string;
-        taskSlug: 'inline' | 'dss-github-feed-sync';
+        taskSlug: 'inline' | 'dss-x-feed-sync' | 'dss-github-feed-sync';
         taskID: string;
         input?:
           | {
@@ -745,7 +784,7 @@ export interface PayloadJob {
         id?: string | null;
       }[]
     | null;
-  taskSlug?: ('inline' | 'dss-github-feed-sync') | null;
+  taskSlug?: ('inline' | 'dss-x-feed-sync' | 'dss-github-feed-sync') | null;
   queue?: string | null;
   waitUntil?: string | null;
   processing?: boolean | null;
@@ -815,6 +854,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'notifications';
         value: number | Notification;
+      } | null)
+    | ({
+        relationTo: 'dss-x-feed-cache';
+        value: number | DssXFeedCache;
       } | null)
     | ({
         relationTo: 'dss-github-feed-cache';
@@ -1130,6 +1173,31 @@ export interface NotificationsSelect<T extends boolean = true> {
   status?: T;
   relatedCollection?: T;
   relatedDocumentId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "dss-x-feed-cache_select".
+ */
+export interface DssXFeedCacheSelect<T extends boolean = true> {
+  key?: T;
+  username?: T;
+  postCount?: T;
+  sourceId?: T;
+  sourceStability?: T;
+  checksum?: T;
+  generatedAt?: T;
+  freshUntil?: T;
+  staleUntil?: T;
+  nextSyncAt?: T;
+  warnings?:
+    | T
+    | {
+        message?: T;
+        id?: T;
+      };
+  snapshot?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1708,6 +1776,46 @@ export interface Analytics {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "dss-x-feed-settings".
+ */
+export interface DssXFeedSetting {
+  id: number;
+  enabled?: boolean | null;
+  username?: string | null;
+  /**
+   * Nitter and RSSHub are unofficial experimental bridges and may stop working without notice.
+   */
+  sourceMode: 'official-api' | 'nitter' | 'rsshub' | 'fallback' | 'custom';
+  /**
+   * Use a trusted self-hosted instance. Public instances may disappear without notice.
+   */
+  nitterBaseUrl?: string | null;
+  /**
+   * Authentication headers remain server-side and are never stored in this global.
+   */
+  rssHubBaseUrl?: string | null;
+  postLimit: number;
+  excludeReplies?: boolean | null;
+  excludeReposts?: boolean | null;
+  syncIntervalMinutes: number;
+  freshForMinutes: number;
+  staleForHours: number;
+  failureThreshold: number;
+  notificationCooldownHours: number;
+  monitorState?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "dss-github-feed-settings".
  */
 export interface DssGithubFeedSetting {
@@ -2172,6 +2280,29 @@ export interface AnalyticsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "dss-x-feed-settings_select".
+ */
+export interface DssXFeedSettingsSelect<T extends boolean = true> {
+  enabled?: T;
+  username?: T;
+  sourceMode?: T;
+  nitterBaseUrl?: T;
+  rssHubBaseUrl?: T;
+  postLimit?: T;
+  excludeReplies?: T;
+  excludeReposts?: T;
+  syncIntervalMinutes?: T;
+  freshForMinutes?: T;
+  staleForHours?: T;
+  failureThreshold?: T;
+  notificationCooldownHours?: T;
+  monitorState?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "dss-github-feed-settings_select".
  */
 export interface DssGithubFeedSettingsSelect<T extends boolean = true> {
@@ -2235,6 +2366,55 @@ export interface CollectionsWidget {
     [k: string]: unknown;
   };
   width: 'full';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaskDss-x-feed-sync".
+ */
+export interface TaskDssXFeedSync {
+  input: {
+    trigger?: ('schedule' | 'manual' | 'endpoint') | null;
+    force?: boolean | null;
+  };
+  output: {
+    status: 'success' | 'skipped';
+    reason?: ('disabled' | 'not_due' | 'locked') | null;
+    trigger: string;
+    cacheKey?: string | null;
+    created?: boolean | null;
+    changed?: boolean | null;
+    fetchedPostCount: number;
+    cachedPostCount: number;
+    checksum?: string | null;
+    generatedAt?: string | null;
+    freshUntil?: string | null;
+    staleUntil?: string | null;
+    nextSyncAt?: string | null;
+    selectedSourceId?: string | null;
+    monitorStatus?: string | null;
+    healthEvents?:
+      | {
+          type: string;
+          occurredAt: string;
+        }[]
+      | null;
+    events?:
+      | {
+          level: 'info' | 'success' | 'warning' | 'error';
+          message: string;
+          timestamp: string;
+          context?:
+            | {
+                [k: string]: unknown;
+              }
+            | unknown[]
+            | string
+            | number
+            | boolean
+            | null;
+        }[]
+      | null;
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -30,10 +30,12 @@
     "test:regression": "pnpm run test:e2e",
     "verify": "pnpm run check:env && pnpm run lint && pnpm run typecheck && pnpm run test:int && pnpm run test:regression && pnpm run build",
     "verify:production": "pnpm run check:env:production && pnpm run lint && pnpm run typecheck && pnpm run test:int && pnpm run test:regression && pnpm run build",
-    "jobs:github-feed": "cross-env NODE_OPTIONS=--no-deprecation payload jobs:run --cron \"* * * * *\" --queue dss-github-feed --handle-schedules"
+    "jobs:github-feed": "cross-env NODE_OPTIONS=--no-deprecation payload jobs:run --cron \"* * * * *\" --queue dss-github-feed --handle-schedules",
+    "jobs:x-feed": "cross-env NODE_OPTIONS=--no-deprecation payload jobs:run --cron \"* * * * *\" --queue dss-x-feed --handle-schedules"
   },
   "dependencies": {
     "@dss-feeds/github-feed": "file:../dss-feeds/packages/github-feed",
+    "@dss-feeds/x-feed": "file:../dss-feeds/packages/x-feed",
     "@payloadcms/db-postgres": "3.85.2",
     "@payloadcms/next": "3.85.2",
     "@payloadcms/richtext-lexical": "3.85.2",

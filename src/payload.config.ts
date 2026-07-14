@@ -20,6 +20,13 @@ import {
   Users,
 } from './collections'
 import { Analytics, Contact, Homepage, Profile, SEO, SiteSettings, Social } from './globals'
+import {
+  xFeedCacheCollection,
+  xFeedSettingsGlobal,
+  xFeedStatusEndpoint,
+  xFeedSyncEndpoint,
+  xFeedSyncTask,
+} from './lib/server/x-feed'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -43,8 +50,23 @@ export default buildConfig({
     ContactMessages,
     NewsletterSubscribers,
     Notifications,
+    xFeedCacheCollection,
   ],
-  globals: [SiteSettings, Homepage, Profile, SEO, Social, Contact, Analytics],
+  globals: [
+    SiteSettings,
+    Homepage,
+    Profile,
+    SEO,
+    Social,
+    Contact,
+    Analytics,
+    xFeedSettingsGlobal,
+  ],
+  endpoints: [xFeedSyncEndpoint, xFeedStatusEndpoint],
+  jobs: {
+    enableConcurrencyControl: true,
+    tasks: [xFeedSyncTask],
+  },
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
