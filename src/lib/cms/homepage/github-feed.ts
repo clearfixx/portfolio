@@ -1,7 +1,7 @@
 import { readGitHubFeed, type GitHubFeedReadResult } from '@dss-feeds/github-feed/payload'
 
 import { getPayloadClient } from '../client'
-import type { SiteFooterGitHubCommitViewModel, SiteFooterGitHubFeedViewModel } from './types'
+import type { SiteFooterGitHubFeedViewModel } from './types'
 
 const FOOTER_COMMIT_LIMIT = 3
 
