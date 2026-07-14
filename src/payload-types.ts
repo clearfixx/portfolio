@@ -1742,6 +1742,39 @@ export interface DssGithubFeedSetting {
    * The last successful snapshot remains renderable for this many additional hours after freshness expires.
    */
   staleForHours: number;
+  monitorStatus?: ('idle' | 'running' | 'success' | 'skipped' | 'error') | null;
+  monitorRunId?: string | null;
+  monitorTrigger?: ('schedule' | 'manual' | 'endpoint') | null;
+  monitorAttemptCount?: number | null;
+  monitorLastAttemptAt?: string | null;
+  monitorLastSuccessAt?: string | null;
+  monitorCompletedAt?: string | null;
+  monitorDurationMs?: number | null;
+  monitorCommitCount?: number | null;
+  monitorChecksum?: string | null;
+  monitorGeneratedAt?: string | null;
+  monitorFreshUntil?: string | null;
+  monitorStaleUntil?: string | null;
+  monitorNextSyncAt?: string | null;
+  monitorAdapterVersion?: string | null;
+  monitorLastError?: string | null;
+  monitorEvents?:
+    | {
+        level: 'info' | 'success' | 'warning' | 'error';
+        message: string;
+        timestamp: string;
+        context?:
+          | {
+              [k: string]: unknown;
+            }
+          | unknown[]
+          | string
+          | number
+          | boolean
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2154,6 +2187,31 @@ export interface DssGithubFeedSettingsSelect<T extends boolean = true> {
   syncIntervalHours?: T;
   freshForMinutes?: T;
   staleForHours?: T;
+  monitorStatus?: T;
+  monitorRunId?: T;
+  monitorTrigger?: T;
+  monitorAttemptCount?: T;
+  monitorLastAttemptAt?: T;
+  monitorLastSuccessAt?: T;
+  monitorCompletedAt?: T;
+  monitorDurationMs?: T;
+  monitorCommitCount?: T;
+  monitorChecksum?: T;
+  monitorGeneratedAt?: T;
+  monitorFreshUntil?: T;
+  monitorStaleUntil?: T;
+  monitorNextSyncAt?: T;
+  monitorAdapterVersion?: T;
+  monitorLastError?: T;
+  monitorEvents?:
+    | T
+    | {
+        level?: T;
+        message?: T;
+        timestamp?: T;
+        context?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
