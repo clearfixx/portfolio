@@ -22,7 +22,11 @@ export async function getSiteFooterGitHubFeed(
     })
 
     return buildSiteFooterGitHubFeedViewModel(result, now, displaySettings.commitLimit)
-  } catch {
+  } catch (error) {
+    if (process.env.NODE_ENV !== 'production') {
+      console.error('[portfolio/github-feed] Failed to read cached GitHub feed.', error)
+    }
+
     return null
   }
 }

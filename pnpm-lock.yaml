@@ -11,6 +11,9 @@ importers:
       '@dss-feeds/github-feed':
         specifier: file:../dss-feeds/packages/github-feed
         version: file:../dss-feeds/packages/github-feed(payload@3.85.2(graphql@16.14.2)(typescript@5.7.3))(react@19.2.6)
+      '@dss-feeds/instagram-feed':
+        specifier: file:../dss-feeds/packages/instagram-feed
+        version: file:../dss-feeds/packages/instagram-feed(payload@3.85.2(graphql@16.14.2)(typescript@5.7.3))(react@19.2.6)
       '@dss-feeds/x-feed':
         specifier: file:../dss-feeds/packages/x-feed
         version: file:../dss-feeds/packages/x-feed(payload@3.85.2(graphql@16.14.2)(typescript@5.7.3))(react@19.2.6)
@@ -289,6 +292,13 @@ packages:
 
   '@dss-feeds/github-feed@file:../dss-feeds/packages/github-feed':
     resolution: {directory: ../dss-feeds/packages/github-feed, type: directory}
+    engines: {node: '>=20.9.0'}
+    peerDependencies:
+      payload: '>=3.85.0 <4'
+      react: '>=18.3.0 <20'
+
+  '@dss-feeds/instagram-feed@file:../dss-feeds/packages/instagram-feed':
+    resolution: {directory: ../dss-feeds/packages/instagram-feed, type: directory}
     engines: {node: '>=20.9.0'}
     peerDependencies:
       payload: '>=3.85.0 <4'
@@ -5532,6 +5542,11 @@ snapshots:
   '@drizzle-team/brocli@0.10.2': {}
 
   '@dss-feeds/github-feed@file:../dss-feeds/packages/github-feed(payload@3.85.2(graphql@16.14.2)(typescript@5.7.3))(react@19.2.6)':
+    dependencies:
+      payload: 3.85.2(graphql@16.14.2)(typescript@5.7.3)
+      react: 19.2.6
+
+  '@dss-feeds/instagram-feed@file:../dss-feeds/packages/instagram-feed(payload@3.85.2(graphql@16.14.2)(typescript@5.7.3))(react@19.2.6)':
     dependencies:
       payload: 3.85.2(graphql@16.14.2)(typescript@5.7.3)
       react: 19.2.6

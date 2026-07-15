@@ -70,9 +70,7 @@ export async function findCollection<TCollection extends CollectionSlug>({
   select,
   sort,
   where,
-}: FindCollectionOptions<TCollection>): Promise<
-  FindCollectionResult<TCollection>
-> {
+}: FindCollectionOptions<TCollection>): Promise<FindCollectionResult<TCollection>> {
   const payload = await getCMSClient()
   const find = payload.find as unknown as PayloadFindBoundary
 
@@ -89,9 +87,7 @@ export async function findCollection<TCollection extends CollectionSlug>({
   return result as FindCollectionResult<TCollection>
 }
 
-export async function findCollectionDocs<
-  TCollection extends CollectionSlug,
->(
+export async function findCollectionDocs<TCollection extends CollectionSlug>(
   options: FindCollectionOptions<TCollection>,
 ): Promise<Array<DataFromCollectionSlug<TCollection>>> {
   const result = await findCollection(options)
@@ -105,9 +101,7 @@ export async function findOneCollection<TCollection extends CollectionSlug>({
   select,
   sort,
   where,
-}: FindOneCollectionOptions<TCollection>): Promise<
-  DataFromCollectionSlug<TCollection> | null
-> {
+}: FindOneCollectionOptions<TCollection>): Promise<DataFromCollectionSlug<TCollection> | null> {
   const docs = await findCollectionDocs({
     collection,
     depth,

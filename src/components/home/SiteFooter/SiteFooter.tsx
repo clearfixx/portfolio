@@ -14,12 +14,16 @@ import {
 import { CookieSettingBanner } from '@/components/privacy/CookieSettingsButton'
 import type {
   SiteFooterGitHubFeedViewModel,
-  SiteFooterSnapshotViewModel,
   SiteFooterSocialIcon,
   SiteFooterSocialLinkViewModel,
   SiteFooterViewModel,
 } from '@/lib/cms/homepage'
 
+import { getSiteFooterGitHubFeed } from '@/lib/cms/homepage/github-feed'
+import {
+  getSiteFooterInstagramFeed,
+  type SiteFooterInstagramFeedViewModel,
+} from '@/lib/cms/homepage/instagram-feed'
 import { getSiteFooterXFeed } from '@/lib/cms/homepage/x-feed'
 
 import { NewsletterForm } from './NewsletterForm'
@@ -104,42 +108,50 @@ function FooterSocialLinkItem({ social }: { social: SiteFooterSocialLinkViewMode
   )
 }
 
-function SnapshotCard({ snapshot }: { snapshot: SiteFooterSnapshotViewModel }) {
-  const quoteWords = snapshot.title.replace(/[.]/g, '').split(/\s+/).filter(Boolean).slice(0, 3)
+function InstagramPostCard({ post }: { post: SiteFooterInstagramFeedViewModel['posts'][number] }) {
+  const metrics = [
+    post.likes === null ? null : `${post.likes} likes`,
+    post.comments === null ? null : `${post.comments} comments`,
+  ]
+    .filter(Boolean)
+    .join(', ')
 
   return (
-    <article
-      aria-label={snapshot.title}
-      className={`site-footer__snapshot site-footer__snapshot--${snapshot.kind}`}
+    <a
+      aria-label={`Open Instagram post${metrics ? `: ${metrics}` : ''}`}
+      className="site-footer__snapshot site-footer__snapshot--instagram-post"
+      href={post.href}
+      rel="noreferrer"
+      target="_blank"
     >
-      <div className="site-footer__snapshot-screen">
-        {snapshot.image ? (
-          <Image
-            alt={snapshot.image.alt}
-            className="site-footer__snapshot-image"
-            fill
-            sizes="(max-width: 760px) 82px, 92px"
-            src={snapshot.image.src}
-          />
-        ) : snapshot.kind === 'quote' ? (
-          <div className="site-footer__snapshot-quote">
-            <span>{'//'}</span>
-            {quoteWords.map((word) => (
-              <strong key={word}>{word.toUpperCase()}</strong>
-            ))}
-          </div>
-        ) : (
-          <>
-            <span className="site-footer__snapshot-dot" />
-            <span className="site-footer__snapshot-dot" />
-            <span className="site-footer__snapshot-dot" />
-            <i />
-            <i />
-            <i />
-          </>
-        )}
-      </div>
-    </article>
+      <span className="site-footer__snapshot-screen site-footer__snapshot-screen--instagram">
+        <Image
+          alt={post.image.alt}
+          className="site-footer__snapshot-image"
+          fill
+          sizes="(max-width: 760px) 82px, 92px"
+          src={post.image.src}
+        />
+
+        {post.likes !== null || post.comments !== null ? (
+          <span aria-hidden="true" className="site-footer__instagram-overlay">
+            {post.likes !== null ? (
+              <span>
+                <HeartIcon />
+                {post.likes}
+              </span>
+            ) : null}
+
+            {post.comments !== null ? (
+              <span>
+                <ReplyIcon />
+                {post.comments}
+              </span>
+            ) : null}
+          </span>
+        ) : null}
+      </span>
+    </a>
   )
 }
 
@@ -215,8 +227,13 @@ type SiteFooterProps = {
 }
 
 export async function SiteFooter({ content, githubFeed = null }: SiteFooterProps) {
-  const liveXFeed = await getSiteFooterXFeed()
+  const [liveXFeed, liveInstagramFeed, liveGitHubFeed] = await Promise.all([
+    getSiteFooterXFeed(),
+    getSiteFooterInstagramFeed(),
+    getSiteFooterGitHubFeed(),
+  ])
   const resolvedXFeed = liveXFeed ?? content.xFeed
+  const resolvedGitHubFeed = liveGitHubFeed ?? githubFeed
 
   return (
     <footer
@@ -307,6 +324,17 @@ export async function SiteFooter({ content, githubFeed = null }: SiteFooterProps
                         <time>
                           {post.date} • {post.time}
                         </time>
+                        {post.href ? (
+                          <a
+                            className="site-footer__post-more"
+                            href={post.href}
+                            rel="noreferrer"
+                            target="_blank"
+                          >
+                            Read full post on X
+                            <ArrowUpRightIcon />
+                          </a>
+                        ) : null}
                       </div>
                     </div>
                     <div aria-label="Post metrics" className="site-footer__post-meta">
@@ -344,22 +372,34 @@ export async function SiteFooter({ content, githubFeed = null }: SiteFooterProps
                   <p>{content.snapshots.subtitle}</p>
                 </div>
               </div>
-              <FooterViewLink href={content.snapshots.href} label={content.snapshots.linkLabel} />
+              <FooterViewLink
+                href={liveInstagramFeed?.href ?? content.snapshots.href}
+                label={content.snapshots.linkLabel}
+              />
             </header>
 
-            {content.snapshots.items.length > 0 ? (
-              <div className="site-footer__snapshot-grid">
-                {content.snapshots.items.slice(0, 6).map((snapshot) => (
-                  <SnapshotCard key={snapshot.id} snapshot={snapshot} />
+            {liveInstagramFeed?.posts.length ? (
+              <div
+                className="site-footer__snapshot-grid"
+                data-cache-state={liveInstagramFeed.state}
+              >
+                {liveInstagramFeed.posts.map((post) => (
+                  <InstagramPostCard key={post.id} post={post} />
                 ))}
               </div>
             ) : (
-              <p className="site-footer__empty" role="status">
-                Build snapshots are being prepared.
-              </p>
+              <div className="site-footer__instagram-empty" role="status">
+                <span className="site-footer__instagram-empty-status">
+                  <i aria-hidden="true" />
+                  FEED_STATUS: STANDBY
+                </span>
+
+                <strong>No Instagram posts to display yet.</strong>
+                <p>The visual feed will appear here after the first successful cache sync.</p>
+              </div>
             )}
 
-            {githubFeed ? <CommitStream feed={githubFeed} /> : null}
+            {resolvedGitHubFeed ? <CommitStream feed={resolvedGitHubFeed} /> : null}
 
             <div className="site-footer__newsletter">
               <div className="site-footer__newsletter-copy">

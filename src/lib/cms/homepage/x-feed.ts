@@ -95,6 +95,7 @@ function toSiteFooterPost(post: XFeedPublicResult['posts'][number]): SiteFooterP
           timeZone: PORTFOLIO_TIME_ZONE,
         }).format(date)
       : 'Recent',
+    href: post.url,
     id: post.id,
     likes: post.metrics.likes,
     replies: post.metrics.replies,

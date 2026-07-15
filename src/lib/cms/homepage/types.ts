@@ -406,6 +406,7 @@ export type SiteFooterSocialLinkViewModel = {
 
 export type SiteFooterPostViewModel = {
   content: string
+  href?: string
   date: string
   id: string
   likes: number

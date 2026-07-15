@@ -23,6 +23,8 @@ import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { XFeedMonitor as XFeedMonitor_cff8e463c952814c6693035ee4a82e26 } from '@dss-feeds/x-feed/admin'
 import { GitHubFeedMonitor as GitHubFeedMonitor_a161267f87e9773ed098beee9ae82808 } from '@dss-feeds/github-feed/admin'
+import { InstagramCredentialsHelp as InstagramCredentialsHelp_e42b35b9290378cb160f1d7c1ce79cda } from '@dss-feeds/instagram-feed/admin'
+import { InstagramFeedMonitor as InstagramFeedMonitor_e42b35b9290378cb160f1d7c1ce79cda } from '@dss-feeds/instagram-feed/admin'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -52,5 +54,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#ItalicFeatureClient": ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@dss-feeds/x-feed/admin#XFeedMonitor": XFeedMonitor_cff8e463c952814c6693035ee4a82e26,
   "@dss-feeds/github-feed/admin#GitHubFeedMonitor": GitHubFeedMonitor_a161267f87e9773ed098beee9ae82808,
+  "@dss-feeds/instagram-feed/admin#InstagramCredentialsHelp": InstagramCredentialsHelp_e42b35b9290378cb160f1d7c1ce79cda,
+  "@dss-feeds/instagram-feed/admin#InstagramFeedMonitor": InstagramFeedMonitor_e42b35b9290378cb160f1d7c1ce79cda,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

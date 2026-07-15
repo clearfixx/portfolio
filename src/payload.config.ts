@@ -1,5 +1,6 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { githubFeedPlugin } from '@dss-feeds/github-feed/payload'
+import { instagramFeedPlugin } from '@dss-feeds/instagram-feed/payload'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
@@ -27,6 +28,7 @@ import {
   xFeedSyncEndpoint,
   xFeedSyncTask,
 } from './lib/server/x-feed'
+import { mirrorInstagramMediaToPayload } from './lib/server/instagram-feed/media-mirror'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -52,16 +54,7 @@ export default buildConfig({
     Notifications,
     xFeedCacheCollection,
   ],
-  globals: [
-    SiteSettings,
-    Homepage,
-    Profile,
-    SEO,
-    Social,
-    Contact,
-    Analytics,
-    xFeedSettingsGlobal,
-  ],
+  globals: [SiteSettings, Homepage, Profile, SEO, Social, Contact, Analytics, xFeedSettingsGlobal],
   endpoints: [xFeedSyncEndpoint, xFeedStatusEndpoint],
   jobs: {
     enableConcurrencyControl: true,
@@ -79,5 +72,10 @@ export default buildConfig({
     },
   }),
   sharp,
-  plugins: [githubFeedPlugin()],
+  plugins: [
+    githubFeedPlugin(),
+    instagramFeedPlugin({
+      mediaMirror: mirrorInstagramMediaToPayload,
+    }),
+  ],
 })

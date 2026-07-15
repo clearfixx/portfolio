@@ -64,6 +64,51 @@ export const Media: CollectionConfig = {
       },
     },
     {
+      name: 'externalProvider',
+      type: 'select',
+      index: true,
+      options: [
+        {
+          label: 'Instagram',
+          value: 'instagram',
+        },
+      ],
+      admin: {
+        hidden: true,
+      },
+    },
+    {
+      name: 'externalId',
+      type: 'text',
+      index: true,
+      admin: {
+        hidden: true,
+      },
+    },
+    {
+      name: 'externalKey',
+      type: 'text',
+      index: true,
+      unique: true,
+      admin: {
+        hidden: true,
+      },
+    },
+    {
+      name: 'externalSourceUrl',
+      type: 'text',
+      admin: {
+        hidden: true,
+      },
+    },
+    {
+      name: 'externalSyncedAt',
+      type: 'date',
+      admin: {
+        hidden: true,
+      },
+    },
+    {
       name: 'sortOrder',
       type: 'number',
       defaultValue: 0,
