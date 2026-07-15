@@ -39,6 +39,38 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+
+    // Portfolio Admin Experience — foundation
+    theme: 'dark',
+    dateFormat: 'MMM d, yyyy · HH:mm',
+    meta: {
+      titleSuffix: ' · Portfolio Control Room',
+      description: 'Editorial control room for the Portfolio platform.',
+      icons: [
+        {
+          rel: 'icon',
+          type: 'image/x-icon',
+          url: '/favicon.ico',
+        },
+      ],
+    },
+    components: {
+      Nav: './components/admin/AdminNav',
+      header: ['./components/admin/AdminTopBar'],
+      beforeLogin: [
+        './components/admin/login/AdminLoginIntro',
+        './components/admin/login/AdminLoginEnhancer',
+      ],
+      graphics: {
+        Icon: './components/admin/brand/AdminIcon',
+        Logo: './components/admin/brand/AdminLogo',
+      },
+      views: {
+        dashboard: {
+          Component: './components/admin/dashboard/AdminDashboard',
+        },
+      },
+    },
   },
   collections: [
     Users,

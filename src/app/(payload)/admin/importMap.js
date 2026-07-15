@@ -25,6 +25,13 @@ import { XFeedMonitor as XFeedMonitor_cff8e463c952814c6693035ee4a82e26 } from '@
 import { GitHubFeedMonitor as GitHubFeedMonitor_a161267f87e9773ed098beee9ae82808 } from '@dss-feeds/github-feed/admin'
 import { InstagramCredentialsHelp as InstagramCredentialsHelp_e42b35b9290378cb160f1d7c1ce79cda } from '@dss-feeds/instagram-feed/admin'
 import { InstagramFeedMonitor as InstagramFeedMonitor_e42b35b9290378cb160f1d7c1ce79cda } from '@dss-feeds/instagram-feed/admin'
+import { default as default_32b988fc5592a6cfc1bcf3baca744a5a } from '../../../components/admin/AdminNav'
+import { default as default_d15cc920ae1b19965a4db19694cc5c56 } from '../../../components/admin/AdminTopBar'
+import { default as default_388d80360be3513d4489841e6162eec5 } from '../../../components/admin/brand/AdminIcon'
+import { default as default_c0bfefc290fe34e439f575bfa7598db6 } from '../../../components/admin/brand/AdminLogo'
+import { default as default_f68461402729ade77873eb402c065908 } from '../../../components/admin/login/AdminLoginIntro'
+import { default as default_1e432732234d3039901ec90b73dc5240 } from '../../../components/admin/login/AdminLoginEnhancer'
+import { default as default_84908015ac81257741578faa24f40e57 } from '../../../components/admin/dashboard/AdminDashboard'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -56,5 +63,12 @@ export const importMap = {
   "@dss-feeds/github-feed/admin#GitHubFeedMonitor": GitHubFeedMonitor_a161267f87e9773ed098beee9ae82808,
   "@dss-feeds/instagram-feed/admin#InstagramCredentialsHelp": InstagramCredentialsHelp_e42b35b9290378cb160f1d7c1ce79cda,
   "@dss-feeds/instagram-feed/admin#InstagramFeedMonitor": InstagramFeedMonitor_e42b35b9290378cb160f1d7c1ce79cda,
+  "./components/admin/AdminNav#default": default_32b988fc5592a6cfc1bcf3baca744a5a,
+  "./components/admin/AdminTopBar#default": default_d15cc920ae1b19965a4db19694cc5c56,
+  "./components/admin/brand/AdminIcon#default": default_388d80360be3513d4489841e6162eec5,
+  "./components/admin/brand/AdminLogo#default": default_c0bfefc290fe34e439f575bfa7598db6,
+  "./components/admin/login/AdminLoginIntro#default": default_f68461402729ade77873eb402c065908,
+  "./components/admin/login/AdminLoginEnhancer#default": default_1e432732234d3039901ec90b73dc5240,
+  "./components/admin/dashboard/AdminDashboard#default": default_84908015ac81257741578faa24f40e57,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }
