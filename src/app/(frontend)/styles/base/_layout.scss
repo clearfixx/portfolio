@@ -28,12 +28,10 @@
   display: block;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    rgb(var(--rgb-header-cyan) / 15%),
-    rgb(var(--rgb-header-cyan) / 95%),
-    rgb(var(--rgb-progress-purple) / 80%)
-  );
+  background: linear-gradient(90deg,
+      rgb(var(--rgb-header-cyan) / 15%),
+      rgb(var(--rgb-header-cyan) / 95%),
+      rgb(var(--rgb-progress-purple) / 80%));
   box-shadow: 0 0 14px rgb(var(--rgb-header-cyan) / 55%);
   transform: scaleX(0);
   transform-origin: left center;
@@ -56,8 +54,22 @@
 
 .logo {
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
-  gap: 16px;
+  gap: 5px;
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease;
+
+  &:hover {
+    transform: scale(1.04);
+  }
+
+  &:focus-visible {
+    border-radius: 0.5rem;
+    outline: 2px solid #13f2e3;
+    outline-offset: 0.35rem;
+  }
 }
 
 .logo__mark {
@@ -72,10 +84,10 @@
   filter: drop-shadow(0 0 16px rgb(var(--rgb-cyan) / 42%));
 }
 
-.logo__mark > svg {
+.logo__mark>svg {
   display: block;
-  width: 100%;
-  height: 100%;
+  // width: 100%;
+  // height: 100%;
 }
 
 .logo__identity {

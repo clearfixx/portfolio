@@ -2,9 +2,10 @@
 
 .logo__mark {
   svg {
-    width: 80px;
-    height: 80px;
+    // width: 80px;
+    // height: 80px;
   }
+
   position: relative;
   width: auto;
   height: auto;
@@ -84,7 +85,7 @@
   gap: 10px;
 }
 
-.terminal-line > span {
+.terminal-line>span {
   flex: 0 0 auto;
 }
 
