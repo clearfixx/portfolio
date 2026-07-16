@@ -37,6 +37,23 @@ import { BlogPostStatusCell as BlogPostStatusCell_2afcc556ee611a3d9dcb1e55794600
 import { BlogPostPublishedCell as BlogPostPublishedCell_2afcc556ee611a3d9dcb1e557946006c } from '../../../components/admin/blog-posts/BlogPostCells'
 import { default as default_d0d555a2e157bf49ca96c34baf382c52 } from '../../../components/admin/blog-posts/BlogPostsListHeader'
 import { default as default_86bdf7f27e47e780c5e4b322ad0c4927 } from '../../../components/admin/blog-posts/ArticleDocumentControls'
+import { TestimonialIdentityCell as TestimonialIdentityCell_0ce3cb26ba82bf8a8785929588db0c61 } from '../../../components/admin/testimonials/TestimonialCells'
+import { default as default_7a22aba4123b3bb088c6c831f5637c32 } from '../../../components/admin/testimonials/TestimonialModerationPanel'
+import { TestimonialStatusCell as TestimonialStatusCell_0ce3cb26ba82bf8a8785929588db0c61 } from '../../../components/admin/testimonials/TestimonialCells'
+import { default as default_62706f58afc06f9a9107ebbb3e80f3ec } from '../../../components/admin/testimonials/TestimonialStatusField'
+import { TestimonialRatingCell as TestimonialRatingCell_0ce3cb26ba82bf8a8785929588db0c61 } from '../../../components/admin/testimonials/TestimonialCells'
+import { TestimonialSourceCell as TestimonialSourceCell_0ce3cb26ba82bf8a8785929588db0c61 } from '../../../components/admin/testimonials/TestimonialCells'
+import { TestimonialApprovedCell as TestimonialApprovedCell_0ce3cb26ba82bf8a8785929588db0c61 } from '../../../components/admin/testimonials/TestimonialCells'
+import { default as default_2f08bc2d0230903ed45585feda4714d6 } from '../../../components/admin/testimonials/TestimonialsListHeader'
+import { default as default_b40eed1f368357d79c97b8543b4e281e } from '../../../components/admin/testimonials/TestimonialDocumentControls'
+import { ContactMessageSubjectCell as ContactMessageSubjectCell_8ac0338e9efdc62dd0570411b2a9d543 } from '../../../components/admin/contact-messages/ContactMessageCells'
+import { default as default_560a1f7ea32a9f5aac083e520579f74b } from '../../../components/admin/contact-messages/ContactMessageViewer'
+import { default as default_4cbd7558fc913b7cd8dfa28d950224c4 } from '../../../components/admin/contact-messages/ContactMessageOperations'
+import { ContactMessageStatusCell as ContactMessageStatusCell_8ac0338e9efdc62dd0570411b2a9d543 } from '../../../components/admin/contact-messages/ContactMessageCells'
+import { default as default_ab8e35f00115c114c675eba44b65d9bb } from '../../../components/admin/contact-messages/ContactMessageStatusField'
+import { ContactMessageSourceCell as ContactMessageSourceCell_8ac0338e9efdc62dd0570411b2a9d543 } from '../../../components/admin/contact-messages/ContactMessageCells'
+import { default as default_441342ee379288341b409fca890f7fd0 } from '../../../components/admin/contact-messages/ContactMessagesListHeader'
+import { default as default_2ae6c0b7a4ef3fd676f25c883ec5c3b9 } from '../../../components/admin/contact-messages/ContactMessageDocumentControls'
 import { XFeedMonitor as XFeedMonitor_cff8e463c952814c6693035ee4a82e26 } from '@dss-feeds/x-feed/admin'
 import { GitHubFeedMonitor as GitHubFeedMonitor_a161267f87e9773ed098beee9ae82808 } from '@dss-feeds/github-feed/admin'
 import { InstagramCredentialsHelp as InstagramCredentialsHelp_e42b35b9290378cb160f1d7c1ce79cda } from '@dss-feeds/instagram-feed/admin'
@@ -91,6 +108,23 @@ export const importMap = {
   "./components/admin/blog-posts/BlogPostCells#BlogPostPublishedCell": BlogPostPublishedCell_2afcc556ee611a3d9dcb1e557946006c,
   "./components/admin/blog-posts/BlogPostsListHeader#default": default_d0d555a2e157bf49ca96c34baf382c52,
   "./components/admin/blog-posts/ArticleDocumentControls#default": default_86bdf7f27e47e780c5e4b322ad0c4927,
+  "./components/admin/testimonials/TestimonialCells#TestimonialIdentityCell": TestimonialIdentityCell_0ce3cb26ba82bf8a8785929588db0c61,
+  "./components/admin/testimonials/TestimonialModerationPanel#default": default_7a22aba4123b3bb088c6c831f5637c32,
+  "./components/admin/testimonials/TestimonialCells#TestimonialStatusCell": TestimonialStatusCell_0ce3cb26ba82bf8a8785929588db0c61,
+  "./components/admin/testimonials/TestimonialStatusField#default": default_62706f58afc06f9a9107ebbb3e80f3ec,
+  "./components/admin/testimonials/TestimonialCells#TestimonialRatingCell": TestimonialRatingCell_0ce3cb26ba82bf8a8785929588db0c61,
+  "./components/admin/testimonials/TestimonialCells#TestimonialSourceCell": TestimonialSourceCell_0ce3cb26ba82bf8a8785929588db0c61,
+  "./components/admin/testimonials/TestimonialCells#TestimonialApprovedCell": TestimonialApprovedCell_0ce3cb26ba82bf8a8785929588db0c61,
+  "./components/admin/testimonials/TestimonialsListHeader#default": default_2f08bc2d0230903ed45585feda4714d6,
+  "./components/admin/testimonials/TestimonialDocumentControls#default": default_b40eed1f368357d79c97b8543b4e281e,
+  "./components/admin/contact-messages/ContactMessageCells#ContactMessageSubjectCell": ContactMessageSubjectCell_8ac0338e9efdc62dd0570411b2a9d543,
+  "./components/admin/contact-messages/ContactMessageViewer#default": default_560a1f7ea32a9f5aac083e520579f74b,
+  "./components/admin/contact-messages/ContactMessageOperations#default": default_4cbd7558fc913b7cd8dfa28d950224c4,
+  "./components/admin/contact-messages/ContactMessageCells#ContactMessageStatusCell": ContactMessageStatusCell_8ac0338e9efdc62dd0570411b2a9d543,
+  "./components/admin/contact-messages/ContactMessageStatusField#default": default_ab8e35f00115c114c675eba44b65d9bb,
+  "./components/admin/contact-messages/ContactMessageCells#ContactMessageSourceCell": ContactMessageSourceCell_8ac0338e9efdc62dd0570411b2a9d543,
+  "./components/admin/contact-messages/ContactMessagesListHeader#default": default_441342ee379288341b409fca890f7fd0,
+  "./components/admin/contact-messages/ContactMessageDocumentControls#default": default_2ae6c0b7a4ef3fd676f25c883ec5c3b9,
   "@dss-feeds/x-feed/admin#XFeedMonitor": XFeedMonitor_cff8e463c952814c6693035ee4a82e26,
   "@dss-feeds/github-feed/admin#GitHubFeedMonitor": GitHubFeedMonitor_a161267f87e9773ed098beee9ae82808,
   "@dss-feeds/instagram-feed/admin#InstagramCredentialsHelp": InstagramCredentialsHelp_e42b35b9290378cb160f1d7c1ce79cda,

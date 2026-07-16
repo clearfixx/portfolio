@@ -572,8 +572,8 @@ export interface ContactMessage {
   id: number;
   name: string;
   email: string;
-  subject: string;
   message: string;
+  subject: string;
   status: 'new' | 'read' | 'archived';
   /**
    * Where this message came from, e.g. website, landing, contact-page.
@@ -1204,8 +1204,8 @@ export interface TestimonialsSelect<T extends boolean = true> {
 export interface ContactMessagesSelect<T extends boolean = true> {
   name?: T;
   email?: T;
-  subject?: T;
   message?: T;
+  subject?: T;
   status?: T;
   source?: T;
   archivedAt?: T;

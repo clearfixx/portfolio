@@ -3,9 +3,17 @@ import { authenticatedAccess, publicAccess } from '@/access'
 
 export const Testimonials: CollectionConfig = {
   slug: 'testimonials',
+  // portfolio-admin-testimonials-moderation-list-v1
   admin: {
     useAsTitle: 'name',
-    defaultColumns: ['name', 'role', 'company', 'status', 'rating', 'approvedAt'],
+    defaultColumns: ['name', 'status', 'rating', 'source', 'approvedAt'],
+    listSearchableFields: ['name', 'role', 'company', 'message', 'source'],
+    components: {
+      beforeList: ['./components/admin/testimonials/TestimonialsListHeader'],
+      edit: {
+        beforeDocumentControls: ['./components/admin/testimonials/TestimonialDocumentControls'],
+      },
+    },
   },
   access: {
     read: publicAccess,
@@ -14,28 +22,66 @@ export const Testimonials: CollectionConfig = {
     delete: authenticatedAccess,
   },
   fields: [
+    // portfolio-admin-testimonial-editor-v1
     {
-      name: 'name',
-      type: 'text',
-      required: true,
+      type: 'tabs',
+      tabs: [
+        {
+          label: 'Feedback',
+          description: 'Client identity and testimonial content.',
+          fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'name',
+                  type: 'text',
+                  required: true,
+                  admin: {
+                    components: {
+                      Cell: './components/admin/testimonials/TestimonialCells#TestimonialIdentityCell',
+                    },
+                  },
+                },
+                {
+                  name: 'role',
+                  type: 'text',
+                },
+                {
+                  name: 'company',
+                  type: 'text',
+                },
+              ],
+            },
+            {
+              name: 'message',
+              type: 'textarea',
+              required: true,
+            },
+          ],
+        },
+        {
+          label: 'Media',
+          description: 'Optional client avatar or organization image.',
+          fields: [
+            {
+              name: 'avatar',
+              type: 'upload',
+              relationTo: 'media',
+            },
+          ],
+        },
+      ],
     },
     {
-      name: 'role',
-      type: 'text',
-    },
-    {
-      name: 'company',
-      type: 'text',
-    },
-    {
-      name: 'message',
-      type: 'textarea',
-      required: true,
-    },
-    {
-      name: 'avatar',
-      type: 'upload',
-      relationTo: 'media',
+      name: 'testimonialModeration',
+      type: 'ui',
+      admin: {
+        position: 'sidebar',
+        components: {
+          Field: './components/admin/testimonials/TestimonialModerationPanel',
+        },
+      },
     },
     {
       name: 'status',
@@ -58,6 +104,10 @@ export const Testimonials: CollectionConfig = {
       ],
       admin: {
         position: 'sidebar',
+        components: {
+          Cell: './components/admin/testimonials/TestimonialCells#TestimonialStatusCell',
+          Field: './components/admin/testimonials/TestimonialStatusField',
+        },
       },
     },
     {
@@ -68,6 +118,9 @@ export const Testimonials: CollectionConfig = {
       admin: {
         position: 'sidebar',
         description: 'Optional rating from 1 to 5.',
+        components: {
+          Cell: './components/admin/testimonials/TestimonialCells#TestimonialRatingCell',
+        },
       },
     },
     {
@@ -76,6 +129,9 @@ export const Testimonials: CollectionConfig = {
       admin: {
         position: 'sidebar',
         description: 'Where this testimonial came from, e.g. website, LinkedIn, direct message.',
+        components: {
+          Cell: './components/admin/testimonials/TestimonialCells#TestimonialSourceCell',
+        },
       },
     },
     {
@@ -85,6 +141,9 @@ export const Testimonials: CollectionConfig = {
         position: 'sidebar',
         date: {
           pickerAppearance: 'dayAndTime',
+        },
+        components: {
+          Cell: './components/admin/testimonials/TestimonialCells#TestimonialApprovedCell',
         },
       },
     },

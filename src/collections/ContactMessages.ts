@@ -3,9 +3,19 @@ import { authenticatedAccess } from '@/access'
 
 export const ContactMessages: CollectionConfig = {
   slug: 'contact-messages',
+  // portfolio-admin-contact-messages-inbox-list-v1
   admin: {
     useAsTitle: 'subject',
-    defaultColumns: ['name', 'email', 'subject', 'status', 'source', 'createdAt'],
+    defaultColumns: ['subject', 'status', 'source', 'createdAt'],
+    listSearchableFields: ['name', 'email', 'subject', 'message', 'source'],
+    components: {
+      beforeList: ['./components/admin/contact-messages/ContactMessagesListHeader'],
+      edit: {
+        beforeDocumentControls: [
+          './components/admin/contact-messages/ContactMessageDocumentControls',
+        ],
+      },
+    },
   },
   access: {
     read: authenticatedAccess,
@@ -14,25 +24,51 @@ export const ContactMessages: CollectionConfig = {
     delete: authenticatedAccess,
   },
   fields: [
+    // portfolio-admin-contact-message-viewer-v1
     {
       name: 'name',
       type: 'text',
       required: true,
+      admin: {
+        hidden: true,
+      },
     },
     {
       name: 'email',
       type: 'email',
       required: true,
-    },
-    {
-      name: 'subject',
-      type: 'text',
-      required: true,
+      admin: {
+        hidden: true,
+      },
     },
     {
       name: 'message',
       type: 'textarea',
       required: true,
+      admin: {
+        hidden: true,
+      },
+    },
+    {
+      name: 'subject',
+      type: 'text',
+      required: true,
+      admin: {
+        components: {
+          Cell: './components/admin/contact-messages/ContactMessageCells#ContactMessageSubjectCell',
+          Field: './components/admin/contact-messages/ContactMessageViewer',
+        },
+      },
+    },
+    {
+      name: 'messageOperations',
+      type: 'ui',
+      admin: {
+        position: 'sidebar',
+        components: {
+          Field: './components/admin/contact-messages/ContactMessageOperations',
+        },
+      },
     },
     {
       name: 'status',
@@ -55,6 +91,10 @@ export const ContactMessages: CollectionConfig = {
       ],
       admin: {
         position: 'sidebar',
+        components: {
+          Cell: './components/admin/contact-messages/ContactMessageCells#ContactMessageStatusCell',
+          Field: './components/admin/contact-messages/ContactMessageStatusField',
+        },
       },
     },
     {
@@ -64,6 +104,9 @@ export const ContactMessages: CollectionConfig = {
       admin: {
         position: 'sidebar',
         description: 'Where this message came from, e.g. website, landing, contact-page.',
+        components: {
+          Cell: './components/admin/contact-messages/ContactMessageCells#ContactMessageSourceCell',
+        },
       },
     },
     {
