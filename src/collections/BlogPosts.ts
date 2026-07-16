@@ -6,9 +6,17 @@ import { formatSlug } from '@/utils/formatSlug'
 
 export const BlogPosts: CollectionConfig = {
   slug: 'blog-posts',
+  // portfolio-admin-blog-posts-list-v1
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'slug', 'status', 'category', 'relatedProject', 'publishedAt'],
+    defaultColumns: ['title', 'status', 'category', 'publishedAt'],
+    listSearchableFields: ['title', 'slug', 'excerpt'],
+    components: {
+      beforeList: ['./components/admin/blog-posts/BlogPostsListHeader'],
+      edit: {
+        beforeDocumentControls: ['./components/admin/blog-posts/ArticleDocumentControls'],
+      },
+    },
   },
   access: {
     read: publicAccess,
@@ -17,29 +25,135 @@ export const BlogPosts: CollectionConfig = {
     delete: authenticatedAccess,
   },
   fields: [
+    // portfolio-admin-blog-post-editor-v1
     {
-      name: 'title',
-      type: 'text',
-      required: true,
+      type: 'tabs',
+      tabs: [
+        {
+          label: 'Content',
+          description: 'Article identity, summary, and long-form editorial body.',
+          fields: [
+            {
+              name: 'title',
+              type: 'text',
+              required: true,
+              admin: {
+                components: {
+                  Cell: './components/admin/blog-posts/BlogPostCells#BlogPostTitleCell',
+                },
+              },
+            },
+            slugField({ sourceField: 'title' }),
+            {
+              name: 'excerpt',
+              type: 'textarea',
+              required: true,
+              admin: {
+                description: 'Short summary for blog cards, previews, and SEO snippets.',
+              },
+            },
+            {
+              name: 'content',
+              type: 'richText',
+              required: true,
+            },
+          ],
+        },
+        {
+          label: 'Media',
+          description: 'Primary editorial imagery.',
+          fields: [
+            {
+              name: 'coverImage',
+              type: 'upload',
+              relationTo: 'media',
+            },
+          ],
+        },
+        {
+          label: 'Taxonomy',
+          description: 'Category and article tags.',
+          fields: [
+            {
+              name: 'category',
+              type: 'relationship',
+              relationTo: 'categories',
+              hasMany: false,
+              admin: {
+                description: 'Use categories with type "Blog" or "Shared".',
+                components: {
+                  Cell: './components/admin/blog-posts/BlogPostCells#BlogPostCategoryCell',
+                },
+              },
+            },
+            {
+              name: 'tags',
+              type: 'array',
+              fields: [
+                {
+                  name: 'label',
+                  type: 'text',
+                  required: true,
+                },
+                {
+                  name: 'slug',
+                  type: 'text',
+                  required: true,
+                  admin: {
+                    description:
+                      'URL-friendly tag identifier. Auto-generated from label when empty.',
+                  },
+                  hooks: {
+                    beforeValidate: [
+                      ({ value, siblingData }) => {
+                        if (typeof value === 'string' && value.length > 0) {
+                          return formatSlug(value)
+                        }
+
+                        if (typeof siblingData?.label === 'string') {
+                          return formatSlug(siblingData.label)
+                        }
+
+                        return value
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Relationships',
+          description: 'Project context connected to this article.',
+          fields: [
+            {
+              name: 'relatedProject',
+              type: 'relationship',
+              relationTo: 'projects',
+              hasMany: false,
+              admin: {
+                description: 'Optional project connected to this article or dev note.',
+              },
+            },
+          ],
+        },
+        {
+          label: 'SEO',
+          description: 'Search and social-sharing metadata.',
+          fields: [seoField()],
+        },
+      ],
     },
-    slugField({ sourceField: 'title' }),
     {
-      name: 'excerpt',
-      type: 'textarea',
-      required: true,
+      name: 'articleReadiness',
+      type: 'ui',
       admin: {
-        description: 'Short summary for blog cards, previews, and SEO snippets.',
+        position: 'sidebar',
+        components: {
+          Field: './components/admin/blog-posts/ArticleReadinessPanel',
+        },
       },
-    },
-    {
-      name: 'content',
-      type: 'richText',
-      required: true,
-    },
-    {
-      name: 'coverImage',
-      type: 'upload',
-      relationTo: 'media',
     },
     {
       name: 'status',
@@ -62,6 +176,9 @@ export const BlogPosts: CollectionConfig = {
       ],
       admin: {
         position: 'sidebar',
+        components: {
+          Cell: './components/admin/blog-posts/BlogPostCells#BlogPostStatusCell',
+        },
       },
     },
     {
@@ -71,6 +188,9 @@ export const BlogPosts: CollectionConfig = {
         position: 'sidebar',
         date: {
           pickerAppearance: 'dayAndTime',
+        },
+        components: {
+          Cell: './components/admin/blog-posts/BlogPostCells#BlogPostPublishedCell',
         },
       },
     },
@@ -83,58 +203,5 @@ export const BlogPosts: CollectionConfig = {
         position: 'sidebar',
       },
     },
-    {
-      name: 'category',
-      type: 'relationship',
-      relationTo: 'categories',
-      hasMany: false,
-      admin: {
-        description: 'Use categories with type "Blog" or "Shared".',
-      },
-    },
-    {
-      name: 'relatedProject',
-      type: 'relationship',
-      relationTo: 'projects',
-      hasMany: false,
-      admin: {
-        description: 'Optional project connected to this article or dev note.',
-      },
-    },
-    {
-      name: 'tags',
-      type: 'array',
-      fields: [
-        {
-          name: 'label',
-          type: 'text',
-          required: true,
-        },
-        {
-          name: 'slug',
-          type: 'text',
-          required: true,
-          admin: {
-            description: 'URL-friendly tag identifier. Auto-generated from label when empty.',
-          },
-          hooks: {
-            beforeValidate: [
-              ({ value, siblingData }) => {
-                if (typeof value === 'string' && value.length > 0) {
-                  return formatSlug(value)
-                }
-
-                if (typeof siblingData?.label === 'string') {
-                  return formatSlug(siblingData.label)
-                }
-
-                return value
-              },
-            ],
-          },
-        },
-      ],
-    },
-    seoField(),
   ],
 }

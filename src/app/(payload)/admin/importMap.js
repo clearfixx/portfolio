@@ -30,6 +30,13 @@ import { ProjectFeaturedCell as ProjectFeaturedCell_b60b3aa295b519a9f28efaec95dd
 import { ProjectPublishedCell as ProjectPublishedCell_b60b3aa295b519a9f28efaec95dd48a6 } from '../../../components/admin/projects/ProjectCells'
 import { default as default_721c4b3f49c101c29c9cbe0ff234816e } from '../../../components/admin/projects/ProjectsListHeader'
 import { default as default_098a8f37f832b2d137a7699dffe85a65 } from '../../../components/admin/projects/ProjectDocumentControls'
+import { BlogPostTitleCell as BlogPostTitleCell_2afcc556ee611a3d9dcb1e557946006c } from '../../../components/admin/blog-posts/BlogPostCells'
+import { BlogPostCategoryCell as BlogPostCategoryCell_2afcc556ee611a3d9dcb1e557946006c } from '../../../components/admin/blog-posts/BlogPostCells'
+import { default as default_bb1969c848f0c947805732b791c7e0fb } from '../../../components/admin/blog-posts/ArticleReadinessPanel'
+import { BlogPostStatusCell as BlogPostStatusCell_2afcc556ee611a3d9dcb1e557946006c } from '../../../components/admin/blog-posts/BlogPostCells'
+import { BlogPostPublishedCell as BlogPostPublishedCell_2afcc556ee611a3d9dcb1e557946006c } from '../../../components/admin/blog-posts/BlogPostCells'
+import { default as default_d0d555a2e157bf49ca96c34baf382c52 } from '../../../components/admin/blog-posts/BlogPostsListHeader'
+import { default as default_86bdf7f27e47e780c5e4b322ad0c4927 } from '../../../components/admin/blog-posts/ArticleDocumentControls'
 import { XFeedMonitor as XFeedMonitor_cff8e463c952814c6693035ee4a82e26 } from '@dss-feeds/x-feed/admin'
 import { GitHubFeedMonitor as GitHubFeedMonitor_a161267f87e9773ed098beee9ae82808 } from '@dss-feeds/github-feed/admin'
 import { InstagramCredentialsHelp as InstagramCredentialsHelp_e42b35b9290378cb160f1d7c1ce79cda } from '@dss-feeds/instagram-feed/admin'
@@ -77,6 +84,13 @@ export const importMap = {
   "./components/admin/projects/ProjectCells#ProjectPublishedCell": ProjectPublishedCell_b60b3aa295b519a9f28efaec95dd48a6,
   "./components/admin/projects/ProjectsListHeader#default": default_721c4b3f49c101c29c9cbe0ff234816e,
   "./components/admin/projects/ProjectDocumentControls#default": default_098a8f37f832b2d137a7699dffe85a65,
+  "./components/admin/blog-posts/BlogPostCells#BlogPostTitleCell": BlogPostTitleCell_2afcc556ee611a3d9dcb1e557946006c,
+  "./components/admin/blog-posts/BlogPostCells#BlogPostCategoryCell": BlogPostCategoryCell_2afcc556ee611a3d9dcb1e557946006c,
+  "./components/admin/blog-posts/ArticleReadinessPanel#default": default_bb1969c848f0c947805732b791c7e0fb,
+  "./components/admin/blog-posts/BlogPostCells#BlogPostStatusCell": BlogPostStatusCell_2afcc556ee611a3d9dcb1e557946006c,
+  "./components/admin/blog-posts/BlogPostCells#BlogPostPublishedCell": BlogPostPublishedCell_2afcc556ee611a3d9dcb1e557946006c,
+  "./components/admin/blog-posts/BlogPostsListHeader#default": default_d0d555a2e157bf49ca96c34baf382c52,
+  "./components/admin/blog-posts/ArticleDocumentControls#default": default_86bdf7f27e47e780c5e4b322ad0c4927,
   "@dss-feeds/x-feed/admin#XFeedMonitor": XFeedMonitor_cff8e463c952814c6693035ee4a82e26,
   "@dss-feeds/github-feed/admin#GitHubFeedMonitor": GitHubFeedMonitor_a161267f87e9773ed098beee9ae82808,
   "@dss-feeds/instagram-feed/admin#InstagramCredentialsHelp": InstagramCredentialsHelp_e42b35b9290378cb160f1d7c1ce79cda,

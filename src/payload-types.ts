@@ -475,17 +475,10 @@ export interface BlogPost {
     [k: string]: unknown;
   };
   coverImage?: (number | null) | Media;
-  status: 'draft' | 'published' | 'archived';
-  publishedAt?: string | null;
-  author?: (number | null) | User;
   /**
    * Use categories with type "Blog" or "Shared".
    */
   category?: (number | null) | Category;
-  /**
-   * Optional project connected to this article or dev note.
-   */
-  relatedProject?: (number | null) | Project;
   tags?:
     | {
         label: string;
@@ -496,11 +489,18 @@ export interface BlogPost {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Optional project connected to this article or dev note.
+   */
+  relatedProject?: (number | null) | Project;
   seo?: {
     metaTitle?: string | null;
     metaDescription?: string | null;
     ogImage?: (number | null) | Media;
   };
+  status: 'draft' | 'published' | 'archived';
+  publishedAt?: string | null;
+  author?: (number | null) | User;
   updatedAt: string;
   createdAt: string;
 }
@@ -1158,11 +1158,7 @@ export interface BlogPostsSelect<T extends boolean = true> {
   excerpt?: T;
   content?: T;
   coverImage?: T;
-  status?: T;
-  publishedAt?: T;
-  author?: T;
   category?: T;
-  relatedProject?: T;
   tags?:
     | T
     | {
@@ -1170,6 +1166,7 @@ export interface BlogPostsSelect<T extends boolean = true> {
         slug?: T;
         id?: T;
       };
+  relatedProject?: T;
   seo?:
     | T
     | {
@@ -1177,6 +1174,9 @@ export interface BlogPostsSelect<T extends boolean = true> {
         metaDescription?: T;
         ogImage?: T;
       };
+  status?: T;
+  publishedAt?: T;
+  author?: T;
   updatedAt?: T;
   createdAt?: T;
 }
