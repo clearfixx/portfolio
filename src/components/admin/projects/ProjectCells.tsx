@@ -1,6 +1,7 @@
 // Portfolio Admin Experience — Projects list cells
 'use client'
 
+import Link from 'next/link'
 import type { DefaultCellComponentProps } from 'payload'
 
 type UnknownRecord = Record<string, unknown>
@@ -44,16 +45,25 @@ function initialsFromTitle(title: string): string {
   return initials || 'PR'
 }
 
+// Portfolio Admin Experience - project edit link v1
 export function ProjectTitleCell({ cellData, rowData }: DefaultCellComponentProps) {
   const row = asRecord(rowData)
   const title = asText(cellData, 'Untitled project')
   const slug = asText(row.slug, 'slug-not-set')
+  const documentID = typeof row.id === 'string' || typeof row.id === 'number' ? String(row.id) : ''
   const preview = getPreview(row.coverImage)
   const previewURL = preview?.thumbnailURL || preview?.url || null
   const safePreviewURL = previewURL?.replace(/"/g, '%22')
+  const editURL = documentID
+    ? `/admin/collections/projects/${encodeURIComponent(documentID)}`
+    : '/admin/collections/projects'
 
   return (
-    <div className="portfolio-admin-project-cell">
+    <Link
+      aria-label={`Edit project ${title}`}
+      className="portfolio-admin-project-cell"
+      href={editURL}
+    >
       <span
         aria-hidden="true"
         className={`portfolio-admin-project-cell__preview${safePreviewURL ? ' has-image' : ''}`}
@@ -61,11 +71,24 @@ export function ProjectTitleCell({ cellData, rowData }: DefaultCellComponentProp
       >
         {safePreviewURL ? null : initialsFromTitle(title)}
       </span>
+
       <span className="portfolio-admin-project-cell__copy">
         <strong>{title}</strong>
         <code>{slug}</code>
       </span>
-    </div>
+
+      <span aria-hidden="true" className="portfolio-admin-project-cell__open">
+        <svg fill="none" viewBox="0 0 20 20">
+          <path
+            d="M7 5.5h7.5V13M14.2 5.8 6 14"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.5"
+          />
+        </svg>
+      </span>
+    </Link>
   )
 }
 

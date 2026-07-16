@@ -12,6 +12,9 @@ export const Projects: CollectionConfig = {
     listSearchableFields: ['title', 'slug', 'excerpt'],
     components: {
       beforeList: ['./components/admin/projects/ProjectsListHeader'],
+      edit: {
+        beforeDocumentControls: ['./components/admin/projects/ProjectDocumentControls'],
+      },
     },
   },
   access: {
@@ -20,53 +23,304 @@ export const Projects: CollectionConfig = {
     update: authenticatedAccess,
     delete: authenticatedAccess,
   },
+  // portfolio-admin-project-editor-operational-polish-v1
   fields: [
+    // portfolio-admin-project-editor-tabs-v1
     {
-      name: 'title',
-      type: 'text',
-      required: true,
-      admin: {
-        components: {
-          Cell: './components/admin/projects/ProjectCells#ProjectTitleCell',
+      type: 'tabs',
+      tabs: [
+        {
+          label: 'Overview',
+          description: 'Core identity, positioning, classification, and technology.',
+          fields: [
+            {
+              name: 'title',
+              type: 'text',
+              required: true,
+              admin: {
+                components: {
+                  Cell: './components/admin/projects/ProjectCells#ProjectTitleCell',
+                },
+              },
+            },
+            slugField({ sourceField: 'title' }),
+            {
+              name: 'excerpt',
+              type: 'textarea',
+              required: true,
+              admin: {
+                description: 'Short project summary for cards, lists, and SEO previews.',
+              },
+            },
+            {
+              name: 'cardTagline',
+              type: 'textarea',
+              admin: {
+                description:
+                  'Short marketing line used in featured project previews. Keep it concise and outcome-focused.',
+              },
+            },
+            {
+              name: 'category',
+              type: 'relationship',
+              relationTo: 'categories',
+              hasMany: false,
+              admin: {
+                description: 'Use categories with type "Project" or "Shared".',
+              },
+            },
+            {
+              name: 'techStack',
+              type: 'relationship',
+              relationTo: 'tech-stack',
+              hasMany: true,
+              admin: {
+                description: 'Technologies used in this project.',
+              },
+            },
+          ],
         },
-      },
+        {
+          label: 'Case Study',
+          description: 'Long-form project story and measurable highlights.',
+          fields: [
+            {
+              name: 'description',
+              type: 'richText',
+              required: true,
+            },
+            {
+              name: 'highlights',
+              type: 'array',
+              fields: [
+                {
+                  name: 'title',
+                  type: 'text',
+                  required: true,
+                },
+                {
+                  name: 'description',
+                  type: 'textarea',
+                  required: true,
+                },
+                {
+                  name: 'icon',
+                  type: 'text',
+                  admin: {
+                    description: 'Icon key for frontend icon mapping.',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Media',
+          description: 'Primary visuals and the project gallery.',
+          fields: [
+            {
+              name: 'coverImage',
+              type: 'upload',
+              relationTo: 'media',
+              admin: {
+                description: 'Primary image for project cards and list pages.',
+              },
+            },
+            {
+              name: 'featuredImage',
+              type: 'upload',
+              relationTo: 'media',
+              admin: {
+                description: 'Large visual for featured homepage/project sections.',
+              },
+            },
+            {
+              name: 'gallery',
+              type: 'array',
+              fields: [
+                {
+                  name: 'image',
+                  type: 'upload',
+                  relationTo: 'media',
+                  required: true,
+                },
+                {
+                  name: 'caption',
+                  type: 'text',
+                },
+                {
+                  name: 'alt',
+                  type: 'text',
+                  required: true,
+                },
+                {
+                  name: 'sortOrder',
+                  type: 'number',
+                  defaultValue: 0,
+                },
+                {
+                  name: 'isFeatured',
+                  type: 'checkbox',
+                  defaultValue: false,
+                },
+                {
+                  name: 'deviceFrame',
+                  type: 'select',
+                  required: true,
+                  defaultValue: 'none',
+                  options: [
+                    {
+                      label: 'None',
+                      value: 'none',
+                    },
+                    {
+                      label: 'Desktop',
+                      value: 'desktop',
+                    },
+                    {
+                      label: 'Laptop',
+                      value: 'laptop',
+                    },
+                    {
+                      label: 'Tablet',
+                      value: 'tablet',
+                    },
+                    {
+                      label: 'Mobile',
+                      value: 'mobile',
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Links & Repository',
+          description: 'Repository metadata and public project destinations.',
+          fields: [
+            {
+              name: 'github',
+              type: 'group',
+              fields: [
+                {
+                  name: 'url',
+                  type: 'text',
+                  admin: {
+                    description: 'Public GitHub repository URL.',
+                  },
+                },
+                {
+                  name: 'owner',
+                  type: 'text',
+                  admin: {
+                    description: 'GitHub owner or organization name.',
+                  },
+                },
+                {
+                  name: 'repo',
+                  type: 'text',
+                  admin: {
+                    description: 'GitHub repository name.',
+                  },
+                },
+                {
+                  name: 'showStats',
+                  type: 'checkbox',
+                  defaultValue: true,
+                  admin: {
+                    description: 'Allow frontend to fetch and show live GitHub stats.',
+                  },
+                },
+              ],
+            },
+            {
+              name: 'links',
+              type: 'array',
+              fields: [
+                {
+                  name: 'label',
+                  type: 'text',
+                  required: true,
+                },
+                {
+                  name: 'url',
+                  type: 'text',
+                  admin: {
+                    description: 'If empty, frontend should show disabled CTA with "Невдовзі".',
+                  },
+                },
+                {
+                  name: 'type',
+                  type: 'select',
+                  required: true,
+                  defaultValue: 'other',
+                  options: [
+                    {
+                      label: 'GitHub',
+                      value: 'github',
+                    },
+                    {
+                      label: 'Live',
+                      value: 'live',
+                    },
+                    {
+                      label: 'Documentation',
+                      value: 'documentation',
+                    },
+                    {
+                      label: 'Case Study',
+                      value: 'case-study',
+                    },
+                    {
+                      label: 'Figma',
+                      value: 'figma',
+                    },
+                    {
+                      label: 'Other',
+                      value: 'other',
+                    },
+                  ],
+                },
+                {
+                  name: 'isEnabled',
+                  type: 'checkbox',
+                  defaultValue: true,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Relationships',
+          description: 'Editorial content associated with this project.',
+          fields: [
+            {
+              name: 'relatedBlogPosts',
+              type: 'relationship',
+              relationTo: 'blog-posts',
+              hasMany: true,
+              admin: {
+                description: 'Articles related to this project.',
+              },
+            },
+          ],
+        },
+        {
+          label: 'SEO',
+          description: 'Search and social-sharing metadata.',
+          fields: [seoField()],
+        },
+      ],
     },
-    slugField({ sourceField: 'title' }),
     {
-      name: 'excerpt',
-      type: 'textarea',
-      required: true,
+      name: 'projectHealth',
+      type: 'ui',
       admin: {
-        description: 'Short project summary for cards, lists, and SEO previews.',
-      },
-    },
-    {
-      name: 'cardTagline',
-      type: 'textarea',
-      admin: {
-        description:
-          'Short marketing line used in featured project previews. Keep it concise and outcome-focused.',
-      },
-    },
-    {
-      name: 'description',
-      type: 'richText',
-      required: true,
-    },
-    {
-      name: 'coverImage',
-      type: 'upload',
-      relationTo: 'media',
-      admin: {
-        description: 'Primary image for project cards and list pages.',
-      },
-    },
-    {
-      name: 'featuredImage',
-      type: 'upload',
-      relationTo: 'media',
-      admin: {
-        description: 'Large visual for featured homepage/project sections.',
+        position: 'sidebar',
+        components: {
+          Field: './components/admin/projects/ProjectHealthPanel',
+        },
       },
     },
     {
@@ -122,6 +376,7 @@ export const Projects: CollectionConfig = {
         description: 'Project completion percentage from 0 to 100.',
         components: {
           Cell: './components/admin/projects/ProjectCells#ProjectProgressCell',
+          Field: './components/admin/projects/ProjectProgressField',
         },
       },
     },
@@ -178,205 +433,5 @@ export const Projects: CollectionConfig = {
         },
       },
     },
-    {
-      name: 'category',
-      type: 'relationship',
-      relationTo: 'categories',
-      hasMany: false,
-      admin: {
-        description: 'Use categories with type "Project" or "Shared".',
-      },
-    },
-    {
-      name: 'techStack',
-      type: 'relationship',
-      relationTo: 'tech-stack',
-      hasMany: true,
-      admin: {
-        description: 'Technologies used in this project.',
-      },
-    },
-    {
-      name: 'relatedBlogPosts',
-      type: 'relationship',
-      relationTo: 'blog-posts',
-      hasMany: true,
-      admin: {
-        description: 'Articles related to this project.',
-      },
-    },
-    {
-      name: 'github',
-      type: 'group',
-      fields: [
-        {
-          name: 'url',
-          type: 'text',
-          admin: {
-            description: 'Public GitHub repository URL.',
-          },
-        },
-        {
-          name: 'owner',
-          type: 'text',
-          admin: {
-            description: 'GitHub owner or organization name.',
-          },
-        },
-        {
-          name: 'repo',
-          type: 'text',
-          admin: {
-            description: 'GitHub repository name.',
-          },
-        },
-        {
-          name: 'showStats',
-          type: 'checkbox',
-          defaultValue: true,
-          admin: {
-            description: 'Allow frontend to fetch and show live GitHub stats.',
-          },
-        },
-      ],
-    },
-    {
-      name: 'links',
-      type: 'array',
-      fields: [
-        {
-          name: 'label',
-          type: 'text',
-          required: true,
-        },
-        {
-          name: 'url',
-          type: 'text',
-          admin: {
-            description: 'If empty, frontend should show disabled CTA with "Невдовзі".',
-          },
-        },
-        {
-          name: 'type',
-          type: 'select',
-          required: true,
-          defaultValue: 'other',
-          options: [
-            {
-              label: 'GitHub',
-              value: 'github',
-            },
-            {
-              label: 'Live',
-              value: 'live',
-            },
-            {
-              label: 'Documentation',
-              value: 'documentation',
-            },
-            {
-              label: 'Case Study',
-              value: 'case-study',
-            },
-            {
-              label: 'Figma',
-              value: 'figma',
-            },
-            {
-              label: 'Other',
-              value: 'other',
-            },
-          ],
-        },
-        {
-          name: 'isEnabled',
-          type: 'checkbox',
-          defaultValue: true,
-        },
-      ],
-    },
-    {
-      name: 'gallery',
-      type: 'array',
-      fields: [
-        {
-          name: 'image',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-        },
-        {
-          name: 'caption',
-          type: 'text',
-        },
-        {
-          name: 'alt',
-          type: 'text',
-          required: true,
-        },
-        {
-          name: 'sortOrder',
-          type: 'number',
-          defaultValue: 0,
-        },
-        {
-          name: 'isFeatured',
-          type: 'checkbox',
-          defaultValue: false,
-        },
-        {
-          name: 'deviceFrame',
-          type: 'select',
-          required: true,
-          defaultValue: 'none',
-          options: [
-            {
-              label: 'None',
-              value: 'none',
-            },
-            {
-              label: 'Desktop',
-              value: 'desktop',
-            },
-            {
-              label: 'Laptop',
-              value: 'laptop',
-            },
-            {
-              label: 'Tablet',
-              value: 'tablet',
-            },
-            {
-              label: 'Mobile',
-              value: 'mobile',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: 'highlights',
-      type: 'array',
-      fields: [
-        {
-          name: 'title',
-          type: 'text',
-          required: true,
-        },
-        {
-          name: 'description',
-          type: 'textarea',
-          required: true,
-        },
-        {
-          name: 'icon',
-          type: 'text',
-          admin: {
-            description: 'Icon key for frontend icon mapping.',
-          },
-        },
-      ],
-    },
-    seoField(),
   ],
 }

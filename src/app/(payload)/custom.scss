@@ -3003,3 +3003,668 @@ html[data-portfolio-admin-nav='closed'] .template-default__wrap {
 }
 
 /* Portfolio Admin Experience - projects duplicate create action:end */
+
+/* Portfolio Admin Experience - project editor foundation:start */
+
+.portfolio-admin-project-health {
+  --project-health-score: 0%;
+  display: block;
+  overflow: hidden;
+  margin: 8px 0 18px;
+  border: 1px solid var(--portfolio-admin-border);
+  border-radius: 12px;
+  background:
+    linear-gradient(145deg, rgba(50, 215, 231, 0.045), transparent 48%),
+    var(--portfolio-admin-surface);
+}
+
+.portfolio-admin-project-health__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 17px 17px 13px;
+}
+
+.portfolio-admin-project-health__header > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.portfolio-admin-project-health__header span:first-child {
+  color: var(--portfolio-admin-text-muted);
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.portfolio-admin-project-health__header strong {
+  color: var(--portfolio-admin-cyan);
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 27px;
+  font-weight: 650;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.portfolio-admin-project-health__meter {
+  position: relative;
+  flex: 0 0 44px;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at center, var(--portfolio-admin-surface) 57%, transparent 59%),
+    conic-gradient(
+      var(--portfolio-admin-cyan) var(--project-health-score),
+      rgba(118, 143, 163, 0.14) 0
+    );
+}
+
+.portfolio-admin-project-health__meter::after {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--portfolio-admin-cyan);
+  box-shadow: 0 0 10px rgba(50, 215, 231, 0.35);
+  content: '';
+}
+
+.portfolio-admin-project-health__summary {
+  margin: 0;
+  padding: 0 17px 15px;
+  color: var(--portfolio-admin-text-dim);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.portfolio-admin-project-health__checks {
+  border-top: 1px solid var(--portfolio-admin-border);
+}
+
+.portfolio-admin-project-health__check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 50px;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--portfolio-admin-border);
+}
+
+.portfolio-admin-project-health__check > span {
+  flex: 0 0 25px;
+  display: grid;
+  width: 25px;
+  height: 25px;
+  place-items: center;
+  border: 1px solid rgba(122, 145, 164, 0.18);
+  border-radius: 7px;
+  color: #6f8495;
+  background: rgba(122, 145, 164, 0.035);
+}
+
+.portfolio-admin-project-health__check > span svg {
+  display: block;
+  width: 15px;
+  height: 15px;
+}
+
+.portfolio-admin-project-health__check.is-ready > span {
+  border-color: rgba(69, 214, 139, 0.24);
+  color: var(--portfolio-admin-success);
+  background: rgba(69, 214, 139, 0.055);
+}
+
+.portfolio-admin-project-health__check > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.portfolio-admin-project-health__check strong {
+  color: var(--portfolio-admin-text);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.portfolio-admin-project-health__check small {
+  color: var(--portfolio-admin-text-dim);
+  font-size: 9px;
+  line-height: 1.3;
+}
+
+.portfolio-admin-project-health__preview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 42px;
+  padding: 0 16px;
+  color: #9edfee;
+  font-size: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color 140ms ease,
+    color 140ms ease;
+}
+
+.portfolio-admin-project-health__preview:hover {
+  color: var(--portfolio-admin-cyan);
+  background: rgba(50, 215, 231, 0.035);
+}
+
+.portfolio-admin-project-health__preview.is-disabled {
+  color: var(--portfolio-admin-text-dim);
+  cursor: default;
+}
+
+.collection-edit:has(.portfolio-admin-project-health) .tabs-field__tabs {
+  position: sticky;
+  top: calc(var(--portfolio-admin-topbar-height) + 8px);
+  z-index: 12;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  margin-bottom: 24px;
+  padding: 5px;
+  border: 1px solid var(--portfolio-admin-border);
+  border-radius: 11px;
+  background: rgba(7, 16, 25, 0.94);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(16px);
+}
+
+.collection-edit:has(.portfolio-admin-project-health) .tabs-field__tab-button {
+  min-height: 36px;
+  margin: 0;
+  padding: 0 13px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  color: var(--portfolio-admin-text-dim);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease;
+}
+
+.collection-edit:has(.portfolio-admin-project-health) .tabs-field__tab-button:hover {
+  color: var(--portfolio-admin-text);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.collection-edit:has(.portfolio-admin-project-health) .tabs-field__tab-button--active {
+  border-color: rgba(50, 215, 231, 0.22);
+  color: var(--portfolio-admin-cyan);
+  background: rgba(50, 215, 231, 0.065);
+}
+
+.collection-edit:has(.portfolio-admin-project-health) .document-fields__main {
+  min-width: 0;
+}
+
+.collection-edit:has(.portfolio-admin-project-health) .document-fields__sidebar {
+  border-left-color: var(--portfolio-admin-border);
+  background:
+    linear-gradient(180deg, rgba(50, 215, 231, 0.018), transparent 220px), rgba(7, 16, 25, 0.32);
+}
+
+.collection-edit:has(.portfolio-admin-project-health) .document-fields__sidebar .field-type {
+  margin-bottom: 18px;
+}
+
+@media (max-width: 1024px) {
+  .collection-edit:has(.portfolio-admin-project-health) .tabs-field__tabs {
+    position: static;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-admin-project-health__preview,
+  .collection-edit:has(.portfolio-admin-project-health) .tabs-field__tab-button {
+    transition: none !important;
+  }
+}
+
+/* Portfolio Admin Experience - project editor foundation:end */
+
+/* Portfolio Admin Experience - project edit link:start */
+
+.portfolio-admin-project-cell {
+  position: relative;
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+
+.portfolio-admin-project-cell__open {
+  flex: 0 0 27px;
+  display: grid;
+  width: 27px;
+  height: 27px;
+  margin-left: auto;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  color: var(--portfolio-admin-text-dim);
+  background: transparent;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition:
+    opacity 130ms ease,
+    transform 130ms ease,
+    color 130ms ease,
+    border-color 130ms ease,
+    background-color 130ms ease;
+}
+
+.portfolio-admin-project-cell__open svg {
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+.portfolio-admin-project-cell:hover .portfolio-admin-project-cell__copy strong,
+.portfolio-admin-project-cell:focus-visible .portfolio-admin-project-cell__copy strong {
+  color: var(--portfolio-admin-cyan);
+}
+
+.portfolio-admin-project-cell:hover .portfolio-admin-project-cell__preview,
+.portfolio-admin-project-cell:focus-visible .portfolio-admin-project-cell__preview {
+  border-color: rgba(50, 215, 231, 0.42);
+  box-shadow: 0 0 0 3px rgba(50, 215, 231, 0.045);
+}
+
+.portfolio-admin-project-cell:hover .portfolio-admin-project-cell__open,
+.portfolio-admin-project-cell:focus-visible .portfolio-admin-project-cell__open {
+  border-color: rgba(50, 215, 231, 0.2);
+  color: var(--portfolio-admin-cyan);
+  background: rgba(50, 215, 231, 0.055);
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.portfolio-admin-project-cell:focus-visible {
+  border-radius: 9px;
+  box-shadow: 0 0 0 2px rgba(50, 215, 231, 0.38);
+}
+
+@media (pointer: coarse) {
+  .portfolio-admin-project-cell__open {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-admin-project-cell__open {
+    transition: none !important;
+  }
+}
+
+/* Portfolio Admin Experience - project edit link:end */
+
+/* Portfolio Admin Experience - project editor operational polish:start */
+
+.portfolio-admin-project-command {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  margin-right: 6px;
+}
+
+.portfolio-admin-project-command__stage {
+  --command-color: #7890a4;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 32px;
+  padding: 0 10px;
+  border: 1px solid color-mix(in srgb, var(--command-color) 28%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--command-color) 8%, transparent);
+  color: color-mix(in srgb, var(--command-color) 84%, white);
+  font-family: var(--font-mono), monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.portfolio-admin-project-command__stage i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--command-color);
+  box-shadow: 0 0 9px color-mix(in srgb, var(--command-color) 58%, transparent);
+}
+
+.portfolio-admin-project-command__stage.is-development {
+  --command-color: var(--portfolio-admin-violet);
+}
+
+.portfolio-admin-project-command__stage.is-testing {
+  --command-color: var(--portfolio-admin-warning);
+}
+
+.portfolio-admin-project-command__stage.is-released {
+  --command-color: var(--portfolio-admin-cyan);
+}
+
+.portfolio-admin-project-command__stage.is-maintenance {
+  --command-color: var(--portfolio-admin-success);
+}
+
+.portfolio-admin-project-command__version {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 10px;
+  border: 1px solid var(--portfolio-admin-border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.018);
+  white-space: nowrap;
+}
+
+.portfolio-admin-project-command__version small {
+  color: var(--portfolio-admin-text-dim);
+  font-size: 8px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.portfolio-admin-project-command__version code,
+.portfolio-admin-project-command__updated time {
+  color: var(--portfolio-admin-text);
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+}
+
+.portfolio-admin-project-command__updated {
+  color: var(--portfolio-admin-text-dim);
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.portfolio-admin-project-command__preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 11px;
+  border: 1px solid rgba(50, 215, 231, 0.24);
+  border-radius: 8px;
+  background: rgba(50, 215, 231, 0.045);
+  color: #a9e6ef;
+  font-size: 10px;
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.portfolio-admin-project-command__preview:hover {
+  border-color: rgba(50, 215, 231, 0.48);
+  color: var(--portfolio-admin-cyan);
+}
+
+.portfolio-admin-project-command__preview.is-disabled {
+  border-color: var(--portfolio-admin-border);
+  color: var(--portfolio-admin-text-dim);
+  cursor: not-allowed;
+}
+
+.portfolio-admin-project-progress-field {
+  margin-bottom: 18px;
+}
+
+.portfolio-admin-project-progress-field__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 9px;
+}
+
+.portfolio-admin-project-progress-field__head label {
+  color: var(--portfolio-admin-text);
+  font-size: 12px;
+}
+
+.portfolio-admin-project-progress-field__head output {
+  color: var(--portfolio-admin-cyan);
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.portfolio-admin-project-progress-field__controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 74px;
+  align-items: center;
+  gap: 12px;
+}
+
+.portfolio-admin-project-progress-field input[type='range'] {
+  width: 100%;
+  height: 22px;
+  margin: 0;
+  appearance: none;
+  cursor: pointer;
+  background: transparent;
+}
+
+.portfolio-admin-project-progress-field input[type='range']::-webkit-slider-runnable-track {
+  height: 5px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--portfolio-admin-cyan) 0,
+    var(--portfolio-admin-violet) var(--project-progress),
+    rgba(119, 143, 163, 0.15) var(--project-progress),
+    rgba(119, 143, 163, 0.15) 100%
+  );
+}
+
+.portfolio-admin-project-progress-field input[type='range']::-webkit-slider-thumb {
+  width: 17px;
+  height: 17px;
+  margin-top: -6px;
+  appearance: none;
+  border: 3px solid #0b1620;
+  border-radius: 50%;
+  background: var(--portfolio-admin-cyan);
+  box-shadow: 0 0 0 1px rgba(50, 215, 231, 0.45);
+}
+
+.portfolio-admin-project-progress-field input[type='range']::-moz-range-track {
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(119, 143, 163, 0.15);
+}
+
+.portfolio-admin-project-progress-field input[type='range']::-moz-range-progress {
+  height: 5px;
+  border-radius: 999px;
+  background: var(--portfolio-admin-cyan);
+}
+
+.portfolio-admin-project-progress-field__number {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  min-height: 40px;
+  overflow: hidden;
+  border: 1px solid var(--portfolio-admin-border);
+  border-radius: 8px;
+  background: #0d1924;
+}
+
+.portfolio-admin-project-progress-field__number:focus-within {
+  border-color: rgba(50, 215, 231, 0.48);
+  box-shadow: 0 0 0 2px rgba(50, 215, 231, 0.07);
+}
+
+.portfolio-admin-project-progress-field__number input {
+  min-width: 0;
+  width: 100%;
+  height: 38px;
+  padding: 0 4px 0 11px;
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+  color: var(--portfolio-admin-text);
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  box-shadow: none !important;
+}
+
+.portfolio-admin-project-progress-field__number > span:last-child {
+  padding-right: 10px;
+  color: var(--portfolio-admin-text-dim);
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+}
+
+.portfolio-admin-project-progress-field > p {
+  margin: 7px 0 0;
+  color: var(--portfolio-admin-text-dim);
+  font-size: 10px;
+}
+
+.collection-edit:has(.portfolio-admin-project-health) .document-fields__sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+.collection-edit:has(.portfolio-admin-project-health)
+  .document-fields__sidebar
+  .portfolio-admin-project-health {
+  order: -100;
+  margin-top: 0;
+}
+
+.collection-edit:has(.portfolio-admin-project-health) .tabs-field__tab-button {
+  box-shadow: none !important;
+}
+
+.collection-edit:has(.portfolio-admin-project-health) .tabs-field__tab-button::before,
+.collection-edit:has(.portfolio-admin-project-health) .tabs-field__tab-button::after {
+  display: none !important;
+}
+
+.collection-edit:has(.portfolio-admin-project-health) .doc-header {
+  border-bottom-color: var(--portfolio-admin-border);
+  background: linear-gradient(90deg, rgba(50, 215, 231, 0.018), transparent 52%), transparent;
+}
+
+.collection-edit:has(.portfolio-admin-project-health) .doc-controls {
+  border-color: var(--portfolio-admin-border);
+  background: rgba(7, 16, 25, 0.52);
+  backdrop-filter: blur(14px);
+}
+
+@media (max-width: 1180px) {
+  .portfolio-admin-project-command__updated {
+    display: none;
+  }
+}
+
+@media (max-width: 980px) {
+  .portfolio-admin-project-command__version {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-admin-project-command__stage {
+    display: none;
+  }
+}
+
+/* Portfolio Admin Experience - project editor operational polish:end */
+
+/* Portfolio Admin Experience - project rich text typography:start */
+
+/*
+ * Payload's Lexical canvas has its own content typography.
+ * Keep project case-study editing aligned with the Control Room sans-serif UI,
+ * while preserving monospace for code content.
+ */
+.collection-edit:has(.portfolio-admin-project-health)
+  :is(.rich-text-lexical, .lexical-editor)
+  :is([contenteditable='true'], [data-lexical-editor='true'], .ContentEditable__root) {
+  font-family:
+    var(--font-body, Inter),
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif !important;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: -0.006em;
+  line-height: 1.72;
+}
+
+.collection-edit:has(.portfolio-admin-project-health)
+  :is(.rich-text-lexical, .lexical-editor)
+  :is([contenteditable='true'], [data-lexical-editor='true'], .ContentEditable__root)
+  :where(p, li, div:not([class])) {
+  font-family: inherit !important;
+}
+
+.collection-edit:has(.portfolio-admin-project-health)
+  :is(.rich-text-lexical, .lexical-editor)
+  :is([contenteditable='true'], [data-lexical-editor='true'], .ContentEditable__root)
+  :where(h1, h2, h3, h4, h5, h6) {
+  font-family: inherit !important;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+}
+
+.collection-edit:has(.portfolio-admin-project-health)
+  :is(.rich-text-lexical, .lexical-editor)
+  :is([contenteditable='true'], [data-lexical-editor='true'], .ContentEditable__root)
+  :where(blockquote) {
+  font-family: inherit !important;
+  font-style: normal;
+}
+
+.collection-edit:has(.portfolio-admin-project-health)
+  :is(.rich-text-lexical, .lexical-editor)
+  :is([contenteditable='true'], [data-lexical-editor='true'], .ContentEditable__root)
+  :where(code, pre, kbd, samp) {
+  font-family:
+    var(--font-mono), 'SFMono-Regular', Consolas, 'Liberation Mono', monospace !important;
+  letter-spacing: 0;
+}
+
+/* Fallback for Payload builds where Lexical does not expose the wrapper class. */
+.collection-edit:has(.portfolio-admin-project-health)
+  .field-type.rich-text
+  :is([contenteditable='true'], [data-lexical-editor='true']) {
+  font-family:
+    var(--font-body, Inter),
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif !important;
+}
+
+/* Portfolio Admin Experience - project rich text typography:end */
