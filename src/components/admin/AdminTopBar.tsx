@@ -1,7 +1,9 @@
 // Portfolio Admin Experience — topbar and metrics refinement
+// Portfolio Admin Experience — stable workspace shell recovery
+// Portfolio Admin Experience — viewport shell geometry and projects import repair
 'use client'
 
-import { useAuth, useConfig } from '@payloadcms/ui'
+import { useAuth, useConfig, useNav } from '@payloadcms/ui'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useMemo, useRef, useState } from 'react'
@@ -138,10 +140,30 @@ function resolveBreadcrumbs(pathname: string, adminRoute: string): [string, stri
 
 function SidebarToggleIcon() {
   return (
-    <svg aria-hidden="true" fill="none" viewBox="0 0 24 24">
-      <rect height="16" rx="2" stroke="currentColor" strokeWidth="1.6" width="18" x="3" y="4" />
-      <path d="M9 4v16" stroke="currentColor" strokeWidth="1.6" />
+    <svg
+      aria-hidden="true"
+      className="portfolio-admin-sidebar-toggle"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <rect
+        className="portfolio-admin-sidebar-toggle__frame"
+        height="16"
+        rx="2"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        width="18"
+        x="3"
+        y="4"
+      />
       <path
+        className="portfolio-admin-sidebar-toggle__rail"
+        d="M9 4v16"
+        stroke="currentColor"
+        strokeWidth="1.6"
+      />
+      <path
+        className="portfolio-admin-sidebar-toggle__chevron"
         d="m14 9 3 3-3 3"
         stroke="currentColor"
         strokeLinecap="round"
@@ -199,6 +221,7 @@ export default function AdminTopBar() {
   const router = useRouter()
   const { config } = useConfig()
   const { logOut, user } = useAuth()
+  const { navOpen } = useNav()
   const [commandOpen, setCommandOpen] = useState(false)
   const [query, setQuery] = useState('')
   const [userOpen, setUserOpen] = useState(false)
@@ -308,6 +331,15 @@ export default function AdminTopBar() {
     return () => document.removeEventListener('pointerdown', handlePointerDown)
   }, [userOpen])
 
+  useEffect(() => {
+    const root = document.documentElement
+    root.dataset.portfolioAdminNav = navOpen ? 'open' : 'closed'
+
+    return () => {
+      delete root.dataset.portfolioAdminNav
+    }
+  }, [navOpen])
+
   const navigateTo = (href: string) => {
     setCommandOpen(false)
     setQuery('')
@@ -328,13 +360,14 @@ export default function AdminTopBar() {
 
   return (
     <>
-      <header className="portfolio-admin-topbar">
+      <header className="portfolio-admin-topbar" data-nav-open={navOpen ? 'true' : 'false'}>
         <div className="portfolio-admin-topbar__left">
           <button
-            aria-label="Toggle sidebar"
+            aria-expanded={navOpen}
+            aria-label={navOpen ? 'Collapse sidebar' : 'Expand sidebar'}
             className="portfolio-admin-topbar__nav-toggle"
             onClick={toggleSidebar}
-            title="Toggle sidebar"
+            title={navOpen ? 'Collapse sidebar' : 'Expand sidebar'}
             type="button"
           >
             <SidebarToggleIcon />
