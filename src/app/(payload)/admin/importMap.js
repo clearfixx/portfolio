@@ -1,3 +1,4 @@
+import { ProjectTitleCell as ProjectTitleCell_b60b3aa295b519a9f28efaec95dd48a6 } from '../../../components/admin/projects/ProjectCells'
 import { RscEntryLexicalCell as RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { RscEntryLexicalField as RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { LexicalDiffComponent as LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
@@ -21,6 +22,11 @@ import { StrikethroughFeatureClient as StrikethroughFeatureClient_e70f5e05f09f93
 import { UnderlineFeatureClient as UnderlineFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
+import { ProjectStageCell as ProjectStageCell_b60b3aa295b519a9f28efaec95dd48a6 } from '../../../components/admin/projects/ProjectCells'
+import { ProjectProgressCell as ProjectProgressCell_b60b3aa295b519a9f28efaec95dd48a6 } from '../../../components/admin/projects/ProjectCells'
+import { ProjectFeaturedCell as ProjectFeaturedCell_b60b3aa295b519a9f28efaec95dd48a6 } from '../../../components/admin/projects/ProjectCells'
+import { ProjectPublishedCell as ProjectPublishedCell_b60b3aa295b519a9f28efaec95dd48a6 } from '../../../components/admin/projects/ProjectCells'
+import { default as default_721c4b3f49c101c29c9cbe0ff234816e } from '../../../components/admin/projects/ProjectsListHeader'
 import { XFeedMonitor as XFeedMonitor_cff8e463c952814c6693035ee4a82e26 } from '@dss-feeds/x-feed/admin'
 import { GitHubFeedMonitor as GitHubFeedMonitor_a161267f87e9773ed098beee9ae82808 } from '@dss-feeds/github-feed/admin'
 import { InstagramCredentialsHelp as InstagramCredentialsHelp_e42b35b9290378cb160f1d7c1ce79cda } from '@dss-feeds/instagram-feed/admin'
@@ -36,6 +42,7 @@ import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } f
 
 /** @type import('payload').ImportMap */
 export const importMap = {
+  "./components/admin/projects/ProjectCells#ProjectTitleCell": ProjectTitleCell_b60b3aa295b519a9f28efaec95dd48a6,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField": RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#LexicalDiffComponent": LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e,
@@ -59,6 +66,11 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#UnderlineFeatureClient": UnderlineFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#BoldFeatureClient": BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#ItalicFeatureClient": ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
+  "./components/admin/projects/ProjectCells#ProjectStageCell": ProjectStageCell_b60b3aa295b519a9f28efaec95dd48a6,
+  "./components/admin/projects/ProjectCells#ProjectProgressCell": ProjectProgressCell_b60b3aa295b519a9f28efaec95dd48a6,
+  "./components/admin/projects/ProjectCells#ProjectFeaturedCell": ProjectFeaturedCell_b60b3aa295b519a9f28efaec95dd48a6,
+  "./components/admin/projects/ProjectCells#ProjectPublishedCell": ProjectPublishedCell_b60b3aa295b519a9f28efaec95dd48a6,
+  "./components/admin/projects/ProjectsListHeader#default": default_721c4b3f49c101c29c9cbe0ff234816e,
   "@dss-feeds/x-feed/admin#XFeedMonitor": XFeedMonitor_cff8e463c952814c6693035ee4a82e26,
   "@dss-feeds/github-feed/admin#GitHubFeedMonitor": GitHubFeedMonitor_a161267f87e9773ed098beee9ae82808,
   "@dss-feeds/instagram-feed/admin#InstagramCredentialsHelp": InstagramCredentialsHelp_e42b35b9290378cb160f1d7c1ce79cda,

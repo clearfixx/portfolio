@@ -5,9 +5,14 @@ import { seoField, slugField } from '@/fields'
 
 export const Projects: CollectionConfig = {
   slug: 'projects',
+  // portfolio-admin-projects-list-components-v2
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'slug', 'stage', 'progress', 'isFeatured', 'publishedAt'],
+    defaultColumns: ['title', 'stage', 'progress', 'isFeatured', 'publishedAt'],
+    listSearchableFields: ['title', 'slug', 'excerpt'],
+    components: {
+      beforeList: ['./components/admin/projects/ProjectsListHeader'],
+    },
   },
   access: {
     read: publicAccess,
@@ -20,6 +25,11 @@ export const Projects: CollectionConfig = {
       name: 'title',
       type: 'text',
       required: true,
+      admin: {
+        components: {
+          Cell: './components/admin/projects/ProjectCells#ProjectTitleCell',
+        },
+      },
     },
     slugField({ sourceField: 'title' }),
     {
@@ -96,6 +106,9 @@ export const Projects: CollectionConfig = {
       ],
       admin: {
         position: 'sidebar',
+        components: {
+          Cell: './components/admin/projects/ProjectCells#ProjectStageCell',
+        },
       },
     },
     {
@@ -107,6 +120,9 @@ export const Projects: CollectionConfig = {
       admin: {
         position: 'sidebar',
         description: 'Project completion percentage from 0 to 100.',
+        components: {
+          Cell: './components/admin/projects/ProjectCells#ProjectProgressCell',
+        },
       },
     },
     {
@@ -124,6 +140,9 @@ export const Projects: CollectionConfig = {
       admin: {
         position: 'sidebar',
         description: 'Show this project in featured sections.',
+        components: {
+          Cell: './components/admin/projects/ProjectCells#ProjectFeaturedCell',
+        },
       },
     },
     {
@@ -133,6 +152,9 @@ export const Projects: CollectionConfig = {
         position: 'sidebar',
         date: {
           pickerAppearance: 'dayAndTime',
+        },
+        components: {
+          Cell: './components/admin/projects/ProjectCells#ProjectPublishedCell',
         },
       },
     },

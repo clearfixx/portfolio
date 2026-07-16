@@ -2302,3 +2302,704 @@ select,
 }
 
 /* Portfolio Admin Experience — auth actions and topbar lint fix:end */
+
+/* Portfolio Admin Experience — viewport shell geometry:start */
+
+/*
+ * Stable workspace geometry.
+ *
+ * Payload's default template uses its own responsive grid. Because our Nav is
+ * fixed, the template must be taken out of that grid explicitly; otherwise the
+ * workspace can collapse to the width of the remaining grid track.
+ */
+:root {
+  --portfolio-admin-sidebar-width: 285px;
+}
+
+.template-default {
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.template-default__wrap {
+  display: block !important;
+  width: auto !important;
+  min-width: 0 !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  margin-left: var(--portfolio-admin-sidebar-width) !important;
+  padding-top: var(--portfolio-admin-topbar-height) !important;
+  box-sizing: border-box;
+  transition: margin-left 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.template-default__wrap > * {
+  min-width: 0;
+}
+
+.portfolio-admin-nav {
+  position: fixed !important;
+  inset: 0 auto 0 0;
+  z-index: 160;
+  display: flex;
+  width: var(--portfolio-admin-sidebar-width) !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  min-height: 0 !important;
+  overflow: hidden;
+  border-right: 1px solid var(--portfolio-admin-border);
+  background: #071019;
+  box-shadow: 12px 0 34px rgba(0, 0, 0, 0.08);
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  visibility: visible;
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 150ms ease,
+    visibility 0s linear 0s;
+  will-change: transform;
+}
+
+.portfolio-admin-nav__brand {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 var(--portfolio-admin-topbar-height);
+  background: linear-gradient(90deg, rgba(50, 215, 231, 0.025), transparent 64%), #071019;
+}
+
+.portfolio-admin-nav__scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.portfolio-admin-topbar {
+  position: fixed !important;
+  inset: 0 0 auto var(--portfolio-admin-sidebar-width);
+  z-index: 150;
+  width: auto !important;
+  max-width: none !important;
+  transition:
+    left 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 180ms ease;
+}
+
+/* Closed desktop state. */
+html[data-portfolio-admin-nav='closed'] .portfolio-admin-nav {
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(calc(-100% - 1px), 0, 0);
+  visibility: hidden;
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 140ms ease,
+    visibility 0s linear 220ms;
+}
+
+html[data-portfolio-admin-nav='closed'] .portfolio-admin-topbar {
+  left: 0;
+}
+
+html[data-portfolio-admin-nav='closed'] .template-default__wrap {
+  margin-left: 0 !important;
+}
+
+/* Toggle motion. */
+.portfolio-admin-topbar__nav-toggle {
+  overflow: hidden;
+  transform: translateZ(0);
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease,
+    color 150ms ease,
+    transform 120ms ease,
+    box-shadow 150ms ease;
+}
+
+.portfolio-admin-topbar__nav-toggle:active {
+  transform: scale(0.94);
+}
+
+.portfolio-admin-topbar__nav-toggle[aria-expanded='true'] {
+  border-color: rgba(50, 215, 231, 0.34);
+  background: rgba(50, 215, 231, 0.065);
+  color: var(--portfolio-admin-cyan);
+  box-shadow: inset 0 0 0 1px rgba(50, 215, 231, 0.025);
+}
+
+.portfolio-admin-sidebar-toggle__frame,
+.portfolio-admin-sidebar-toggle__rail,
+.portfolio-admin-sidebar-toggle__chevron {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 150ms ease;
+}
+
+.portfolio-admin-topbar__nav-toggle[aria-expanded='true'] .portfolio-admin-sidebar-toggle__chevron {
+  transform: rotate(180deg);
+}
+
+.portfolio-admin-topbar__nav-toggle[aria-expanded='false'] .portfolio-admin-sidebar-toggle__rail {
+  transform: scaleY(0.72);
+}
+
+.portfolio-admin-topbar__nav-toggle[aria-expanded='false'] .portfolio-admin-sidebar-toggle__frame {
+  transform: scaleX(0.94);
+}
+
+/* Mobile: sidebar becomes an overlay and does not reserve workspace width. */
+@media (max-width: 768px) {
+  :root {
+    --portfolio-admin-sidebar-width: min(88vw, 320px);
+  }
+
+  .portfolio-admin-topbar {
+    left: 0;
+  }
+
+  .template-default__wrap,
+  html[data-portfolio-admin-nav='closed'] .template-default__wrap {
+    margin-left: 0 !important;
+  }
+
+  .portfolio-admin-nav {
+    box-shadow: 24px 0 60px rgba(0, 0, 0, 0.34);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .template-default__wrap,
+  .portfolio-admin-topbar,
+  .portfolio-admin-nav,
+  .portfolio-admin-topbar__nav-toggle,
+  .portfolio-admin-sidebar-toggle__frame,
+  .portfolio-admin-sidebar-toggle__rail,
+  .portfolio-admin-sidebar-toggle__chevron {
+    transition: none !important;
+  }
+}
+
+/* Portfolio Admin Experience — viewport shell geometry:end */
+
+/* Portfolio Admin Experience - projects list visual system:start */
+
+.portfolio-admin-projects-overview {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 30px clamp(28px, 4vw, 64px) 18px;
+}
+
+.portfolio-admin-projects-overview__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0 0 20px;
+}
+
+.portfolio-admin-projects-overview__header > div {
+  min-width: 0;
+}
+
+.portfolio-admin-projects-overview__eyebrow {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--portfolio-admin-cyan);
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.portfolio-admin-projects-overview__header h2 {
+  margin: 0;
+  color: var(--portfolio-admin-text);
+  font-size: clamp(24px, 2.3vw, 34px);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.portfolio-admin-projects-overview__header p {
+  max-width: 760px;
+  margin: 10px 0 0;
+  color: var(--portfolio-admin-text-muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.portfolio-admin-projects-overview .portfolio-admin-button {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 18px;
+  border: 1px solid rgba(50, 215, 231, 0.5);
+  border-radius: 9px;
+  background: var(--portfolio-admin-cyan);
+  color: #031016;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 12px 28px rgba(50, 215, 231, 0.08);
+  transition:
+    transform 130ms ease,
+    background-color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.portfolio-admin-projects-overview .portfolio-admin-button:hover {
+  background: #5ee5f0;
+  border-color: #5ee5f0;
+  box-shadow: 0 14px 34px rgba(50, 215, 231, 0.14);
+  transform: translateY(-1px);
+}
+
+.portfolio-admin-projects-overview .portfolio-admin-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.portfolio-admin-projects-overview__metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.portfolio-admin-project-stat {
+  position: relative;
+  min-width: 0;
+  min-height: 132px;
+  overflow: hidden;
+  padding: 18px 18px 16px;
+  border: 1px solid var(--portfolio-admin-border);
+  border-radius: 12px;
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--project-stat-accent) 8%, transparent),
+      transparent 58%
+    ),
+    var(--portfolio-admin-surface);
+  box-shadow: inset 3px 0 0 var(--project-stat-accent);
+}
+
+.portfolio-admin-project-stat::after {
+  position: absolute;
+  right: -28px;
+  bottom: -42px;
+  width: 120px;
+  height: 120px;
+  border: 1px solid color-mix(in srgb, var(--project-stat-accent) 22%, transparent);
+  border-radius: 50%;
+  content: '';
+  opacity: 0.65;
+}
+
+.portfolio-admin-project-stat.is-cyan {
+  --project-stat-accent: var(--portfolio-admin-cyan);
+}
+
+.portfolio-admin-project-stat.is-purple {
+  --project-stat-accent: var(--portfolio-admin-violet);
+}
+
+.portfolio-admin-project-stat.is-green {
+  --project-stat-accent: var(--portfolio-admin-success);
+}
+
+.portfolio-admin-project-stat.is-amber {
+  --project-stat-accent: var(--portfolio-admin-warning);
+}
+
+.portfolio-admin-project-stat__topline {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.portfolio-admin-project-stat__topline span {
+  overflow: hidden;
+  color: var(--portfolio-admin-text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.portfolio-admin-project-stat__topline code {
+  color: color-mix(in srgb, var(--project-stat-accent) 78%, white);
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+.portfolio-admin-project-stat > strong {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin-top: 15px;
+  color: var(--project-stat-accent);
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 29px;
+  font-weight: 650;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.portfolio-admin-project-stat > p {
+  position: relative;
+  z-index: 1;
+  max-width: 82%;
+  margin: 8px 0 0;
+  color: var(--portfolio-admin-text-dim);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.portfolio-admin-project-stat__signal {
+  position: absolute;
+  right: 16px;
+  bottom: 15px;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 22px;
+}
+
+.portfolio-admin-project-stat__signal i {
+  display: block;
+  width: 2px;
+  border-radius: 999px;
+  background: var(--project-stat-accent);
+  opacity: 0.78;
+}
+
+.portfolio-admin-project-stat__signal i:nth-child(1) {
+  height: 7px;
+}
+
+.portfolio-admin-project-stat__signal i:nth-child(2) {
+  height: 14px;
+}
+
+.portfolio-admin-project-stat__signal i:nth-child(3) {
+  height: 21px;
+}
+
+.portfolio-admin-project-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 220px;
+}
+
+.portfolio-admin-project-cell__preview {
+  flex: 0 0 42px;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(50, 215, 231, 0.18);
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(50, 215, 231, 0.13), rgba(155, 92, 255, 0.12)), #0d1924;
+  color: var(--portfolio-admin-cyan);
+  background-position: center;
+  background-size: cover;
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.portfolio-admin-project-cell__preview.has-image {
+  color: transparent;
+}
+
+.portfolio-admin-project-cell__copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.portfolio-admin-project-cell__copy strong {
+  overflow: hidden;
+  color: var(--portfolio-admin-text);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.portfolio-admin-project-cell__copy code {
+  overflow: hidden;
+  color: var(--portfolio-admin-text-dim);
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 10px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.portfolio-admin-stage {
+  --stage-color: #7890a4;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  width: max-content;
+  min-height: 26px;
+  padding: 0 10px;
+  border: 1px solid color-mix(in srgb, var(--stage-color) 28%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--stage-color) 10%, transparent);
+  color: color-mix(in srgb, var(--stage-color) 84%, white);
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.055em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.portfolio-admin-stage i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--stage-color);
+  box-shadow: 0 0 9px color-mix(in srgb, var(--stage-color) 62%, transparent);
+}
+
+.portfolio-admin-stage.is-idea,
+.portfolio-admin-stage.is-planning {
+  --stage-color: #7890a4;
+}
+
+.portfolio-admin-stage.is-development {
+  --stage-color: var(--portfolio-admin-violet);
+}
+
+.portfolio-admin-stage.is-testing {
+  --stage-color: var(--portfolio-admin-warning);
+}
+
+.portfolio-admin-stage.is-released {
+  --stage-color: var(--portfolio-admin-cyan);
+}
+
+.portfolio-admin-stage.is-maintenance {
+  --stage-color: var(--portfolio-admin-success);
+}
+
+.portfolio-admin-stage.is-archived {
+  --stage-color: #697581;
+}
+
+.portfolio-admin-progress-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 138px;
+}
+
+.portfolio-admin-progress-cell__track {
+  position: relative;
+  flex: 1 1 auto;
+  display: block;
+  min-width: 86px;
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(125, 148, 167, 0.13);
+}
+
+.portfolio-admin-progress-cell__track > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--portfolio-admin-cyan), var(--portfolio-admin-violet));
+  box-shadow: 0 0 10px rgba(50, 215, 231, 0.18);
+}
+
+.portfolio-admin-progress-cell code {
+  min-width: 34px;
+  color: var(--portfolio-admin-text);
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 10px;
+  text-align: right;
+}
+
+.portfolio-admin-featured-cell {
+  display: inline-grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: #647789;
+}
+
+.portfolio-admin-featured-cell svg {
+  display: block !important;
+  width: 17px !important;
+  height: 17px !important;
+  max-width: 17px !important;
+  max-height: 17px !important;
+}
+
+.portfolio-admin-featured-cell.is-featured {
+  border-color: rgba(50, 215, 231, 0.22);
+  background: rgba(50, 215, 231, 0.07);
+  color: var(--portfolio-admin-cyan);
+}
+
+.portfolio-admin-publication-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 128px;
+}
+
+.portfolio-admin-publication-cell > i {
+  flex: 0 0 7px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--portfolio-admin-warning);
+  box-shadow: 0 0 9px rgba(245, 179, 66, 0.28);
+}
+
+.portfolio-admin-publication-cell > span {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.portfolio-admin-publication-cell strong {
+  color: var(--portfolio-admin-text);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.portfolio-admin-publication-cell small {
+  color: var(--portfolio-admin-text-dim);
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 9px;
+  line-height: 1.15;
+}
+
+.portfolio-admin-publication-cell.is-published > i {
+  background: var(--portfolio-admin-success);
+  box-shadow: 0 0 9px rgba(69, 214, 139, 0.28);
+}
+
+.collection-list .table {
+  overflow: hidden;
+  border: 1px solid var(--portfolio-admin-border);
+  border-radius: 12px;
+  background: var(--portfolio-admin-surface);
+}
+
+.collection-list .table table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.collection-list .table thead {
+  background: rgba(255, 255, 255, 0.012);
+}
+
+.collection-list .table tbody tr {
+  transition:
+    background-color 130ms ease,
+    box-shadow 130ms ease;
+}
+
+.collection-list .table tbody tr:hover {
+  background: rgba(50, 215, 231, 0.025);
+  box-shadow: inset 2px 0 0 rgba(50, 215, 231, 0.42);
+}
+
+.collection-list .table td,
+.collection-list .table th {
+  vertical-align: middle;
+}
+
+@media (max-width: 1120px) {
+  .portfolio-admin-projects-overview__metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-admin-projects-overview {
+    padding: 22px 18px 14px;
+  }
+
+  .portfolio-admin-projects-overview__header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .portfolio-admin-projects-overview .portfolio-admin-button {
+    align-self: flex-start;
+  }
+
+  .portfolio-admin-projects-overview__metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolio-admin-project-stat {
+    min-height: 116px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-admin-projects-overview .portfolio-admin-button,
+  .collection-list .table tbody tr {
+    transition: none !important;
+  }
+}
+
+/* Portfolio Admin Experience - projects list visual system:end */
+
+/* Portfolio Admin Experience - projects duplicate create action:start */
+
+/*
+ * ProjectsListHeader already renders the primary "New project" action.
+ * Hide Payload's duplicate title action only on a list view that contains
+ * our Projects overview component. The native list heading remains visible.
+ */
+.template-default__wrap:has(.portfolio-admin-projects-overview) .list-header__title-actions {
+  display: none !important;
+}
+
+/* Compatibility fallback for Payload builds where the title action wrapper
+ * is flattened but the create link remains inside the list header.
+ */
+.template-default__wrap:has(.portfolio-admin-projects-overview)
+  .list-header
+  a[href*='/collections/projects/create'] {
+  display: none !important;
+}
+
+/* Portfolio Admin Experience - projects duplicate create action:end */
