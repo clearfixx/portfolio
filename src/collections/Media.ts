@@ -3,9 +3,14 @@ import { authenticatedAccess, publicAccess } from '@/access'
 
 export const Media: CollectionConfig = {
   slug: 'media',
+  // portfolio-admin-media-library-list-v1
   admin: {
     useAsTitle: 'alt',
-    defaultColumns: ['filename', 'alt', 'folder', 'isPublic', 'sortOrder'],
+    defaultColumns: ['asset', 'alt', 'folder', 'isPublic', 'assetMeta'],
+    listSearchableFields: ['filename', 'alt', 'caption', 'credit', 'folder'],
+    components: {
+      beforeList: ['./components/admin/media/MediaLibraryHeader'],
+    },
   },
   access: {
     read: publicAccess,
@@ -13,44 +18,115 @@ export const Media: CollectionConfig = {
     update: authenticatedAccess,
     delete: authenticatedAccess,
   },
+  // portfolio-admin-media-editor-v1
   fields: [
     {
-      name: 'alt',
-      type: 'text',
-      required: true,
+      name: 'asset',
+      type: 'ui',
       admin: {
-        description: 'Accessible alternative text. Required for public images.',
+        components: {
+          Cell: './components/admin/media/MediaCells#MediaAssetCell',
+          Field: './components/admin/media/MediaCells#MediaListOnlyField',
+        },
       },
     },
     {
-      name: 'caption',
-      type: 'textarea',
+      name: 'assetMeta',
+      type: 'ui',
       admin: {
-        description: 'Optional human-readable image caption.',
+        components: {
+          Cell: './components/admin/media/MediaCells#MediaMetaCell',
+          Field: './components/admin/media/MediaCells#MediaListOnlyField',
+        },
       },
     },
     {
-      name: 'credit',
-      type: 'text',
+      name: 'mediaWorkspace',
+      type: 'ui',
       admin: {
-        description: 'Optional author, source, or attribution note.',
+        components: {
+          Field: './components/admin/media/MediaEditor#MediaWorkspace',
+        },
       },
     },
     {
-      name: 'folder',
-      type: 'text',
-      admin: {
-        description: 'Simple folder/group key, e.g. projects, blog, seo, homepage.',
-      },
-    },
-    {
-      name: 'tags',
-      type: 'array',
-      fields: [
+      type: 'tabs',
+      tabs: [
         {
-          name: 'label',
-          type: 'text',
-          required: true,
+          label: 'Metadata',
+          description: 'Accessible identity, editorial caption, and attribution.',
+          fields: [
+            {
+              name: 'alt',
+              type: 'text',
+              required: true,
+              admin: {
+                description: 'Accessible alternative text. Required for public images.',
+                components: {
+                  Cell: './components/admin/media/MediaCells#MediaAltCell',
+                },
+              },
+            },
+            {
+              name: 'caption',
+              type: 'textarea',
+              admin: {
+                description: 'Optional human-readable image caption.',
+                components: {
+                  Field: './components/admin/media/MediaCaptionField',
+                },
+              },
+            },
+            {
+              name: 'credit',
+              type: 'text',
+              admin: {
+                description: 'Optional author, source, or attribution note.',
+              },
+            },
+          ],
+        },
+        {
+          label: 'Organization',
+          description: 'Folder assignment and reusable taxonomy labels.',
+          fields: [
+            {
+              name: 'folder',
+              type: 'text',
+              admin: {
+                description: 'Simple folder/group key, e.g. projects, blog, seo, homepage.',
+                components: {
+                  Cell: './components/admin/media/MediaCells#MediaFolderCell',
+                },
+              },
+            },
+            {
+              name: 'tags',
+              type: 'array',
+              fields: [
+                {
+                  name: 'label',
+                  type: 'text',
+                  required: true,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'External Source',
+          description: 'Read-only diagnostics for mirrored social media.',
+          fields: [
+            {
+              name: 'mediaExternalSource',
+              type: 'ui',
+              admin: {
+                components: {
+                  Field: './components/admin/media/MediaEditor#MediaExternalSource',
+                },
+              },
+            },
+          ],
         },
       ],
     },
@@ -61,6 +137,17 @@ export const Media: CollectionConfig = {
       admin: {
         position: 'sidebar',
         description: 'Allow this media item to be used on public pages.',
+        components: {
+          Cell: './components/admin/media/MediaCells#MediaVisibilityCell',
+        },
+      },
+    },
+    {
+      name: 'sortOrder',
+      type: 'number',
+      defaultValue: 0,
+      admin: {
+        position: 'sidebar',
       },
     },
     {
@@ -109,11 +196,13 @@ export const Media: CollectionConfig = {
       },
     },
     {
-      name: 'sortOrder',
-      type: 'number',
-      defaultValue: 0,
+      name: 'mediaReadiness',
+      type: 'ui',
       admin: {
         position: 'sidebar',
+        components: {
+          Field: './components/admin/media/MediaEditor#MediaReadiness',
+        },
       },
     },
   ],

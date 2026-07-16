@@ -1,3 +1,14 @@
+import { MediaAssetCell as MediaAssetCell_2feed0058d0a6717355bf16e9b6445f5 } from '../../../components/admin/media/MediaCells'
+import { MediaListOnlyField as MediaListOnlyField_2feed0058d0a6717355bf16e9b6445f5 } from '../../../components/admin/media/MediaCells'
+import { MediaMetaCell as MediaMetaCell_2feed0058d0a6717355bf16e9b6445f5 } from '../../../components/admin/media/MediaCells'
+import { MediaWorkspace as MediaWorkspace_0372aedb22b25a49a78f3ae77c3ec3e1 } from '../../../components/admin/media/MediaEditor'
+import { MediaAltCell as MediaAltCell_2feed0058d0a6717355bf16e9b6445f5 } from '../../../components/admin/media/MediaCells'
+import { default as default_c22918a050cb6b6999e17e2275cef85c } from '../../../components/admin/media/MediaCaptionField'
+import { MediaFolderCell as MediaFolderCell_2feed0058d0a6717355bf16e9b6445f5 } from '../../../components/admin/media/MediaCells'
+import { MediaExternalSource as MediaExternalSource_0372aedb22b25a49a78f3ae77c3ec3e1 } from '../../../components/admin/media/MediaEditor'
+import { MediaVisibilityCell as MediaVisibilityCell_2feed0058d0a6717355bf16e9b6445f5 } from '../../../components/admin/media/MediaCells'
+import { MediaReadiness as MediaReadiness_0372aedb22b25a49a78f3ae77c3ec3e1 } from '../../../components/admin/media/MediaEditor'
+import { default as default_0f4b71343bca476acdd36fc503c6926b } from '../../../components/admin/media/MediaLibraryHeader'
 import { ProjectTitleCell as ProjectTitleCell_b60b3aa295b519a9f28efaec95dd48a6 } from '../../../components/admin/projects/ProjectCells'
 import { RscEntryLexicalCell as RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { RscEntryLexicalField as RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
@@ -69,6 +80,17 @@ import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } f
 
 /** @type import('payload').ImportMap */
 export const importMap = {
+  "./components/admin/media/MediaCells#MediaAssetCell": MediaAssetCell_2feed0058d0a6717355bf16e9b6445f5,
+  "./components/admin/media/MediaCells#MediaListOnlyField": MediaListOnlyField_2feed0058d0a6717355bf16e9b6445f5,
+  "./components/admin/media/MediaCells#MediaMetaCell": MediaMetaCell_2feed0058d0a6717355bf16e9b6445f5,
+  "./components/admin/media/MediaEditor#MediaWorkspace": MediaWorkspace_0372aedb22b25a49a78f3ae77c3ec3e1,
+  "./components/admin/media/MediaCells#MediaAltCell": MediaAltCell_2feed0058d0a6717355bf16e9b6445f5,
+  "./components/admin/media/MediaCaptionField#default": default_c22918a050cb6b6999e17e2275cef85c,
+  "./components/admin/media/MediaCells#MediaFolderCell": MediaFolderCell_2feed0058d0a6717355bf16e9b6445f5,
+  "./components/admin/media/MediaEditor#MediaExternalSource": MediaExternalSource_0372aedb22b25a49a78f3ae77c3ec3e1,
+  "./components/admin/media/MediaCells#MediaVisibilityCell": MediaVisibilityCell_2feed0058d0a6717355bf16e9b6445f5,
+  "./components/admin/media/MediaEditor#MediaReadiness": MediaReadiness_0372aedb22b25a49a78f3ae77c3ec3e1,
+  "./components/admin/media/MediaLibraryHeader#default": default_0f4b71343bca476acdd36fc503c6926b,
   "./components/admin/projects/ProjectCells#ProjectTitleCell": ProjectTitleCell_b60b3aa295b519a9f28efaec95dd48a6,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField": RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e,
