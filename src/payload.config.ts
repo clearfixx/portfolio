@@ -29,6 +29,11 @@ import {
   xFeedSyncTask,
 } from './lib/server/x-feed'
 import { mirrorInstagramMediaToPayload } from './lib/server/instagram-feed/media-mirror'
+import { developmentEmailAdapter } from './lib/server/developmentEmailAdapter'
+import {
+  withAdminCollectionDocumentView,
+  withAdminGlobalDocumentView,
+} from './components/admin/editor-system/withAdminDocumentView'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -85,14 +90,24 @@ export default buildConfig({
     NewsletterSubscribers,
     Notifications,
     xFeedCacheCollection,
-  ],
-  globals: [SiteSettings, Homepage, Profile, SEO, Social, Contact, Analytics, xFeedSettingsGlobal],
+  ].map(withAdminCollectionDocumentView),
+  globals: [
+    SiteSettings,
+    Homepage,
+    Profile,
+    SEO,
+    Social,
+    Contact,
+    Analytics,
+    xFeedSettingsGlobal,
+  ].map(withAdminGlobalDocumentView),
   endpoints: [xFeedSyncEndpoint, xFeedStatusEndpoint],
   jobs: {
     enableConcurrencyControl: true,
     tasks: [xFeedSyncTask],
   },
   editor: lexicalEditor(),
+  email: developmentEmailAdapter,
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     autoGenerate: false,

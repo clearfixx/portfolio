@@ -31,4 +31,8 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default withPayload(nextConfig, { devBundleServerPackages: false })
+const payloadConfig = withPayload(nextConfig, { devBundleServerPackages: false })
+
+delete payloadConfig.experimental?.turbopackServerFastRefresh
+
+export default payloadConfig

@@ -102,8 +102,8 @@
 :where([role='button'], a)[aria-disabled='true'] {
   cursor: not-allowed;
   opacity: 0.52;
-  transform: none !important;
-  box-shadow: none !important;
+  transform: none;
+  box-shadow: none;
 }
 
 :where([role='button'], a)[aria-disabled='true'] {

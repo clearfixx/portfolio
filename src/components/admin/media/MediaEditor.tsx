@@ -3,8 +3,9 @@
 'use client'
 
 import { useFormFields } from '@payloadcms/ui'
-import type { CSSProperties, ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { useEffect } from 'react'
+import { AdminReadiness, defineReadiness, evaluateReadiness } from '../editor-system'
 
 type Primitive = boolean | number | string | null | undefined
 
@@ -247,25 +248,36 @@ export function MediaWorkspace() {
   )
 }
 
-function ReadinessItem({
-  complete,
-  description,
-  label,
-}: {
-  complete: boolean
-  description: string
-  label: string
-}) {
-  return (
-    <li className={complete ? 'is-complete' : 'is-pending'}>
-      <span aria-hidden="true">{complete ? '✓' : '○'}</span>
-      <div>
-        <strong>{label}</strong>
-        <small>{description}</small>
-      </div>
-    </li>
-  )
-}
+const mediaReadiness = defineReadiness<Record<string, unknown>>({
+  id: 'media',
+  label: 'Asset readiness',
+  checks: [
+    {
+      id: 'accessibility',
+      label: 'Accessibility',
+      description: 'Accessible alternative text',
+      evaluate: (document) => Boolean(document.alt),
+    },
+    {
+      id: 'organization',
+      label: 'Organization',
+      description: 'Folder key for organization',
+      evaluate: (document) => Boolean(document.folder),
+    },
+    {
+      id: 'visibility',
+      label: 'Visibility',
+      description: 'Public or private state',
+      evaluate: (document) => typeof document.visibility === 'boolean',
+    },
+    {
+      id: 'dimensions',
+      label: 'Dimensions',
+      description: 'Image width and height detected',
+      evaluate: (document) => Boolean(document.dimensionsReady),
+    },
+  ],
+})
 
 export function MediaReadiness() {
   const alt = text(useValue('alt'))
@@ -276,73 +288,11 @@ export function MediaReadiness() {
   const height = numberValue(useValue('height'))
   const dimensionsReady = !mimeType.startsWith('image/') || Boolean(width && height)
 
-  const checks = [
-    {
-      complete: Boolean(alt),
-      description: 'Accessible alternative text',
-      label: 'Accessibility',
-    },
-    {
-      complete: Boolean(folder),
-      description: 'Folder key for organization',
-      label: 'Organization',
-    },
-    {
-      complete: typeof visibility === 'boolean',
-      description: 'Public or private state',
-      label: 'Visibility',
-    },
-    {
-      complete: dimensionsReady,
-      description: 'Image width and height detected',
-      label: 'Dimensions',
-    },
-  ]
-
-  const completeCount = checks.filter((check) => check.complete).length
-  const percentage = Math.round((completeCount / checks.length) * 100)
-
   return (
-    <aside className="portfolio-admin-media-readiness">
-      <header>
-        <div>
-          <span>Asset readiness</span>
-          <strong>{percentage}%</strong>
-        </div>
-
-        <div
-          aria-label={`${percentage}% ready`}
-          className="portfolio-admin-media-readiness__ring"
-          role="img"
-          style={
-            {
-              '--media-readiness': `${percentage * 3.6}deg`,
-            } as CSSProperties
-          }
-        >
-          <i aria-hidden="true" />
-        </div>
-      </header>
-
-      <p>
-        {completeCount === checks.length
-          ? 'All asset checks are complete.'
-          : `${checks.length - completeCount} asset ${
-              checks.length - completeCount === 1 ? 'check needs' : 'checks need'
-            } attention.`}
-      </p>
-
-      <ul>
-        {checks.map((check) => (
-          <ReadinessItem
-            complete={check.complete}
-            description={check.description}
-            key={check.label}
-            label={check.label}
-          />
-        ))}
-      </ul>
-    </aside>
+    <AdminReadiness
+      label={mediaReadiness.label}
+      result={evaluateReadiness(mediaReadiness, { alt, dimensionsReady, folder, visibility })}
+    />
   )
 }
 

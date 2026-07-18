@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 import { authenticatedAccess, publicAccess } from '@/access'
 
 import { seoField, slugField } from '@/fields'
+import { adminRichTextField } from '@/fields/adminRichTextField'
 import { formatSlug } from '@/utils/formatSlug'
 
 export const BlogPosts: CollectionConfig = {
@@ -52,11 +53,7 @@ export const BlogPosts: CollectionConfig = {
                 description: 'Short summary for blog cards, previews, and SEO snippets.',
               },
             },
-            {
-              name: 'content',
-              type: 'richText',
-              required: true,
-            },
+            adminRichTextField({ label: 'Content', name: 'content', required: true }),
           ],
         },
         {

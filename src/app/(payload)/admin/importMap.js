@@ -1,3 +1,4 @@
+import { default as default_bc236d4ed73b07b6025575af4ac12123 } from '../../../components/admin/editor-system/AdminDocumentView'
 import { MediaAssetCell as MediaAssetCell_2feed0058d0a6717355bf16e9b6445f5 } from '../../../components/admin/media/MediaCells'
 import { MediaListOnlyField as MediaListOnlyField_2feed0058d0a6717355bf16e9b6445f5 } from '../../../components/admin/media/MediaCells'
 import { MediaMetaCell as MediaMetaCell_2feed0058d0a6717355bf16e9b6445f5 } from '../../../components/admin/media/MediaCells'
@@ -9,30 +10,27 @@ import { MediaExternalSource as MediaExternalSource_0372aedb22b25a49a78f3ae77c3e
 import { MediaVisibilityCell as MediaVisibilityCell_2feed0058d0a6717355bf16e9b6445f5 } from '../../../components/admin/media/MediaCells'
 import { MediaReadiness as MediaReadiness_0372aedb22b25a49a78f3ae77c3ec3e1 } from '../../../components/admin/media/MediaEditor'
 import { default as default_0f4b71343bca476acdd36fc503c6926b } from '../../../components/admin/media/MediaLibraryHeader'
+import { CategoryWorkspace as CategoryWorkspace_7e253da1b4e83d42f66df56174bad02e } from '../../../components/admin/taxonomy/CategoryEditor'
+import { CategoryTitleCell as CategoryTitleCell_aab1aa765ef5eb1068d1f422ed2559a7 } from '../../../components/admin/taxonomy/CategoryCells'
+import { CategoryTypeCell as CategoryTypeCell_aab1aa765ef5eb1068d1f422ed2559a7 } from '../../../components/admin/taxonomy/CategoryCells'
+import { CategoryParentCell as CategoryParentCell_aab1aa765ef5eb1068d1f422ed2559a7 } from '../../../components/admin/taxonomy/CategoryCells'
+import { CategoryHierarchy as CategoryHierarchy_7e253da1b4e83d42f66df56174bad02e } from '../../../components/admin/taxonomy/CategoryEditor'
+import { CategorySortCell as CategorySortCell_aab1aa765ef5eb1068d1f422ed2559a7 } from '../../../components/admin/taxonomy/CategoryCells'
+import { CategoryReadiness as CategoryReadiness_7e253da1b4e83d42f66df56174bad02e } from '../../../components/admin/taxonomy/CategoryEditor'
+import { default as default_7ac7605f06f32227d7f15e053559a74a } from '../../../components/admin/taxonomy/CategoriesListHeader'
+import { TechnologyWorkspace as TechnologyWorkspace_9069e911ea9f7d95508ab69a1d10e0e4 } from '../../../components/admin/taxonomy/TechStackEditor'
+import { TechnologyNameCell as TechnologyNameCell_5850b4f38d8dcb4a666d956838afbceb } from '../../../components/admin/taxonomy/TechStackCells'
+import { TechnologyCategoryCell as TechnologyCategoryCell_5850b4f38d8dcb4a666d956838afbceb } from '../../../components/admin/taxonomy/TechStackCells'
+import { TechnologyClassification as TechnologyClassification_9069e911ea9f7d95508ab69a1d10e0e4 } from '../../../components/admin/taxonomy/TechStackEditor'
+import { TechnologyLinksCell as TechnologyLinksCell_5850b4f38d8dcb4a666d956838afbceb } from '../../../components/admin/taxonomy/TechStackCells'
+import { TechnologyResources as TechnologyResources_9069e911ea9f7d95508ab69a1d10e0e4 } from '../../../components/admin/taxonomy/TechStackEditor'
+import { TechnologyFeaturedCell as TechnologyFeaturedCell_5850b4f38d8dcb4a666d956838afbceb } from '../../../components/admin/taxonomy/TechStackCells'
+import { TechnologyVisibleCell as TechnologyVisibleCell_5850b4f38d8dcb4a666d956838afbceb } from '../../../components/admin/taxonomy/TechStackCells'
+import { TechnologySortCell as TechnologySortCell_5850b4f38d8dcb4a666d956838afbceb } from '../../../components/admin/taxonomy/TechStackCells'
+import { TechnologyReadiness as TechnologyReadiness_9069e911ea9f7d95508ab69a1d10e0e4 } from '../../../components/admin/taxonomy/TechStackEditor'
+import { default as default_767ebf5ce13d7cc356c77ecc170f4203 } from '../../../components/admin/taxonomy/TechStackListHeader'
 import { ProjectTitleCell as ProjectTitleCell_b60b3aa295b519a9f28efaec95dd48a6 } from '../../../components/admin/projects/ProjectCells'
-import { RscEntryLexicalCell as RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
-import { RscEntryLexicalField as RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
-import { LexicalDiffComponent as LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
-import { InlineToolbarFeatureClient as InlineToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { HorizontalRuleFeatureClient as HorizontalRuleFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { UploadFeatureClient as UploadFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { BlockquoteFeatureClient as BlockquoteFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { RelationshipFeatureClient as RelationshipFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { LinkFeatureClient as LinkFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { ChecklistFeatureClient as ChecklistFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { OrderedListFeatureClient as OrderedListFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { UnorderedListFeatureClient as UnorderedListFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { IndentFeatureClient as IndentFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { AlignFeatureClient as AlignFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { HeadingFeatureClient as HeadingFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { ParagraphFeatureClient as ParagraphFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { InlineCodeFeatureClient as InlineCodeFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { SuperscriptFeatureClient as SuperscriptFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { SubscriptFeatureClient as SubscriptFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { StrikethroughFeatureClient as StrikethroughFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { UnderlineFeatureClient as UnderlineFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
+import { default as default_ad9256c3644bedfa84002efe3ec10f4b } from '../../../components/admin/rich-text/AdminRichTextField'
 import { default as default_ab78d9502cc657922cb4d1eb5f80fa6f } from '../../../components/admin/projects/ProjectHealthPanel'
 import { ProjectStageCell as ProjectStageCell_b60b3aa295b519a9f28efaec95dd48a6 } from '../../../components/admin/projects/ProjectCells'
 import { ProjectProgressCell as ProjectProgressCell_b60b3aa295b519a9f28efaec95dd48a6 } from '../../../components/admin/projects/ProjectCells'
@@ -41,6 +39,17 @@ import { ProjectFeaturedCell as ProjectFeaturedCell_b60b3aa295b519a9f28efaec95dd
 import { ProjectPublishedCell as ProjectPublishedCell_b60b3aa295b519a9f28efaec95dd48a6 } from '../../../components/admin/projects/ProjectCells'
 import { default as default_721c4b3f49c101c29c9cbe0ff234816e } from '../../../components/admin/projects/ProjectsListHeader'
 import { default as default_098a8f37f832b2d137a7699dffe85a65 } from '../../../components/admin/projects/ProjectDocumentControls'
+import { ReleaseWorkspace as ReleaseWorkspace_7222189af48e42343afadf4d8e6a6e50 } from '../../../components/admin/project-versions/ProjectVersionEditor'
+import { ProjectVersionProjectCell as ProjectVersionProjectCell_2790147deb8ee21beb1509eeacfd1407 } from '../../../components/admin/project-versions/ProjectVersionCells'
+import { ProjectVersionIdentityCell as ProjectVersionIdentityCell_2790147deb8ee21beb1509eeacfd1407 } from '../../../components/admin/project-versions/ProjectVersionCells'
+import { ProjectVersionDateCell as ProjectVersionDateCell_2790147deb8ee21beb1509eeacfd1407 } from '../../../components/admin/project-versions/ProjectVersionCells'
+import { ReleaseHighlightsSummary as ReleaseHighlightsSummary_7222189af48e42343afadf4d8e6a6e50 } from '../../../components/admin/project-versions/ProjectVersionEditor'
+import { ProjectVersionBreakingCell as ProjectVersionBreakingCell_2790147deb8ee21beb1509eeacfd1407 } from '../../../components/admin/project-versions/ProjectVersionCells'
+import { ReleaseRiskSummary as ReleaseRiskSummary_7222189af48e42343afadf4d8e6a6e50 } from '../../../components/admin/project-versions/ProjectVersionEditor'
+import { ProjectVersionStableCell as ProjectVersionStableCell_2790147deb8ee21beb1509eeacfd1407 } from '../../../components/admin/project-versions/ProjectVersionCells'
+import { ProjectVersionCurrentCell as ProjectVersionCurrentCell_2790147deb8ee21beb1509eeacfd1407 } from '../../../components/admin/project-versions/ProjectVersionCells'
+import { ReleaseReadiness as ReleaseReadiness_7222189af48e42343afadf4d8e6a6e50 } from '../../../components/admin/project-versions/ProjectVersionEditor'
+import { default as default_87b450e451470415c95e582d91bf11db } from '../../../components/admin/project-versions/ProjectVersionsListHeader'
 import { BlogPostTitleCell as BlogPostTitleCell_2afcc556ee611a3d9dcb1e557946006c } from '../../../components/admin/blog-posts/BlogPostCells'
 import { BlogPostCategoryCell as BlogPostCategoryCell_2afcc556ee611a3d9dcb1e557946006c } from '../../../components/admin/blog-posts/BlogPostCells'
 import { default as default_bb1969c848f0c947805732b791c7e0fb } from '../../../components/admin/blog-posts/ArticleReadinessPanel'
@@ -80,6 +89,7 @@ import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } f
 
 /** @type import('payload').ImportMap */
 export const importMap = {
+  "./components/admin/editor-system/AdminDocumentView#default": default_bc236d4ed73b07b6025575af4ac12123,
   "./components/admin/media/MediaCells#MediaAssetCell": MediaAssetCell_2feed0058d0a6717355bf16e9b6445f5,
   "./components/admin/media/MediaCells#MediaListOnlyField": MediaListOnlyField_2feed0058d0a6717355bf16e9b6445f5,
   "./components/admin/media/MediaCells#MediaMetaCell": MediaMetaCell_2feed0058d0a6717355bf16e9b6445f5,
@@ -91,30 +101,27 @@ export const importMap = {
   "./components/admin/media/MediaCells#MediaVisibilityCell": MediaVisibilityCell_2feed0058d0a6717355bf16e9b6445f5,
   "./components/admin/media/MediaEditor#MediaReadiness": MediaReadiness_0372aedb22b25a49a78f3ae77c3ec3e1,
   "./components/admin/media/MediaLibraryHeader#default": default_0f4b71343bca476acdd36fc503c6926b,
+  "./components/admin/taxonomy/CategoryEditor#CategoryWorkspace": CategoryWorkspace_7e253da1b4e83d42f66df56174bad02e,
+  "./components/admin/taxonomy/CategoryCells#CategoryTitleCell": CategoryTitleCell_aab1aa765ef5eb1068d1f422ed2559a7,
+  "./components/admin/taxonomy/CategoryCells#CategoryTypeCell": CategoryTypeCell_aab1aa765ef5eb1068d1f422ed2559a7,
+  "./components/admin/taxonomy/CategoryCells#CategoryParentCell": CategoryParentCell_aab1aa765ef5eb1068d1f422ed2559a7,
+  "./components/admin/taxonomy/CategoryEditor#CategoryHierarchy": CategoryHierarchy_7e253da1b4e83d42f66df56174bad02e,
+  "./components/admin/taxonomy/CategoryCells#CategorySortCell": CategorySortCell_aab1aa765ef5eb1068d1f422ed2559a7,
+  "./components/admin/taxonomy/CategoryEditor#CategoryReadiness": CategoryReadiness_7e253da1b4e83d42f66df56174bad02e,
+  "./components/admin/taxonomy/CategoriesListHeader#default": default_7ac7605f06f32227d7f15e053559a74a,
+  "./components/admin/taxonomy/TechStackEditor#TechnologyWorkspace": TechnologyWorkspace_9069e911ea9f7d95508ab69a1d10e0e4,
+  "./components/admin/taxonomy/TechStackCells#TechnologyNameCell": TechnologyNameCell_5850b4f38d8dcb4a666d956838afbceb,
+  "./components/admin/taxonomy/TechStackCells#TechnologyCategoryCell": TechnologyCategoryCell_5850b4f38d8dcb4a666d956838afbceb,
+  "./components/admin/taxonomy/TechStackEditor#TechnologyClassification": TechnologyClassification_9069e911ea9f7d95508ab69a1d10e0e4,
+  "./components/admin/taxonomy/TechStackCells#TechnologyLinksCell": TechnologyLinksCell_5850b4f38d8dcb4a666d956838afbceb,
+  "./components/admin/taxonomy/TechStackEditor#TechnologyResources": TechnologyResources_9069e911ea9f7d95508ab69a1d10e0e4,
+  "./components/admin/taxonomy/TechStackCells#TechnologyFeaturedCell": TechnologyFeaturedCell_5850b4f38d8dcb4a666d956838afbceb,
+  "./components/admin/taxonomy/TechStackCells#TechnologyVisibleCell": TechnologyVisibleCell_5850b4f38d8dcb4a666d956838afbceb,
+  "./components/admin/taxonomy/TechStackCells#TechnologySortCell": TechnologySortCell_5850b4f38d8dcb4a666d956838afbceb,
+  "./components/admin/taxonomy/TechStackEditor#TechnologyReadiness": TechnologyReadiness_9069e911ea9f7d95508ab69a1d10e0e4,
+  "./components/admin/taxonomy/TechStackListHeader#default": default_767ebf5ce13d7cc356c77ecc170f4203,
   "./components/admin/projects/ProjectCells#ProjectTitleCell": ProjectTitleCell_b60b3aa295b519a9f28efaec95dd48a6,
-  "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
-  "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField": RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e,
-  "@payloadcms/richtext-lexical/rsc#LexicalDiffComponent": LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e,
-  "@payloadcms/richtext-lexical/client#InlineToolbarFeatureClient": InlineToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@payloadcms/richtext-lexical/client#HorizontalRuleFeatureClient": HorizontalRuleFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@payloadcms/richtext-lexical/client#UploadFeatureClient": UploadFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@payloadcms/richtext-lexical/client#BlockquoteFeatureClient": BlockquoteFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@payloadcms/richtext-lexical/client#RelationshipFeatureClient": RelationshipFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@payloadcms/richtext-lexical/client#LinkFeatureClient": LinkFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@payloadcms/richtext-lexical/client#ChecklistFeatureClient": ChecklistFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@payloadcms/richtext-lexical/client#OrderedListFeatureClient": OrderedListFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@payloadcms/richtext-lexical/client#UnorderedListFeatureClient": UnorderedListFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@payloadcms/richtext-lexical/client#IndentFeatureClient": IndentFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@payloadcms/richtext-lexical/client#AlignFeatureClient": AlignFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@payloadcms/richtext-lexical/client#HeadingFeatureClient": HeadingFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@payloadcms/richtext-lexical/client#ParagraphFeatureClient": ParagraphFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@payloadcms/richtext-lexical/client#InlineCodeFeatureClient": InlineCodeFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@payloadcms/richtext-lexical/client#SuperscriptFeatureClient": SuperscriptFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@payloadcms/richtext-lexical/client#SubscriptFeatureClient": SubscriptFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@payloadcms/richtext-lexical/client#StrikethroughFeatureClient": StrikethroughFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@payloadcms/richtext-lexical/client#UnderlineFeatureClient": UnderlineFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@payloadcms/richtext-lexical/client#BoldFeatureClient": BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@payloadcms/richtext-lexical/client#ItalicFeatureClient": ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
+  "./components/admin/rich-text/AdminRichTextField#default": default_ad9256c3644bedfa84002efe3ec10f4b,
   "./components/admin/projects/ProjectHealthPanel#default": default_ab78d9502cc657922cb4d1eb5f80fa6f,
   "./components/admin/projects/ProjectCells#ProjectStageCell": ProjectStageCell_b60b3aa295b519a9f28efaec95dd48a6,
   "./components/admin/projects/ProjectCells#ProjectProgressCell": ProjectProgressCell_b60b3aa295b519a9f28efaec95dd48a6,
@@ -123,6 +130,17 @@ export const importMap = {
   "./components/admin/projects/ProjectCells#ProjectPublishedCell": ProjectPublishedCell_b60b3aa295b519a9f28efaec95dd48a6,
   "./components/admin/projects/ProjectsListHeader#default": default_721c4b3f49c101c29c9cbe0ff234816e,
   "./components/admin/projects/ProjectDocumentControls#default": default_098a8f37f832b2d137a7699dffe85a65,
+  "./components/admin/project-versions/ProjectVersionEditor#ReleaseWorkspace": ReleaseWorkspace_7222189af48e42343afadf4d8e6a6e50,
+  "./components/admin/project-versions/ProjectVersionCells#ProjectVersionProjectCell": ProjectVersionProjectCell_2790147deb8ee21beb1509eeacfd1407,
+  "./components/admin/project-versions/ProjectVersionCells#ProjectVersionIdentityCell": ProjectVersionIdentityCell_2790147deb8ee21beb1509eeacfd1407,
+  "./components/admin/project-versions/ProjectVersionCells#ProjectVersionDateCell": ProjectVersionDateCell_2790147deb8ee21beb1509eeacfd1407,
+  "./components/admin/project-versions/ProjectVersionEditor#ReleaseHighlightsSummary": ReleaseHighlightsSummary_7222189af48e42343afadf4d8e6a6e50,
+  "./components/admin/project-versions/ProjectVersionCells#ProjectVersionBreakingCell": ProjectVersionBreakingCell_2790147deb8ee21beb1509eeacfd1407,
+  "./components/admin/project-versions/ProjectVersionEditor#ReleaseRiskSummary": ReleaseRiskSummary_7222189af48e42343afadf4d8e6a6e50,
+  "./components/admin/project-versions/ProjectVersionCells#ProjectVersionStableCell": ProjectVersionStableCell_2790147deb8ee21beb1509eeacfd1407,
+  "./components/admin/project-versions/ProjectVersionCells#ProjectVersionCurrentCell": ProjectVersionCurrentCell_2790147deb8ee21beb1509eeacfd1407,
+  "./components/admin/project-versions/ProjectVersionEditor#ReleaseReadiness": ReleaseReadiness_7222189af48e42343afadf4d8e6a6e50,
+  "./components/admin/project-versions/ProjectVersionsListHeader#default": default_87b450e451470415c95e582d91bf11db,
   "./components/admin/blog-posts/BlogPostCells#BlogPostTitleCell": BlogPostTitleCell_2afcc556ee611a3d9dcb1e557946006c,
   "./components/admin/blog-posts/BlogPostCells#BlogPostCategoryCell": BlogPostCategoryCell_2afcc556ee611a3d9dcb1e557946006c,
   "./components/admin/blog-posts/ArticleReadinessPanel#default": default_bb1969c848f0c947805732b791c7e0fb,
