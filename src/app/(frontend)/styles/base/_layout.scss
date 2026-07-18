@@ -28,10 +28,12 @@
   display: block;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg,
-      rgb(var(--rgb-header-cyan) / 15%),
-      rgb(var(--rgb-header-cyan) / 95%),
-      rgb(var(--rgb-progress-purple) / 80%));
+  background: linear-gradient(
+    90deg,
+    rgb(var(--rgb-header-cyan) / 15%),
+    rgb(var(--rgb-header-cyan) / 95%),
+    rgb(var(--rgb-progress-purple) / 80%)
+  );
   box-shadow: 0 0 14px rgb(var(--rgb-header-cyan) / 55%);
   transform: scaleX(0);
   transform-origin: left center;
@@ -84,7 +86,7 @@
   filter: drop-shadow(0 0 16px rgb(var(--rgb-cyan) / 42%));
 }
 
-.logo__mark>svg {
+.logo__mark > svg {
   display: block;
   // width: 100%;
   // height: 100%;

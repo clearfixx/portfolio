@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 import { authenticatedAccess, publicAccess } from '@/access'
 
 import { seoField, slugField } from '@/fields'
+import { adminRichTextField } from '@/fields/adminRichTextField'
 
 export const Projects: CollectionConfig = {
   slug: 'projects',
@@ -84,11 +85,11 @@ export const Projects: CollectionConfig = {
           label: 'Case Study',
           description: 'Long-form project story and measurable highlights.',
           fields: [
-            {
+            adminRichTextField({
+              label: 'Description',
               name: 'description',
-              type: 'richText',
               required: true,
-            },
+            }),
             {
               name: 'highlights',
               type: 'array',

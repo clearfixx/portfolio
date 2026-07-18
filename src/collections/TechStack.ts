@@ -1,13 +1,17 @@
 import type { CollectionConfig } from 'payload'
-import { authenticatedAccess, publicAccess } from '@/access'
 
+import { authenticatedAccess, publicAccess } from '@/access'
 import { slugField } from '@/fields'
 
 export const TechStack: CollectionConfig = {
   slug: 'tech-stack',
   admin: {
     useAsTitle: 'name',
-    defaultColumns: ['name', 'slug', 'category', 'featured', 'visible', 'sortOrder'],
+    defaultColumns: ['name', 'category', 'featured', 'visible', 'officialUrl', 'sortOrder'],
+    listSearchableFields: ['name', 'slug', 'description'],
+    components: {
+      beforeList: ['./components/admin/taxonomy/TechStackListHeader'],
+    },
   },
   access: {
     read: publicAccess,
@@ -17,50 +21,115 @@ export const TechStack: CollectionConfig = {
   },
   fields: [
     {
-      name: 'name',
-      type: 'text',
-      required: true,
-    },
-    slugField({
-      sourceField: 'name',
-      description: 'Used as the icon key for AppIcon, e.g. nextjs, react, typescript.',
-    }),
-    {
-      name: 'description',
-      type: 'textarea',
+      name: 'technologyWorkspace',
+      type: 'ui',
       admin: {
-        description: 'Short tooltip-friendly description.',
+        components: {
+          Field: './components/admin/taxonomy/TechStackEditor#TechnologyWorkspace',
+        },
       },
     },
     {
-      name: 'color',
-      type: 'text',
-      admin: {
-        description: 'Optional brand color, e.g. #3178C6.',
-      },
-    },
-    {
-      name: 'category',
-      type: 'relationship',
-      relationTo: 'categories',
-      hasMany: false,
-      admin: {
-        description: 'Use categories with type "Tech Stack" or "Shared".',
-      },
-    },
-    {
-      name: 'officialUrl',
-      type: 'text',
-      admin: {
-        description: 'Official website URL.',
-      },
-    },
-    {
-      name: 'documentationUrl',
-      type: 'text',
-      admin: {
-        description: 'Official documentation URL.',
-      },
+      type: 'tabs',
+      tabs: [
+        {
+          label: 'Identity',
+          fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'name',
+                  type: 'text',
+                  required: true,
+                  admin: {
+                    width: '70%',
+                    components: {
+                      Cell: './components/admin/taxonomy/TechStackCells#TechnologyNameCell',
+                    },
+                  },
+                },
+                {
+                  name: 'color',
+                  type: 'text',
+                  admin: {
+                    width: '30%',
+                    description: 'Optional brand color in hexadecimal format, e.g. #3178C6.',
+                  },
+                },
+              ],
+            },
+            slugField({
+              sourceField: 'name',
+              description: 'Used as the icon key for AppIcon, e.g. nextjs, react, typescript.',
+            }),
+            {
+              name: 'description',
+              type: 'textarea',
+              admin: {
+                description: 'Short tooltip-friendly description.',
+              },
+            },
+          ],
+        },
+        {
+          label: 'Classification',
+          fields: [
+            {
+              name: 'category',
+              type: 'relationship',
+              relationTo: 'categories',
+              hasMany: false,
+              admin: {
+                description: 'Use categories with type "Tech Stack" or "Shared".',
+                components: {
+                  Cell: './components/admin/taxonomy/TechStackCells#TechnologyCategoryCell',
+                },
+              },
+            },
+            {
+              name: 'technologyClassification',
+              type: 'ui',
+              admin: {
+                components: {
+                  Field: './components/admin/taxonomy/TechStackEditor#TechnologyClassification',
+                },
+              },
+            },
+          ],
+        },
+        {
+          label: 'Resources',
+          fields: [
+            {
+              name: 'officialUrl',
+              type: 'text',
+              admin: {
+                description: 'Official website URL.',
+                components: {
+                  Cell: './components/admin/taxonomy/TechStackCells#TechnologyLinksCell',
+                },
+              },
+            },
+            {
+              name: 'documentationUrl',
+              type: 'text',
+              admin: {
+                description: 'Official documentation URL.',
+              },
+            },
+            {
+              name: 'technologyResources',
+              type: 'ui',
+              admin: {
+                components: {
+                  Field: './components/admin/taxonomy/TechStackEditor#TechnologyResources',
+                },
+              },
+            },
+          ],
+        },
+      ],
     },
     {
       name: 'featured',
@@ -69,6 +138,9 @@ export const TechStack: CollectionConfig = {
       admin: {
         position: 'sidebar',
         description: 'Show in highlighted homepage sections.',
+        components: {
+          Cell: './components/admin/taxonomy/TechStackCells#TechnologyFeaturedCell',
+        },
       },
     },
     {
@@ -78,6 +150,9 @@ export const TechStack: CollectionConfig = {
       admin: {
         position: 'sidebar',
         description: 'Allow this technology to appear on public pages.',
+        components: {
+          Cell: './components/admin/taxonomy/TechStackCells#TechnologyVisibleCell',
+        },
       },
     },
     {
@@ -86,6 +161,20 @@ export const TechStack: CollectionConfig = {
       defaultValue: 0,
       admin: {
         position: 'sidebar',
+        description: 'Lower values appear earlier in manually ordered technology lists.',
+        components: {
+          Cell: './components/admin/taxonomy/TechStackCells#TechnologySortCell',
+        },
+      },
+    },
+    {
+      name: 'technologyReadiness',
+      type: 'ui',
+      admin: {
+        position: 'sidebar',
+        components: {
+          Field: './components/admin/taxonomy/TechStackEditor#TechnologyReadiness',
+        },
       },
     },
   ],

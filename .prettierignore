@@ -1,3 +1,6 @@
 # Payload regenerates this tracked file on startup.
 # Keep the generator output canonical instead of reformatting it.
 src/app/(payload)/admin/importMap.js
+
+# pnpm owns the lockfile's compact YAML representation.
+pnpm-lock.yaml

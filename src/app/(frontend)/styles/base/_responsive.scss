@@ -106,10 +106,10 @@
   *,
   *::before,
   *::after {
-    scroll-behavior: auto !important;
-    animation-duration: 1ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 1ms !important;
+    scroll-behavior: auto;
+    animation-duration: 1ms;
+    animation-iteration-count: 1;
+    transition-duration: 1ms;
   }
 
   .hero-orb,
@@ -120,6 +120,6 @@
   .hero-tech,
   .hero-dashboard,
   .hero-scroll i::after {
-    animation: none !important;
+    animation: none;
   }
 }
