@@ -32,7 +32,8 @@
     "verify:production": "pnpm run check:env:production && pnpm run lint && pnpm run typecheck && pnpm run test:int && pnpm run test:regression && pnpm run build",
     "jobs:github-feed": "cross-env NODE_OPTIONS=--no-deprecation payload jobs:run --cron \"* * * * *\" --queue dss-github-feed --handle-schedules",
     "jobs:x-feed": "cross-env NODE_OPTIONS=--no-deprecation payload jobs:run --cron \"* * * * *\" --queue dss-x-feed --handle-schedules",
-    "jobs:instagram-feed": "cross-env NODE_OPTIONS=--no-deprecation payload jobs:run --cron \"* * * * *\" --queue dss-instagram-feed --handle-schedules"
+    "jobs:instagram-feed": "cross-env NODE_OPTIONS=--no-deprecation payload jobs:run --cron \"* * * * *\" --queue dss-instagram-feed --handle-schedules",
+    "seed:dss-case-study": "cross-env NODE_OPTIONS=--no-deprecation tsx scripts/seed-dss-universe-case-study.ts"
   },
   "dependencies": {
     "@dss-feeds/github-feed": "file:../dss-feeds/packages/github-feed",

@@ -1,6 +1,11 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 
+import {
+  PublicEmptyState,
+  PublicIndexCard,
+  PublicPageHero,
+  PublicPageShell,
+} from '@/components/public-page'
 import { getPublishedBlogPosts } from '@/lib/cms'
 
 export const revalidate = 300
@@ -13,49 +18,77 @@ export const metadata: Metadata = {
   },
 }
 
+const dateFormatter = new Intl.DateTimeFormat('en', {
+  day: '2-digit',
+  month: 'short',
+  year: 'numeric',
+})
+
 export default async function BlogPage() {
   const posts = await getPublishedBlogPosts(12)
+  const publishedCount = posts.length
 
   return (
-    <section className="public-page public-page--blog" aria-labelledby="blog-page-title">
-      <div className="site-container public-page__inner">
-        <header className="public-page__header">
-          <p className="public-page__eyebrow">Portfolio // Build Notes</p>
-          <h1 id="blog-page-title">Blog</h1>
-          <p>
-            Notes about product engineering, architecture, implementation choices, and lessons
-            learned while building.
-          </p>
+    <PublicPageShell className="public-page--blog">
+      <PublicPageHero
+        eyebrow="Portfolio / Build Notes"
+        title="Blog"
+        titleId="blog-page-title"
+        description="Engineering notes about architecture, implementation choices, product systems, and the lessons that only appear while building."
+        meta={
+          <>
+            <span>Editorial stream</span>
+            <span>{publishedCount} published</span>
+          </>
+        }
+        aside={
+          <div className="public-page-telemetry public-page-telemetry--violet">
+            <span>BUILD_NOTES</span>
+            <strong>{String(publishedCount).padStart(2, '0')}</strong>
+            <small>articles online</small>
+          </div>
+        }
+      />
+
+      <section className="public-page-section" aria-labelledby="blog-registry-title">
+        <header className="public-page-section__header">
+          <div>
+            <p>Latest transmissions</p>
+            <h2 id="blog-registry-title">Notes from the build process.</h2>
+          </div>
+          <span>{String(publishedCount).padStart(2, '0')} entries</span>
         </header>
 
         {posts.length > 0 ? (
-          <ul className="public-page__list">
-            {posts.map((post) => {
+          <ul className="public-index-grid public-index-grid--blog">
+            {posts.map((post, index) => {
               const href = post.slug ? `/blog/${post.slug}` : '/blog'
+              const publishedAt = post.publishedAt
+                ? dateFormatter.format(new Date(post.publishedAt))
+                : 'Publication pending'
 
               return (
                 <li key={post.id}>
-                  <article>
-                    {post.publishedAt ? (
-                      <time dateTime={post.publishedAt}>
-                        {new Intl.DateTimeFormat('en', {
-                          dateStyle: 'medium',
-                        }).format(new Date(post.publishedAt))}
-                      </time>
-                    ) : null}
-                    <h2>
-                      <Link href={href}>{post.title}</Link>
-                    </h2>
-                    <p>{post.excerpt}</p>
-                  </article>
+                  <PublicIndexCard
+                    accent={index % 2 === 0 ? 'violet' : 'cyan'}
+                    ctaLabel="Read article"
+                    eyebrow="Build note"
+                    excerpt={post.excerpt}
+                    href={href}
+                    meta={publishedAt}
+                    title={post.title}
+                  />
                 </li>
               )
             })}
           </ul>
         ) : (
-          <p role="status">No published articles are available yet.</p>
+          <PublicEmptyState
+            title="No published articles yet"
+            description="Published engineering notes will appear here automatically."
+          />
         )}
-      </div>
-    </section>
+      </section>
+    </PublicPageShell>
   )
 }

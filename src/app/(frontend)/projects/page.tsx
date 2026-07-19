@@ -1,7 +1,17 @@
+import {
+  ActivityIcon,
+  BarChartIcon,
+  CodeIcon,
+  GitHubIcon,
+  LayersIcon,
+} from '@/components/icons/project'
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import Image from 'next/image'
 
+import { ProjectDirectory } from '@/components/projects'
+import { PublicBreadcrumbs, PublicPageShell } from '@/components/public-page'
 import { getProjects } from '@/lib/cms'
+import { buildProjectDirectoryItems, getProjectImage } from '@/lib/cms/public-projects'
 
 export const revalidate = 300
 
@@ -14,42 +24,106 @@ export const metadata: Metadata = {
 }
 
 export default async function ProjectsPage() {
-  const projects = await getProjects()
+  const projects = await getProjects(48)
+  const items = buildProjectDirectoryItems(projects)
+  const heroProject = projects.find((project) => project.isFeatured) ?? projects[0]
+  const heroImage = heroProject ? getProjectImage(heroProject) : undefined
+  const heroItem = items[0]
+  const openSourceCount = items.filter((item) =>
+    item.links.some((link) => link.type === 'github'),
+  ).length
+  const activeCount = items.filter((item) =>
+    ['planning', 'development', 'testing'].includes(item.stage),
+  ).length
+  const averageProgress =
+    items.length > 0
+      ? Math.round(items.reduce((total, item) => total + item.progress, 0) / items.length)
+      : 0
 
   return (
-    <section className="public-page public-page--projects" aria-labelledby="projects-page-title">
-      <div className="site-container public-page__inner">
-        <header className="public-page__header">
-          <p className="public-page__eyebrow">Portfolio // Projects</p>
-          <h1 id="projects-page-title">Projects</h1>
-          <p>
-            A growing collection of products, platforms, and engineering systems built from idea to
-            release.
+    <PublicPageShell className="projects-page">
+      <PublicBreadcrumbs items={[{ label: 'Projects' }]} />
+
+      <header className="projects-index-hero">
+        <div className="projects-index-hero__copy">
+          <p className="projects-index-hero__eyebrow">
+            <LayersIcon aria-hidden="true" size={15} />
+            Project registry
           </p>
-        </header>
+          <h1>
+            All Projects <span aria-hidden="true" />
+          </h1>
+          <p>
+            A collection of systems I&apos;ve designed, built, and shipped. From first architecture
+            decisions to production-ready releases.
+          </p>
+        </div>
 
-        {projects.length > 0 ? (
-          <ul className="public-page__list">
-            {projects.map((project) => {
-              const href = project.slug ? `/projects/${project.slug}` : '/projects'
+        <div className="projects-index-hero__visual">
+          {heroImage ? (
+            <Image
+              alt={heroImage.alt}
+              fill
+              priority
+              sizes="(max-width: 900px) 100vw, 42vw"
+              src={heroImage.src}
+            />
+          ) : (
+            <div className="projects-index-hero__fallback" aria-hidden="true">
+              <div className="projects-index-hero__fallback-window">
+                <div className="projects-index-hero__fallback-toolbar">
+                  <div>
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+                  <small>project.registry.ts</small>
+                </div>
 
-              return (
-                <li key={project.id}>
-                  <article>
-                    <p>{project.stage}</p>
-                    <h2>
-                      <Link href={href}>{project.title}</Link>
-                    </h2>
-                    <p>{project.excerpt}</p>
-                  </article>
-                </li>
-              )
-            })}
-          </ul>
-        ) : (
-          <p role="status">No published projects are available yet.</p>
-        )}
-      </div>
-    </section>
+                <div className="projects-index-hero__fallback-body">
+                  <CodeIcon size={32} />
+                  <span>
+                    <i>const</i> registry = {'{'}
+                  </span>
+                  <span>&nbsp;&nbsp;projects: {items.length},</span>
+                  <span>&nbsp;&nbsp;active: {activeCount},</span>
+                  <span>&nbsp;&nbsp;featured: &apos;{heroItem?.title ?? 'none'}&apos;</span>
+                  <span>{'}'}</span>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </header>
+
+      <section className="projects-index-metrics" aria-label="Project metrics">
+        <article>
+          <LayersIcon aria-hidden="true" size={18} />
+          <span>Total projects</span>
+          <strong>{items.length}</strong>
+          <small>published case studies</small>
+        </article>
+        <article>
+          <GitHubIcon aria-hidden="true" size={18} />
+          <span>Open source</span>
+          <strong>{openSourceCount}</strong>
+          <small>public repositories</small>
+        </article>
+        <article>
+          <ActivityIcon aria-hidden="true" size={18} />
+          <span>Active builds</span>
+          <strong>{activeCount}</strong>
+          <small>currently moving</small>
+        </article>
+        <article>
+          <BarChartIcon aria-hidden="true" size={18} />
+          <span>Average progress</span>
+          <strong>{averageProgress}%</strong>
+          <small>across public work</small>
+        </article>
+      </section>
+
+      <ProjectDirectory items={items} />
+    </PublicPageShell>
   )
 }

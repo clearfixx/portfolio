@@ -1,8 +1,15 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-import { getProjectBySlug } from '@/lib/cms'
+import { SiteFooter } from '@/components/home'
+import { ProjectDetail } from '@/components/projects'
+import { PublicBreadcrumbs, PublicPageShell } from '@/components/public-page'
+import {
+  getHomepageContent,
+  getProjectBySlug,
+  getProjectVersions,
+  getSiteFooterGitHubFeed,
+} from '@/lib/cms'
 
 export const revalidate = 300
 
@@ -37,40 +44,33 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound()
   }
 
+  const [versions, homepageContent, githubFeed] = await Promise.all([
+    getProjectVersions(project.id),
+    getHomepageContent(),
+    getSiteFooterGitHubFeed(),
+  ])
+
   return (
-    <article className="public-page public-page--project">
-      <div className="site-container public-page__inner">
-        <nav aria-label="Breadcrumb">
-          <Link href="/projects">Projects</Link>
-          <span aria-hidden="true"> / </span>
-          <span aria-current="page">{project.title}</span>
-        </nav>
+    <>
+      <PublicPageShell className="project-page">
+        <PublicBreadcrumbs
+          items={[
+            {
+              href: '/projects',
+              label: 'Projects',
+            },
+            {
+              label: project.title,
+            },
+          ]}
+        />
 
-        <header className="public-page__header">
-          <p className="public-page__eyebrow">
-            {project.stage} · {project.progress ?? 0}% complete
-          </p>
-          <h1>{project.title}</h1>
-          <p>{project.excerpt}</p>
-        </header>
+        <ProjectDetail project={project} versions={versions} />
+      </PublicPageShell>
 
-        <dl>
-          <div>
-            <dt>Stage</dt>
-            <dd>{project.stage}</dd>
-          </div>
-          <div>
-            <dt>Progress</dt>
-            <dd>{project.progress ?? 0}%</dd>
-          </div>
-          {project.currentVersion ? (
-            <div>
-              <dt>Current version</dt>
-              <dd>{project.currentVersion}</dd>
-            </div>
-          ) : null}
-        </dl>
-      </div>
-    </article>
+      {homepageContent.siteFooter ? (
+        <SiteFooter content={homepageContent.siteFooter} githubFeed={githubFeed} />
+      ) : null}
+    </>
   )
 }

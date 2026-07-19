@@ -358,14 +358,61 @@ export interface Project {
     | number
     | boolean
     | null;
+  /**
+   * Code editor content shown in the public case study. Leave code empty to use the frontend fallback.
+   */
+  caseStudyCode?: {
+    /**
+     * Displayed file path, for example apps/api/src/main.ts.
+     */
+    filePath?: string | null;
+    language?: ('typescript' | 'javascript' | 'tsx' | 'jsx' | 'json' | 'scss' | 'shell' | 'other') | null;
+    /**
+     * Plain code text. Line breaks are preserved on the public page.
+     */
+    code?: string | null;
+  };
   highlights?:
     | {
         title: string;
         description: string;
         /**
-         * Icon key for frontend icon mapping.
+         * Semantic icon used by the public case study.
          */
-        icon?: string | null;
+        icon?: ('community' | 'research' | 'ai' | 'media' | 'security' | 'modules') | null;
+        id?: string | null;
+      }[]
+    | null;
+  caseStudyMetrics?:
+    | {
+        label: string;
+        value: string;
+        detail?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  architecture?:
+    | {
+        title: string;
+        /**
+         * Architecture node icon used on the public case study.
+         */
+        icon?: ('frontend' | 'api' | 'services' | 'database') | null;
+        description?: string | null;
+        items: {
+          label: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+      }[]
+    | null;
+  roadmap?:
+    | {
+        version?: string | null;
+        title: string;
+        description?: string | null;
+        status: 'completed' | 'current' | 'planned';
+        timeframe?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -1068,12 +1115,51 @@ export interface ProjectsSelect<T extends boolean = true> {
   category?: T;
   techStack?: T;
   description?: T;
+  caseStudyCode?:
+    | T
+    | {
+        filePath?: T;
+        language?: T;
+        code?: T;
+      };
   highlights?:
     | T
     | {
         title?: T;
         description?: T;
         icon?: T;
+        id?: T;
+      };
+  caseStudyMetrics?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        detail?: T;
+        id?: T;
+      };
+  architecture?:
+    | T
+    | {
+        title?: T;
+        icon?: T;
+        description?: T;
+        items?:
+          | T
+          | {
+              label?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  roadmap?:
+    | T
+    | {
+        version?: T;
+        title?: T;
+        description?: T;
+        status?: T;
+        timeframe?: T;
         id?: T;
       };
   coverImage?: T;

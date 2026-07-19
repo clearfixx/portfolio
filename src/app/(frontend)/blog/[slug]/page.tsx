@@ -1,10 +1,14 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { PublicBreadcrumbs, PublicPageHero, PublicPageShell } from '@/components/public-page'
 import { getBlogPostBySlug } from '@/lib/cms'
 
 export const revalidate = 300
+
+const longDateFormatter = new Intl.DateTimeFormat('en', {
+  dateStyle: 'long',
+})
 
 type BlogPostPageProps = {
   params: Promise<{
@@ -37,28 +41,60 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound()
   }
 
-  return (
-    <article className="public-page public-page--article">
-      <div className="site-container public-page__inner">
-        <nav aria-label="Breadcrumb">
-          <Link href="/blog">Blog</Link>
-          <span aria-hidden="true"> / </span>
-          <span aria-current="page">{post.title}</span>
-        </nav>
+  const publishedAt = post.publishedAt
+    ? longDateFormatter.format(new Date(post.publishedAt))
+    : 'Publication pending'
 
-        <header className="public-page__header">
-          <p className="public-page__eyebrow">Build Note</p>
-          <h1>{post.title}</h1>
-          <p>{post.excerpt}</p>
-          {post.publishedAt ? (
-            <time dateTime={post.publishedAt}>
-              {new Intl.DateTimeFormat('en', {
-                dateStyle: 'long',
-              }).format(new Date(post.publishedAt))}
-            </time>
-          ) : null}
-        </header>
-      </div>
-    </article>
+  return (
+    <PublicPageShell className="public-page--article">
+      <article aria-labelledby="article-page-title">
+        <PublicBreadcrumbs
+          items={[
+            {
+              href: '/blog',
+              label: 'Blog',
+            },
+            {
+              label: post.title,
+            },
+          ]}
+        />
+
+        <PublicPageHero
+          eyebrow="Build Note / Article"
+          title={post.title}
+          titleId="article-page-title"
+          description={post.excerpt}
+          meta={
+            <>
+              <span>{publishedAt}</span>
+              <span>Editorial stream</span>
+            </>
+          }
+          aside={
+            <div className="public-page-telemetry public-page-telemetry--violet">
+              <span>ARTICLE_STATUS</span>
+              <strong>LIVE</strong>
+              <small>published note</small>
+            </div>
+          }
+        />
+
+        <section className="public-article-summary" aria-label="Article information">
+          <div>
+            <span>Published</span>
+            <strong>{publishedAt}</strong>
+          </div>
+          <div>
+            <span>Format</span>
+            <strong>Engineering note</strong>
+          </div>
+          <div>
+            <span>Source</span>
+            <strong>Portfolio CMS</strong>
+          </div>
+        </section>
+      </article>
+    </PublicPageShell>
   )
 }
