@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 import { SiteShell } from '@/components/layout'
 import { CookieConsent } from '@/components/privacy/CookieConsent'
 import { ThemeProvider } from '@/components/theme/ThemeProvider'
+import { Tooltip } from '@/components/ui'
 import { getSeo, getSiteSettings } from '@/lib/cms'
 
 import './styles.scss'
@@ -84,6 +85,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       <body>
         <ThemeProvider>
           <SiteShell>{children}</SiteShell>
+          <Tooltip />
           <CookieConsent />
         </ThemeProvider>
       </body>

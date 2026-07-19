@@ -1,16 +1,12 @@
-import {
-  ActivityIcon,
-  BarChartIcon,
-  CodeIcon,
-  GitHubIcon,
-  LayersIcon,
-} from '@/components/icons/project'
+import { LayersIcon } from '@/components/icons/project'
+import { ProjectsRegistryEditor } from '@/components/projects/ProjectsRegistryEditor'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 
-import { ProjectDirectory } from '@/components/projects'
+import { SiteFooter } from '@/components/home'
+import { ProjectDirectory, ProjectsIndexCTA } from '@/components/projects'
 import { PublicBreadcrumbs, PublicPageShell } from '@/components/public-page'
-import { getProjects } from '@/lib/cms'
+import { getHomepageContent, getProjects, getSiteFooterGitHubFeed } from '@/lib/cms'
 import { buildProjectDirectoryItems, getProjectImage } from '@/lib/cms/public-projects'
 
 export const revalidate = 300
@@ -23,107 +19,121 @@ export const metadata: Metadata = {
   },
 }
 
+type HomepageMetric = {
+  label?: string | null
+  value?: string | number | null
+}
+
+function readMetric(metrics: HomepageMetric[], searchTerms: string[], fallback: string) {
+  const metric = metrics.find((item) => {
+    const label = item.label?.toLocaleLowerCase() ?? ''
+
+    return searchTerms.some((term) => label.includes(term))
+  })
+
+  if (metric?.value === null || metric?.value === undefined || metric.value === '') {
+    return fallback
+  }
+
+  return String(metric.value)
+}
+
 export default async function ProjectsPage() {
-  const projects = await getProjects(48)
+  const [projects, homepageContent, githubFeed] = await Promise.all([
+    getProjects(48),
+    getHomepageContent(),
+    getSiteFooterGitHubFeed(),
+  ])
+
   const items = buildProjectDirectoryItems(projects)
   const heroProject = projects.find((project) => project.isFeatured) ?? projects[0]
   const heroImage = heroProject ? getProjectImage(heroProject) : undefined
-  const heroItem = items[0]
+  const heroItem = items.find((item) => item.id === String(heroProject?.id)) ?? items[0]
   const openSourceCount = items.filter((item) =>
     item.links.some((link) => link.type === 'github'),
   ).length
-  const activeCount = items.filter((item) =>
-    ['planning', 'development', 'testing'].includes(item.stage),
-  ).length
-  const averageProgress =
-    items.length > 0
-      ? Math.round(items.reduce((total, item) => total + item.progress, 0) / items.length)
-      : 0
+  const homepageMetrics = ((homepageContent.hero as { metrics?: HomepageMetric[] } | undefined)
+    ?.metrics ?? []) as HomepageMetric[]
+  const yearsBuilding = readMetric(homepageMetrics, ['year'], '12+')
+  const codeCommitments = readMetric(homepageMetrics, ['commit'], '—')
+  const footerContent = homepageContent.siteFooter
 
   return (
-    <PublicPageShell className="projects-page">
-      <PublicBreadcrumbs items={[{ label: 'Projects' }]} />
+    <>
+      <PublicPageShell className="projects-page">
+        <PublicBreadcrumbs items={[{ label: 'Projects' }]} />
 
-      <header className="projects-index-hero">
-        <div className="projects-index-hero__copy">
-          <p className="projects-index-hero__eyebrow">
-            <LayersIcon aria-hidden="true" size={15} />
-            Project registry
-          </p>
-          <h1>
-            All Projects <span aria-hidden="true" />
-          </h1>
-          <p>
-            A collection of systems I&apos;ve designed, built, and shipped. From first architecture
-            decisions to production-ready releases.
-          </p>
-        </div>
+        <header className="projects-index-hero">
+          <div className="projects-index-hero__copy">
+            <p className="projects-index-hero__eyebrow">
+              <LayersIcon aria-hidden="true" size={15} />
+              Project registry
+            </p>
 
-        <div className="projects-index-hero__visual">
-          {heroImage ? (
-            <Image
-              alt={heroImage.alt}
-              fill
-              priority
-              sizes="(max-width: 900px) 100vw, 42vw"
-              src={heroImage.src}
-            />
-          ) : (
-            <div className="projects-index-hero__fallback" aria-hidden="true">
-              <div className="projects-index-hero__fallback-window">
-                <div className="projects-index-hero__fallback-toolbar">
-                  <div>
-                    <span />
-                    <span />
-                    <span />
-                  </div>
-                  <small>project.registry.ts</small>
-                </div>
+            <h1>
+              All Projects <span aria-hidden="true" />
+            </h1>
 
-                <div className="projects-index-hero__fallback-body">
-                  <CodeIcon size={32} />
-                  <span>
-                    <i>const</i> registry = {'{'}
-                  </span>
-                  <span>&nbsp;&nbsp;projects: {items.length},</span>
-                  <span>&nbsp;&nbsp;active: {activeCount},</span>
-                  <span>&nbsp;&nbsp;featured: &apos;{heroItem?.title ?? 'none'}&apos;</span>
-                  <span>{'}'}</span>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </header>
+            <p className="projects-index-hero__description">
+              A collection of systems I&apos;ve designed, built, and shipped. From idea to
+              production.
+            </p>
 
-      <section className="projects-index-metrics" aria-label="Project metrics">
-        <article>
-          <LayersIcon aria-hidden="true" size={18} />
-          <span>Total projects</span>
-          <strong>{items.length}</strong>
-          <small>published case studies</small>
-        </article>
-        <article>
-          <GitHubIcon aria-hidden="true" size={18} />
-          <span>Open source</span>
-          <strong>{openSourceCount}</strong>
-          <small>public repositories</small>
-        </article>
-        <article>
-          <ActivityIcon aria-hidden="true" size={18} />
-          <span>Active builds</span>
-          <strong>{activeCount}</strong>
-          <small>currently moving</small>
-        </article>
-        <article>
-          <BarChartIcon aria-hidden="true" size={18} />
-          <span>Average progress</span>
-          <strong>{averageProgress}%</strong>
-          <small>across public work</small>
-        </article>
-      </section>
+            <section className="projects-index-metrics" aria-label="Project metrics">
+              <article>
+                <span>Total projects</span>
+                <strong>{items.length}</strong>
+                <small>and counting</small>
+              </article>
 
-      <ProjectDirectory items={items} />
-    </PublicPageShell>
+              <article>
+                <span>Open source</span>
+                <strong>{openSourceCount}</strong>
+                <small>projects</small>
+              </article>
+
+              <article>
+                <span>Years building</span>
+                <strong>{yearsBuilding}</strong>
+                <small>of experience</small>
+              </article>
+
+              <article>
+                <span>Code commitments</span>
+                <strong>{codeCommitments}</strong>
+                <small>across all projects</small>
+              </article>
+            </section>
+          </div>
+
+          <div className="projects-index-hero__visual">
+            {heroImage ? (
+              <Image
+                alt={heroImage.alt}
+                fill
+                priority
+                sizes="(max-width: 900px) 100vw, 42vw"
+                src={heroImage.src}
+              />
+            ) : (
+              <ProjectsRegistryEditor
+                activeCount={items.filter((item) => item.stage !== 'archived').length}
+                featuredTitle={heroItem?.title ?? 'Portfolio'}
+                progress={heroItem?.progress ?? 0}
+                projectCount={items.length}
+              />
+            )}
+          </div>
+        </header>
+
+        <ProjectDirectory items={items} />
+
+        {footerContent ? (
+          <ProjectsIndexCTA socialLinks={footerContent.profile.socialLinks} />
+        ) : null}
+      </PublicPageShell>
+
+      {footerContent ? <SiteFooter content={footerContent} githubFeed={githubFeed} /> : null}
+    </>
   )
 }

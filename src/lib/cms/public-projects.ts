@@ -6,6 +6,11 @@ export type ProjectLinkViewModel = {
   type: NonNullable<Project['links']>[number]['type']
 }
 
+export type ProjectDirectoryMetric = {
+  label: string
+  value: string
+}
+
 export type ProjectDirectoryItem = {
   category: string
   excerpt: string
@@ -18,6 +23,7 @@ export type ProjectDirectoryItem = {
     width?: number
   }
   links: ProjectLinkViewModel[]
+  metrics: ProjectDirectoryMetric[]
   progress: number
   sinceYear: string
   slug: string
@@ -73,7 +79,7 @@ export function getProjectImage(project: Project) {
       : undefined
   const src = normalizeText(media?.url)
 
-  if (!src || media?.isPublic === false) {
+  if (!media || !src || media.isPublic === false) {
     return undefined
   }
 
@@ -119,6 +125,29 @@ function formatUpdatedLabel(value: string): string {
     return 'Recently'
   }
 
+  const difference = Date.now() - date.getTime()
+  const days = Math.floor(difference / 86_400_000)
+
+  if (days < 0) {
+    return new Intl.DateTimeFormat('en', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    }).format(date)
+  }
+
+  if (days === 0) {
+    return 'Today'
+  }
+
+  if (days === 1) {
+    return '1 day ago'
+  }
+
+  if (days < 31) {
+    return `${days} days ago`
+  }
+
   return new Intl.DateTimeFormat('en', {
     day: '2-digit',
     month: 'short',
@@ -132,7 +161,36 @@ function getSinceYear(project: Project): string {
   return Number.isNaN(date.getTime()) ? '—' : String(date.getFullYear())
 }
 
+function getDirectoryMetrics(project: Project, technologies: string[]): ProjectDirectoryMetric[] {
+  const configuredMetrics = (project.caseStudyMetrics ?? [])
+    .map((metric) => ({
+      label: normalizeText(metric.label) ?? '',
+      value: normalizeText(metric.value) ?? '',
+    }))
+    .filter((metric) => metric.label && metric.value)
+    .slice(0, 2)
+
+  if (configuredMetrics.length >= 2) {
+    return configuredMetrics
+  }
+
+  const fallbackMetrics: ProjectDirectoryMetric[] = [
+    {
+      label: 'Technologies',
+      value: technologies.length > 0 ? `${technologies.length}+` : '—',
+    },
+    {
+      label: 'Features',
+      value: (project.highlights?.length ?? 0) > 0 ? `${project.highlights?.length ?? 0}+` : '—',
+    },
+  ]
+
+  return [...configuredMetrics, ...fallbackMetrics].slice(0, 2)
+}
+
 export function buildProjectDirectoryItem(project: Project): ProjectDirectoryItem {
+  const technologies = getProjectTechnologies(project)
+
   return {
     category: getProjectCategory(project),
     excerpt: project.excerpt,
@@ -140,12 +198,13 @@ export function buildProjectDirectoryItem(project: Project): ProjectDirectoryIte
     id: String(project.id),
     image: getProjectImage(project),
     links: getProjectLinks(project),
+    metrics: getDirectoryMetrics(project, technologies),
     progress: Math.min(100, Math.max(0, Math.round(project.progress ?? 0))),
     sinceYear: getSinceYear(project),
     slug: project.slug,
     stage: project.stage,
     stageLabel: getProjectStageLabel(project.stage),
-    technologies: getProjectTechnologies(project),
+    technologies,
     title: project.title,
     updatedLabel: formatUpdatedLabel(project.updatedAt),
     version: normalizeText(project.currentVersion),

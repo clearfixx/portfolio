@@ -33,6 +33,7 @@ import {
 } from '@/lib/cms/public-projects'
 
 import { ProjectMediaCarousel, type ProjectMediaSlide } from './ProjectMediaCarousel'
+import { ProjectCodePreview } from './ProjectCodePreview'
 import { ProjectRichText } from './ProjectRichText'
 import { ProjectVisualPlaceholder } from './ProjectVisualPlaceholder'
 import { ProjectScreenshotCarousel } from './ProjectScreenshotCarousel'
@@ -196,7 +197,6 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
   const progress = Math.min(100, Math.max(0, Math.round(project.progress ?? 0)))
   const visibleCategory = category.toLowerCase() === 'uncategorized' ? null : category
   const codePreview = project.caseStudyCode?.code?.trim() || DEFAULT_CODE_PREVIEW
-  const codeLines = codePreview.split('\n')
   const codeFilePath =
     project.caseStudyCode?.filePath?.trim() || `${project.slug}/apps/api/src/main.ts`
   const codeLanguage = project.caseStudyCode?.language || 'typescript'
@@ -318,19 +318,11 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
                 ) : null}
               </div>
 
-              <div className="project-case__code-card">
-                <div className="project-case__code-header">
-                  <span>{codeFilePath}</span>
-                  <strong>{codeLanguage}</strong>
-                </div>
-                <ol>
-                  {codeLines.map((line, index) => (
-                    <li key={`${index}-${line}`}>
-                      <code>{line || ' '}</code>
-                    </li>
-                  ))}
-                </ol>
-              </div>
+              <ProjectCodePreview
+                code={codePreview}
+                filePath={codeFilePath}
+                language={codeLanguage}
+              />
             </div>
           </section>
 
@@ -398,10 +390,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
                   <GitHubIcon aria-hidden="true" size={16} />
                   Repository
                 </dt>
-                <dd>
-                  {project.github?.repo || 'Private / unavailable'}
-                  {project.github?.stars ? <span>{project.github.stars} stars</span> : null}
-                </dd>
+                <dd>{project.github?.repo || 'Private / unavailable'}</dd>
               </div>
               {visibleCategory ? (
                 <div>

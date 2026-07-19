@@ -9,14 +9,18 @@ type ProjectRichTextProps = {
   data: Project['description']
 }
 
+function isRichTextData(value: unknown): value is RichTextData {
+  return typeof value === 'object' && value !== null && !Array.isArray(value) && 'root' in value
+}
+
 export function ProjectRichText({ data }: ProjectRichTextProps) {
   if (typeof data === 'string') {
     return <p>{data}</p>
   }
 
-  if (!data || typeof data !== 'object') {
+  if (!isRichTextData(data)) {
     return null
   }
 
-  return <RichText data={data as RichTextData} />
+  return <RichText data={data} />
 }

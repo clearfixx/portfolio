@@ -2,7 +2,7 @@
 
 import { ChevronLeftIcon, ChevronRightIcon } from '@/components/icons/project'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 export type ProjectMediaSlide = {
   src: string
@@ -21,13 +21,8 @@ export function ProjectMediaCarousel({
   priority = false,
   variant = 'hero',
 }: ProjectMediaCarouselProps) {
-  const [activeIndex, setActiveIndex] = useState(0)
-
-  useEffect(() => {
-    if (activeIndex >= slides.length) {
-      setActiveIndex(0)
-    }
-  }, [activeIndex, slides.length])
+  const [requestedIndex, setActiveIndex] = useState(0)
+  const activeIndex = requestedIndex < slides.length ? requestedIndex : 0
 
   if (slides.length === 0) {
     return null
@@ -51,7 +46,9 @@ export function ProjectMediaCarousel({
           alt={activeSlide.alt}
           fill
           priority={priority}
-          sizes={variant === 'hero' ? '(max-width: 900px) 100vw, 56vw' : '(max-width: 900px) 100vw, 44vw'}
+          sizes={
+            variant === 'hero' ? '(max-width: 900px) 100vw, 56vw' : '(max-width: 900px) 100vw, 44vw'
+          }
           src={activeSlide.src}
         />
 

@@ -41,7 +41,7 @@ function getSlideBasis(visibleSlides: number) {
 export function ProjectScreenshotCarousel({ slides }: ProjectScreenshotCarouselProps) {
   const viewportRef = useRef<HTMLDivElement>(null)
   const [visibleSlides, setVisibleSlides] = useState(3)
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [requestedIndex, setActiveIndex] = useState(0)
 
   useEffect(() => {
     function updateVisibleSlides() {
@@ -57,14 +57,11 @@ export function ProjectScreenshotCarousel({ slides }: ProjectScreenshotCarouselP
   }, [])
 
   const maxIndex = Math.max(0, slides.length - visibleSlides)
+  const activeIndex = Math.min(requestedIndex, maxIndex)
   const pageIndexes = useMemo(
     () => Array.from({ length: maxIndex + 1 }, (_, index) => index),
     [maxIndex],
   )
-
-  useEffect(() => {
-    setActiveIndex((current) => Math.min(current, maxIndex))
-  }, [maxIndex])
 
   if (slides.length === 0) {
     return null
