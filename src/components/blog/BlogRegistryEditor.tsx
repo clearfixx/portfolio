@@ -5,53 +5,53 @@ import {
   type RegistryEditorLine,
 } from '@/components/editor/RegistryEditorShell'
 
-type ProjectsRegistryEditorProps = {
-  activeCount: number
+type BlogRegistryEditorProps = {
+  articleCount: number
   featuredTitle: string
-  progress: number
-  projectCount: number
+  seriesCount: number
+  topicCount: number
 }
 
-export function ProjectsRegistryEditor({
-  activeCount,
+export function BlogRegistryEditor({
+  articleCount,
   featuredTitle,
-  progress,
-  projectCount,
-}: ProjectsRegistryEditorProps) {
+  seriesCount,
+  topicCount,
+}: BlogRegistryEditorProps) {
   const codeLines: RegistryEditorLine[] = [
     {
       key: 'type-open',
       content: (
         <>
           <span className="token-keyword">type</span>{' '}
-          <span className="token-type">RegistrySnapshot</span>{' '}
+          <span className="token-type">JournalSnapshot</span>{' '}
           <span className="token-operator">=</span> {'{'}
         </>
       ),
     },
     {
-      key: 'projects-type',
+      key: 'articles-type',
       content: (
         <>
-          {'  '}projects
+          {'  '}articles
           <span className="token-punctuation">:</span> <span className="token-type">number</span>
         </>
       ),
     },
     {
-      key: 'active-type',
+      key: 'topics-type',
       content: (
         <>
-          {'  '}active
+          {'  '}topics
           <span className="token-punctuation">:</span> <span className="token-type">number</span>
         </>
       ),
     },
     {
-      key: 'progress-type',
+      key: 'series-type',
       content: (
         <>
-          {'  '}progress
+          {'  '}series
           <span className="token-punctuation">:</span> <span className="token-type">number</span>
         </>
       ),
@@ -68,13 +68,13 @@ export function ProjectsRegistryEditor({
     { key: 'type-close', content: '}' as ReactNode },
     { key: 'empty', content: '\u00A0' as ReactNode },
     {
-      key: 'registry-open',
+      key: 'journal-open',
       content: (
         <>
           <span className="token-keyword">export const</span>{' '}
-          <span className="token-variable">registry</span>
+          <span className="token-variable">journal</span>
           <span className="token-punctuation">:</span>{' '}
-          <span className="token-type">RegistrySnapshot</span>{' '}
+          <span className="token-type">JournalSnapshot</span>{' '}
           <span className="token-operator">=</span> {'{'}
         </>
       ),
@@ -83,23 +83,23 @@ export function ProjectsRegistryEditor({
       key: 'counts',
       content: (
         <>
-          {'  '}projects
+          {'  '}articles
           <span className="token-punctuation">:</span>{' '}
-          <span className="token-number">{projectCount}</span>
-          <span className="token-punctuation">,</span> active
+          <span className="token-number">{articleCount}</span>
+          <span className="token-punctuation">,</span> topics
           <span className="token-punctuation">:</span>{' '}
-          <span className="token-number">{activeCount}</span>
+          <span className="token-number">{topicCount}</span>
           <span className="token-punctuation">,</span>
         </>
       ),
     },
     {
-      key: 'progress',
+      key: 'series',
       content: (
         <>
-          {'  '}progress
+          {'  '}series
           <span className="token-punctuation">:</span>{' '}
-          <span className="token-number">{progress}</span>
+          <span className="token-number">{seriesCount}</span>
           <span className="token-punctuation">,</span>
         </>
       ),
@@ -115,14 +115,14 @@ export function ProjectsRegistryEditor({
         </>
       ),
     },
-    { key: 'registry-close', content: '}' as ReactNode },
+    { key: 'journal-close', content: '}' as ReactNode },
   ]
 
   return (
     <RegistryEditorShell
-      ariaLabel="TypeScript project registry preview"
+      ariaLabel="TypeScript engineering journal registry preview"
       codeLines={codeLines}
-      fileName="project.registry.ts"
+      fileName="journal.registry.ts"
     />
   )
 }

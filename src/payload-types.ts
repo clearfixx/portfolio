@@ -73,6 +73,7 @@ export interface Config {
     projects: Project;
     'project-versions': ProjectVersion;
     'blog-posts': BlogPost;
+    'blog-feedback-votes': BlogFeedbackVote;
     testimonials: Testimonial;
     'contact-messages': ContactMessage;
     'newsletter-subscribers': NewsletterSubscriber;
@@ -95,6 +96,7 @@ export interface Config {
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     'project-versions': ProjectVersionsSelect<false> | ProjectVersionsSelect<true>;
     'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
+    'blog-feedback-votes': BlogFeedbackVotesSelect<false> | BlogFeedbackVotesSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     'contact-messages': ContactMessagesSelect<false> | ContactMessagesSelect<true>;
     'newsletter-subscribers': NewsletterSubscribersSelect<false> | NewsletterSubscribersSelect<true>;
@@ -522,6 +524,14 @@ export interface BlogPost {
    * Use categories with type "Blog" or "Shared".
    */
   category?: (number | null) | Category;
+  /**
+   * Optional editorial series name used by the public journal index and related-content navigation.
+   */
+  series?: string | null;
+  /**
+   * Editorial depth indicator for readers.
+   */
+  difficulty?: ('foundation' | 'intermediate' | 'advanced') | null;
   tags?:
     | {
         label: string;
@@ -541,6 +551,18 @@ export interface BlogPost {
     metaDescription?: string | null;
     ogImage?: (number | null) | Media;
   };
+  /**
+   * Promote this article in the Engineering Journal featured slot.
+   */
+  isFeatured?: boolean | null;
+  /**
+   * Estimated reading time in minutes.
+   */
+  readingTime?: number | null;
+  /**
+   * Public article view counter.
+   */
+  views?: number | null;
   status: 'draft' | 'published' | 'archived';
   publishedAt?: string | null;
   author?: (number | null) | User;
@@ -589,6 +611,18 @@ export interface ProjectVersion {
    * Current visible project version.
    */
   isCurrent?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-feedback-votes".
+ */
+export interface BlogFeedbackVote {
+  id: number;
+  post: number | BlogPost;
+  vote: 'helpful' | 'not-helpful';
+  fingerprint: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -946,6 +980,10 @@ export interface PayloadLockedDocument {
         value: number | BlogPost;
       } | null)
     | ({
+        relationTo: 'blog-feedback-votes';
+        value: number | BlogFeedbackVote;
+      } | null)
+    | ({
         relationTo: 'testimonials';
         value: number | Testimonial;
       } | null)
@@ -1250,6 +1288,8 @@ export interface BlogPostsSelect<T extends boolean = true> {
   content?: T;
   coverImage?: T;
   category?: T;
+  series?: T;
+  difficulty?: T;
   tags?:
     | T
     | {
@@ -1265,9 +1305,23 @@ export interface BlogPostsSelect<T extends boolean = true> {
         metaDescription?: T;
         ogImage?: T;
       };
+  isFeatured?: T;
+  readingTime?: T;
+  views?: T;
   status?: T;
   publishedAt?: T;
   author?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-feedback-votes_select".
+ */
+export interface BlogFeedbackVotesSelect<T extends boolean = true> {
+  post?: T;
+  vote?: T;
+  fingerprint?: T;
   updatedAt?: T;
   createdAt?: T;
 }
