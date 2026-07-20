@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { SiteFooter } from '@/components/home'
-import { PublicBreadcrumbs, PublicPageShell } from '@/components/public-page'
+import { PublicBreadcrumbs, PublicPageHeroFrame, PublicPageShell } from '@/components/public-page'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -390,7 +390,11 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         <div className={`${styles.page} ${styles.container}`}>
           <PublicBreadcrumbs items={[{ label: 'Blog' }]} />
 
-          <section className={styles.hero} aria-labelledby="blog-page-title">
+          <PublicPageHeroFrame
+            aria-labelledby="blog-page-title"
+            className={styles.hero}
+            variant="index"
+          >
             <div className={styles.heroCopy}>
               <p className={styles.eyebrow}>
                 <span aria-hidden="true">{'//'}</span>
@@ -468,7 +472,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 topicCount={categories.length}
               />
             </div>
-          </section>
+          </PublicPageHeroFrame>
 
           <div className={styles.contentLayout}>
             <div className={styles.mainColumn}>

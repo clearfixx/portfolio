@@ -2242,3 +2242,148 @@
 }
 
 /* public-article-rhythm-v2:end */
+
+/* public-detail-hero-rhythm-v3:start */
+
+.heroGrid {
+  gap: var(--public-page-hero-column-gap);
+  padding-bottom: var(--public-page-hero-divider-space);
+}
+
+.heroGrid::after {
+  display: none;
+}
+
+.articleGrid {
+  margin-top: var(--public-page-content-start);
+}
+
+/* public-detail-hero-rhythm-v3:end */
+
+/* public-article-spacing-v4:start */
+
+:global(.journal-article-page) {
+  /*
+   * Match the Blog index rhythm:
+   * breadcrumb rail -> editorial eyebrow -> hero -> content.
+   */
+  --public-page-breadcrumb-gap: 24px;
+}
+
+.heroGrid {
+  padding-top: 0;
+  padding-bottom: var(--public-page-hero-divider-space);
+}
+
+.articleGrid {
+  margin-top: var(--public-page-content-start);
+}
+
+@media (max-width: 760px) {
+  :global(.journal-article-page) {
+    --public-page-breadcrumb-gap: 20px;
+  }
+}
+
+/* public-article-spacing-v4:end */
+
+/* public-blog-light-shell-ownership-v5:start */
+
+:global([data-theme='light']) .page {
+  background: transparent;
+}
+
+:global([data-theme='light']) .page::before,
+:global([data-theme='light']) .page::after {
+  display: none;
+  background: none;
+}
+
+/* public-blog-light-shell-ownership-v5:end */
+
+/* public-article-full-width-grid-v6:start */
+
+/*
+ * The article page now consumes the full PublicPageShell container.
+ * Hero: flexible copy + fixed telemetry card.
+ * Workspace: TOC + flexible article + right rail.
+ */
+.heroGrid {
+  width: 100%;
+  grid-template-columns: minmax(0, 1fr) 258px;
+  justify-content: stretch;
+  column-gap: clamp(28px, 3vw, 44px);
+  margin-inline: 0;
+  padding-inline: 0;
+}
+
+.heroGrid .heroCopy {
+  grid-column: 1;
+  width: 100%;
+  max-width: none;
+}
+
+.heroGrid .statusCard {
+  grid-column: 2;
+  width: 100%;
+}
+
+.heroGrid h1 {
+  max-width: 1050px;
+}
+
+.heroGrid .excerpt {
+  max-width: 920px;
+}
+
+.articleGrid {
+  width: 100%;
+  grid-template-columns: 225px minmax(0, 1fr) 250px;
+  justify-content: stretch;
+  column-gap: clamp(24px, 2.2vw, 34px);
+  margin-inline: 0;
+  padding-inline: 0;
+}
+
+.articleColumn {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+}
+
+.leftRail,
+.rightRail {
+  min-width: 0;
+}
+
+@media (max-width: 1150px) {
+  .heroGrid {
+    grid-template-columns: minmax(0, 1fr) 240px;
+  }
+
+  .heroGrid .heroCopy {
+    grid-column: 1;
+  }
+
+  .heroGrid .statusCard {
+    grid-column: 2;
+  }
+
+  .articleGrid {
+    grid-template-columns: minmax(0, 1fr) 240px;
+  }
+}
+
+@media (max-width: 900px) {
+  .heroGrid,
+  .articleGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroGrid .heroCopy,
+  .heroGrid .statusCard {
+    grid-column: 1;
+  }
+}
+
+/* public-article-full-width-grid-v6:end */

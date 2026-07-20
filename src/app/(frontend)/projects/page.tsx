@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 import { SiteFooter } from '@/components/home'
 import { ProjectDirectory, ProjectsIndexCTA } from '@/components/projects'
-import { PublicBreadcrumbs, PublicPageShell } from '@/components/public-page'
+import { PublicBreadcrumbs, PublicPageHeroFrame, PublicPageShell } from '@/components/public-page'
 import { getHomepageContent, getProjects, getSiteFooterGitHubFeed } from '@/lib/cms'
 import { buildProjectDirectoryItems, getProjectImage } from '@/lib/cms/public-projects'
 
@@ -63,7 +63,7 @@ export default async function ProjectsPage() {
       <PublicPageShell className="projects-page" variant="index">
         <PublicBreadcrumbs items={[{ label: 'Projects' }]} />
 
-        <header className="projects-index-hero">
+        <PublicPageHeroFrame className="projects-index-hero" variant="index">
           <div className="projects-index-hero__copy">
             <p className="projects-index-hero__eyebrow">
               <LayersIcon aria-hidden="true" size={15} />
@@ -124,7 +124,7 @@ export default async function ProjectsPage() {
               />
             )}
           </div>
-        </header>
+        </PublicPageHeroFrame>
 
         <ProjectDirectory items={items} />
 

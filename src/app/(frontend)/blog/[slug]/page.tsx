@@ -9,7 +9,7 @@ import { BlogArticleReveal } from '@/components/blog/BlogArticleReveal'
 import { BlogArticleToc } from '@/components/blog/BlogArticleToc'
 import { BlogPostRichText } from '@/components/blog/BlogPostRichText'
 import { SiteFooter } from '@/components/home'
-import { PublicBreadcrumbs, PublicPageShell } from '@/components/public-page'
+import { PublicBreadcrumbs, PublicPageHeroFrame, PublicPageShell } from '@/components/public-page'
 import {
   getBlogFeedbackCounts,
   getBlogPostBySlug,
@@ -204,9 +204,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <article aria-labelledby="article-page-title">
             <BlogArticleReveal />
 
-            <header className={styles.heroGrid}>
-              <div className={styles.heroSpacer} aria-hidden="true" />
-
+            <PublicPageHeroFrame className={styles.heroGrid} variant="detail">
               <div className={styles.heroCopy}>
                 <p className={styles.eyebrow}>
                   <span aria-hidden="true">{'//'}</span>
@@ -257,7 +255,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   <strong>v1.0</strong>
                 </div>
               </aside>
-            </header>
+            </PublicPageHeroFrame>
 
             <div className={styles.articleGrid}>
               <aside className={styles.leftRail}>

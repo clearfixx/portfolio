@@ -1592,3 +1592,65 @@
   margin-top: var(--public-page-section-gap);
 }
 /* portfolio-public-shell-integration-v1:end */
+
+/* public-index-hero-rhythm-v3:start */
+
+.hero {
+  min-height: 360px;
+  grid-template-columns: minmax(0, 0.56fr) minmax(430px, 0.44fr);
+  gap: var(--public-page-hero-column-gap);
+  padding-bottom: var(--public-page-hero-divider-space);
+}
+
+.heroCopy {
+  display: flex;
+  min-width: 0;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.heroCopy > p:last-of-type {
+  max-width: 650px;
+  line-height: 1.65;
+}
+
+.editorWrap {
+  min-height: 326px;
+}
+
+.contentLayout {
+  margin-top: var(--public-page-content-start);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    min-height: 0;
+    grid-template-columns: 1fr;
+  }
+
+  .editorWrap {
+    min-height: 286px;
+  }
+}
+
+@media (max-width: 650px) {
+  .editorWrap {
+    min-height: 260px;
+  }
+}
+
+/* public-index-hero-rhythm-v3:end */
+
+/* public-blog-light-shell-ownership-v5:start */
+
+:global([data-theme='light']) .page {
+  background: transparent;
+}
+
+:global([data-theme='light']) .page::before,
+:global([data-theme='light']) .page::after {
+  display: none;
+  background: none;
+}
+
+/* public-blog-light-shell-ownership-v5:end */

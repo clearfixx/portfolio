@@ -4,6 +4,9 @@
   --public-page-top-space: 112px;
   --public-page-bottom-space: 0px;
   --public-page-breadcrumb-gap: 24px;
+  --public-page-hero-column-gap: clamp(48px, 5vw, 78px);
+  --public-page-hero-divider-space: clamp(30px, 2.6vw, 38px);
+  --public-page-content-start: var(--public-page-hero-divider-space);
   --public-page-section-gap: clamp(48px, 5vw, 76px);
 
   position: relative;
@@ -14,7 +17,7 @@
 }
 
 .public-page--detail {
-  --public-page-breadcrumb-gap: 14px;
+  --public-page-breadcrumb-gap: clamp(24px, 2.1vw, 32px);
 }
 
 .public-page::before {
@@ -828,3 +831,60 @@
 }
 
 /* public-breadcrumb-rail-v2:end */
+
+/* public-hero-frame-system-v1:start */
+
+.public-page-hero-frame {
+  position: relative;
+  border-bottom: 1px solid rgb(var(--rgb-cyan) / 14%);
+  padding-bottom: var(--public-page-hero-divider-space);
+}
+
+.public-page-hero-frame--detail {
+  border-bottom-color: rgb(var(--rgb-cyan) / 16%);
+}
+
+@media (max-width: 900px) {
+  .public-page {
+    --public-page-hero-column-gap: 34px;
+    --public-page-hero-divider-space: 26px;
+  }
+}
+
+@media (max-width: 650px) {
+  .public-page {
+    --public-page-hero-column-gap: 28px;
+    --public-page-hero-divider-space: 22px;
+  }
+}
+
+/* public-hero-frame-system-v1:end */
+
+/* public-header-background-continuity-v4:start */
+
+/*
+ * The fixed 88px header must not create a visually separate black strip.
+ * The page canvas starts at the top of the viewport and remains visible
+ * through the transparent header. Content still keeps its safe header
+ * clearance through --public-page-top-space.
+ */
+.public-page::before {
+  inset: 0 0 auto;
+  height: calc(min(620px, 68vh) + 88px);
+}
+
+.public-page__ambient {
+  inset: 0 0 auto;
+  height: 518px;
+}
+
+/* Preserve the previous visible position of the violet telemetry rail. */
+.public-page__ambient::after {
+  top: 88px;
+}
+
+.public-page__ambient > span:last-child {
+  top: 200px;
+}
+
+/* public-header-background-continuity-v4:end */

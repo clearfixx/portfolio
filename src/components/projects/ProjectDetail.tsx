@@ -21,6 +21,8 @@ import type { ComponentType } from 'react'
 import type { ProjectIconProps } from '@/components/icons/project'
 import Link from 'next/link'
 
+import { PublicPageHeroFrame } from '@/components/public-page'
+
 import type { Project, ProjectVersion } from '@/payload-types'
 import {
   getProjectCategory,
@@ -203,7 +205,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
 
   return (
     <article className="project-case">
-      <header className="project-case__hero">
+      <PublicPageHeroFrame className="project-case__hero" variant="detail">
         <div className="project-case__hero-copy">
           <p className={`project-case__status is-${project.stage}`}>
             <span aria-hidden="true" />
@@ -269,7 +271,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
             />
           )}
         </div>
-      </header>
+      </PublicPageHeroFrame>
 
       <div className="project-case__workspace">
         <div className="project-case__workspace-main">

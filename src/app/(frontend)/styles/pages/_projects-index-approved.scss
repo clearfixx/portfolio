@@ -3,12 +3,11 @@
 /* Hero */
 .projects-page .projects-index-hero {
   display: grid;
-  min-height: 310px;
+  min-height: 360px;
   grid-template-columns: minmax(0, 0.56fr) minmax(430px, 0.44fr);
   align-items: stretch;
-  gap: clamp(48px, 5vw, 78px);
-  border-bottom: 1px solid rgb(var(--rgb-cyan) / 12%);
-  padding: 0 0 34px;
+  gap: var(--public-page-hero-column-gap);
+  padding-bottom: var(--public-page-hero-divider-space);
 }
 
 .projects-page .projects-index-hero__copy {
@@ -53,17 +52,17 @@
 }
 
 .projects-page .projects-index-hero__description {
-  max-width: 640px;
+  max-width: 650px;
   margin: 17px 0 0;
   color: rgb(var(--rgb-text-soft));
-  font-size: 0.94rem;
-  line-height: 1.58;
+  font-size: 1rem;
+  line-height: 1.65;
 }
 
 .projects-page .projects-index-hero__visual {
   position: relative;
   display: grid;
-  min-height: 298px;
+  min-height: 326px;
   align-self: stretch;
   overflow: hidden;
   border: 1px solid rgb(var(--rgb-cyan) / 20%);
@@ -84,7 +83,7 @@
 .projects-page .projects-index-hero__fallback-window {
   width: 100%;
   height: 100%;
-  min-height: 298px;
+  min-height: 326px;
 }
 
 .projects-page .projects-index-hero__fallback {
@@ -222,7 +221,7 @@
 
 /* Controls */
 .projects-page .projects-directory {
-  padding-top: 26px;
+  padding-top: var(--public-page-content-start);
 }
 
 .projects-page .projects-directory__controls {
