@@ -60,7 +60,7 @@ export default async function ProjectsPage() {
 
   return (
     <>
-      <PublicPageShell className="projects-page">
+      <PublicPageShell className="projects-page" variant="index">
         <PublicBreadcrumbs items={[{ label: 'Projects' }]} />
 
         <header className="projects-index-hero">

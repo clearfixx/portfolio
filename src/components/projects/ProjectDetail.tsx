@@ -272,7 +272,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
       </header>
 
       <div className="project-case__workspace">
-        <main className="project-case__workspace-main">
+        <div className="project-case__workspace-main">
           <nav className="project-case__tabs" aria-label="Project sections">
             <a href="#project-overview">Overview</a>
             {highlights.length > 0 ? <a href="#project-features">Features</a> : null}
@@ -353,7 +353,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
               </div>
             </section>
           ) : null}
-        </main>
+        </div>
 
         <aside className="project-case__workspace-sidebar">
           <section className="project-case-card">

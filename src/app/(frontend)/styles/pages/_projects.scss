@@ -1,14 +1,4 @@
-.projects-page {
-  padding-top: 112px;
-}
-
-.projects-page .public-page__container {
-  width: min(100% - calc(var(--container-padding) * 2), 1420px);
-}
-
-.projects-page .public-breadcrumbs {
-  margin-bottom: 20px;
-}
+/* Public page geometry and breadcrumbs are owned by _public-pages.scss. */
 
 .projects-index-hero {
   display: grid;
@@ -712,10 +702,6 @@
 }
 
 @media (max-width: 760px) {
-  .projects-page .public-page__container {
-    width: min(100% - 32px, 1420px);
-  }
-
   .projects-index-hero h1 {
     font-size: clamp(2.8rem, 14vw, 4.4rem);
   }
@@ -781,27 +767,7 @@
   }
 }
 
-.project-page {
-  padding-top: 112px;
-}
-
-.projects-page .public-page__container,
-.project-page .public-page__container {
-  width: min(100% - calc(var(--container-padding) * 2), 1420px);
-}
-
-.projects-page .public-breadcrumbs,
-.project-page {
-  padding-bottom: 0;
-}
-
-.project-page .public-page__container {
-  padding-bottom: 0;
-}
-
-.project-page .public-breadcrumbs {
-  margin-bottom: 14px;
-}
+/* Public page geometry and breadcrumbs are owned by _public-pages.scss. */
 
 .project-page + .site-footer {
   margin-top: 0;

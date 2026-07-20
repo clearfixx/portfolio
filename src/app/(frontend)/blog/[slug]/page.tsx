@@ -9,7 +9,7 @@ import { BlogArticleReveal } from '@/components/blog/BlogArticleReveal'
 import { BlogArticleToc } from '@/components/blog/BlogArticleToc'
 import { BlogPostRichText } from '@/components/blog/BlogPostRichText'
 import { SiteFooter } from '@/components/home'
-import { PublicBreadcrumbs } from '@/components/public-page'
+import { PublicBreadcrumbs, PublicPageShell } from '@/components/public-page'
 import {
   getBlogFeedbackCounts,
   getBlogPostBySlug,
@@ -187,13 +187,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <>
-      <main className={styles.page}>
-        <div className={`site-container ${styles.container}`}>
+      <PublicPageShell className="journal-article-page" variant="detail">
+        <div className={`${styles.page} ${styles.container}`}>
           <PublicBreadcrumbs
             items={[
               {
                 href: '/blog',
-                label: 'Engineering Journal',
+                label: 'Blog',
               },
               {
                 label: post.title,
@@ -482,7 +482,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </section>
           </article>
         </div>
-      </main>
+      </PublicPageShell>
 
       {footerContent ? <SiteFooter content={footerContent} githubFeed={githubFeed} /> : null}
     </>

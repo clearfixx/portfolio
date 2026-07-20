@@ -52,7 +52,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <>
-      <PublicPageShell className="project-page">
+      <PublicPageShell className="project-page" variant="detail">
         <PublicBreadcrumbs
           items={[
             {

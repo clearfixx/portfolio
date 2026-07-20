@@ -1,9 +1,20 @@
 .public-page {
+  --public-page-max-width: 1420px;
+  --public-page-gutter: var(--container-padding);
+  --public-page-top-space: 112px;
+  --public-page-bottom-space: 0px;
+  --public-page-breadcrumb-gap: 24px;
+  --public-page-section-gap: clamp(48px, 5vw, 76px);
+
   position: relative;
   min-height: 100svh;
   overflow: clip;
-  padding: clamp(138px, 10vw, 172px) 0 clamp(76px, 9vw, 136px);
+  padding: var(--public-page-top-space) 0 var(--public-page-bottom-space);
   isolation: isolate;
+}
+
+.public-page--detail {
+  --public-page-breadcrumb-gap: 14px;
 }
 
 .public-page::before {
@@ -37,7 +48,7 @@
 
 .public-page__ambient::before {
   top: 56px;
-  left: max(var(--container-padding), calc((100vw - var(--container-width)) / 2));
+  left: max(var(--public-page-gutter), calc((100vw - var(--public-page-max-width)) / 2));
   width: min(42vw, 580px);
   height: 1px;
   background: linear-gradient(90deg, rgb(var(--rgb-cyan) / 58%), transparent);
@@ -60,7 +71,7 @@
 
 .public-page__ambient > span:first-child {
   top: 52px;
-  left: max(var(--container-padding), calc((100vw - var(--container-width)) / 2));
+  left: max(var(--public-page-gutter), calc((100vw - var(--public-page-max-width)) / 2));
   width: 8px;
   height: 8px;
   background: rgb(var(--rgb-cyan));
@@ -78,11 +89,11 @@
 }
 
 .public-page__container {
-  width: min(100% - calc(var(--container-padding) * 2), 1360px);
+  width: min(100% - calc(var(--public-page-gutter) * 2), var(--public-page-max-width));
 }
 
 .public-breadcrumbs {
-  margin-bottom: clamp(34px, 4vw, 56px);
+  margin-bottom: var(--public-page-breadcrumb-gap);
   color: rgb(var(--rgb-text-muted));
   font-family: var(--font-geist-mono), monospace;
   font-size: 0.72rem;
@@ -103,8 +114,21 @@
 
 .public-breadcrumbs li {
   display: inline-flex;
+  min-width: 0;
   align-items: center;
   gap: 8px;
+}
+
+.public-breadcrumbs li.is-current {
+  flex: 1 1 auto;
+}
+
+.public-breadcrumbs__current {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .public-breadcrumbs a {
@@ -621,7 +645,7 @@
 
 @media (max-width: 980px) {
   .public-page {
-    padding-top: 126px;
+    --public-page-top-space: 104px;
   }
 
   .public-page-hero {
@@ -653,11 +677,9 @@
 
 @media (max-width: 760px) {
   .public-page {
-    padding-top: 112px;
-  }
-
-  .public-page__container {
-    width: min(100% - 36px, 1360px);
+    --public-page-gutter: 16px;
+    --public-page-top-space: 96px;
+    --public-page-breadcrumb-gap: 20px;
   }
 
   .public-breadcrumbs {
@@ -710,8 +732,8 @@
 }
 
 @media (max-width: 480px) {
-  .public-page__container {
-    width: min(100% - 28px, 1360px);
+  .public-page {
+    --public-page-gutter: 14px;
   }
 
   .public-page-telemetry {
@@ -743,3 +765,66 @@
     transform: none;
   }
 }
+
+/* public-breadcrumb-rail-v2:start */
+
+/*
+ * The horizontal signal rail belongs to the breadcrumb component.
+ * Keeping it inside the breadcrumb box prevents the ambient decoration
+ * from drifting when a page changes its top spacing.
+ */
+.public-page__ambient::before,
+.public-page__ambient > span:first-child {
+  display: none;
+}
+
+.public-breadcrumbs {
+  position: relative;
+  padding-bottom: 18px;
+}
+
+.public-breadcrumbs::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgb(var(--rgb-cyan) / 62%) 0,
+    rgb(var(--rgb-cyan) / 24%) 46%,
+    rgb(var(--rgb-violet) / 18%) 78%,
+    transparent 100%
+  );
+  box-shadow: 0 0 18px rgb(var(--rgb-cyan) / 8%);
+  content: '';
+}
+
+.public-breadcrumbs::before {
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  z-index: 1;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgb(var(--rgb-cyan));
+  box-shadow:
+    0 0 0 4px rgb(var(--rgb-cyan) / 7%),
+    0 0 16px rgb(var(--rgb-cyan) / 72%);
+  content: '';
+}
+
+@media (max-width: 760px) {
+  .public-breadcrumbs {
+    padding-bottom: 15px;
+  }
+
+  .public-breadcrumbs::before {
+    bottom: -3px;
+    width: 7px;
+    height: 7px;
+  }
+}
+
+/* public-breadcrumb-rail-v2:end */

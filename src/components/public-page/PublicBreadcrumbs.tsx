@@ -1,17 +1,20 @@
 import Link from 'next/link'
 
-type PublicBreadcrumbItem = {
+export type PublicBreadcrumbItem = {
   href?: string
   label: string
 }
 
 type PublicBreadcrumbsProps = {
+  className?: string
   items: PublicBreadcrumbItem[]
 }
 
-export function PublicBreadcrumbs({ items }: PublicBreadcrumbsProps) {
+export function PublicBreadcrumbs({ className, items }: PublicBreadcrumbsProps) {
+  const classes = ['public-breadcrumbs', className].filter(Boolean).join(' ')
+
   return (
-    <nav className="public-breadcrumbs" aria-label="Breadcrumb">
+    <nav className={classes} aria-label="Breadcrumb">
       <ol>
         <li>
           <Link href="/">Home</Link>
@@ -21,7 +24,7 @@ export function PublicBreadcrumbs({ items }: PublicBreadcrumbsProps) {
           const isCurrent = index === items.length - 1
 
           return (
-            <li key={`${item.label}-${index}`}>
+            <li className={isCurrent ? 'is-current' : undefined} key={`${item.label}-${index}`}>
               <span className="public-breadcrumbs__separator" aria-hidden="true">
                 /
               </span>
@@ -29,7 +32,13 @@ export function PublicBreadcrumbs({ items }: PublicBreadcrumbsProps) {
               {item.href && !isCurrent ? (
                 <Link href={item.href}>{item.label}</Link>
               ) : (
-                <span aria-current={isCurrent ? 'page' : undefined}>{item.label}</span>
+                <span
+                  className="public-breadcrumbs__current"
+                  aria-current={isCurrent ? 'page' : undefined}
+                  title={isCurrent ? item.label : undefined}
+                >
+                  {item.label}
+                </span>
               )}
             </li>
           )

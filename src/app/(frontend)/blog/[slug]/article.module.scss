@@ -2187,3 +2187,58 @@
   filter: drop-shadow(0 0 7px rgba(17, 24, 39, 0.16));
 }
 /* portfolio-blog-light-share-x-fix-v2:end */
+
+/* portfolio-public-shell-integration-v1:start */
+.page {
+  position: relative;
+  min-height: 0;
+  overflow: visible;
+  padding: 0 0 5rem;
+  background: transparent;
+}
+
+.page::before,
+.page::after {
+  display: none;
+}
+
+.heroGrid {
+  padding: 4px 0 1.65rem;
+}
+/* portfolio-public-shell-integration-v1:end */
+
+/* public-article-rhythm-v2:start */
+
+:global(.journal-article-page) {
+  --public-page-breadcrumb-gap: clamp(24px, 2.1vw, 32px);
+  --article-hero-divider-space: clamp(26px, 2.2vw, 34px);
+}
+
+/*
+ * The hero divider now has one spacing token on both sides:
+ * hero content -> divider and divider -> article workspace.
+ */
+.heroGrid {
+  padding-top: 0;
+  padding-bottom: var(--article-hero-divider-space);
+}
+
+.articleGrid {
+  margin-top: var(--article-hero-divider-space);
+}
+
+@media (max-width: 900px) {
+  :global(.journal-article-page) {
+    --public-page-breadcrumb-gap: 24px;
+    --article-hero-divider-space: 26px;
+  }
+}
+
+@media (max-width: 650px) {
+  :global(.journal-article-page) {
+    --public-page-breadcrumb-gap: 22px;
+    --article-hero-divider-space: 22px;
+  }
+}
+
+/* public-article-rhythm-v2:end */

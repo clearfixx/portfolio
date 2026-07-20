@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import { ChevronDown, Copy, Share2, ThumbsDown, ThumbsUp } from 'lucide-react'
 import {
   siFacebook,
@@ -26,6 +26,55 @@ type BrandIconName = 'facebook' | 'instagram' | 'pinterest' | 'telegram' | 'what
 
 type FeedbackVote = 'helpful' | 'not-helpful'
 type ShareTarget = 'facebook' | 'instagram' | 'pinterest' | 'telegram' | 'whatsapp' | 'x'
+
+const feedbackStorageEvent = 'portfolio-blog-feedback-change'
+
+function feedbackStorageKey(slug: string) {
+  return `blog-feedback:${slug}`
+}
+
+function readStoredFeedback(slug: string): FeedbackVote | null {
+  const savedFeedback = window.localStorage.getItem(feedbackStorageKey(slug))
+
+  return savedFeedback === 'helpful' || savedFeedback === 'not-helpful' ? savedFeedback : null
+}
+
+function getServerFeedbackSnapshot(): FeedbackVote | null {
+  return null
+}
+
+function useStoredFeedback(slug: string): FeedbackVote | null {
+  const subscribe = useCallback(
+    (onStoreChange: () => void) => {
+      const storageKey = feedbackStorageKey(slug)
+
+      const handleStorage = (event: StorageEvent) => {
+        if (event.key === storageKey) {
+          onStoreChange()
+        }
+      }
+
+      const handleLocalChange = (event: Event) => {
+        if (event instanceof CustomEvent && event.detail === storageKey) {
+          onStoreChange()
+        }
+      }
+
+      window.addEventListener('storage', handleStorage)
+      window.addEventListener(feedbackStorageEvent, handleLocalChange)
+
+      return () => {
+        window.removeEventListener('storage', handleStorage)
+        window.removeEventListener(feedbackStorageEvent, handleLocalChange)
+      }
+    },
+    [slug],
+  )
+
+  const getSnapshot = useCallback(() => readStoredFeedback(slug), [slug])
+
+  return useSyncExternalStore(subscribe, getSnapshot, getServerFeedbackSnapshot)
+}
 
 const brandIconMap = {
   facebook: siFacebook,
@@ -104,15 +153,7 @@ export function BlogArticleActions({
   const [counts, setCounts] = useState(initialCounts)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [feedbackError, setFeedbackError] = useState<string | null>(null)
-  const [feedback, setFeedback] = useState<FeedbackVote | null>(() => {
-    if (typeof window === 'undefined') {
-      return null
-    }
-
-    const savedFeedback = window.localStorage.getItem(`blog-feedback:${slug}`)
-
-    return savedFeedback === 'helpful' || savedFeedback === 'not-helpful' ? savedFeedback : null
-  })
+  const feedback = useStoredFeedback(slug)
 
   useEffect(() => {
     const updateProgress = () => {
@@ -255,8 +296,10 @@ export function BlogArticleActions({
         throw new Error(result.message || 'Unable to save feedback.')
       }
 
-      window.localStorage.setItem(`blog-feedback:${slug}`, result.vote)
-      setFeedback(result.vote)
+      const storageKey = feedbackStorageKey(slug)
+
+      window.localStorage.setItem(storageKey, result.vote)
+      window.dispatchEvent(new CustomEvent(feedbackStorageEvent, { detail: storageKey }))
       setCounts(result.counts)
     } catch {
       setFeedbackError('Could not save feedback. Try again.')
