@@ -19,7 +19,7 @@ import {
 } from '@/lib/cms'
 import type { BlogPost, Category, Media } from '@/payload-types'
 
-import styles from './article.module.scss'
+import styles from '@/app/(frontend)/styles/pages/blog-article.module.scss'
 
 export const revalidate = 300
 
@@ -184,6 +184,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const tags = post.tags ?? []
   const series = post.series || 'Independent note'
   const difficulty = post.difficulty || 'intermediate'
+  const keyTakeaways = (post.keyTakeaways ?? []).filter((item) => item.text?.trim())
+  const tocItems = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'article-content', label: 'Article' },
+    ...(keyTakeaways.length > 0 ? [{ id: 'key-takeaways', label: 'Key takeaways' }] : []),
+    ...(relatedPosts.length > 0 ? [{ id: 'related-articles', label: 'Related articles' }] : []),
+  ]
 
   return (
     <>
@@ -259,14 +266,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             <div className={styles.articleGrid}>
               <aside className={styles.leftRail}>
-                <BlogArticleToc
-                  items={[
-                    { id: 'overview', label: 'Overview' },
-                    { id: 'article-content', label: 'Article' },
-                    { id: 'key-takeaways', label: 'Key takeaways' },
-                    { id: 'related-articles', label: 'Related articles' },
-                  ]}
-                />
+                <BlogArticleToc items={tocItems} />
 
                 <div className={styles.leftCta}>
                   <span>Enjoying the read?</span>
@@ -318,23 +318,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   <BlogPostRichText data={post.content} />
                 </section>
 
-                <section className={styles.takeaways} data-article-reveal id="key-takeaways">
-                  <p className={styles.sectionEyebrow}>Key takeaways</p>
-                  <div>
-                    <article>
-                      <span>01</span>
-                      <p>Prefer explicit boundaries over hidden framework behavior.</p>
-                    </article>
-                    <article>
-                      <span>02</span>
-                      <p>Document trade-offs while the context is still fresh.</p>
-                    </article>
-                    <article>
-                      <span>03</span>
-                      <p>Design operational visibility as part of the feature.</p>
-                    </article>
-                  </div>
-                </section>
+                {keyTakeaways.length > 0 ? (
+                  <section className={styles.takeaways} data-article-reveal id="key-takeaways">
+                    <p className={styles.sectionEyebrow}>Key takeaways</p>
+                    <div>
+                      {keyTakeaways.map((takeaway, index) => (
+                        <article key={takeaway.id ?? `${post.id}-takeaway-${index}`}>
+                          <span>{String(index + 1).padStart(2, '0')}</span>
+                          <p>{takeaway.text}</p>
+                        </article>
+                      ))}
+                    </div>
+                  </section>
+                ) : null}
 
                 <BlogArticleActions
                   initialCounts={feedbackCounts}

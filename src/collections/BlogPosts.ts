@@ -54,6 +54,30 @@ export const BlogPosts: CollectionConfig = {
               },
             },
             adminRichTextField({ label: 'Content', name: 'content', required: true }),
+            {
+              name: 'keyTakeaways',
+              type: 'array',
+              maxRows: 8,
+              labels: {
+                singular: 'Takeaway',
+                plural: 'Key takeaways',
+              },
+              admin: {
+                description:
+                  'Optional concise conclusions shown after the article body. Rows can be reordered; numbering and accent colors are applied automatically.',
+                initCollapsed: false,
+              },
+              fields: [
+                {
+                  name: 'text',
+                  type: 'textarea',
+                  required: true,
+                  admin: {
+                    description: 'One clear, self-contained conclusion.',
+                  },
+                },
+              ],
+            },
           ],
         },
         {

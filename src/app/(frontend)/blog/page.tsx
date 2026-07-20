@@ -9,7 +9,7 @@ import { TechnicalPreviewPlaceholder } from '@/components/blog/TechnicalPreviewP
 import type { BlogPost, Category, Media } from '@/payload-types'
 import { getHomepageContent, getPublishedBlogPosts, getSiteFooterGitHubFeed } from '@/lib/cms'
 
-import styles from './blog.module.scss'
+import styles from '@/app/(frontend)/styles/pages/blog.module.scss'
 
 export const revalidate = 300
 

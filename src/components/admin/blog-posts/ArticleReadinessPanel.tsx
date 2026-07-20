@@ -33,6 +33,12 @@ export const articleReadiness = defineReadiness<ArticleDocument>({
       evaluate: (d) => richTextWordCount(d.content) >= 120,
     },
     {
+      id: 'takeaways',
+      label: 'Key takeaways',
+      description: 'At least two concise conclusions',
+      evaluate: (d) => Array.isArray(d.keyTakeaways) && d.keyTakeaways.length >= 2,
+    },
+    {
       id: 'media',
       label: 'Media',
       description: 'Primary cover image',
@@ -74,6 +80,7 @@ export default function ArticleReadinessPanel() {
     slug: value('slug'),
     excerpt: value('excerpt'),
     content: value('content'),
+    keyTakeaways: field('keyTakeaways')?.rows,
     coverImage: value('coverImage'),
     category: value('category'),
     tags: field('tags')?.rows,

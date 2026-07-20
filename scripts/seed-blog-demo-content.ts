@@ -95,6 +95,33 @@ const tagSets = [
   ['Testing', 'Vitest', 'Playwright'],
 ] as const
 
+const takeawaySets = [
+  [
+    'Prefer explicit boundaries over hidden framework behavior.',
+    'Document trade-offs while the context is still fresh.',
+    'Design operational visibility as part of the feature.',
+  ],
+  [
+    'Keep domain rules independent from framework integration details.',
+    'Make failure states observable before optimizing the happy path.',
+    'Treat maintainability as a product requirement, not cleanup work.',
+  ],
+  [
+    'Measure the real bottleneck before introducing another abstraction.',
+    'Choose predictable contracts over clever implicit behavior.',
+    'Write the operational workflow alongside the implementation.',
+  ],
+  [
+    'Small interface decisions compound across the whole product.',
+    'Accessibility and performance belong in the initial design.',
+    'A reusable system should reduce decisions, not hide them.',
+  ],
+] as const
+
+function keyTakeawaysFor(index: number) {
+  return takeawaySets[index % takeawaySets.length].map((text) => ({ text }))
+}
+
 function slugify(value: string) {
   return value
     .trim()
@@ -322,8 +349,22 @@ async function seed() {
     })
 
     if (existing.docs.length > 0) {
-      skipped += 1
-      console.log(`Skipped existing ${slug}`)
+      const existingArticle = existing.docs[0]
+
+      if (!existingArticle.keyTakeaways?.length) {
+        await payload.update({
+          collection: 'blog-posts',
+          id: existingArticle.id,
+          data: {
+            keyTakeaways: keyTakeawaysFor(index),
+          },
+        })
+        console.log(`Backfilled key takeaways for ${slug}`)
+      } else {
+        skipped += 1
+        console.log(`Skipped existing ${slug}`)
+      }
+
       continue
     }
 
@@ -342,6 +383,7 @@ async function seed() {
         slug,
         excerpt,
         content: createRichText(title, excerpt),
+        keyTakeaways: keyTakeawaysFor(index),
         category: category.id,
         tags: selectedTags.map((label) => ({
           label,

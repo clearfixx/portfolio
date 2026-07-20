@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 
-import styles from '@/app/(frontend)/blog/[slug]/article.module.scss'
+import styles from '@/app/(frontend)/styles/pages/blog-article.module.scss'
 
 type BlogArticleTocItem = {
   id: string
