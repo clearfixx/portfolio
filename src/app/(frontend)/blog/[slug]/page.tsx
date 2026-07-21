@@ -14,6 +14,7 @@ import {
   getBlogFeedbackCounts,
   getBlogPostBySlug,
   getHomepageContent,
+  getProfile,
   getPublishedBlogPosts,
   getSiteFooterGitHubFeed,
 } from '@/lib/cms'
@@ -96,8 +97,32 @@ function categoryLabel(post: BlogPost): string {
     : 'Engineering'
 }
 
-function mediaFrom(value: BlogPost['coverImage']): Media | null {
-  return typeof value === 'object' && value ? (value as Media) : null
+function mediaFrom(value: number | Media | null | undefined): Media | null {
+  return typeof value === 'object' && value ? value : null
+}
+
+type ProfileStatus = 'available' | 'focused' | 'unavailable'
+
+const PROFILE_STATUS_LABELS: Record<ProfileStatus, string> = {
+  available: 'Available',
+  focused: 'Focused',
+  unavailable: 'Unavailable',
+}
+
+function normalizeProfileStatus(value: string | null | undefined): ProfileStatus {
+  return value === 'focused' || value === 'unavailable' ? value : 'available'
+}
+
+function initialsFromName(name: string): string {
+  const initials = name
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase())
+    .join('')
+
+  return initials || 'PF'
 }
 
 function publishedLabel(post: BlogPost): string {
@@ -146,11 +171,12 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params
 
-  const [post, allPosts, homepageContent, githubFeed] = await Promise.all([
+  const [post, allPosts, homepageContent, githubFeed, profile] = await Promise.all([
     getBlogPostBySlug(slug),
     getPublishedBlogPosts(250),
     getHomepageContent(),
     getSiteFooterGitHubFeed(),
+    getProfile(),
   ])
 
   if (!post) {
@@ -184,6 +210,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const tags = post.tags ?? []
   const series = post.series || 'Independent note'
   const difficulty = post.difficulty || 'intermediate'
+  const authorName = profile.name.trim() || 'Portfolio author'
+  const authorRole = profile.role.trim() || 'Software Engineer'
+  const authorBio =
+    profile.shortBio?.trim() || profile.fullBio?.trim() || 'Profile details are being updated.'
+  const authorStatus = normalizeProfileStatus(profile.status)
+  const authorStatusLabel = profile.availability?.trim() || PROFILE_STATUS_LABELS[authorStatus]
+  const authorPortrait = mediaFrom(profile.portrait)
+  const authorInitials = initialsFromName(authorName)
   const keyTakeaways = (post.keyTakeaways ?? []).filter((item) => item.text?.trim())
   const tocItems = [
     { id: 'overview', label: 'Overview' },
@@ -359,16 +393,27 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
               <aside className={styles.rightRail}>
                 <div className={styles.authorCard}>
-                  <div className={styles.authorAvatar}>AK</div>
+                  <div className={styles.authorAvatar}>
+                    {authorPortrait?.url ? (
+                      <Image
+                        alt={authorPortrait.alt || `Portrait of ${authorName}`}
+                        fill
+                        sizes="52px"
+                        src={authorPortrait.url}
+                      />
+                    ) : (
+                      authorInitials
+                    )}
+                  </div>
                   <div>
-                    <strong>Andrii Kulahin</strong>
-                    <span>Software Engineer</span>
-                    <small>
+                    <strong>{authorName}</strong>
+                    <span>{authorRole}</span>
+                    <small data-status={authorStatus}>
                       <i aria-hidden="true" />
-                      Available
+                      {authorStatusLabel}
                     </small>
                   </div>
-                  <p>Building maintainable systems and sharing lessons from production.</p>
+                  <p>{authorBio}</p>
                   <Link href="/about">
                     View full profile
                     <ArticleIcon name="arrow" size={13} />
