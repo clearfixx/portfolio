@@ -1,27 +1,69 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { type MouseEvent, useEffect, useRef, useState } from 'react'
 
 import { ThemeToggle } from '@/components/theme/ThemeToggle'
 
-const navItems = [
-  { label: 'Home', href: '#hero', sectionId: 'hero', index: '01' },
-  { label: 'Projects', href: '#projects', sectionId: 'projects', index: '02' },
+type NavItem = {
+  label: string
+  href: string
+  index: string
+  activeSectionId?: string
+  scrollSectionId?: string
+  match?: 'exact' | 'prefix'
+}
+
+const contactNavItem: NavItem = {
+  label: 'Contact',
+  href: '/#contact',
+  activeSectionId: 'contact',
+  scrollSectionId: 'contact',
+  index: '06',
+}
+
+const navItems: NavItem[] = [
+  {
+    label: 'Home',
+    href: '/',
+    activeSectionId: 'hero',
+    index: '01',
+    match: 'exact',
+  },
+  {
+    label: 'Projects',
+    href: '/projects',
+    activeSectionId: 'projects',
+    index: '02',
+    match: 'prefix',
+  },
+  {
+    label: 'Blog',
+    href: '/blog',
+    index: '03',
+    match: 'prefix',
+  },
   {
     label: 'About',
-    href: '#engineer-profile',
-    sectionId: 'engineer-profile',
-    index: '03',
+    href: '/#engineer-profile',
+    activeSectionId: 'engineer-profile',
+    scrollSectionId: 'engineer-profile',
+    index: '04',
   },
   {
     label: 'Stack',
-    href: '#skills-technologies',
-    sectionId: 'skills-technologies',
-    index: '04',
+    href: '/#skills-technologies',
+    activeSectionId: 'skills-technologies',
+    scrollSectionId: 'skills-technologies',
+    index: '05',
   },
-  { label: 'Contact', href: '#contact', sectionId: 'contact', index: '05' },
+  contactNavItem,
 ]
+
+const homeSectionItems = navItems.filter((item): item is NavItem & { activeSectionId: string } =>
+  Boolean(item.activeSectionId),
+)
 
 const SCROLL_LOCK_MS = 900
 const DESKTOP_NAV_QUERY = '(min-width: 901px)'
@@ -43,25 +85,48 @@ function getActiveSectionId() {
     return 'contact'
   }
 
-  let activeSectionId = navItems[0].sectionId
+  let activeSectionId = 'hero'
 
-  for (const item of navItems) {
-    const section = document.getElementById(item.sectionId)
+  for (const item of homeSectionItems) {
+    const section = document.getElementById(item.activeSectionId)
 
     if (!section) {
       continue
     }
 
     if (section.getBoundingClientRect().top <= markerPosition) {
-      activeSectionId = item.sectionId
+      activeSectionId = item.activeSectionId
     }
   }
 
   return activeSectionId
 }
 
+function getRoutePath(href: string) {
+  return href.split('#')[0] || '/'
+}
+
+function isRouteActive(pathname: string, item: NavItem) {
+  if (pathname === '/') {
+    return false
+  }
+
+  const routePath = getRoutePath(item.href)
+
+  if (routePath === '/') {
+    return false
+  }
+
+  if (item.match === 'prefix') {
+    return pathname === routePath || pathname.startsWith(`${routePath}/`)
+  }
+
+  return pathname === routePath
+}
+
 export function Navbar() {
-  const [activeSection, setActiveSection] = useState(navItems[0].sectionId)
+  const pathname = usePathname()
+  const [activeSection, setActiveSection] = useState('hero')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const isProgrammaticScrollRef = useRef(false)
@@ -73,6 +138,10 @@ export function Navbar() {
   const restoreMenuFocusRef = useRef(false)
 
   useEffect(() => {
+    if (pathname !== '/') {
+      return
+    }
+
     const updateActiveSection = () => {
       window.cancelAnimationFrame(frameRef.current)
 
@@ -100,7 +169,7 @@ export function Navbar() {
       window.removeEventListener('scroll', updateActiveSection)
       window.removeEventListener('resize', updateActiveSection)
     }
-  }, [])
+  }, [pathname])
 
   useEffect(() => {
     const desktopQuery = window.matchMedia(DESKTOP_NAV_QUERY)
@@ -208,24 +277,28 @@ export function Navbar() {
     setIsMenuOpen(false)
   }
 
-  const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, sectionId: string) => {
-    const section = document.getElementById(sectionId)
+  const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, item: NavItem) => {
+    closeMenu(false)
+
+    if (pathname !== '/' || !item.scrollSectionId) {
+      return
+    }
+
+    const section = document.getElementById(item.scrollSectionId)
 
     if (!section) {
       return
     }
 
     event.preventDefault()
-    closeMenu(false)
-
     isProgrammaticScrollRef.current = true
 
     if (scrollLockTimeoutRef.current !== null) {
       window.clearTimeout(scrollLockTimeoutRef.current)
     }
 
-    setActiveSection(sectionId)
-    window.history.pushState(null, '', `#${sectionId}`)
+    setActiveSection(item.activeSectionId ?? item.scrollSectionId)
+    window.history.pushState(null, '', `#${item.scrollSectionId}`)
 
     section.scrollIntoView({
       behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
@@ -239,19 +312,27 @@ export function Navbar() {
     }, SCROLL_LOCK_MS)
   }
 
+  const getItemActiveState = (item: NavItem) => {
+    if (pathname === '/') {
+      return Boolean(item.activeSectionId && activeSection === item.activeSectionId)
+    }
+
+    return isRouteActive(pathname, item)
+  }
+
   return (
     <div className="navbar">
       <nav className="navbar__links" aria-label="Main navigation">
         {navItems.map((item) => {
-          const isActive = activeSection === item.sectionId
+          const isActive = getItemActiveState(item)
 
           return (
             <Link
               className={`navbar__link ${isActive ? 'is-active' : ''}`}
               href={item.href}
               key={item.href}
-              aria-current={isActive ? 'page' : undefined}
-              onClick={(event) => handleNavClick(event, item.sectionId)}
+              aria-current={isActive ? (pathname === '/' ? 'location' : 'page') : undefined}
+              onClick={(event) => handleNavClick(event, item)}
             >
               {item.label}
             </Link>
@@ -262,8 +343,8 @@ export function Navbar() {
       <div className="navbar__actions">
         <Link
           className="lets-talk"
-          href="#contact"
-          onClick={(event) => handleNavClick(event, 'contact')}
+          href={contactNavItem.href}
+          onClick={(event) => handleNavClick(event, contactNavItem)}
         >
           Let&apos;s Talk
           <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none">
@@ -337,15 +418,15 @@ export function Navbar() {
 
             <nav className="mobile-navigation__links" aria-label="Mobile navigation">
               {navItems.map((item) => {
-                const isActive = activeSection === item.sectionId
+                const isActive = getItemActiveState(item)
 
                 return (
                   <Link
                     className={`mobile-navigation__link ${isActive ? 'is-active' : ''}`}
                     href={item.href}
                     key={item.href}
-                    aria-current={isActive ? 'page' : undefined}
-                    onClick={(event) => handleNavClick(event, item.sectionId)}
+                    aria-current={isActive ? (pathname === '/' ? 'location' : 'page') : undefined}
+                    onClick={(event) => handleNavClick(event, item)}
                   >
                     <span>{item.index}</span>
                     <strong>{item.label}</strong>
@@ -380,8 +461,8 @@ export function Navbar() {
 
               <Link
                 className="mobile-navigation__cta"
-                href="#contact"
-                onClick={(event) => handleNavClick(event, 'contact')}
+                href={contactNavItem.href}
+                onClick={(event) => handleNavClick(event, contactNavItem)}
               >
                 Start a conversation
                 <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none">

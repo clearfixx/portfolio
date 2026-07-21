@@ -58,2077 +58,2242 @@ export type SupportedTimezones =
   | 'Pacific/Guam'
   | 'Pacific/Noumea'
   | 'Pacific/Auckland'
-  | 'Pacific/Fiji';
+  | 'Pacific/Fiji'
 
 export interface Config {
   auth: {
-    users: UserAuthOperations;
-  };
-  blocks: {};
+    users: UserAuthOperations
+  }
+  blocks: {}
   collections: {
-    users: User;
-    media: Media;
-    categories: Category;
-    'tech-stack': TechStack;
-    projects: Project;
-    'project-versions': ProjectVersion;
-    'blog-posts': BlogPost;
-    testimonials: Testimonial;
-    'contact-messages': ContactMessage;
-    'newsletter-subscribers': NewsletterSubscriber;
-    notifications: Notification;
-    'dss-x-feed-cache': DssXFeedCache;
-    'dss-github-feed-cache': DssGithubFeedCache;
-    'dss-instagram-feed-cache': DssInstagramFeedCache;
-    'payload-kv': PayloadKv;
-    'payload-jobs': PayloadJob;
-    'payload-locked-documents': PayloadLockedDocument;
-    'payload-preferences': PayloadPreference;
-    'payload-migrations': PayloadMigration;
-  };
-  collectionsJoins: {};
+    users: User
+    media: Media
+    categories: Category
+    'tech-stack': TechStack
+    projects: Project
+    'project-versions': ProjectVersion
+    'blog-posts': BlogPost
+    'blog-feedback-votes': BlogFeedbackVote
+    testimonials: Testimonial
+    'contact-messages': ContactMessage
+    'newsletter-subscribers': NewsletterSubscriber
+    notifications: Notification
+    'dss-x-feed-cache': DssXFeedCache
+    'dss-github-feed-cache': DssGithubFeedCache
+    'dss-instagram-feed-cache': DssInstagramFeedCache
+    'payload-kv': PayloadKv
+    'payload-jobs': PayloadJob
+    'payload-locked-documents': PayloadLockedDocument
+    'payload-preferences': PayloadPreference
+    'payload-migrations': PayloadMigration
+  }
+  collectionsJoins: {}
   collectionsSelect: {
-    users: UsersSelect<false> | UsersSelect<true>;
-    media: MediaSelect<false> | MediaSelect<true>;
-    categories: CategoriesSelect<false> | CategoriesSelect<true>;
-    'tech-stack': TechStackSelect<false> | TechStackSelect<true>;
-    projects: ProjectsSelect<false> | ProjectsSelect<true>;
-    'project-versions': ProjectVersionsSelect<false> | ProjectVersionsSelect<true>;
-    'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
-    testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
-    'contact-messages': ContactMessagesSelect<false> | ContactMessagesSelect<true>;
-    'newsletter-subscribers': NewsletterSubscribersSelect<false> | NewsletterSubscribersSelect<true>;
-    notifications: NotificationsSelect<false> | NotificationsSelect<true>;
-    'dss-x-feed-cache': DssXFeedCacheSelect<false> | DssXFeedCacheSelect<true>;
-    'dss-github-feed-cache': DssGithubFeedCacheSelect<false> | DssGithubFeedCacheSelect<true>;
-    'dss-instagram-feed-cache': DssInstagramFeedCacheSelect<false> | DssInstagramFeedCacheSelect<true>;
-    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
-    'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
-    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
-    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
-    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
-  };
+    users: UsersSelect<false> | UsersSelect<true>
+    media: MediaSelect<false> | MediaSelect<true>
+    categories: CategoriesSelect<false> | CategoriesSelect<true>
+    'tech-stack': TechStackSelect<false> | TechStackSelect<true>
+    projects: ProjectsSelect<false> | ProjectsSelect<true>
+    'project-versions': ProjectVersionsSelect<false> | ProjectVersionsSelect<true>
+    'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>
+    'blog-feedback-votes': BlogFeedbackVotesSelect<false> | BlogFeedbackVotesSelect<true>
+    testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>
+    'contact-messages': ContactMessagesSelect<false> | ContactMessagesSelect<true>
+    'newsletter-subscribers': NewsletterSubscribersSelect<false> | NewsletterSubscribersSelect<true>
+    notifications: NotificationsSelect<false> | NotificationsSelect<true>
+    'dss-x-feed-cache': DssXFeedCacheSelect<false> | DssXFeedCacheSelect<true>
+    'dss-github-feed-cache': DssGithubFeedCacheSelect<false> | DssGithubFeedCacheSelect<true>
+    'dss-instagram-feed-cache':
+      DssInstagramFeedCacheSelect<false> | DssInstagramFeedCacheSelect<true>
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>
+    'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>
+    'payload-locked-documents':
+      PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>
+    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>
+    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>
+  }
   db: {
-    defaultIDType: number;
-  };
-  fallbackLocale: null;
+    defaultIDType: number
+  }
+  fallbackLocale: null
   globals: {
-    'site-settings': SiteSetting;
-    homepage: Homepage;
-    profile: Profile;
-    seo: Seo;
-    social: Social;
-    contact: Contact;
-    analytics: Analytics;
-    'dss-x-feed-settings': DssXFeedSetting;
-    'dss-github-feed-settings': DssGithubFeedSetting;
-    'dss-instagram-feed-settings': DssInstagramFeedSetting;
-    'payload-jobs-stats': PayloadJobsStat;
-  };
+    'site-settings': SiteSetting
+    homepage: Homepage
+    profile: Profile
+    seo: Seo
+    social: Social
+    contact: Contact
+    analytics: Analytics
+    'dss-x-feed-settings': DssXFeedSetting
+    'dss-github-feed-settings': DssGithubFeedSetting
+    'dss-instagram-feed-settings': DssInstagramFeedSetting
+    'payload-jobs-stats': PayloadJobsStat
+  }
   globalsSelect: {
-    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
-    homepage: HomepageSelect<false> | HomepageSelect<true>;
-    profile: ProfileSelect<false> | ProfileSelect<true>;
-    seo: SeoSelect<false> | SeoSelect<true>;
-    social: SocialSelect<false> | SocialSelect<true>;
-    contact: ContactSelect<false> | ContactSelect<true>;
-    analytics: AnalyticsSelect<false> | AnalyticsSelect<true>;
-    'dss-x-feed-settings': DssXFeedSettingsSelect<false> | DssXFeedSettingsSelect<true>;
-    'dss-github-feed-settings': DssGithubFeedSettingsSelect<false> | DssGithubFeedSettingsSelect<true>;
-    'dss-instagram-feed-settings': DssInstagramFeedSettingsSelect<false> | DssInstagramFeedSettingsSelect<true>;
-    'payload-jobs-stats': PayloadJobsStatsSelect<false> | PayloadJobsStatsSelect<true>;
-  };
-  locale: null;
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>
+    homepage: HomepageSelect<false> | HomepageSelect<true>
+    profile: ProfileSelect<false> | ProfileSelect<true>
+    seo: SeoSelect<false> | SeoSelect<true>
+    social: SocialSelect<false> | SocialSelect<true>
+    contact: ContactSelect<false> | ContactSelect<true>
+    analytics: AnalyticsSelect<false> | AnalyticsSelect<true>
+    'dss-x-feed-settings': DssXFeedSettingsSelect<false> | DssXFeedSettingsSelect<true>
+    'dss-github-feed-settings':
+      DssGithubFeedSettingsSelect<false> | DssGithubFeedSettingsSelect<true>
+    'dss-instagram-feed-settings':
+      DssInstagramFeedSettingsSelect<false> | DssInstagramFeedSettingsSelect<true>
+    'payload-jobs-stats': PayloadJobsStatsSelect<false> | PayloadJobsStatsSelect<true>
+  }
+  locale: null
   widgets: {
-    collections: CollectionsWidget;
-  };
-  user: User;
+    collections: CollectionsWidget
+  }
+  user: User
   jobs: {
     tasks: {
-      'dss-x-feed-sync': TaskDssXFeedSync;
-      'dss-github-feed-sync': TaskDssGithubFeedSync;
-      'dss-instagram-feed-sync': TaskDssInstagramFeedSync;
+      'dss-x-feed-sync': TaskDssXFeedSync
+      'dss-github-feed-sync': TaskDssGithubFeedSync
+      'dss-instagram-feed-sync': TaskDssInstagramFeedSync
       inline: {
-        input: unknown;
-        output: unknown;
-      };
-    };
-    workflows: unknown;
-  };
+        input: unknown
+        output: unknown
+      }
+    }
+    workflows: unknown
+  }
 }
 export interface UserAuthOperations {
   forgotPassword: {
-    email: string;
-    password: string;
-  };
+    email: string
+    password: string
+  }
   login: {
-    email: string;
-    password: string;
-  };
+    email: string
+    password: string
+  }
   registerFirstUser: {
-    email: string;
-    password: string;
-  };
+    email: string
+    password: string
+  }
   unlock: {
-    email: string;
-    password: string;
-  };
+    email: string
+    password: string
+  }
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
-  id: number;
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
+  id: number
+  updatedAt: string
+  createdAt: string
+  email: string
+  resetPasswordToken?: string | null
+  resetPasswordExpiration?: string | null
+  salt?: string | null
+  hash?: string | null
+  loginAttempts?: number | null
+  lockUntil?: string | null
   sessions?:
     | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
+        id: string
+        createdAt?: string | null
+        expiresAt: string
       }[]
-    | null;
-  password?: string | null;
-  collection: 'users';
+    | null
+  password?: string | null
+  collection: 'users'
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
-  id: number;
+  id: number
   /**
    * Accessible alternative text. Required for public images.
    */
-  alt: string;
+  alt: string
   /**
    * Optional human-readable image caption.
    */
-  caption?: string | null;
+  caption?: string | null
   /**
    * Optional author, source, or attribution note.
    */
-  credit?: string | null;
+  credit?: string | null
   /**
    * Simple folder/group key, e.g. projects, blog, seo, homepage.
    */
-  folder?: string | null;
+  folder?: string | null
   tags?:
     | {
-        label: string;
-        id?: string | null;
+        label: string
+        id?: string | null
       }[]
-    | null;
+    | null
   /**
    * Allow this media item to be used on public pages.
    */
-  isPublic?: boolean | null;
-  sortOrder?: number | null;
-  externalProvider?: 'instagram' | null;
-  externalId?: string | null;
-  externalKey?: string | null;
-  externalSourceUrl?: string | null;
-  externalSyncedAt?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
+  isPublic?: boolean | null
+  sortOrder?: number | null
+  externalProvider?: 'instagram' | null
+  externalId?: string | null
+  externalKey?: string | null
+  externalSourceUrl?: string | null
+  externalSyncedAt?: string | null
+  updatedAt: string
+  createdAt: string
+  url?: string | null
+  thumbnailURL?: string | null
+  filename?: string | null
+  mimeType?: string | null
+  filesize?: number | null
+  width?: number | null
+  height?: number | null
+  focalX?: number | null
+  focalY?: number | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories".
  */
 export interface Category {
-  id: number;
-  title: string;
+  id: number
+  title: string
   /**
    * URL-friendly identifier. Auto-generated from title when empty.
    */
-  slug: string;
+  slug: string
   /**
    * Explain what belongs in this category and where it is used.
    */
-  description?: string | null;
-  type: 'project' | 'blog' | 'tech-stack' | 'shared';
+  description?: string | null
+  type: 'project' | 'blog' | 'tech-stack' | 'shared'
   /**
    * Optional parent category. Leave empty for a root node.
    */
-  parent?: (number | null) | Category;
+  parent?: (number | null) | Category
   /**
    * Lower values appear earlier in manually ordered category lists.
    */
-  sortOrder?: number | null;
-  updatedAt: string;
-  createdAt: string;
+  sortOrder?: number | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "tech-stack".
  */
 export interface TechStack {
-  id: number;
-  name: string;
+  id: number
+  name: string
   /**
    * Optional brand color in hexadecimal format, e.g. #3178C6.
    */
-  color?: string | null;
+  color?: string | null
   /**
    * Used as the icon key for AppIcon, e.g. nextjs, react, typescript.
    */
-  slug: string;
+  slug: string
   /**
    * Short tooltip-friendly description.
    */
-  description?: string | null;
+  description?: string | null
   /**
    * Use categories with type "Tech Stack" or "Shared".
    */
-  category?: (number | null) | Category;
+  category?: (number | null) | Category
   /**
    * Official website URL.
    */
-  officialUrl?: string | null;
+  officialUrl?: string | null
   /**
    * Official documentation URL.
    */
-  documentationUrl?: string | null;
+  documentationUrl?: string | null
   /**
    * Show in highlighted homepage sections.
    */
-  featured?: boolean | null;
+  featured?: boolean | null
   /**
    * Allow this technology to appear on public pages.
    */
-  visible?: boolean | null;
+  visible?: boolean | null
   /**
    * Lower values appear earlier in manually ordered technology lists.
    */
-  sortOrder?: number | null;
-  updatedAt: string;
-  createdAt: string;
+  sortOrder?: number | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "projects".
  */
 export interface Project {
-  id: number;
-  title: string;
+  id: number
+  title: string
   /**
    * URL-friendly identifier. Auto-generated from title when empty.
    */
-  slug: string;
+  slug: string
   /**
    * Short project summary for cards, lists, and SEO previews.
    */
-  excerpt: string;
+  excerpt: string
   /**
    * Short marketing line used in featured project previews. Keep it concise and outcome-focused.
    */
-  cardTagline?: string | null;
+  cardTagline?: string | null
   /**
    * Use categories with type "Project" or "Shared".
    */
-  category?: (number | null) | Category;
+  category?: (number | null) | Category
   /**
    * Technologies used in this project.
    */
-  techStack?: (number | TechStack)[] | null;
+  techStack?: (number | TechStack)[] | null
   description:
     | {
-        [k: string]: unknown;
+        [k: string]: unknown
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null;
+    | null
+  /**
+   * Code editor content shown in the public case study. Leave code empty to use the frontend fallback.
+   */
+  caseStudyCode?: {
+    /**
+     * Displayed file path, for example apps/api/src/main.ts.
+     */
+    filePath?: string | null
+    language?:
+      ('typescript' | 'javascript' | 'tsx' | 'jsx' | 'json' | 'scss' | 'shell' | 'other') | null
+    /**
+     * Plain code text. Line breaks are preserved on the public page.
+     */
+    code?: string | null
+  }
   highlights?:
     | {
-        title: string;
-        description: string;
+        title: string
+        description: string
         /**
-         * Icon key for frontend icon mapping.
+         * Semantic icon used by the public case study.
          */
-        icon?: string | null;
-        id?: string | null;
+        icon?: ('community' | 'research' | 'ai' | 'media' | 'security' | 'modules') | null
+        id?: string | null
       }[]
-    | null;
+    | null
+  caseStudyMetrics?:
+    | {
+        label: string
+        value: string
+        detail?: string | null
+        id?: string | null
+      }[]
+    | null
+  architecture?:
+    | {
+        title: string
+        /**
+         * Architecture node icon used on the public case study.
+         */
+        icon?: ('frontend' | 'api' | 'services' | 'database') | null
+        description?: string | null
+        items: {
+          label: string
+          id?: string | null
+        }[]
+        id?: string | null
+      }[]
+    | null
+  roadmap?:
+    | {
+        version?: string | null
+        title: string
+        description?: string | null
+        status: 'completed' | 'current' | 'planned'
+        timeframe?: string | null
+        id?: string | null
+      }[]
+    | null
   /**
    * Primary image for project cards and list pages.
    */
-  coverImage?: (number | null) | Media;
+  coverImage?: (number | null) | Media
   /**
    * Large visual for featured homepage/project sections.
    */
-  featuredImage?: (number | null) | Media;
+  featuredImage?: (number | null) | Media
   gallery?:
     | {
-        image: number | Media;
-        caption?: string | null;
-        alt: string;
-        sortOrder?: number | null;
-        isFeatured?: boolean | null;
-        deviceFrame: 'none' | 'desktop' | 'laptop' | 'tablet' | 'mobile';
-        id?: string | null;
+        image: number | Media
+        caption?: string | null
+        alt: string
+        sortOrder?: number | null
+        isFeatured?: boolean | null
+        deviceFrame: 'none' | 'desktop' | 'laptop' | 'tablet' | 'mobile'
+        id?: string | null
       }[]
-    | null;
+    | null
   github?: {
     /**
      * Public GitHub repository URL.
      */
-    url?: string | null;
+    url?: string | null
     /**
      * GitHub owner or organization name.
      */
-    owner?: string | null;
+    owner?: string | null
     /**
      * GitHub repository name.
      */
-    repo?: string | null;
+    repo?: string | null
     /**
      * Allow frontend to fetch and show live GitHub stats.
      */
-    showStats?: boolean | null;
-  };
+    showStats?: boolean | null
+  }
   links?:
     | {
-        label: string;
+        label: string
         /**
          * If empty, frontend should show disabled CTA with "Невдовзі".
          */
-        url?: string | null;
-        type: 'github' | 'live' | 'documentation' | 'case-study' | 'figma' | 'other';
-        isEnabled?: boolean | null;
-        id?: string | null;
+        url?: string | null
+        type: 'github' | 'live' | 'documentation' | 'case-study' | 'figma' | 'other'
+        isEnabled?: boolean | null
+        id?: string | null
       }[]
-    | null;
+    | null
   /**
    * Articles related to this project.
    */
-  relatedBlogPosts?: (number | BlogPost)[] | null;
+  relatedBlogPosts?: (number | BlogPost)[] | null
   seo?: {
-    metaTitle?: string | null;
-    metaDescription?: string | null;
-    ogImage?: (number | null) | Media;
-  };
-  stage: 'idea' | 'planning' | 'development' | 'testing' | 'released' | 'maintenance' | 'archived';
+    metaTitle?: string | null
+    metaDescription?: string | null
+    ogImage?: (number | null) | Media
+  }
+  stage: 'idea' | 'planning' | 'development' | 'testing' | 'released' | 'maintenance' | 'archived'
   /**
    * Project completion percentage from 0 to 100.
    */
-  progress?: number | null;
+  progress?: number | null
   /**
    * Current public or internal version, e.g. 1.0.0.
    */
-  currentVersion?: string | null;
+  currentVersion?: string | null
   /**
    * Show this project in featured sections.
    */
-  isFeatured?: boolean | null;
-  publishedAt?: string | null;
-  startedAt?: string | null;
-  releasedAt?: string | null;
-  updatedAt: string;
-  createdAt: string;
+  isFeatured?: boolean | null
+  publishedAt?: string | null
+  startedAt?: string | null
+  releasedAt?: string | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blog-posts".
  */
 export interface BlogPost {
-  id: number;
-  title: string;
+  id: number
+  title: string
   /**
    * URL-friendly identifier. Auto-generated from title when empty.
    */
-  slug: string;
+  slug: string
   /**
    * Short summary for blog cards, previews, and SEO snippets.
    */
-  excerpt: string;
+  excerpt: string
   content:
     | {
-        [k: string]: unknown;
+        [k: string]: unknown
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null;
-  coverImage?: (number | null) | Media;
+    | null
+  /**
+   * Optional concise conclusions shown after the article body. Rows can be reordered; numbering and accent colors are applied automatically.
+   */
+  keyTakeaways?:
+    | {
+        /**
+         * One clear, self-contained conclusion.
+         */
+        text: string
+        id?: string | null
+      }[]
+    | null
+  coverImage?: (number | null) | Media
   /**
    * Use categories with type "Blog" or "Shared".
    */
-  category?: (number | null) | Category;
+  category?: (number | null) | Category
+  /**
+   * Optional editorial series name used by the public journal index and related-content navigation.
+   */
+  series?: string | null
+  /**
+   * Editorial depth indicator for readers.
+   */
+  difficulty?: ('foundation' | 'intermediate' | 'advanced') | null
   tags?:
     | {
-        label: string;
+        label: string
         /**
          * URL-friendly tag identifier. Auto-generated from label when empty.
          */
-        slug: string;
-        id?: string | null;
+        slug: string
+        id?: string | null
       }[]
-    | null;
+    | null
   /**
    * Optional project connected to this article or dev note.
    */
-  relatedProject?: (number | null) | Project;
+  relatedProject?: (number | null) | Project
   seo?: {
-    metaTitle?: string | null;
-    metaDescription?: string | null;
-    ogImage?: (number | null) | Media;
-  };
-  status: 'draft' | 'published' | 'archived';
-  publishedAt?: string | null;
-  author?: (number | null) | User;
-  updatedAt: string;
-  createdAt: string;
+    metaTitle?: string | null
+    metaDescription?: string | null
+    ogImage?: (number | null) | Media
+  }
+  /**
+   * Promote this article in the Engineering Journal featured slot.
+   */
+  isFeatured?: boolean | null
+  /**
+   * Estimated reading time in minutes.
+   */
+  readingTime?: number | null
+  /**
+   * Public article view counter.
+   */
+  views?: number | null
+  status: 'draft' | 'published' | 'archived'
+  publishedAt?: string | null
+  author?: (number | null) | User
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "project-versions".
  */
 export interface ProjectVersion {
-  id: number;
-  project: number | Project;
+  id: number
+  project: number | Project
   /**
    * Version number or label, e.g. 1.0.0, Phase 2.2, MVP.
    */
-  version: string;
-  title: string;
+  version: string
+  title: string
   /**
    * Public or internal release date for this version.
    */
-  releaseDate?: string | null;
+  releaseDate?: string | null
   /**
    * Concise explanation used in version history and previews.
    */
-  summary: string;
+  summary: string
   highlights?:
     | {
-        title: string;
-        description?: string | null;
-        id?: string | null;
+        title: string
+        description?: string | null
+        id?: string | null
       }[]
-    | null;
+    | null
   breakingChanges?:
     | {
-        title: string;
-        description?: string | null;
-        id?: string | null;
+        title: string
+        description?: string | null
+        id?: string | null
       }[]
-    | null;
+    | null
   /**
    * Suitable for production use.
    */
-  isStable?: boolean | null;
+  isStable?: boolean | null
   /**
    * Current visible project version.
    */
-  isCurrent?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
+  isCurrent?: boolean | null
+  updatedAt: string
+  createdAt: string
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-feedback-votes".
+ */
+export interface BlogFeedbackVote {
+  id: number
+  post: number | BlogPost
+  vote: 'helpful' | 'not-helpful'
+  fingerprint: string
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "testimonials".
  */
 export interface Testimonial {
-  id: number;
-  name: string;
-  role?: string | null;
-  company?: string | null;
-  message: string;
-  avatar?: (number | null) | Media;
-  status: 'pending' | 'approved' | 'rejected';
+  id: number
+  name: string
+  role?: string | null
+  company?: string | null
+  message: string
+  avatar?: (number | null) | Media
+  status: 'pending' | 'approved' | 'rejected'
   /**
    * Optional rating from 1 to 5.
    */
-  rating?: number | null;
+  rating?: number | null
   /**
    * Where this testimonial came from, e.g. website, LinkedIn, direct message.
    */
-  source?: string | null;
-  approvedAt?: string | null;
-  updatedAt: string;
-  createdAt: string;
+  source?: string | null
+  approvedAt?: string | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact-messages".
  */
 export interface ContactMessage {
-  id: number;
-  name: string;
-  email: string;
-  message: string;
-  subject: string;
-  status: 'new' | 'read' | 'archived';
+  id: number
+  name: string
+  email: string
+  message: string
+  subject: string
+  status: 'new' | 'read' | 'archived'
   /**
    * Where this message came from, e.g. website, landing, contact-page.
    */
-  source?: string | null;
-  archivedAt?: string | null;
-  updatedAt: string;
-  createdAt: string;
+  source?: string | null
+  archivedAt?: string | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "newsletter-subscribers".
  */
 export interface NewsletterSubscriber {
-  id: number;
-  email: string;
-  status: 'active' | 'unsubscribed';
-  source?: string | null;
-  subscribedAt: string;
-  unsubscribedAt?: string | null;
-  updatedAt: string;
-  createdAt: string;
+  id: number
+  email: string
+  status: 'active' | 'unsubscribed'
+  source?: string | null
+  subscribedAt: string
+  unsubscribedAt?: string | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "notifications".
  */
 export interface Notification {
-  id: number;
-  title: string;
-  message: string;
-  type: 'contact' | 'testimonial' | 'system';
-  status: 'unread' | 'read' | 'archived';
+  id: number
+  title: string
+  message: string
+  type: 'contact' | 'testimonial' | 'system'
+  status: 'unread' | 'read' | 'archived'
   /**
    * Collection that generated this notification.
    */
-  relatedCollection?: ('contact-messages' | 'testimonials' | 'projects' | 'blog-posts' | 'system') | null;
+  relatedCollection?:
+    ('contact-messages' | 'testimonials' | 'projects' | 'blog-posts' | 'system') | null
   /**
    * Payload document ID associated with this notification.
    */
-  relatedDocumentId?: string | null;
-  updatedAt: string;
-  createdAt: string;
+  relatedDocumentId?: string | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "dss-x-feed-cache".
  */
 export interface DssXFeedCache {
-  id: number;
-  key: string;
-  username: string;
-  postCount: number;
-  sourceId: string;
-  sourceStability: 'stable' | 'experimental' | 'composite' | 'unknown';
-  checksum: string;
-  generatedAt: string;
-  freshUntil: string;
-  staleUntil: string;
-  nextSyncAt: string;
+  id: number
+  key: string
+  username: string
+  postCount: number
+  sourceId: string
+  sourceStability: 'stable' | 'experimental' | 'composite' | 'unknown'
+  checksum: string
+  generatedAt: string
+  freshUntil: string
+  staleUntil: string
+  nextSyncAt: string
   warnings?:
     | {
-        message: string;
-        id?: string | null;
+        message: string
+        id?: string | null
       }[]
-    | null;
+    | null
   snapshot:
     | {
-        [k: string]: unknown;
+        [k: string]: unknown
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null;
-  updatedAt: string;
-  createdAt: string;
+    | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "dss-github-feed-cache".
  */
 export interface DssGithubFeedCache {
-  id: number;
-  key: string;
-  username: string;
+  id: number
+  key: string
+  username: string
   repositories: {
-    repository: string;
-    id?: string | null;
-  }[];
+    repository: string
+    id?: string | null
+  }[]
   commits: {
-    externalId: string;
-    sha: string;
-    shortSha: string;
-    repository: string;
-    repositoryUrl: string;
-    title: string;
-    committedAt: string;
-    url: string;
-    authorLogin?: string | null;
-    authorName?: string | null;
-    id?: string | null;
-  }[];
-  checksum: string;
-  adapterVersion: string;
-  generatedAt: string;
-  freshUntil: string;
-  staleUntil: string;
-  nextSyncAt?: string | null;
+    externalId: string
+    sha: string
+    shortSha: string
+    repository: string
+    repositoryUrl: string
+    title: string
+    committedAt: string
+    url: string
+    authorLogin?: string | null
+    authorName?: string | null
+    id?: string | null
+  }[]
+  checksum: string
+  adapterVersion: string
+  generatedAt: string
+  freshUntil: string
+  staleUntil: string
+  nextSyncAt?: string | null
   warnings?:
     | {
-        message: string;
-        id?: string | null;
+        message: string
+        id?: string | null
       }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
+    | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "dss-instagram-feed-cache".
  */
 export interface DssInstagramFeedCache {
-  id: number;
-  key: string;
-  username: string;
-  sourceMode: 'official' | 'experimental-web-session' | 'official-with-experimental-fallback';
-  sourceUsed: 'official' | 'experimental-web-session';
+  id: number
+  key: string
+  username: string
+  sourceMode: 'official' | 'experimental-web-session' | 'official-with-experimental-fallback'
+  sourceUsed: 'official' | 'experimental-web-session'
   posts: {
-    externalId: string;
-    shortcode?: string | null;
-    mediaType: 'image' | 'carousel' | 'video';
-    mediaProductType?: string | null;
-    imageUrl: string;
-    thumbnailUrl?: string | null;
-    providerImageUrl: string;
-    providerThumbnailUrl?: string | null;
-    permalink: string;
-    caption?: string | null;
-    publishedAt: string;
-    likeCount?: number | null;
-    commentCount?: number | null;
-    username: string;
-    width?: number | null;
-    height?: number | null;
-    id?: string | null;
-  }[];
-  checksum: string;
-  adapterVersion: string;
-  generatedAt: string;
-  freshUntil: string;
-  staleUntil: string;
-  nextSyncAt?: string | null;
+    externalId: string
+    shortcode?: string | null
+    mediaType: 'image' | 'carousel' | 'video'
+    mediaProductType?: string | null
+    imageUrl: string
+    thumbnailUrl?: string | null
+    providerImageUrl: string
+    providerThumbnailUrl?: string | null
+    permalink: string
+    caption?: string | null
+    publishedAt: string
+    likeCount?: number | null
+    commentCount?: number | null
+    username: string
+    width?: number | null
+    height?: number | null
+    id?: string | null
+  }[]
+  checksum: string
+  adapterVersion: string
+  generatedAt: string
+  freshUntil: string
+  staleUntil: string
+  nextSyncAt?: string | null
   warnings?:
     | {
-        message: string;
-        id?: string | null;
+        message: string
+        id?: string | null
       }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
+    | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: number;
-  key: string;
+  id: number
+  key: string
   data:
     | {
-        [k: string]: unknown;
+        [k: string]: unknown
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null;
+    | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-jobs".
  */
 export interface PayloadJob {
-  id: number;
+  id: number
   /**
    * Input data provided to the job
    */
   input?:
     | {
-        [k: string]: unknown;
+        [k: string]: unknown
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null;
+    | null
   taskStatus?:
     | {
-        [k: string]: unknown;
+        [k: string]: unknown
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null;
-  completedAt?: string | null;
-  totalTried?: number | null;
+    | null
+  completedAt?: string | null
+  totalTried?: number | null
   /**
    * If hasError is true this job will not be retried
    */
-  hasError?: boolean | null;
+  hasError?: boolean | null
   /**
    * If hasError is true, this is the error that caused it
    */
   error?:
     | {
-        [k: string]: unknown;
+        [k: string]: unknown
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null;
+    | null
   /**
    * Task execution log
    */
   log?:
     | {
-        executedAt: string;
-        completedAt: string;
-        taskSlug: 'inline' | 'dss-x-feed-sync' | 'dss-github-feed-sync' | 'dss-instagram-feed-sync';
-        taskID: string;
+        executedAt: string
+        completedAt: string
+        taskSlug: 'inline' | 'dss-x-feed-sync' | 'dss-github-feed-sync' | 'dss-instagram-feed-sync'
+        taskID: string
         input?:
           | {
-              [k: string]: unknown;
+              [k: string]: unknown
             }
           | unknown[]
           | string
           | number
           | boolean
-          | null;
+          | null
         output?:
           | {
-              [k: string]: unknown;
+              [k: string]: unknown
             }
           | unknown[]
           | string
           | number
           | boolean
-          | null;
-        state: 'failed' | 'succeeded';
+          | null
+        state: 'failed' | 'succeeded'
         error?:
           | {
-              [k: string]: unknown;
+              [k: string]: unknown
             }
           | unknown[]
           | string
           | number
           | boolean
-          | null;
-        id?: string | null;
+          | null
+        id?: string | null
       }[]
-    | null;
-  taskSlug?: ('inline' | 'dss-x-feed-sync' | 'dss-github-feed-sync' | 'dss-instagram-feed-sync') | null;
-  queue?: string | null;
-  waitUntil?: string | null;
-  processing?: boolean | null;
+    | null
+  taskSlug?:
+    ('inline' | 'dss-x-feed-sync' | 'dss-github-feed-sync' | 'dss-instagram-feed-sync') | null
+  queue?: string | null
+  waitUntil?: string | null
+  processing?: boolean | null
   /**
    * Used for concurrency control. Jobs with the same key are subject to exclusive/supersedes rules.
    */
-  concurrencyKey?: string | null;
+  concurrencyKey?: string | null
   meta?:
     | {
-        [k: string]: unknown;
+        [k: string]: unknown
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null;
-  updatedAt: string;
-  createdAt: string;
+    | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: number;
+  id: number
   document?:
     | ({
-        relationTo: 'users';
-        value: number | User;
+        relationTo: 'users'
+        value: number | User
       } | null)
     | ({
-        relationTo: 'media';
-        value: number | Media;
+        relationTo: 'media'
+        value: number | Media
       } | null)
     | ({
-        relationTo: 'categories';
-        value: number | Category;
+        relationTo: 'categories'
+        value: number | Category
       } | null)
     | ({
-        relationTo: 'tech-stack';
-        value: number | TechStack;
+        relationTo: 'tech-stack'
+        value: number | TechStack
       } | null)
     | ({
-        relationTo: 'projects';
-        value: number | Project;
+        relationTo: 'projects'
+        value: number | Project
       } | null)
     | ({
-        relationTo: 'project-versions';
-        value: number | ProjectVersion;
+        relationTo: 'project-versions'
+        value: number | ProjectVersion
       } | null)
     | ({
-        relationTo: 'blog-posts';
-        value: number | BlogPost;
+        relationTo: 'blog-posts'
+        value: number | BlogPost
       } | null)
     | ({
-        relationTo: 'testimonials';
-        value: number | Testimonial;
+        relationTo: 'blog-feedback-votes'
+        value: number | BlogFeedbackVote
       } | null)
     | ({
-        relationTo: 'contact-messages';
-        value: number | ContactMessage;
+        relationTo: 'testimonials'
+        value: number | Testimonial
       } | null)
     | ({
-        relationTo: 'newsletter-subscribers';
-        value: number | NewsletterSubscriber;
+        relationTo: 'contact-messages'
+        value: number | ContactMessage
       } | null)
     | ({
-        relationTo: 'notifications';
-        value: number | Notification;
+        relationTo: 'newsletter-subscribers'
+        value: number | NewsletterSubscriber
       } | null)
     | ({
-        relationTo: 'dss-x-feed-cache';
-        value: number | DssXFeedCache;
+        relationTo: 'notifications'
+        value: number | Notification
       } | null)
     | ({
-        relationTo: 'dss-github-feed-cache';
-        value: number | DssGithubFeedCache;
+        relationTo: 'dss-x-feed-cache'
+        value: number | DssXFeedCache
       } | null)
     | ({
-        relationTo: 'dss-instagram-feed-cache';
-        value: number | DssInstagramFeedCache;
-      } | null);
-  globalSlug?: string | null;
+        relationTo: 'dss-github-feed-cache'
+        value: number | DssGithubFeedCache
+      } | null)
+    | ({
+        relationTo: 'dss-instagram-feed-cache'
+        value: number | DssInstagramFeedCache
+      } | null)
+  globalSlug?: string | null
   user: {
-    relationTo: 'users';
-    value: number | User;
-  };
-  updatedAt: string;
-  createdAt: string;
+    relationTo: 'users'
+    value: number | User
+  }
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: number;
+  id: number
   user: {
-    relationTo: 'users';
-    value: number | User;
-  };
-  key?: string | null;
+    relationTo: 'users'
+    value: number | User
+  }
+  key?: string | null
   value?:
     | {
-        [k: string]: unknown;
+        [k: string]: unknown
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null;
-  updatedAt: string;
-  createdAt: string;
+    | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: number;
-  name?: string | null;
-  batch?: number | null;
-  updatedAt: string;
-  createdAt: string;
+  id: number
+  name?: string | null
+  batch?: number | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
-  updatedAt?: T;
-  createdAt?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
+  updatedAt?: T
+  createdAt?: T
+  email?: T
+  resetPasswordToken?: T
+  resetPasswordExpiration?: T
+  salt?: T
+  hash?: T
+  loginAttempts?: T
+  lockUntil?: T
   sessions?:
     | T
     | {
-        id?: T;
-        createdAt?: T;
-        expiresAt?: T;
-      };
+        id?: T
+        createdAt?: T
+        expiresAt?: T
+      }
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
-  alt?: T;
-  caption?: T;
-  credit?: T;
-  folder?: T;
+  alt?: T
+  caption?: T
+  credit?: T
+  folder?: T
   tags?:
     | T
     | {
-        label?: T;
-        id?: T;
-      };
-  isPublic?: T;
-  sortOrder?: T;
-  externalProvider?: T;
-  externalId?: T;
-  externalKey?: T;
-  externalSourceUrl?: T;
-  externalSyncedAt?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
+        label?: T
+        id?: T
+      }
+  isPublic?: T
+  sortOrder?: T
+  externalProvider?: T
+  externalId?: T
+  externalKey?: T
+  externalSourceUrl?: T
+  externalSyncedAt?: T
+  updatedAt?: T
+  createdAt?: T
+  url?: T
+  thumbnailURL?: T
+  filename?: T
+  mimeType?: T
+  filesize?: T
+  width?: T
+  height?: T
+  focalX?: T
+  focalY?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories_select".
  */
 export interface CategoriesSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  description?: T;
-  type?: T;
-  parent?: T;
-  sortOrder?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  title?: T
+  slug?: T
+  description?: T
+  type?: T
+  parent?: T
+  sortOrder?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "tech-stack_select".
  */
 export interface TechStackSelect<T extends boolean = true> {
-  name?: T;
-  color?: T;
-  slug?: T;
-  description?: T;
-  category?: T;
-  officialUrl?: T;
-  documentationUrl?: T;
-  featured?: T;
-  visible?: T;
-  sortOrder?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  name?: T
+  color?: T
+  slug?: T
+  description?: T
+  category?: T
+  officialUrl?: T
+  documentationUrl?: T
+  featured?: T
+  visible?: T
+  sortOrder?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "projects_select".
  */
 export interface ProjectsSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  excerpt?: T;
-  cardTagline?: T;
-  category?: T;
-  techStack?: T;
-  description?: T;
+  title?: T
+  slug?: T
+  excerpt?: T
+  cardTagline?: T
+  category?: T
+  techStack?: T
+  description?: T
+  caseStudyCode?:
+    | T
+    | {
+        filePath?: T
+        language?: T
+        code?: T
+      }
   highlights?:
     | T
     | {
-        title?: T;
-        description?: T;
-        icon?: T;
-        id?: T;
-      };
-  coverImage?: T;
-  featuredImage?: T;
+        title?: T
+        description?: T
+        icon?: T
+        id?: T
+      }
+  caseStudyMetrics?:
+    | T
+    | {
+        label?: T
+        value?: T
+        detail?: T
+        id?: T
+      }
+  architecture?:
+    | T
+    | {
+        title?: T
+        icon?: T
+        description?: T
+        items?:
+          | T
+          | {
+              label?: T
+              id?: T
+            }
+        id?: T
+      }
+  roadmap?:
+    | T
+    | {
+        version?: T
+        title?: T
+        description?: T
+        status?: T
+        timeframe?: T
+        id?: T
+      }
+  coverImage?: T
+  featuredImage?: T
   gallery?:
     | T
     | {
-        image?: T;
-        caption?: T;
-        alt?: T;
-        sortOrder?: T;
-        isFeatured?: T;
-        deviceFrame?: T;
-        id?: T;
-      };
+        image?: T
+        caption?: T
+        alt?: T
+        sortOrder?: T
+        isFeatured?: T
+        deviceFrame?: T
+        id?: T
+      }
   github?:
     | T
     | {
-        url?: T;
-        owner?: T;
-        repo?: T;
-        showStats?: T;
-      };
+        url?: T
+        owner?: T
+        repo?: T
+        showStats?: T
+      }
   links?:
     | T
     | {
-        label?: T;
-        url?: T;
-        type?: T;
-        isEnabled?: T;
-        id?: T;
-      };
-  relatedBlogPosts?: T;
+        label?: T
+        url?: T
+        type?: T
+        isEnabled?: T
+        id?: T
+      }
+  relatedBlogPosts?: T
   seo?:
     | T
     | {
-        metaTitle?: T;
-        metaDescription?: T;
-        ogImage?: T;
-      };
-  stage?: T;
-  progress?: T;
-  currentVersion?: T;
-  isFeatured?: T;
-  publishedAt?: T;
-  startedAt?: T;
-  releasedAt?: T;
-  updatedAt?: T;
-  createdAt?: T;
+        metaTitle?: T
+        metaDescription?: T
+        ogImage?: T
+      }
+  stage?: T
+  progress?: T
+  currentVersion?: T
+  isFeatured?: T
+  publishedAt?: T
+  startedAt?: T
+  releasedAt?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "project-versions_select".
  */
 export interface ProjectVersionsSelect<T extends boolean = true> {
-  project?: T;
-  version?: T;
-  title?: T;
-  releaseDate?: T;
-  summary?: T;
+  project?: T
+  version?: T
+  title?: T
+  releaseDate?: T
+  summary?: T
   highlights?:
     | T
     | {
-        title?: T;
-        description?: T;
-        id?: T;
-      };
+        title?: T
+        description?: T
+        id?: T
+      }
   breakingChanges?:
     | T
     | {
-        title?: T;
-        description?: T;
-        id?: T;
-      };
-  isStable?: T;
-  isCurrent?: T;
-  updatedAt?: T;
-  createdAt?: T;
+        title?: T
+        description?: T
+        id?: T
+      }
+  isStable?: T
+  isCurrent?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blog-posts_select".
  */
 export interface BlogPostsSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  excerpt?: T;
-  content?: T;
-  coverImage?: T;
-  category?: T;
+  title?: T
+  slug?: T
+  excerpt?: T
+  content?: T
+  keyTakeaways?:
+    | T
+    | {
+        text?: T
+        id?: T
+      }
+  coverImage?: T
+  category?: T
+  series?: T
+  difficulty?: T
   tags?:
     | T
     | {
-        label?: T;
-        slug?: T;
-        id?: T;
-      };
-  relatedProject?: T;
+        label?: T
+        slug?: T
+        id?: T
+      }
+  relatedProject?: T
   seo?:
     | T
     | {
-        metaTitle?: T;
-        metaDescription?: T;
-        ogImage?: T;
-      };
-  status?: T;
-  publishedAt?: T;
-  author?: T;
-  updatedAt?: T;
-  createdAt?: T;
+        metaTitle?: T
+        metaDescription?: T
+        ogImage?: T
+      }
+  isFeatured?: T
+  readingTime?: T
+  views?: T
+  status?: T
+  publishedAt?: T
+  author?: T
+  updatedAt?: T
+  createdAt?: T
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-feedback-votes_select".
+ */
+export interface BlogFeedbackVotesSelect<T extends boolean = true> {
+  post?: T
+  vote?: T
+  fingerprint?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "testimonials_select".
  */
 export interface TestimonialsSelect<T extends boolean = true> {
-  name?: T;
-  role?: T;
-  company?: T;
-  message?: T;
-  avatar?: T;
-  status?: T;
-  rating?: T;
-  source?: T;
-  approvedAt?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  name?: T
+  role?: T
+  company?: T
+  message?: T
+  avatar?: T
+  status?: T
+  rating?: T
+  source?: T
+  approvedAt?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact-messages_select".
  */
 export interface ContactMessagesSelect<T extends boolean = true> {
-  name?: T;
-  email?: T;
-  message?: T;
-  subject?: T;
-  status?: T;
-  source?: T;
-  archivedAt?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  name?: T
+  email?: T
+  message?: T
+  subject?: T
+  status?: T
+  source?: T
+  archivedAt?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "newsletter-subscribers_select".
  */
 export interface NewsletterSubscribersSelect<T extends boolean = true> {
-  email?: T;
-  status?: T;
-  source?: T;
-  subscribedAt?: T;
-  unsubscribedAt?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  email?: T
+  status?: T
+  source?: T
+  subscribedAt?: T
+  unsubscribedAt?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "notifications_select".
  */
 export interface NotificationsSelect<T extends boolean = true> {
-  title?: T;
-  message?: T;
-  type?: T;
-  status?: T;
-  relatedCollection?: T;
-  relatedDocumentId?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  title?: T
+  message?: T
+  type?: T
+  status?: T
+  relatedCollection?: T
+  relatedDocumentId?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "dss-x-feed-cache_select".
  */
 export interface DssXFeedCacheSelect<T extends boolean = true> {
-  key?: T;
-  username?: T;
-  postCount?: T;
-  sourceId?: T;
-  sourceStability?: T;
-  checksum?: T;
-  generatedAt?: T;
-  freshUntil?: T;
-  staleUntil?: T;
-  nextSyncAt?: T;
+  key?: T
+  username?: T
+  postCount?: T
+  sourceId?: T
+  sourceStability?: T
+  checksum?: T
+  generatedAt?: T
+  freshUntil?: T
+  staleUntil?: T
+  nextSyncAt?: T
   warnings?:
     | T
     | {
-        message?: T;
-        id?: T;
-      };
-  snapshot?: T;
-  updatedAt?: T;
-  createdAt?: T;
+        message?: T
+        id?: T
+      }
+  snapshot?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "dss-github-feed-cache_select".
  */
 export interface DssGithubFeedCacheSelect<T extends boolean = true> {
-  key?: T;
-  username?: T;
+  key?: T
+  username?: T
   repositories?:
     | T
     | {
-        repository?: T;
-        id?: T;
-      };
+        repository?: T
+        id?: T
+      }
   commits?:
     | T
     | {
-        externalId?: T;
-        sha?: T;
-        shortSha?: T;
-        repository?: T;
-        repositoryUrl?: T;
-        title?: T;
-        committedAt?: T;
-        url?: T;
-        authorLogin?: T;
-        authorName?: T;
-        id?: T;
-      };
-  checksum?: T;
-  adapterVersion?: T;
-  generatedAt?: T;
-  freshUntil?: T;
-  staleUntil?: T;
-  nextSyncAt?: T;
+        externalId?: T
+        sha?: T
+        shortSha?: T
+        repository?: T
+        repositoryUrl?: T
+        title?: T
+        committedAt?: T
+        url?: T
+        authorLogin?: T
+        authorName?: T
+        id?: T
+      }
+  checksum?: T
+  adapterVersion?: T
+  generatedAt?: T
+  freshUntil?: T
+  staleUntil?: T
+  nextSyncAt?: T
   warnings?:
     | T
     | {
-        message?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
+        message?: T
+        id?: T
+      }
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "dss-instagram-feed-cache_select".
  */
 export interface DssInstagramFeedCacheSelect<T extends boolean = true> {
-  key?: T;
-  username?: T;
-  sourceMode?: T;
-  sourceUsed?: T;
+  key?: T
+  username?: T
+  sourceMode?: T
+  sourceUsed?: T
   posts?:
     | T
     | {
-        externalId?: T;
-        shortcode?: T;
-        mediaType?: T;
-        mediaProductType?: T;
-        imageUrl?: T;
-        thumbnailUrl?: T;
-        providerImageUrl?: T;
-        providerThumbnailUrl?: T;
-        permalink?: T;
-        caption?: T;
-        publishedAt?: T;
-        likeCount?: T;
-        commentCount?: T;
-        username?: T;
-        width?: T;
-        height?: T;
-        id?: T;
-      };
-  checksum?: T;
-  adapterVersion?: T;
-  generatedAt?: T;
-  freshUntil?: T;
-  staleUntil?: T;
-  nextSyncAt?: T;
+        externalId?: T
+        shortcode?: T
+        mediaType?: T
+        mediaProductType?: T
+        imageUrl?: T
+        thumbnailUrl?: T
+        providerImageUrl?: T
+        providerThumbnailUrl?: T
+        permalink?: T
+        caption?: T
+        publishedAt?: T
+        likeCount?: T
+        commentCount?: T
+        username?: T
+        width?: T
+        height?: T
+        id?: T
+      }
+  checksum?: T
+  adapterVersion?: T
+  generatedAt?: T
+  freshUntil?: T
+  staleUntil?: T
+  nextSyncAt?: T
   warnings?:
     | T
     | {
-        message?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
+        message?: T
+        id?: T
+      }
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
-  key?: T;
-  data?: T;
+  key?: T
+  data?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-jobs_select".
  */
 export interface PayloadJobsSelect<T extends boolean = true> {
-  input?: T;
-  taskStatus?: T;
-  completedAt?: T;
-  totalTried?: T;
-  hasError?: T;
-  error?: T;
+  input?: T
+  taskStatus?: T
+  completedAt?: T
+  totalTried?: T
+  hasError?: T
+  error?: T
   log?:
     | T
     | {
-        executedAt?: T;
-        completedAt?: T;
-        taskSlug?: T;
-        taskID?: T;
-        input?: T;
-        output?: T;
-        state?: T;
-        error?: T;
-        id?: T;
-      };
-  taskSlug?: T;
-  queue?: T;
-  waitUntil?: T;
-  processing?: T;
-  concurrencyKey?: T;
-  meta?: T;
-  updatedAt?: T;
-  createdAt?: T;
+        executedAt?: T
+        completedAt?: T
+        taskSlug?: T
+        taskID?: T
+        input?: T
+        output?: T
+        state?: T
+        error?: T
+        id?: T
+      }
+  taskSlug?: T
+  queue?: T
+  waitUntil?: T
+  processing?: T
+  concurrencyKey?: T
+  meta?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
-  document?: T;
-  globalSlug?: T;
-  user?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  document?: T
+  globalSlug?: T
+  user?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences_select".
  */
 export interface PayloadPreferencesSelect<T extends boolean = true> {
-  user?: T;
-  key?: T;
-  value?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  user?: T
+  key?: T
+  value?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations_select".
  */
 export interface PayloadMigrationsSelect<T extends boolean = true> {
-  name?: T;
-  batch?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  name?: T
+  batch?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings".
  */
 export interface SiteSetting {
-  id: number;
-  siteName: string;
-  siteDescription: string;
-  logo?: (number | null) | Media;
-  defaultLanguage: 'en' | 'uk';
+  id: number
+  siteName: string
+  siteDescription: string
+  logo?: (number | null) | Media
+  defaultLanguage: 'en' | 'uk'
   footer?: {
     navigation?:
       | {
-          label: string;
-          href: string;
-          id?: string | null;
+          label: string
+          href: string
+          id?: string | null
         }[]
-      | null;
-    copyrightPrefix?: string | null;
-    copyrightEmphasis?: string | null;
-    copyrightSuffix?: string | null;
-  };
+      | null
+    copyrightPrefix?: string | null
+    copyrightEmphasis?: string | null
+    copyrightSuffix?: string | null
+  }
   /**
    * Temporarily hide the public website.
    */
-  maintenanceMode?: boolean | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
+  maintenanceMode?: boolean | null
+  updatedAt?: string | null
+  createdAt?: string | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "homepage".
  */
 export interface Homepage {
-  id: number;
+  id: number
   hero: {
-    eyebrow?: string | null;
-    title: string;
+    eyebrow?: string | null
+    title: string
     /**
      * Exact phrase inside the title that receives strong emphasis.
      */
-    titleAccent?: string | null;
-    subtitle: string;
+    titleAccent?: string | null
+    subtitle: string
     /**
      * Exact phrase inside the subtitle that receives accent emphasis.
      */
-    subtitleAccent?: string | null;
-    primaryCtaLabel?: string | null;
-    primaryCtaUrl?: string | null;
-    secondaryCtaLabel?: string | null;
-    secondaryCtaUrl?: string | null;
-    image?: (number | null) | Media;
-  };
+    subtitleAccent?: string | null
+    primaryCtaLabel?: string | null
+    primaryCtaUrl?: string | null
+    secondaryCtaLabel?: string | null
+    secondaryCtaUrl?: string | null
+    image?: (number | null) | Media
+  }
   currentMissionSection?: {
-    enabled?: boolean | null;
-    eyebrow?: string | null;
+    enabled?: boolean | null
+    eyebrow?: string | null
     /**
      * Optional custom title. Leave empty to use “Building {project title}”.
      */
-    title?: string | null;
-    description?: string | null;
+    title?: string | null
+    description?: string | null
     /**
      * Explicit project shown as the current mission. No automatic project fallback is used.
      */
-    project?: (number | null) | Project;
-    ctaLabel?: string | null;
+    project?: (number | null) | Project
+    ctaLabel?: string | null
     /**
      * Optional safe internal or HTTPS URL. When empty, the preferred enabled project link is used.
      */
-    ctaUrlOverride?: string | null;
-    footerLabel?: string | null;
-    footerText?: string | null;
-  };
+    ctaUrlOverride?: string | null
+    footerLabel?: string | null
+    footerText?: string | null
+  }
   /**
    * Selected projects for the homepage. If empty, frontend can fallback to featured projects.
    */
-  featuredProjects?: (number | Project)[] | null;
+  featuredProjects?: (number | Project)[] | null
   skillsSection?: {
-    eyebrow?: string | null;
-    title?: string | null;
-    description?: string | null;
-    footerLabel?: string | null;
-    footerText?: string | null;
+    eyebrow?: string | null
+    title?: string | null
+    description?: string | null
+    footerLabel?: string | null
+    footerText?: string | null
     /**
      * Card order controls the public layout. Presentation tone and icon are derived from the card key.
      */
     cards?:
       | {
-          key: 'frontend' | 'workflow' | 'backend' | 'devops' | 'architecture' | 'focus';
-          title: string;
-          badge?: string | null;
-          description: string;
+          key: 'frontend' | 'workflow' | 'backend' | 'devops' | 'architecture' | 'focus'
+          title: string
+          badge?: string | null
+          description: string
           /**
            * Visible technologies shown in this card. When empty, the frontend uses the default slug group for this card key.
            */
-          technologies?: (number | TechStack)[] | null;
-          pillsTitle?: string | null;
+          technologies?: (number | TechStack)[] | null
+          pillsTitle?: string | null
           pills?:
             | {
-                label: string;
-                id?: string | null;
+                label: string
+                id?: string | null
               }[]
-            | null;
+            | null
           details?:
             | {
-                label: string;
-                value?: string | null;
-                caption?: string | null;
+                label: string
+                value?: string | null
+                caption?: string | null
                 items?:
                   | {
-                      label: string;
-                      id?: string | null;
+                      label: string
+                      id?: string | null
                     }[]
-                  | null;
-                id?: string | null;
+                  | null
+                id?: string | null
               }[]
-            | null;
-          workflowTitle?: string | null;
+            | null
+          workflowTitle?: string | null
           workflow?:
             | {
-                label: string;
-                icon: 'plan' | 'code' | 'commit' | 'review' | 'deploy';
-                id?: string | null;
+                label: string
+                icon: 'plan' | 'code' | 'commit' | 'review' | 'deploy'
+                id?: string | null
               }[]
-            | null;
+            | null
           focusLine?:
             | {
-                label: string;
-                id?: string | null;
+                label: string
+                id?: string | null
               }[]
-            | null;
+            | null
           principles?:
             | {
-                title: string;
-                description: string;
-                icon: 'layers' | 'cube' | 'scale' | 'wrench' | 'flask';
-                id?: string | null;
+                title: string
+                description: string
+                icon: 'layers' | 'cube' | 'scale' | 'wrench' | 'flask'
+                id?: string | null
               }[]
-            | null;
+            | null
           focusItems?:
             | {
-                title: string;
-                description: string;
-                icon: 'ai' | 'system' | 'automation' | 'performance';
-                id?: string | null;
+                title: string
+                description: string
+                icon: 'ai' | 'system' | 'automation' | 'performance'
+                id?: string | null
               }[]
-            | null;
-          id?: string | null;
+            | null
+          id?: string | null
         }[]
-      | null;
-  };
+      | null
+  }
   deliveryPipelineSection?: {
-    enabled?: boolean | null;
-    eyebrow?: string | null;
-    title?: string | null;
+    enabled?: boolean | null
+    eyebrow?: string | null
+    title?: string | null
     /**
      * Exact phrase inside the title that receives the cyan accent.
      */
-    titleAccent?: string | null;
-    description?: string | null;
-    footerLabel?: string | null;
-    footerText?: string | null;
+    titleAccent?: string | null
+    description?: string | null
+    footerLabel?: string | null
+    footerText?: string | null
     /**
      * Up to three delivery values. The icon is derived from the stable metric key.
      */
     metrics?:
       | {
-          key: 'predictable' | 'milestones' | 'maintainable';
-          title: string;
-          description: string;
-          id?: string | null;
+          key: 'predictable' | 'milestones' | 'maintainable'
+          title: string
+          description: string
+          id?: string | null
         }[]
-      | null;
+      | null
     /**
      * Exactly five unique phases are required because the desktop motion runtime uses five fixed activation steps.
      */
     phases?:
       | {
-          key: 'discovery' | 'architecture' | 'interface' | 'development' | 'launch';
-          title: string;
-          status: 'complete' | 'progress' | 'pending';
+          key: 'discovery' | 'architecture' | 'interface' | 'development' | 'launch'
+          title: string
+          status: 'complete' | 'progress' | 'pending'
           items?:
             | {
-                label: string;
-                id?: string | null;
+                label: string
+                id?: string | null
               }[]
-            | null;
-          id?: string | null;
+            | null
+          id?: string | null
         }[]
-      | null;
-  };
+      | null
+  }
   /**
    * Selected technologies used in the Hero telemetry strip.
    */
-  selectedTechStack?: (number | TechStack)[] | null;
+  selectedTechStack?: (number | TechStack)[] | null
   engineerProfileSection?: {
-    enabled?: boolean | null;
-    eyebrow?: string | null;
-    title?: string | null;
-    description?: string | null;
-    journeyTitle?: string | null;
-    journeyMeta?: string | null;
-    journeyFooter?: string | null;
-    principlesTitle?: string | null;
-    principlesMeta?: string | null;
-    footerLabel?: string | null;
-    footerText?: string | null;
-  };
+    enabled?: boolean | null
+    eyebrow?: string | null
+    title?: string | null
+    description?: string | null
+    journeyTitle?: string | null
+    journeyMeta?: string | null
+    journeyFooter?: string | null
+    principlesTitle?: string | null
+    principlesMeta?: string | null
+    footerLabel?: string | null
+    footerText?: string | null
+  }
   insightsTrustSection?: {
-    enabled?: boolean | null;
-    eyebrow?: string | null;
-    title?: string | null;
+    enabled?: boolean | null
+    eyebrow?: string | null
+    title?: string | null
     /**
      * Exact phrase inside the title that receives the cyan accent.
      */
-    titleAccent?: string | null;
+    titleAccent?: string | null
     /**
      * Exact phrase inside the title that receives the purple accent.
      */
-    titleMuted?: string | null;
-    description?: string | null;
-    articlesTitle?: string | null;
-    featuredLabel?: string | null;
+    titleMuted?: string | null
+    description?: string | null
+    articlesTitle?: string | null
+    featuredLabel?: string | null
     /**
      * Enable only after real article index and detail pages replace the current placeholder redirects.
      */
-    articleLinksEnabled?: boolean | null;
-    articlesCtaEnabled?: boolean | null;
-    articlesCtaLabel?: string | null;
-    articlesCtaUrl?: string | null;
+    articleLinksEnabled?: boolean | null
+    articlesCtaEnabled?: boolean | null
+    articlesCtaLabel?: string | null
+    articlesCtaUrl?: string | null
     /**
      * Preferred featured article. Draft, archived, future, or unresolved records are ignored.
      */
-    featuredArticle?: (number | null) | BlogPost;
+    featuredArticle?: (number | null) | BlogPost
     /**
      * Preferred compact articles. Latest published articles fill any remaining slots.
      */
-    selectedArticles?: (number | BlogPost)[] | null;
-    feedbackTitle?: string | null;
+    selectedArticles?: (number | BlogPost)[] | null
+    feedbackTitle?: string | null
     /**
      * Preferred testimonials. Only approved records with approvedAt are rendered.
      */
-    selectedTestimonials?: (number | Testimonial)[] | null;
-    trustTitle?: string | null;
-    footerLabel?: string | null;
-    footerText?: string | null;
-  };
+    selectedTestimonials?: (number | Testimonial)[] | null
+    trustTitle?: string | null
+    footerLabel?: string | null
+    footerText?: string | null
+  }
   socialFeedsSection?: {
-    enabled?: boolean | null;
-    title?: string | null;
-    description?: string | null;
-  };
+    enabled?: boolean | null
+    title?: string | null
+    description?: string | null
+  }
   footerSection?: {
-    enabled?: boolean | null;
-    availabilityLabel?: string | null;
-    connectLabel?: string | null;
-    xTitle?: string | null;
-    xHandle?: string | null;
-    xLinkLabel?: string | null;
+    enabled?: boolean | null
+    availabilityLabel?: string | null
+    connectLabel?: string | null
+    xTitle?: string | null
+    xHandle?: string | null
+    xLinkLabel?: string | null
     /**
      * Curated manual posts. This is not presented as a live X API integration.
      */
     xPosts?:
       | {
-          content: string;
-          publishedAt: string;
-          replies?: number | null;
-          reposts?: number | null;
-          likes?: number | null;
-          id?: string | null;
+          content: string
+          publishedAt: string
+          replies?: number | null
+          reposts?: number | null
+          likes?: number | null
+          id?: string | null
         }[]
-      | null;
-    snapshotsTitle?: string | null;
-    snapshotsSubtitle?: string | null;
-    instagramLinkLabel?: string | null;
+      | null
+    snapshotsTitle?: string | null
+    snapshotsSubtitle?: string | null
+    instagramLinkLabel?: string | null
     /**
      * Optional Media overrides the decorative frontend preset.
      */
     snapshots?:
       | {
-          title: string;
-          subtitle?: string | null;
-          kind: 'code' | 'ui' | 'desk' | 'quote' | 'terminal' | 'coffee';
-          image?: (number | null) | Media;
-          id?: string | null;
+          title: string
+          subtitle?: string | null
+          kind: 'code' | 'ui' | 'desk' | 'quote' | 'terminal' | 'coffee'
+          image?: (number | null) | Media
+          id?: string | null
         }[]
-      | null;
-    newsletterTitle?: string | null;
-    newsletterDescription?: string | null;
-    newsletterPlaceholder?: string | null;
-    newsletterButtonLabel?: string | null;
-    newsletterNote?: string | null;
-  };
+      | null
+    newsletterTitle?: string | null
+    newsletterDescription?: string | null
+    newsletterPlaceholder?: string | null
+    newsletterButtonLabel?: string | null
+    newsletterNote?: string | null
+  }
   contactSection?: {
-    enabled?: boolean | null;
-    eyebrow?: string | null;
-    title?: string | null;
+    enabled?: boolean | null
+    eyebrow?: string | null
+    title?: string | null
     /**
      * Exact phrase inside the title that receives accent emphasis.
      */
-    titleAccent?: string | null;
-    description?: string | null;
-    formTitle?: string | null;
-    formDescription?: string | null;
-    footerLabel?: string | null;
-    footerText?: string | null;
-  };
-  updatedAt?: string | null;
-  createdAt?: string | null;
+    titleAccent?: string | null
+    description?: string | null
+    formTitle?: string | null
+    formDescription?: string | null
+    footerLabel?: string | null
+    footerText?: string | null
+  }
+  updatedAt?: string | null
+  createdAt?: string | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "profile".
  */
 export interface Profile {
-  id: number;
-  name: string;
-  role: string;
-  location?: string | null;
-  status?: ('available' | 'focused' | 'unavailable') | null;
-  portrait?: (number | null) | Media;
-  shortBio?: string | null;
-  availability?: string | null;
+  id: number
+  name: string
+  role: string
+  location?: string | null
+  status?: ('available' | 'focused' | 'unavailable') | null
+  portrait?: (number | null) | Media
+  shortBio?: string | null
+  availability?: string | null
   /**
    * Used to derive the public years-of-experience metric.
    */
-  careerStartedAt?: string | null;
+  careerStartedAt?: string | null
   /**
    * Completed projects not represented by published Projects records. The public Projects metric adds this value to the published portfolio count.
    */
-  completedProjectsOutsidePortfolio?: number | null;
+  completedProjectsOutsidePortfolio?: number | null
   /**
    * Optional fallback for the Hero secondary CTA.
    */
-  cvFile?: (number | null) | Media;
+  cvFile?: (number | null) | Media
   /**
    * Optional manual public metrics. Derived collection and experience metrics stay in code.
    */
   metrics?:
     | {
-        key: string;
-        label: string;
-        value: number;
-        suffix?: string | null;
-        enabled?: boolean | null;
-        id?: string | null;
+        key: string
+        label: string
+        value: number
+        suffix?: string | null
+        enabled?: boolean | null
+        id?: string | null
       }[]
-    | null;
+    | null
   /**
    * Public HUD-style identifier shown on the Engineer Profile card.
    */
-  profileId?: string | null;
-  fullBio?: string | null;
+  profileId?: string | null
+  fullBio?: string | null
   journey?:
     | {
-        year: string;
-        title: string;
-        description: string;
-        accent?: boolean | null;
-        id?: string | null;
+        year: string
+        title: string
+        description: string
+        accent?: boolean | null
+        id?: string | null
       }[]
-    | null;
+    | null
   principles?:
     | {
-        icon: 'architecture' | 'documentation' | 'code' | 'rocket';
-        title: string;
-        description: string;
-        id?: string | null;
+        icon: 'architecture' | 'documentation' | 'code' | 'rocket'
+        title: string
+        description: string
+        id?: string | null
       }[]
-    | null;
+    | null
   /**
    * Optional truthful activity note. Leave disabled until a manual note or live integration exists.
    */
   heroActivity?: {
-    enabled?: boolean | null;
-    label?: string | null;
-    detail?: string | null;
-  };
-  updatedAt?: string | null;
-  createdAt?: string | null;
+    enabled?: boolean | null
+    label?: string | null
+    detail?: string | null
+  }
+  updatedAt?: string | null
+  createdAt?: string | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "seo".
  */
 export interface Seo {
-  id: number;
-  defaultMetaTitle: string;
-  defaultMetaDescription: string;
-  defaultOgImage?: (number | null) | Media;
+  id: number
+  defaultMetaTitle: string
+  defaultMetaDescription: string
+  defaultOgImage?: (number | null) | Media
   /**
    * Default robots behavior for public pages.
    */
-  robots: 'index-follow' | 'noindex-follow' | 'noindex-nofollow';
-  sitemapEnabled?: boolean | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
+  robots: 'index-follow' | 'noindex-follow' | 'noindex-nofollow'
+  sitemapEnabled?: boolean | null
+  updatedAt?: string | null
+  createdAt?: string | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "social".
  */
 export interface Social {
-  id: number;
-  githubUrl?: string | null;
-  linkedinUrl?: string | null;
+  id: number
+  githubUrl?: string | null
+  linkedinUrl?: string | null
   /**
    * Public Telegram profile or contact URL.
    */
-  telegramUrl?: string | null;
+  telegramUrl?: string | null
   /**
    * X / Twitter profile URL.
    */
-  xUrl?: string | null;
-  instagramUrl?: string | null;
-  dribbbleUrl?: string | null;
-  youtubeUrl?: string | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
+  xUrl?: string | null
+  instagramUrl?: string | null
+  dribbbleUrl?: string | null
+  youtubeUrl?: string | null
+  updatedAt?: string | null
+  createdAt?: string | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact".
  */
 export interface Contact {
-  id: number;
-  email: string;
-  phone?: string | null;
-  location?: string | null;
+  id: number
+  email: string
+  phone?: string | null
+  location?: string | null
   /**
    * Enable or disable the public contact form.
    */
-  contactFormEnabled?: boolean | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
+  contactFormEnabled?: boolean | null
+  updatedAt?: string | null
+  createdAt?: string | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "analytics".
  */
 export interface Analytics {
-  id: number;
+  id: number
   /**
    * Enable or disable analytics on the public website.
    */
-  enabled?: boolean | null;
+  enabled?: boolean | null
   /**
    * Google Analytics measurement ID, e.g. G-XXXXXXXXXX.
    */
-  googleAnalyticsId?: string | null;
+  googleAnalyticsId?: string | null
   /**
    * Plausible Analytics domain, e.g. example.com.
    */
-  plausibleDomain?: string | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
+  plausibleDomain?: string | null
+  updatedAt?: string | null
+  createdAt?: string | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "dss-x-feed-settings".
  */
 export interface DssXFeedSetting {
-  id: number;
-  enabled?: boolean | null;
-  username?: string | null;
+  id: number
+  enabled?: boolean | null
+  username?: string | null
   /**
    * Nitter and RSSHub are unofficial experimental bridges and may stop working without notice.
    */
-  sourceMode: 'official-api' | 'nitter' | 'rsshub' | 'fallback' | 'custom';
+  sourceMode: 'official-api' | 'nitter' | 'rsshub' | 'fallback' | 'custom'
   /**
    * Use a trusted self-hosted instance. Public instances may disappear without notice.
    */
-  nitterBaseUrl?: string | null;
+  nitterBaseUrl?: string | null
   /**
    * Authentication headers remain server-side and are never stored in this global.
    */
-  rssHubBaseUrl?: string | null;
-  postLimit: number;
+  rssHubBaseUrl?: string | null
+  postLimit: number
   /**
    * Maximum number of cached posts rendered by public views. This does not reduce the active snapshot.
    */
-  displayPostLimit: number;
-  excludeReplies?: boolean | null;
-  excludeReposts?: boolean | null;
-  syncIntervalMinutes: number;
-  freshForMinutes: number;
-  staleForHours: number;
-  failureThreshold: number;
-  notificationCooldownHours: number;
+  displayPostLimit: number
+  excludeReplies?: boolean | null
+  excludeReposts?: boolean | null
+  syncIntervalMinutes: number
+  freshForMinutes: number
+  staleForHours: number
+  failureThreshold: number
+  notificationCooldownHours: number
   monitorState?:
     | {
-        [k: string]: unknown;
+        [k: string]: unknown
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
+    | null
+  updatedAt?: string | null
+  createdAt?: string | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "dss-github-feed-settings".
  */
 export interface DssGithubFeedSetting {
-  id: number;
-  enabled?: boolean | null;
+  id: number
+  enabled?: boolean | null
   /**
    * Used to filter commits and as the default repository owner.
    */
-  username?: string | null;
+  username?: string | null
   /**
    * Use owner/name or a bare repository name when the owner matches the configured username.
    */
   repositories?:
     | {
-        repository: string;
-        id?: string | null;
+        repository: string
+        id?: string | null
       }[]
-    | null;
+    | null
   /**
    * Maximum number of normalized commits retained in the active snapshot.
    */
-  commitLimit: number;
+  commitLimit: number
   /**
    * Maximum number of cached commits rendered by public views. This does not reduce the active snapshot.
    */
-  displayCommitLimit: number;
+  displayCommitLimit: number
   /**
    * The scheduled task checks this value before contacting GitHub.
    */
-  syncIntervalHours: number;
+  syncIntervalHours: number
   /**
    * A successful snapshot is considered fresh for this many minutes.
    */
-  freshForMinutes: number;
+  freshForMinutes: number
   /**
    * The last successful snapshot remains renderable for this many additional hours after freshness expires.
    */
-  staleForHours: number;
-  monitorStatus?: ('idle' | 'running' | 'success' | 'skipped' | 'error') | null;
-  monitorRunId?: string | null;
-  monitorTrigger?: ('schedule' | 'manual' | 'endpoint') | null;
-  monitorAttemptCount?: number | null;
-  monitorLastAttemptAt?: string | null;
-  monitorLastSuccessAt?: string | null;
-  monitorCompletedAt?: string | null;
-  monitorDurationMs?: number | null;
-  monitorCommitCount?: number | null;
-  monitorChecksum?: string | null;
-  monitorGeneratedAt?: string | null;
-  monitorFreshUntil?: string | null;
-  monitorStaleUntil?: string | null;
-  monitorNextSyncAt?: string | null;
-  monitorAdapterVersion?: string | null;
-  monitorLastError?: string | null;
+  staleForHours: number
+  monitorStatus?: ('idle' | 'running' | 'success' | 'skipped' | 'error') | null
+  monitorRunId?: string | null
+  monitorTrigger?: ('schedule' | 'manual' | 'endpoint') | null
+  monitorAttemptCount?: number | null
+  monitorLastAttemptAt?: string | null
+  monitorLastSuccessAt?: string | null
+  monitorCompletedAt?: string | null
+  monitorDurationMs?: number | null
+  monitorCommitCount?: number | null
+  monitorChecksum?: string | null
+  monitorGeneratedAt?: string | null
+  monitorFreshUntil?: string | null
+  monitorStaleUntil?: string | null
+  monitorNextSyncAt?: string | null
+  monitorAdapterVersion?: string | null
+  monitorLastError?: string | null
   monitorEvents?:
     | {
-        level: 'info' | 'success' | 'warning' | 'error';
-        message: string;
-        timestamp: string;
+        level: 'info' | 'success' | 'warning' | 'error'
+        message: string
+        timestamp: string
         context?:
           | {
-              [k: string]: unknown;
+              [k: string]: unknown
             }
           | unknown[]
           | string
           | number
           | boolean
-          | null;
-        id?: string | null;
+          | null
+        id?: string | null
       }[]
-    | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
+    | null
+  updatedAt?: string | null
+  createdAt?: string | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "dss-instagram-feed-settings".
  */
 export interface DssInstagramFeedSetting {
-  id: number;
-  enabled?: boolean | null;
+  id: number
+  enabled?: boolean | null
   /**
    * Public profile username without @.
    */
-  username?: string | null;
+  username?: string | null
   /**
    * The experimental source uses a logged-in Instagram web session and may break when Instagram changes private web endpoints.
    */
-  sourceMode: 'official' | 'experimental-web-session' | 'official-with-experimental-fallback';
+  sourceMode: 'official' | 'experimental-web-session' | 'official-with-experimental-fallback'
   /**
    * Maximum normalized posts retained in the active snapshot.
    */
-  fetchLimit: number;
+  fetchLimit: number
   /**
    * Public views read this many newest posts from the larger cached snapshot.
    */
-  displayPostLimit: number;
-  includeVideos?: boolean | null;
+  displayPostLimit: number
+  includeVideos?: boolean | null
   /**
    * The scheduled task checks this value before contacting Instagram.
    */
-  syncIntervalHours: number;
+  syncIntervalHours: number
   /**
    * A successful snapshot is considered fresh for this many minutes.
    */
-  freshForMinutes: number;
+  freshForMinutes: number
   /**
    * The last successful snapshot remains renderable after freshness expires.
    */
-  staleForHours: number;
+  staleForHours: number
   /**
    * Used only by the official source.
    */
-  graphVersion: string;
-  timeoutMs: number;
-  monitorStatus?: ('idle' | 'running' | 'success' | 'skipped' | 'error') | null;
-  monitorRunId?: string | null;
-  monitorTrigger?: ('schedule' | 'manual' | 'endpoint') | null;
-  monitorAttemptCount?: number | null;
-  monitorLastAttemptAt?: string | null;
-  monitorLastSuccessAt?: string | null;
-  monitorCompletedAt?: string | null;
-  monitorDurationMs?: number | null;
-  monitorPostCount?: number | null;
-  monitorChecksum?: string | null;
-  monitorGeneratedAt?: string | null;
-  monitorFreshUntil?: string | null;
-  monitorStaleUntil?: string | null;
-  monitorNextSyncAt?: string | null;
-  monitorAdapterVersion?: string | null;
-  monitorLastError?: string | null;
+  graphVersion: string
+  timeoutMs: number
+  monitorStatus?: ('idle' | 'running' | 'success' | 'skipped' | 'error') | null
+  monitorRunId?: string | null
+  monitorTrigger?: ('schedule' | 'manual' | 'endpoint') | null
+  monitorAttemptCount?: number | null
+  monitorLastAttemptAt?: string | null
+  monitorLastSuccessAt?: string | null
+  monitorCompletedAt?: string | null
+  monitorDurationMs?: number | null
+  monitorPostCount?: number | null
+  monitorChecksum?: string | null
+  monitorGeneratedAt?: string | null
+  monitorFreshUntil?: string | null
+  monitorStaleUntil?: string | null
+  monitorNextSyncAt?: string | null
+  monitorAdapterVersion?: string | null
+  monitorLastError?: string | null
   monitorEvents?:
     | {
-        level: 'info' | 'success' | 'warning' | 'error';
-        message: string;
-        timestamp: string;
+        level: 'info' | 'success' | 'warning' | 'error'
+        message: string
+        timestamp: string
         context?:
           | {
-              [k: string]: unknown;
+              [k: string]: unknown
             }
           | unknown[]
           | string
           | number
           | boolean
-          | null;
-        id?: string | null;
+          | null
+        id?: string | null
       }[]
-    | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
+    | null
+  updatedAt?: string | null
+  createdAt?: string | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-jobs-stats".
  */
 export interface PayloadJobsStat {
-  id: number;
+  id: number
   stats?:
     | {
-        [k: string]: unknown;
+        [k: string]: unknown
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
+    | null
+  updatedAt?: string | null
+  createdAt?: string | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
-  siteName?: T;
-  siteDescription?: T;
-  logo?: T;
-  defaultLanguage?: T;
+  siteName?: T
+  siteDescription?: T
+  logo?: T
+  defaultLanguage?: T
   footer?:
     | T
     | {
         navigation?:
           | T
           | {
-              label?: T;
-              href?: T;
-              id?: T;
-            };
-        copyrightPrefix?: T;
-        copyrightEmphasis?: T;
-        copyrightSuffix?: T;
-      };
-  maintenanceMode?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
+              label?: T
+              href?: T
+              id?: T
+            }
+        copyrightPrefix?: T
+        copyrightEmphasis?: T
+        copyrightSuffix?: T
+      }
+  maintenanceMode?: T
+  updatedAt?: T
+  createdAt?: T
+  globalType?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2138,469 +2303,469 @@ export interface HomepageSelect<T extends boolean = true> {
   hero?:
     | T
     | {
-        eyebrow?: T;
-        title?: T;
-        titleAccent?: T;
-        subtitle?: T;
-        subtitleAccent?: T;
-        primaryCtaLabel?: T;
-        primaryCtaUrl?: T;
-        secondaryCtaLabel?: T;
-        secondaryCtaUrl?: T;
-        image?: T;
-      };
+        eyebrow?: T
+        title?: T
+        titleAccent?: T
+        subtitle?: T
+        subtitleAccent?: T
+        primaryCtaLabel?: T
+        primaryCtaUrl?: T
+        secondaryCtaLabel?: T
+        secondaryCtaUrl?: T
+        image?: T
+      }
   currentMissionSection?:
     | T
     | {
-        enabled?: T;
-        eyebrow?: T;
-        title?: T;
-        description?: T;
-        project?: T;
-        ctaLabel?: T;
-        ctaUrlOverride?: T;
-        footerLabel?: T;
-        footerText?: T;
-      };
-  featuredProjects?: T;
+        enabled?: T
+        eyebrow?: T
+        title?: T
+        description?: T
+        project?: T
+        ctaLabel?: T
+        ctaUrlOverride?: T
+        footerLabel?: T
+        footerText?: T
+      }
+  featuredProjects?: T
   skillsSection?:
     | T
     | {
-        eyebrow?: T;
-        title?: T;
-        description?: T;
-        footerLabel?: T;
-        footerText?: T;
+        eyebrow?: T
+        title?: T
+        description?: T
+        footerLabel?: T
+        footerText?: T
         cards?:
           | T
           | {
-              key?: T;
-              title?: T;
-              badge?: T;
-              description?: T;
-              technologies?: T;
-              pillsTitle?: T;
+              key?: T
+              title?: T
+              badge?: T
+              description?: T
+              technologies?: T
+              pillsTitle?: T
               pills?:
                 | T
                 | {
-                    label?: T;
-                    id?: T;
-                  };
+                    label?: T
+                    id?: T
+                  }
               details?:
                 | T
                 | {
-                    label?: T;
-                    value?: T;
-                    caption?: T;
+                    label?: T
+                    value?: T
+                    caption?: T
                     items?:
                       | T
                       | {
-                          label?: T;
-                          id?: T;
-                        };
-                    id?: T;
-                  };
-              workflowTitle?: T;
+                          label?: T
+                          id?: T
+                        }
+                    id?: T
+                  }
+              workflowTitle?: T
               workflow?:
                 | T
                 | {
-                    label?: T;
-                    icon?: T;
-                    id?: T;
-                  };
+                    label?: T
+                    icon?: T
+                    id?: T
+                  }
               focusLine?:
                 | T
                 | {
-                    label?: T;
-                    id?: T;
-                  };
+                    label?: T
+                    id?: T
+                  }
               principles?:
                 | T
                 | {
-                    title?: T;
-                    description?: T;
-                    icon?: T;
-                    id?: T;
-                  };
+                    title?: T
+                    description?: T
+                    icon?: T
+                    id?: T
+                  }
               focusItems?:
                 | T
                 | {
-                    title?: T;
-                    description?: T;
-                    icon?: T;
-                    id?: T;
-                  };
-              id?: T;
-            };
-      };
+                    title?: T
+                    description?: T
+                    icon?: T
+                    id?: T
+                  }
+              id?: T
+            }
+      }
   deliveryPipelineSection?:
     | T
     | {
-        enabled?: T;
-        eyebrow?: T;
-        title?: T;
-        titleAccent?: T;
-        description?: T;
-        footerLabel?: T;
-        footerText?: T;
+        enabled?: T
+        eyebrow?: T
+        title?: T
+        titleAccent?: T
+        description?: T
+        footerLabel?: T
+        footerText?: T
         metrics?:
           | T
           | {
-              key?: T;
-              title?: T;
-              description?: T;
-              id?: T;
-            };
+              key?: T
+              title?: T
+              description?: T
+              id?: T
+            }
         phases?:
           | T
           | {
-              key?: T;
-              title?: T;
-              status?: T;
+              key?: T
+              title?: T
+              status?: T
               items?:
                 | T
                 | {
-                    label?: T;
-                    id?: T;
-                  };
-              id?: T;
-            };
-      };
-  selectedTechStack?: T;
+                    label?: T
+                    id?: T
+                  }
+              id?: T
+            }
+      }
+  selectedTechStack?: T
   engineerProfileSection?:
     | T
     | {
-        enabled?: T;
-        eyebrow?: T;
-        title?: T;
-        description?: T;
-        journeyTitle?: T;
-        journeyMeta?: T;
-        journeyFooter?: T;
-        principlesTitle?: T;
-        principlesMeta?: T;
-        footerLabel?: T;
-        footerText?: T;
-      };
+        enabled?: T
+        eyebrow?: T
+        title?: T
+        description?: T
+        journeyTitle?: T
+        journeyMeta?: T
+        journeyFooter?: T
+        principlesTitle?: T
+        principlesMeta?: T
+        footerLabel?: T
+        footerText?: T
+      }
   insightsTrustSection?:
     | T
     | {
-        enabled?: T;
-        eyebrow?: T;
-        title?: T;
-        titleAccent?: T;
-        titleMuted?: T;
-        description?: T;
-        articlesTitle?: T;
-        featuredLabel?: T;
-        articleLinksEnabled?: T;
-        articlesCtaEnabled?: T;
-        articlesCtaLabel?: T;
-        articlesCtaUrl?: T;
-        featuredArticle?: T;
-        selectedArticles?: T;
-        feedbackTitle?: T;
-        selectedTestimonials?: T;
-        trustTitle?: T;
-        footerLabel?: T;
-        footerText?: T;
-      };
+        enabled?: T
+        eyebrow?: T
+        title?: T
+        titleAccent?: T
+        titleMuted?: T
+        description?: T
+        articlesTitle?: T
+        featuredLabel?: T
+        articleLinksEnabled?: T
+        articlesCtaEnabled?: T
+        articlesCtaLabel?: T
+        articlesCtaUrl?: T
+        featuredArticle?: T
+        selectedArticles?: T
+        feedbackTitle?: T
+        selectedTestimonials?: T
+        trustTitle?: T
+        footerLabel?: T
+        footerText?: T
+      }
   socialFeedsSection?:
     | T
     | {
-        enabled?: T;
-        title?: T;
-        description?: T;
-      };
+        enabled?: T
+        title?: T
+        description?: T
+      }
   footerSection?:
     | T
     | {
-        enabled?: T;
-        availabilityLabel?: T;
-        connectLabel?: T;
-        xTitle?: T;
-        xHandle?: T;
-        xLinkLabel?: T;
+        enabled?: T
+        availabilityLabel?: T
+        connectLabel?: T
+        xTitle?: T
+        xHandle?: T
+        xLinkLabel?: T
         xPosts?:
           | T
           | {
-              content?: T;
-              publishedAt?: T;
-              replies?: T;
-              reposts?: T;
-              likes?: T;
-              id?: T;
-            };
-        snapshotsTitle?: T;
-        snapshotsSubtitle?: T;
-        instagramLinkLabel?: T;
+              content?: T
+              publishedAt?: T
+              replies?: T
+              reposts?: T
+              likes?: T
+              id?: T
+            }
+        snapshotsTitle?: T
+        snapshotsSubtitle?: T
+        instagramLinkLabel?: T
         snapshots?:
           | T
           | {
-              title?: T;
-              subtitle?: T;
-              kind?: T;
-              image?: T;
-              id?: T;
-            };
-        newsletterTitle?: T;
-        newsletterDescription?: T;
-        newsletterPlaceholder?: T;
-        newsletterButtonLabel?: T;
-        newsletterNote?: T;
-      };
+              title?: T
+              subtitle?: T
+              kind?: T
+              image?: T
+              id?: T
+            }
+        newsletterTitle?: T
+        newsletterDescription?: T
+        newsletterPlaceholder?: T
+        newsletterButtonLabel?: T
+        newsletterNote?: T
+      }
   contactSection?:
     | T
     | {
-        enabled?: T;
-        eyebrow?: T;
-        title?: T;
-        titleAccent?: T;
-        description?: T;
-        formTitle?: T;
-        formDescription?: T;
-        footerLabel?: T;
-        footerText?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
+        enabled?: T
+        eyebrow?: T
+        title?: T
+        titleAccent?: T
+        description?: T
+        formTitle?: T
+        formDescription?: T
+        footerLabel?: T
+        footerText?: T
+      }
+  updatedAt?: T
+  createdAt?: T
+  globalType?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "profile_select".
  */
 export interface ProfileSelect<T extends boolean = true> {
-  name?: T;
-  role?: T;
-  location?: T;
-  status?: T;
-  portrait?: T;
-  shortBio?: T;
-  availability?: T;
-  careerStartedAt?: T;
-  completedProjectsOutsidePortfolio?: T;
-  cvFile?: T;
+  name?: T
+  role?: T
+  location?: T
+  status?: T
+  portrait?: T
+  shortBio?: T
+  availability?: T
+  careerStartedAt?: T
+  completedProjectsOutsidePortfolio?: T
+  cvFile?: T
   metrics?:
     | T
     | {
-        key?: T;
-        label?: T;
-        value?: T;
-        suffix?: T;
-        enabled?: T;
-        id?: T;
-      };
-  profileId?: T;
-  fullBio?: T;
+        key?: T
+        label?: T
+        value?: T
+        suffix?: T
+        enabled?: T
+        id?: T
+      }
+  profileId?: T
+  fullBio?: T
   journey?:
     | T
     | {
-        year?: T;
-        title?: T;
-        description?: T;
-        accent?: T;
-        id?: T;
-      };
+        year?: T
+        title?: T
+        description?: T
+        accent?: T
+        id?: T
+      }
   principles?:
     | T
     | {
-        icon?: T;
-        title?: T;
-        description?: T;
-        id?: T;
-      };
+        icon?: T
+        title?: T
+        description?: T
+        id?: T
+      }
   heroActivity?:
     | T
     | {
-        enabled?: T;
-        label?: T;
-        detail?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
+        enabled?: T
+        label?: T
+        detail?: T
+      }
+  updatedAt?: T
+  createdAt?: T
+  globalType?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "seo_select".
  */
 export interface SeoSelect<T extends boolean = true> {
-  defaultMetaTitle?: T;
-  defaultMetaDescription?: T;
-  defaultOgImage?: T;
-  robots?: T;
-  sitemapEnabled?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
+  defaultMetaTitle?: T
+  defaultMetaDescription?: T
+  defaultOgImage?: T
+  robots?: T
+  sitemapEnabled?: T
+  updatedAt?: T
+  createdAt?: T
+  globalType?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "social_select".
  */
 export interface SocialSelect<T extends boolean = true> {
-  githubUrl?: T;
-  linkedinUrl?: T;
-  telegramUrl?: T;
-  xUrl?: T;
-  instagramUrl?: T;
-  dribbbleUrl?: T;
-  youtubeUrl?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
+  githubUrl?: T
+  linkedinUrl?: T
+  telegramUrl?: T
+  xUrl?: T
+  instagramUrl?: T
+  dribbbleUrl?: T
+  youtubeUrl?: T
+  updatedAt?: T
+  createdAt?: T
+  globalType?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact_select".
  */
 export interface ContactSelect<T extends boolean = true> {
-  email?: T;
-  phone?: T;
-  location?: T;
-  contactFormEnabled?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
+  email?: T
+  phone?: T
+  location?: T
+  contactFormEnabled?: T
+  updatedAt?: T
+  createdAt?: T
+  globalType?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "analytics_select".
  */
 export interface AnalyticsSelect<T extends boolean = true> {
-  enabled?: T;
-  googleAnalyticsId?: T;
-  plausibleDomain?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
+  enabled?: T
+  googleAnalyticsId?: T
+  plausibleDomain?: T
+  updatedAt?: T
+  createdAt?: T
+  globalType?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "dss-x-feed-settings_select".
  */
 export interface DssXFeedSettingsSelect<T extends boolean = true> {
-  enabled?: T;
-  username?: T;
-  sourceMode?: T;
-  nitterBaseUrl?: T;
-  rssHubBaseUrl?: T;
-  postLimit?: T;
-  displayPostLimit?: T;
-  excludeReplies?: T;
-  excludeReposts?: T;
-  syncIntervalMinutes?: T;
-  freshForMinutes?: T;
-  staleForHours?: T;
-  failureThreshold?: T;
-  notificationCooldownHours?: T;
-  monitorState?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
+  enabled?: T
+  username?: T
+  sourceMode?: T
+  nitterBaseUrl?: T
+  rssHubBaseUrl?: T
+  postLimit?: T
+  displayPostLimit?: T
+  excludeReplies?: T
+  excludeReposts?: T
+  syncIntervalMinutes?: T
+  freshForMinutes?: T
+  staleForHours?: T
+  failureThreshold?: T
+  notificationCooldownHours?: T
+  monitorState?: T
+  updatedAt?: T
+  createdAt?: T
+  globalType?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "dss-github-feed-settings_select".
  */
 export interface DssGithubFeedSettingsSelect<T extends boolean = true> {
-  enabled?: T;
-  username?: T;
+  enabled?: T
+  username?: T
   repositories?:
     | T
     | {
-        repository?: T;
-        id?: T;
-      };
-  commitLimit?: T;
-  displayCommitLimit?: T;
-  syncIntervalHours?: T;
-  freshForMinutes?: T;
-  staleForHours?: T;
-  monitorStatus?: T;
-  monitorRunId?: T;
-  monitorTrigger?: T;
-  monitorAttemptCount?: T;
-  monitorLastAttemptAt?: T;
-  monitorLastSuccessAt?: T;
-  monitorCompletedAt?: T;
-  monitorDurationMs?: T;
-  monitorCommitCount?: T;
-  monitorChecksum?: T;
-  monitorGeneratedAt?: T;
-  monitorFreshUntil?: T;
-  monitorStaleUntil?: T;
-  monitorNextSyncAt?: T;
-  monitorAdapterVersion?: T;
-  monitorLastError?: T;
+        repository?: T
+        id?: T
+      }
+  commitLimit?: T
+  displayCommitLimit?: T
+  syncIntervalHours?: T
+  freshForMinutes?: T
+  staleForHours?: T
+  monitorStatus?: T
+  monitorRunId?: T
+  monitorTrigger?: T
+  monitorAttemptCount?: T
+  monitorLastAttemptAt?: T
+  monitorLastSuccessAt?: T
+  monitorCompletedAt?: T
+  monitorDurationMs?: T
+  monitorCommitCount?: T
+  monitorChecksum?: T
+  monitorGeneratedAt?: T
+  monitorFreshUntil?: T
+  monitorStaleUntil?: T
+  monitorNextSyncAt?: T
+  monitorAdapterVersion?: T
+  monitorLastError?: T
   monitorEvents?:
     | T
     | {
-        level?: T;
-        message?: T;
-        timestamp?: T;
-        context?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
+        level?: T
+        message?: T
+        timestamp?: T
+        context?: T
+        id?: T
+      }
+  updatedAt?: T
+  createdAt?: T
+  globalType?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "dss-instagram-feed-settings_select".
  */
 export interface DssInstagramFeedSettingsSelect<T extends boolean = true> {
-  enabled?: T;
-  username?: T;
-  sourceMode?: T;
-  fetchLimit?: T;
-  displayPostLimit?: T;
-  includeVideos?: T;
-  syncIntervalHours?: T;
-  freshForMinutes?: T;
-  staleForHours?: T;
-  graphVersion?: T;
-  timeoutMs?: T;
-  monitorStatus?: T;
-  monitorRunId?: T;
-  monitorTrigger?: T;
-  monitorAttemptCount?: T;
-  monitorLastAttemptAt?: T;
-  monitorLastSuccessAt?: T;
-  monitorCompletedAt?: T;
-  monitorDurationMs?: T;
-  monitorPostCount?: T;
-  monitorChecksum?: T;
-  monitorGeneratedAt?: T;
-  monitorFreshUntil?: T;
-  monitorStaleUntil?: T;
-  monitorNextSyncAt?: T;
-  monitorAdapterVersion?: T;
-  monitorLastError?: T;
+  enabled?: T
+  username?: T
+  sourceMode?: T
+  fetchLimit?: T
+  displayPostLimit?: T
+  includeVideos?: T
+  syncIntervalHours?: T
+  freshForMinutes?: T
+  staleForHours?: T
+  graphVersion?: T
+  timeoutMs?: T
+  monitorStatus?: T
+  monitorRunId?: T
+  monitorTrigger?: T
+  monitorAttemptCount?: T
+  monitorLastAttemptAt?: T
+  monitorLastSuccessAt?: T
+  monitorCompletedAt?: T
+  monitorDurationMs?: T
+  monitorPostCount?: T
+  monitorChecksum?: T
+  monitorGeneratedAt?: T
+  monitorFreshUntil?: T
+  monitorStaleUntil?: T
+  monitorNextSyncAt?: T
+  monitorAdapterVersion?: T
+  monitorLastError?: T
   monitorEvents?:
     | T
     | {
-        level?: T;
-        message?: T;
-        timestamp?: T;
-        context?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
+        level?: T
+        message?: T
+        timestamp?: T
+        context?: T
+        id?: T
+      }
+  updatedAt?: T
+  createdAt?: T
+  globalType?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-jobs-stats_select".
  */
 export interface PayloadJobsStatsSelect<T extends boolean = true> {
-  stats?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
+  stats?: T
+  updatedAt?: T
+  createdAt?: T
+  globalType?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2608,9 +2773,9 @@ export interface PayloadJobsStatsSelect<T extends boolean = true> {
  */
 export interface CollectionsWidget {
   data?: {
-    [k: string]: unknown;
-  };
-  width: 'full';
+    [k: string]: unknown
+  }
+  width: 'full'
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2618,48 +2783,48 @@ export interface CollectionsWidget {
  */
 export interface TaskDssXFeedSync {
   input: {
-    trigger?: ('schedule' | 'manual' | 'endpoint') | null;
-    force?: boolean | null;
-  };
+    trigger?: ('schedule' | 'manual' | 'endpoint') | null
+    force?: boolean | null
+  }
   output: {
-    status: 'success' | 'skipped';
-    reason?: ('disabled' | 'not_due' | 'locked') | null;
-    trigger: string;
-    cacheKey?: string | null;
-    created?: boolean | null;
-    changed?: boolean | null;
-    fetchedPostCount: number;
-    cachedPostCount: number;
-    checksum?: string | null;
-    generatedAt?: string | null;
-    freshUntil?: string | null;
-    staleUntil?: string | null;
-    nextSyncAt?: string | null;
-    selectedSourceId?: string | null;
-    monitorStatus?: string | null;
+    status: 'success' | 'skipped'
+    reason?: ('disabled' | 'not_due' | 'locked') | null
+    trigger: string
+    cacheKey?: string | null
+    created?: boolean | null
+    changed?: boolean | null
+    fetchedPostCount: number
+    cachedPostCount: number
+    checksum?: string | null
+    generatedAt?: string | null
+    freshUntil?: string | null
+    staleUntil?: string | null
+    nextSyncAt?: string | null
+    selectedSourceId?: string | null
+    monitorStatus?: string | null
     healthEvents?:
       | {
-          type: string;
-          occurredAt: string;
+          type: string
+          occurredAt: string
         }[]
-      | null;
+      | null
     events?:
       | {
-          level: 'info' | 'success' | 'warning' | 'error';
-          message: string;
-          timestamp: string;
+          level: 'info' | 'success' | 'warning' | 'error'
+          message: string
+          timestamp: string
           context?:
             | {
-                [k: string]: unknown;
+                [k: string]: unknown
               }
             | unknown[]
             | string
             | number
             | boolean
-            | null;
+            | null
         }[]
-      | null;
-  };
+      | null
+  }
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2667,37 +2832,37 @@ export interface TaskDssXFeedSync {
  */
 export interface TaskDssGithubFeedSync {
   input: {
-    trigger?: ('schedule' | 'manual' | 'endpoint') | null;
-    force?: boolean | null;
-  };
+    trigger?: ('schedule' | 'manual' | 'endpoint') | null
+    force?: boolean | null
+  }
   output: {
-    status: 'success' | 'skipped';
-    reason?: ('disabled' | 'not_due') | null;
-    created?: boolean | null;
-    changed?: boolean | null;
-    commitCount: number;
-    checksum?: string | null;
-    generatedAt?: string | null;
-    freshUntil?: string | null;
-    staleUntil?: string | null;
-    nextSyncAt?: string | null;
+    status: 'success' | 'skipped'
+    reason?: ('disabled' | 'not_due') | null
+    created?: boolean | null
+    changed?: boolean | null
+    commitCount: number
+    checksum?: string | null
+    generatedAt?: string | null
+    freshUntil?: string | null
+    staleUntil?: string | null
+    nextSyncAt?: string | null
     events?:
       | {
-          level: 'info' | 'success' | 'warning' | 'error';
-          message: string;
-          timestamp: string;
+          level: 'info' | 'success' | 'warning' | 'error'
+          message: string
+          timestamp: string
           context?:
             | {
-                [k: string]: unknown;
+                [k: string]: unknown
               }
             | unknown[]
             | string
             | number
             | boolean
-            | null;
+            | null
         }[]
-      | null;
-  };
+      | null
+  }
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2705,46 +2870,45 @@ export interface TaskDssGithubFeedSync {
  */
 export interface TaskDssInstagramFeedSync {
   input: {
-    trigger?: ('schedule' | 'manual' | 'endpoint') | null;
-    force?: boolean | null;
-  };
+    trigger?: ('schedule' | 'manual' | 'endpoint') | null
+    force?: boolean | null
+  }
   output: {
-    status: 'success' | 'skipped';
-    reason?: ('disabled' | 'not_due') | null;
-    created?: boolean | null;
-    changed?: boolean | null;
-    postCount: number;
-    checksum?: string | null;
-    generatedAt?: string | null;
-    freshUntil?: string | null;
-    staleUntil?: string | null;
-    nextSyncAt?: string | null;
+    status: 'success' | 'skipped'
+    reason?: ('disabled' | 'not_due') | null
+    created?: boolean | null
+    changed?: boolean | null
+    postCount: number
+    checksum?: string | null
+    generatedAt?: string | null
+    freshUntil?: string | null
+    staleUntil?: string | null
+    nextSyncAt?: string | null
     events?:
       | {
-          level: 'info' | 'success' | 'warning' | 'error';
-          message: string;
-          timestamp: string;
+          level: 'info' | 'success' | 'warning' | 'error'
+          message: string
+          timestamp: string
           context?:
             | {
-                [k: string]: unknown;
+                [k: string]: unknown
               }
             | unknown[]
             | string
             | number
             | boolean
-            | null;
+            | null
         }[]
-      | null;
-  };
+      | null
+  }
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {
-  [k: string]: unknown;
+  [k: string]: unknown
 }
-
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}

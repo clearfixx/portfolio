@@ -1,4 +1,5 @@
 export { BlogPosts } from './BlogPosts'
+export { BlogFeedbackVotes } from './BlogFeedbackVotes'
 export { Categories } from './Categories'
 export { ContactMessages } from './ContactMessages'
 export { Media } from './Media'

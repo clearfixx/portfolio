@@ -1,0 +1,229 @@
+.preview {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  min-height: 150px;
+  grid-template-rows: 2rem minmax(0, 1fr) 1.35rem;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 72% 34%, rgba(168, 92, 255, 0.14), transparent 16rem), #07111d;
+  color: #aebdca;
+  font-family: var(--font-geist-mono), monospace;
+}
+
+.titlebar {
+  display: grid;
+  grid-template-columns: 4.8rem minmax(0, 1fr) auto;
+  gap: 0.6rem;
+  align-items: center;
+  border-bottom: 1px solid rgba(118, 164, 190, 0.11);
+  padding: 0 0.7rem;
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.titlebar strong {
+  overflow: hidden;
+  color: #c8d4de;
+  font-size: 0.56rem;
+  font-weight: 650;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.titlebar small {
+  color: #617581;
+  font-size: 0.46rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.trafficLights {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.trafficLights i {
+  width: 0.48rem;
+  height: 0.48rem;
+  border-radius: 50%;
+  background: #ff5f57;
+}
+
+.trafficLights i:nth-child(2) {
+  background: #febc2e;
+}
+
+.trafficLights i:nth-child(3) {
+  background: #28c840;
+}
+
+.terminal {
+  display: grid;
+  align-content: center;
+  gap: 0.42rem;
+  padding: 1rem 1.15rem;
+  background-image:
+    linear-gradient(rgba(19, 242, 227, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(19, 242, 227, 0.035) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.terminal p {
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+  margin: 0;
+  color: #80939f;
+  font-size: 0.58rem;
+}
+
+.terminal p:first-child {
+  color: #d1d9df;
+}
+
+.terminal p > span,
+.terminal p > i {
+  color: #62e6dc;
+  font-style: normal;
+}
+
+.terminal .ready {
+  margin-top: 0.25rem;
+  color: #9ff3b9;
+}
+
+.terminal .ready span {
+  color: #74f0a9;
+  text-shadow: 0 0 12px rgba(116, 240, 169, 0.8);
+}
+
+.code {
+  display: grid;
+  align-content: center;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 1rem 1.1rem;
+  list-style: none;
+  background-image:
+    linear-gradient(rgba(19, 242, 227, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(19, 242, 227, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.code li {
+  display: grid;
+  grid-template-columns: 1.2rem minmax(0, 1fr);
+  gap: 0.65rem;
+  color: #8194a0;
+  font-size: 0.56rem;
+}
+
+.code li > span {
+  color: #405560;
+  text-align: right;
+}
+
+.code code {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.code b {
+  color: #c586c0;
+  font-weight: 500;
+}
+
+.code em {
+  color: #4ec9b0;
+  font-style: normal;
+}
+
+.code strong {
+  color: #9cdcfe;
+  font-weight: 500;
+}
+
+.statusbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0 0.65rem;
+  background: #093c4c;
+  color: #bfeaf0;
+  font-size: 0.43rem;
+}
+
+@media (max-width: 650px) {
+  .titlebar {
+    grid-template-columns: 4rem minmax(0, 1fr);
+  }
+
+  .titlebar small {
+    display: none;
+  }
+}
+
+/* portfolio-technical-preview-light-theme-v1:start */
+:global([data-theme='light']) .preview {
+  background:
+    radial-gradient(circle at 72% 34%, rgba(120, 71, 199, 0.12), transparent 16rem), #eaf1f4;
+  color: #516a75;
+}
+
+:global([data-theme='light']) .titlebar {
+  border-bottom-color: rgba(35, 79, 96, 0.11);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+:global([data-theme='light']) .titlebar strong {
+  color: #304a56;
+}
+
+:global([data-theme='light']) .titlebar small {
+  color: #7f949d;
+}
+
+:global([data-theme='light']) .terminal,
+:global([data-theme='light']) .code {
+  background-image:
+    linear-gradient(rgba(8, 127, 140, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(8, 127, 140, 0.055) 1px, transparent 1px);
+}
+
+:global([data-theme='light']) .terminal p,
+:global([data-theme='light']) .code li {
+  color: #617984;
+}
+
+:global([data-theme='light']) .terminal p:first-child {
+  color: #263f4b;
+}
+
+:global([data-theme='light']) .terminal p > span,
+:global([data-theme='light']) .terminal p > i {
+  color: #087f8c;
+}
+
+:global([data-theme='light']) .code li > span {
+  color: #9aabb3;
+}
+
+:global([data-theme='light']) .code b {
+  color: #7e4eb2;
+}
+
+:global([data-theme='light']) .code em {
+  color: #087f8c;
+}
+
+:global([data-theme='light']) .code strong {
+  color: #286b9b;
+}
+
+:global([data-theme='light']) .statusbar {
+  background: #d6e9ed;
+  color: #315e67;
+}
+/* portfolio-technical-preview-light-theme-v1:end */

@@ -3,7 +3,6 @@ import { randomUUID } from 'node:crypto'
 
 type PublicApiBody = {
   ok: boolean
-  message: string
 }
 
 type PublicApiJsonOptions = {
@@ -61,8 +60,8 @@ function hasAllowedOrigin(request: Request) {
   }
 }
 
-export function publicApiResponse(
-  body: PublicApiBody,
+export function publicApiResponse<TBody extends PublicApiBody>(
+  body: TBody,
   status: number,
   requestId: string = randomUUID(),
   additionalHeaders?: HeadersInit,

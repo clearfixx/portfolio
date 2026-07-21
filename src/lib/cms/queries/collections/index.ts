@@ -1,4 +1,5 @@
 export * from './blog-posts'
+export * from './blog-feedback'
 export * from './categories'
 export * from './projects'
 export * from './tech-stack'

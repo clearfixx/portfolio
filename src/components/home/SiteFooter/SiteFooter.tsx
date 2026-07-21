@@ -221,6 +221,35 @@ function CommitStream({ feed }: { feed: SiteFooterGitHubFeedViewModel }) {
   )
 }
 
+function CommitStreamStandby() {
+  return (
+    <section
+      aria-labelledby="site-footer-commit-stream-title"
+      className="site-footer__commits"
+      data-cache-state="empty"
+    >
+      <header className="site-footer__commit-header">
+        <div className="site-footer__commit-heading">
+          <span className="site-footer__commit-icon">
+            <GithubIcon />
+          </span>
+          <div>
+            <div className="site-footer__commit-title-row">
+              <h3 id="site-footer-commit-stream-title">Commit Stream</h3>
+              <span className="site-footer__commit-status">Feed standby</span>
+            </div>
+            <p>Latest repository activity</p>
+          </div>
+        </div>
+      </header>
+
+      <p className="site-footer__empty" role="status">
+        GitHub activity will appear after the next successful cache sync.
+      </p>
+    </section>
+  )
+}
+
 type SiteFooterProps = {
   content: SiteFooterViewModel
   githubFeed?: SiteFooterGitHubFeedViewModel | null
@@ -232,7 +261,8 @@ export async function SiteFooter({ content, githubFeed = null }: SiteFooterProps
     getSiteFooterInstagramFeed(),
     getSiteFooterGitHubFeed(),
   ])
-  const resolvedXFeed = liveXFeed ?? content.xFeed
+  const resolvedXFeed = liveXFeed
+  const xFeedMeta = liveXFeed ?? content.xFeed
   const resolvedGitHubFeed = liveGitHubFeed ?? githubFeed
 
   return (
@@ -304,14 +334,14 @@ export async function SiteFooter({ content, githubFeed = null }: SiteFooterProps
                   <XIcon />
                 </span>
                 <div>
-                  <h2>{resolvedXFeed.title}</h2>
-                  <p>{resolvedXFeed.handle}</p>
+                  <h2>{xFeedMeta.title}</h2>
+                  <p>{xFeedMeta.handle}</p>
                 </div>
               </div>
-              <FooterViewLink href={resolvedXFeed.href} label={resolvedXFeed.linkLabel} />
+              <FooterViewLink href={xFeedMeta.href} label={xFeedMeta.linkLabel} />
             </header>
 
-            {resolvedXFeed.posts.length > 0 ? (
+            {resolvedXFeed?.posts.length ? (
               <div className="site-footer__posts">
                 {resolvedXFeed.posts.map((post) => (
                   <article className="site-footer__post" key={post.id}>
@@ -356,7 +386,7 @@ export async function SiteFooter({ content, githubFeed = null }: SiteFooterProps
               </div>
             ) : (
               <p className="site-footer__empty" role="status">
-                Curated build signals will appear here.
+                Live X posts will appear after the next successful cache sync.
               </p>
             )}
           </section>
@@ -399,7 +429,11 @@ export async function SiteFooter({ content, githubFeed = null }: SiteFooterProps
               </div>
             )}
 
-            {resolvedGitHubFeed ? <CommitStream feed={resolvedGitHubFeed} /> : null}
+            {resolvedGitHubFeed ? (
+              <CommitStream feed={resolvedGitHubFeed} />
+            ) : (
+              <CommitStreamStandby />
+            )}
 
             <div className="site-footer__newsletter">
               <div className="site-footer__newsletter-copy">

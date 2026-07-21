@@ -54,6 +54,30 @@ export const BlogPosts: CollectionConfig = {
               },
             },
             adminRichTextField({ label: 'Content', name: 'content', required: true }),
+            {
+              name: 'keyTakeaways',
+              type: 'array',
+              maxRows: 8,
+              labels: {
+                singular: 'Takeaway',
+                plural: 'Key takeaways',
+              },
+              admin: {
+                description:
+                  'Optional concise conclusions shown after the article body. Rows can be reordered; numbering and accent colors are applied automatically.',
+                initCollapsed: false,
+              },
+              fields: [
+                {
+                  name: 'text',
+                  type: 'textarea',
+                  required: true,
+                  admin: {
+                    description: 'One clear, self-contained conclusion.',
+                  },
+                },
+              ],
+            },
           ],
         },
         {
@@ -81,6 +105,36 @@ export const BlogPosts: CollectionConfig = {
                 components: {
                   Cell: './components/admin/blog-posts/BlogPostCells#BlogPostCategoryCell',
                 },
+              },
+            },
+            {
+              name: 'series',
+              type: 'text',
+              admin: {
+                description:
+                  'Optional editorial series name used by the public journal index and related-content navigation.',
+              },
+            },
+            {
+              name: 'difficulty',
+              type: 'select',
+              defaultValue: 'intermediate',
+              options: [
+                {
+                  label: 'Foundation',
+                  value: 'foundation',
+                },
+                {
+                  label: 'Intermediate',
+                  value: 'intermediate',
+                },
+                {
+                  label: 'Advanced',
+                  value: 'advanced',
+                },
+              ],
+              admin: {
+                description: 'Editorial depth indicator for readers.',
               },
             },
             {
@@ -150,6 +204,36 @@ export const BlogPosts: CollectionConfig = {
         components: {
           Field: './components/admin/blog-posts/ArticleReadinessPanel',
         },
+      },
+    },
+    {
+      name: 'isFeatured',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+        description: 'Promote this article in the Engineering Journal featured slot.',
+      },
+    },
+    {
+      name: 'readingTime',
+      type: 'number',
+      min: 1,
+      defaultValue: 5,
+      admin: {
+        position: 'sidebar',
+        description: 'Estimated reading time in minutes.',
+      },
+    },
+    {
+      name: 'views',
+      type: 'number',
+      min: 0,
+      defaultValue: 0,
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+        description: 'Public article view counter.',
       },
     },
     {

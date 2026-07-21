@@ -41,7 +41,11 @@ export async function getSiteFooterXFeed(
       runtimeSettings.config.username,
       displaySettings.postLimit,
     )
-  } catch {
+  } catch (error) {
+    if (process.env.NODE_ENV !== 'production') {
+      console.error('[portfolio/x-feed] Failed to read cached X feed.', error)
+    }
+
     return null
   }
 }

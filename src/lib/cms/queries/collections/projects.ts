@@ -1,4 +1,4 @@
-import type { Project } from '@/payload-types'
+import type { Project, ProjectVersion } from '@/payload-types'
 
 import {
   countCollection,
@@ -62,6 +62,20 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
       },
       publishedOnly(),
     ),
+  })
+}
+
+export async function getProjectVersions(projectId: number): Promise<ProjectVersion[]> {
+  return findCollectionDocs({
+    collection: 'project-versions',
+    depth: 1,
+    limit: 50,
+    sort: '-releaseDate',
+    where: {
+      project: {
+        equals: projectId,
+      },
+    },
   })
 }
 

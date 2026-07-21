@@ -91,6 +91,47 @@ export const Projects: CollectionConfig = {
               required: true,
             }),
             {
+              name: 'caseStudyCode',
+              type: 'group',
+              label: 'Code preview',
+              admin: {
+                description:
+                  'Code editor content shown in the public case study. Leave code empty to use the frontend fallback.',
+              },
+              fields: [
+                {
+                  name: 'filePath',
+                  type: 'text',
+                  admin: {
+                    description: 'Displayed file path, for example apps/api/src/main.ts.',
+                  },
+                },
+                {
+                  name: 'language',
+                  type: 'select',
+                  defaultValue: 'typescript',
+                  options: [
+                    { label: 'TypeScript', value: 'typescript' },
+                    { label: 'JavaScript', value: 'javascript' },
+                    { label: 'TSX', value: 'tsx' },
+                    { label: 'JSX', value: 'jsx' },
+                    { label: 'JSON', value: 'json' },
+                    { label: 'SCSS', value: 'scss' },
+                    { label: 'Shell', value: 'shell' },
+                    { label: 'Other', value: 'other' },
+                  ],
+                },
+                {
+                  name: 'code',
+                  type: 'textarea',
+                  admin: {
+                    rows: 16,
+                    description: 'Plain code text. Line breaks are preserved on the public page.',
+                  },
+                },
+              ],
+            },
+            {
               name: 'highlights',
               type: 'array',
               fields: [
@@ -106,10 +147,136 @@ export const Projects: CollectionConfig = {
                 },
                 {
                   name: 'icon',
-                  type: 'text',
+                  type: 'select',
+                  defaultValue: 'modules',
+                  options: [
+                    { label: 'Community', value: 'community' },
+                    { label: 'Research', value: 'research' },
+                    { label: 'AI', value: 'ai' },
+                    { label: 'Media', value: 'media' },
+                    { label: 'Security', value: 'security' },
+                    { label: 'Modules', value: 'modules' },
+                  ],
                   admin: {
-                    description: 'Icon key for frontend icon mapping.',
+                    description: 'Semantic icon used by the public case study.',
                   },
+                },
+              ],
+            },
+            {
+              name: 'caseStudyMetrics',
+              type: 'array',
+              labels: {
+                singular: 'Case study metric',
+                plural: 'Case study metrics',
+              },
+              fields: [
+                {
+                  name: 'label',
+                  type: 'text',
+                  required: true,
+                },
+                {
+                  name: 'value',
+                  type: 'text',
+                  required: true,
+                },
+                {
+                  name: 'detail',
+                  type: 'text',
+                },
+              ],
+            },
+            {
+              name: 'architecture',
+              type: 'array',
+              labels: {
+                singular: 'Architecture group',
+                plural: 'Architecture',
+              },
+              fields: [
+                {
+                  name: 'title',
+                  type: 'text',
+                  required: true,
+                },
+                {
+                  name: 'icon',
+                  type: 'select',
+                  defaultValue: 'services',
+                  options: [
+                    { label: 'Frontend', value: 'frontend' },
+                    { label: 'API Gateway', value: 'api' },
+                    { label: 'Services', value: 'services' },
+                    { label: 'Database', value: 'database' },
+                  ],
+                  admin: {
+                    description: 'Architecture node icon used on the public case study.',
+                  },
+                },
+                {
+                  name: 'description',
+                  type: 'textarea',
+                },
+                {
+                  name: 'items',
+                  type: 'array',
+                  required: true,
+                  minRows: 1,
+                  fields: [
+                    {
+                      name: 'label',
+                      type: 'text',
+                      required: true,
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              name: 'roadmap',
+              type: 'array',
+              labels: {
+                singular: 'Roadmap milestone',
+                plural: 'Roadmap',
+              },
+              fields: [
+                {
+                  name: 'version',
+                  type: 'text',
+                },
+                {
+                  name: 'title',
+                  type: 'text',
+                  required: true,
+                },
+                {
+                  name: 'description',
+                  type: 'textarea',
+                },
+                {
+                  name: 'status',
+                  type: 'select',
+                  required: true,
+                  defaultValue: 'planned',
+                  options: [
+                    {
+                      label: 'Completed',
+                      value: 'completed',
+                    },
+                    {
+                      label: 'Current',
+                      value: 'current',
+                    },
+                    {
+                      label: 'Planned',
+                      value: 'planned',
+                    },
+                  ],
+                },
+                {
+                  name: 'timeframe',
+                  type: 'text',
                 },
               ],
             },

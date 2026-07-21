@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { RouteTransitionIndicator } from '@/components/loading'
 import { MotionRuntime } from '@/components/motion'
 
 import { SiteHeader } from './SiteHeader'
@@ -14,6 +15,7 @@ export function SiteShell({ children }: SiteShellProps) {
       <MotionRuntime />
       <SkipLink />
       <SiteHeader />
+      <RouteTransitionIndicator />
       <main className="site-main" id="main-content" tabIndex={-1}>
         {children}
       </main>

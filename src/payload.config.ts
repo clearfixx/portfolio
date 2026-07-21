@@ -9,6 +9,7 @@ import sharp from 'sharp'
 
 import {
   BlogPosts,
+  BlogFeedbackVotes,
   Categories,
   ContactMessages,
   Media,
@@ -85,6 +86,7 @@ export default buildConfig({
     Projects,
     ProjectVersions,
     BlogPosts,
+    BlogFeedbackVotes,
     Testimonials,
     ContactMessages,
     NewsletterSubscribers,
