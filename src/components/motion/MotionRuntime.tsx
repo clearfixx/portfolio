@@ -1,16 +1,17 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { useLayoutEffect } from 'react'
+import { useEffect } from 'react'
 
 const MOTION_SELECTOR = '[data-motion]'
 const VISIBLE_STATE = 'visible'
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
 const IMMEDIATE_REVEAL_LINE = 0.9
+const IDLE_TIMEOUT = 750
+const FALLBACK_DELAY = 180
 
 function revealElement(element: HTMLElement) {
   element.dataset.motionState = VISIBLE_STATE
-  element.removeAttribute('inert')
 }
 
 function getViewportHeight() {
@@ -30,177 +31,202 @@ function getMotionElements(root: ParentNode = document) {
 export function MotionRuntime() {
   const pathname = usePathname()
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const root = document.documentElement
-    const reducedMotionQuery = window.matchMedia(REDUCED_MOTION_QUERY)
-    const observedElements = new Set<HTMLElement>()
 
-    let intersectionObserver: IntersectionObserver | null = null
+    let cancelled = false
+    let firstFrame: number | null = null
+    let secondFrame: number | null = null
+    let fallbackTimer: ReturnType<typeof setTimeout> | null = null
+    let idleCallback: number | null = null
+    let disposeRuntime: (() => void) | null = null
 
-    const reveal = (element: HTMLElement) => {
-      revealElement(element)
-      intersectionObserver?.unobserve(element)
-      observedElements.delete(element)
-    }
-
-    const prepareElement = (element: HTMLElement) => {
-      if (element.dataset.motionState === VISIBLE_STATE) {
-        element.removeAttribute('inert')
+    const initializeRuntime = () => {
+      if (cancelled) {
         return
       }
 
-      if (
-        reducedMotionQuery.matches ||
-        intersectionObserver === null ||
-        shouldRevealImmediately(element)
-      ) {
-        reveal(element)
-        return
+      const reducedMotionQuery = window.matchMedia(REDUCED_MOTION_QUERY)
+      const observedElements = new Set<HTMLElement>()
+
+      let intersectionObserver: IntersectionObserver | null = null
+
+      const reveal = (element: HTMLElement) => {
+        revealElement(element)
+        intersectionObserver?.unobserve(element)
+        observedElements.delete(element)
       }
 
-      element.setAttribute('inert', '')
-      observedElements.add(element)
-      intersectionObserver.observe(element)
-    }
+      const prepareElement = (element: HTMLElement) => {
+        if (element.dataset.motionState === VISIBLE_STATE) {
+          return
+        }
 
-    if (!reducedMotionQuery.matches && 'IntersectionObserver' in window) {
-      intersectionObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) {
-              return
-            }
+        if (
+          reducedMotionQuery.matches ||
+          intersectionObserver === null ||
+          shouldRevealImmediately(element)
+        ) {
+          reveal(element)
+          return
+        }
 
-            reveal(entry.target as HTMLElement)
-          })
-        },
-        {
-          rootMargin: '0px 0px -10% 0px',
-          threshold: 0.12,
-        },
-      )
-    }
-
-    getMotionElements().forEach(prepareElement)
-    root.dataset.motionReady = 'true'
-
-    const revealHashTarget = () => {
-      const rawHash = window.location.hash.slice(1)
-
-      if (!rawHash) {
-        return
+        observedElements.add(element)
+        intersectionObserver.observe(element)
       }
 
-      let targetId = rawHash
+      if (!reducedMotionQuery.matches && 'IntersectionObserver' in window) {
+        intersectionObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) {
+                return
+              }
 
-      try {
-        targetId = decodeURIComponent(rawHash)
-      } catch {
-        // Keep the raw hash when it is not valid URI-encoded text.
-      }
-
-      const target = document.getElementById(targetId)
-
-      if (!target) {
-        return
-      }
-
-      const relatedMotionElements = new Set<HTMLElement>()
-
-      if (target.matches(MOTION_SELECTOR)) {
-        relatedMotionElements.add(target)
-      }
-
-      const closestMotionElement = target.closest<HTMLElement>(MOTION_SELECTOR)
-
-      if (closestMotionElement) {
-        relatedMotionElements.add(closestMotionElement)
-      }
-
-      target
-        .querySelectorAll<HTMLElement>(MOTION_SELECTOR)
-        .forEach((element) => relatedMotionElements.add(element))
-
-      relatedMotionElements.forEach(reveal)
-    }
-
-    revealHashTarget()
-
-    const mutationObserver =
-      'MutationObserver' in window
-        ? new MutationObserver((records) => {
-            records.forEach((record) => {
-              record.addedNodes.forEach((node) => {
-                if (!(node instanceof Element)) {
-                  return
-                }
-
-                if (node.matches(MOTION_SELECTOR)) {
-                  prepareElement(node as HTMLElement)
-                }
-
-                node.querySelectorAll<HTMLElement>(MOTION_SELECTOR).forEach(prepareElement)
-              })
+              reveal(entry.target as HTMLElement)
             })
-          })
-        : null
-
-    mutationObserver?.observe(document.body, {
-      childList: true,
-      subtree: true,
-    })
-
-    const revealAll = () => {
-      getMotionElements().forEach(reveal)
-    }
-
-    const handleReducedMotionChange = (event: MediaQueryListEvent) => {
-      if (!event.matches) {
-        return
+          },
+          {
+            rootMargin: '0px 0px -10% 0px',
+            threshold: 0.12,
+          },
+        )
       }
 
-      revealAll()
-      intersectionObserver?.disconnect()
-      intersectionObserver = null
-    }
-
-    const handleFocusIn = (event: FocusEvent) => {
-      if (!(event.target instanceof Element)) {
-        return
-      }
-
-      const motionElement = event.target.closest<HTMLElement>(MOTION_SELECTOR)
-
-      if (motionElement) {
-        reveal(motionElement)
-      }
-    }
-
-    const handlePageShow = () => {
       getMotionElements().forEach(prepareElement)
+      root.dataset.motionReady = 'true'
+
+      const revealHashTarget = () => {
+        const rawHash = window.location.hash.slice(1)
+
+        if (!rawHash) {
+          return
+        }
+
+        let targetId = rawHash
+
+        try {
+          targetId = decodeURIComponent(rawHash)
+        } catch {
+          // Keep the raw hash when it is not valid URI-encoded text.
+        }
+
+        const target = document.getElementById(targetId)
+
+        if (!target) {
+          return
+        }
+
+        const relatedMotionElements = new Set<HTMLElement>()
+
+        if (target.matches(MOTION_SELECTOR)) {
+          relatedMotionElements.add(target)
+        }
+
+        const closestMotionElement = target.closest<HTMLElement>(MOTION_SELECTOR)
+
+        if (closestMotionElement) {
+          relatedMotionElements.add(closestMotionElement)
+        }
+
+        target
+          .querySelectorAll<HTMLElement>(MOTION_SELECTOR)
+          .forEach((element) => relatedMotionElements.add(element))
+
+        relatedMotionElements.forEach(reveal)
+      }
+
       revealHashTarget()
+
+      const revealAll = () => {
+        getMotionElements().forEach(reveal)
+      }
+
+      const handleReducedMotionChange = (event: MediaQueryListEvent) => {
+        if (!event.matches) {
+          return
+        }
+
+        revealAll()
+        intersectionObserver?.disconnect()
+        intersectionObserver = null
+      }
+
+      const handleFocusIn = (event: FocusEvent) => {
+        if (!(event.target instanceof Element)) {
+          return
+        }
+
+        const motionElement = event.target.closest<HTMLElement>(MOTION_SELECTOR)
+
+        if (motionElement) {
+          reveal(motionElement)
+        }
+      }
+
+      const handlePageShow = () => {
+        getMotionElements().forEach(prepareElement)
+        revealHashTarget()
+      }
+
+      reducedMotionQuery.addEventListener('change', handleReducedMotionChange)
+      document.addEventListener('focusin', handleFocusIn)
+      window.addEventListener('hashchange', revealHashTarget)
+      window.addEventListener('pageshow', handlePageShow)
+      window.addEventListener('beforeprint', revealAll)
+
+      disposeRuntime = () => {
+        intersectionObserver?.disconnect()
+        reducedMotionQuery.removeEventListener('change', handleReducedMotionChange)
+        document.removeEventListener('focusin', handleFocusIn)
+        window.removeEventListener('hashchange', revealHashTarget)
+        window.removeEventListener('pageshow', handlePageShow)
+        window.removeEventListener('beforeprint', revealAll)
+      }
     }
 
-    reducedMotionQuery.addEventListener('change', handleReducedMotionChange)
-    document.addEventListener('focusin', handleFocusIn)
-    window.addEventListener('hashchange', revealHashTarget)
-    window.addEventListener('pageshow', handlePageShow)
-    window.addEventListener('beforeprint', revealAll)
+    const scheduleRuntime = () => {
+      firstFrame = window.requestAnimationFrame(() => {
+        secondFrame = window.requestAnimationFrame(() => {
+          if ('requestIdleCallback' in window) {
+            idleCallback = window.requestIdleCallback(initializeRuntime, {
+              timeout: IDLE_TIMEOUT,
+            })
+            return
+          }
+
+          fallbackTimer = globalThis.setTimeout(initializeRuntime, FALLBACK_DELAY)
+        })
+      })
+    }
+
+    if (document.readyState === 'complete') {
+      scheduleRuntime()
+    } else {
+      window.addEventListener('load', scheduleRuntime, { once: true })
+    }
 
     return () => {
-      intersectionObserver?.disconnect()
-      mutationObserver?.disconnect()
-      reducedMotionQuery.removeEventListener('change', handleReducedMotionChange)
-      document.removeEventListener('focusin', handleFocusIn)
-      window.removeEventListener('hashchange', revealHashTarget)
-      window.removeEventListener('pageshow', handlePageShow)
-      window.removeEventListener('beforeprint', revealAll)
+      cancelled = true
+      window.removeEventListener('load', scheduleRuntime)
 
-      getMotionElements().forEach((element) => {
-        element.removeAttribute('inert')
-      })
+      if (firstFrame !== null) {
+        window.cancelAnimationFrame(firstFrame)
+      }
 
-      delete root.dataset.motionReady
+      if (secondFrame !== null) {
+        window.cancelAnimationFrame(secondFrame)
+      }
+
+      if (idleCallback !== null && 'cancelIdleCallback' in window) {
+        window.cancelIdleCallback(idleCallback)
+      }
+
+      if (fallbackTimer !== null) {
+        window.clearTimeout(fallbackTimer)
+      }
+
+      disposeRuntime?.()
     }
   }, [pathname])
 

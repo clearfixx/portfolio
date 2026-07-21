@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import type { ReactNode } from 'react'
+import { PortfolioBootPreloader } from '@/components/loading'
 import { SiteShell } from '@/components/layout'
 import { CookieConsent } from '@/components/privacy/CookieConsent'
 import { ThemeProvider } from '@/components/theme/ThemeProvider'
@@ -81,9 +82,15 @@ type RootLayoutProps = {
 
 export default async function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html className={inter.variable} lang="en" suppressHydrationWarning>
+    <html
+      className={inter.variable}
+      data-scroll-behavior="smooth"
+      lang="en"
+      suppressHydrationWarning
+    >
       <body>
         <ThemeProvider>
+          <PortfolioBootPreloader />
           <SiteShell>{children}</SiteShell>
           <Tooltip />
           <CookieConsent />
