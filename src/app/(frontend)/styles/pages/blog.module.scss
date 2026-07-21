@@ -1654,3 +1654,704 @@
 }
 
 /* public-blog-light-shell-ownership-v5:end */
+
+/* blog-filter-toolbar-ux-v1:start */
+
+.sectionHeader > span {
+  font-size: 0.76rem;
+  font-weight: 650;
+}
+
+.toolbar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(1.5rem, 2.5vw, 3rem);
+  align-items: end;
+  margin-bottom: 1.35rem;
+}
+
+.tabs {
+  gap: 1.6rem;
+  min-height: 48px;
+}
+
+.tabs a {
+  padding: 0.85rem 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(150px, 0.48fr) minmax(150px, 0.48fr) auto;
+  gap: 0.7rem;
+  align-items: center;
+  min-width: 0;
+}
+
+.search,
+.filterSelect select,
+.filters button {
+  min-height: 48px;
+  border: 1px solid rgba(77, 203, 214, 0.2);
+  border-radius: 8px;
+  background: rgba(5, 19, 31, 0.72);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease;
+}
+
+.search {
+  gap: 0.7rem;
+  min-width: 0;
+  padding: 0 0.95rem;
+  border-bottom: 1px solid rgba(77, 203, 214, 0.2);
+  color: #64cfd1;
+}
+
+.search:hover,
+.search:focus-within,
+.filterSelect select:hover,
+.filterSelect select:focus-visible {
+  border-color: rgba(24, 226, 229, 0.48);
+  background: rgba(7, 25, 39, 0.92);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    0 0 0 3px rgba(24, 226, 229, 0.055);
+}
+
+.search input {
+  width: 100%;
+  min-width: 0;
+  height: 46px;
+  border: 0;
+  outline: 0;
+  color: #edf9fc;
+  background: transparent;
+  caret-color: var(--journal-cyan);
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.search input::placeholder {
+  color: #7f939e;
+  opacity: 1;
+}
+
+.search input::-webkit-search-cancel-button {
+  cursor: pointer;
+  filter: invert(0.8);
+}
+
+.filterSelect {
+  display: block;
+  min-width: 0;
+}
+
+.filters select {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 2.2rem 0 0.9rem;
+  border-bottom: 1px solid rgba(77, 203, 214, 0.2);
+  outline: 0;
+  color: #dbeaf0;
+  background-color: rgba(5, 19, 31, 0.72);
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 550;
+}
+
+.filters button {
+  gap: 0.55rem;
+  min-height: 48px;
+  padding: 0 1.1rem;
+  color: var(--journal-cyan);
+  cursor: pointer;
+  font-size: 0.92rem;
+  font-weight: 750;
+}
+
+.filters button:hover:not(:disabled),
+.filters button:focus-visible {
+  border-color: rgba(24, 226, 229, 0.58);
+  background: rgba(24, 226, 229, 0.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 0 20px rgba(24, 226, 229, 0.08);
+}
+
+.filters button:disabled {
+  cursor: wait;
+  opacity: 0.62;
+}
+
+:global([data-theme='light']) .search,
+:global([data-theme='light']) .filterSelect select,
+:global([data-theme='light']) .filters button {
+  border-color: rgba(35, 79, 96, 0.2);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    0 8px 22px rgba(30, 70, 85, 0.055);
+}
+
+:global([data-theme='light']) .search {
+  color: #087f8c;
+}
+
+:global([data-theme='light']) .search:hover,
+:global([data-theme='light']) .search:focus-within,
+:global([data-theme='light']) .filterSelect select:hover,
+:global([data-theme='light']) .filterSelect select:focus-visible {
+  border-color: rgba(8, 127, 140, 0.42);
+  background: #fff;
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 0 0 3px rgba(8, 127, 140, 0.07);
+}
+
+:global([data-theme='light']) .search input,
+:global([data-theme='light']) .filterSelect select {
+  color: #17303c;
+  background: transparent;
+}
+
+:global([data-theme='light']) .search input::placeholder {
+  color: #718791;
+}
+
+:global([data-theme='light']) .filters button {
+  color: #087f8c;
+  background: rgba(8, 127, 140, 0.065);
+}
+
+@media (max-width: 1120px) {
+  .toolbar {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .tabs {
+    width: max-content;
+  }
+}
+
+@media (max-width: 820px) {
+  .filters {
+    grid-template-columns: minmax(0, 1fr) minmax(150px, 0.5fr);
+  }
+
+  .search {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 560px) {
+  .tabs {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .filters {
+    grid-template-columns: 1fr;
+  }
+
+  .search {
+    grid-column: auto;
+  }
+}
+
+/* blog-filter-toolbar-ux-v1:end */
+
+/* blog-custom-filter-selects-v2:start */
+
+.tabs a[aria-current='page'] {
+  font-weight: 750;
+}
+
+.filterSelect {
+  position: relative;
+  display: block;
+  min-width: 0;
+}
+
+.filterSelectButton {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: 48px;
+  align-items: center;
+  padding: 0 3rem 0 0.95rem;
+  border: 1px solid rgba(77, 203, 214, 0.2);
+  border-radius: 8px;
+  color: #dbeaf0;
+  background: rgba(5, 19, 31, 0.72);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 550;
+  text-align: left;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.filterSelectButton:hover,
+.filterSelectButton:focus-visible,
+.filterSelectButton[aria-expanded='true'] {
+  border-color: rgba(24, 226, 229, 0.48);
+  outline: 0;
+  background: rgba(7, 25, 39, 0.92);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    0 0 0 3px rgba(24, 226, 229, 0.055);
+}
+
+.filterSelectChevron {
+  position: absolute;
+  top: 50%;
+  right: 0.72rem;
+  display: grid;
+  width: 1.75rem;
+  height: 1.75rem;
+  place-items: center;
+  color: #8da4ae;
+  transform: translateY(-50%);
+  transition:
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.filterSelectButton[aria-expanded='true'] .filterSelectChevron {
+  color: var(--journal-cyan);
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.filterSelectMenu {
+  position: absolute;
+  z-index: 80;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  left: 0;
+  display: grid;
+  max-height: min(360px, 52vh);
+  padding: 0.45rem;
+  overflow-y: auto;
+  border: 1px solid rgba(77, 203, 214, 0.28);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(168, 92, 255, 0.09), transparent 12rem),
+    rgba(5, 18, 30, 0.985);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    0 22px 55px rgba(0, 0, 0, 0.36);
+  backdrop-filter: blur(18px);
+}
+
+.filterSelectMenu::-webkit-scrollbar {
+  width: 7px;
+}
+
+.filterSelectMenu::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: rgba(24, 226, 229, 0.26);
+  background-clip: padding-box;
+}
+
+.filterSelectOption {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 16px;
+  gap: 0.75rem;
+  align-items: center;
+  min-height: 40px;
+  padding: 0.65rem 0.75rem;
+  border: 0;
+  border-radius: 7px;
+  color: #9db1ba;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.84rem;
+  text-align: left;
+  transition:
+    color 140ms ease,
+    background 140ms ease,
+    transform 140ms ease;
+}
+
+.filterSelectOption:hover,
+.filterSelectOption:focus-visible {
+  outline: 0;
+  color: #effcff;
+  background: rgba(24, 226, 229, 0.075);
+  transform: translateX(2px);
+}
+
+.filterSelectOption i {
+  width: 7px;
+  height: 7px;
+  justify-self: center;
+  border-radius: 50%;
+  background: transparent;
+}
+
+.filterSelectOption[aria-selected='true'] {
+  color: var(--journal-cyan);
+  background: linear-gradient(90deg, rgba(24, 226, 229, 0.09), transparent);
+  font-weight: 750;
+}
+
+.filterSelectOption[aria-selected='true'] i {
+  background: var(--journal-cyan);
+  box-shadow: 0 0 11px rgba(24, 226, 229, 0.72);
+}
+
+:global([data-theme='light']) .tabs a {
+  color: #637b86;
+}
+
+:global([data-theme='light']) .tabs a[aria-current='page'] {
+  color: #0d2632;
+}
+
+:global([data-theme='light']) .tabs a[aria-current='page']::after {
+  height: 3px;
+  background: #087f8c;
+  box-shadow: 0 0 10px rgba(8, 127, 140, 0.28);
+}
+
+:global([data-theme='light']) .filterSelectButton {
+  border-color: rgba(35, 79, 96, 0.2);
+  color: #17303c;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    0 8px 22px rgba(30, 70, 85, 0.055);
+}
+
+:global([data-theme='light']) .filterSelectButton:hover,
+:global([data-theme='light']) .filterSelectButton:focus-visible,
+:global([data-theme='light']) .filterSelectButton[aria-expanded='true'] {
+  border-color: rgba(8, 127, 140, 0.42);
+  background: #fff;
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 0 0 3px rgba(8, 127, 140, 0.07);
+}
+
+:global([data-theme='light']) .filterSelectChevron {
+  color: #58727e;
+}
+
+:global([data-theme='light']) .filterSelectMenu {
+  border-color: rgba(35, 79, 96, 0.2);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(120, 71, 199, 0.07), transparent 12rem),
+    rgba(255, 255, 255, 0.985);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 22px 48px rgba(30, 70, 85, 0.16);
+}
+
+:global([data-theme='light']) .filterSelectOption {
+  color: #536c77;
+}
+
+:global([data-theme='light']) .filterSelectOption:hover,
+:global([data-theme='light']) .filterSelectOption:focus-visible {
+  color: #0f3440;
+  background: rgba(8, 127, 140, 0.075);
+}
+
+:global([data-theme='light']) .filterSelectOption[aria-selected='true'] {
+  color: #087f8c;
+  background: linear-gradient(90deg, rgba(8, 127, 140, 0.1), transparent);
+}
+
+/* blog-custom-filter-selects-v2:end */
+
+/* blog-dropdown-visual-refinement-v3:start */
+
+/*
+ * The generic .filters button rule is intentionally stronger than the
+ * component classes, so these scoped overrides use equal-or-higher
+ * specificity to keep dropdown controls visually restrained.
+ */
+.filters .filterSelectButton {
+  min-height: 48px;
+  padding: 0 3rem 0 0.95rem;
+  border: 1px solid rgba(77, 203, 214, 0.2);
+  border-radius: 8px;
+  color: #dbeaf0;
+  background: rgba(5, 19, 31, 0.72);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
+  font-size: 0.84rem;
+  font-weight: 550;
+}
+
+.filterSelectMenu {
+  right: auto;
+  left: 0;
+  width: max(100%, 15.5rem);
+  max-width: min(20rem, calc(100vw - 2rem));
+  overflow-x: hidden;
+  animation: blog-filter-menu-fade-in 150ms ease-out both;
+}
+
+.filters .filterSelectOption {
+  min-height: 38px;
+  padding: 0.58rem 0.72rem;
+  border: 0;
+  border-radius: 6px;
+  color: #9db1ba;
+  background: transparent;
+  box-shadow: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transform: none;
+}
+
+.filters .filterSelectOption:hover,
+.filters .filterSelectOption:focus-visible {
+  border: 0;
+  color: #e9f9fb;
+  background: rgba(24, 226, 229, 0.055);
+  box-shadow: none;
+  transform: none;
+}
+
+.filters .filterSelectOption[aria-selected='true'] {
+  border: 0;
+  color: var(--journal-cyan);
+  background: transparent;
+  box-shadow: none;
+  font-weight: 600;
+}
+
+.filters .filterSelectOption[aria-selected='true']:hover,
+.filters .filterSelectOption[aria-selected='true']:focus-visible {
+  background: rgba(24, 226, 229, 0.055);
+}
+
+@keyframes blog-filter-menu-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+:global([data-theme='light']) .filters .filterSelectButton {
+  border-color: rgba(35, 79, 96, 0.2);
+  color: #17303c;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    0 8px 22px rgba(30, 70, 85, 0.055);
+}
+
+:global([data-theme='light']) .filters .filterSelectOption {
+  color: #536c77;
+  background: transparent;
+}
+
+:global([data-theme='light']) .filters .filterSelectOption:hover,
+:global([data-theme='light']) .filters .filterSelectOption:focus-visible {
+  color: #17303c;
+  background: rgba(8, 127, 140, 0.055);
+}
+
+:global([data-theme='light']) .filters .filterSelectOption[aria-selected='true'] {
+  color: #087f8c;
+  background: transparent;
+}
+
+:global([data-theme='light']) .filters .filterSelectOption[aria-selected='true']:hover,
+:global([data-theme='light']) .filters .filterSelectOption[aria-selected='true']:focus-visible {
+  background: rgba(8, 127, 140, 0.055);
+}
+
+@media (max-width: 560px) {
+  .filterSelectMenu {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* blog-dropdown-visual-refinement-v3:end */
+
+/* blog-sidebar-newsletter-form-polish-v1:start */
+
+/*
+ * Sidebar rows previously received extra padding only in the light theme.
+ * Apply the same row geometry in both themes so card heights and inner rhythm
+ * no longer change when the theme switches.
+ */
+.railCard {
+  padding: 1rem;
+}
+
+.transmissions a {
+  padding: 0.35rem 0.4rem;
+  margin-inline: -0.4rem;
+  border-radius: 7px;
+}
+
+.railList a,
+.seriesList a {
+  padding: 0.4rem 0.45rem;
+  margin-inline: -0.45rem;
+  border-radius: 7px;
+}
+
+/*
+ * Make the newsletter control own its full geometry. Explicit sizing,
+ * typography and appearance prevent browser/button defaults from producing
+ * the oversized grey control visible in the light theme.
+ */
+.newsletter form {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(107, 220, 228, 0.28);
+  border-radius: 9px;
+  background: rgba(1, 10, 19, 0.58);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.newsletter label {
+  display: block;
+  min-width: 0;
+}
+
+.newsletter input {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: 50px;
+  padding: 0 1rem;
+  border: 0;
+  outline: 0;
+  color: #eefbff;
+  background: transparent;
+  caret-color: var(--journal-cyan);
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.newsletter input::placeholder {
+  color: #7d929d;
+  opacity: 1;
+}
+
+.newsletter form:focus-within {
+  border-color: rgba(24, 226, 229, 0.5);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 0 0 3px rgba(24, 226, 229, 0.06),
+    0 14px 34px rgba(0, 0, 0, 0.14);
+}
+
+.newsletter button {
+  appearance: none;
+  display: inline-flex;
+  min-width: 132px;
+  min-height: 50px;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  border: 0;
+  border-left: 1px solid rgba(107, 220, 228, 0.2);
+  border-radius: 0;
+  color: var(--journal-cyan);
+  background: rgba(24, 226, 229, 0.075);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1;
+  transition:
+    color 150ms ease,
+    background 150ms ease;
+}
+
+.newsletter button:hover,
+.newsletter button:focus-visible {
+  outline: 0;
+  color: #bffefa;
+  background: rgba(24, 226, 229, 0.13);
+}
+
+:global([data-theme='light']) .newsletter form {
+  border-color: rgba(35, 79, 96, 0.2);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    0 12px 30px rgba(30, 70, 85, 0.08);
+}
+
+:global([data-theme='light']) .newsletter input {
+  color: #17303c;
+  background: transparent;
+}
+
+:global([data-theme='light']) .newsletter input::placeholder {
+  color: #7a909b;
+}
+
+:global([data-theme='light']) .newsletter form:focus-within {
+  border-color: rgba(8, 127, 140, 0.42);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 0 0 3px rgba(8, 127, 140, 0.07),
+    0 14px 34px rgba(30, 70, 85, 0.1);
+}
+
+:global([data-theme='light']) .newsletter button {
+  border-left-color: rgba(35, 79, 96, 0.16);
+  color: #087f8c;
+  background: rgba(8, 127, 140, 0.075);
+}
+
+:global([data-theme='light']) .newsletter button:hover,
+:global([data-theme='light']) .newsletter button:focus-visible {
+  color: #056a74;
+  background: rgba(8, 127, 140, 0.13);
+}
+
+@media (max-width: 650px) {
+  .newsletter form {
+    grid-template-columns: 1fr;
+  }
+
+  .newsletter button {
+    min-height: 46px;
+    border-top: 1px solid rgba(107, 220, 228, 0.2);
+    border-left: 0;
+  }
+
+  :global([data-theme='light']) .newsletter button {
+    border-top-color: rgba(35, 79, 96, 0.16);
+  }
+}
+
+/* blog-sidebar-newsletter-form-polish-v1:end */
