@@ -1,3 +1,5 @@
+import { SiteHeaderSkeleton } from './SiteHeaderSkeleton'
+
 const TERMINAL_ROWS = [0, 1, 2, 3]
 const METRIC_CARDS = [0, 1, 2, 3]
 const EDITOR_ROWS = [0, 1, 2, 3, 4, 5, 6, 7, 8]
@@ -14,40 +16,7 @@ export function HomePageSkeleton() {
       <section aria-hidden="true" className="home-hero-skeleton">
         <div className="home-hero-skeleton__grid" />
 
-        <header className="home-header-skeleton">
-          <div className="site-container home-header-skeleton__inner">
-            <div className="home-header-skeleton__brand">
-              <span className="home-header-skeleton__mark">
-                <i />
-                <i />
-                <i />
-                <i />
-              </span>
-
-              <span className="home-header-skeleton__identity">
-                <SkeletonLine className="home-header-skeleton__name" />
-                <SkeletonLine className="home-header-skeleton__role" />
-              </span>
-
-              <span className="home-header-skeleton__presence" />
-            </div>
-
-            <nav className="home-header-skeleton__nav">
-              {[0, 1, 2, 3, 4, 5].map((item) => (
-                <span className="home-header-skeleton__nav-item" key={item}>
-                  <SkeletonLine />
-                </span>
-              ))}
-            </nav>
-
-            <div className="home-header-skeleton__actions">
-              <SkeletonLine className="home-header-skeleton__talk" />
-              <span className="home-header-skeleton__theme">
-                <i />
-              </span>
-            </div>
-          </div>
-        </header>
+        <SiteHeaderSkeleton activeItem="home" />
 
         <div className="site-container home-hero-skeleton__shell">
           <div className="home-hero-skeleton__dashboard">

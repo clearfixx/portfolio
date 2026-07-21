@@ -4,6 +4,7 @@ import { PublicBreadcrumbs, PublicPageHeroFrame, PublicPageShell } from '@/compo
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { BlogArticleFilters } from '@/components/blog/BlogArticleFilters'
 import { BlogRegistryEditor } from '@/components/blog/BlogRegistryEditor'
 import { TechnicalPreviewPlaceholder } from '@/components/blog/TechnicalPreviewPlaceholder'
 import type { BlogPost, Category, Media } from '@/payload-types'
@@ -543,41 +544,15 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                     ))}
                   </nav>
 
-                  <form className={styles.filters}>
-                    <input name="sort" type="hidden" value={selectedSort} />
-                    <label className={styles.search}>
-                      <JournalIcon name="search" size={13} />
-                      <input
-                        defaultValue={params.q}
-                        name="q"
-                        placeholder="Search articles..."
-                        type="search"
-                      />
-                    </label>
-
-                    <select defaultValue={params.topic || ''} name="topic">
-                      <option value="">All topics</option>
-                      {categories.map((item) => (
-                        <option key={item.slug} value={item.slug}>
-                          {item.label}
-                        </option>
-                      ))}
-                    </select>
-
-                    <select defaultValue={params.series || ''} name="series">
-                      <option value="">All series</option>
-                      {series.map((item) => (
-                        <option key={item.slug} value={item.slug}>
-                          {item.label}
-                        </option>
-                      ))}
-                    </select>
-
-                    <button type="submit">
-                      <JournalIcon name="sliders" size={13} />
-                      Apply
-                    </button>
-                  </form>
+                  <BlogArticleFilters
+                    categories={categories}
+                    initialQuery={params.q}
+                    initialSeries={params.series}
+                    initialTopic={params.topic}
+                    key={`${params.q ?? ''}:${params.topic ?? ''}:${params.series ?? ''}:${selectedSort}`}
+                    selectedSort={selectedSort}
+                    series={series}
+                  />
                 </div>
 
                 <ul className={styles.articleGrid}>
