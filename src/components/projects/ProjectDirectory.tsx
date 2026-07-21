@@ -4,8 +4,6 @@ import {
   ActivityIcon,
   ArrowUpRightIcon,
   ChevronDownIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
   ClockIcon,
   CodeIcon,
   ExternalLinkIcon,
@@ -456,43 +454,102 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
         </div>
       )}
 
-      <nav className="projects-directory__pagination" aria-label="Project pages">
-        <button
-          aria-label="Previous project page"
-          disabled={safeCurrentPage === 1}
-          type="button"
-          onClick={() => changePage(safeCurrentPage - 1)}
-        >
-          <ChevronLeftIcon aria-hidden="true" size={16} />
-        </button>
+      {pageCount > 1 ? (
+        <section className="projects-directory__pagination-section" aria-label="Project pagination">
+          <div className="projects-directory__pagination-summary">
+            <p>
+              <span aria-hidden="true">{'//'}</span>
+              Project index
+            </p>
+            <strong>
+              Page {safeCurrentPage} of {pageCount}
+            </strong>
+            <span>{filteredItems.length} indexed entries</span>
+          </div>
 
-        {pageItems.map((item, index) =>
-          item === 'ellipsis' ? (
-            <span aria-hidden="true" key={`ellipsis-${index}`}>
-              …
-            </span>
-          ) : (
+          <nav className="projects-directory__pagination" aria-label="Project pages">
             <button
-              aria-current={item === safeCurrentPage ? 'page' : undefined}
-              className={item === safeCurrentPage ? 'is-active' : undefined}
-              key={item}
+              aria-label="First project page"
+              disabled={safeCurrentPage === 1}
               type="button"
-              onClick={() => changePage(item)}
+              onClick={() => changePage(1)}
             >
-              {item}
+              «
             </button>
-          ),
-        )}
 
-        <button
-          aria-label="Next project page"
-          disabled={safeCurrentPage === pageCount}
-          type="button"
-          onClick={() => changePage(safeCurrentPage + 1)}
-        >
-          <ChevronRightIcon aria-hidden="true" size={16} />
-        </button>
-      </nav>
+            <button
+              aria-label="Previous project page"
+              disabled={safeCurrentPage === 1}
+              type="button"
+              onClick={() => changePage(safeCurrentPage - 1)}
+            >
+              ‹
+            </button>
+
+            {pageItems.map((item, index) =>
+              item === 'ellipsis' ? (
+                <span aria-hidden="true" key={`ellipsis-${index}`}>
+                  …
+                </span>
+              ) : (
+                <button
+                  aria-current={item === safeCurrentPage ? 'page' : undefined}
+                  className={item === safeCurrentPage ? 'is-active' : undefined}
+                  key={item}
+                  type="button"
+                  onClick={() => changePage(item)}
+                >
+                  {item}
+                </button>
+              ),
+            )}
+
+            <button
+              aria-label="Next project page"
+              disabled={safeCurrentPage === pageCount}
+              type="button"
+              onClick={() => changePage(safeCurrentPage + 1)}
+            >
+              ›
+            </button>
+
+            <button
+              aria-label="Last project page"
+              disabled={safeCurrentPage === pageCount}
+              type="button"
+              onClick={() => changePage(pageCount)}
+            >
+              »
+            </button>
+          </nav>
+
+          <div className="projects-directory__pagination-controls">
+            <form
+              onSubmit={(event) => {
+                event.preventDefault()
+                const formData = new FormData(event.currentTarget)
+                changePage(Number(formData.get('page')))
+              }}
+            >
+              <label>
+                <span>Jump to page</span>
+                <select defaultValue={String(safeCurrentPage)} key={safeCurrentPage} name="page">
+                  {Array.from({ length: pageCount }, (_, index) => index + 1).map((pageNumber) => (
+                    <option key={pageNumber} value={pageNumber}>
+                      {pageNumber}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <button type="submit">
+                Go
+                <span aria-hidden="true">→</span>
+              </button>
+            </form>
+          </div>
+        </section>
+      ) : null}
     </section>
   )
 }

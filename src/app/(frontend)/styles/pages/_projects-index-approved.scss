@@ -780,26 +780,67 @@
   cursor: pointer;
 }
 
+/* Projects index pagination aligned with the Engineering Journal system. */
+.projects-page .projects-directory__pagination-section {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.65fr) auto minmax(320px, 0.85fr);
+  gap: clamp(1.25rem, 3vw, 3rem);
+  align-items: center;
+  margin-top: clamp(2.8rem, 5vw, 4.8rem);
+  padding: 1.2rem 1.4rem;
+  border-block: 1px solid rgb(var(--rgb-cyan) / 14%);
+  background:
+    linear-gradient(90deg, rgb(var(--rgb-teal) / 3.5%), transparent 28%),
+    rgb(var(--rgb-surface-card) / 34%);
+}
+
+.projects-page .projects-directory__pagination-summary {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.projects-page .projects-directory__pagination-summary p {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0;
+  color: rgb(var(--rgb-cyan));
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.projects-page .projects-directory__pagination-summary strong {
+  color: rgb(var(--rgb-text-strong));
+  font-size: 0.75rem;
+}
+
+.projects-page .projects-directory__pagination-summary > span {
+  color: rgb(var(--rgb-text-muted));
+  font-size: 0.57rem;
+}
+
 .projects-page .projects-directory__pagination {
   display: flex;
-  align-items: center;
+  gap: 0.35rem;
   justify-content: center;
-  gap: 7px;
-  margin-top: 20px;
+  align-items: center;
 }
 
 .projects-page .projects-directory__pagination button,
 .projects-page .projects-directory__pagination > span {
   display: grid;
-  width: 38px;
-  height: 38px;
+  min-width: 36px;
+  height: 36px;
+  padding-inline: 0.45rem;
   place-items: center;
-  border: 1px solid rgb(var(--rgb-cyan) / 12%);
+  border: 1px solid transparent;
   border-radius: 5px;
-  background: rgb(var(--rgb-surface-card) / 58%);
-  color: rgb(var(--rgb-text-muted));
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 0.68rem;
+  background: transparent;
+  color: rgb(var(--rgb-text-soft));
+  font: inherit;
+  font-size: 0.78rem;
 }
 
 .projects-page .projects-directory__pagination button {
@@ -807,8 +848,9 @@
 }
 
 .projects-page .projects-directory__pagination button:hover:not(:disabled) {
-  border-color: rgb(var(--rgb-cyan) / 36%);
+  border-color: rgb(var(--rgb-cyan) / 30%);
   color: rgb(var(--rgb-cyan));
+  background: rgb(var(--rgb-cyan) / 5%);
 }
 
 .projects-page .projects-directory__pagination button.is-active {
@@ -820,7 +862,103 @@
 
 .projects-page .projects-directory__pagination button:disabled {
   cursor: default;
-  opacity: 0.3;
+  opacity: 0.28;
+}
+
+.projects-page .projects-directory__pagination-controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.projects-page .projects-directory__pagination-controls form {
+  display: flex;
+  gap: 0.45rem;
+  align-items: end;
+  padding: 0.55rem 0.6rem;
+  border: 1px solid rgb(var(--rgb-cyan) / 14%);
+  border-radius: 7px;
+  background: rgb(var(--rgb-surface-card) / 42%);
+}
+
+.projects-page .projects-directory__pagination-controls label {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.projects-page .projects-directory__pagination-controls label > span {
+  color: rgb(var(--rgb-text-muted));
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.projects-page .projects-directory__pagination-controls select {
+  width: 82px;
+  min-height: 34px;
+  border: 1px solid rgb(var(--rgb-cyan) / 16%);
+  border-radius: 5px;
+  padding-inline: 0.55rem;
+  outline: 0;
+  color: rgb(var(--rgb-text-strong));
+  background: rgb(var(--rgb-surface-card));
+  cursor: pointer;
+  font: inherit;
+}
+
+.projects-page .projects-directory__pagination-controls select:focus {
+  border-color: rgb(var(--rgb-cyan) / 48%);
+  box-shadow: 0 0 0 3px rgb(var(--rgb-cyan) / 6%);
+}
+
+.projects-page .projects-directory__pagination-controls button {
+  display: inline-flex;
+  gap: 0.35rem;
+  align-items: center;
+  min-height: 34px;
+  border: 1px solid rgb(var(--rgb-cyan) / 28%);
+  border-radius: 5px;
+  padding-inline: 0.7rem;
+  color: rgb(var(--rgb-cyan));
+  background: rgb(var(--rgb-cyan) / 5%);
+  cursor: pointer;
+  font: inherit;
+}
+
+.projects-page .projects-directory__pagination-controls button:hover {
+  border-color: rgb(var(--rgb-cyan) / 44%);
+  background: rgb(var(--rgb-cyan) / 9%);
+}
+
+@media (max-width: 1180px) {
+  .projects-page .projects-directory__pagination-section {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-page .projects-directory__pagination-summary {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .projects-page .projects-directory__pagination-controls {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 650px) {
+  .projects-page .projects-directory__pagination-section {
+    padding: 1rem;
+  }
+
+  .projects-page .projects-directory__pagination {
+    flex-wrap: wrap;
+  }
+
+  .projects-page .projects-directory__pagination-controls form {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* CTA */
