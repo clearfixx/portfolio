@@ -1958,3 +1958,63 @@ body.mobile-navigation-open {
 }
 
 /* End Phase 5.2.4 */
+
+/* Compact viewport motion reveal safety:start */
+
+/*
+ * Homepage sections and the footer can become taller than a compact viewport.
+ * Their desktop reveal choreography starts content at opacity: 0 and relies on
+ * IntersectionObserver. On phones, coarse pointers and short viewports that
+ * can leave the layout reserved while the visible content never reveals.
+ *
+ * Compact layouts therefore render the full homepage and footer immediately.
+ * Desktop choreography remains untouched.
+ */
+@media (max-width: 767px), (max-height: 759px), (pointer: coarse) {
+  html[data-motion-ready='true'] {
+    #projects,
+    #engineer-profile,
+    #skills-technologies,
+    #insights,
+    #contact,
+    .site-footer {
+      .featured-project-card,
+      .featured-project-card__progress span,
+      .engineer-profile__grid > *,
+      .journey__item,
+      .philosophy-card,
+      .engineer-profile__terminal-line,
+      .skills-tech__card,
+      .skills-tech__layout > :last-child,
+      .insights-trust__panel,
+      .insights-trust__panel--articles,
+      .insights-trust__panel--feedback,
+      .insights-trust__featured-article,
+      .insights-trust__article-row,
+      .insights-trust__feedback-card,
+      .insights-trust__metric,
+      .contact-cta__map-panel,
+      .contact-cta__form-panel,
+      .contact-cta__form-header,
+      .contact-cta__field,
+      .contact-cta__form button,
+      .contact-cta__availability,
+      .site-footer__panel,
+      .site-footer__post,
+      .site-footer__snapshot,
+      .site-footer__newsletter,
+      .site-footer__bottom {
+        opacity: 1;
+        transform: none;
+        transition: none;
+        transition-delay: 0ms;
+      }
+
+      .featured-project-card__progress span {
+        transform: scaleX(1);
+      }
+    }
+  }
+}
+
+/* Compact viewport motion reveal safety:end */

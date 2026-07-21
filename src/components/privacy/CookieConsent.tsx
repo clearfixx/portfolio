@@ -15,6 +15,8 @@ const defaultDraft: CookieConsentDraft = {
   analytics: false,
 }
 
+const subscribeToHydration = () => () => {}
+
 function ShieldIcon() {
   return (
     <svg aria-hidden="true" viewBox="0 0 64 64" fill="none">
@@ -67,6 +69,12 @@ export function CookieConsent() {
     subscribeToCookieConsent,
     getCookieConsentSnapshot,
     getCookieConsentServerSnapshot,
+  )
+
+  const isHydrated = useSyncExternalStore(
+    subscribeToHydration,
+    () => true,
+    () => false,
   )
 
   const [isPreferencesOpen, setIsPreferencesOpen] = useState(false)
@@ -213,7 +221,8 @@ export function CookieConsent() {
     closePreferences()
   }
 
-  const shouldShowBanner = !isPreferencesOpen && (consent === null || isBannerForcedOpen)
+  const shouldShowBanner =
+    isHydrated && !isPreferencesOpen && (consent === null || isBannerForcedOpen)
 
   if (!shouldShowBanner && !isPreferencesOpen) {
     return null
