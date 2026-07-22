@@ -1,4 +1,5 @@
 import type {
+  About,
   Analytics,
   Contact,
   Homepage,
@@ -16,6 +17,15 @@ import { getPayloadClient } from '../../client'
  * Keep global reads here so layouts/pages do not talk to Payload directly.
  * The frontend asks for meaning, not for database mechanics.
  */
+export async function getAbout(): Promise<About> {
+  const payload = await getPayloadClient()
+
+  return payload.findGlobal({
+    slug: 'about',
+    depth: 2,
+  })
+}
+
 export async function getHomepage(): Promise<Homepage> {
   const payload = await getPayloadClient()
 

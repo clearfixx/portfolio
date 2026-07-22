@@ -21,7 +21,7 @@ import {
   Testimonials,
   Users,
 } from './collections'
-import { Analytics, Contact, Homepage, Profile, SEO, SiteSettings, Social } from './globals'
+import { About, Analytics, Contact, Homepage, Profile, SEO, SiteSettings, Social } from './globals'
 import {
   xFeedCacheCollection,
   xFeedSettingsGlobal,
@@ -96,6 +96,7 @@ export default buildConfig({
   globals: [
     SiteSettings,
     Homepage,
+    About,
     Profile,
     SEO,
     Social,

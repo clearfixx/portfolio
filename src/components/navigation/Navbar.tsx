@@ -46,10 +46,9 @@ const navItems: NavItem[] = [
   },
   {
     label: 'About',
-    href: '/#engineer-profile',
-    activeSectionId: 'engineer-profile',
-    scrollSectionId: 'engineer-profile',
+    href: '/about',
     index: '04',
+    match: 'prefix',
   },
   {
     label: 'Stack',

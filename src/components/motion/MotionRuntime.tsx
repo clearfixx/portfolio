@@ -67,6 +67,7 @@ export function MotionRuntime() {
 
       let intersectionObserver: IntersectionObserver | null = null
       let mutationObserver: MutationObserver | null = null
+      let isRuntimeDisposed = false
 
       const reveal = (element: HTMLElement) => {
         revealElement(element)
@@ -128,7 +129,23 @@ export function MotionRuntime() {
         mutationObserver = new MutationObserver((records) => {
           records.forEach((record) => {
             record.addedNodes.forEach((node) => {
-              getMotionElementsFromNode(node).forEach(prepareElement)
+              getMotionElementsFromNode(node).forEach((element) => {
+                /*
+                 * A streamed App Router segment can be inserted before React
+                 * hydrates its host nodes. Mutating data-motion-state at that
+                 * point creates a server/client attribute mismatch.
+                 *
+                 * Two animation frames allow the streamed subtree to finish
+                 * hydration before it is registered with the motion runtime.
+                 */
+                window.requestAnimationFrame(() => {
+                  window.requestAnimationFrame(() => {
+                    if (!isRuntimeDisposed && element.isConnected) {
+                      prepareElement(element)
+                    }
+                  })
+                })
+              })
             })
           })
         })
@@ -219,6 +236,7 @@ export function MotionRuntime() {
       window.addEventListener('beforeprint', revealAll)
 
       disposeRuntime = () => {
+        isRuntimeDisposed = true
         mutationObserver?.disconnect()
         intersectionObserver?.disconnect()
         reducedMotionQuery.removeEventListener('change', handleReducedMotionChange)
@@ -276,3 +294,5 @@ export function MotionRuntime() {
 
   return null
 }
+
+// about-hydration-admin-nav-repair-v2-1

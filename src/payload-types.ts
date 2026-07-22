@@ -119,6 +119,7 @@ export interface Config {
   globals: {
     'site-settings': SiteSetting
     homepage: Homepage
+    about: About
     profile: Profile
     seo: Seo
     social: Social
@@ -132,6 +133,7 @@ export interface Config {
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>
     homepage: HomepageSelect<false> | HomepageSelect<true>
+    about: AboutSelect<false> | AboutSelect<true>
     profile: ProfileSelect<false> | ProfileSelect<true>
     seo: SeoSelect<false> | SeoSelect<true>
     social: SocialSelect<false> | SocialSelect<true>
@@ -1906,6 +1908,246 @@ export interface Homepage {
   createdAt?: string | null
 }
 /**
+ * Editorial content and composition for the public Engineering Profile page.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about".
+ */
+export interface About {
+  id: number
+  hero: {
+    enabled?: boolean | null
+    eyebrow: string
+    title: string
+    titleAccent: string
+    description: string
+    actions?:
+      | {
+          label: string
+          href: string
+          icon:
+            | 'arrow'
+            | 'architecture'
+            | 'automation'
+            | 'code'
+            | 'compass'
+            | 'layers'
+            | 'performance'
+            | 'product'
+            | 'signal'
+            | 'system'
+          tone: 'primary' | 'secondary'
+          id?: string | null
+        }[]
+      | null
+    signals?:
+      | {
+          source: 'manual' | 'experience-years' | 'published-projects'
+          /**
+           * Used for Manual value. Derived sources ignore this field.
+           */
+          value?: string | null
+          label: string
+          id?: string | null
+        }[]
+      | null
+  }
+  career: {
+    enabled?: boolean | null
+    eyebrow: string
+    title: string
+    description: string
+    items?:
+      | {
+          period: string
+          role: string
+          description: string
+          stack?:
+            | {
+                label: string
+                id?: string | null
+              }[]
+            | null
+          id?: string | null
+        }[]
+      | null
+  }
+  principles: {
+    enabled?: boolean | null
+    eyebrow: string
+    title: string
+    description: string
+    items?:
+      | {
+          icon:
+            | 'arrow'
+            | 'architecture'
+            | 'automation'
+            | 'code'
+            | 'compass'
+            | 'layers'
+            | 'performance'
+            | 'product'
+            | 'signal'
+            | 'system'
+          title: string
+          description: string
+          id?: string | null
+        }[]
+      | null
+  }
+  operatingSystem: {
+    enabled?: boolean | null
+    eyebrow: string
+    title: string
+    description: string
+    steps?:
+      | {
+          code: string
+          label: string
+          output: string
+          id?: string | null
+        }[]
+      | null
+    currentStage: {
+      label: string
+      title: string
+      description: string
+      items?:
+        | {
+            label: string
+            id?: string | null
+          }[]
+        | null
+    }
+    guardrails: {
+      eyebrow: string
+      title: string
+      status: string
+      items?:
+        | {
+            label: string
+            value: string
+            id?: string | null
+          }[]
+        | null
+    }
+    outputs: {
+      eyebrow: string
+      title: string
+      status: string
+      items?:
+        | {
+            title: string
+            description: string
+            id?: string | null
+          }[]
+        | null
+    }
+    telemetry?:
+      | {
+          label: string
+          value: string
+          tone: 'cyan' | 'purple'
+          id?: string | null
+        }[]
+      | null
+  }
+  experience: {
+    enabled?: boolean | null
+    eyebrow: string
+    title: string
+    description: string
+    items?:
+      | {
+          area: string
+          level: 'lead' | 'advanced' | 'working'
+          score: number
+          example: string
+          id?: string | null
+        }[]
+      | null
+    summary?:
+      | {
+          label: string
+          title: string
+          description: string
+          id?: string | null
+        }[]
+      | null
+  }
+  currentFocus: {
+    enabled?: boolean | null
+    eyebrow: string
+    title: string
+    description: string
+    primaryLabel: string
+    /**
+     * Primary project shown in the Current Focus panel. The public page uses its title, excerpt, and slug.
+     */
+    primaryProject?: (number | null) | Project
+    primaryLinkLabel: string
+    cards?:
+      | {
+          eyebrow: string
+          status: string
+          tone: 'cyan' | 'purple'
+          icon:
+            | 'arrow'
+            | 'architecture'
+            | 'automation'
+            | 'code'
+            | 'compass'
+            | 'layers'
+            | 'performance'
+            | 'product'
+            | 'signal'
+            | 'system'
+          title: string
+          description: string
+          tags?:
+            | {
+                label: string
+                id?: string | null
+              }[]
+            | null
+          footerLabel: string
+          footerValue: string
+          id?: string | null
+        }[]
+      | null
+  }
+  personalSignals: {
+    enabled?: boolean | null
+    eyebrow: string
+    title: string
+    description: string
+    items?:
+      | {
+          title: string
+          description: string
+          id?: string | null
+        }[]
+      | null
+  }
+  cta: {
+    enabled?: boolean | null
+    eyebrow: string
+    title: string
+    titleAccent: string
+    description: string
+    label: string
+    href: string
+  }
+  seo: {
+    metaTitle: string
+    metaDescription: string
+    canonical: string
+  }
+  updatedAt?: string | null
+  createdAt?: string | null
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "profile".
  */
@@ -2526,6 +2768,232 @@ export interface HomepageSelect<T extends boolean = true> {
         formDescription?: T
         footerLabel?: T
         footerText?: T
+      }
+  updatedAt?: T
+  createdAt?: T
+  globalType?: T
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about_select".
+ */
+export interface AboutSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        enabled?: T
+        eyebrow?: T
+        title?: T
+        titleAccent?: T
+        description?: T
+        actions?:
+          | T
+          | {
+              label?: T
+              href?: T
+              icon?: T
+              tone?: T
+              id?: T
+            }
+        signals?:
+          | T
+          | {
+              source?: T
+              value?: T
+              label?: T
+              id?: T
+            }
+      }
+  career?:
+    | T
+    | {
+        enabled?: T
+        eyebrow?: T
+        title?: T
+        description?: T
+        items?:
+          | T
+          | {
+              period?: T
+              role?: T
+              description?: T
+              stack?:
+                | T
+                | {
+                    label?: T
+                    id?: T
+                  }
+              id?: T
+            }
+      }
+  principles?:
+    | T
+    | {
+        enabled?: T
+        eyebrow?: T
+        title?: T
+        description?: T
+        items?:
+          | T
+          | {
+              icon?: T
+              title?: T
+              description?: T
+              id?: T
+            }
+      }
+  operatingSystem?:
+    | T
+    | {
+        enabled?: T
+        eyebrow?: T
+        title?: T
+        description?: T
+        steps?:
+          | T
+          | {
+              code?: T
+              label?: T
+              output?: T
+              id?: T
+            }
+        currentStage?:
+          | T
+          | {
+              label?: T
+              title?: T
+              description?: T
+              items?:
+                | T
+                | {
+                    label?: T
+                    id?: T
+                  }
+            }
+        guardrails?:
+          | T
+          | {
+              eyebrow?: T
+              title?: T
+              status?: T
+              items?:
+                | T
+                | {
+                    label?: T
+                    value?: T
+                    id?: T
+                  }
+            }
+        outputs?:
+          | T
+          | {
+              eyebrow?: T
+              title?: T
+              status?: T
+              items?:
+                | T
+                | {
+                    title?: T
+                    description?: T
+                    id?: T
+                  }
+            }
+        telemetry?:
+          | T
+          | {
+              label?: T
+              value?: T
+              tone?: T
+              id?: T
+            }
+      }
+  experience?:
+    | T
+    | {
+        enabled?: T
+        eyebrow?: T
+        title?: T
+        description?: T
+        items?:
+          | T
+          | {
+              area?: T
+              level?: T
+              score?: T
+              example?: T
+              id?: T
+            }
+        summary?:
+          | T
+          | {
+              label?: T
+              title?: T
+              description?: T
+              id?: T
+            }
+      }
+  currentFocus?:
+    | T
+    | {
+        enabled?: T
+        eyebrow?: T
+        title?: T
+        description?: T
+        primaryLabel?: T
+        primaryProject?: T
+        primaryLinkLabel?: T
+        cards?:
+          | T
+          | {
+              eyebrow?: T
+              status?: T
+              tone?: T
+              icon?: T
+              title?: T
+              description?: T
+              tags?:
+                | T
+                | {
+                    label?: T
+                    id?: T
+                  }
+              footerLabel?: T
+              footerValue?: T
+              id?: T
+            }
+      }
+  personalSignals?:
+    | T
+    | {
+        enabled?: T
+        eyebrow?: T
+        title?: T
+        description?: T
+        items?:
+          | T
+          | {
+              title?: T
+              description?: T
+              id?: T
+            }
+      }
+  cta?:
+    | T
+    | {
+        enabled?: T
+        eyebrow?: T
+        title?: T
+        titleAccent?: T
+        description?: T
+        label?: T
+        href?: T
+      }
+  seo?:
+    | T
+    | {
+        metaTitle?: T
+        metaDescription?: T
+        canonical?: T
       }
   updatedAt?: T
   createdAt?: T

@@ -54,7 +54,7 @@ const FIXED_GROUPS: Array<{ label: string; slugs: string[] }> = [
   },
   {
     label: 'Website',
-    slugs: ['homepage', 'profile', 'contact', 'social'],
+    slugs: ['homepage', 'about', 'profile', 'contact', 'social'],
   },
   {
     label: 'Optimization',
@@ -317,3 +317,5 @@ export default function AdminNav() {
     </nav>
   )
 }
+
+// about-hydration-admin-nav-repair-v2-1

@@ -1,3 +1,4 @@
+export { About } from './About'
 export { Analytics } from './Analytics'
 export { Contact } from './Contact'
 export { Homepage } from './Homepage'
