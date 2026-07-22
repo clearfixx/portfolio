@@ -28,6 +28,22 @@ function getMotionElements(root: ParentNode = document) {
   return Array.from(root.querySelectorAll<HTMLElement>(MOTION_SELECTOR))
 }
 
+function getMotionElementsFromNode(node: Node) {
+  if (!(node instanceof Element)) {
+    return []
+  }
+
+  const elements: HTMLElement[] = []
+
+  if (node.matches(MOTION_SELECTOR)) {
+    elements.push(node as HTMLElement)
+  }
+
+  node.querySelectorAll<HTMLElement>(MOTION_SELECTOR).forEach((element) => elements.push(element))
+
+  return elements
+}
+
 export function MotionRuntime() {
   const pathname = usePathname()
 
@@ -50,6 +66,7 @@ export function MotionRuntime() {
       const observedElements = new Set<HTMLElement>()
 
       let intersectionObserver: IntersectionObserver | null = null
+      let mutationObserver: MutationObserver | null = null
 
       const reveal = (element: HTMLElement) => {
         revealElement(element)
@@ -58,7 +75,7 @@ export function MotionRuntime() {
       }
 
       const prepareElement = (element: HTMLElement) => {
-        if (element.dataset.motionState === VISIBLE_STATE) {
+        if (element.dataset.motionState === VISIBLE_STATE || observedElements.has(element)) {
           return
         }
 
@@ -95,6 +112,32 @@ export function MotionRuntime() {
 
       getMotionElements().forEach(prepareElement)
       root.dataset.motionReady = 'true'
+
+      /*
+       * Next.js App Router can stream async server components after the route
+       * shell has already hydrated. SiteFooter is one such component because
+       * it awaits live social-feed snapshots. Watch only for newly inserted
+       * nodes and register their [data-motion] elements with the existing
+       * IntersectionObserver.
+       *
+       * Deliberately observe childList only. Watching attributes here would
+       * react to data-motion-state writes performed by reveal() and could
+       * create a self-triggering mutation loop.
+       */
+      if ('MutationObserver' in window && document.body) {
+        mutationObserver = new MutationObserver((records) => {
+          records.forEach((record) => {
+            record.addedNodes.forEach((node) => {
+              getMotionElementsFromNode(node).forEach(prepareElement)
+            })
+          })
+        })
+
+        mutationObserver.observe(document.body, {
+          childList: true,
+          subtree: true,
+        })
+      }
 
       const revealHashTarget = () => {
         const rawHash = window.location.hash.slice(1)
@@ -176,6 +219,7 @@ export function MotionRuntime() {
       window.addEventListener('beforeprint', revealAll)
 
       disposeRuntime = () => {
+        mutationObserver?.disconnect()
         intersectionObserver?.disconnect()
         reducedMotionQuery.removeEventListener('change', handleReducedMotionChange)
         document.removeEventListener('focusin', handleFocusIn)
