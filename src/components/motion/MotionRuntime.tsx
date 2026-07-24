@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
 
 const MOTION_SELECTOR = '[data-motion]'
+const PENDING_BOUNDARY_SELECTOR = '[data-motion-hydrated="false"]'
 const VISIBLE_STATE = 'visible'
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
 const IMMEDIATE_REVEAL_LINE = 0.9
@@ -22,6 +23,10 @@ function shouldRevealImmediately(element: HTMLElement) {
   const triggerLine = getViewportHeight() * IMMEDIATE_REVEAL_LINE
 
   return element.getBoundingClientRect().top <= triggerLine
+}
+
+function isInsidePendingBoundary(element: HTMLElement) {
+  return element.closest(PENDING_BOUNDARY_SELECTOR) !== null
 }
 
 function getMotionElements(root: ParentNode = document) {
@@ -76,7 +81,11 @@ export function MotionRuntime() {
       }
 
       const prepareElement = (element: HTMLElement) => {
-        if (element.dataset.motionState === VISIBLE_STATE || observedElements.has(element)) {
+        if (
+          isInsidePendingBoundary(element) ||
+          element.dataset.motionState === VISIBLE_STATE ||
+          observedElements.has(element)
+        ) {
           return
         }
 
@@ -115,28 +124,32 @@ export function MotionRuntime() {
       root.dataset.motionReady = 'true'
 
       /*
-       * Next.js App Router can stream async server components after the route
-       * shell has already hydrated. SiteFooter is one such component because
-       * it awaits live social-feed snapshots. Watch only for newly inserted
-       * nodes and register their [data-motion] elements with the existing
-       * IntersectionObserver.
-       *
-       * Deliberately observe childList only. Watching attributes here would
-       * react to data-motion-state writes performed by reveal() and could
-       * create a self-triggering mutation loop.
+       * Streamed Server Components are wrapped in StreamedMotionBoundary.
+       * Its client effect changes data-motion-hydrated from false to true only
+       * after React has hydrated that subtree. Motion attributes are therefore
+       * never written into pending server HTML.
        */
       if ('MutationObserver' in window && document.body) {
         mutationObserver = new MutationObserver((records) => {
           records.forEach((record) => {
+            if (
+              record.type === 'attributes' &&
+              record.target instanceof HTMLElement &&
+              record.target.dataset.motionHydrated === 'true'
+            ) {
+              getMotionElements(record.target).forEach(prepareElement)
+              return
+            }
+
             record.addedNodes.forEach((node) => {
               getMotionElementsFromNode(node).forEach((element) => {
+                if (isInsidePendingBoundary(element)) {
+                  return
+                }
+
                 /*
-                 * A streamed App Router segment can be inserted before React
-                 * hydrates its host nodes. Mutating data-motion-state at that
-                 * point creates a server/client attribute mismatch.
-                 *
-                 * Two animation frames allow the streamed subtree to finish
-                 * hydration before it is registered with the motion runtime.
+                 * Unwrapped insertions keep the conservative two-frame
+                 * fallback used by the previous runtime.
                  */
                 window.requestAnimationFrame(() => {
                   window.requestAnimationFrame(() => {
@@ -151,6 +164,8 @@ export function MotionRuntime() {
         })
 
         mutationObserver.observe(document.body, {
+          attributeFilter: ['data-motion-hydrated'],
+          attributes: true,
           childList: true,
           subtree: true,
         })
@@ -193,13 +208,21 @@ export function MotionRuntime() {
           .querySelectorAll<HTMLElement>(MOTION_SELECTOR)
           .forEach((element) => relatedMotionElements.add(element))
 
-        relatedMotionElements.forEach(reveal)
+        relatedMotionElements.forEach((element) => {
+          if (!isInsidePendingBoundary(element)) {
+            reveal(element)
+          }
+        })
       }
 
       revealHashTarget()
 
       const revealAll = () => {
-        getMotionElements().forEach(reveal)
+        getMotionElements().forEach((element) => {
+          if (!isInsidePendingBoundary(element)) {
+            reveal(element)
+          }
+        })
       }
 
       const handleReducedMotionChange = (event: MediaQueryListEvent) => {
@@ -219,7 +242,7 @@ export function MotionRuntime() {
 
         const motionElement = event.target.closest<HTMLElement>(MOTION_SELECTOR)
 
-        if (motionElement) {
+        if (motionElement && !isInsidePendingBoundary(motionElement)) {
           reveal(motionElement)
         }
       }
@@ -295,4 +318,4 @@ export function MotionRuntime() {
   return null
 }
 
-// about-hydration-admin-nav-repair-v2-1
+// public-pages-consistency-runtime-skeletons-v1-8

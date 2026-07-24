@@ -2270,6 +2270,49 @@ export interface Contact {
    * Enable or disable the public contact form.
    */
   contactFormEnabled?: boolean | null
+  /**
+   * Editorial content for the standalone /contacts page. Contact details, availability, and social URLs continue to use the shared Contact, Profile, and Social globals.
+   */
+  page: {
+    enabled?: boolean | null
+    breadcrumbLabel: string
+    eyebrow: string
+    title: string
+    /**
+     * Exact phrase inside the title that receives accent emphasis.
+     */
+    titleAccent: string
+    description: string
+    responseTimeLabel: string
+    responseTimeValue: string
+    workingModeLabel: string
+    workingModeValue: string
+    channelsEyebrow: string
+    channelsTitle: string
+    channelsDescription: string
+    formEyebrow: string
+    formTitle: string
+    formDescription: string
+    processEyebrow: string
+    processTitle: string
+    processDescription: string
+    processSteps?:
+      | {
+          code: string
+          title: string
+          description: string
+          id?: string | null
+        }[]
+      | null
+    socialEyebrow: string
+    socialTitle: string
+    socialDescription: string
+    seo: {
+      metaTitle: string
+      metaDescription: string
+      canonical: string
+    }
+  }
   updatedAt?: string | null
   createdAt?: string | null
 }
@@ -3093,6 +3136,47 @@ export interface ContactSelect<T extends boolean = true> {
   phone?: T
   location?: T
   contactFormEnabled?: T
+  page?:
+    | T
+    | {
+        enabled?: T
+        breadcrumbLabel?: T
+        eyebrow?: T
+        title?: T
+        titleAccent?: T
+        description?: T
+        responseTimeLabel?: T
+        responseTimeValue?: T
+        workingModeLabel?: T
+        workingModeValue?: T
+        channelsEyebrow?: T
+        channelsTitle?: T
+        channelsDescription?: T
+        formEyebrow?: T
+        formTitle?: T
+        formDescription?: T
+        processEyebrow?: T
+        processTitle?: T
+        processDescription?: T
+        processSteps?:
+          | T
+          | {
+              code?: T
+              title?: T
+              description?: T
+              id?: T
+            }
+        socialEyebrow?: T
+        socialTitle?: T
+        socialDescription?: T
+        seo?:
+          | T
+          | {
+              metaTitle?: T
+              metaDescription?: T
+              canonical?: T
+            }
+      }
   updatedAt?: T
   createdAt?: T
   globalType?: T

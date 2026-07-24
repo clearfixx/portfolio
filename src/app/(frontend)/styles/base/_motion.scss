@@ -83,3 +83,9 @@ html[data-motion-ready='true'] [data-motion='scale-in']:not([data-motion-state='
     --motion-distance-lg: 16px;
   }
 }
+
+/* public-pages-consistency-runtime-skeletons-v1-8:motion-boundary:start */
+.streamed-motion-boundary {
+  display: contents;
+}
+/* public-pages-consistency-runtime-skeletons-v1-8:motion-boundary:end */

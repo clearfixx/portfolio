@@ -1,16 +1,19 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 
-import { EngineeringProfilePage } from '@/components/about/EngineeringProfilePage'
+import { ContactsPage } from '@/components/contacts/ContactsPage'
+import { ContactsPageSkeleton } from '@/components/contacts/ContactsPageSkeleton'
 import { SiteFooter } from '@/components/home'
 import { StreamedMotionBoundary } from '@/components/motion'
-import { getAboutPageContent, getSiteFooterGitHubFeed } from '@/lib/cms'
+import { getContactsPageContent, getSiteFooterGitHubFeed } from '@/lib/cms'
 
 export const revalidate = 300
 
-// about-live-data-integration-v2
+// contacts-page-foundation-v1
+// contacts-page-manual-suspense-skeleton-v1-7
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { page } = await getAboutPageContent()
+  const { page } = await getContactsPageContent()
 
   return {
     title: page.seo.title,
@@ -21,24 +24,32 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: page.seo.title,
       description: page.seo.description,
-      type: 'profile',
+      type: 'website',
       url: page.seo.canonical,
     },
   }
 }
 
-export default async function AboutPage() {
+async function ContactsPageContent() {
   const [content, githubFeed] = await Promise.all([
-    getAboutPageContent(),
+    getContactsPageContent(),
     getSiteFooterGitHubFeed(),
   ])
 
   return (
     <StreamedMotionBoundary>
-      <EngineeringProfilePage content={content.page} />
+      <ContactsPage content={content.page} />
       {content.siteFooter ? (
         <SiteFooter content={content.siteFooter} githubFeed={githubFeed} />
       ) : null}
     </StreamedMotionBoundary>
+  )
+}
+
+export default function ContactsRoute() {
+  return (
+    <Suspense fallback={<ContactsPageSkeleton />}>
+      <ContactsPageContent />
+    </Suspense>
   )
 }

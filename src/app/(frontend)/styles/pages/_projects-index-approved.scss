@@ -1372,3 +1372,30 @@
     scroll-margin-top: 84px;
   }
 }
+
+/* public-pages-consistency-runtime-skeletons-v1-8:projects-hero:start */
+.projects-page {
+  --profile-text: rgb(var(--rgb-text-strong));
+}
+
+.projects-page .projects-index-hero h1 {
+  display: block;
+  margin: 0;
+  color: var(--profile-text);
+  font-size: clamp(2.55rem, 4.8vw, 5.05rem);
+  font-weight: 620;
+  letter-spacing: -0.052em;
+  line-height: 0.99;
+}
+
+.projects-page .projects-index-hero h1 > span {
+  display: inline;
+  width: auto;
+  height: auto;
+  color: transparent;
+  background: linear-gradient(100deg, var(--profile-text), #34e2f0 45%, #8e54ff);
+  background-clip: text;
+  box-shadow: none;
+  -webkit-background-clip: text;
+}
+/* public-pages-consistency-runtime-skeletons-v1-8:projects-hero:end */

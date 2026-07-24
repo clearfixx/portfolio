@@ -17,10 +17,10 @@ type NavItem = {
 
 const contactNavItem: NavItem = {
   label: 'Contact',
-  href: '/#contact',
+  href: '/contacts',
   activeSectionId: 'contact',
-  scrollSectionId: 'contact',
   index: '06',
+  match: 'prefix',
 }
 
 const navItems: NavItem[] = [
