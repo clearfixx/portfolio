@@ -36,7 +36,7 @@ import type {
 const FEATURED_PROJECT_LIMIT = 3
 
 export type HomepageContent = {
-  contact: ContactSectionViewModel
+  contact: ContactSectionViewModel | null
   currentMission: CurrentMissionViewModel | null
   deliveryPipeline: DeliveryPipelineViewModel | null
   engineerProfile: EngineerProfileViewModel | null
@@ -89,12 +89,15 @@ export async function getHomepageContent(): Promise<HomepageContent> {
   ])
 
   return {
-    contact: buildContactSectionViewModel({
-      contact,
-      homepage,
-      profile,
-      social,
-    }),
+    contact:
+      homepage.contactSection?.enabled === false
+        ? null
+        : buildContactSectionViewModel({
+            contact,
+            homepage,
+            profile,
+            social,
+          }),
     currentMission: buildCurrentMissionViewModel(homepage),
     deliveryPipeline: buildDeliveryPipelineViewModel(homepage),
     engineerProfile: buildEngineerProfileViewModel({

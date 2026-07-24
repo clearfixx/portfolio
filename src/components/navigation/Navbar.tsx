@@ -2,67 +2,21 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { type MouseEvent, useEffect, useRef, useState } from 'react'
+import { type KeyboardEvent, type MouseEvent, useEffect, useMemo, useRef, useState } from 'react'
 
 import { ThemeToggle } from '@/components/theme/ThemeToggle'
+import type { NavigationViewModel } from '@/lib/cms/navigation'
 
-type NavItem = {
-  label: string
-  href: string
-  index: string
-  activeSectionId?: string
-  scrollSectionId?: string
-  match?: 'exact' | 'prefix'
+type NavbarProps = {
+  navigation: NavigationViewModel
 }
 
-const contactNavItem: NavItem = {
-  label: 'Contact',
-  href: '/contacts',
-  activeSectionId: 'contact',
-  index: '06',
-  match: 'prefix',
+type LandingItem = NavigationViewModel['landingItems'][number]
+type RouteItem = NonNullable<NavigationViewModel['pagesMenu']>['items'][number]
+type CtaItem = NonNullable<NavigationViewModel['cta']>
+type ScrollItem = {
+  sectionId: string
 }
-
-const navItems: NavItem[] = [
-  {
-    label: 'Home',
-    href: '/',
-    activeSectionId: 'hero',
-    index: '01',
-    match: 'exact',
-  },
-  {
-    label: 'Projects',
-    href: '/projects',
-    activeSectionId: 'projects',
-    index: '02',
-    match: 'prefix',
-  },
-  {
-    label: 'Blog',
-    href: '/blog',
-    index: '03',
-    match: 'prefix',
-  },
-  {
-    label: 'About',
-    href: '/about',
-    index: '04',
-    match: 'prefix',
-  },
-  {
-    label: 'Stack',
-    href: '/#skills-technologies',
-    activeSectionId: 'skills-technologies',
-    scrollSectionId: 'skills-technologies',
-    index: '05',
-  },
-  contactNavItem,
-]
-
-const homeSectionItems = navItems.filter((item): item is NavItem & { activeSectionId: string } =>
-  Boolean(item.activeSectionId),
-)
 
 const SCROLL_LOCK_MS = 900
 const DESKTOP_NAV_QUERY = '(min-width: 901px)'
@@ -75,26 +29,52 @@ const FOCUSABLE_SELECTOR = [
   '[tabindex]:not([tabindex="-1"])',
 ].join(',')
 
-function getActiveSectionId() {
+function ArrowUpRightIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none">
+      <path d="M7 17L17 7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path
+        d="M9 7H17V15"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+function ChevronDownIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" fill="none">
+      <path
+        d="m4 6 4 4 4-4"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+function getActiveSectionId(items: ScrollItem[]) {
   const markerPosition = Math.min(window.innerHeight * 0.36, 340)
   const documentHeight = document.documentElement.scrollHeight
   const scrollBottom = window.scrollY + window.innerHeight
+  const existingItems = items.filter((item) => document.getElementById(item.sectionId))
 
   if (scrollBottom >= documentHeight - 12) {
-    return 'contact'
+    return existingItems.at(-1)?.sectionId ?? 'hero'
   }
 
   let activeSectionId = 'hero'
 
-  for (const item of homeSectionItems) {
-    const section = document.getElementById(item.activeSectionId)
+  for (const item of existingItems) {
+    const section = document.getElementById(item.sectionId)
 
-    if (!section) {
-      continue
-    }
-
-    if (section.getBoundingClientRect().top <= markerPosition) {
-      activeSectionId = item.activeSectionId
+    if (section && section.getBoundingClientRect().top <= markerPosition) {
+      activeSectionId = item.sectionId
     }
   }
 
@@ -102,17 +82,17 @@ function getActiveSectionId() {
 }
 
 function getRoutePath(href: string) {
-  return href.split('#')[0] || '/'
-}
-
-function isRouteActive(pathname: string, item: NavItem) {
-  if (pathname === '/') {
-    return false
+  if (!href.startsWith('/')) {
+    return undefined
   }
 
+  return href.split('#')[0]?.split('?')[0] || '/'
+}
+
+function isRouteActive(pathname: string, item: RouteItem) {
   const routePath = getRoutePath(item.href)
 
-  if (routePath === '/') {
+  if (!routePath || routePath === '/') {
     return false
   }
 
@@ -123,10 +103,26 @@ function isRouteActive(pathname: string, item: NavItem) {
   return pathname === routePath
 }
 
-export function Navbar() {
+export function Navbar({ navigation }: NavbarProps) {
   const pathname = usePathname()
+  const sectionItems = useMemo<ScrollItem[]>(() => {
+    const items = navigation.landingItems.map((item) => ({
+      sectionId: item.sectionId,
+    }))
+    const ctaSectionId = navigation.cta?.sectionId
+
+    if (ctaSectionId && !items.some((item) => item.sectionId === ctaSectionId)) {
+      items.push({
+        sectionId: ctaSectionId,
+      })
+    }
+
+    return items
+  }, [navigation.cta?.sectionId, navigation.landingItems])
+
   const [activeSection, setActiveSection] = useState('hero')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isPagesMenuOpen, setIsPagesMenuOpen] = useState(false)
 
   const isProgrammaticScrollRef = useRef(false)
   const scrollLockTimeoutRef = useRef<number | null>(null)
@@ -135,6 +131,9 @@ export function Navbar() {
   const menuPanelRef = useRef<HTMLElement>(null)
   const menuCloseRef = useRef<HTMLButtonElement>(null)
   const restoreMenuFocusRef = useRef(false)
+  const pagesMenuTriggerRef = useRef<HTMLButtonElement>(null)
+  const pagesMenuRef = useRef<HTMLDivElement>(null)
+  const pagesMenuContainerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (pathname !== '/') {
@@ -149,7 +148,7 @@ export function Navbar() {
           return
         }
 
-        setActiveSection(getActiveSectionId())
+        setActiveSection(getActiveSectionId(sectionItems))
       })
     }
 
@@ -157,6 +156,7 @@ export function Navbar() {
 
     window.addEventListener('scroll', updateActiveSection, { passive: true })
     window.addEventListener('resize', updateActiveSection)
+    window.addEventListener('hashchange', updateActiveSection)
 
     return () => {
       window.cancelAnimationFrame(frameRef.current)
@@ -167,8 +167,9 @@ export function Navbar() {
 
       window.removeEventListener('scroll', updateActiveSection)
       window.removeEventListener('resize', updateActiveSection)
+      window.removeEventListener('hashchange', updateActiveSection)
     }
-  }, [pathname])
+  }, [pathname, sectionItems])
 
   useEffect(() => {
     const desktopQuery = window.matchMedia(DESKTOP_NAV_QUERY)
@@ -190,6 +191,42 @@ export function Navbar() {
   }, [])
 
   useEffect(() => {
+    if (!isPagesMenuOpen) {
+      return
+    }
+
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target
+
+      if (
+        target instanceof Node &&
+        pagesMenuContainerRef.current &&
+        !pagesMenuContainerRef.current.contains(target)
+      ) {
+        setIsPagesMenuOpen(false)
+      }
+    }
+
+    const handleKeyDown = (event: globalThis.KeyboardEvent) => {
+      if (event.key !== 'Escape') {
+        return
+      }
+
+      event.preventDefault()
+      setIsPagesMenuOpen(false)
+      pagesMenuTriggerRef.current?.focus()
+    }
+
+    document.addEventListener('pointerdown', handlePointerDown)
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isPagesMenuOpen])
+
+  useEffect(() => {
     if (!isMenuOpen) {
       return
     }
@@ -209,7 +246,7 @@ export function Navbar() {
       menuCloseRef.current?.focus()
     })
 
-    const handleKeyDown = (event: KeyboardEvent) => {
+    const handleKeyDown = (event: globalThis.KeyboardEvent) => {
       if (event.key === 'Escape') {
         event.preventDefault()
         restoreMenuFocusRef.current = true
@@ -276,14 +313,18 @@ export function Navbar() {
     setIsMenuOpen(false)
   }
 
-  const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, item: NavItem) => {
+  const handleSectionClick = (
+    event: MouseEvent<HTMLAnchorElement>,
+    item: LandingItem | CtaItem,
+  ) => {
     closeMenu(false)
+    setIsPagesMenuOpen(false)
 
-    if (pathname !== '/' || !item.scrollSectionId) {
+    if (pathname !== '/' || !item.sectionId) {
       return
     }
 
-    const section = document.getElementById(item.scrollSectionId)
+    const section = document.getElementById(item.sectionId)
 
     if (!section) {
       return
@@ -296,8 +337,8 @@ export function Navbar() {
       window.clearTimeout(scrollLockTimeoutRef.current)
     }
 
-    setActiveSection(item.activeSectionId ?? item.scrollSectionId)
-    window.history.pushState(null, '', `#${item.scrollSectionId}`)
+    setActiveSection(item.sectionId)
+    window.history.pushState(null, '', `#${item.sectionId}`)
 
     section.scrollIntoView({
       behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
@@ -306,57 +347,138 @@ export function Navbar() {
 
     scrollLockTimeoutRef.current = window.setTimeout(() => {
       isProgrammaticScrollRef.current = false
-      setActiveSection(getActiveSectionId())
+      setActiveSection(getActiveSectionId(sectionItems))
       scrollLockTimeoutRef.current = null
     }, SCROLL_LOCK_MS)
   }
 
-  const getItemActiveState = (item: NavItem) => {
-    if (pathname === '/') {
-      return Boolean(item.activeSectionId && activeSection === item.activeSectionId)
+  const handlePagesMenuKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
+    if (event.key !== 'ArrowDown') {
+      return
     }
 
-    return isRouteActive(pathname, item)
+    event.preventDefault()
+    setIsPagesMenuOpen(true)
+
+    window.requestAnimationFrame(() => {
+      pagesMenuRef.current?.querySelector<HTMLElement>('a[href]')?.focus()
+    })
   }
+
+  const pagesMenuActive =
+    navigation.pagesMenu?.items.some((item) => isRouteActive(pathname, item)) ?? false
+  const ctaActive =
+    pathname === '/' &&
+    Boolean(navigation.cta?.sectionId && activeSection === navigation.cta.sectionId)
 
   return (
     <div className="navbar">
       <nav className="navbar__links" aria-label="Main navigation">
-        {navItems.map((item) => {
-          const isActive = getItemActiveState(item)
+        {navigation.landingItems.map((item) => {
+          const isActive = pathname === '/' && activeSection === item.sectionId
 
           return (
             <Link
               className={`navbar__link ${isActive ? 'is-active' : ''}`}
               href={item.href}
-              key={item.href}
-              aria-current={isActive ? (pathname === '/' ? 'location' : 'page') : undefined}
-              onClick={(event) => handleNavClick(event, item)}
+              key={item.id}
+              aria-current={isActive ? 'location' : undefined}
+              onClick={(event) => handleSectionClick(event, item)}
             >
               {item.label}
             </Link>
           )
         })}
+
+        {navigation.pagesMenu ? (
+          <div className="navbar__dropdown" ref={pagesMenuContainerRef}>
+            <button
+              className={`navbar__dropdown-trigger ${pagesMenuActive ? 'is-active' : ''}`}
+              type="button"
+              ref={pagesMenuTriggerRef}
+              aria-controls="navbar-pages-menu"
+              aria-expanded={isPagesMenuOpen}
+              onClick={() => setIsPagesMenuOpen((current) => !current)}
+              onKeyDown={handlePagesMenuKeyDown}
+            >
+              {navigation.pagesMenu.label}
+              <ChevronDownIcon />
+            </button>
+
+            {isPagesMenuOpen ? (
+              <div className="navbar__dropdown-menu" id="navbar-pages-menu" ref={pagesMenuRef}>
+                <span className="navbar__dropdown-eyebrow">Internal pages</span>
+
+                {navigation.pagesMenu.items.map((item) => {
+                  const isActive = isRouteActive(pathname, item)
+                  const className = `navbar__dropdown-item ${isActive ? 'is-active' : ''}`
+                  const content = (
+                    <>
+                      <span>
+                        <strong>{item.label}</strong>
+                        <small>{item.href}</small>
+                      </span>
+                      <ArrowUpRightIcon />
+                    </>
+                  )
+
+                  return item.external ? (
+                    <a
+                      className={className}
+                      href={item.href}
+                      key={item.id}
+                      target={item.newTab ? '_blank' : undefined}
+                      rel={item.newTab ? 'noreferrer' : undefined}
+                      onClick={() => setIsPagesMenuOpen(false)}
+                    >
+                      {content}
+                    </a>
+                  ) : (
+                    <Link
+                      className={className}
+                      href={item.href}
+                      key={item.id}
+                      target={item.newTab ? '_blank' : undefined}
+                      rel={item.newTab ? 'noreferrer' : undefined}
+                      aria-current={isActive ? 'page' : undefined}
+                      onClick={() => setIsPagesMenuOpen(false)}
+                    >
+                      {content}
+                    </Link>
+                  )
+                })}
+              </div>
+            ) : null}
+          </div>
+        ) : null}
       </nav>
 
       <div className="navbar__actions">
-        <Link
-          className="lets-talk"
-          href={contactNavItem.href}
-          onClick={(event) => handleNavClick(event, contactNavItem)}
-        >
-          Let&apos;s Talk
-          <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none">
-            <path d="M7 17L17 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            <path
-              d="M9 7H17V15"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </Link>
+        {navigation.cta ? (
+          navigation.cta.external ? (
+            <a
+              className={`lets-talk ${ctaActive ? 'is-active' : ''}`}
+              href={navigation.cta.href}
+              target={navigation.cta.newTab ? '_blank' : undefined}
+              rel={navigation.cta.newTab ? 'noreferrer' : undefined}
+            >
+              {navigation.cta.label}
+              <ArrowUpRightIcon />
+            </a>
+          ) : (
+            <Link
+              className={`lets-talk ${ctaActive ? 'is-active' : ''}`}
+              href={navigation.cta.href}
+              aria-current={ctaActive ? 'location' : undefined}
+              target={navigation.cta.newTab ? '_blank' : undefined}
+              rel={navigation.cta.newTab ? 'noreferrer' : undefined}
+              onClick={(event) => handleSectionClick(event, navigation.cta as CtaItem)}
+            >
+              {navigation.cta.label}
+              <ArrowUpRightIcon />
+            </Link>
+          )
+        ) : null}
 
         <ThemeToggle />
       </div>
@@ -370,6 +492,7 @@ export function Navbar() {
         aria-label="Open navigation menu"
         onClick={() => {
           restoreMenuFocusRef.current = false
+          setIsPagesMenuOpen(false)
           setIsMenuOpen(true)
         }}
       >
@@ -415,39 +538,80 @@ export function Navbar() {
               </button>
             </div>
 
-            <nav className="mobile-navigation__links" aria-label="Mobile navigation">
-              {navItems.map((item) => {
-                const isActive = getItemActiveState(item)
+            <div className="mobile-navigation__groups">
+              {navigation.landingItems.length > 0 ? (
+                <section className="mobile-navigation__group">
+                  <span className="mobile-navigation__group-label">On this page</span>
+                  <nav className="mobile-navigation__links" aria-label="Homepage sections">
+                    {navigation.landingItems.map((item, index) => {
+                      const isActive = pathname === '/' && activeSection === item.sectionId
 
-                return (
-                  <Link
-                    className={`mobile-navigation__link ${isActive ? 'is-active' : ''}`}
-                    href={item.href}
-                    key={item.href}
-                    aria-current={isActive ? (pathname === '/' ? 'location' : 'page') : undefined}
-                    onClick={(event) => handleNavClick(event, item)}
-                  >
-                    <span>{item.index}</span>
-                    <strong>{item.label}</strong>
-                    <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none">
-                      <path
-                        d="M7 17L17 7"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                        strokeLinecap="round"
-                      />
-                      <path
-                        d="M9 7H17V15"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </Link>
-                )
-              })}
-            </nav>
+                      return (
+                        <Link
+                          className={`mobile-navigation__link ${isActive ? 'is-active' : ''}`}
+                          href={item.href}
+                          key={item.id}
+                          aria-current={isActive ? 'location' : undefined}
+                          onClick={(event) => handleSectionClick(event, item)}
+                        >
+                          <span>{String(index + 1).padStart(2, '0')}</span>
+                          <strong>{item.label}</strong>
+                          <ArrowUpRightIcon />
+                        </Link>
+                      )
+                    })}
+                  </nav>
+                </section>
+              ) : null}
+
+              {navigation.pagesMenu ? (
+                <section className="mobile-navigation__group">
+                  <span className="mobile-navigation__group-label">
+                    {navigation.pagesMenu.label}
+                  </span>
+                  <nav className="mobile-navigation__links" aria-label="Internal pages">
+                    {navigation.pagesMenu.items.map((item) => {
+                      const isActive = isRouteActive(pathname, item)
+                      const className = `mobile-navigation__link mobile-navigation__link--page ${
+                        isActive ? 'is-active' : ''
+                      }`
+                      const content = (
+                        <>
+                          <span>{'//'}</span>
+                          <strong>{item.label}</strong>
+                          <ArrowUpRightIcon />
+                        </>
+                      )
+
+                      return item.external ? (
+                        <a
+                          className={className}
+                          href={item.href}
+                          key={item.id}
+                          target={item.newTab ? '_blank' : undefined}
+                          rel={item.newTab ? 'noreferrer' : undefined}
+                          onClick={() => closeMenu(false)}
+                        >
+                          {content}
+                        </a>
+                      ) : (
+                        <Link
+                          className={className}
+                          href={item.href}
+                          key={item.id}
+                          target={item.newTab ? '_blank' : undefined}
+                          rel={item.newTab ? 'noreferrer' : undefined}
+                          aria-current={isActive ? 'page' : undefined}
+                          onClick={() => closeMenu(false)}
+                        >
+                          {content}
+                        </Link>
+                      )
+                    })}
+                  </nav>
+                </section>
+              ) : null}
+            </div>
 
             <div className="mobile-navigation__footer">
               <div className="mobile-navigation__theme">
@@ -458,28 +622,31 @@ export function Navbar() {
                 <ThemeToggle />
               </div>
 
-              <Link
-                className="mobile-navigation__cta"
-                href={contactNavItem.href}
-                onClick={(event) => handleNavClick(event, contactNavItem)}
-              >
-                Start a conversation
-                <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none">
-                  <path
-                    d="M7 17L17 7"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M9 7H17V15"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </Link>
+              {navigation.cta ? (
+                navigation.cta.external ? (
+                  <a
+                    className="mobile-navigation__cta"
+                    href={navigation.cta.href}
+                    target={navigation.cta.newTab ? '_blank' : undefined}
+                    rel={navigation.cta.newTab ? 'noreferrer' : undefined}
+                    onClick={() => closeMenu(false)}
+                  >
+                    {navigation.cta.label}
+                    <ArrowUpRightIcon />
+                  </a>
+                ) : (
+                  <Link
+                    className="mobile-navigation__cta"
+                    href={navigation.cta.href}
+                    target={navigation.cta.newTab ? '_blank' : undefined}
+                    rel={navigation.cta.newTab ? 'noreferrer' : undefined}
+                    onClick={(event) => handleSectionClick(event, navigation.cta as CtaItem)}
+                  >
+                    {navigation.cta.label}
+                    <ArrowUpRightIcon />
+                  </Link>
+                )
+              ) : null}
             </div>
           </aside>
         </div>

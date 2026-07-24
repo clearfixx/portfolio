@@ -254,7 +254,6 @@ export function MotionRuntime() {
 
       reducedMotionQuery.addEventListener('change', handleReducedMotionChange)
       document.addEventListener('focusin', handleFocusIn)
-      window.addEventListener('hashchange', revealHashTarget)
       window.addEventListener('pageshow', handlePageShow)
       window.addEventListener('beforeprint', revealAll)
 
@@ -264,7 +263,6 @@ export function MotionRuntime() {
         intersectionObserver?.disconnect()
         reducedMotionQuery.removeEventListener('change', handleReducedMotionChange)
         document.removeEventListener('focusin', handleFocusIn)
-        window.removeEventListener('hashchange', revealHashTarget)
         window.removeEventListener('pageshow', handlePageShow)
         window.removeEventListener('beforeprint', revealAll)
       }

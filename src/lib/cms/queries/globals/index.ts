@@ -1,12 +1,13 @@
 import type {
-  About,
   Analytics,
   Contact,
   Homepage,
+  Navigation,
   Profile,
   Seo,
   SiteSetting,
   Social,
+  About,
 } from '@/payload-types'
 
 import { getPayloadClient } from '../../client'
@@ -32,6 +33,15 @@ export async function getHomepage(): Promise<Homepage> {
   return payload.findGlobal({
     slug: 'homepage',
     depth: 2,
+  })
+}
+
+export async function getNavigation(): Promise<Navigation> {
+  const payload = await getPayloadClient()
+
+  return payload.findGlobal({
+    slug: 'navigation',
+    depth: 0,
   })
 }
 

@@ -40,7 +40,7 @@ export default async function HomePage() {
       </ScrollStack>
       {deliveryPipeline ? <DeliveryPipeline content={deliveryPipeline} /> : null}
       {insightsTrust ? <InsightsTrust content={insightsTrust} /> : null}
-      <ContactCTA content={contact} />
+      {contact ? <ContactCTA content={contact} /> : null}
       {siteFooter ? <SiteFooter content={siteFooter} githubFeed={githubFeed} /> : null}
     </>
   )

@@ -1,5 +1,6 @@
 export * from './client'
 export * from './homepage'
+export * from './navigation'
 export * from './queries'
 export * from './about'
 export * from './contacts'
