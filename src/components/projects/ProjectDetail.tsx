@@ -485,9 +485,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
 
       <div
         className={
-          versions.length > 0
-            ? 'project-case__lower'
-            : 'project-case__lower project-case__lower--screenshots-only'
+          versions.length > 0 ? styles.lower : `${styles.lower} ${styles.lowerScreenshotsOnly}`
         }
       >
         {versions.length > 0 ? (
@@ -497,7 +495,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
               <a href="#project-changelog">View full changelog →</a>
             </header>
 
-            <ol className="project-case__changelog">
+            <ol className={styles.changelog}>
               {versions.slice(0, 6).map((version) => (
                 <li key={version.id}>
                   <strong>v{version.version}</strong>
