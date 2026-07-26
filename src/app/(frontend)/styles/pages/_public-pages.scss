@@ -776,6 +776,7 @@
  * Keeping it inside the breadcrumb box prevents the ambient decoration
  * from drifting when a page changes its top spacing.
  */
+
 .public-page__ambient::before,
 .public-page__ambient > span:first-child {
   display: none;
@@ -832,17 +833,7 @@
 
 /* public-breadcrumb-rail-v2:end */
 
-/* public-hero-frame-system-v1:start */
-
-.public-page-hero-frame {
-  position: relative;
-  border-bottom: 1px solid rgb(var(--rgb-cyan) / 14%);
-  padding-bottom: var(--public-page-hero-divider-space);
-}
-
-.public-page-hero-frame--detail {
-  border-bottom-color: rgb(var(--rgb-cyan) / 16%);
-}
+/* public-page-hero-runtime-variables-v1:start */
 
 @media (max-width: 900px) {
   .public-page {
@@ -858,7 +849,7 @@
   }
 }
 
-/* public-hero-frame-system-v1:end */
+/* public-page-hero-runtime-variables-v1:end */
 
 /* public-header-background-continuity-v4:start */
 
@@ -868,6 +859,7 @@
  * through the transparent header. Content still keeps its safe header
  * clearance through --public-page-top-space.
  */
+
 .public-page::before {
   inset: 0 0 auto;
   height: calc(min(620px, 68vh) + 88px);
@@ -879,6 +871,7 @@
 }
 
 /* Preserve the previous visible position of the violet telemetry rail. */
+
 .public-page__ambient::after {
   top: 88px;
 }
@@ -890,6 +883,7 @@
 /* public-header-background-continuity-v4:end */
 
 /* Projects index to site footer boundary. */
+
 .projects-page + .site-footer {
   margin-top: 22px;
 }

@@ -1,5 +1,7 @@
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 
+import styles from './PublicPageHeroFrame.module.scss'
+
 import type { PublicPageVariant } from './PublicPageShell'
 
 type PublicPageHeroFrameProps = Omit<
@@ -17,9 +19,7 @@ export function PublicPageHeroFrame({
   variant = 'index',
   ...headerProps
 }: PublicPageHeroFrameProps) {
-  const classes = ['public-page-hero-frame', `public-page-hero-frame--${variant}`, className]
-    .filter(Boolean)
-    .join(' ')
+  const classes = [styles.frame, className].filter(Boolean).join(' ')
 
   return (
     <header {...headerProps} className={classes} data-public-page-hero-variant={variant}>
