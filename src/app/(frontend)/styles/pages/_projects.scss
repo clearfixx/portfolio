@@ -76,14 +76,3 @@
 .project-page + .site-footer {
   margin-top: 0;
 }
-
-.project-case__media-empty {
-  display: grid;
-  min-height: 330px;
-  place-items: center;
-  align-content: center;
-  gap: 10px;
-  border: 1px dashed rgb(var(--rgb-cyan) / 18%);
-  border-radius: 9px;
-  color: rgb(var(--rgb-text-muted));
-}
