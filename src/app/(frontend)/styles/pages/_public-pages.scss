@@ -888,3 +888,8 @@
 }
 
 /* public-header-background-continuity-v4:end */
+
+/* Projects index to site footer boundary. */
+.projects-page + .site-footer {
+  margin-top: 22px;
+}
