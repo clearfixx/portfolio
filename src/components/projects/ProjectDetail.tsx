@@ -269,9 +269,9 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
         </div>
       </PublicPageHeroFrame>
 
-      <div className="project-case__workspace">
-        <div className="project-case__workspace-main">
-          <nav className="project-case__tabs" aria-label="Project sections">
+      <div className={styles.workspace}>
+        <div className={styles.workspaceMain}>
+          <nav className={styles.tabs} aria-label="Project sections">
             <a href="#project-overview">Overview</a>
             {highlights.length > 0 ? <a href="#project-features">Features</a> : null}
             {technologies.length > 0 ? <a href="#project-tech-stack">Tech stack</a> : null}
@@ -280,11 +280,8 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
             {versions.length > 0 ? <a href="#project-changelog">Changelog</a> : null}
           </nav>
 
-          <section
-            className="project-case-panel project-case__overview-panel"
-            id="project-overview"
-          >
-            <header className="project-case-panel__header">
+          <section className={styles.panel} id="project-overview">
+            <header className={styles.panelHeader}>
               <h2>About the project</h2>
               <CodeIcon aria-hidden="true" size={24} />
             </header>
@@ -325,11 +322,8 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
           </section>
 
           {highlights.length > 0 ? (
-            <section
-              className="project-case-panel project-case__features-panel"
-              id="project-features"
-            >
-              <header className="project-case-panel__header">
+            <section className={styles.panel} id="project-features">
+              <header className={styles.panelHeader}>
                 <h2>Core features</h2>
                 <a href="#project-features">See all features →</a>
               </header>
@@ -353,7 +347,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
           ) : null}
         </div>
 
-        <aside className="project-case__workspace-sidebar">
+        <aside className={styles.workspaceSidebar}>
           <section className="project-case-card">
             <p>Project status</p>
             <strong className={`project-case-card__status is-${project.stage}`}>
@@ -428,8 +422,8 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
       {architecture.length > 0 || roadmap.length > 0 ? (
         <div className="project-case__systems">
           {architecture.length > 0 ? (
-            <section className="project-case-panel" id="project-architecture">
-              <header className="project-case-panel__header">
+            <section className={styles.panel} id="project-architecture">
+              <header className={styles.panelHeader}>
                 <h2>Architecture overview</h2>
                 <a href="#project-architecture">View full diagram →</a>
               </header>
@@ -460,8 +454,8 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
           ) : null}
 
           {roadmap.length > 0 ? (
-            <section className="project-case-panel" id="project-roadmap">
-              <header className="project-case-panel__header">
+            <section className={styles.panel} id="project-roadmap">
+              <header className={styles.panelHeader}>
                 <h2>Roadmap</h2>
                 <a href="#project-roadmap">View full roadmap →</a>
               </header>
@@ -497,8 +491,8 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
         }
       >
         {versions.length > 0 ? (
-          <section className="project-case-panel" id="project-changelog">
-            <header className="project-case-panel__header">
+          <section className={styles.panel} id="project-changelog">
+            <header className={styles.panelHeader}>
               <h2>Recent changelog</h2>
               <a href="#project-changelog">View full changelog →</a>
             </header>
@@ -520,8 +514,8 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
           </section>
         ) : null}
 
-        <section className="project-case-panel project-case__screenshots" id="project-gallery">
-          <header className="project-case-panel__header">
+        <section className={`${styles.panel} ${styles.screenshots}`} id="project-gallery">
+          <header className={styles.panelHeader}>
             <h2>Screenshots</h2>
             {screenshotSlides.length > 0 ? (
               <a href="#project-gallery">View full gallery →</a>
