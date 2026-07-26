@@ -286,20 +286,20 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
               <CodeIcon aria-hidden="true" size={24} />
             </header>
 
-            <div className="project-case__overview">
-              <div className="project-case__overview-copy">
-                <div className="project-case__rich-text">
+            <div className={styles.overview}>
+              <div>
+                <div className={styles.richText}>
                   <ProjectRichText data={project.description} />
                 </div>
 
                 {highlights.length > 0 ? (
-                  <div className="project-case__overview-highlights">
+                  <div className={styles.overviewHighlights}>
                     {highlights.slice(0, 4).map((highlight, index) => {
                       const HighlightIcon = resolveFeatureIcon(highlight.icon, index)
 
                       return (
                         <article key={highlight.id ?? highlight.title}>
-                          <span className="project-case__overview-icon">
+                          <span className={styles.overviewIcon}>
                             <HighlightIcon aria-hidden="true" size={27} />
                           </span>
                           <div>
@@ -328,7 +328,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
                 <a href="#project-features">See all features →</a>
               </header>
 
-              <div className="project-case__features">
+              <div className={styles.features}>
                 {highlights.map((highlight, index) => {
                   const FeatureIcon = resolveFeatureIcon(highlight.icon, index)
 
