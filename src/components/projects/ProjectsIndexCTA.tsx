@@ -3,6 +3,7 @@ import type { SiteFooterSocialIcon, SiteFooterSocialLinkViewModel } from '@/lib/
 import type { ComponentType, SVGProps } from 'react'
 
 import { ProjectsWorldMap } from './ProjectsWorldMap'
+import styles from './ProjectsIndexCTA.module.scss'
 
 type IconProps = SVGProps<SVGSVGElement>
 
@@ -34,8 +35,8 @@ export function ProjectsIndexCTA({ socialLinks }: ProjectsIndexCTAProps) {
     .slice(0, 4)
 
   return (
-    <section aria-labelledby="projects-registry-cta-title" className="projects-registry-cta">
-      <div className="projects-registry-cta__terminal">
+    <section aria-labelledby="projects-registry-cta-title" className={styles.cta}>
+      <div className={styles.terminal}>
         <p>TERMINAL</p>
 
         <div>
@@ -50,12 +51,12 @@ export function ProjectsIndexCTA({ socialLinks }: ProjectsIndexCTAProps) {
         </div>
       </div>
 
-      <div className="projects-registry-cta__content">
+      <div className={styles.content}>
         <p>Have an idea?</p>
         <h2 id="projects-registry-cta-title">Let&apos;s build something amazing together.</h2>
 
         {visibleLinks.length > 0 ? (
-          <div className="projects-registry-cta__links">
+          <div className={styles.links}>
             {visibleLinks.map((social) => {
               const Icon = iconMap[social.icon]
 

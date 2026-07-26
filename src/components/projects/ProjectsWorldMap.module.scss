@@ -1,0 +1,99 @@
+/*
+ * Dotted world activity map used by the Projects index CTA.
+ * SVG presentation, routes, nodes, motion, and responsive layout.
+ */
+
+.map {
+  position: relative;
+  display: grid;
+  min-height: 176px;
+  place-items: center;
+  overflow: hidden;
+  border-left: 1px solid rgb(var(--rgb-cyan) / 8%);
+  padding: 16px 20px;
+  background:
+    linear-gradient(rgb(var(--rgb-cyan) / 2%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--rgb-cyan) / 2%) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+
+.map::before {
+  position: absolute;
+  inset: 12% 4%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(var(--rgb-cyan) / 8%), transparent 67%);
+  content: '';
+}
+
+.map svg {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: min(100%, 430px);
+  height: auto;
+  overflow: visible;
+}
+
+.dot {
+  fill: rgb(var(--rgb-cyan) / 42%);
+}
+
+.land {
+  fill: url(#projects-world-map-dot-pattern);
+  stroke: rgb(var(--rgb-cyan) / 13%);
+  stroke-width: 0.8;
+  vector-effect: non-scaling-stroke;
+}
+
+.routes path {
+  fill: none;
+  stroke: rgb(var(--rgb-cyan) / 17%);
+  stroke-dasharray: 5 8;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.nodes circle:first-child {
+  fill: rgb(var(--rgb-cyan));
+}
+
+.nodes circle.primary {
+  fill: rgb(var(--rgb-teal));
+}
+
+.nodes circle.pulse {
+  fill: none;
+  stroke: rgb(var(--rgb-cyan) / 34%);
+  stroke-width: 1.2;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: projects-map-pulse 2.8s ease-out infinite;
+}
+
+@keyframes projects-map-pulse {
+  0% {
+    opacity: 0.85;
+    transform: scale(0.55);
+  }
+
+  75%,
+  100% {
+    opacity: 0;
+    transform: scale(1.65);
+  }
+}
+
+@media (max-width: 940px) {
+  .map {
+    grid-column: 1 / -1;
+    min-height: 156px;
+    border-top: 1px solid rgb(var(--rgb-cyan) / 8%);
+    border-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nodes circle.pulse {
+    animation: none;
+  }
+}
