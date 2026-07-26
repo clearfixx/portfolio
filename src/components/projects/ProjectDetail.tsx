@@ -532,7 +532,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
         </section>
       </div>
 
-      <section className="project-case__cta">
+      <section className={styles.cta}>
         <p>Interested in this project?</p>
         <h2>Let&apos;s build something amazing together.</h2>
         <div>
