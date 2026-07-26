@@ -39,6 +39,7 @@ import { ProjectCodePreview } from './ProjectCodePreview'
 import { ProjectRichText } from './ProjectRichText'
 import { ProjectVisualPlaceholder } from './ProjectVisualPlaceholder'
 import { ProjectScreenshotCarousel } from './ProjectScreenshotCarousel'
+import styles from './ProjectDetail.module.scss'
 
 type ProjectDetailProps = {
   project: Project
@@ -204,21 +205,21 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
   const codeLanguage = project.caseStudyCode?.language || 'typescript'
 
   return (
-    <article className="project-case">
-      <PublicPageHeroFrame className="project-case__hero" variant="detail">
-        <div className="project-case__hero-copy">
-          <p className={`project-case__status is-${project.stage}`}>
+    <article className={styles.caseStudy}>
+      <PublicPageHeroFrame className={styles.hero} variant="detail">
+        <div className={styles.heroCopy}>
+          <p className={styles.status} data-stage={project.stage}>
             <span aria-hidden="true" />
             {stageLabel}
           </p>
 
           <h1 id="project-page-title">{project.title}</h1>
-          <p className="project-case__tagline">{project.cardTagline || project.excerpt}</p>
-          <p className="project-case__excerpt">{project.excerpt}</p>
+          <p className={styles.tagline}>{project.cardTagline || project.excerpt}</p>
+          <p className={styles.excerpt}>{project.excerpt}</p>
 
           {technologies.length > 0 ? (
             <ul
-              className="project-case__hero-stack"
+              className={styles.heroStack}
               id="project-tech-stack"
               aria-label="Project technology stack"
             >
@@ -228,10 +229,10 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
             </ul>
           ) : null}
 
-          <div className="project-case__hero-actions">
+          <div className={styles.heroActions}>
             {liveLink ? (
               <a
-                className="project-case__button project-case__button--primary"
+                className={`${styles.button} ${styles.primaryButton}`}
                 href={liveLink.href}
                 rel={isExternalLink(liveLink.href) ? 'noreferrer' : undefined}
                 target={isExternalLink(liveLink.href) ? '_blank' : undefined}
@@ -242,25 +243,20 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
             ) : null}
 
             {githubLink ? (
-              <a
-                className="project-case__button"
-                href={githubLink.href}
-                rel="noreferrer"
-                target="_blank"
-              >
+              <a className={styles.button} href={githubLink.href} rel="noreferrer" target="_blank">
                 <GitHubIcon aria-hidden="true" size={16} />
                 GitHub
               </a>
             ) : null}
 
-            <a className="project-case__button" href="#project-overview">
+            <a className={styles.button} href="#project-overview">
               <FileTextIcon aria-hidden="true" size={16} />
               Case study
             </a>
           </div>
         </div>
 
-        <div className="project-case__hero-media">
+        <div className={styles.heroMedia}>
           {heroSlides.length > 0 ? (
             <ProjectMediaCarousel priority slides={heroSlides} />
           ) : (
