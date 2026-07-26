@@ -1,39 +1,9 @@
-@use './styles/abstracts/variables';
-@use './styles/abstracts/functions';
-@use './styles/abstracts/mixins';
-
-@use './styles/base/base';
-@use './styles/base/layout';
-@use './styles/base/utilities';
-@use './styles/base/animations';
-@use './styles/base/motion';
-@use './styles/base/loading';
-@use './styles/base/responsive';
-@use './styles/navigation/navbar.scss';
-
-@use './styles/sections/portfolio-section';
-@use './styles/sections/portfolio-stack';
-@use './styles/sections/hero';
-@use './styles/sections/hero-refinement';
-@use './styles/sections/hero-background';
-@use './styles/sections/current-mission';
-@use './styles/sections/featured-projects';
-@use './styles/sections/engineer-profile';
-@use './styles/sections/skills-technologies';
-@use './styles/sections/delivery-pipeline';
-@use './styles/sections/social';
-@use './styles/sections/testimonials';
-@use './styles/sections/contact';
-@use './styles/sections/site-footer';
-@use './styles/sections/insights-trust';
-@use './styles/sections/cookie-consent';
-@use './styles/pages/public-pages';
-@use './styles/pages/projects';
-@use './styles/sections/light-theme-polish';
-@use './styles/base/ui-polish-closeout';
-@use './styles/sections/motion-choreography';
-@use './styles/base/responsive-system';
-@use './styles/pages/projects-index-approved';
-@use './styles/components/tooltip';
-@use './styles/components/projects-registry-editor';
-@use './styles/navigation/navigation-system';
+/*
+ * Frontend global Sass entrypoint.
+ *
+ * Keep this file intentionally small. Global CSS is split into:
+ * - global-foundation: tokens, reset, shell, and cross-route infrastructure;
+ * - legacy-bundle: component/page selectors waiting for CSS Modules migration.
+ */
+@use './styles/global-foundation';
+@use './styles/legacy-bundle';

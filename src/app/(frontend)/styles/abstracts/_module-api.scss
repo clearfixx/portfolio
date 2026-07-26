@@ -1,0 +1,12 @@
+/*
+ * Compile-time Sass API for CSS Modules.
+ *
+ * Do not forward abstracts/variables here: that file emits :root and light-theme
+ * CSS. Importing it from component modules would duplicate runtime token output.
+ *
+ * Usage:
+ *   @use '../abstracts/module-api' as module;
+ *   .button { @include module.interactive; }
+ */
+@forward 'functions';
+@forward 'mixins';
