@@ -22,8 +22,9 @@ import type { ReactNode } from 'react'
 import type { ProjectDirectoryItem, ProjectLinkViewModel } from '@/lib/cms/public-projects'
 
 import { ProjectRegistryPreview } from './ProjectRegistryPreview'
+import styles from './ProjectDirectory.module.scss'
 
-// project-preview-system-v33
+// project-directory-css-module-v1
 
 type ProjectDirectoryProps = {
   items: ProjectDirectoryItem[]
@@ -92,7 +93,7 @@ function DisabledProjectAction({ icon, label }: { icon: ReactNode; label: string
   return (
     <span
       aria-disabled="true"
-      className="project-row__action is-disabled"
+      className={`${styles.action} ${styles.disabled}`}
       data-placement="top"
       data-toggle="tooltip"
       data-tooltip-delay="0.3s"
@@ -118,7 +119,7 @@ function ProjectExternalAction({
 }) {
   return (
     <a
-      className="project-row__action"
+      className={styles.action}
       href={link.href}
       rel={isExternalLink(link.href) ? 'noreferrer' : undefined}
       target={isExternalLink(link.href) ? '_blank' : undefined}
@@ -201,11 +202,11 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
   }
 
   return (
-    <section ref={directoryRef} className="projects-directory" aria-label="Project registry">
-      <div className="projects-directory__controls">
-        <div className="projects-directory__filters" aria-label="Project filters">
+    <section ref={directoryRef} className={styles.directory} aria-label="Project registry">
+      <div className={styles.controls}>
+        <div className={styles.filters} aria-label="Project filters">
           <button
-            className={activeFilter === 'all' ? 'is-active' : undefined}
+            className={activeFilter === 'all' ? styles.active : undefined}
             type="button"
             onClick={() => {
               setActiveFilter('all')
@@ -218,7 +219,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
 
           {hasFeatured ? (
             <button
-              className={activeFilter === 'featured' ? 'is-active' : undefined}
+              className={activeFilter === 'featured' ? styles.active : undefined}
               type="button"
               onClick={() => {
                 setActiveFilter('featured')
@@ -232,7 +233,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
 
           {categories.map((category) => (
             <button
-              className={activeFilter === category ? 'is-active' : undefined}
+              className={activeFilter === category ? styles.active : undefined}
               key={category}
               type="button"
               onClick={() => {
@@ -246,8 +247,8 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
           ))}
         </div>
 
-        <div className="projects-directory__tools">
-          <label className="projects-directory__search">
+        <div className={styles.tools}>
+          <label className={styles.search}>
             <SearchIcon aria-hidden="true" size={17} />
             <input
               aria-label="Search projects"
@@ -261,7 +262,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
             />
           </label>
 
-          <div className="projects-directory__sort">
+          <div className={styles.sort}>
             <select
               aria-label="Sort projects"
               value={sort}
@@ -280,7 +281,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
       </div>
 
       {visibleItems.length > 0 ? (
-        <ol className="projects-directory__list">
+        <ol className={styles.list}>
           {visibleItems.map((project) => {
             const detailHref = `/projects/${project.slug}`
             const liveLink = project.links.find((link) => link.type === 'live')
@@ -290,8 +291,8 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
 
             return (
               <li key={project.id}>
-                <article className={`project-row project-row--${project.stage}`}>
-                  <Link className="project-row__visual" href={detailHref}>
+                <article className={styles.row} data-stage={project.stage}>
+                  <Link className={styles.visual} href={detailHref}>
                     {project.image ? (
                       <>
                         <Image
@@ -301,12 +302,12 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
                           src={project.image.src}
                         />
 
-                        <span className="project-row__image-status">
+                        <span className={styles.imageStatus}>
                           {project.featured ? 'Featured' : project.stageLabel}
                         </span>
 
-                        <span className="project-row__image-stripe" aria-hidden="true">
-                          <span className="project-row__image-stripe-mode">
+                        <span className={styles.imageStripe} aria-hidden="true">
+                          <span className={styles.imageStripeMode}>
                             <i />
                             Product view
                           </span>
@@ -322,38 +323,38 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
                     )}
                   </Link>
 
-                  <div className="project-row__content">
-                    <div className="project-row__meta">
-                      <p className="project-row__category">{project.category}</p>
+                  <div className={styles.content}>
+                    <div className={styles.meta}>
+                      <p className={styles.category}>{project.category}</p>
 
-                      <div className="project-row__meta-details">
-                        <span className="project-row__stage">
+                      <div className={styles.metaDetails}>
+                        <span className={styles.stage}>
                           <i aria-hidden="true" />
                           {project.stageLabel}
                         </span>
 
-                        <span className="project-row__updated">
+                        <span className={styles.updated}>
                           <ClockIcon aria-hidden="true" size={14} />
                           {project.updatedLabel}
                         </span>
                       </div>
                     </div>
 
-                    <h3 className="project-row__heading">
+                    <h3 className={styles.heading}>
                       <Link href={detailHref}>{project.title}</Link>
                     </h3>
 
-                    <p className="project-row__excerpt">{project.excerpt}</p>
+                    <p className={styles.excerpt}>{project.excerpt}</p>
 
                     {project.technologies.length > 0 ? (
-                      <ul className="project-row__stack" aria-label={`${project.title} stack`}>
+                      <ul className={styles.stack} aria-label={`${project.title} stack`}>
                         {project.technologies.slice(0, 7).map((technology) => (
                           <li key={technology}>{technology}</li>
                         ))}
                       </ul>
                     ) : null}
 
-                    <dl className="project-row__metrics">
+                    <dl className={styles.metrics}>
                       <div>
                         <PackageIcon aria-hidden="true" size={17} />
                         <span>
@@ -378,11 +379,11 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
                         </span>
                       </div>
 
-                      <div className="project-row__progress-metric">
+                      <div className={styles.progressMetric}>
                         <span>
                           <dt>Progress</dt>
                           <dd>
-                            <span className="project-row__progress" aria-hidden="true">
+                            <span className={styles.progress} aria-hidden="true">
                               <span style={{ width: `${project.progress}%` }} />
                             </span>
                             <strong>{project.progress}%</strong>
@@ -391,9 +392,9 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
                       </div>
                     </dl>
 
-                    <footer className="project-row__footer">
+                    <footer className={styles.footer}>
                       <div
-                        className="project-row__actions"
+                        className={styles.actions}
                         aria-label={`${project.title} project actions`}
                       >
                         {githubLink ? (
@@ -409,7 +410,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
                           />
                         )}
 
-                        <Link className="project-row__action" href={detailHref}>
+                        <Link className={styles.action} href={detailHref}>
                           <FileTextIcon aria-hidden="true" size={17} />
                           <span>Case Study</span>
                           <ArrowUpRightIcon aria-hidden="true" size={13} />
@@ -430,7 +431,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
                       </div>
 
                       <div
-                        className="project-row__release"
+                        className={styles.release}
                         aria-label={`${project.title} release information`}
                       >
                         <span>
@@ -453,7 +454,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
           })}
         </ol>
       ) : (
-        <div className="projects-directory__empty" role="status">
+        <div className={styles.empty} role="status">
           <SearchIcon aria-hidden="true" size={24} />
           <h3>No projects match these filters.</h3>
           <p>Reset the filters or try a different search phrase.</p>
@@ -470,8 +471,8 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
       )}
 
       {pageCount > 1 ? (
-        <section className="projects-directory__pagination-section" aria-label="Project pagination">
-          <div className="projects-directory__pagination-summary">
+        <section className={styles.paginationSection} aria-label="Project pagination">
+          <div className={styles.paginationSummary}>
             <p>
               <span aria-hidden="true">{'//'}</span>
               Project index
@@ -482,7 +483,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
             <span>{filteredItems.length} indexed entries</span>
           </div>
 
-          <nav className="projects-directory__pagination" aria-label="Project pages">
+          <nav className={styles.pagination} aria-label="Project pages">
             <button
               aria-label="First project page"
               disabled={safeCurrentPage === 1}
@@ -509,7 +510,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
               ) : (
                 <button
                   aria-current={item === safeCurrentPage ? 'page' : undefined}
-                  className={item === safeCurrentPage ? 'is-active' : undefined}
+                  className={item === safeCurrentPage ? styles.active : undefined}
                   key={item}
                   type="button"
                   onClick={() => changePage(item)}
@@ -538,7 +539,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
             </button>
           </nav>
 
-          <div className="projects-directory__pagination-controls">
+          <div className={styles.paginationControls}>
             <form
               onSubmit={(event) => {
                 event.preventDefault()
