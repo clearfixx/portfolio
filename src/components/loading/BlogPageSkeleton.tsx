@@ -1,302 +1,146 @@
-import { SiteHeaderSkeleton } from './SiteHeaderSkeleton'
+import {
+  EditorSkeleton,
+  PublicSkeletonFrame,
+  SkeletonBreadcrumbs,
+  SkeletonDescription,
+  SkeletonEyebrow,
+  SkeletonLine,
+  SkeletonMetrics,
+  SkeletonTitle,
+} from './PublicSkeletonPrimitives'
 
-const METRICS = [0, 1, 2, 3]
-const CODE_ROWS = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-const ARTICLES = [0, 1, 2, 3, 4, 5]
-const RAIL_ITEMS = [0, 1, 2, 3]
 const FILTERS = [0, 1, 2]
-
-function SkeletonLine({ className = '' }: { className?: string }) {
-  return <span aria-hidden="true" className={`loading-skeleton__line ${className}`} />
-}
-
-function RegistryEditorSkeleton() {
-  return (
-    <div className="blog-page-skeleton__editor">
-      <div className="blog-page-skeleton__editor-title">
-        <span>
-          <i />
-          <i />
-          <i />
-        </span>
-        <span>
-          <i />
-          <SkeletonLine />
-          <SkeletonLine />
-        </span>
-        <SkeletonLine />
-      </div>
-
-      <div className="blog-page-skeleton__editor-tab">
-        <span>
-          <i />
-          <SkeletonLine />
-          <b />
-        </span>
-      </div>
-
-      <div className="blog-page-skeleton__editor-workspace">
-        <aside>
-          <i />
-          <i />
-          <i />
-          <i />
-        </aside>
-
-        <div>
-          {CODE_ROWS.map((row) => (
-            <span key={row}>
-              <SkeletonLine />
-              <SkeletonLine className={`is-code-${(row % 5) + 1}`} />
-            </span>
-          ))}
-        </div>
-
-        <aside className="is-minimap">
-          {CODE_ROWS.map((row) => (
-            <i key={row} />
-          ))}
-        </aside>
-      </div>
-
-      <div className="blog-page-skeleton__editor-status">
-        <SkeletonLine />
-        <i />
-        <SkeletonLine />
-        <i />
-        <SkeletonLine />
-      </div>
-    </div>
-  )
-}
-
-function FeaturedArticleSkeleton() {
-  return (
-    <article className="blog-page-skeleton__featured">
-      <div className="blog-page-skeleton__featured-image">
-        <span>
-          <i />
-          <i />
-          <i />
-          <SkeletonLine />
-        </span>
-        <div>
-          <SkeletonLine />
-          <SkeletonLine />
-          <SkeletonLine />
-          <SkeletonLine />
-          <SkeletonLine />
-        </div>
-        <SkeletonLine className="is-badge" />
-      </div>
-
-      <div className="blog-page-skeleton__featured-content">
-        <div>
-          <SkeletonLine className="is-category" />
-          <SkeletonLine className="is-title" />
-          <span className="blog-page-skeleton__copy">
-            <SkeletonLine />
-            <SkeletonLine />
-            <SkeletonLine />
-          </span>
-        </div>
-
-        <footer>
-          <SkeletonLine />
-          <SkeletonLine />
-          <SkeletonLine />
-          <SkeletonLine className="is-action" />
-        </footer>
-      </div>
-    </article>
-  )
-}
+const ARTICLES = [0, 1, 2, 3]
+const RAIL_ITEMS = [0, 1, 2, 3, 4]
+const META = [0, 1, 2]
 
 function ArticleCardSkeleton({ index }: { index: number }) {
   return (
-    <article className="blog-page-skeleton__article">
+    <article className="blog-page-skeleton__article" data-skeleton-index={index}>
       <div className="blog-page-skeleton__article-image">
-        <span>
-          <i />
-          <i />
-          <i />
-        </span>
-        <SkeletonLine />
-        <SkeletonLine />
-      </div>
-
-      <div className="blog-page-skeleton__article-body">
         <header>
-          <SkeletonLine />
-          <SkeletonLine />
+          <i />
+          <i />
+          <i />
         </header>
-        <SkeletonLine className={`is-title is-title-${(index % 3) + 1}`} />
-        <span className="blog-page-skeleton__copy">
+        <SkeletonLine />
+        <SkeletonLine />
+      </div>
+
+      <section>
+        <SkeletonLine className="is-category" />
+        <SkeletonLine className="is-article-title" />
+        <span>
           <SkeletonLine />
           <SkeletonLine />
         </span>
-
-        <div className="blog-page-skeleton__tags">
-          <SkeletonLine />
-          <SkeletonLine />
-          <SkeletonLine />
-        </div>
-
         <footer>
-          <SkeletonLine />
-          <i />
-          <SkeletonLine />
-          <SkeletonLine className="is-action" />
+          {META.map((item) => (
+            <SkeletonLine key={item} />
+          ))}
         </footer>
-      </div>
+      </section>
     </article>
   )
 }
 
 export function BlogPageSkeleton() {
   return (
-    <div aria-busy="true" aria-label="Loading blog" className="blog-loading">
-      <section aria-hidden="true" className="blog-page-skeleton">
-        <div className="blog-page-skeleton__grid" />
-        <SiteHeaderSkeleton activeItem="blog" />
+    <PublicSkeletonFrame activeItem="blog" label="Loading engineering journal">
+      <SkeletonBreadcrumbs />
 
-        <main className="site-container blog-page-skeleton__main">
-          <div className="blog-page-skeleton__breadcrumbs">
-            <SkeletonLine />
-            <i />
-            <SkeletonLine />
+      <section className="public-skeleton__hero blog-page-skeleton__hero">
+        <div className="public-skeleton__hero-copy">
+          <SkeletonEyebrow />
+          <SkeletonTitle accentWidth="76%" leadingWidth="82%" />
+          <SkeletonDescription />
+          <SkeletonMetrics />
+        </div>
+
+        <EditorSkeleton variant="blog" />
+      </section>
+
+      <section className="blog-page-skeleton__content">
+        <div className="blog-page-skeleton__toolbar">
+          <div>
+            {FILTERS.map((filter) => (
+              <SkeletonLine key={filter} />
+            ))}
           </div>
+          <div>
+            <SkeletonLine className="is-search" />
+            <SkeletonLine className="is-filter" />
+          </div>
+        </div>
 
-          <section className="blog-page-skeleton__hero">
-            <div>
-              <span className="blog-page-skeleton__eyebrow">
-                <i />
-                <SkeletonLine />
-              </span>
-              <SkeletonLine className="blog-page-skeleton__hero-title" />
-              <SkeletonLine className="blog-page-skeleton__hero-title is-accent" />
-
-              <span className="blog-page-skeleton__description">
-                <SkeletonLine />
-                <SkeletonLine />
-              </span>
-
-              <div className="blog-page-skeleton__metrics">
-                {METRICS.map((metric) => (
-                  <article key={metric}>
-                    <SkeletonLine />
-                    <SkeletonLine />
-                    <SkeletonLine />
-                  </article>
-                ))}
-              </div>
-            </div>
-
-            <RegistryEditorSkeleton />
-          </section>
-
-          <section className="blog-page-skeleton__content">
-            <div className="blog-page-skeleton__label">
-              <i />
-              <SkeletonLine />
-            </div>
-
-            <div className="blog-page-skeleton__top">
-              <FeaturedArticleSkeleton />
-
-              <aside className="blog-page-skeleton__rail">
-                <section>
-                  <header>
-                    <SkeletonLine />
-                    <i />
-                  </header>
-                  <div>
-                    {RAIL_ITEMS.map((item) => (
-                      <span key={item}>
-                        <i />
-                        <SkeletonLine />
-                        <SkeletonLine />
-                      </span>
-                    ))}
-                  </div>
-                </section>
-
-                <section>
-                  <header>
-                    <SkeletonLine />
-                    <i />
-                  </header>
-                  <div className="blog-page-skeleton__rail-tags">
-                    <SkeletonLine />
-                    <SkeletonLine />
-                    <SkeletonLine />
-                    <SkeletonLine />
-                  </div>
-                </section>
-
-                <section className="is-sync">
-                  <span>
-                    <i />
-                    <SkeletonLine />
-                  </span>
+        <div className="blog-page-skeleton__layout">
+          <div className="blog-page-skeleton__main">
+            <article className="blog-page-skeleton__featured">
+              <div className="blog-page-skeleton__featured-image">
+                <header>
+                  <i />
+                  <i />
+                  <i />
+                  <SkeletonLine />
+                </header>
+                <span>
                   <SkeletonLine />
                   <SkeletonLine />
-                  <b>
-                    <i />
-                  </b>
-                </section>
-              </aside>
-            </div>
-
-            <div className="blog-page-skeleton__articles-heading">
-              <span>
-                <i />
-                <SkeletonLine />
-              </span>
-              <SkeletonLine />
-            </div>
-
-            <div className="blog-page-skeleton__toolbar">
-              <div>
-                {FILTERS.map((filter) => (
-                  <SkeletonLine className={`is-filter-${filter + 1}`} key={filter} />
-                ))}
+                  <SkeletonLine />
+                  <SkeletonLine />
+                </span>
+                <SkeletonLine className="is-badge" />
               </div>
-              <div>
-                <SkeletonLine className="is-search" />
-                <SkeletonLine className="is-sort" />
-              </div>
-            </div>
+
+              <section>
+                <SkeletonLine className="is-category" />
+                <SkeletonLine className="is-featured-title" />
+                <span>
+                  <SkeletonLine />
+                  <SkeletonLine />
+                  <SkeletonLine />
+                </span>
+                <footer>
+                  {META.map((item) => (
+                    <SkeletonLine key={item} />
+                  ))}
+                  <SkeletonLine className="is-action" />
+                </footer>
+              </section>
+            </article>
 
             <div className="blog-page-skeleton__articles">
               {ARTICLES.map((article) => (
                 <ArticleCardSkeleton index={article} key={article} />
               ))}
             </div>
+          </div>
 
-            <nav className="blog-page-skeleton__pagination">
-              <div>
-                {[0, 1, 2, 3, 4].map((item) => (
-                  <SkeletonLine className={item === 2 ? 'is-active' : undefined} key={item} />
-                ))}
-              </div>
-              <SkeletonLine />
-            </nav>
-
-            <section className="blog-page-skeleton__newsletter">
-              <div>
-                <SkeletonLine />
-                <SkeletonLine />
-                <SkeletonLine />
-              </div>
-              <div>
-                <SkeletonLine />
-                <SkeletonLine />
-              </div>
-            </section>
-          </section>
-        </main>
+          <aside className="blog-page-skeleton__rail">
+            {RAIL_ITEMS.map((item) => (
+              <section key={item}>
+                <header>
+                  <i />
+                  <SkeletonLine />
+                </header>
+                <div>
+                  {META.map((row) => (
+                    <span key={row}>
+                      <i />
+                      <b>
+                        <SkeletonLine />
+                        <SkeletonLine />
+                      </b>
+                    </span>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </aside>
+        </div>
       </section>
-    </div>
+    </PublicSkeletonFrame>
   )
 }
+
+// page-specific-unified-skeletons-v1-9

@@ -1,6 +1,8 @@
+export { About } from './About'
 export { Analytics } from './Analytics'
 export { Contact } from './Contact'
 export { Homepage } from './Homepage'
+export { Navigation } from './Navigation'
 export { Profile } from './Profile'
 export { SEO } from './SEO'
 export { SiteSettings } from './SiteSettings'

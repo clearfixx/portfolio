@@ -21,6 +21,10 @@ import type { ReactNode } from 'react'
 
 import type { ProjectDirectoryItem, ProjectLinkViewModel } from '@/lib/cms/public-projects'
 
+import { ProjectRegistryPreview } from './ProjectRegistryPreview'
+
+// project-preview-system-v33
+
 type ProjectDirectoryProps = {
   items: ProjectDirectoryItem[]
 }
@@ -46,6 +50,16 @@ function getMetricStageLabel(stage: ProjectDirectoryItem['stage']) {
   }
 
   return labels[stage]
+}
+
+function formatProjectVersion(value: string | undefined) {
+  const normalized = value?.trim()
+
+  if (!normalized) {
+    return 'Rolling'
+  }
+
+  return /^v/i.test(normalized) ? normalized : `v${normalized}`
 }
 
 function buildPageItems(currentPage: number, pageCount: number) {
@@ -279,62 +293,55 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
                 <article className={`project-row project-row--${project.stage}`}>
                   <Link className="project-row__visual" href={detailHref}>
                     {project.image ? (
-                      <Image
-                        alt={project.image.alt}
-                        fill
-                        sizes="(max-width: 760px) 100vw, (max-width: 1180px) 42vw, 440px"
-                        src={project.image.src}
-                      />
+                      <>
+                        <Image
+                          alt={project.image.alt}
+                          fill
+                          sizes="(max-width: 940px) 100vw, (max-width: 1240px) 36vw, 440px"
+                          src={project.image.src}
+                        />
+
+                        <span className="project-row__image-status">
+                          {project.featured ? 'Featured' : project.stageLabel}
+                        </span>
+
+                        <span className="project-row__image-stripe" aria-hidden="true">
+                          <span className="project-row__image-stripe-mode">
+                            <i />
+                            Product view
+                          </span>
+                          <span>{project.slug}</span>
+                          <span>{project.technologies[0] ?? 'Interface'}</span>
+                          <strong>{project.progress}%</strong>
+                        </span>
+
+                        {/* project-image-mini-stripe-v34 */}
+                      </>
                     ) : (
-                      <div className="project-row__fallback" aria-hidden="true">
-                        <div className="project-row__fallback-window">
-                          <div className="project-row__fallback-toolbar">
-                            <span>
-                              <i />
-                              <i />
-                              <i />
-                            </span>
-                            <small>project.config.ts</small>
-                          </div>
-
-                          <div className="project-row__fallback-code">
-                            <span>
-                              <b>const</b> project = {'{'}
-                            </span>
-                            <span>
-                              &nbsp;&nbsp;name: <em>&apos;{project.title}&apos;</em>,
-                            </span>
-                            <span>
-                              &nbsp;&nbsp;stage: <em>&apos;{project.stage}&apos;</em>,
-                            </span>
-                            <span>
-                              &nbsp;&nbsp;progress: <strong>{project.progress}</strong>,
-                            </span>
-                            <span>{'}'}</span>
-                          </div>
-                        </div>
-                      </div>
+                      <ProjectRegistryPreview project={project} />
                     )}
-
-                    <span className="project-row__image-status">
-                      {project.featured ? 'Featured' : project.stageLabel}
-                    </span>
                   </Link>
 
                   <div className="project-row__content">
-                    <div className="project-row__title">
-                      <div>
-                        <p>{project.category}</p>
-                        <h3>
-                          <Link href={detailHref}>{project.title}</Link>
-                        </h3>
-                      </div>
+                    <div className="project-row__meta">
+                      <p className="project-row__category">{project.category}</p>
 
-                      <span className="project-row__stage">
-                        <i aria-hidden="true" />
-                        {project.stageLabel}
-                      </span>
+                      <div className="project-row__meta-details">
+                        <span className="project-row__stage">
+                          <i aria-hidden="true" />
+                          {project.stageLabel}
+                        </span>
+
+                        <span className="project-row__updated">
+                          <ClockIcon aria-hidden="true" size={14} />
+                          {project.updatedLabel}
+                        </span>
+                      </div>
                     </div>
+
+                    <h3 className="project-row__heading">
+                      <Link href={detailHref}>{project.title}</Link>
+                    </h3>
 
                     <p className="project-row__excerpt">{project.excerpt}</p>
 
@@ -371,67 +378,75 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
                         </span>
                       </div>
 
-                      <div>
-                        <ClockIcon aria-hidden="true" size={17} />
+                      <div className="project-row__progress-metric">
                         <span>
-                          <dt>Updated</dt>
-                          <dd>{project.updatedLabel}</dd>
+                          <dt>Progress</dt>
+                          <dd>
+                            <span className="project-row__progress" aria-hidden="true">
+                              <span style={{ width: `${project.progress}%` }} />
+                            </span>
+                            <strong>{project.progress}%</strong>
+                          </dd>
                         </span>
                       </div>
                     </dl>
+
+                    <footer className="project-row__footer">
+                      <div
+                        className="project-row__actions"
+                        aria-label={`${project.title} project actions`}
+                      >
+                        {githubLink ? (
+                          <ProjectExternalAction
+                            icon={<GitHubIcon aria-hidden="true" size={17} />}
+                            label="GitHub"
+                            link={githubLink}
+                          />
+                        ) : (
+                          <DisabledProjectAction
+                            icon={<GitHubIcon aria-hidden="true" size={17} />}
+                            label="GitHub"
+                          />
+                        )}
+
+                        <Link className="project-row__action" href={detailHref}>
+                          <FileTextIcon aria-hidden="true" size={17} />
+                          <span>Case Study</span>
+                          <ArrowUpRightIcon aria-hidden="true" size={13} />
+                        </Link>
+
+                        {liveLink ? (
+                          <ProjectExternalAction
+                            icon={<ExternalLinkIcon aria-hidden="true" size={17} />}
+                            label="Live Demo"
+                            link={liveLink}
+                          />
+                        ) : (
+                          <DisabledProjectAction
+                            icon={<ExternalLinkIcon aria-hidden="true" size={17} />}
+                            label="Live Demo"
+                          />
+                        )}
+                      </div>
+
+                      <div
+                        className="project-row__release"
+                        aria-label={`${project.title} release information`}
+                      >
+                        <span>
+                          <small>Release</small>
+                          <strong>{formatProjectVersion(project.version)}</strong>
+                        </span>
+
+                        <span>
+                          <small>Since</small>
+                          <strong>{project.sinceYear}</strong>
+                        </span>
+                      </div>
+
+                      {/* project-release-meta-v36 */}
+                    </footer>
                   </div>
-
-                  <aside className="project-row__rail">
-                    <div className="project-row__actions">
-                      {liveLink ? (
-                        <ProjectExternalAction
-                          icon={<ExternalLinkIcon aria-hidden="true" size={17} />}
-                          label="Live Demo"
-                          link={liveLink}
-                        />
-                      ) : (
-                        <DisabledProjectAction
-                          icon={<ExternalLinkIcon aria-hidden="true" size={17} />}
-                          label="Live Demo"
-                        />
-                      )}
-
-                      {githubLink ? (
-                        <ProjectExternalAction
-                          icon={<GitHubIcon aria-hidden="true" size={17} />}
-                          label="GitHub"
-                          link={githubLink}
-                        />
-                      ) : (
-                        <DisabledProjectAction
-                          icon={<GitHubIcon aria-hidden="true" size={17} />}
-                          label="GitHub"
-                        />
-                      )}
-
-                      <Link className="project-row__action" href={detailHref}>
-                        <FileTextIcon aria-hidden="true" size={17} />
-                        <span>Case Study</span>
-                        <ArrowUpRightIcon aria-hidden="true" size={13} />
-                      </Link>
-                    </div>
-
-                    <div className="project-row__delivery">
-                      <div className="project-row__progress-copy">
-                        <span>Progress</span>
-                        <strong>{project.progress}%</strong>
-                      </div>
-
-                      <div className="project-row__progress" aria-hidden="true">
-                        <span style={{ width: `${project.progress}%` }} />
-                      </div>
-
-                      <div className="project-row__since">
-                        <span>Since</span>
-                        <strong>{project.sinceYear}</strong>
-                      </div>
-                    </div>
-                  </aside>
                 </article>
               </li>
             )

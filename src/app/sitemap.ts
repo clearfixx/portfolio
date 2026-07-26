@@ -15,11 +15,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return []
   }
 
+  const siteUrl = getSiteUrl()
+
   return [
     {
-      url: getSiteUrl(),
+      url: siteUrl,
       changeFrequency: 'monthly',
       priority: 1,
+    },
+    {
+      url: `${siteUrl}/contacts`,
+      changeFrequency: 'monthly',
+      priority: 0.8,
     },
   ]
 }

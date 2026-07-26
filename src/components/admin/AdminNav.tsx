@@ -54,7 +54,7 @@ const FIXED_GROUPS: Array<{ label: string; slugs: string[] }> = [
   },
   {
     label: 'Website',
-    slugs: ['homepage', 'profile', 'contact', 'social'],
+    slugs: ['homepage', 'navigation', 'about', 'profile', 'contact', 'social'],
   },
   {
     label: 'Optimization',
@@ -76,6 +76,7 @@ const LABEL_OVERRIDES: Record<string, string> = {
   'dss-instagram-feed-settings': 'Instagram Feed',
   'dss-x-feed-settings': 'X Feed',
   homepage: 'Homepage',
+  navigation: 'Navigation',
   media: 'Media',
   'newsletter-subscribers': 'Newsletter Subscribers',
   notifications: 'Notifications',
@@ -154,6 +155,17 @@ function NavGlyph({ slug }: { slug: string }) {
         <circle cx="9" cy="12" fill="currentColor" r="1.2" />
         <circle cx="12" cy="15" fill="currentColor" r="1.2" />
         <circle cx="19" cy="7" fill="currentColor" r="1.2" />
+      </svg>
+    )
+  }
+
+  if (/navigation/.test(slug)) {
+    return (
+      <svg {...commonProps}>
+        <path d="M5 7h14M5 12h14M5 17h14" stroke="currentColor" strokeWidth="1.6" />
+        <circle cx="8" cy="7" fill="currentColor" r="1.2" />
+        <circle cx="15" cy="12" fill="currentColor" r="1.2" />
+        <circle cx="10" cy="17" fill="currentColor" r="1.2" />
       </svg>
     )
   }
@@ -317,3 +329,5 @@ export default function AdminNav() {
     </nav>
   )
 }
+
+// about-hydration-admin-nav-repair-v2-1

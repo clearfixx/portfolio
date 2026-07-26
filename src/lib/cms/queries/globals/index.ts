@@ -2,10 +2,12 @@ import type {
   Analytics,
   Contact,
   Homepage,
+  Navigation,
   Profile,
   Seo,
   SiteSetting,
   Social,
+  About,
 } from '@/payload-types'
 
 import { getPayloadClient } from '../../client'
@@ -16,12 +18,30 @@ import { getPayloadClient } from '../../client'
  * Keep global reads here so layouts/pages do not talk to Payload directly.
  * The frontend asks for meaning, not for database mechanics.
  */
+export async function getAbout(): Promise<About> {
+  const payload = await getPayloadClient()
+
+  return payload.findGlobal({
+    slug: 'about',
+    depth: 2,
+  })
+}
+
 export async function getHomepage(): Promise<Homepage> {
   const payload = await getPayloadClient()
 
   return payload.findGlobal({
     slug: 'homepage',
     depth: 2,
+  })
+}
+
+export async function getNavigation(): Promise<Navigation> {
+  const payload = await getPayloadClient()
+
+  return payload.findGlobal({
+    slug: 'navigation',
+    depth: 0,
   })
 }
 

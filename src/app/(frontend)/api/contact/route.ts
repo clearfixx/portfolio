@@ -34,6 +34,7 @@ type ContactRequest = {
   projectType?: unknown
   message?: unknown
   website?: unknown
+  source?: unknown
   captcha?: unknown
 }
 
@@ -99,6 +100,9 @@ export async function POST(request: Request) {
   const projectType = normalizeString(body.projectType)
   const message = normalizeString(body.message)
   const website = normalizeString(body.website)
+  const requestedSource = normalizeString(body.source)
+  const submissionSource =
+    requestedSource === 'contact-page' ? 'contact-page' : 'portfolio-contact-form'
 
   if (website) {
     return publicApiResponse(
@@ -159,7 +163,7 @@ export async function POST(request: Request) {
         subject: `${projectTypes[projectType]} enquiry`,
         message,
         status: 'new',
-        source: 'portfolio-contact-form',
+        source: submissionSource,
       },
     })
 

@@ -4,7 +4,7 @@ import type { Locator, Page } from '@playwright/test'
 const siteUrl = process.env.PLAYWRIGHT_BASE_URL ?? 'http://localhost:3000'
 
 async function openContactForm(page: Page) {
-  await page.goto(`${siteUrl}/#contact`, {
+  await page.goto(`${siteUrl}/contacts`, {
     waitUntil: 'domcontentloaded',
   })
 
@@ -16,13 +16,19 @@ async function openContactForm(page: Page) {
     await rejectOptional.click()
   }
 
-  const form = page.locator('.contact-cta__form')
+  /*
+   * Next.js can retain an inactive hidden route tree while the streamed
+   * App Router page settles. Select the active standalone form by its
+   * explicit source marker and visible state.
+   */
+  const form = page.locator('form[data-contact-form-source="contact-page"]:visible')
 
-  await form.scrollIntoViewIfNeeded()
+  await expect(form).toHaveCount(1)
+  await expect(form).toBeAttached()
   await expect(form).toBeVisible()
 
   // The CAPTCHA intentionally rejects interactions made too soon after mount.
-  await page.waitForTimeout(600)
+  await page.waitForTimeout(650)
 
   return form
 }
@@ -207,6 +213,7 @@ test.describe('contact form', () => {
       projectType: 'website',
       message: 'This is a valid automated contact-form message.',
       website: '',
+      source: 'contact-page',
       captcha: {
         checked: true,
         interaction: 'pointer',
@@ -237,3 +244,7 @@ test.describe('contact form', () => {
     await expect(form.locator('[name="captcha"]')).not.toBeChecked()
   })
 })
+
+// contacts-page-e2e-repair-v1-2
+
+// contacts-page-e2e-repair-v1-3

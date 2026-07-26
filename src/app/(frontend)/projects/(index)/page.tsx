@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 
 import { SiteFooter } from '@/components/home'
+import { StreamedMotionBoundary } from '@/components/motion'
 import { ProjectDirectory, ProjectsIndexCTA } from '@/components/projects'
 import { PublicBreadcrumbs, PublicPageHeroFrame, PublicPageShell } from '@/components/public-page'
 import { getHomepageContent, getProjects, getSiteFooterGitHubFeed } from '@/lib/cms'
@@ -59,7 +60,7 @@ export default async function ProjectsPage() {
   const footerContent = homepageContent.siteFooter
 
   return (
-    <>
+    <StreamedMotionBoundary>
       <PublicPageShell className="projects-page" variant="index">
         <PublicBreadcrumbs items={[{ label: 'Projects' }]} />
 
@@ -71,7 +72,7 @@ export default async function ProjectsPage() {
             </p>
 
             <h1>
-              All Projects <span aria-hidden="true" />
+              All <span>Projects</span>
             </h1>
 
             <p className="projects-index-hero__description">
@@ -134,6 +135,6 @@ export default async function ProjectsPage() {
       </PublicPageShell>
 
       {footerContent ? <SiteFooter content={footerContent} githubFeed={githubFeed} /> : null}
-    </>
+    </StreamedMotionBoundary>
   )
 }

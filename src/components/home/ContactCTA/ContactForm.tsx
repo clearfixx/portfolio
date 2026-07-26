@@ -110,7 +110,11 @@ function focusFirstInvalidField(form: HTMLFormElement, errors: FormErrors) {
   })
 }
 
-export function ContactForm() {
+type ContactFormProps = {
+  source?: 'contact-page' | 'homepage'
+}
+
+export function ContactForm({ source = 'homepage' }: ContactFormProps) {
   const formStartedAtRef = useRef(0)
   const captchaInteractionRef = useRef<CaptchaInteraction | null>(null)
   const captchaProofRef = useRef<CaptchaProof | null>(null)
@@ -243,6 +247,7 @@ export function ContactForm() {
           projectType: readFormValue(formData, 'projectType'),
           message: readFormValue(formData, 'message'),
           website: readFormValue(formData, 'website'),
+          source,
           captcha: captchaProofRef.current,
         }),
       })
@@ -271,7 +276,13 @@ export function ContactForm() {
   }
 
   return (
-    <form className="contact-cta__form" aria-busy={isSubmitting} noValidate onSubmit={handleSubmit}>
+    <form
+      className="contact-cta__form"
+      aria-busy={isSubmitting}
+      noValidate
+      onSubmit={handleSubmit}
+      data-contact-form-source={source}
+    >
       <fieldset className="contact-cta__fieldset" disabled={isSubmitting}>
         <label className={`contact-cta__field${errors.name ? ' is-invalid' : ''}`}>
           <span className="contact-cta__field-icon">
@@ -409,3 +420,5 @@ export function ContactForm() {
     </form>
   )
 }
+
+// contacts-page-e2e-repair-v1-3

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { SiteFooter } from '@/components/home'
+import { StreamedMotionBoundary } from '@/components/motion'
 import { PublicBreadcrumbs, PublicPageHeroFrame, PublicPageShell } from '@/components/public-page'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -386,7 +387,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   }
 
   return (
-    <>
+    <StreamedMotionBoundary>
       <PublicPageShell className="journal-page" variant="index">
         <div className={`${styles.page} ${styles.container}`}>
           <PublicBreadcrumbs items={[{ label: 'Blog' }]} />
@@ -818,6 +819,6 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
       </PublicPageShell>
 
       {footerContent ? <SiteFooter content={footerContent} githubFeed={githubFeed} /> : null}
-    </>
+    </StreamedMotionBoundary>
   )
 }
