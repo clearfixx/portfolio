@@ -415,3 +415,135 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Project detail sidebar cards. */
+
+.cardStatus > span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 12px currentColor;
+}
+
+.card {
+  border: 1px solid rgb(var(--rgb-cyan) / 16%);
+  border-radius: 8px;
+  background: rgb(var(--rgb-surface-card) / 74%);
+  box-shadow: inset 0 1px 0 rgb(var(--rgb-white) / 3%);
+}
+
+.card {
+  padding: 21px;
+}
+
+.card > p {
+  margin: 0 0 10px;
+  color: rgb(var(--rgb-text-muted));
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.61rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cardStatus {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgb(var(--rgb-cyan) / 10%);
+  padding: 5px 0 15px;
+  color: rgb(var(--rgb-teal));
+  font-size: 0.81rem;
+}
+
+.card dl {
+  display: grid;
+  margin: 0;
+}
+
+.card dl > div {
+  display: grid;
+  gap: 5px;
+  border-bottom: 1px solid rgb(var(--rgb-cyan) / 8%);
+  padding: 12px 0;
+}
+
+.card dt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgb(var(--rgb-text-muted));
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.56rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.card dd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0;
+  color: rgb(var(--rgb-text-strong));
+  font-size: 0.77rem;
+}
+
+.card dd span {
+  color: rgb(var(--rgb-text-muted));
+  font-size: 0.65rem;
+}
+
+.metricsCard dl > div {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+}
+
+.metricsCard dd {
+  color: rgb(var(--rgb-text-strong));
+  font-size: 0.96rem;
+  font-weight: 700;
+}
+
+.metricsCard small {
+  grid-column: 1 / -1;
+  color: rgb(var(--rgb-text-muted));
+  font-size: 0.65rem;
+  line-height: 1.42;
+}
+
+.coverage {
+  margin-top: 18px;
+}
+
+.coverage > div:first-child {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.coverage span {
+  color: rgb(var(--rgb-text-muted));
+  font-size: 0.61rem;
+  text-transform: uppercase;
+}
+
+.coverage strong {
+  color: rgb(var(--rgb-text-strong));
+  font-size: 1.2rem;
+}
+
+.coverage > div:last-child {
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  margin-top: 9px;
+  background: rgb(var(--rgb-cyan) / 10%);
+}
+
+.coverage > div:last-child span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, rgb(var(--rgb-teal)), rgb(var(--rgb-violet)));
+}

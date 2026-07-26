@@ -348,9 +348,9 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
         </div>
 
         <aside className={styles.workspaceSidebar}>
-          <section className="project-case-card">
+          <section className={styles.card}>
             <p>Project status</p>
-            <strong className={`project-case-card__status is-${project.stage}`}>
+            <strong className={styles.cardStatus} data-stage={project.stage}>
               <span aria-hidden="true" />
               {stageLabel}
             </strong>
@@ -393,7 +393,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
             </dl>
           </section>
 
-          <section className="project-case-card project-case-card--metrics">
+          <section className={`${styles.card} ${styles.metricsCard}`}>
             <p>Key metrics</p>
 
             <dl>
@@ -406,7 +406,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
               ))}
             </dl>
 
-            <div className="project-case-card__coverage">
+            <div className={styles.coverage}>
               <div>
                 <span>Delivery progress</span>
                 <strong>{progress}%</strong>
