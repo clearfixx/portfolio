@@ -1,0 +1,105 @@
+/*
+ * Responsive project screenshot carousel.
+ * Component-owned track, slides, controls, pagination, and state.
+ */
+
+.carousel {
+  position: relative;
+  padding: 2px 38px 26px;
+}
+
+.viewport {
+  overflow: hidden;
+  scroll-behavior: smooth;
+}
+
+.track {
+  display: flex;
+  gap: 16px;
+}
+
+.slide {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.slide > div {
+  position: relative;
+  aspect-ratio: 1.62 / 1;
+  overflow: hidden;
+  border: 1px solid rgb(var(--rgb-cyan) / 18%);
+  border-radius: 7px;
+  background: rgb(var(--rgb-surface-code));
+  box-shadow: inset 0 1px 0 rgb(var(--rgb-white) / 3%);
+}
+
+.slide img {
+  object-fit: cover;
+}
+
+.slide figcaption {
+  margin-top: 7px;
+  color: rgb(var(--rgb-text-muted));
+  font-size: 0.64rem;
+}
+
+.arrow {
+  position: absolute;
+  top: 42%;
+  z-index: 2;
+  display: grid;
+  width: 36px;
+  height: 52px;
+  place-items: center;
+  border: 1px solid rgb(var(--rgb-cyan) / 12%);
+  border-radius: 8px;
+  background: rgb(var(--rgb-canvas) / 82%);
+  color: rgb(var(--rgb-text-soft));
+  cursor: pointer;
+  transform: translateY(-50%);
+  backdrop-filter: blur(10px);
+}
+
+.arrow:disabled {
+  cursor: default;
+  opacity: 0.28;
+}
+
+.previous {
+  left: -2px;
+}
+
+.next {
+  right: -2px;
+}
+
+.pagination {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pagination button {
+  width: 34px;
+  height: 4px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0;
+  background: rgb(var(--rgb-text-muted) / 18%);
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background: rgb(var(--rgb-teal));
+  box-shadow: 0 0 10px rgb(var(--rgb-teal) / 38%);
+}
+
+@media (max-width: 520px) {
+  .carousel {
+    padding-inline: 32px;
+  }
+}
