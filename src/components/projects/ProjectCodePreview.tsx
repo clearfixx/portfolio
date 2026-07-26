@@ -1,5 +1,7 @@
 import { common, createLowlight } from 'lowlight'
 
+import styles from './ProjectCodePreview.module.scss'
+
 type HighlightNode = {
   type: 'element' | 'root' | 'text'
   value?: string
@@ -21,6 +23,41 @@ type ProjectCodePreviewProps = {
 }
 
 const lowlight = createLowlight(common)
+
+const highlightClassMap: Record<string, string> = {
+  function_: styles.functionTitle,
+  'hljs-attr': styles.attr,
+  'hljs-built_in': styles.builtIn,
+  'hljs-bullet': styles.bullet,
+  'hljs-comment': styles.comment,
+  'hljs-function': styles.functionGroup,
+  'hljs-keyword': styles.keyword,
+  'hljs-link': styles.link,
+  'hljs-literal': styles.literal,
+  'hljs-meta': styles.meta,
+  'hljs-number': styles.number,
+  'hljs-operator': styles.operator,
+  'hljs-params': styles.params,
+  'hljs-property': styles.property,
+  'hljs-punctuation': styles.punctuation,
+  'hljs-quote': styles.quote,
+  'hljs-section': styles.section,
+  'hljs-selector-tag': styles.selectorTag,
+  'hljs-string': styles.string,
+  'hljs-symbol': styles.symbol,
+  'hljs-template-variable': styles.templateVariable,
+  'hljs-title': styles.title,
+  'hljs-type': styles.type,
+  'hljs-variable': styles.variable,
+}
+
+function getHighlightClassName(classNames: string[]) {
+  const localClassNames = classNames
+    .map((className) => highlightClassMap[className])
+    .filter((className): className is string => Boolean(className))
+
+  return localClassNames.length > 0 ? localClassNames.join(' ') : undefined
+}
 
 const languageAliases: Record<string, string> = {
   bash: 'bash',
@@ -104,22 +141,20 @@ export function ProjectCodePreview({ code, filePath, language }: ProjectCodePrev
   const lines = highlightCode(code, language)
 
   return (
-    <div className="project-case__code-card">
-      <div className="project-case__code-header">
+    <div className={styles.card}>
+      <div className={styles.header}>
         <span>{filePath}</span>
         <strong>{language}</strong>
       </div>
 
-      <ol className="project-code-highlight">
+      <ol className={styles.code}>
         {lines.map((line, lineIndex) => (
           <li key={lineIndex}>
             <code>
               {line.length > 0
                 ? line.map((fragment, fragmentIndex) => (
                     <span
-                      className={
-                        fragment.classNames.length > 0 ? fragment.classNames.join(' ') : undefined
-                      }
+                      className={getHighlightClassName(fragment.classNames)}
                       key={`${lineIndex}-${fragmentIndex}`}
                     >
                       {fragment.text}

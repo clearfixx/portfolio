@@ -458,57 +458,6 @@
   line-height: 1.5;
 }
 
-.project-case__code-card {
-  min-height: 270px;
-  max-height: 330px;
-  overflow: auto;
-  border: 1px solid rgb(var(--rgb-cyan) / 16%);
-  border-radius: 7px;
-  background: rgb(var(--rgb-surface-code) / 96%);
-  box-shadow: inset 0 1px 0 rgb(var(--rgb-white) / 3%);
-}
-
-.project-case__code-header {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  display: flex;
-  min-height: 42px;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid rgb(var(--rgb-cyan) / 10%);
-  padding: 0 14px;
-  background: rgb(var(--rgb-surface-code) / 98%);
-  color: rgb(var(--rgb-text-muted));
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 0.59rem;
-}
-
-.project-case__code-header strong {
-  color: rgb(var(--rgb-cyan));
-  text-transform: capitalize;
-}
-
-.project-case__code-card ol {
-  margin: 0;
-  padding: 20px 19px 22px 52px;
-  color: rgb(var(--rgb-text-soft));
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 0.73rem;
-  line-height: 1.7;
-}
-
-.project-case__code-card li::marker {
-  color: rgb(var(--rgb-text-muted) / 52%);
-}
-
-.project-case__code-card code {
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  color: inherit;
-  font: inherit;
-}
-
 .project-case__features {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1459,50 +1408,4 @@
   .project-visual-placeholder__hero-main dl {
     grid-template-columns: 1fr;
   }
-}
-
-.project-code-highlight .hljs-comment,
-.project-code-highlight .hljs-quote {
-  color: rgb(var(--rgb-text-muted) / 68%);
-  font-style: italic;
-}
-
-.project-code-highlight .hljs-keyword,
-.project-code-highlight .hljs-selector-tag,
-.project-code-highlight .hljs-literal,
-.project-code-highlight .hljs-section,
-.project-code-highlight .hljs-link {
-  color: rgb(var(--rgb-violet));
-}
-
-.project-code-highlight .hljs-string,
-.project-code-highlight .hljs-attr,
-.project-code-highlight .hljs-template-variable,
-.project-code-highlight .hljs-type {
-  color: rgb(var(--rgb-cyan));
-}
-
-.project-code-highlight .hljs-number,
-.project-code-highlight .hljs-symbol,
-.project-code-highlight .hljs-bullet,
-.project-code-highlight .hljs-meta {
-  color: rgb(var(--rgb-warning));
-}
-
-.project-code-highlight .hljs-title,
-.project-code-highlight .hljs-title.function_,
-.project-code-highlight .hljs-function .hljs-title,
-.project-code-highlight .hljs-built_in {
-  color: rgb(var(--rgb-teal));
-}
-
-.project-code-highlight .hljs-variable,
-.project-code-highlight .hljs-property,
-.project-code-highlight .hljs-params {
-  color: rgb(var(--rgb-text-strong));
-}
-
-.project-code-highlight .hljs-punctuation,
-.project-code-highlight .hljs-operator {
-  color: rgb(var(--rgb-text-soft));
 }
