@@ -420,7 +420,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
       </div>
 
       {architecture.length > 0 || roadmap.length > 0 ? (
-        <div className="project-case__systems">
+        <div className={styles.systems}>
           {architecture.length > 0 ? (
             <section className={styles.panel} id="project-architecture">
               <header className={styles.panelHeader}>
@@ -428,14 +428,14 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
                 <a href="#project-architecture">View full diagram →</a>
               </header>
 
-              <div className="project-case__architecture-flow">
+              <div className={styles.architectureFlow}>
                 {architecture.map((group, index) => {
                   const ArchitectureIcon = resolveArchitectureIcon(group.icon, index)
 
                   return (
-                    <div className="project-case__architecture-step" key={group.id ?? group.title}>
+                    <div className={styles.architectureStep} key={group.id ?? group.title}>
                       <article>
-                        <span className="project-case__architecture-icon">
+                        <span className={styles.architectureIcon}>
                           <ArchitectureIcon aria-hidden="true" size={36} />
                         </span>
                         <strong>{group.title}</strong>
@@ -460,10 +460,10 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
                 <a href="#project-roadmap">View full roadmap →</a>
               </header>
 
-              <ol className="project-case__roadmap">
+              <ol className={styles.roadmap}>
                 {roadmap.map((milestone) => (
                   <li
-                    className={`is-${milestone.status}`}
+                    data-status={milestone.status}
                     key={milestone.id ?? `${milestone.version}-${milestone.title}`}
                   >
                     <span aria-hidden="true" />
