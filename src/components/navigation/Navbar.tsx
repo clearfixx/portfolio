@@ -510,9 +510,9 @@ export function Navbar({ navigation }: NavbarProps) {
       </button>
 
       {isMenuOpen ? (
-        <div className="mobile-navigation">
+        <div className={styles.mobileNavigation}>
           <button
-            className="mobile-navigation__backdrop"
+            className={styles.mobileBackdrop}
             type="button"
             aria-label="Close navigation menu"
             tabIndex={-1}
@@ -521,14 +521,14 @@ export function Navbar({ navigation }: NavbarProps) {
 
           <aside
             ref={menuPanelRef}
-            className="mobile-navigation__panel"
+            className={styles.mobilePanel}
             id="mobile-navigation-panel"
             role="dialog"
             aria-modal="true"
             aria-labelledby="mobile-navigation-title"
             tabIndex={-1}
           >
-            <div className="mobile-navigation__header">
+            <div className={styles.mobileHeader}>
               <div>
                 <span>PORTFOLIO // NAV</span>
                 <strong id="mobile-navigation-title">Navigation</strong>
@@ -536,7 +536,7 @@ export function Navbar({ navigation }: NavbarProps) {
 
               <button
                 ref={menuCloseRef}
-                className="mobile-navigation__close"
+                className={styles.mobileClose}
                 type="button"
                 aria-label="Close navigation menu"
                 onClick={() => closeMenu(true)}
@@ -546,22 +546,17 @@ export function Navbar({ navigation }: NavbarProps) {
               </button>
             </div>
 
-            <div className={`mobile-navigation__groups ${styles.mobileGroups}`}>
+            <div className={styles.mobileGroups}>
               {navigation.landingItems.length > 0 ? (
-                <section className={`mobile-navigation__group ${styles.mobileGroup}`}>
-                  <span className={`mobile-navigation__group-label ${styles.mobileGroupLabel}`}>
-                    On this page
-                  </span>
-                  <nav
-                    className={`mobile-navigation__links ${styles.mobileLinks}`}
-                    aria-label="Homepage sections"
-                  >
+                <section className={styles.mobileGroup}>
+                  <span className={styles.mobileGroupLabel}>On this page</span>
+                  <nav className={styles.mobileLinks} aria-label="Homepage sections">
                     {navigation.landingItems.map((item, index) => {
                       const isActive = pathname === '/' && activeSection === item.sectionId
 
                       return (
                         <Link
-                          className={`mobile-navigation__link ${styles.mobileLink} ${isActive ? 'is-active' : ''}`}
+                          className={`${styles.mobileLink} ${isActive ? 'is-active' : ''}`}
                           href={item.href}
                           key={item.id}
                           aria-current={isActive ? 'location' : undefined}
@@ -578,17 +573,12 @@ export function Navbar({ navigation }: NavbarProps) {
               ) : null}
 
               {navigation.pagesMenu ? (
-                <section className={`mobile-navigation__group ${styles.mobileGroup}`}>
-                  <span className={`mobile-navigation__group-label ${styles.mobileGroupLabel}`}>
-                    {navigation.pagesMenu.label}
-                  </span>
-                  <nav
-                    className={`mobile-navigation__links ${styles.mobileLinks}`}
-                    aria-label="Internal pages"
-                  >
+                <section className={styles.mobileGroup}>
+                  <span className={styles.mobileGroupLabel}>{navigation.pagesMenu.label}</span>
+                  <nav className={styles.mobileLinks} aria-label="Internal pages">
                     {navigation.pagesMenu.items.map((item) => {
                       const isActive = isRouteActive(pathname, item)
-                      const className = `mobile-navigation__link ${styles.mobileLink} mobile-navigation__link--page ${styles.mobileLinkPage} ${
+                      const className = `${styles.mobileLink} ${styles.mobileLinkPage} ${
                         isActive ? 'is-active' : ''
                       }`
                       const content = (
@@ -629,8 +619,8 @@ export function Navbar({ navigation }: NavbarProps) {
               ) : null}
             </div>
 
-            <div className="mobile-navigation__footer">
-              <div className="mobile-navigation__theme">
+            <div className={styles.mobileFooter}>
+              <div className={styles.mobileTheme}>
                 <div>
                   <span>Interface theme</span>
                   <strong>Dark / Light</strong>
@@ -641,7 +631,7 @@ export function Navbar({ navigation }: NavbarProps) {
               {navigation.cta ? (
                 navigation.cta.external ? (
                   <a
-                    className={`mobile-navigation__cta ${styles.mobileCta}`}
+                    className={styles.mobileCta}
                     href={navigation.cta.href}
                     target={navigation.cta.newTab ? '_blank' : undefined}
                     rel={navigation.cta.newTab ? 'noreferrer' : undefined}
@@ -652,7 +642,7 @@ export function Navbar({ navigation }: NavbarProps) {
                   </a>
                 ) : (
                   <Link
-                    className={`mobile-navigation__cta ${styles.mobileCta}`}
+                    className={styles.mobileCta}
                     href={navigation.cta.href}
                     target={navigation.cta.newTab ? '_blank' : undefined}
                     rel={navigation.cta.newTab ? 'noreferrer' : undefined}
