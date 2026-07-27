@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react'
 
+import styles from './SiteHeaderClient.module.scss'
+
 import { Logo } from '@/components/brand'
 import { Navbar } from '@/components/navigation'
 import type { NavigationViewModel } from '@/lib/cms/navigation'
@@ -53,14 +55,11 @@ export function SiteHeaderClient({ navigation }: SiteHeaderClientProps) {
   }, [])
 
   return (
-    <header className={`site-header ${isScrolled ? 'site-header--scrolled' : ''}`}>
-      <div className="site-header__progress" aria-hidden="true">
-        <span
-          className="site-header__progress-bar"
-          style={{ transform: `scaleX(${scrollProgress})` }}
-        />
+    <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
+      <div className={styles.progress} aria-hidden="true">
+        <span className={styles.progressBar} style={{ transform: `scaleX(${scrollProgress})` }} />
       </div>
-      <div className="site-container site-header__inner">
+      <div className={`site-container ${styles.inner}`}>
         <Logo />
         <Navbar navigation={navigation} />
       </div>

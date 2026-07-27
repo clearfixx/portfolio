@@ -1,59 +1,5 @@
 /* Header */
 
-.site-header {
-  position: fixed;
-  inset: 0 0 auto;
-  z-index: 50;
-  border-bottom: 1px solid transparent;
-  background: transparent;
-  transition:
-    background 260ms var(--ease-out),
-    border-color 260ms var(--ease-out),
-    backdrop-filter 260ms var(--ease-out);
-}
-
-.site-header__progress {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 20;
-  width: 100%;
-  height: 2px;
-  overflow: hidden;
-  pointer-events: none;
-  background: rgb(var(--rgb-header-cyan) / 8%);
-}
-
-.site-header__progress-bar {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    rgb(var(--rgb-header-cyan) / 15%),
-    rgb(var(--rgb-header-cyan) / 95%),
-    rgb(var(--rgb-progress-purple) / 80%)
-  );
-  box-shadow: 0 0 14px rgb(var(--rgb-header-cyan) / 55%);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 90ms linear;
-}
-
-.site-header--scrolled {
-  border-color: rgb(var(--rgb-cyan) / 14%);
-  background: rgb(var(--rgb-header-scrolled) / var(--header-scrolled-opacity));
-  backdrop-filter: blur(22px);
-}
-
-.site-header__inner {
-  display: flex;
-  min-height: 88px;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-}
-
 .logo {
   display: inline-flex;
   flex-shrink: 0;

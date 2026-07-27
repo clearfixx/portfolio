@@ -75,11 +75,6 @@ body.mobile-navigation-open {
     --container-padding: 24px;
   }
 
-  .site-header__inner {
-    min-height: 80px;
-    gap: 22px;
-  }
-
   .logo {
     gap: 12px;
   }
@@ -221,20 +216,6 @@ body.mobile-navigation-open {
   .home-hero,
   .portfolio-section {
     scroll-margin-top: 78px;
-  }
-
-  .site-header {
-    background: rgb(var(--rgb-header-scrolled) / 88%);
-    backdrop-filter: blur(18px);
-  }
-
-  .site-header__inner {
-    min-height: 72px;
-    gap: 16px;
-  }
-
-  .site-header__progress {
-    height: 2px;
   }
 
   .logo__mark {
@@ -482,10 +463,6 @@ body.mobile-navigation-open {
 @media (max-width: 640px) {
   :root {
     --container-padding: 16px;
-  }
-
-  .site-header__inner {
-    min-height: 64px;
   }
 
   .home-hero,

@@ -49,23 +49,6 @@
  * both values interpolable when the scrolled class is toggled.
  */
 
-.site-header {
-  background-color: transparent;
-  -webkit-backdrop-filter: blur(0);
-  backdrop-filter: blur(0);
-  transition:
-    background-color 300ms ease-in-out,
-    border-color 300ms ease-in-out,
-    -webkit-backdrop-filter 300ms ease-in-out,
-    backdrop-filter 300ms ease-in-out;
-}
-
-.site-header.site-header--scrolled {
-  background-color: rgb(var(--rgb-header-scrolled) / var(--header-scrolled-opacity));
-  -webkit-backdrop-filter: blur(22px);
-  backdrop-filter: blur(22px);
-}
-
 /*
  * Do not keep the browser's mouse-focus rectangle, but preserve a clear and
  * consistent keyboard focus state.
@@ -115,10 +98,6 @@
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation-duration: 1ms;
-  }
-
-  .site-header {
-    transition: none;
   }
 }
 
