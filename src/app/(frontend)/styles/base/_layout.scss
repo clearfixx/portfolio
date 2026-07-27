@@ -129,13 +129,6 @@
   box-shadow: 0 0 14px rgb(var(--rgb-teal) / 85%);
 }
 
-.navbar {
-  display: flex;
-  align-items: center;
-  gap: 42px;
-  position: relative;
-}
-
 .theme-toggle {
   position: relative;
   display: inline-grid;
@@ -188,72 +181,6 @@ html[data-theme='light'] .theme-toggle__icon--moon {
   transform: rotate(45deg) scale(0.75);
 }
 
-.navbar__links {
-  display: flex;
-  gap: 42px;
-}
-
-.navbar__link {
-  position: relative;
-  color: rgb(var(--rgb-nav-link));
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 88px;
-  transition: all ease-in-out 0.3s;
-  // transition:
-  //   color 380ms var(--ease-out),
-  //   text-shadow 380ms var(--ease-out),
-  //   transform 380ms var(--ease-out);
-}
-
-.navbar__link:hover {
-  color: rgb(var(--rgb-nav-link-hover));
-  transform: translateY(-1px);
-}
-
-.navbar__link.is-active {
-  color: var(--color-cyan);
-  transition:
-    color 380ms var(--ease-out),
-    text-shadow 380ms var(--ease-out),
-    transform 380ms var(--ease-out);
-}
-
-.navbar__link.is-active::after {
-  position: absolute;
-  left: 50%;
-  bottom: 0px;
-  width: 54px;
-  height: 1px;
-  background: var(--color-cyan);
-  box-shadow: 0 0 14px var(--color-cyan);
-  content: '';
-  transform: translateX(-50%);
-}
-
-.navbar__link.is-active::before {
-  position: absolute;
-  left: 50%;
-  bottom: -3px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--color-cyan);
-  content: '';
-  transform: translateX(-50%);
-}
-
-.navbar__actions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
 .theme-toggle {
   display: grid;
   width: 44px;
@@ -276,38 +203,5 @@ html[data-theme='light'] .theme-toggle__icon--moon {
   border-color: rgb(var(--rgb-cyan) / 42%);
   color: var(--color-cyan);
   box-shadow: 0 0 20px rgb(var(--rgb-cyan) / 16%);
-  transform: translateY(-1px);
-}
-
-.lets-talk {
-  display: inline-flex;
-  height: 44px;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  border: 1px solid rgb(var(--rgb-cyan) / 26%);
-  border-radius: 6px;
-  padding: 0 19px 0 21px;
-  background:
-    linear-gradient(180deg, rgb(var(--rgb-white) / 5.5%), rgb(var(--rgb-white) / 1.6%)),
-    rgb(var(--rgb-surface-control) / 78%);
-  box-shadow:
-    inset 0 1px 0 rgb(var(--rgb-white) / 6%),
-    0 0 22px rgb(var(--rgb-cyan) / 12%);
-  color: rgb(var(--rgb-text-cta));
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 0.01em;
-  transition:
-    border-color 180ms var(--ease-out),
-    color 180ms var(--ease-out),
-    box-shadow 180ms var(--ease-out),
-    transform 180ms var(--ease-out);
-}
-
-.lets-talk:hover {
-  border-color: rgb(var(--rgb-cyan) / 48%);
-  color: var(--color-cyan);
-  box-shadow: 0 0 24px rgb(var(--rgb-cyan) / 18%);
   transform: translateY(-1px);
 }

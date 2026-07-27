@@ -374,14 +374,14 @@ export function Navbar({ navigation }: NavbarProps) {
     Boolean(navigation.cta?.sectionId && activeSection === navigation.cta.sectionId)
 
   return (
-    <div className="navbar">
-      <nav className={`navbar__links ${styles.links}`} aria-label="Main navigation">
+    <div className={styles.navbar}>
+      <nav className={styles.links} aria-label="Main navigation">
         {navigation.landingItems.map((item) => {
           const isActive = pathname === '/' && activeSection === item.sectionId
 
           return (
             <Link
-              className={`navbar__link ${styles.link} ${isActive ? 'is-active' : ''}`}
+              className={`${styles.link} ${isActive ? 'is-active' : ''}`}
               href={item.href}
               key={item.id}
               aria-current={isActive ? 'location' : undefined}
@@ -461,11 +461,11 @@ export function Navbar({ navigation }: NavbarProps) {
         ) : null}
       </nav>
 
-      <div className="navbar__actions">
+      <div className={styles.actions}>
         {navigation.cta ? (
           navigation.cta.external ? (
             <a
-              className={`lets-talk ${styles.letsTalk} ${ctaActive ? 'is-active' : ''}`}
+              className={`${styles.letsTalk} ${ctaActive ? 'is-active' : ''}`}
               href={navigation.cta.href}
               target={navigation.cta.newTab ? '_blank' : undefined}
               rel={navigation.cta.newTab ? 'noreferrer' : undefined}
@@ -475,7 +475,7 @@ export function Navbar({ navigation }: NavbarProps) {
             </a>
           ) : (
             <Link
-              className={`lets-talk ${styles.letsTalk} ${ctaActive ? 'is-active' : ''}`}
+              className={`${styles.letsTalk} ${ctaActive ? 'is-active' : ''}`}
               href={navigation.cta.href}
               aria-current={ctaActive ? 'location' : undefined}
               target={navigation.cta.newTab ? '_blank' : undefined}
@@ -493,7 +493,7 @@ export function Navbar({ navigation }: NavbarProps) {
 
       <button
         ref={menuToggleRef}
-        className="navbar__mobile-toggle"
+        className={styles.mobileToggle}
         type="button"
         aria-controls="mobile-navigation-panel"
         aria-expanded={isMenuOpen}
