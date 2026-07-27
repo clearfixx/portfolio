@@ -108,13 +108,6 @@
  * This avoids coupling the audit fix to the formatting of _layout.scss.
  */
 
-.theme-toggle__icon {
-  will-change: opacity, transform;
-  transition:
-    opacity 320ms var(--ease-out),
-    transform 360ms var(--ease-out);
-}
-
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: var(--ui-theme-transition-duration);
@@ -122,10 +115,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .theme-toggle__icon {
-    transition: none;
-  }
-
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation-duration: 0.01ms;
