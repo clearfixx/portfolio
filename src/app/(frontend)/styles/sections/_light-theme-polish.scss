@@ -238,24 +238,8 @@ html[data-theme='light'] {
     color: rgb(232 242 248);
   }
 
-  .contact-cta__form-header p,
-  .contact-cta__field select,
-  .contact-cta__privacy {
+  .contact-cta__form-header p {
     color: rgb(var(--rgb-text-muted));
-  }
-
-  .contact-cta__field input::placeholder,
-  .contact-cta__field textarea::placeholder,
-  .contact-cta__field-icon,
-  .contact-cta__counter {
-    color: rgb(var(--rgb-text-dim));
-  }
-
-  .contact-cta__field input,
-  .contact-cta__field select,
-  .contact-cta__field textarea {
-    border-color: rgb(var(--rgb-border) / 24%);
-    background: rgb(var(--rgb-surface-overlay) / 92%);
   }
 
   /*

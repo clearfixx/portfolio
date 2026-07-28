@@ -1,6 +1,8 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+
+import styles from './ContactForm.module.scss'
 import type { ChangeEvent, SubmitEvent, KeyboardEvent, PointerEvent } from 'react'
 
 import {
@@ -277,15 +279,15 @@ export function ContactForm({ source = 'homepage' }: ContactFormProps) {
 
   return (
     <form
-      className="contact-cta__form"
+      className={styles.form}
       aria-busy={isSubmitting}
       noValidate
       onSubmit={handleSubmit}
       data-contact-form-source={source}
     >
-      <fieldset className="contact-cta__fieldset" disabled={isSubmitting}>
-        <label className={`contact-cta__field${errors.name ? ' is-invalid' : ''}`}>
-          <span className="contact-cta__field-icon">
+      <fieldset className={styles.fieldset} disabled={isSubmitting}>
+        <label className={`${styles.field}${errors.name ? ' is-invalid' : ''}`}>
+          <span className={styles.fieldIcon}>
             <ContactUserIcon />
           </span>
           <span className="sr-only">Your Name</span>
@@ -308,8 +310,8 @@ export function ContactForm({ source = 'homepage' }: ContactFormProps) {
           </span>
         </label>
 
-        <label className={`contact-cta__field${errors.email ? ' is-invalid' : ''}`}>
-          <span className="contact-cta__field-icon">
+        <label className={`${styles.field}${errors.email ? ' is-invalid' : ''}`}>
+          <span className={styles.fieldIcon}>
             <MailIcon />
           </span>
           <span className="sr-only">Your Email</span>
@@ -342,11 +344,9 @@ export function ContactForm({ source = 'homepage' }: ContactFormProps) {
         />
 
         <label
-          className={`contact-cta__field contact-cta__field--message${
-            errors.message ? ' is-invalid' : ''
-          }`}
+          className={`${styles.field} ${styles.fieldMessage}${errors.message ? ' is-invalid' : ''}`}
         >
-          <span className="contact-cta__field-icon">
+          <span className={styles.fieldIcon}>
             <MessageIcon />
           </span>
           <span className="sr-only">Message</span>
@@ -366,20 +366,20 @@ export function ContactForm({ source = 'homepage' }: ContactFormProps) {
           <span id="contact-message-error" className="sr-only">
             {errors.message ?? ''}
           </span>
-          <span className="contact-cta__counter">
+          <span className={styles.counter}>
             {messageLength} / {MAX_MESSAGE_LENGTH}
           </span>
         </label>
 
-        <label className="contact-cta__honeypot" aria-hidden="true">
+        <label className={styles.honeypot} aria-hidden="true">
           <span>Website</span>
           <input name="website" type="text" autoComplete="off" tabIndex={-1} />
         </label>
 
-        <div className={`contact-cta__captcha${errors.captcha ? ' is-invalid' : ''}`}>
-          <label className="contact-cta__captcha-control" onPointerDown={handleCaptchaPointerDown}>
+        <div className={`${styles.captcha}${errors.captcha ? ' is-invalid' : ''}`}>
+          <label className={styles.captchaControl} onPointerDown={handleCaptchaPointerDown}>
             <input
-              className="contact-cta__captcha-input"
+              className={styles.captchaInput}
               name="captcha"
               type="checkbox"
               checked={captchaChecked}
@@ -389,15 +389,15 @@ export function ContactForm({ source = 'homepage' }: ContactFormProps) {
               onKeyDown={handleCaptchaKeyDown}
               onChange={handleCaptchaChange}
             />
-            <span className="contact-cta__captcha-box" aria-hidden="true" />
-            <span id="contact-captcha-copy" className="contact-cta__captcha-copy">
+            <span className={styles.captchaBox} aria-hidden="true" />
+            <span id="contact-captcha-copy" className={styles.captchaCopy}>
               <strong>{errors.captcha ?? 'I am human'}</strong>
               <span>Simple interaction verification</span>
             </span>
           </label>
         </div>
 
-        <button className="contact-cta__submit" type="submit">
+        <button className={styles.submit} type="submit">
           {isSubmitting ? 'Sending…' : 'Start the conversation'}
           <ArrowUpRightIcon />
         </button>
@@ -405,7 +405,7 @@ export function ContactForm({ source = 'homepage' }: ContactFormProps) {
 
       {feedback ? (
         <p
-          className="contact-cta__feedback"
+          className={styles.feedback}
           data-state={submitState}
           role={submitState === 'error' ? 'alert' : 'status'}
         >
@@ -413,7 +413,7 @@ export function ContactForm({ source = 'homepage' }: ContactFormProps) {
         </p>
       ) : null}
 
-      <p className="contact-cta__privacy">
+      <p className={styles.privacy}>
         <LockIcon />
         Your message is private and secure.
       </p>

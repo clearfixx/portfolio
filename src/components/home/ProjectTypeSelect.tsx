@@ -4,6 +4,8 @@ import { useEffect, useId, useRef, useState } from 'react'
 
 import type { KeyboardEvent, SVGProps } from 'react'
 
+import styles from './ContactCTA/ContactForm.module.scss'
+
 const projectTypeOptions = [
   { value: 'website', label: 'Website' },
   { value: 'web-app', label: 'Web App' },
@@ -200,11 +202,11 @@ export function ProjectTypeSelect({
   return (
     <div
       ref={rootRef}
-      className={`contact-cta__field contact-cta__select${
+      className={`${styles.field} ${styles.select}${
         isOpen ? ' is-open' : ''
       }${invalid ? ' is-invalid' : ''}`}
     >
-      <span className="contact-cta__field-icon" aria-hidden="true">
+      <span className={styles.fieldIcon} aria-hidden="true">
         <LayersIcon />
       </span>
 
@@ -216,7 +218,7 @@ export function ProjectTypeSelect({
 
       <button
         ref={triggerRef}
-        className="contact-cta__select-trigger"
+        className={styles.selectTrigger}
         type="button"
         role="combobox"
         data-contact-field="projectType"
@@ -241,12 +243,12 @@ export function ProjectTypeSelect({
       >
         <span
           id={valueId}
-          className="contact-cta__select-value"
+          className={styles.selectValue}
           data-placeholder={selectedOption ? undefined : 'true'}
         >
           {selectedOption?.label ?? placeholder}
         </span>
-        <span className="contact-cta__select-chevron" aria-hidden="true" />
+        <span className={styles.selectChevron} aria-hidden="true" />
       </button>
 
       {errorId ? (
@@ -256,12 +258,7 @@ export function ProjectTypeSelect({
       ) : null}
 
       {isOpen ? (
-        <ul
-          id={listboxId}
-          className="contact-cta__select-list"
-          role="listbox"
-          aria-labelledby={labelId}
-        >
+        <ul id={listboxId} className={styles.selectList} role="listbox" aria-labelledby={labelId}>
           {projectTypeOptions.map((option, index) => {
             const isSelected = option.value === value
             const isActive = index === activeIndex
@@ -270,7 +267,7 @@ export function ProjectTypeSelect({
               <li
                 id={`${listboxId}-option-${index}`}
                 key={option.value}
-                className="contact-cta__select-option"
+                className={styles.selectOption}
                 role="option"
                 aria-selected={isSelected}
                 data-active={isActive ? 'true' : undefined}
@@ -283,7 +280,7 @@ export function ProjectTypeSelect({
                 }}
               >
                 <span>{option.label}</span>
-                <span className="contact-cta__select-check" aria-hidden="true">
+                <span className={styles.selectCheck} aria-hidden="true">
                   ✓
                 </span>
               </li>

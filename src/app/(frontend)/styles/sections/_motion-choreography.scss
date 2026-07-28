@@ -218,6 +218,7 @@ html[data-motion-ready='true'] {
   }
 
   /* Contact */
+
   #contact .portfolio-section__body {
     .contact-cta__map-panel,
     .contact-cta__form-panel {
@@ -237,8 +238,6 @@ html[data-motion-ready='true'] {
     }
 
     .contact-cta__form-header,
-    .contact-cta__field,
-    .contact-cta__form button,
     .contact-cta__availability {
       opacity: 0;
       transform: translate3d(0, 8px, 0);
@@ -248,7 +247,7 @@ html[data-motion-ready='true'] {
     }
 
     @for $index from 2 through 6 {
-      .contact-cta__field:nth-child(#{$index}) {
+      ) {
         transition-delay: calc(var(--motion-stagger-tight) * #{$index - 1});
       }
     }
@@ -257,16 +256,12 @@ html[data-motion-ready='true'] {
       .contact-cta__map-panel,
       .contact-cta__form-panel,
       .contact-cta__form-header,
-      .contact-cta__field,
-      .contact-cta__form button,
       .contact-cta__availability {
         opacity: 1;
         transform: none;
       }
 
       .contact-cta__form-header,
-      .contact-cta__field,
-      .contact-cta__form button,
       .contact-cta__availability {
         transition-delay: calc(var(--motion-stagger-default) * 2);
       }
@@ -347,8 +342,6 @@ html[data-motion-ready='true'] {
       .contact-cta__map-panel,
       .contact-cta__form-panel,
       .contact-cta__form-header,
-      .contact-cta__field,
-      .contact-cta__form button,
       .contact-cta__availability,
       .site-footer__panel,
       .site-footer__post,

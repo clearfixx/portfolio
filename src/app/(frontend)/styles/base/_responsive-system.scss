@@ -792,15 +792,8 @@ body.mobile-navigation-open {
     padding: 16px;
   }
 
-  .contact-cta__form,
   .contact-cta__fields {
     grid-template-columns: 1fr;
-  }
-
-  .contact-cta__field,
-  .contact-cta__form button,
-  .contact-cta__submit {
-    width: 100%;
   }
 
   .site-footer {
@@ -1626,8 +1619,6 @@ body.mobile-navigation-open {
       .contact-cta__map-panel,
       .contact-cta__form-panel,
       .contact-cta__form-header,
-      .contact-cta__field,
-      .contact-cta__form button,
       .contact-cta__availability,
       .site-footer__panel,
       .site-footer__post,
