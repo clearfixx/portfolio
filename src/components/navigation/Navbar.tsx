@@ -393,9 +393,9 @@ export function Navbar({ navigation }: NavbarProps) {
         })}
 
         {navigation.pagesMenu ? (
-          <div className={`navbar__dropdown ${styles.dropdown}`} ref={pagesMenuContainerRef}>
+          <div className={styles.dropdown} ref={pagesMenuContainerRef}>
             <button
-              className={`navbar__dropdown-trigger ${styles.dropdownTrigger} ${pagesMenuActive ? 'is-active' : ''}`}
+              className={`${styles.dropdownTrigger} ${pagesMenuActive ? 'is-active' : ''}`}
               type="button"
               ref={pagesMenuTriggerRef}
               aria-controls="navbar-pages-menu"
@@ -408,18 +408,12 @@ export function Navbar({ navigation }: NavbarProps) {
             </button>
 
             {isPagesMenuOpen ? (
-              <div
-                className={`navbar__dropdown-menu ${styles.dropdownMenu}`}
-                id="navbar-pages-menu"
-                ref={pagesMenuRef}
-              >
-                <span className={`navbar__dropdown-eyebrow ${styles.dropdownEyebrow}`}>
-                  Internal pages
-                </span>
+              <div className={styles.dropdownMenu} id="navbar-pages-menu" ref={pagesMenuRef}>
+                <span className={styles.dropdownEyebrow}>Internal pages</span>
 
                 {navigation.pagesMenu.items.map((item) => {
                   const isActive = isRouteActive(pathname, item)
-                  const className = `navbar__dropdown-item ${styles.dropdownItem} ${isActive ? 'is-active' : ''}`
+                  const className = `${styles.dropdownItem} ${isActive ? 'is-active' : ''}`
                   const content = (
                     <>
                       <span>
