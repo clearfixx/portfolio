@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import styles from './Logo.module.scss'
+
 type SiteLogoProps = {
   className?: string
   href?: string
@@ -23,11 +25,11 @@ export function Logo({
 }: SiteLogoProps) {
   return (
     <Link
-      className={['logo', className].filter(Boolean).join(' ')}
+      className={[styles.logo, className].filter(Boolean).join(' ')}
       href={href}
       aria-label="Andrii Kulahin homepage"
     >
-      <span className="logo__mark">
+      <span className={styles.mark}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={width}
@@ -62,10 +64,10 @@ export function Logo({
         </svg>
       </span>
 
-      <span className="logo__content">
-        <span className="logo__name">Andrii Kulahin</span>
+      <span className={styles.content}>
+        <span className={styles.name}>Andrii Kulahin</span>
 
-        <span className="logo__role">
+        <span className={styles.role}>
           Software Engineer <i aria-hidden="true" />
         </span>
       </span>

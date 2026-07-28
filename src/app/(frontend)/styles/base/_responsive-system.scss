@@ -75,23 +75,6 @@ body.mobile-navigation-open {
     --container-padding: 24px;
   }
 
-  .logo {
-    gap: 12px;
-  }
-
-  .logo__mark {
-    width: 64px;
-    height: 40px;
-  }
-
-  .logo__name {
-    font-size: 18px;
-  }
-
-  .logo__role {
-    font-size: 12px;
-  }
-
   .hero-main {
     grid-template-columns: minmax(280px, 0.78fr) minmax(0, 1.22fr);
     align-items: start;
@@ -216,23 +199,6 @@ body.mobile-navigation-open {
   .home-hero,
   .portfolio-section {
     scroll-margin-top: 78px;
-  }
-
-  .logo__mark {
-    width: 60px;
-    height: 38px;
-  }
-
-  .logo__content {
-    gap: 1px;
-  }
-
-  .logo__name {
-    font-size: 16px;
-  }
-
-  .logo__role {
-    font-size: 11px;
   }
 
   .home-hero {
@@ -468,19 +434,6 @@ body.mobile-navigation-open {
   .home-hero,
   .portfolio-section {
     scroll-margin-top: 70px;
-  }
-
-  .logo {
-    gap: 8px;
-  }
-
-  .logo__mark {
-    width: 56px;
-    height: 34px;
-  }
-
-  .logo__content {
-    display: none;
   }
 
   .home-hero {
