@@ -218,7 +218,6 @@ html[data-motion-ready='true'] {
   }
 
   /* Contact */
-
   #contact .portfolio-section__body {
     .contact-cta__map-panel,
     .contact-cta__form-panel {
@@ -244,12 +243,6 @@ html[data-motion-ready='true'] {
       transition:
         opacity var(--motion-duration-reveal) var(--motion-ease-standard),
         transform var(--motion-duration-reveal) var(--motion-ease-standard);
-    }
-
-    @for $index from 2 through 6 {
-      ) {
-        transition-delay: calc(var(--motion-stagger-tight) * #{$index - 1});
-      }
     }
 
     &[data-motion-state='visible'] {
