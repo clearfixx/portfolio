@@ -1,0 +1,111 @@
+/* Theme switch control and light/dark icon states. */
+
+/* migrated from src/app/(frontend)/styles/base/_layout.scss */
+.toggle {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--theme-border);
+  border-radius: 999px;
+  color: var(--theme-accent);
+  background: rgba(4, 13, 24, 0.42);
+  cursor: pointer;
+  overflow: hidden;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+
+.toggle:hover {
+  transform: translateY(-1px);
+  border-color: rgb(var(--rgb-header-cyan) / 55%);
+}
+
+
+.icon {
+  position: absolute;
+  display: inline-flex;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+
+.sun {
+  opacity: 0;
+  transform: rotate(-45deg) scale(0.75);
+}
+
+
+.moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+
+:global(html[data-theme='light']) .sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+
+:global(html[data-theme='light']) .moon {
+  opacity: 0;
+  transform: rotate(45deg) scale(0.75);
+}
+
+
+.toggle {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid rgb(var(--rgb-cyan) / 18%);
+  border-radius: 50%;
+  background: rgb(var(--rgb-surface-control) / 74%);
+  color: rgb(var(--rgb-text-cyan-soft));
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgb(var(--rgb-white) / 5%);
+  transition:
+    border-color 180ms var(--ease-out),
+    color 180ms var(--ease-out),
+    box-shadow 180ms var(--ease-out),
+    transform 180ms var(--ease-out);
+}
+
+
+.toggle:hover {
+  border-color: rgb(var(--rgb-cyan) / 42%);
+  color: var(--color-cyan);
+  box-shadow: 0 0 20px rgb(var(--rgb-cyan) / 16%);
+  transform: translateY(-1px);
+}
+
+/* migrated from src/app/(frontend)/styles/base/_ui-polish-closeout.scss */
+.icon {
+  will-change: opacity, transform;
+  transition:
+    opacity 320ms var(--ease-out),
+    transform 360ms var(--ease-out);
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+.icon {
+    transition: none;
+  }
+
+}
+
+/* migrated from src/app/(frontend)/styles/base/_responsive-system.scss */
+@media (hover: none) {
+.toggle:hover {
+    transform: none;
+  }
+
+}
