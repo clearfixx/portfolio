@@ -23,6 +23,8 @@ import type {
 
 import styles from '@/app/(frontend)/styles/pages/contacts.module.scss'
 
+import channelsStyles from './ContactsChannelsPanel.module.scss'
+
 import statusStyles from './ContactsStatusConsole.module.scss'
 
 // contacts-page-foundation-v1
@@ -131,47 +133,47 @@ function ChannelsPanel({ content }: { content: ContactsPageViewModel }) {
   return (
     <section
       aria-labelledby="contacts-channels-title"
-      className={styles.channelsPanel}
+      className={channelsStyles.channelsPanel}
       data-motion="rise"
     >
       <Image
         alt=""
         aria-hidden="true"
-        className={styles.mapImage}
+        className={channelsStyles.mapImage}
         fill
         loading="lazy"
         quality={75}
         sizes="(max-width: 980px) 100vw, 46vw"
         src="/images/contact/kyiv-map.png"
       />
-      <div aria-hidden="true" className={styles.mapOverlay} />
-      <div aria-hidden="true" className={styles.mapSignal}>
+      <div aria-hidden="true" className={channelsStyles.mapOverlay} />
+      <div aria-hidden="true" className={channelsStyles.mapSignal}>
         <span />
         <i />
         <b />
       </div>
 
-      <header className={styles.panelHeading}>
+      <header className={channelsStyles.panelHeading}>
         <span>{content.channels.eyebrow}</span>
         <h2 id="contacts-channels-title">{content.channels.title}</h2>
         <p>{content.channels.description}</p>
       </header>
 
-      <div className={styles.channelDeck}>
+      <div className={channelsStyles.channelDeck}>
         {content.contact.channels.length > 0 ? (
           content.contact.channels.map((channel) => {
             const Icon = CHANNEL_ICONS[channel.icon]
             const channelContent = (
               <>
-                <span className={styles.channelIcon}>
+                <span className={channelsStyles.channelIcon}>
                   <Icon />
                 </span>
-                <span className={styles.channelCopy}>
+                <span className={channelsStyles.channelCopy}>
                   <small>{channel.label}</small>
                   <strong>{channel.value}</strong>
                 </span>
                 {channel.href ? (
-                  <span aria-hidden="true" className={styles.channelArrow}>
+                  <span aria-hidden="true" className={channelsStyles.channelArrow}>
                     ↗
                   </span>
                 ) : null}
@@ -180,7 +182,7 @@ function ChannelsPanel({ content }: { content: ContactsPageViewModel }) {
 
             return channel.href ? (
               <a
-                className={styles.channel}
+                className={channelsStyles.channel}
                 href={channel.href}
                 key={channel.id}
                 rel={channel.external ? 'noreferrer' : undefined}
@@ -189,17 +191,17 @@ function ChannelsPanel({ content }: { content: ContactsPageViewModel }) {
                 {channelContent}
               </a>
             ) : (
-              <div className={styles.channel} key={channel.id}>
+              <div className={channelsStyles.channel} key={channel.id}>
                 {channelContent}
               </div>
             )
           })
         ) : (
-          <p className={styles.emptyState}>Contact channels are being updated.</p>
+          <p className={channelsStyles.emptyState}>Contact channels are being updated.</p>
         )}
       </div>
 
-      <div className={styles.locationBadge}>
+      <div className={channelsStyles.locationBadge}>
         <PinIcon />
         {content.contact.location ?? 'Remote / Ukraine'}
       </div>
