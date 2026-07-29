@@ -13,6 +13,9 @@ import { getHomepageContent, getPublishedBlogPosts, getSiteFooterGitHubFeed } fr
 
 import styles from '@/app/(frontend)/styles/pages/blog.module.scss'
 
+import railStyles from './BlogRail.module.scss'
+
+const blogRailIconClassName = [styles.icon, railStyles.icon].join(' ')
 export const revalidate = 300
 
 export const metadata: Metadata = {
@@ -131,7 +134,7 @@ function JournalIcon({ name, size = 14 }: { name: JournalIconName; size?: number
   return (
     <svg
       aria-hidden="true"
-      className={styles.icon}
+      className={blogRailIconClassName}
       fill="none"
       height={size}
       viewBox="0 0 24 24"
@@ -598,13 +601,13 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               </section>
             </div>
 
-            <aside className={styles.rail}>
-              <section className={styles.railCard}>
+            <aside className={railStyles.rail}>
+              <section className={railStyles.railCard}>
                 <h2>
                   <JournalIcon name="radio" size={14} />
                   Latest transmissions
                 </h2>
-                <ul className={styles.transmissions}>
+                <ul className={railStyles.transmissions}>
                   {posts.slice(0, 5).map((post) => (
                     <li key={post.id}>
                       <Link href={post.slug ? `/blog/${post.slug}` : '/blog'}>
@@ -618,19 +621,19 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   ))}
                 </ul>
 
-                <div className={styles.sync}>
+                <div className={railStyles.sync}>
                   <span aria-hidden="true" />
                   <JournalIcon name="radio" size={12} />
                   Journal_sync: <strong>online</strong>
                 </div>
               </section>
 
-              <section className={styles.railCard}>
+              <section className={railStyles.railCard}>
                 <h2>
                   <JournalIcon name="folder" size={14} />
                   Topics
                 </h2>
-                <ul className={styles.railList}>
+                <ul className={railStyles.railList}>
                   {categories.map((item) => (
                     <li key={item.slug}>
                       <Link href={withQuery(queryState, { page: undefined, topic: item.slug })}>
@@ -642,12 +645,12 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 </ul>
               </section>
 
-              <section className={styles.railCard}>
+              <section className={railStyles.railCard}>
                 <h2>
                   <JournalIcon name="book" size={14} />
                   Series
                 </h2>
-                <ul className={styles.seriesList}>
+                <ul className={railStyles.seriesList}>
                   {series.map((item) => (
                     <li key={item.slug}>
                       <Link href={withQuery(queryState, { page: undefined, series: item.slug })}>
@@ -662,24 +665,24 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 </ul>
               </section>
 
-              <section className={styles.railCard}>
+              <section className={railStyles.railCard}>
                 <h2>
                   <JournalIcon name="tag" size={14} />
                   Popular tags
                 </h2>
-                <ul className={styles.tags}>
+                <ul className={railStyles.tags}>
                   {tags.slice(0, 14).map((tag) => (
                     <li key={tag.slug}>{tag.label}</li>
                   ))}
                 </ul>
               </section>
 
-              <section className={styles.railCard}>
+              <section className={railStyles.railCard}>
                 <h2>
                   <JournalIcon name="archive" size={14} />
                   Archive
                 </h2>
-                <ul className={styles.railList}>
+                <ul className={railStyles.railList}>
                   {archive.map((item) => (
                     <li key={item.year}>
                       <span>{item.year}</span>

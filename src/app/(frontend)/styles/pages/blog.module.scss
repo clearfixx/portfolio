@@ -324,179 +324,15 @@
   flex: 0 0 auto;
 }
 
-.rail {
-  display: grid;
-  gap: 24px;
-  padding-top: 28px;
-  align-content: start;
-  min-width: 0;
-}
-
-.railCard {
-  overflow: hidden;
-  border: 1px solid var(--journal-line);
-  border-radius: 12px;
-  padding: 1rem;
-  background:
-    linear-gradient(180deg, rgba(24, 226, 229, 0.025), transparent 42%), rgba(4, 17, 29, 0.72);
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
-}
-
-.rail h2 {
-  display: flex;
-  gap: 0.35rem;
-  align-items: center;
-  margin: 0;
-  color: var(--journal-cyan);
-  font-size: 0.66rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.rail h2 .icon {
-  flex: 0 0 auto;
-}
-
-.transmissions,
-.railList,
-.seriesList,
-.tags,
 .articleGrid {
   padding: 0;
   margin: 0;
   list-style: none;
 }
 
-.transmissions {
-  display: grid;
-  gap: 0.72rem;
-  margin-top: 0.85rem;
-}
-
-.transmissions a {
-  display: grid;
-  grid-template-columns: 7px minmax(0, 1fr);
-  gap: 0.65rem;
-  color: inherit;
-  text-decoration: none;
-}
-
-.transmissions a > span {
-  width: 6px;
-  height: 6px;
-  margin-top: 0.35rem;
-  border-radius: 50%;
-  background: var(--journal-cyan);
-  box-shadow: 0 0 10px rgba(24, 226, 229, 0.65);
-}
-
-.transmissions div {
-  display: grid;
-  gap: 0.12rem;
-}
-
-.transmissions strong {
-  font-size: 0.7rem;
-  line-height: 1.3;
-}
-
-.transmissions small {
-  color: #718691;
-  font-size: 0.57rem;
-}
-
 .articleMeta > .icon {
   margin-left: auto;
   color: var(--journal-cyan);
-}
-
-.sync {
-  display: flex;
-  gap: 0.45rem;
-  align-items: center;
-  margin: 1rem -1rem -1rem;
-  padding: 0.75rem 1rem;
-  border-top: 1px solid var(--journal-line);
-  color: #758995;
-  font-size: 0.59rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.sync > span {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #55e89a;
-  box-shadow: 0 0 10px rgba(85, 232, 154, 0.6);
-}
-
-.sync strong {
-  color: var(--journal-cyan);
-}
-
-.railList,
-.seriesList {
-  display: grid;
-  gap: 0.6rem;
-  margin-top: 0.8rem;
-}
-
-.railList li,
-.railList a {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  color: #aebdc6;
-  font-size: 0.68rem;
-  text-decoration: none;
-}
-
-.railList strong {
-  color: #6f8490;
-  font-weight: 500;
-}
-
-.seriesList a {
-  display: grid;
-  grid-template-columns: 22px minmax(0, 1fr);
-  gap: 0.55rem;
-  align-items: center;
-  color: inherit;
-  text-decoration: none;
-}
-
-.seriesList a > span {
-  color: #9a70ff;
-}
-
-.seriesList div {
-  display: grid;
-  gap: 0.1rem;
-}
-
-.seriesList strong {
-  font-size: 0.67rem;
-}
-
-.seriesList small {
-  color: #708590;
-  font-size: 0.56rem;
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  margin-top: 0.75rem;
-}
-
-.tags li {
-  padding: 0.32rem 0.45rem;
-  border: 1px solid var(--journal-line);
-  border-radius: 4px;
-  color: #9fb0b9;
-  font-size: 0.56rem;
 }
 
 .articlesSection {
@@ -1014,11 +850,6 @@
   .contentLayout {
     grid-template-columns: 1fr;
   }
-
-  .rail {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    padding-top: 0;
-  }
 }
 
 @media (max-width: 900px) {
@@ -1071,10 +902,6 @@
     min-height: 240px;
   }
 
-  .rail {
-    grid-template-columns: 1fr;
-  }
-
   .editorWrap {
     transform: none;
   }
@@ -1094,6 +921,7 @@
 }
 
 /* portfolio-blog-grid-background-v1:start */
+
 .page {
   position: relative;
   isolation: isolate;
@@ -1166,6 +994,7 @@
 /* portfolio-blog-grid-background-v1:end */
 
 /* portfolio-blog-light-theme-v1:start */
+
 :global([data-theme='light']) .page {
   --journal-cyan: #087f8c;
   --journal-violet: #7847c7;
@@ -1341,88 +1170,10 @@
   background: rgba(8, 127, 140, 0.1);
   color: #087f8c;
 }
+
 /* portfolio-blog-light-theme-v1:end */
 
 /* portfolio-blog-light-refinement-v2:start */
-:global([data-theme='light']) .rail {
-  gap: 1.35rem;
-}
-
-:global([data-theme='light']) .railCard {
-  border-color: rgba(30, 88, 104, 0.14);
-  background:
-    radial-gradient(circle at 100% 0%, rgba(120, 71, 199, 0.065), transparent 12rem),
-    linear-gradient(145deg, rgba(255, 255, 255, 0.99), rgba(246, 250, 251, 0.96));
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.96),
-    0 14px 34px rgba(32, 75, 91, 0.08);
-}
-
-:global([data-theme='light']) .railCard:hover {
-  border-color: rgba(8, 127, 140, 0.27);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.96),
-    0 18px 42px rgba(32, 75, 91, 0.11);
-}
-
-:global([data-theme='light']) .rail h2 {
-  color: #087f8c;
-}
-
-:global([data-theme='light']) .transmissions strong,
-:global([data-theme='light']) .railList li,
-:global([data-theme='light']) .railList a,
-:global([data-theme='light']) .seriesList a,
-:global([data-theme='light']) .seriesList strong {
-  color: #29434f;
-}
-
-:global([data-theme='light']) .transmissions small,
-:global([data-theme='light']) .seriesList small,
-:global([data-theme='light']) .railList strong {
-  color: #718791;
-}
-
-:global([data-theme='light']) .transmissions a,
-:global([data-theme='light']) .railList a,
-:global([data-theme='light']) .seriesList a {
-  border-radius: 7px;
-  transition:
-    background 150ms ease,
-    color 150ms ease,
-    transform 150ms ease;
-}
-
-:global([data-theme='light']) .transmissions a {
-  padding: 0.35rem 0.4rem;
-  margin-inline: -0.4rem;
-}
-
-:global([data-theme='light']) .railList a,
-:global([data-theme='light']) .seriesList a {
-  padding: 0.4rem 0.45rem;
-  margin-inline: -0.45rem;
-}
-
-:global([data-theme='light']) .transmissions a:hover,
-:global([data-theme='light']) .railList a:hover,
-:global([data-theme='light']) .seriesList a:hover {
-  background: rgba(8, 127, 140, 0.065);
-  color: #087f8c;
-  transform: translateX(2px);
-}
-
-:global([data-theme='light']) .tags li {
-  border-color: rgba(35, 79, 96, 0.14);
-  background: rgba(247, 250, 251, 0.88);
-  color: #536c77;
-}
-
-:global([data-theme='light']) .sync {
-  border-color: rgba(35, 79, 96, 0.11);
-  background: rgba(237, 246, 247, 0.72);
-  color: #647b85;
-}
 
 :global([data-theme='light']) .paginationSection {
   grid-template-columns: minmax(185px, 0.65fr) auto minmax(255px, 0.75fr);
@@ -1570,6 +1321,7 @@
 /* portfolio-blog-light-refinement-v2:end */
 
 /* portfolio-public-shell-integration-v1:start */
+
 .page {
   position: relative;
   min-height: 0;
@@ -1591,6 +1343,7 @@
 .contentLayout {
   margin-top: var(--public-page-section-gap);
 }
+
 /* portfolio-public-shell-integration-v1:end */
 
 /* public-index-hero-rhythm-v3:start */
@@ -2084,6 +1837,7 @@
  * component classes, so these scoped overrides use equal-or-higher
  * specificity to keep dropdown controls visually restrained.
  */
+
 .filters .filterSelectButton {
   min-height: 48px;
   padding: 0 3rem 0 0.95rem;
@@ -2197,28 +1951,13 @@
  * Apply the same row geometry in both themes so card heights and inner rhythm
  * no longer change when the theme switches.
  */
-.railCard {
-  padding: 1rem;
-}
-
-.transmissions a {
-  padding: 0.35rem 0.4rem;
-  margin-inline: -0.4rem;
-  border-radius: 7px;
-}
-
-.railList a,
-.seriesList a {
-  padding: 0.4rem 0.45rem;
-  margin-inline: -0.45rem;
-  border-radius: 7px;
-}
 
 /*
  * Make the newsletter control own its full geometry. Explicit sizing,
  * typography and appearance prevent browser/button defaults from producing
  * the oversized grey control visible in the light theme.
  */
+
 .newsletter form {
   display: grid;
   width: 100%;
@@ -2357,6 +2096,7 @@
 /* blog-sidebar-newsletter-form-polish-v1:end */
 
 /* public-pages-consistency-runtime-skeletons-v1-8:blog-hero:start */
+
 .page {
   --profile-text: rgb(var(--rgb-text-strong));
 }
@@ -2375,4 +2115,5 @@
   background-clip: text;
   -webkit-background-clip: text;
 }
+
 /* public-pages-consistency-runtime-skeletons-v1-8:blog-hero:end */
