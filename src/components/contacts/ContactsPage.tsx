@@ -20,9 +20,6 @@ import type {
   ContactsPageViewModel,
   ContactsStatusIcon,
 } from '@/lib/cms'
-
-import styles from '@/app/(frontend)/styles/pages/contacts.module.scss'
-
 import pageStyles from './ContactsPageShell.module.scss'
 
 import socialStyles from './ContactsSocialSection.module.scss'
