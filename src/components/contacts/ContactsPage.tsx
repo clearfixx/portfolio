@@ -23,6 +23,8 @@ import type {
 
 import styles from '@/app/(frontend)/styles/pages/contacts.module.scss'
 
+import processStyles from './ContactsProcessSection.module.scss'
+
 import formPanelStyles from './ContactsFormPanel.module.scss'
 
 import channelsStyles from './ContactsChannelsPanel.module.scss'
@@ -246,8 +248,12 @@ function ContactFormPanel({ content }: { content: ContactsPageViewModel }) {
 
 function ProcessSection({ content }: { content: ContactsPageViewModel }) {
   return (
-    <section aria-labelledby="contacts-process-title" className={styles.process} data-motion="rise">
-      <header className={styles.sectionHeading}>
+    <section
+      aria-labelledby="contacts-process-title"
+      className={processStyles.process}
+      data-motion="rise"
+    >
+      <header className={processStyles.sectionHeading}>
         <div>
           <span>{content.process.eyebrow}</span>
           <h2 id="contacts-process-title">{content.process.title}</h2>
@@ -258,7 +264,7 @@ function ProcessSection({ content }: { content: ContactsPageViewModel }) {
       <ol>
         {content.process.steps.map((step, index) => (
           <li key={step.id}>
-            <div className={styles.stepRail}>
+            <div className={processStyles.stepRail}>
               <span>{step.code}</span>
               <i />
             </div>
