@@ -21,6 +21,8 @@ import type {
 } from '@/lib/cms/homepage'
 
 import { ContactForm } from './ContactForm'
+import styles from './ContactCTA.module.scss'
+import formStyles from './ContactForm.module.scss'
 
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>
 
@@ -47,10 +49,10 @@ function ContactChannelItem({ channel }: { channel: ContactChannelViewModel }) {
   const Icon = CHANNEL_ICONS[channel.icon]
   const content = (
     <>
-      <span className="contact-cta__channel-icon">
+      <span className={styles.channelIcon}>
         <Icon />
       </span>
-      <span className="contact-cta__channel-copy">
+      <span className={styles.channelCopy}>
         <span>{channel.label}</span>
         <strong>{channel.value}</strong>
       </span>
@@ -60,7 +62,7 @@ function ContactChannelItem({ channel }: { channel: ContactChannelViewModel }) {
   if (channel.href) {
     return (
       <a
-        className="contact-cta__channel"
+        className={styles.channel}
         href={channel.href}
         rel={channel.external ? 'noreferrer' : undefined}
         target={channel.external ? '_blank' : undefined}
@@ -70,14 +72,14 @@ function ContactChannelItem({ channel }: { channel: ContactChannelViewModel }) {
     )
   }
 
-  return <div className="contact-cta__channel">{content}</div>
+  return <div className={styles.channel}>{content}</div>
 }
 
 function ContactMap({ content }: { content: ContactSectionViewModel }) {
   return (
-    <div className="contact-cta__map-panel">
+    <div className={styles.mapPanel}>
       <Image
-        className="contact-cta__map-image"
+        className={styles.mapImage}
         src="/images/contact/kyiv-map.png"
         alt=""
         aria-hidden="true"
@@ -87,41 +89,41 @@ function ContactMap({ content }: { content: ContactSectionViewModel }) {
         sizes="(max-width: 1180px) 100vw, 56vw"
       />
 
-      <div className="contact-cta__map-overlay" aria-hidden="true" />
+      <div className={styles.mapOverlay} aria-hidden="true" />
 
-      <div className="contact-cta__pin" aria-hidden="true">
+      <div className={styles.pin} aria-hidden="true">
         <PinIcon />
         <span />
       </div>
 
       {content.location ? (
-        <div className="contact-cta__location-badge">
+        <div className={styles.locationBadge}>
           <PinIcon />
           {content.location}
         </div>
       ) : null}
 
-      <div className="contact-cta__contact-card">
+      <div className={styles.contactCard}>
         {content.channels.length > 0 ? (
-          <div className="contact-cta__channels">
+          <div className={styles.channels}>
             {content.channels.map((channel) => (
               <ContactChannelItem channel={channel} key={channel.id} />
             ))}
           </div>
         ) : (
-          <p className="contact-cta__empty" role="status">
+          <p className={styles.empty} role="status">
             Contact details are being updated.
           </p>
         )}
 
         {content.socialLinks.length > 0 ? (
-          <div className="contact-cta__socials" aria-label="Social links">
+          <div className={styles.socials} aria-label="Social links">
             {content.socialLinks.map((social) => {
               const Icon = SOCIAL_ICONS[social.icon]
 
               return (
                 <a
-                  className="contact-cta__social-link"
+                  className={styles.socialLink}
                   href={social.href}
                   key={social.id}
                   target="_blank"
@@ -135,9 +137,7 @@ function ContactMap({ content }: { content: ContactSectionViewModel }) {
           </div>
         ) : null}
 
-        <div
-          className={`contact-cta__availability contact-cta__availability--${content.availability.tone}`}
-        >
+        <div className={styles.availability} data-tone={content.availability.tone}>
           <span />
           {content.availability.label}
         </div>
@@ -153,7 +153,7 @@ function ContactTitle({ title }: { title: ContactSectionViewModel['title'] }) {
       {title.accent ? (
         <>
           {title.leading ? ' ' : null}
-          <span className="contact-cta__title-accent">{title.accent}</span>
+          <span className={styles.titleAccent}>{title.accent}</span>
         </>
       ) : null}
       {title.trailing ? ` ${title.trailing}` : null}
@@ -175,12 +175,20 @@ export function ContactCTA({ content }: ContactCTAProps) {
         text: content.footer.text,
       }}
     >
-      <div className={`contact-cta${content.form.enabled ? '' : ' contact-cta--channels-only'}`}>
+      <div
+        className={[
+          styles.root,
+          formStyles.scope,
+          content.form.enabled ? null : styles.channelsOnly,
+        ]
+          .filter(Boolean)
+          .join(' ')}
+      >
         <ContactMap content={content} />
 
         {content.form.enabled ? (
-          <section className="contact-cta__form-panel" aria-labelledby="contact-form-title">
-            <div className="contact-cta__form-header">
+          <section className={styles.formPanel} aria-labelledby="contact-form-title">
+            <div className={styles.formHeader}>
               <h3 id="contact-form-title">{content.form.title}</h3>
               <p>{content.form.description}</p>
             </div>

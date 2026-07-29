@@ -5,27 +5,24 @@
 
 /* migrated from src/app/(frontend)/styles/sections/_light-theme-polish.scss */
 :global(html[data-theme='light']) {
-.field select,
-.privacy {
+  .field select,
+  .privacy {
     color: rgb(var(--rgb-text-muted));
   }
 
-
-.field input::placeholder,
-.field textarea::placeholder,
-.fieldIcon,
-.counter {
+  .field input::placeholder,
+  .field textarea::placeholder,
+  .fieldIcon,
+  .counter {
     color: rgb(var(--rgb-text-dim));
   }
 
-
-.field input,
-.field select,
-.field textarea {
+  .field input,
+  .field select,
+  .field textarea {
     border-color: rgb(var(--rgb-border) / 24%);
     background: rgb(var(--rgb-surface-overlay) / 92%);
   }
-
 }
 
 /* migrated from src/app/(frontend)/styles/sections/_contact.scss */
@@ -36,7 +33,6 @@
   height: 20px;
 }
 
-
 .form {
   position: relative;
   z-index: 1;
@@ -44,12 +40,10 @@
   gap: 14px;
 }
 
-
 .field {
   position: relative;
   display: block;
 }
-
 
 .field input,
 .field select,
@@ -67,13 +61,11 @@
     box-shadow 180ms ease;
 }
 
-
 .field input,
 .field select {
   height: 54px;
   padding: 0 18px 0 54px;
 }
-
 
 .field textarea {
   min-height: 150px;
@@ -81,19 +73,16 @@
   padding: 18px 18px 42px 54px;
 }
 
-
 .field input::placeholder,
 .field textarea::placeholder {
   color: rgb(var(--rgb-text-soft) / 48%);
 }
-
 
 .field select {
   color: rgb(var(--rgb-text-soft) / 72%);
   appearance: none;
   cursor: pointer;
 }
-
 
 .field input:focus,
 .field select:focus,
@@ -103,7 +92,6 @@
   box-shadow: 0 0 0 3px rgb(var(--rgb-accent) / 8%);
 }
 
-
 .fieldIcon {
   position: absolute;
   top: 17px;
@@ -112,11 +100,9 @@
   color: rgb(var(--rgb-text-soft) / 62%);
 }
 
-
 .fieldMessage .fieldIcon {
   top: 19px;
 }
-
 
 .counter {
   position: absolute;
@@ -125,7 +111,6 @@
   color: rgb(var(--rgb-text-soft) / 45%);
   font-size: 0.85rem;
 }
-
 
 .submit {
   @include ui.action-control($min-height: 56px);
@@ -144,14 +129,12 @@
     inset 0 1px 0 rgb(var(--rgb-white) / 34%);
 }
 
-
 .submit:hover {
   transform: translateY(-2px);
   box-shadow:
     0 0 42px rgb(var(--rgb-accent) / 28%),
     inset 0 1px 0 rgb(var(--rgb-white) / 42%);
 }
-
 
 .privacy {
   display: inline-flex;
@@ -163,18 +146,15 @@
   font-size: 0.88rem;
 }
 
-
 @media (max-width: 520px) {
-.field input,
-.field select {
+  .field input,
+  .field select {
     height: 50px;
   }
 
-
-.field textarea {
+  .field textarea {
     min-height: 140px;
   }
-
 }
 
 .select {
@@ -182,16 +162,13 @@
   z-index: 4;
 }
 
-
 .select:global(.is-open) {
   z-index: 30;
 }
 
-
 .select .fieldIcon {
   pointer-events: none;
 }
-
 
 .selectTrigger {
   display: flex;
@@ -214,12 +191,10 @@
     box-shadow 180ms ease;
 }
 
-
 .selectTrigger:hover {
   border-color: rgb(var(--rgb-accent-border) / 36%);
   background: rgb(var(--rgb-surface-control-hover) / 72%);
 }
-
 
 .selectTrigger:focus-visible,
 .select:global(.is-open) .selectTrigger {
@@ -228,7 +203,6 @@
   box-shadow: 0 0 0 3px rgb(var(--rgb-accent) / 8%);
 }
 
-
 .selectValue {
   min-width: 0;
   overflow: hidden;
@@ -236,11 +210,9 @@
   white-space: nowrap;
 }
 
-
 .selectValue[data-placeholder='true'] {
   color: rgb(var(--rgb-text-soft) / 72%);
 }
-
 
 .selectChevron {
   width: 8px;
@@ -253,11 +225,9 @@
   transition: transform 180ms ease;
 }
 
-
 .select:global(.is-open) .selectChevron {
   transform: translateY(2px) rotate(225deg);
 }
-
 
 .selectList {
   position: absolute;
@@ -282,7 +252,6 @@
   animation: contact-select-enter 160ms ease-out both;
 }
 
-
 .selectOption {
   display: flex;
   min-height: 44px;
@@ -300,17 +269,14 @@
     color 140ms ease;
 }
 
-
 .selectOption[data-active='true'] {
   background: rgb(var(--rgb-accent) / 10%);
 }
-
 
 .selectOption[aria-selected='true'] {
   background: rgb(var(--rgb-accent) / 14%);
   color: rgb(var(--rgb-accent));
 }
-
 
 .selectCheck {
   flex: 0 0 auto;
@@ -322,44 +288,37 @@
     transform 140ms ease;
 }
 
-
 .selectOption[aria-selected='true'] .selectCheck {
   opacity: 1;
   transform: scale(1);
 }
 
-
 @media (max-width: 520px) {
-.selectTrigger {
+  .selectTrigger {
     height: 50px;
   }
 
-
-.selectList {
+  .selectList {
     max-height: min(252px, 46vh);
   }
-
 }
 
 @media (prefers-reduced-motion: reduce) {
-.selectTrigger,
-.selectChevron,
-.selectOption,
-.selectCheck {
+  .selectTrigger,
+  .selectChevron,
+  .selectOption,
+  .selectCheck {
     transition: none;
   }
 
-
-.selectList {
+  .selectList {
     animation: none;
   }
-
 }
 
 .form {
   --contact-error-rgb: var(--rgb-danger, 255 92 92);
 }
-
 
 .fieldset {
   display: grid;
@@ -370,17 +329,14 @@
   gap: 14px;
 }
 
-
 .fieldset:disabled {
   opacity: 0.76;
 }
-
 
 .submit:disabled {
   cursor: wait;
   transform: none;
 }
-
 
 .honeypot {
   position: absolute;
@@ -389,7 +345,6 @@
   height: 1px;
   overflow: hidden;
 }
-
 
 .field:global(.is-invalid) input,
 .field:global(.is-invalid) textarea,
@@ -403,13 +358,11 @@
     0 0 24px rgb(var(--contact-error-rgb) / 8%);
 }
 
-
 .field:global(.is-invalid) .fieldIcon,
 .select:global(.is-invalid) .selectChevron,
 .select:global(.is-invalid) .selectValue {
   color: rgb(var(--contact-error-rgb));
 }
-
 
 .field:global(.is-invalid) input::placeholder,
 .field:global(.is-invalid) textarea::placeholder {
@@ -417,11 +370,9 @@
   opacity: 1;
 }
 
-
 .select:global(.is-invalid) .selectValue[data-placeholder='true'] {
   color: rgb(var(--contact-error-rgb) / 88%);
 }
-
 
 .captcha {
   border: 1px solid rgb(var(--rgb-accent-border) / 20%);
@@ -433,7 +384,6 @@
     box-shadow 180ms ease;
 }
 
-
 .captchaControl {
   display: flex;
   min-height: 66px;
@@ -443,7 +393,6 @@
   cursor: pointer;
 }
 
-
 .captchaInput {
   position: absolute;
   width: 1px;
@@ -452,7 +401,6 @@
   opacity: 0;
   pointer-events: none;
 }
-
 
 .captchaBox {
   position: relative;
@@ -472,7 +420,6 @@
     transform 180ms ease;
 }
 
-
 .captchaBox::after {
   content: '';
   width: 10px;
@@ -486,31 +433,26 @@
     transform 150ms ease;
 }
 
-
 .captchaInput:checked + .captchaBox {
   border-color: rgb(var(--rgb-accent) / 76%);
   background: rgb(var(--rgb-accent));
   box-shadow: 0 0 22px rgb(var(--rgb-accent) / 22%);
 }
 
-
 .captchaInput:checked + .captchaBox::after {
   opacity: 1;
   transform: translateY(-1px) rotate(-45deg) scale(1);
 }
-
 
 .captchaInput:focus-visible + .captchaBox {
   outline: 2px solid rgb(var(--rgb-accent) / 76%);
   outline-offset: 3px;
 }
 
-
 .captchaCopy {
   display: grid;
   gap: 3px;
 }
-
 
 .captchaCopy strong {
   color: rgb(var(--rgb-text-strong));
@@ -518,13 +460,11 @@
   line-height: 1.2;
 }
 
-
 .captchaCopy span {
   color: rgb(var(--rgb-text-soft) / 56%);
   font-size: 0.8rem;
   line-height: 1.3;
 }
-
 
 .captcha:global(.is-invalid) {
   border-color: rgb(var(--contact-error-rgb) / 78%);
@@ -534,17 +474,14 @@
   box-shadow: 0 0 0 3px rgb(var(--contact-error-rgb) / 8%);
 }
 
-
 .captcha:global(.is-invalid) .captchaBox {
   border-color: rgb(var(--contact-error-rgb) / 78%);
   color: rgb(var(--contact-error-rgb));
 }
 
-
 .captcha:global(.is-invalid) .captchaCopy strong {
   color: rgb(var(--contact-error-rgb));
 }
-
 
 .feedback {
   min-height: 1.4em;
@@ -554,30 +491,25 @@
   text-align: center;
 }
 
-
 .feedback[data-state='submitting'] {
   color: rgb(var(--rgb-text-soft) / 72%);
 }
-
 
 .feedback[data-state='success'] {
   color: rgb(var(--rgb-success));
 }
 
-
 .feedback[data-state='error'] {
   color: rgb(var(--contact-error-rgb));
 }
 
-
 @media (prefers-reduced-motion: reduce) {
-.submit,
-.captcha,
-.captchaBox,
-.captchaBox::after {
+  .submit,
+  .captcha,
+  .captchaBox,
+  .captchaBox::after {
     transition: none;
   }
-
 }
 
 /* migrated from src/app/(frontend)/styles/sections/_motion-choreography.scss */
@@ -616,37 +548,32 @@
 
 /* migrated from src/app/(frontend)/styles/base/_responsive-system.scss */
 @media (max-width: 640px) {
-.form {
+  .form {
     grid-template-columns: 1fr;
   }
 
-
-.field,
-.form button,
-.submit {
+  .field,
+  .form button,
+  .submit {
     width: 100%;
   }
-
 }
 
 @media (max-width: 767px), (max-height: 759px), (pointer: coarse) {
-html[data-motion-ready='true'] {
-#projects,
-#engineer-profile,
-#skills-technologies,
-#insights,
-#contact,
-:global(.site-footer) {
-.field,
-.form button {
+  html[data-motion-ready='true'] {
+    #projects,
+    #engineer-profile,
+    #skills-technologies,
+    #insights,
+    #contact,
+    :global(.site-footer) {
+      .field,
+      .form button {
         opacity: 1;
         transform: none;
         transition: none;
         transition-delay: 0ms;
       }
-
-}
-
-}
-
+    }
+  }
 }

@@ -214,33 +214,6 @@ html[data-theme='light'] {
    * foregrounds so global light-theme compatibility tokens cannot turn its
    * content dark.
    */
-  .contact-cta__contact-card {
-    --rgb-white: 255 255 255;
-    --rgb-text-strong: 246 251 255;
-    --rgb-text-soft: 202 218 230;
-    --rgb-surface-control-hover: 18 31 46;
-    background:
-      radial-gradient(circle at 0% 0%, rgb(var(--rgb-purple) / 13%), transparent 38%),
-      rgb(5 13 25 / 94%);
-  }
-
-  .contact-cta__channel-copy span {
-    color: rgb(178 199 214);
-  }
-
-  .contact-cta__channel-copy strong {
-    color: rgb(242 248 252);
-  }
-
-  .contact-cta__social-link {
-    border-color: rgb(105 239 255 / 20%);
-    background: rgb(18 31 46 / 88%);
-    color: rgb(232 242 248);
-  }
-
-  .contact-cta__form-header p {
-    color: rgb(var(--rgb-text-muted));
-  }
 
   /*
    * Cookie modal: previous gradients contain hard-coded dark layers. They sit
