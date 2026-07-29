@@ -23,6 +23,8 @@ import type {
 
 import styles from '@/app/(frontend)/styles/pages/contacts.module.scss'
 
+import pageStyles from './ContactsPageShell.module.scss'
+
 import socialStyles from './ContactsSocialSection.module.scss'
 
 import processStyles from './ContactsProcessSection.module.scss'
@@ -345,27 +347,27 @@ export function ContactsPage({ content }: { content: ContactsPageViewModel }) {
   }
 
   return (
-    <main className={styles.page} id="main-content">
-      <PublicPageShell className={styles.shell} variant="index">
+    <main className={pageStyles.page} id="main-content">
+      <PublicPageShell className={pageStyles.shell} variant="index">
         <PublicBreadcrumbs items={[{ label: content.breadcrumbLabel }]} />
 
         <PublicPageHeroFrame
           aria-labelledby="contacts-page-title"
-          className={styles.hero}
+          className={pageStyles.hero}
           variant="index"
         >
-          <div className={styles.heroCopy} data-motion="rise">
-            <p className={styles.eyebrow}>
+          <div className={pageStyles.heroCopy} data-motion="rise">
+            <p className={pageStyles.eyebrow}>
               <span aria-hidden="true">{'//'}</span>
               {content.hero.eyebrow}
             </p>
             <h1 id="contacts-page-title">
               <SplitTitle title={content.hero.title} />
             </h1>
-            <p className={styles.heroDescription}>{content.hero.description}</p>
+            <p className={pageStyles.heroDescription}>{content.hero.description}</p>
 
             {heroChannels.length > 0 ? (
-              <div aria-label="Preferred contact channels" className={styles.heroActions}>
+              <div aria-label="Preferred contact channels" className={pageStyles.heroActions}>
                 {heroChannels.map((channel) => {
                   const Icon = CHANNEL_ICONS[channel.icon]
 
@@ -375,7 +377,7 @@ export function ContactsPage({ content }: { content: ContactsPageViewModel }) {
 
                   return (
                     <a
-                      className={styles.heroAction}
+                      className={pageStyles.heroAction}
                       href={channel.href}
                       key={channel.id}
                       rel={channel.external ? 'noreferrer' : undefined}
@@ -394,12 +396,12 @@ export function ContactsPage({ content }: { content: ContactsPageViewModel }) {
             ) : null}
           </div>
 
-          <div className={styles.heroVisual} data-motion="rise">
+          <div className={pageStyles.heroVisual} data-motion="rise">
             <StatusConsole content={content} />
           </div>
         </PublicPageHeroFrame>
 
-        <div className={styles.workspace}>
+        <div className={pageStyles.workspace}>
           <ChannelsPanel content={content} />
           <ContactFormPanel content={content} />
         </div>
