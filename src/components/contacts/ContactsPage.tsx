@@ -23,6 +23,8 @@ import type {
 
 import styles from '@/app/(frontend)/styles/pages/contacts.module.scss'
 
+import socialStyles from './ContactsSocialSection.module.scss'
+
 import processStyles from './ContactsProcessSection.module.scss'
 
 import formPanelStyles from './ContactsFormPanel.module.scss'
@@ -292,7 +294,7 @@ function SocialSection({ content }: { content: ContactsPageViewModel }) {
   return (
     <section
       aria-labelledby="contacts-social-title"
-      className={styles.socialPanel}
+      className={socialStyles.socialPanel}
       data-motion="rise"
     >
       <div>
@@ -315,7 +317,7 @@ function SocialSection({ content }: { content: ContactsPageViewModel }) {
         })}
 
         {emailChannel?.href ? (
-          <a className={styles.emailSocialLink} href={emailChannel.href}>
+          <a className={socialStyles.emailSocialLink} href={emailChannel.href}>
             <MailIcon />
             <span>Send a direct email</span>
             <b aria-hidden="true">↗</b>
