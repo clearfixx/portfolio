@@ -24,10 +24,8 @@
 }
 
 .eyebrow,
-.panelHeading > span,
 .sectionHeading span,
-.socialPanel > div > span,
-.formUnavailable > span {
+.socialPanel > div > span {
   display: flex;
   align-items: center;
   gap: 9px;
@@ -113,7 +111,6 @@
   padding-top: var(--public-page-content-start);
 }
 
-.formPanel,
 .process,
 .socialPanel {
   position: relative;
@@ -127,15 +124,8 @@
     0 24px 70px rgb(var(--rgb-black) / 16%);
 }
 
-.panelHeading {
-  position: relative;
-  z-index: 1;
-}
-
-.panelHeading h2,
 .sectionHeading h2,
-.socialPanel h2,
-.formUnavailable h2 {
+.socialPanel h2 {
   margin: 12px 0 0;
   color: rgb(var(--rgb-text-strong));
   font-size: clamp(1.7rem, 2.8vw, 2.65rem);
@@ -144,51 +134,13 @@
   text-wrap: balance;
 }
 
-.panelHeading p,
 .sectionHeading p,
-.socialPanel p,
-.formUnavailable p {
+.socialPanel p {
   max-width: 680px;
   margin: 16px 0 0;
   color: var(--contacts-soft);
   line-height: 1.7;
   text-wrap: pretty;
-}
-
-.formPanel {
-  padding: clamp(26px, 3.2vw, 42px);
-  background:
-    radial-gradient(circle at 90% 0%, rgb(var(--rgb-violet) / 10%), transparent 34%),
-    linear-gradient(145deg, rgb(var(--rgb-violet) / 4%), transparent 42%), var(--contacts-panel);
-}
-
-.formScope {
-  display: block;
-  margin-top: 30px;
-}
-
-.formScope :global(.contact-cta__form) {
-  gap: 15px;
-}
-
-.formScope :global(.contact-cta__field input),
-.formScope :global(.contact-cta__select-trigger) {
-  height: 58px;
-}
-
-.formScope :global(.contact-cta__field textarea) {
-  min-height: 172px;
-}
-
-.formScope :global(.contact-cta__submit) {
-  min-height: 60px;
-}
-
-.formUnavailable {
-  display: grid;
-  min-height: 420px;
-  align-content: center;
-  padding: clamp(30px, 5vw, 64px);
 }
 
 .process {
@@ -425,7 +377,6 @@
   }
 }
 
-:global([data-theme='light']) .formPanel,
 :global([data-theme='light']) .process,
 :global([data-theme='light']) .socialPanel {
   box-shadow:
@@ -489,7 +440,6 @@
     border-left: 0;
   }
 
-  .formPanel,
   .process,
   .socialPanel {
     border-radius: 16px;
@@ -535,15 +485,9 @@
 }
 
 @media (max-width: 480px) {
-  .formPanel,
   .process,
   .socialPanel {
     padding: 21px;
-  }
-
-  .formScope :global(.contact-cta__field input),
-  .formScope :global(.contact-cta__select-trigger) {
-    height: 52px;
   }
 }
 

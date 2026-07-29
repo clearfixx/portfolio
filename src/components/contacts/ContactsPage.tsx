@@ -23,6 +23,8 @@ import type {
 
 import styles from '@/app/(frontend)/styles/pages/contacts.module.scss'
 
+import formPanelStyles from './ContactsFormPanel.module.scss'
+
 import channelsStyles from './ContactsChannelsPanel.module.scss'
 
 import statusStyles from './ContactsStatusConsole.module.scss'
@@ -212,7 +214,10 @@ function ChannelsPanel({ content }: { content: ContactsPageViewModel }) {
 function ContactFormPanel({ content }: { content: ContactsPageViewModel }) {
   if (!content.form.enabled) {
     return (
-      <section className={`${styles.formPanel} ${styles.formUnavailable}`} data-motion="rise">
+      <section
+        className={`${formPanelStyles.formPanel} ${formPanelStyles.formUnavailable}`}
+        data-motion="rise"
+      >
         <span>{content.form.eyebrow}</span>
         <h2>{content.form.title}</h2>
         <p>The public form is currently disabled. Use one of the direct channels instead.</p>
@@ -221,14 +226,18 @@ function ContactFormPanel({ content }: { content: ContactsPageViewModel }) {
   }
 
   return (
-    <section aria-labelledby="contacts-form-title" className={styles.formPanel} data-motion="rise">
-      <header className={styles.panelHeading}>
+    <section
+      aria-labelledby="contacts-form-title"
+      className={formPanelStyles.formPanel}
+      data-motion="rise"
+    >
+      <header className={formPanelStyles.panelHeading}>
         <span>{content.form.eyebrow}</span>
         <h2 id="contacts-form-title">{content.form.title}</h2>
         <p>{content.form.description}</p>
       </header>
 
-      <div className={`${contactFormStyles.scope} ${styles.formScope}`}>
+      <div className={`${contactFormStyles.scope} ${formPanelStyles.formScope}`}>
         <ContactForm source="contact-page" />
       </div>
     </section>
