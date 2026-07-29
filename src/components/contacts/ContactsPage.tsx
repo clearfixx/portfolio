@@ -23,6 +23,8 @@ import type {
 
 import styles from '@/app/(frontend)/styles/pages/contacts.module.scss'
 
+import statusStyles from './ContactsStatusConsole.module.scss'
+
 // contacts-page-foundation-v1
 
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>
@@ -87,10 +89,10 @@ function StatusConsole({ content }: { content: ContactsPageViewModel }) {
   return (
     <aside
       aria-label="Contact channel status"
-      className={styles.statusConsole}
+      className={statusStyles.statusConsole}
       data-status={content.status.availability.tone}
     >
-      <div aria-hidden="true" className={styles.consoleGrid} />
+      <div aria-hidden="true" className={statusStyles.consoleGrid} />
 
       <header>
         <div>
