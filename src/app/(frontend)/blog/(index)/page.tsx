@@ -13,6 +13,7 @@ import { getHomepageContent, getPublishedBlogPosts, getSiteFooterGitHubFeed } fr
 
 import styles from '@/app/(frontend)/styles/pages/blog.module.scss'
 
+import heroStyles from './BlogHero.module.scss'
 import heroMetricsStyles from './BlogHeroMetrics.module.scss'
 import sectionHeaderStyles from './BlogSectionHeader.module.scss'
 import featuredStyles from './BlogFeaturedArticle.module.scss'
@@ -410,11 +411,11 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
           <PublicPageHeroFrame
             aria-labelledby="blog-page-title"
-            className={styles.hero}
+            className={heroStyles.hero}
             variant="index"
           >
-            <div className={styles.heroCopy}>
-              <p className={styles.eyebrow}>
+            <div className={heroStyles.heroCopy}>
+              <p className={heroStyles.eyebrow}>
                 <span aria-hidden="true">{'//'}</span>
                 Engineering journal
               </p>
