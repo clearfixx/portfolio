@@ -13,6 +13,7 @@ import { getHomepageContent, getPublishedBlogPosts, getSiteFooterGitHubFeed } fr
 
 import styles from '@/app/(frontend)/styles/pages/blog.module.scss'
 
+import heroMetricsStyles from './BlogHeroMetrics.module.scss'
 import sectionHeaderStyles from './BlogSectionHeader.module.scss'
 import featuredStyles from './BlogFeaturedArticle.module.scss'
 import toolbarStyles from './BlogArticleToolbar.module.scss'
@@ -426,54 +427,54 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 from building complex systems.
               </p>
 
-              <dl className={styles.metrics}>
-                <div className={styles.metricCard}>
+              <dl className={heroMetricsStyles.metrics}>
+                <div className={heroMetricsStyles.metricCard}>
                   <span
-                    className={`${styles.metricIcon} ${styles.metricIconCyan}`}
+                    className={`${heroMetricsStyles.metricIcon} ${heroMetricsStyles.metricIconCyan}`}
                     aria-hidden="true"
                   >
                     <JournalIcon name="archive" size={18} />
                   </span>
-                  <div className={styles.metricCopy}>
+                  <div className={heroMetricsStyles.metricCopy}>
                     <dd>{String(posts.length).padStart(2, '0')}</dd>
                     <dt>Articles</dt>
                   </div>
                 </div>
 
-                <div className={styles.metricCard}>
+                <div className={heroMetricsStyles.metricCard}>
                   <span
-                    className={`${styles.metricIcon} ${styles.metricIconViolet}`}
+                    className={`${heroMetricsStyles.metricIcon} ${heroMetricsStyles.metricIconViolet}`}
                     aria-hidden="true"
                   >
                     <JournalIcon name="book" size={18} />
                   </span>
-                  <div className={styles.metricCopy}>
+                  <div className={heroMetricsStyles.metricCopy}>
                     <dd>{String(categories.length).padStart(2, '0')}</dd>
                     <dt>Topics</dt>
                   </div>
                 </div>
 
-                <div className={styles.metricCard}>
+                <div className={heroMetricsStyles.metricCard}>
                   <span
-                    className={`${styles.metricIcon} ${styles.metricIconCyan}`}
+                    className={`${heroMetricsStyles.metricIcon} ${heroMetricsStyles.metricIconCyan}`}
                     aria-hidden="true"
                   >
                     <JournalIcon name="folder" size={18} />
                   </span>
-                  <div className={styles.metricCopy}>
+                  <div className={heroMetricsStyles.metricCopy}>
                     <dd>{String(series.length).padStart(2, '0')}</dd>
                     <dt>Series</dt>
                   </div>
                 </div>
 
-                <div className={styles.metricCard}>
+                <div className={heroMetricsStyles.metricCard}>
                   <span
-                    className={`${styles.metricIcon} ${styles.metricIconViolet}`}
+                    className={`${heroMetricsStyles.metricIcon} ${heroMetricsStyles.metricIconViolet}`}
                     aria-hidden="true"
                   >
                     <JournalIcon name="radio" size={18} />
                   </span>
-                  <div className={styles.metricCopy}>
+                  <div className={heroMetricsStyles.metricCopy}>
                     <dd>Online</dd>
                     <dt>Status</dt>
                   </div>
@@ -481,7 +482,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               </dl>
             </div>
 
-            <div className={styles.editorWrap}>
+            <div className={heroMetricsStyles.editorWrap}>
               <BlogRegistryEditor
                 articleCount={posts.length}
                 featuredTitle={featuredPost?.title || 'No featured article'}
