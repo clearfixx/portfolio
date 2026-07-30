@@ -14,6 +14,7 @@ import {
 
 import styles from '@/app/(frontend)/styles/pages/blog.module.scss'
 
+import filterStyles from './BlogArticleFilters.module.scss'
 type FilterOption = {
   label: string
   slug: string
@@ -113,7 +114,7 @@ function FilterSelect({ allLabel, ariaLabel, name, onChange, options, value }: F
   }
 
   return (
-    <div className={styles.filterSelect} ref={rootRef}>
+    <div className={filterStyles.filterSelect} ref={rootRef}>
       <input name={name} type="hidden" value={value} />
 
       <button
@@ -121,13 +122,13 @@ function FilterSelect({ allLabel, ariaLabel, name, onChange, options, value }: F
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         aria-label={ariaLabel}
-        className={styles.filterSelectButton}
+        className={filterStyles.filterSelectButton}
         id={buttonId}
         onClick={() => setIsOpen((current) => !current)}
         type="button"
       >
         <span>{selectedLabel}</span>
-        <span className={styles.filterSelectChevron}>
+        <span className={filterStyles.filterSelectChevron}>
           <FilterIcon name="chevron" />
         </span>
       </button>
@@ -135,14 +136,14 @@ function FilterSelect({ allLabel, ariaLabel, name, onChange, options, value }: F
       {isOpen ? (
         <div
           aria-labelledby={buttonId}
-          className={styles.filterSelectMenu}
+          className={filterStyles.filterSelectMenu}
           id={listboxId}
           role="listbox"
           tabIndex={-1}
         >
           <button
             aria-selected={value === ''}
-            className={styles.filterSelectOption}
+            className={filterStyles.filterSelectOption}
             onClick={(event) => selectValue('', event)}
             role="option"
             type="button"
@@ -154,7 +155,7 @@ function FilterSelect({ allLabel, ariaLabel, name, onChange, options, value }: F
           {options.map((option) => (
             <button
               aria-selected={value === option.slug}
-              className={styles.filterSelectOption}
+              className={filterStyles.filterSelectOption}
               key={option.slug}
               onClick={(event) => selectValue(option.slug, event)}
               role="option"
@@ -215,8 +216,8 @@ export function BlogArticleFilters({
   }
 
   return (
-    <form className={styles.filters} onSubmit={submitFilters}>
-      <label className={styles.search}>
+    <form className={filterStyles.filters} onSubmit={submitFilters}>
+      <label className={filterStyles.search}>
         <span className={styles.srOnly}>Search articles</span>
         <FilterIcon name="search" />
         <input
