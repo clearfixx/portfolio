@@ -13,6 +13,7 @@ import { getHomepageContent, getPublishedBlogPosts, getSiteFooterGitHubFeed } fr
 
 import styles from '@/app/(frontend)/styles/pages/blog.module.scss'
 
+import shellStyles from './BlogPageShell.module.scss'
 import heroStyles from './BlogHero.module.scss'
 import heroMetricsStyles from './BlogHeroMetrics.module.scss'
 import sectionHeaderStyles from './BlogSectionHeader.module.scss'
@@ -406,7 +407,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   return (
     <StreamedMotionBoundary>
       <PublicPageShell className="journal-page" variant="index">
-        <div className={`${styles.page} ${styles.container}`}>
+        <div className={`${shellStyles.page} ${shellStyles.container}`}>
           <PublicBreadcrumbs items={[{ label: 'Blog' }]} />
 
           <PublicPageHeroFrame
@@ -493,8 +494,8 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             </div>
           </PublicPageHeroFrame>
 
-          <div className={styles.contentLayout}>
-            <div className={styles.mainColumn}>
+          <div className={shellStyles.contentLayout}>
+            <div className={shellStyles.mainColumn}>
               {featuredPost ? (
                 <section
                   className={featuredStyles.featuredSection}
