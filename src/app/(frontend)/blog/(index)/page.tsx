@@ -13,6 +13,7 @@ import { getHomepageContent, getPublishedBlogPosts, getSiteFooterGitHubFeed } fr
 
 import styles from '@/app/(frontend)/styles/pages/blog.module.scss'
 
+import featuredStyles from './BlogFeaturedArticle.module.scss'
 import toolbarStyles from './BlogArticleToolbar.module.scss'
 import railStyles from './BlogRail.module.scss'
 
@@ -281,7 +282,15 @@ function collectArchive(posts: BlogPost[]) {
     .sort((a, b) => Number(b.year) - Number(a.year))
 }
 
-function ArticleImage({ post, priority = false }: { post: BlogPost; priority?: boolean }) {
+function ArticleImage({
+  className,
+  post,
+  priority = false,
+}: {
+  className?: string
+  post: BlogPost
+  priority?: boolean
+}) {
   const media = coverOf(post)
   const src = media && typeof media.url === 'string' ? media.url : null
   const alt = media?.alt || post.title
@@ -289,7 +298,7 @@ function ArticleImage({ post, priority = false }: { post: BlogPost; priority?: b
   if (!src) {
     return (
       <TechnicalPreviewPlaceholder
-        className={styles.imageFallback}
+        className={[styles.imageFallback, className].filter(Boolean).join(' ')}
         label={categoryLabel(post)}
         variant="code"
       />
@@ -297,7 +306,7 @@ function ArticleImage({ post, priority = false }: { post: BlogPost; priority?: b
   }
 
   return (
-    <div className={styles.imageFrame}>
+    <div className={[styles.imageFrame, className].filter(Boolean).join(' ')}>
       <Image
         alt={alt}
         fill
@@ -484,7 +493,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           <div className={styles.contentLayout}>
             <div className={styles.mainColumn}>
               {featuredPost ? (
-                <section className={styles.featuredSection} aria-labelledby="featured-title">
+                <section
+                  className={featuredStyles.featuredSection}
+                  aria-labelledby="featured-title"
+                >
                   <header className={styles.sectionHeader}>
                     <p>
                       <span aria-hidden="true">{'//'}</span>
@@ -493,16 +505,20 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   </header>
 
                   <Link
-                    className={styles.featuredCard}
+                    className={featuredStyles.featuredCard}
                     href={featuredPost.slug ? `/blog/${featuredPost.slug}` : '/blog'}
                   >
-                    <ArticleImage post={featuredPost} priority />
-                    <div className={styles.featuredContent}>
+                    <ArticleImage
+                      className={featuredStyles.featuredMedia}
+                      post={featuredPost}
+                      priority
+                    />
+                    <div className={featuredStyles.featuredContent}>
                       <span className={styles.category}>{categoryLabel(featuredPost)}</span>
                       <h2 id="featured-title">{featuredPost.title}</h2>
                       <p>{featuredPost.excerpt}</p>
 
-                      <div className={styles.metaRow}>
+                      <div className={featuredStyles.metaRow}>
                         <span>
                           <JournalIcon name="calendar" size={12} />
                           {publishedLabel(featuredPost)}

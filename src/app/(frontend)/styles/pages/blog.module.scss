@@ -188,10 +188,6 @@
   transform: none;
 }
 
-.featuredSection {
-  margin-top: 0;
-}
-
 .sectionHeader {
   display: flex;
   justify-content: space-between;
@@ -211,18 +207,6 @@
   font-size: 0.62rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-}
-
-.featuredCard {
-  display: grid;
-  grid-template-columns: minmax(320px, 0.92fr) minmax(0, 1.08fr);
-  min-height: 252px;
-  border: 1px solid var(--journal-line-strong);
-  border-radius: 12px;
-  background: var(--journal-panel);
-  color: inherit;
-  text-decoration: none;
-  overflow: hidden;
 }
 
 .imageFrame,
@@ -265,13 +249,6 @@
   color: #62d7d2;
 }
 
-.featuredContent {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: clamp(1.45rem, 2.5vw, 2.35rem);
-}
-
 .category {
   color: var(--journal-cyan);
   font-size: 0.62rem;
@@ -280,39 +257,6 @@
   text-transform: uppercase;
 }
 
-.featuredContent h2 {
-  margin: 0.7rem 0 0;
-  font-size: clamp(1.8rem, 3vw, 3.15rem);
-  line-height: 1.05;
-  letter-spacing: -0.04em;
-}
-
-.featuredContent > p {
-  margin: 1rem 0 0;
-  color: var(--journal-muted);
-  font-size: 0.86rem;
-  line-height: 1.65;
-}
-
-.metaRow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.9rem;
-  align-items: center;
-  margin-top: 1.4rem;
-  padding-top: 0.9rem;
-  border-top: 1px solid var(--journal-line);
-  color: #748994;
-  font-size: 0.64rem;
-}
-
-.metaRow strong {
-  margin-left: auto;
-  color: var(--journal-cyan);
-}
-
-.metaRow span,
-.metaRow strong,
 .articleMeta span {
   display: inline-flex;
   gap: 0.35rem;
@@ -784,15 +728,6 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .featuredCard {
-    grid-template-columns: 1fr;
-  }
-
-  .featuredCard .imageFrame,
-  .featuredCard .imageFallback {
-    min-height: 240px;
-  }
-
   .editorWrap {
     transform: none;
   }
@@ -914,21 +849,18 @@
 
 :global([data-theme='light']) .hero h1,
 :global([data-theme='light']) .sectionHeader h2,
-:global([data-theme='light']) .featuredContent h2,
 :global([data-theme='light']) .articleCard h3,
 :global([data-theme='light']) .newsletter h2 {
   color: #0b1e2a;
 }
 
 :global([data-theme='light']) .heroCopy > p:last-of-type,
-:global([data-theme='light']) .featuredContent > p,
 :global([data-theme='light']) .articleCard > p,
 :global([data-theme='light']) .newsletterCopy > span {
   color: #526974;
 }
 
 :global([data-theme='light']) .metricCard,
-:global([data-theme='light']) .featuredCard,
 :global([data-theme='light']) .articleCard,
 :global([data-theme='light']) .sidebarCard,
 :global([data-theme='light']) .newsletter,
@@ -943,20 +875,17 @@
 }
 
 :global([data-theme='light']) .metricCard:hover,
-:global([data-theme='light']) .articleCard:hover,
-:global([data-theme='light']) .featuredCard:hover {
+:global([data-theme='light']) .articleCard:hover {
   border-color: rgba(8, 127, 140, 0.32);
   box-shadow: 0 22px 54px rgba(30, 70, 85, 0.13);
 }
 
 :global([data-theme='light']) .metrics dd,
-:global([data-theme='light']) .featuredContent h2,
 :global([data-theme='light']) .articleCard h3 {
   color: #112935;
 }
 
 :global([data-theme='light']) .metrics dt,
-:global([data-theme='light']) .metaRow,
 :global([data-theme='light']) .articleMeta,
 :global([data-theme='light']) .sectionHeader > span {
   color: #687f89;
@@ -1007,10 +936,6 @@
 :global([data-theme='light']) .sectionHeader > p,
 :global([data-theme='light']) .newsletterCopy > p {
   color: #087f8c;
-}
-
-:global([data-theme='light']) .metaRow {
-  border-top-color: rgba(35, 79, 96, 0.12);
 }
 
 :global([data-theme='light']) .newsletter {
