@@ -13,6 +13,7 @@ import { getHomepageContent, getPublishedBlogPosts, getSiteFooterGitHubFeed } fr
 
 import styles from '@/app/(frontend)/styles/pages/blog.module.scss'
 
+import articleCardStyles from './BlogArticleCards.module.scss'
 import mediaStyles from './BlogArticleMedia.module.scss'
 import shellStyles from './BlogPageShell.module.scss'
 import heroStyles from './BlogHero.module.scss'
@@ -582,26 +583,26 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   />
                 </div>
 
-                <ul className={styles.articleGrid}>
+                <ul className={articleCardStyles.articleGrid}>
                   {visiblePosts.map((post) => (
                     <li key={post.id}>
-                      <Link className={styles.articleCard} href={`/blog/${post.slug}`}>
+                      <Link className={articleCardStyles.articleCard} href={`/blog/${post.slug}`}>
                         <ArticleImage post={post} />
-                        <span aria-hidden="true" className={styles.cardIndex}>
+                        <span aria-hidden="true" className={articleCardStyles.cardIndex}>
                           {String(
                             (currentPage - 1) * POSTS_PER_PAGE +
                               visiblePosts.findIndex((item) => item.id === post.id) +
                               1,
                           ).padStart(2, '0')}
                         </span>
-                        <div className={styles.articleContent}>
+                        <div className={articleCardStyles.articleContent}>
                           <div>
                             <span className={mediaStyles.category}>{categoryLabel(post)}</span>
                             <h3>{post.title}</h3>
                             <p>{post.excerpt}</p>
                           </div>
 
-                          <div className={styles.articleMeta}>
+                          <div className={articleCardStyles.articleMeta}>
                             <span>
                               <JournalIcon name="calendar" size={12} />
                               {publishedLabel(post)}
