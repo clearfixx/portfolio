@@ -13,6 +13,7 @@ import { getHomepageContent, getPublishedBlogPosts, getSiteFooterGitHubFeed } fr
 
 import styles from '@/app/(frontend)/styles/pages/blog.module.scss'
 
+import mediaStyles from './BlogArticleMedia.module.scss'
 import shellStyles from './BlogPageShell.module.scss'
 import heroStyles from './BlogHero.module.scss'
 import heroMetricsStyles from './BlogHeroMetrics.module.scss'
@@ -302,7 +303,7 @@ function ArticleImage({
   if (!src) {
     return (
       <TechnicalPreviewPlaceholder
-        className={[styles.imageFallback, className].filter(Boolean).join(' ')}
+        className={[mediaStyles.imageFallback, className].filter(Boolean).join(' ')}
         label={categoryLabel(post)}
         variant="code"
       />
@@ -310,7 +311,7 @@ function ArticleImage({
   }
 
   return (
-    <div className={[styles.imageFrame, className].filter(Boolean).join(' ')}>
+    <div className={[mediaStyles.imageFrame, className].filter(Boolean).join(' ')}>
       <Image
         alt={alt}
         fill
@@ -518,7 +519,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                       priority
                     />
                     <div className={featuredStyles.featuredContent}>
-                      <span className={styles.category}>{categoryLabel(featuredPost)}</span>
+                      <span className={mediaStyles.category}>{categoryLabel(featuredPost)}</span>
                       <h2 id="featured-title">{featuredPost.title}</h2>
                       <p>{featuredPost.excerpt}</p>
 
@@ -595,7 +596,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                         </span>
                         <div className={styles.articleContent}>
                           <div>
-                            <span className={styles.category}>{categoryLabel(post)}</span>
+                            <span className={mediaStyles.category}>{categoryLabel(post)}</span>
                             <h3>{post.title}</h3>
                             <p>{post.excerpt}</p>
                           </div>

@@ -1,0 +1,55 @@
+/* Shared Blog article media shell and category label. */
+
+.imageFrame,
+.imageFallback {
+  position: relative;
+  min-height: 100%;
+  overflow: hidden;
+  background: #071421;
+}
+
+
+.imageFrame img {
+  object-fit: cover;
+}
+
+
+.imageFallback {
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(rgba(24, 226, 229, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(24, 226, 229, 0.05) 1px, transparent 1px), #071421;
+  background-size: 24px 24px;
+}
+
+
+.category {
+  color: var(--journal-cyan);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+
+:global([data-theme='light']) .imageFrame,
+:global([data-theme='light']) .imageFallback {
+  background: #e8f0f3;
+}
+
+
+:global([data-theme='light']) .imageFallback {
+  background:
+    linear-gradient(rgba(8, 127, 140, 0.075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(8, 127, 140, 0.075) 1px, transparent 1px),
+    linear-gradient(145deg, #eef5f7, #e7eef4);
+  background-size:
+    24px 24px,
+    24px 24px,
+    auto;
+}
+
+:global([data-theme='light']) .category {
+  color: #087f8c;
+}

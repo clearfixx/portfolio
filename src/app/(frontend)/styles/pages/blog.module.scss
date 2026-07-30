@@ -24,27 +24,6 @@
   text-transform: uppercase;
 }
 
-.imageFrame,
-.imageFallback {
-  position: relative;
-  min-height: 100%;
-  overflow: hidden;
-  background: #071421;
-}
-
-.imageFrame img {
-  object-fit: cover;
-}
-
-.imageFallback {
-  display: grid;
-  place-items: center;
-  background:
-    linear-gradient(rgba(24, 226, 229, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(24, 226, 229, 0.05) 1px, transparent 1px), #071421;
-  background-size: 24px 24px;
-}
-
 .placeholderCode {
   display: grid;
   grid-template-columns: 26px minmax(0, 1fr);
@@ -62,14 +41,6 @@
 
 .placeholderCode code {
   color: #62d7d2;
-}
-
-.category {
-  color: var(--journal-cyan);
-  font-size: 0.62rem;
-  font-weight: 800;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
 }
 
 .articleMeta span {
@@ -571,22 +542,6 @@
   color: #687f89;
 }
 
-:global([data-theme='light']) .imageFrame,
-:global([data-theme='light']) .imageFallback {
-  background: #e8f0f3;
-}
-
-:global([data-theme='light']) .imageFallback {
-  background:
-    linear-gradient(rgba(8, 127, 140, 0.075) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(8, 127, 140, 0.075) 1px, transparent 1px),
-    linear-gradient(145deg, #eef5f7, #e7eef4);
-  background-size:
-    24px 24px,
-    24px 24px,
-    auto;
-}
-
 :global([data-theme='light']) .placeholderCode {
   color: #58727e;
 }
@@ -599,7 +554,6 @@
   color: #087f8c;
 }
 
-:global([data-theme='light']) .category,
 :global([data-theme='light']) .newsletterCopy > p {
   color: #087f8c;
 }
