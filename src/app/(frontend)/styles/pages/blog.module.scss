@@ -339,44 +339,6 @@
   margin-top: clamp(3rem, 5vw, 4.5rem);
 }
 
-.toolbar {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.tabs {
-  display: flex;
-  gap: 1.2rem;
-  align-items: center;
-  min-height: 42px;
-  border-bottom: 1px solid var(--journal-line);
-}
-
-.tabs a {
-  position: relative;
-  padding: 0.7rem 0;
-  color: #758995;
-  font-size: 0.7rem;
-  text-decoration: none;
-}
-
-.tabs a[aria-current='page'] {
-  color: #eefbff;
-}
-
-.tabs a[aria-current='page']::after {
-  position: absolute;
-  right: 0;
-  bottom: -1px;
-  left: 0;
-  height: 2px;
-  background: var(--journal-cyan);
-  content: '';
-}
-
 .filters {
   display: flex;
   gap: 0.55rem;
@@ -842,11 +804,6 @@
 @media (max-width: 900px) {
   .hero {
     grid-template-columns: 1fr;
-  }
-
-  .toolbar {
-    align-items: stretch;
-    flex-direction: column;
   }
 
   .filters {
@@ -1396,26 +1353,6 @@
   font-weight: 650;
 }
 
-.toolbar {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: clamp(1.5rem, 2.5vw, 3rem);
-  align-items: end;
-  margin-bottom: 1.35rem;
-}
-
-.tabs {
-  gap: 1.6rem;
-  min-height: 48px;
-}
-
-.tabs a {
-  padding: 0.85rem 0;
-  font-size: 0.92rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
 .filters {
   display: grid;
   grid-template-columns: minmax(280px, 1fr) minmax(150px, 0.48fr) minmax(150px, 0.48fr) auto;
@@ -1563,17 +1500,6 @@
   background: rgba(8, 127, 140, 0.065);
 }
 
-@media (max-width: 1120px) {
-  .toolbar {
-    grid-template-columns: 1fr;
-    align-items: stretch;
-  }
-
-  .tabs {
-    width: max-content;
-  }
-}
-
 @media (max-width: 820px) {
   .filters {
     grid-template-columns: minmax(0, 1fr) minmax(150px, 0.5fr);
@@ -1585,11 +1511,6 @@
 }
 
 @media (max-width: 560px) {
-  .tabs {
-    width: 100%;
-    justify-content: space-between;
-  }
-
   .filters {
     grid-template-columns: 1fr;
   }
@@ -1597,14 +1518,6 @@
   .search {
     grid-column: auto;
   }
-}
-
-/* blog-filter-toolbar-ux-v1:end */
-
-/* blog-custom-filter-selects-v2:start */
-
-.tabs a[aria-current='page'] {
-  font-weight: 750;
 }
 
 .filterSelect {
@@ -1745,20 +1658,6 @@
 .filterSelectOption[aria-selected='true'] i {
   background: var(--journal-cyan);
   box-shadow: 0 0 11px rgba(24, 226, 229, 0.72);
-}
-
-:global([data-theme='light']) .tabs a {
-  color: #637b86;
-}
-
-:global([data-theme='light']) .tabs a[aria-current='page'] {
-  color: #0d2632;
-}
-
-:global([data-theme='light']) .tabs a[aria-current='page']::after {
-  height: 3px;
-  background: #087f8c;
-  box-shadow: 0 0 10px rgba(8, 127, 140, 0.28);
 }
 
 :global([data-theme='light']) .filterSelectButton {

@@ -13,6 +13,7 @@ import { getHomepageContent, getPublishedBlogPosts, getSiteFooterGitHubFeed } fr
 
 import styles from '@/app/(frontend)/styles/pages/blog.module.scss'
 
+import toolbarStyles from './BlogArticleToolbar.module.scss'
 import railStyles from './BlogRail.module.scss'
 
 import paginationStyles from './BlogPagination.module.scss'
@@ -536,8 +537,8 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   <span>{registryPosts.length} entries</span>
                 </header>
 
-                <div className={styles.toolbar}>
-                  <nav className={styles.tabs} aria-label="Article sorting">
+                <div className={toolbarStyles.toolbar}>
+                  <nav className={toolbarStyles.tabs} aria-label="Article sorting">
                     {(['latest', 'popular', 'updated'] as const).map((sort) => (
                       <Link
                         aria-current={selectedSort === sort ? 'page' : undefined}
