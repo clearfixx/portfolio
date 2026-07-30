@@ -11,9 +11,7 @@ import {
   useState,
   useTransition,
 } from 'react'
-
-import styles from '@/app/(frontend)/styles/pages/blog.module.scss'
-
+import iconStyles from './BlogIcon.module.scss'
 import filterStyles from './BlogArticleFilters.module.scss'
 type FilterOption = {
   label: string
@@ -35,7 +33,7 @@ function FilterIcon({ name }: { name: FilterIconName }) {
   return (
     <svg
       aria-hidden="true"
-      className={styles.icon}
+      className={iconStyles.icon}
       fill="none"
       height="18"
       viewBox="0 0 24 24"
@@ -218,7 +216,7 @@ export function BlogArticleFilters({
   return (
     <form className={filterStyles.filters} onSubmit={submitFilters}>
       <label className={filterStyles.search}>
-        <span className={styles.srOnly}>Search articles</span>
+        <span className={filterStyles.srOnly}>Search articles</span>
         <FilterIcon name="search" />
         <input
           autoComplete="off"

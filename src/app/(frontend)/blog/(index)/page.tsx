@@ -10,9 +10,7 @@ import { BlogRegistryEditor } from '@/components/blog/BlogRegistryEditor'
 import { TechnicalPreviewPlaceholder } from '@/components/blog/TechnicalPreviewPlaceholder'
 import type { BlogPost, Category, Media } from '@/payload-types'
 import { getHomepageContent, getPublishedBlogPosts, getSiteFooterGitHubFeed } from '@/lib/cms'
-
-import styles from '@/app/(frontend)/styles/pages/blog.module.scss'
-
+import iconStyles from '@/components/blog/BlogIcon.module.scss'
 import newsletterStyles from './BlogNewsletter.module.scss'
 import articleCardStyles from './BlogArticleCards.module.scss'
 import mediaStyles from './BlogArticleMedia.module.scss'
@@ -25,7 +23,7 @@ import toolbarStyles from './BlogArticleToolbar.module.scss'
 import railStyles from './BlogRail.module.scss'
 
 import paginationStyles from './BlogPagination.module.scss'
-const blogRailIconClassName = [styles.icon, railStyles.icon].join(' ')
+const blogRailIconClassName = [iconStyles.icon, railStyles.icon].join(' ')
 export const revalidate = 300
 
 export const metadata: Metadata = {
@@ -548,7 +546,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 </section>
               ) : null}
 
-              <section className={styles.articlesSection} aria-labelledby="articles-title">
+              <section className={toolbarStyles.articlesSection} aria-labelledby="articles-title">
                 <header className={sectionHeaderStyles.sectionHeader}>
                   <div>
                     <p>
