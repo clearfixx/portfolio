@@ -1,0 +1,451 @@
+/* Blog newsletter CTA, pipeline visualization and subscription form. */
+
+.newsletter p {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  margin: 0;
+  color: var(--journal-cyan);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+
+.newsletter {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(220px, 0.45fr) minmax(320px, 0.72fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: center;
+  overflow: hidden;
+  margin-top: clamp(2.5rem, 4vw, 4rem);
+  padding: clamp(1.7rem, 2.5vw, 2.35rem);
+  border: 1px solid rgba(107, 220, 228, 0.28);
+  border-radius: 14px;
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.055), transparent 27%),
+    radial-gradient(circle at 68% 45%, rgba(24, 226, 229, 0.1), transparent 28%),
+    linear-gradient(180deg, rgba(9, 28, 43, 0.94), rgba(3, 15, 27, 0.96));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 28px 80px rgba(0, 0, 0, 0.2);
+}
+
+
+.newsletter::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: linear-gradient(180deg, transparent, var(--journal-cyan), transparent);
+  content: '';
+}
+
+
+.newsletter::after {
+  position: absolute;
+  top: 0;
+  right: 8%;
+  left: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(204, 250, 255, 0.65), transparent);
+  content: '';
+}
+
+
+.newsletterCopy {
+  min-width: 0;
+}
+
+
+.newsletter h2 {
+  max-width: 720px;
+  margin: 0.45rem 0 0;
+  color: #f8fdff;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  text-shadow: 0 0 28px rgba(255, 255, 255, 0.08);
+}
+
+
+.newsletterCopy > span {
+  display: block;
+  max-width: 620px;
+  margin-top: 0.5rem;
+  color: #c0d0d7;
+  line-height: 1.65;
+}
+
+
+.newsletterPipeline {
+  position: relative;
+  min-width: 0;
+  max-width: 250px;
+  justify-self: center;
+  padding: 0.75rem 0.1rem 0;
+}
+
+
+.pipelineTrack {
+  position: absolute;
+  top: 30px;
+  right: 9%;
+  left: 9%;
+  height: 1px;
+  overflow: hidden;
+  background: rgba(77, 203, 214, 0.18);
+}
+
+
+.pipelineLine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(24, 226, 229, 0.55), transparent);
+}
+
+
+.pipelineSignal {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--journal-cyan);
+  box-shadow: 0 0 14px rgba(24, 226, 229, 0.75);
+  transform: translate(-50%, -50%);
+  animation: journal-pipeline-signal 4.8s linear infinite;
+}
+
+
+.pipelineNodes {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+
+.pipelineNodes > div {
+  display: grid;
+  justify-items: center;
+  gap: 0.18rem;
+  text-align: center;
+}
+
+
+.pipelineIcon {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid rgba(152, 239, 244, 0.44);
+  border-radius: 50%;
+  color: #bdfcff;
+  background: radial-gradient(circle, rgba(24, 226, 229, 0.13), transparent 65%), #071826;
+  box-shadow:
+    0 0 0 5px rgba(4, 16, 27, 0.88),
+    0 0 22px rgba(24, 226, 229, 0.12);
+}
+
+
+.pipelineNodes strong {
+  margin-top: 0.35rem;
+  color: #dcebf0;
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+
+.pipelineNodes small {
+  color: #617782;
+  font-size: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+
+@keyframes journal-pipeline-signal {
+  from {
+    left: 0;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+
+.newsletter form {
+  display: flex;
+  min-height: 46px;
+  padding: 0 0.25rem 0 0.6rem;
+  border: 1px solid rgba(107, 220, 228, 0.25);
+  border-radius: 8px;
+  background: rgba(1, 10, 19, 0.58);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+
+.newsletter label {
+  flex: 1;
+}
+
+
+.newsletter input {
+  width: 100%;
+  height: 44px;
+  padding: 0 0.7rem;
+  border: 0;
+  outline: 0;
+  color: #eefbff;
+  background: transparent;
+}
+
+
+.newsletter button {
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
+  border: 0;
+  color: var(--journal-cyan);
+  background: transparent;
+  font-weight: 800;
+}
+
+@media (max-width: 900px) {
+
+.newsletter {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+
+
+.newsletterPipeline {
+    max-width: 460px;
+  }
+}
+
+
+@media (max-width: 650px) {
+
+.newsletterPipeline {
+    display: none;
+  }
+}
+
+
+:global([data-theme='light']) .newsletter h2 {
+  color: #0b1e2a;
+}
+
+
+:global([data-theme='light']) .newsletterCopy > span {
+  color: #526974;
+}
+
+:global([data-theme='light']) .newsletter {
+  border-color: rgba(35, 79, 96, 0.15);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(245, 250, 251, 0.92));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 18px 45px rgba(30, 70, 85, 0.09);
+}
+
+
+:global([data-theme='light']) .newsletterCopy > p {
+  color: #087f8c;
+}
+
+
+:global([data-theme='light']) .newsletter {
+  background:
+    radial-gradient(circle at 84% 18%, rgba(120, 71, 199, 0.11), transparent 20rem),
+    radial-gradient(circle at 16% 40%, rgba(8, 127, 140, 0.1), transparent 18rem),
+    rgba(255, 255, 255, 0.94);
+}
+
+:global([data-theme='light']) .newsletter input {
+  border-color: rgba(35, 79, 96, 0.17);
+  background: rgba(248, 251, 252, 0.95);
+  color: #17303c;
+}
+
+:global([data-theme='light']) .newsletter input::placeholder {
+  color: #8ba0a9;
+}
+
+:global([data-theme='light']) .newsletter button {
+  border-color: rgba(8, 127, 140, 0.34);
+  background: rgba(8, 127, 140, 0.08);
+  color: #087f8c;
+}
+
+
+/* blog-dropdown-visual-refinement-v3:end */
+
+/* blog-sidebar-newsletter-form-polish-v1:start */
+
+/*
+ * Sidebar rows previously received extra padding only in the light theme.
+ * Apply the same row geometry in both themes so card heights and inner rhythm
+ * no longer change when the theme switches.
+ */
+
+/*
+ * Make the newsletter control own its full geometry. Explicit sizing,
+ * typography and appearance prevent browser/button defaults from producing
+ * the oversized grey control visible in the light theme.
+ */
+
+
+.newsletter form {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(107, 220, 228, 0.28);
+  border-radius: 9px;
+  background: rgba(1, 10, 19, 0.58);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+
+.newsletter label {
+  display: block;
+  min-width: 0;
+}
+
+
+.newsletter input {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: 50px;
+  padding: 0 1rem;
+  border: 0;
+  outline: 0;
+  color: #eefbff;
+  background: transparent;
+  caret-color: var(--journal-cyan);
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+
+.newsletter input::placeholder {
+  color: #7d929d;
+  opacity: 1;
+}
+
+
+.newsletter form:focus-within {
+  border-color: rgba(24, 226, 229, 0.5);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 0 0 3px rgba(24, 226, 229, 0.06),
+    0 14px 34px rgba(0, 0, 0, 0.14);
+}
+
+
+.newsletter button {
+  appearance: none;
+  display: inline-flex;
+  min-width: 132px;
+  min-height: 50px;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  border: 0;
+  border-left: 1px solid rgba(107, 220, 228, 0.2);
+  border-radius: 0;
+  color: var(--journal-cyan);
+  background: rgba(24, 226, 229, 0.075);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1;
+  transition:
+    color 150ms ease,
+    background 150ms ease;
+}
+
+
+.newsletter button:hover,
+.newsletter button:focus-visible {
+  outline: 0;
+  color: #bffefa;
+  background: rgba(24, 226, 229, 0.13);
+}
+
+
+:global([data-theme='light']) .newsletter form {
+  border-color: rgba(35, 79, 96, 0.2);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    0 12px 30px rgba(30, 70, 85, 0.08);
+}
+
+
+:global([data-theme='light']) .newsletter input {
+  color: #17303c;
+  background: transparent;
+}
+
+
+:global([data-theme='light']) .newsletter input::placeholder {
+  color: #7a909b;
+}
+
+
+:global([data-theme='light']) .newsletter form:focus-within {
+  border-color: rgba(8, 127, 140, 0.42);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 0 0 3px rgba(8, 127, 140, 0.07),
+    0 14px 34px rgba(30, 70, 85, 0.1);
+}
+
+
+:global([data-theme='light']) .newsletter button {
+  border-left-color: rgba(35, 79, 96, 0.16);
+  color: #087f8c;
+  background: rgba(8, 127, 140, 0.075);
+}
+
+
+:global([data-theme='light']) .newsletter button:hover,
+:global([data-theme='light']) .newsletter button:focus-visible {
+  color: #056a74;
+  background: rgba(8, 127, 140, 0.13);
+}
+
+
+@media (max-width: 650px) {
+
+.newsletter form {
+    grid-template-columns: 1fr;
+  }
+
+
+.newsletter button {
+    min-height: 46px;
+    border-top: 1px solid rgba(107, 220, 228, 0.2);
+    border-left: 0;
+  }
+
+
+:global([data-theme='light']) .newsletter button {
+    border-top-color: rgba(35, 79, 96, 0.16);
+  }
+}

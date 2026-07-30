@@ -13,6 +13,7 @@ import { getHomepageContent, getPublishedBlogPosts, getSiteFooterGitHubFeed } fr
 
 import styles from '@/app/(frontend)/styles/pages/blog.module.scss'
 
+import newsletterStyles from './BlogNewsletter.module.scss'
 import articleCardStyles from './BlogArticleCards.module.scss'
 import mediaStyles from './BlogArticleMedia.module.scss'
 import shellStyles from './BlogPageShell.module.scss'
@@ -158,36 +159,36 @@ function JournalIcon({ name, size = 14 }: { name: JournalIconName; size?: number
 
 function NewsletterPipeline() {
   return (
-    <div aria-hidden="true" className={styles.newsletterPipeline}>
-      <div className={styles.pipelineTrack}>
-        <span className={styles.pipelineLine} />
-        <span className={styles.pipelineSignal} />
+    <div aria-hidden="true" className={newsletterStyles.newsletterPipeline}>
+      <div className={newsletterStyles.pipelineTrack}>
+        <span className={newsletterStyles.pipelineLine} />
+        <span className={newsletterStyles.pipelineSignal} />
       </div>
 
-      <div className={styles.pipelineNodes}>
+      <div className={newsletterStyles.pipelineNodes}>
         <div>
-          <span className={styles.pipelineIcon}>
+          <span className={newsletterStyles.pipelineIcon}>
             <JournalIcon name="arrow" size={15} />
           </span>
           <strong>Commit</strong>
           <small>main</small>
         </div>
         <div>
-          <span className={styles.pipelineIcon}>
+          <span className={newsletterStyles.pipelineIcon}>
             <JournalIcon name="radio" size={15} />
           </span>
           <strong>Publish</strong>
           <small>journal</small>
         </div>
         <div>
-          <span className={styles.pipelineIcon}>
+          <span className={newsletterStyles.pipelineIcon}>
             <JournalIcon name="folder" size={15} />
           </span>
           <strong>Feed</strong>
           <small>RSS</small>
         </div>
         <div>
-          <span className={styles.pipelineIcon}>
+          <span className={newsletterStyles.pipelineIcon}>
             <JournalIcon name="book" size={15} />
           </span>
           <strong>Inbox</strong>
@@ -817,8 +818,8 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             </section>
           ) : null}
 
-          <section className={styles.newsletter}>
-            <div className={styles.newsletterCopy}>
+          <section className={newsletterStyles.newsletter}>
+            <div className={newsletterStyles.newsletterCopy}>
               <p>
                 <span aria-hidden="true">{'//'}</span>
                 Journal updates
