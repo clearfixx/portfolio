@@ -13,6 +13,7 @@ import { getHomepageContent, getPublishedBlogPosts, getSiteFooterGitHubFeed } fr
 
 import styles from '@/app/(frontend)/styles/pages/blog.module.scss'
 
+import sectionHeaderStyles from './BlogSectionHeader.module.scss'
 import featuredStyles from './BlogFeaturedArticle.module.scss'
 import toolbarStyles from './BlogArticleToolbar.module.scss'
 import railStyles from './BlogRail.module.scss'
@@ -497,7 +498,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   className={featuredStyles.featuredSection}
                   aria-labelledby="featured-title"
                 >
-                  <header className={styles.sectionHeader}>
+                  <header className={sectionHeaderStyles.sectionHeader}>
                     <p>
                       <span aria-hidden="true">{'//'}</span>
                       Featured article
@@ -542,7 +543,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               ) : null}
 
               <section className={styles.articlesSection} aria-labelledby="articles-title">
-                <header className={styles.sectionHeader}>
+                <header className={sectionHeaderStyles.sectionHeader}>
                   <div>
                     <p>
                       <span aria-hidden="true">{'//'}</span>

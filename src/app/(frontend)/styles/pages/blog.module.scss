@@ -53,7 +53,6 @@
 }
 
 .eyebrow,
-.sectionHeader p,
 .newsletter p {
   display: flex;
   gap: 0.6rem;
@@ -186,27 +185,6 @@
   border-radius: 15px;
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
   transform: none;
-}
-
-.sectionHeader {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  align-items: end;
-  margin-bottom: 0.9rem;
-}
-
-.sectionHeader h2 {
-  margin: 0.45rem 0 0;
-  font-size: clamp(1.8rem, 3vw, 3rem);
-  letter-spacing: -0.035em;
-}
-
-.sectionHeader > span {
-  color: #718691;
-  font-size: 0.62rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 .imageFrame,
@@ -848,7 +826,6 @@
 }
 
 :global([data-theme='light']) .hero h1,
-:global([data-theme='light']) .sectionHeader h2,
 :global([data-theme='light']) .articleCard h3,
 :global([data-theme='light']) .newsletter h2 {
   color: #0b1e2a;
@@ -886,8 +863,7 @@
 }
 
 :global([data-theme='light']) .metrics dt,
-:global([data-theme='light']) .articleMeta,
-:global([data-theme='light']) .sectionHeader > span {
+:global([data-theme='light']) .articleMeta {
   color: #687f89;
 }
 
@@ -933,7 +909,6 @@
 
 :global([data-theme='light']) .category,
 :global([data-theme='light']) .eyebrow,
-:global([data-theme='light']) .sectionHeader > p,
 :global([data-theme='light']) .newsletterCopy > p {
   color: #087f8c;
 }
@@ -1205,15 +1180,6 @@
 :global([data-theme='light']) .page::after {
   display: none;
   background: none;
-}
-
-/* public-blog-light-shell-ownership-v5:end */
-
-/* blog-filter-toolbar-ux-v1:start */
-
-.sectionHeader > span {
-  font-size: 0.76rem;
-  font-weight: 650;
 }
 
 /* blog-dropdown-visual-refinement-v3:end */

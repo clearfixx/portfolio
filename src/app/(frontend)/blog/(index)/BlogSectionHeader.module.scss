@@ -1,0 +1,60 @@
+/* Shared headings for Featured article and Latest articles. */
+
+.sectionHeader p {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  margin: 0;
+  color: var(--journal-cyan);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: end;
+  margin-bottom: 0.9rem;
+}
+
+
+.sectionHeader h2 {
+  margin: 0.45rem 0 0;
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  letter-spacing: -0.035em;
+}
+
+
+.sectionHeader > span {
+  color: #718691;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+:global([data-theme='light']) .sectionHeader h2 {
+  color: #0b1e2a;
+}
+
+:global([data-theme='light']) .sectionHeader > span {
+  color: #687f89;
+}
+
+:global([data-theme='light']) .sectionHeader > p {
+  color: #087f8c;
+}
+
+
+/* public-blog-light-shell-ownership-v5:end */
+
+/* blog-filter-toolbar-ux-v1:start */
+
+
+.sectionHeader > span {
+  font-size: 0.76rem;
+  font-weight: 650;
+}
