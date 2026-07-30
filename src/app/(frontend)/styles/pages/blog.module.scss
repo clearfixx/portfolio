@@ -548,8 +548,7 @@
   align-items: center;
 }
 
-.pagination > a,
-.paginationItem a {
+.pagination > a {
   display: grid;
   min-width: 36px;
   height: 36px;
@@ -561,8 +560,7 @@
   text-decoration: none;
 }
 
-.pagination > a:hover,
-.paginationItem a:hover {
+.pagination > a:hover {
   border-color: var(--journal-line-strong);
   color: #eafbff;
 }
@@ -576,17 +574,6 @@
 .pagination a[aria-disabled='true'] {
   pointer-events: none;
   opacity: 0.28;
-}
-
-.paginationItem {
-  display: inline-flex;
-  gap: 0.35rem;
-  align-items: center;
-}
-
-.paginationItem i {
-  color: #526771;
-  font-style: normal;
 }
 
 .paginationControls {
@@ -1206,8 +1193,7 @@
   gap: 0.38rem;
 }
 
-:global([data-theme='light']) .pagination > a,
-:global([data-theme='light']) .paginationItem a {
+:global([data-theme='light']) .pagination > a {
   min-width: 2.35rem;
   height: 2.35rem;
   border-color: rgba(35, 79, 96, 0.12);
@@ -1223,8 +1209,7 @@
     transform 150ms ease;
 }
 
-:global([data-theme='light']) .pagination > a:hover,
-:global([data-theme='light']) .paginationItem a:hover {
+:global([data-theme='light']) .pagination > a:hover {
   border-color: rgba(8, 127, 140, 0.3);
   background: rgba(8, 127, 140, 0.07);
   color: #087f8c;
@@ -1239,10 +1224,6 @@
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.45),
     0 8px 20px rgba(8, 127, 140, 0.1);
-}
-
-:global([data-theme='light']) .paginationItem i {
-  color: #8ba0a9;
 }
 
 :global([data-theme='light']) .paginationControls {

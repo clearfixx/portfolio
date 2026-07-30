@@ -15,6 +15,7 @@ import styles from '@/app/(frontend)/styles/pages/blog.module.scss'
 
 import railStyles from './BlogRail.module.scss'
 
+import paginationStyles from './BlogPagination.module.scss'
 const blogRailIconClassName = [styles.icon, railStyles.icon].join(' ')
 export const revalidate = 300
 
@@ -695,8 +696,8 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           </div>
 
           {totalPages > 1 ? (
-            <section className={styles.paginationSection} aria-label="Journal pagination">
-              <div className={styles.paginationSummary}>
+            <section className={paginationStyles.paginationSection} aria-label="Journal pagination">
+              <div className={paginationStyles.paginationSummary}>
                 <p>
                   <span aria-hidden="true">{'//'}</span>
                   Journal index
@@ -707,7 +708,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 <span>{registryPosts.length} indexed entries</span>
               </div>
 
-              <nav className={styles.pagination} aria-label="Blog pagination">
+              <nav className={paginationStyles.pagination} aria-label="Blog pagination">
                 <Link
                   aria-disabled={currentPage === 1}
                   aria-label="First page"
@@ -730,7 +731,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   const hasGap = previousPage !== undefined && pageNumber - previousPage > 1
 
                   return (
-                    <span className={styles.paginationItem} key={pageNumber}>
+                    <span className={paginationStyles.paginationItem} key={pageNumber}>
                       {hasGap ? <i aria-hidden="true">…</i> : null}
                       <Link
                         aria-current={pageNumber === currentPage ? 'page' : undefined}
@@ -762,7 +763,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 </Link>
               </nav>
 
-              <div className={styles.paginationControls}>
+              <div className={paginationStyles.paginationControls}>
                 <form>
                   {params.q ? <input name="q" type="hidden" value={params.q} /> : null}
                   {params.topic ? <input name="topic" type="hidden" value={params.topic} /> : null}
@@ -809,7 +810,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
             <form>
               <label>
-                <span className={styles.srOnly}>Email address</span>
+                <span className={paginationStyles.srOnly}>Email address</span>
                 <input placeholder="Enter your email" type="email" />
               </label>
               <button type="submit">
