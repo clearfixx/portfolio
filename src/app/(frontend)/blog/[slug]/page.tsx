@@ -22,6 +22,7 @@ import type { BlogPost, Category, Media } from '@/payload-types'
 
 import styles from '@/app/(frontend)/styles/pages/blog-article.module.scss'
 
+import railStyles from './BlogArticleRail.module.scss'
 import layoutStyles from './BlogArticleLayout.module.scss'
 import contentStyles from './BlogArticleContent.module.scss'
 import heroStyles from './BlogArticleHero.module.scss'
@@ -398,9 +399,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </nav>
               </div>
 
-              <aside className={styles.rightRail}>
-                <div className={styles.authorCard}>
-                  <div className={styles.authorAvatar}>
+              <aside className={railStyles.rightRail}>
+                <div className={railStyles.authorCard}>
+                  <div className={railStyles.authorAvatar}>
                     {authorPortrait?.url ? (
                       <Image
                         alt={authorPortrait.alt || `Portrait of ${authorName}`}
@@ -427,7 +428,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </Link>
                 </div>
 
-                <div className={styles.progressCard}>
+                <div className={railStyles.progressCard}>
                   <p>Reading progress</p>
                   <BlogArticleActions mode="progress" slug={post.slug} title={post.title} />
                   <div>
@@ -437,7 +438,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </div>
 
                 {tags.length > 0 ? (
-                  <div className={styles.tagsCard}>
+                  <div className={railStyles.tagsCard}>
                     <p>
                       <ArticleIcon name="tag" />
                       Tags
@@ -452,7 +453,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </div>
                 ) : null}
 
-                <div className={styles.seriesCard}>
+                <div className={railStyles.seriesCard}>
                   <p>
                     <ArticleIcon name="folder" />
                     Series
