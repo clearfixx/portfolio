@@ -22,6 +22,7 @@ import type { BlogPost, Category, Media } from '@/payload-types'
 
 import styles from '@/app/(frontend)/styles/pages/blog-article.module.scss'
 
+import relatedStyles from './BlogArticleRelated.module.scss'
 import railStyles from './BlogArticleRail.module.scss'
 import layoutStyles from './BlogArticleLayout.module.scss'
 import contentStyles from './BlogArticleContent.module.scss'
@@ -380,7 +381,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   title={post.title}
                 />
 
-                <nav className={styles.articleNavigation} aria-label="Article navigation">
+                <nav className={relatedStyles.articleNavigation} aria-label="Article navigation">
                   {previousPost ? (
                     <Link href={`/blog/${previousPost.slug}`}>
                       <span>Previous article</span>
@@ -466,7 +467,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             {relatedPosts.length > 0 ? (
               <section
-                className={styles.related}
+                className={relatedStyles.related}
                 data-article-reveal
                 id="related-articles"
                 aria-labelledby="related-articles-title"
@@ -482,11 +483,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
                     return (
                       <Link
-                        className={styles.relatedCard}
+                        className={relatedStyles.relatedCard}
                         href={`/blog/${relatedPost.slug}`}
                         key={relatedPost.id}
                       >
-                        <div className={styles.relatedImage}>
+                        <div className={relatedStyles.relatedImage}>
                           {relatedCover?.url ? (
                             <Image
                               alt={relatedCover.alt}
@@ -502,7 +503,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                           )}
                         </div>
 
-                        <div className={styles.relatedContent}>
+                        <div className={relatedStyles.relatedContent}>
                           <span>{categoryLabel(relatedPost)}</span>
                           <h3>{relatedPost.title}</h3>
                           <p>
