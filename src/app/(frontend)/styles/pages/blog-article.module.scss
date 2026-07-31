@@ -836,19 +836,6 @@
   }
 }
 
-.articleReveal {
-  opacity: 0;
-  transform: translateY(14px);
-  transition:
-    opacity 520ms ease,
-    transform 520ms ease;
-}
-
-.articleRevealVisible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 @keyframes article-status-pulse {
   0%,
   100% {
@@ -863,12 +850,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .articleReveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
   .liveStatus i {
     animation: none;
   }

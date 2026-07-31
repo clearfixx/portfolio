@@ -2,8 +2,7 @@
 
 import { useEffect } from 'react'
 
-import styles from '@/app/(frontend)/styles/pages/blog-article.module.scss'
-
+import revealStyles from './BlogArticleReveal.module.scss'
 export function BlogArticleReveal() {
   useEffect(() => {
     const targets = Array.from(document.querySelectorAll<HTMLElement>('[data-article-reveal]'))
@@ -14,7 +13,7 @@ export function BlogArticleReveal() {
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return
-          entry.target.classList.add(styles.articleRevealVisible)
+          entry.target.classList.add(revealStyles.articleRevealVisible)
           observer.unobserve(entry.target)
         })
       },
@@ -22,7 +21,7 @@ export function BlogArticleReveal() {
     )
 
     targets.forEach((target) => {
-      target.classList.add(styles.articleReveal)
+      target.classList.add(revealStyles.articleReveal)
       observer.observe(target)
     })
 
