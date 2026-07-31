@@ -2,8 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 
-import styles from '@/app/(frontend)/styles/pages/blog-article.module.scss'
-
+import tocStyles from './BlogArticleToc.module.scss'
 type BlogArticleTocItem = {
   id: string
   label: string
@@ -50,17 +49,17 @@ export function BlogArticleToc({ items }: BlogArticleTocProps) {
   }, [validItems])
 
   return (
-    <nav className={styles.toc} aria-label="On this page">
+    <nav className={tocStyles.toc} aria-label="On this page">
       <p>On this page</p>
 
-      <div className={styles.tocList}>
+      <div className={tocStyles.tocList}>
         {validItems.map((item) => {
           const isActive = activeId === item.id
 
           return (
             <a
               aria-current={isActive ? 'location' : undefined}
-              className={isActive ? styles.tocLinkActive : undefined}
+              className={isActive ? tocStyles.tocLinkActive : undefined}
               href={`#${item.id}`}
               key={item.id}
             >
