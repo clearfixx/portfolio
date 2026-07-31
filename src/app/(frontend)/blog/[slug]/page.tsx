@@ -22,6 +22,7 @@ import type { BlogPost, Category, Media } from '@/payload-types'
 
 import styles from '@/app/(frontend)/styles/pages/blog-article.module.scss'
 
+import discussionStyles from './BlogArticleDiscussion.module.scss'
 import relatedStyles from './BlogArticleRelated.module.scss'
 import railStyles from './BlogArticleRail.module.scss'
 import layoutStyles from './BlogArticleLayout.module.scss'
@@ -341,7 +342,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 )}
 
                 <section className={contentStyles.overview} data-article-reveal id="overview">
-                  <p className={styles.sectionEyebrow}>Overview</p>
+                  <p className={discussionStyles.sectionEyebrow}>Overview</p>
                   <p>{post.excerpt}</p>
 
                   <div className={contentStyles.note}>
@@ -363,7 +364,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     data-article-reveal
                     id="key-takeaways"
                   >
-                    <p className={styles.sectionEyebrow}>Key takeaways</p>
+                    <p className={discussionStyles.sectionEyebrow}>Key takeaways</p>
                     <div>
                       {keyTakeaways.map((takeaway, index) => (
                         <article key={takeaway.id ?? `${post.id}-takeaway-${index}`}>
@@ -473,7 +474,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 aria-labelledby="related-articles-title"
               >
                 <header>
-                  <p className={styles.sectionEyebrow}>Continue reading</p>
+                  <p className={discussionStyles.sectionEyebrow}>Continue reading</p>
                   <h2 id="related-articles-title">Related articles</h2>
                 </header>
 
@@ -517,9 +518,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </section>
             ) : null}
 
-            <section className={styles.discuss} data-article-reveal>
+            <section className={discussionStyles.discuss} data-article-reveal>
               <div>
-                <p className={styles.sectionEyebrow}>Questions?</p>
+                <p className={discussionStyles.sectionEyebrow}>Questions?</p>
                 <h2>Let&apos;s discuss the implementation.</h2>
                 <p>Have a question about the architecture or want to build something similar?</p>
               </div>
