@@ -11,7 +11,7 @@ import {
   siX,
 } from 'simple-icons/icons'
 
-import styles from '@/app/(frontend)/styles/pages/blog-article.module.scss'
+import actionStyles from './BlogArticleActions.module.scss'
 import type { BlogFeedbackCounts } from '@/lib/cms'
 
 type BlogArticleActionsProps = {
@@ -200,7 +200,7 @@ export function BlogArticleActions({
 
     return (
       <div
-        className={`${styles.progressMeter} ${isComplete ? styles.progressMeterComplete : ''}`}
+        className={`${actionStyles.progressMeter} ${isComplete ? actionStyles.progressMeterComplete : ''}`}
         aria-label={isComplete ? 'Reading completed' : `${roundedProgress}% read`}
       >
         <div>
@@ -322,8 +322,8 @@ export function BlogArticleActions({
   ]
 
   return (
-    <section className={styles.actions} aria-label="Article actions">
-      <div className={styles.actionsIntro}>
+    <section className={actionStyles.actions} aria-label="Article actions">
+      <div className={actionStyles.actionsIntro}>
         <strong>Was this article useful?</strong>
         <span>
           {feedbackError ||
@@ -331,37 +331,37 @@ export function BlogArticleActions({
         </span>
       </div>
 
-      <div className={styles.feedbackButtons}>
+      <div className={actionStyles.feedbackButtons}>
         <button
           aria-pressed={feedback === 'helpful'}
-          className={styles.feedbackPositive}
+          className={actionStyles.feedbackPositive}
           disabled={isSubmitting}
           onClick={() => saveFeedback('helpful')}
           type="button"
         >
           <ActionIcon name="thumb-up" />
           Helpful
-          <span className={styles.feedbackCount}>{counts.helpful}</span>
+          <span className={actionStyles.feedbackCount}>{counts.helpful}</span>
         </button>
 
         <button
           aria-pressed={feedback === 'not-helpful'}
-          className={styles.feedbackNegative}
+          className={actionStyles.feedbackNegative}
           disabled={isSubmitting}
           onClick={() => saveFeedback('not-helpful')}
           type="button"
         >
           <ActionIcon name="thumb-down" />
           Not helpful
-          <span className={styles.feedbackCount}>{counts.notHelpful}</span>
+          <span className={actionStyles.feedbackCount}>{counts.notHelpful}</span>
         </button>
       </div>
 
-      <div className={styles.shareMenu} ref={shareMenuRef}>
+      <div className={actionStyles.shareMenu} ref={shareMenuRef}>
         <button
           aria-expanded={shareMenuOpen}
           aria-haspopup="menu"
-          className={styles.shareMenuTrigger}
+          className={actionStyles.shareMenuTrigger}
           onClick={() => setShareMenuOpen((current) => !current)}
           type="button"
         >
@@ -369,20 +369,20 @@ export function BlogArticleActions({
           Share article
           <ChevronDown
             aria-hidden="true"
-            className={styles.shareChevron}
+            className={actionStyles.shareChevron}
             size={15}
             strokeWidth={1.9}
           />
         </button>
 
         {shareMenuOpen ? (
-          <div className={styles.shareDropdown} role="menu">
-            <div className={styles.shareDropdownHeader}>
+          <div className={actionStyles.shareDropdown} role="menu">
+            <div className={actionStyles.shareDropdownHeader}>
               <strong>Share article</strong>
               <span>Choose a destination</span>
             </div>
 
-            <div className={styles.shareDropdownList}>
+            <div className={actionStyles.shareDropdownList}>
               {shareItems.map((item) => (
                 <button
                   data-share-target={item.target}
@@ -397,7 +397,7 @@ export function BlogArticleActions({
               ))}
             </div>
 
-            <div className={styles.shareDropdownFooter}>
+            <div className={actionStyles.shareDropdownFooter}>
               <button onClick={copyLink} role="menuitem" type="button">
                 <ActionIcon name="copy" />
                 <span>{copied ? 'Link copied' : 'Copy link'}</span>
