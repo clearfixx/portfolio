@@ -61,7 +61,6 @@
   box-shadow: 0 0 18px rgba(19, 242, 227, 0.08);
 }
 
-.eyebrow,
 .sectionEyebrow {
   margin: 0;
   color: var(--article-cyan);
@@ -69,11 +68,6 @@
   font-weight: 800;
   letter-spacing: 0.13em;
   text-transform: uppercase;
-}
-
-.eyebrow span {
-  margin-right: 0.55rem;
-  color: var(--article-violet);
 }
 
 .hero h1 {
@@ -84,30 +78,6 @@
   letter-spacing: -0.06em;
 }
 
-.excerpt {
-  max-width: 800px;
-  margin: 1.5rem 0 0;
-  color: #b6c7d0;
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
-  line-height: 1.72;
-}
-
-.heroMeta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 1rem;
-  margin-top: 1.5rem;
-  color: #7f949f;
-  font-size: 0.7rem;
-}
-
-.heroMeta span {
-  display: inline-flex;
-  gap: 0.42rem;
-  align-items: center;
-}
-
-.statusCard,
 .authorCard,
 .progressCard,
 .tagsCard,
@@ -117,52 +87,6 @@
   border-radius: 12px;
   background: var(--article-panel);
   box-shadow: 0 18px 55px rgba(0, 0, 0, 0.2);
-}
-
-.statusCard {
-  overflow: hidden;
-}
-
-.statusCard > div {
-  display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  gap: 0.75rem;
-  padding: 0.85rem 1rem;
-}
-
-.statusCard > div + div {
-  border-top: 1px solid var(--article-line);
-}
-
-.statusCard span {
-  color: #6f8490;
-  font-size: 0.62rem;
-}
-
-.statusCard strong {
-  color: #c7d4db;
-  font-size: 0.7rem;
-  text-transform: capitalize;
-}
-
-.liveStatus {
-  display: inline-flex;
-  gap: 0.42rem;
-  align-items: center;
-  color: #74f0a9 !important;
-}
-
-.liveStatus i {
-  width: 0.45rem;
-  height: 0.45rem;
-  border-radius: 50%;
-  background: #74f0a9;
-  box-shadow: 0 0 12px rgba(116, 240, 169, 0.7);
-  animation: article-status-pulse 2.1s ease-in-out infinite;
-}
-
-.difficulty {
-  color: var(--article-violet) !important;
 }
 
 .articleGrid {
@@ -779,10 +703,6 @@
     grid-template-columns: 1fr;
   }
 
-  .statusCard {
-    max-width: 560px;
-  }
-
   .articleGrid {
     grid-template-columns: 1fr;
   }
@@ -804,11 +724,6 @@
 
   .hero h1 {
     font-size: clamp(2.6rem, 14vw, 4.4rem);
-  }
-
-  .heroMeta {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
   }
 
   .rightRail,
@@ -834,83 +749,6 @@
     align-items: stretch;
     flex-direction: column;
   }
-}
-
-@keyframes article-status-pulse {
-  0%,
-  100% {
-    opacity: 0.75;
-    transform: scale(0.9);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.12);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .liveStatus i {
-    animation: none;
-  }
-}
-
-/* portfolio-blog-article-composition-v4:start */
-
-.heroGrid {
-  position: relative;
-  display: grid;
-  grid-template-columns: 225px minmax(0, 760px) 250px;
-  gap: clamp(1.5rem, 3vw, 2.5rem);
-  align-items: end;
-  justify-content: center;
-  padding: clamp(2.2rem, 4.5vw, 4rem) 0 1.65rem;
-}
-
-.heroGrid::after {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    rgba(19, 242, 227, 0.48),
-    rgba(168, 92, 255, 0.28) 70%,
-    transparent
-  );
-  content: '';
-  box-shadow: 0 0 18px rgba(19, 242, 227, 0.1);
-}
-
-.heroSpacer {
-  grid-column: 1;
-}
-
-.heroGrid .heroCopy {
-  grid-column: 2;
-  min-width: 0;
-}
-
-.heroGrid .statusCard {
-  grid-column: 3;
-  align-self: end;
-  width: 100%;
-  margin: 0;
-}
-
-.heroGrid h1 {
-  max-width: 760px;
-  margin: 0.9rem 0 0;
-  font-size: clamp(2.65rem, 4.4vw, 4.8rem);
-  line-height: 0.98;
-  letter-spacing: -0.055em;
-}
-
-.heroGrid .excerpt {
-  max-width: 720px;
-  margin-top: 1.2rem;
-  font-size: clamp(0.95rem, 1.25vw, 1.1rem);
 }
 
 .articleGrid {
@@ -1078,53 +916,13 @@
   font-size: 0.55rem;
 }
 
-@media (max-width: 1150px) {
-  .heroGrid {
-    grid-template-columns: minmax(0, 760px) 240px;
-  }
-
-  .heroSpacer {
-    display: none;
-  }
-
-  .heroGrid .heroCopy {
-    grid-column: 1;
-  }
-
-  .heroGrid .statusCard {
-    grid-column: 2;
-  }
-}
-
 @media (max-width: 900px) {
-  .heroGrid {
-    grid-template-columns: 1fr;
-    align-items: start;
-  }
-
-  .heroGrid .heroCopy,
-  .heroGrid .statusCard {
-    grid-column: 1;
-  }
-
-  .heroGrid .statusCard {
-    max-width: 560px;
-  }
-
   .relatedCard {
     grid-template-rows: 200px minmax(0, 1fr);
   }
 }
 
 @media (max-width: 650px) {
-  .heroGrid {
-    padding-top: 1.8rem;
-  }
-
-  .heroGrid h1 {
-    font-size: clamp(2.45rem, 13vw, 4rem);
-  }
-
   .shareButtons {
     grid-column: 1;
   }
@@ -1149,35 +947,8 @@
   }
 }
 
-/* portfolio-blog-article-composition-v4:end */
-
-/* portfolio-blog-article-structure-v5:start */
-
-.heroGrid .heroSpacer {
-  display: none;
-}
-
-.heroGrid .heroCopy {
-  grid-column: 1 / 3;
-  max-width: none;
-}
-
-.heroGrid h1 {
-  max-width: 980px;
-}
-
-.heroGrid .excerpt {
-  max-width: 900px;
-}
-
 .rightRail {
   gap: 1.15rem;
-}
-
-.statusCard > div {
-  min-height: 3.5rem;
-  align-items: center;
-  padding: 1rem 1.15rem;
 }
 
 .authorCard,
@@ -1239,18 +1010,6 @@
 .relatedImage > div {
   width: 100%;
   height: 100%;
-}
-
-@media (max-width: 1150px) {
-  .heroGrid .heroCopy {
-    grid-column: 1;
-  }
-}
-
-@media (max-width: 900px) {
-  .heroGrid .heroCopy {
-    grid-column: 1;
-  }
 }
 
 .shareButtons {
@@ -1317,7 +1076,6 @@
   opacity: 0.72;
 }
 
-:global([data-theme='light']) .heroGrid h1,
 :global([data-theme='light']) .hero h1,
 :global([data-theme='light']) .related h2,
 :global([data-theme='light']) .discuss h2,
@@ -1326,17 +1084,11 @@
   color: #0b1e2a;
 }
 
-:global([data-theme='light']) .excerpt,
 :global([data-theme='light']) .overview > p:last-of-type,
 :global([data-theme='light']) .richText {
   color: #4d6570;
 }
 
-:global([data-theme='light']) .heroMeta {
-  color: #6b818b;
-}
-
-:global([data-theme='light']) .statusCard,
 :global([data-theme='light']) .authorCard,
 :global([data-theme='light']) .progressCard,
 :global([data-theme='light']) .tagsCard,
@@ -1354,11 +1106,6 @@
     0 18px 46px rgba(30, 70, 85, 0.09);
 }
 
-:global([data-theme='light']) .statusCard > div + div {
-  border-top-color: rgba(35, 79, 96, 0.11);
-}
-
-:global([data-theme='light']) .statusCard span,
 :global([data-theme='light']) .authorCard span,
 :global([data-theme='light']) .authorCard p,
 :global([data-theme='light']) .seriesCard span,
@@ -1367,7 +1114,6 @@
   color: #657c86;
 }
 
-:global([data-theme='light']) .statusCard strong,
 :global([data-theme='light']) .authorCard strong,
 :global([data-theme='light']) .seriesCard strong,
 :global([data-theme='light']) .articleNavigation strong,
@@ -1445,7 +1191,6 @@
 
 :global([data-theme='light']) .relatedContent > span,
 :global([data-theme='light']) .sectionEyebrow,
-:global([data-theme='light']) .eyebrow,
 :global([data-theme='light']) .progressCard > p,
 :global([data-theme='light']) .tagsCard > p,
 :global([data-theme='light']) .seriesCard > p {
@@ -1486,10 +1231,6 @@
   display: none;
 }
 
-.heroGrid {
-  padding: 4px 0 1.65rem;
-}
-
 /* portfolio-public-shell-integration-v1:end */
 
 /* public-article-rhythm-v2:start */
@@ -1497,16 +1238,6 @@
 :global(.journal-article-page) {
   --public-page-breadcrumb-gap: clamp(24px, 2.1vw, 32px);
   --article-hero-divider-space: clamp(26px, 2.2vw, 34px);
-}
-
-/*
- * The hero divider now has one spacing token on both sides:
- * hero content -> divider and divider -> article workspace.
- */
-
-.heroGrid {
-  padding-top: 0;
-  padding-bottom: var(--article-hero-divider-space);
 }
 
 .articleGrid {
@@ -1527,19 +1258,6 @@
   }
 }
 
-/* public-article-rhythm-v2:end */
-
-/* public-detail-hero-rhythm-v3:start */
-
-.heroGrid {
-  gap: var(--public-page-hero-column-gap);
-  padding-bottom: var(--public-page-hero-divider-space);
-}
-
-.heroGrid::after {
-  display: none;
-}
-
 .articleGrid {
   margin-top: var(--public-page-content-start);
 }
@@ -1554,11 +1272,6 @@
    * breadcrumb rail -> editorial eyebrow -> hero -> content.
    */
   --public-page-breadcrumb-gap: 24px;
-}
-
-.heroGrid {
-  padding-top: 0;
-  padding-bottom: var(--public-page-hero-divider-space);
 }
 
 .articleGrid {
@@ -1585,44 +1298,6 @@
   background: none;
 }
 
-/* public-blog-light-shell-ownership-v5:end */
-
-/* public-article-full-width-grid-v6:start */
-
-/*
- * The article page now consumes the full PublicPageShell container.
- * Hero: flexible copy + fixed telemetry card.
- * Workspace: TOC + flexible article + right rail.
- */
-
-.heroGrid {
-  width: 100%;
-  grid-template-columns: minmax(0, 1fr) 258px;
-  justify-content: stretch;
-  column-gap: clamp(28px, 3vw, 44px);
-  margin-inline: 0;
-  padding-inline: 0;
-}
-
-.heroGrid .heroCopy {
-  grid-column: 1;
-  width: 100%;
-  max-width: none;
-}
-
-.heroGrid .statusCard {
-  grid-column: 2;
-  width: 100%;
-}
-
-.heroGrid h1 {
-  max-width: 1050px;
-}
-
-.heroGrid .excerpt {
-  max-width: 920px;
-}
-
 .articleGrid {
   width: 100%;
   grid-template-columns: 225px minmax(0, 1fr) 250px;
@@ -1644,32 +1319,14 @@
 }
 
 @media (max-width: 1150px) {
-  .heroGrid {
-    grid-template-columns: minmax(0, 1fr) 240px;
-  }
-
-  .heroGrid .heroCopy {
-    grid-column: 1;
-  }
-
-  .heroGrid .statusCard {
-    grid-column: 2;
-  }
-
   .articleGrid {
     grid-template-columns: minmax(0, 1fr) 240px;
   }
 }
 
 @media (max-width: 900px) {
-  .heroGrid,
   .articleGrid {
     grid-template-columns: 1fr;
-  }
-
-  .heroGrid .heroCopy,
-  .heroGrid .statusCard {
-    grid-column: 1;
   }
 }
 

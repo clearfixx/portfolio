@@ -22,6 +22,7 @@ import type { BlogPost, Category, Media } from '@/payload-types'
 
 import styles from '@/app/(frontend)/styles/pages/blog-article.module.scss'
 
+import heroStyles from './BlogArticleHero.module.scss'
 export const revalidate = 300
 
 const longDateFormatter = new Intl.DateTimeFormat('en', {
@@ -245,17 +246,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <article aria-labelledby="article-page-title">
             <BlogArticleReveal />
 
-            <PublicPageHeroFrame className={styles.heroGrid} variant="detail">
-              <div className={styles.heroCopy}>
-                <p className={styles.eyebrow}>
+            <PublicPageHeroFrame className={heroStyles.heroGrid} variant="detail">
+              <div className={heroStyles.heroCopy}>
+                <p className={heroStyles.eyebrow}>
                   <span aria-hidden="true">{'//'}</span>
                   {categoryLabel(post)}
                 </p>
 
                 <h1 id="article-page-title">{post.title}</h1>
-                <p className={styles.excerpt}>{post.excerpt}</p>
+                <p className={heroStyles.excerpt}>{post.excerpt}</p>
 
-                <div className={styles.heroMeta}>
+                <div className={heroStyles.heroMeta}>
                   <span>
                     <ArticleIcon name="calendar" />
                     {publishedAt}
@@ -275,10 +276,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </div>
               </div>
 
-              <aside className={styles.statusCard} aria-label="Article status">
+              <aside className={heroStyles.statusCard} aria-label="Article status">
                 <div>
                   <span>Status</span>
-                  <strong className={styles.liveStatus}>
+                  <strong className={heroStyles.liveStatus}>
                     <i aria-hidden="true" />
                     Published
                   </strong>
@@ -289,7 +290,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </div>
                 <div>
                   <span>Difficulty</span>
-                  <strong className={styles.difficulty}>{difficulty}</strong>
+                  <strong className={heroStyles.difficulty}>{difficulty}</strong>
                 </div>
                 <div>
                   <span>Version</span>
