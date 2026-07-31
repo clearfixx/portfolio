@@ -22,6 +22,7 @@ import type { BlogPost, Category, Media } from '@/payload-types'
 
 import styles from '@/app/(frontend)/styles/pages/blog-article.module.scss'
 
+import contentStyles from './BlogArticleContent.module.scss'
 import heroStyles from './BlogArticleHero.module.scss'
 export const revalidate = 300
 
@@ -315,7 +316,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
               <div className={styles.articleColumn}>
                 {cover?.url ? (
-                  <figure className={styles.cover}>
+                  <figure className={contentStyles.cover}>
                     <Image
                       alt={cover.alt}
                       fill
@@ -326,7 +327,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     {cover.caption ? <figcaption>{cover.caption}</figcaption> : null}
                   </figure>
                 ) : (
-                  <div className={styles.coverFallback} aria-hidden="true">
+                  <div className={contentStyles.coverFallback} aria-hidden="true">
                     <div>
                       <span>AUTH</span>
                       <span>API</span>
@@ -336,11 +337,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </div>
                 )}
 
-                <section className={styles.overview} data-article-reveal id="overview">
+                <section className={contentStyles.overview} data-article-reveal id="overview">
                   <p className={styles.sectionEyebrow}>Overview</p>
                   <p>{post.excerpt}</p>
 
-                  <div className={styles.note}>
+                  <div className={contentStyles.note}>
                     <span>Engineering note</span>
                     <p>
                       The strongest architecture decisions are the ones that remain understandable
@@ -349,12 +350,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </div>
                 </section>
 
-                <section className={styles.richText} id="article-content">
+                <section className={contentStyles.richText} id="article-content">
                   <BlogPostRichText data={post.content} />
                 </section>
 
                 {keyTakeaways.length > 0 ? (
-                  <section className={styles.takeaways} data-article-reveal id="key-takeaways">
+                  <section
+                    className={contentStyles.takeaways}
+                    data-article-reveal
+                    id="key-takeaways"
+                  >
                     <p className={styles.sectionEyebrow}>Key takeaways</p>
                     <div>
                       {keyTakeaways.map((takeaway, index) => (
