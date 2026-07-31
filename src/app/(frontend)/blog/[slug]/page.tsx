@@ -22,6 +22,7 @@ import type { BlogPost, Category, Media } from '@/payload-types'
 
 import styles from '@/app/(frontend)/styles/pages/blog-article.module.scss'
 
+import layoutStyles from './BlogArticleLayout.module.scss'
 import contentStyles from './BlogArticleContent.module.scss'
 import heroStyles from './BlogArticleHero.module.scss'
 export const revalidate = 300
@@ -300,11 +301,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </aside>
             </PublicPageHeroFrame>
 
-            <div className={styles.articleGrid}>
-              <aside className={styles.leftRail}>
+            <div className={layoutStyles.articleGrid}>
+              <aside className={layoutStyles.leftRail}>
                 <BlogArticleToc items={tocItems} />
 
-                <div className={styles.leftCta}>
+                <div className={layoutStyles.leftCta}>
                   <span>Enjoying the read?</span>
                   <p>Get new architecture notes and implementation lessons.</p>
                   <Link href="/contacts">
@@ -314,7 +315,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </div>
               </aside>
 
-              <div className={styles.articleColumn}>
+              <div className={layoutStyles.articleColumn}>
                 {cover?.url ? (
                   <figure className={contentStyles.cover}>
                     <Image
