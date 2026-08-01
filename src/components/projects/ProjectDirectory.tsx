@@ -22,8 +22,7 @@ import type { ReactNode } from 'react'
 import type { ProjectDirectoryItem, ProjectLinkViewModel } from '@/lib/cms/public-projects'
 
 import { ProjectRegistryPreview } from './ProjectRegistryPreview'
-import styles from './ProjectDirectory.module.scss'
-
+import emptyStyles from './ProjectDirectoryEmpty.module.scss'
 import shellStyles from './ProjectDirectoryShell.module.scss'
 import contentStyles from './ProjectDirectoryContent.module.scss'
 import footerStyles from './ProjectDirectoryFooter.module.scss'
@@ -461,7 +460,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
           })}
         </ol>
       ) : (
-        <div className={styles.empty} role="status">
+        <div className={emptyStyles.empty} role="status">
           <SearchIcon aria-hidden="true" size={24} />
           <h3>No projects match these filters.</h3>
           <p>Reset the filters or try a different search phrase.</p>
