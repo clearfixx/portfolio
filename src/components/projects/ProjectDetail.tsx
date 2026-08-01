@@ -41,6 +41,7 @@ import { ProjectVisualPlaceholder } from './ProjectVisualPlaceholder'
 import { ProjectScreenshotCarousel } from './ProjectScreenshotCarousel'
 import styles from './ProjectDetail.module.scss'
 
+import sidebarStyles from './ProjectDetailSidebar.module.scss'
 import roadmapStyles from './ProjectDetailRoadmap.module.scss'
 import ctaStyles from './ProjectDetailCta.module.scss'
 type ProjectDetailProps = {
@@ -350,9 +351,9 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
         </div>
 
         <aside className={styles.workspaceSidebar}>
-          <section className={styles.card}>
+          <section className={sidebarStyles.card}>
             <p>Project status</p>
-            <strong className={styles.cardStatus} data-stage={project.stage}>
+            <strong className={sidebarStyles.cardStatus} data-stage={project.stage}>
               <span aria-hidden="true" />
               {stageLabel}
             </strong>
@@ -395,7 +396,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
             </dl>
           </section>
 
-          <section className={`${styles.card} ${styles.metricsCard}`}>
+          <section className={`${sidebarStyles.card} ${sidebarStyles.metricsCard}`}>
             <p>Key metrics</p>
 
             <dl>
@@ -408,7 +409,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
               ))}
             </dl>
 
-            <div className={styles.coverage}>
+            <div className={sidebarStyles.coverage}>
               <div>
                 <span>Delivery progress</span>
                 <strong>{progress}%</strong>
