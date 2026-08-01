@@ -41,6 +41,7 @@ import { ProjectVisualPlaceholder } from './ProjectVisualPlaceholder'
 import { ProjectScreenshotCarousel } from './ProjectScreenshotCarousel'
 import styles from './ProjectDetail.module.scss'
 
+import roadmapStyles from './ProjectDetailRoadmap.module.scss'
 import ctaStyles from './ProjectDetailCta.module.scss'
 type ProjectDetailProps = {
   project: Project
@@ -461,7 +462,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
                 <a href="#project-roadmap">View full roadmap →</a>
               </header>
 
-              <ol className={styles.roadmap}>
+              <ol className={roadmapStyles.roadmap}>
                 {roadmap.map((milestone) => (
                   <li
                     data-status={milestone.status}
