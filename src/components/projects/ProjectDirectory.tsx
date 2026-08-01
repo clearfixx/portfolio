@@ -24,6 +24,7 @@ import type { ProjectDirectoryItem, ProjectLinkViewModel } from '@/lib/cms/publi
 import { ProjectRegistryPreview } from './ProjectRegistryPreview'
 import styles from './ProjectDirectory.module.scss'
 
+import shellStyles from './ProjectDirectoryShell.module.scss'
 import contentStyles from './ProjectDirectoryContent.module.scss'
 import footerStyles from './ProjectDirectoryFooter.module.scss'
 import metricsStyles from './ProjectDirectoryMetrics.module.scss'
@@ -208,7 +209,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
   }
 
   return (
-    <section ref={directoryRef} className={styles.directory} aria-label="Project registry">
+    <section ref={directoryRef} className={shellStyles.directory} aria-label="Project registry">
       <div className={controlsStyles.controls}>
         <div className={controlsStyles.filters} aria-label="Project filters">
           <button
@@ -287,7 +288,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
       </div>
 
       {visibleItems.length > 0 ? (
-        <ol className={styles.list}>
+        <ol className={shellStyles.list}>
           {visibleItems.map((project) => {
             const detailHref = `/projects/${project.slug}`
             const liveLink = project.links.find((link) => link.type === 'live')
@@ -297,7 +298,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
 
             return (
               <li key={project.id}>
-                <article className={styles.row} data-stage={project.stage}>
+                <article className={shellStyles.row} data-stage={project.stage}>
                   <Link className={visualStyles.visual} href={detailHref}>
                     {project.image ? (
                       <>
