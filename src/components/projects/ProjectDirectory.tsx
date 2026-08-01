@@ -24,6 +24,7 @@ import type { ProjectDirectoryItem, ProjectLinkViewModel } from '@/lib/cms/publi
 import { ProjectRegistryPreview } from './ProjectRegistryPreview'
 import styles from './ProjectDirectory.module.scss'
 
+import paginationStyles from './ProjectDirectoryPagination.module.scss'
 import visualStyles from './ProjectDirectoryVisual.module.scss'
 // project-directory-css-module-v1
 
@@ -472,8 +473,8 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
       )}
 
       {pageCount > 1 ? (
-        <section className={styles.paginationSection} aria-label="Project pagination">
-          <div className={styles.paginationSummary}>
+        <section className={paginationStyles.paginationSection} aria-label="Project pagination">
+          <div className={paginationStyles.paginationSummary}>
             <p>
               <span aria-hidden="true">{'//'}</span>
               Project index
@@ -484,7 +485,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
             <span>{filteredItems.length} indexed entries</span>
           </div>
 
-          <nav className={styles.pagination} aria-label="Project pages">
+          <nav className={paginationStyles.pagination} aria-label="Project pages">
             <button
               aria-label="First project page"
               disabled={safeCurrentPage === 1}
@@ -511,7 +512,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
               ) : (
                 <button
                   aria-current={item === safeCurrentPage ? 'page' : undefined}
-                  className={item === safeCurrentPage ? styles.active : undefined}
+                  className={item === safeCurrentPage ? paginationStyles.active : undefined}
                   key={item}
                   type="button"
                   onClick={() => changePage(item)}
@@ -540,7 +541,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
             </button>
           </nav>
 
-          <div className={styles.paginationControls}>
+          <div className={paginationStyles.paginationControls}>
             <form
               onSubmit={(event) => {
                 event.preventDefault()
