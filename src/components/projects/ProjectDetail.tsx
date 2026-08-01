@@ -41,6 +41,7 @@ import { ProjectVisualPlaceholder } from './ProjectVisualPlaceholder'
 import { ProjectScreenshotCarousel } from './ProjectScreenshotCarousel'
 import styles from './ProjectDetail.module.scss'
 
+import overviewStyles from './ProjectDetailOverview.module.scss'
 import architectureStyles from './ProjectDetailArchitecture.module.scss'
 import lowerStyles from './ProjectDetailLower.module.scss'
 import sidebarStyles from './ProjectDetailSidebar.module.scss'
@@ -291,20 +292,20 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
               <CodeIcon aria-hidden="true" size={24} />
             </header>
 
-            <div className={styles.overview}>
+            <div className={overviewStyles.overview}>
               <div>
-                <div className={styles.richText}>
+                <div className={overviewStyles.richText}>
                   <ProjectRichText data={project.description} />
                 </div>
 
                 {highlights.length > 0 ? (
-                  <div className={styles.overviewHighlights}>
+                  <div className={overviewStyles.overviewHighlights}>
                     {highlights.slice(0, 4).map((highlight, index) => {
                       const HighlightIcon = resolveFeatureIcon(highlight.icon, index)
 
                       return (
                         <article key={highlight.id ?? highlight.title}>
-                          <span className={styles.overviewIcon}>
+                          <span className={overviewStyles.overviewIcon}>
                             <HighlightIcon aria-hidden="true" size={27} />
                           </span>
                           <div>
@@ -333,7 +334,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
                 <a href="#project-features">See all features →</a>
               </header>
 
-              <div className={styles.features}>
+              <div className={overviewStyles.features}>
                 {highlights.map((highlight, index) => {
                   const FeatureIcon = resolveFeatureIcon(highlight.icon, index)
 
