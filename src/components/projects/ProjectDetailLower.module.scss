@@ -1,0 +1,92 @@
+/* Project detail lower changelog and screenshots. */
+
+.screenshots {
+  width: 100%;
+}
+
+
+/* Project detail lower layout and changelog. */
+
+
+.lower {
+  display: grid;
+  align-items: start;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+
+.lower {
+  grid-template-columns: minmax(360px, 0.78fr) minmax(0, 1.22fr);
+}
+
+
+.changelog {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+
+.changelog li {
+  display: grid;
+  grid-template-columns: 62px minmax(0, 1fr) auto;
+  gap: 12px;
+  border-bottom: 1px solid rgb(var(--rgb-cyan) / 9%);
+  padding: 11px 0;
+}
+
+
+.changelog > li > strong {
+  color: rgb(var(--rgb-cyan));
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+}
+
+
+.changelog span {
+  color: rgb(var(--rgb-text-strong));
+  font-size: 0.74rem;
+}
+
+
+.changelog p {
+  margin: 4px 0 0;
+  color: rgb(var(--rgb-text-muted));
+  font-size: 0.66rem;
+  line-height: 1.42;
+}
+
+
+.changelog time {
+  color: rgb(var(--rgb-text-muted));
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.59rem;
+}
+
+
+@media (max-width: 980px) {
+
+.lower {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+@media (max-width: 760px) {
+
+.changelog li {
+    grid-template-columns: 58px minmax(0, 1fr);
+  }
+
+
+.changelog time {
+    grid-column: 2;
+  }
+}
+
+
+.lowerScreenshotsOnly {
+  grid-template-columns: 1fr;
+}

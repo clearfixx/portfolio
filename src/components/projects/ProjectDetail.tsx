@@ -41,6 +41,7 @@ import { ProjectVisualPlaceholder } from './ProjectVisualPlaceholder'
 import { ProjectScreenshotCarousel } from './ProjectScreenshotCarousel'
 import styles from './ProjectDetail.module.scss'
 
+import lowerStyles from './ProjectDetailLower.module.scss'
 import sidebarStyles from './ProjectDetailSidebar.module.scss'
 import roadmapStyles from './ProjectDetailRoadmap.module.scss'
 import ctaStyles from './ProjectDetailCta.module.scss'
@@ -488,7 +489,9 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
 
       <div
         className={
-          versions.length > 0 ? styles.lower : `${styles.lower} ${styles.lowerScreenshotsOnly}`
+          versions.length > 0
+            ? lowerStyles.lower
+            : `${lowerStyles.lower} ${lowerStyles.lowerScreenshotsOnly}`
         }
       >
         {versions.length > 0 ? (
@@ -498,7 +501,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
               <a href="#project-changelog">View full changelog →</a>
             </header>
 
-            <ol className={styles.changelog}>
+            <ol className={lowerStyles.changelog}>
               {versions.slice(0, 6).map((version) => (
                 <li key={version.id}>
                   <strong>v{version.version}</strong>
@@ -515,7 +518,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
           </section>
         ) : null}
 
-        <section className={`${styles.panel} ${styles.screenshots}`} id="project-gallery">
+        <section className={`${styles.panel} ${lowerStyles.screenshots}`} id="project-gallery">
           <header className={styles.panelHeader}>
             <h2>Screenshots</h2>
             {screenshotSlides.length > 0 ? (
