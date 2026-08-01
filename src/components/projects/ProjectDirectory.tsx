@@ -24,6 +24,7 @@ import type { ProjectDirectoryItem, ProjectLinkViewModel } from '@/lib/cms/publi
 import { ProjectRegistryPreview } from './ProjectRegistryPreview'
 import styles from './ProjectDirectory.module.scss'
 
+import visualStyles from './ProjectDirectoryVisual.module.scss'
 // project-directory-css-module-v1
 
 type ProjectDirectoryProps = {
@@ -292,7 +293,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
             return (
               <li key={project.id}>
                 <article className={styles.row} data-stage={project.stage}>
-                  <Link className={styles.visual} href={detailHref}>
+                  <Link className={visualStyles.visual} href={detailHref}>
                     {project.image ? (
                       <>
                         <Image
@@ -302,12 +303,12 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
                           src={project.image.src}
                         />
 
-                        <span className={styles.imageStatus}>
+                        <span className={visualStyles.imageStatus}>
                           {project.featured ? 'Featured' : project.stageLabel}
                         </span>
 
-                        <span className={styles.imageStripe} aria-hidden="true">
-                          <span className={styles.imageStripeMode}>
+                        <span className={visualStyles.imageStripe} aria-hidden="true">
+                          <span className={visualStyles.imageStripeMode}>
                             <i />
                             Product view
                           </span>
