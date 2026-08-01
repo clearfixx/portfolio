@@ -24,6 +24,7 @@ import type { ProjectDirectoryItem, ProjectLinkViewModel } from '@/lib/cms/publi
 import { ProjectRegistryPreview } from './ProjectRegistryPreview'
 import styles from './ProjectDirectory.module.scss'
 
+import footerStyles from './ProjectDirectoryFooter.module.scss'
 import metricsStyles from './ProjectDirectoryMetrics.module.scss'
 import controlsStyles from './ProjectDirectoryControls.module.scss'
 import paginationStyles from './ProjectDirectoryPagination.module.scss'
@@ -97,7 +98,7 @@ function DisabledProjectAction({ icon, label }: { icon: ReactNode; label: string
   return (
     <span
       aria-disabled="true"
-      className={`${styles.action} ${styles.disabled}`}
+      className={`${footerStyles.action} ${footerStyles.disabled}`}
       data-placement="top"
       data-toggle="tooltip"
       data-tooltip-delay="0.3s"
@@ -123,7 +124,7 @@ function ProjectExternalAction({
 }) {
   return (
     <a
-      className={styles.action}
+      className={footerStyles.action}
       href={link.href}
       rel={isExternalLink(link.href) ? 'noreferrer' : undefined}
       target={isExternalLink(link.href) ? '_blank' : undefined}
@@ -396,9 +397,9 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
                       </div>
                     </dl>
 
-                    <footer className={styles.footer}>
+                    <footer className={footerStyles.footer}>
                       <div
-                        className={styles.actions}
+                        className={footerStyles.actions}
                         aria-label={`${project.title} project actions`}
                       >
                         {githubLink ? (
@@ -414,7 +415,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
                           />
                         )}
 
-                        <Link className={styles.action} href={detailHref}>
+                        <Link className={footerStyles.action} href={detailHref}>
                           <FileTextIcon aria-hidden="true" size={17} />
                           <span>Case Study</span>
                           <ArrowUpRightIcon aria-hidden="true" size={13} />
@@ -435,7 +436,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
                       </div>
 
                       <div
-                        className={styles.release}
+                        className={footerStyles.release}
                         aria-label={`${project.title} release information`}
                       >
                         <span>
