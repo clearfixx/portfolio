@@ -24,6 +24,7 @@ import type { ProjectDirectoryItem, ProjectLinkViewModel } from '@/lib/cms/publi
 import { ProjectRegistryPreview } from './ProjectRegistryPreview'
 import styles from './ProjectDirectory.module.scss'
 
+import metricsStyles from './ProjectDirectoryMetrics.module.scss'
 import controlsStyles from './ProjectDirectoryControls.module.scss'
 import paginationStyles from './ProjectDirectoryPagination.module.scss'
 import visualStyles from './ProjectDirectoryVisual.module.scss'
@@ -357,7 +358,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
                       </ul>
                     ) : null}
 
-                    <dl className={styles.metrics}>
+                    <dl className={metricsStyles.metrics}>
                       <div>
                         <PackageIcon aria-hidden="true" size={17} />
                         <span>
@@ -382,11 +383,11 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
                         </span>
                       </div>
 
-                      <div className={styles.progressMetric}>
+                      <div className={metricsStyles.progressMetric}>
                         <span>
                           <dt>Progress</dt>
                           <dd>
-                            <span className={styles.progress} aria-hidden="true">
+                            <span className={metricsStyles.progress} aria-hidden="true">
                               <span style={{ width: `${project.progress}%` }} />
                             </span>
                             <strong>{project.progress}%</strong>
