@@ -19,9 +19,7 @@ import {
   getSiteFooterGitHubFeed,
 } from '@/lib/cms'
 import type { BlogPost, Category, Media } from '@/payload-types'
-
-import styles from '@/app/(frontend)/styles/pages/blog-article.module.scss'
-
+import pageShellStyles from './BlogArticlePageShell.module.scss'
 import discussionStyles from './BlogArticleDiscussion.module.scss'
 import relatedStyles from './BlogArticleRelated.module.scss'
 import railStyles from './BlogArticleRail.module.scss'
@@ -235,7 +233,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   return (
     <>
       <PublicPageShell className="journal-article-page" variant="detail">
-        <div className={`${styles.page} ${styles.container}`}>
+        <div className={`${pageShellStyles.page} ${pageShellStyles.container}`}>
           <PublicBreadcrumbs
             items={[
               {
