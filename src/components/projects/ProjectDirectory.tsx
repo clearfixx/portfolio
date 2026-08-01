@@ -24,6 +24,7 @@ import type { ProjectDirectoryItem, ProjectLinkViewModel } from '@/lib/cms/publi
 import { ProjectRegistryPreview } from './ProjectRegistryPreview'
 import styles from './ProjectDirectory.module.scss'
 
+import controlsStyles from './ProjectDirectoryControls.module.scss'
 import paginationStyles from './ProjectDirectoryPagination.module.scss'
 import visualStyles from './ProjectDirectoryVisual.module.scss'
 // project-directory-css-module-v1
@@ -205,10 +206,10 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
 
   return (
     <section ref={directoryRef} className={styles.directory} aria-label="Project registry">
-      <div className={styles.controls}>
-        <div className={styles.filters} aria-label="Project filters">
+      <div className={controlsStyles.controls}>
+        <div className={controlsStyles.filters} aria-label="Project filters">
           <button
-            className={activeFilter === 'all' ? styles.active : undefined}
+            className={activeFilter === 'all' ? controlsStyles.active : undefined}
             type="button"
             onClick={() => {
               setActiveFilter('all')
@@ -221,7 +222,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
 
           {hasFeatured ? (
             <button
-              className={activeFilter === 'featured' ? styles.active : undefined}
+              className={activeFilter === 'featured' ? controlsStyles.active : undefined}
               type="button"
               onClick={() => {
                 setActiveFilter('featured')
@@ -235,7 +236,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
 
           {categories.map((category) => (
             <button
-              className={activeFilter === category ? styles.active : undefined}
+              className={activeFilter === category ? controlsStyles.active : undefined}
               key={category}
               type="button"
               onClick={() => {
@@ -249,8 +250,8 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
           ))}
         </div>
 
-        <div className={styles.tools}>
-          <label className={styles.search}>
+        <div className={controlsStyles.tools}>
+          <label className={controlsStyles.search}>
             <SearchIcon aria-hidden="true" size={17} />
             <input
               aria-label="Search projects"
@@ -264,7 +265,7 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
             />
           </label>
 
-          <div className={styles.sort}>
+          <div className={controlsStyles.sort}>
             <select
               aria-label="Sort projects"
               value={sort}
