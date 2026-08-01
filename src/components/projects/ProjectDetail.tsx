@@ -41,6 +41,7 @@ import { ProjectVisualPlaceholder } from './ProjectVisualPlaceholder'
 import { ProjectScreenshotCarousel } from './ProjectScreenshotCarousel'
 import styles from './ProjectDetail.module.scss'
 
+import architectureStyles from './ProjectDetailArchitecture.module.scss'
 import lowerStyles from './ProjectDetailLower.module.scss'
 import sidebarStyles from './ProjectDetailSidebar.module.scss'
 import roadmapStyles from './ProjectDetailRoadmap.module.scss'
@@ -424,7 +425,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
       </div>
 
       {architecture.length > 0 || roadmap.length > 0 ? (
-        <div className={styles.systems}>
+        <div className={architectureStyles.systems}>
           {architecture.length > 0 ? (
             <section className={styles.panel} id="project-architecture">
               <header className={styles.panelHeader}>
@@ -432,14 +433,17 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
                 <a href="#project-architecture">View full diagram →</a>
               </header>
 
-              <div className={styles.architectureFlow}>
+              <div className={architectureStyles.architectureFlow}>
                 {architecture.map((group, index) => {
                   const ArchitectureIcon = resolveArchitectureIcon(group.icon, index)
 
                   return (
-                    <div className={styles.architectureStep} key={group.id ?? group.title}>
+                    <div
+                      className={architectureStyles.architectureStep}
+                      key={group.id ?? group.title}
+                    >
                       <article>
-                        <span className={styles.architectureIcon}>
+                        <span className={architectureStyles.architectureIcon}>
                           <ArchitectureIcon aria-hidden="true" size={36} />
                         </span>
                         <strong>{group.title}</strong>
