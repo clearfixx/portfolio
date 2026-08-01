@@ -24,6 +24,7 @@ import type { ProjectDirectoryItem, ProjectLinkViewModel } from '@/lib/cms/publi
 import { ProjectRegistryPreview } from './ProjectRegistryPreview'
 import styles from './ProjectDirectory.module.scss'
 
+import contentStyles from './ProjectDirectoryContent.module.scss'
 import footerStyles from './ProjectDirectoryFooter.module.scss'
 import metricsStyles from './ProjectDirectoryMetrics.module.scss'
 import controlsStyles from './ProjectDirectoryControls.module.scss'
@@ -328,31 +329,31 @@ export function ProjectDirectory({ items }: ProjectDirectoryProps) {
                     )}
                   </Link>
 
-                  <div className={styles.content}>
-                    <div className={styles.meta}>
-                      <p className={styles.category}>{project.category}</p>
+                  <div className={contentStyles.content}>
+                    <div className={contentStyles.meta}>
+                      <p className={contentStyles.category}>{project.category}</p>
 
-                      <div className={styles.metaDetails}>
-                        <span className={styles.stage}>
+                      <div className={contentStyles.metaDetails}>
+                        <span className={contentStyles.stage}>
                           <i aria-hidden="true" />
                           {project.stageLabel}
                         </span>
 
-                        <span className={styles.updated}>
+                        <span className={contentStyles.updated}>
                           <ClockIcon aria-hidden="true" size={14} />
                           {project.updatedLabel}
                         </span>
                       </div>
                     </div>
 
-                    <h3 className={styles.heading}>
+                    <h3 className={contentStyles.heading}>
                       <Link href={detailHref}>{project.title}</Link>
                     </h3>
 
-                    <p className={styles.excerpt}>{project.excerpt}</p>
+                    <p className={contentStyles.excerpt}>{project.excerpt}</p>
 
                     {project.technologies.length > 0 ? (
-                      <ul className={styles.stack} aria-label={`${project.title} stack`}>
+                      <ul className={contentStyles.stack} aria-label={`${project.title} stack`}>
                         {project.technologies.slice(0, 7).map((technology) => (
                           <li key={technology}>{technology}</li>
                         ))}
