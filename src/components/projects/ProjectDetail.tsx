@@ -41,6 +41,7 @@ import { ProjectVisualPlaceholder } from './ProjectVisualPlaceholder'
 import { ProjectScreenshotCarousel } from './ProjectScreenshotCarousel'
 import styles from './ProjectDetail.module.scss'
 
+import ctaStyles from './ProjectDetailCta.module.scss'
 type ProjectDetailProps = {
   project: Project
   versions: ProjectVersion[]
@@ -532,7 +533,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
         </section>
       </div>
 
-      <section className={styles.cta}>
+      <section className={ctaStyles.cta}>
         <p>Interested in this project?</p>
         <h2>Let&apos;s build something amazing together.</h2>
         <div>
