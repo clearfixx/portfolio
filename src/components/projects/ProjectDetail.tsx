@@ -39,8 +39,7 @@ import { ProjectCodePreview } from './ProjectCodePreview'
 import { ProjectRichText } from './ProjectRichText'
 import { ProjectVisualPlaceholder } from './ProjectVisualPlaceholder'
 import { ProjectScreenshotCarousel } from './ProjectScreenshotCarousel'
-import styles from './ProjectDetail.module.scss'
-
+import shellStyles from './ProjectDetailShell.module.scss'
 import workspaceStyles from './ProjectDetailWorkspace.module.scss'
 import heroStyles from './ProjectDetailHero.module.scss'
 import overviewStyles from './ProjectDetailOverview.module.scss'
@@ -213,7 +212,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
   const codeLanguage = project.caseStudyCode?.language || 'typescript'
 
   return (
-    <article className={styles.caseStudy}>
+    <article className={shellStyles.caseStudy}>
       <PublicPageHeroFrame className={heroStyles.hero} variant="detail">
         <div className={heroStyles.heroCopy}>
           <p className={heroStyles.status} data-stage={project.stage}>
