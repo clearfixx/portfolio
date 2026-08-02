@@ -8,6 +8,7 @@ import { EngineeringProfileMotion } from './EngineeringProfileMotion'
 
 import styles from '@/app/(frontend)/styles/pages/about.module.scss'
 
+import heroStyles from './EngineeringProfileHero.module.scss'
 import consoleStyles from './EngineeringProfileConsole.module.scss'
 import operatingSystemStyles from './EngineeringProfileOperatingSystem.module.scss'
 import currentFocusStyles from './EngineeringProfileCurrentFocus.module.scss'
@@ -195,9 +196,9 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
           <PublicBreadcrumbs items={[{ label: content.breadcrumbLabel }]} />
 
           {content.hero.enabled ? (
-            <PublicPageHeroFrame className={styles.hero} variant="index">
-              <div className={styles.heroCopy} data-profile-reveal>
-                <div className={styles.availability}>
+            <PublicPageHeroFrame className={heroStyles.hero} variant="index">
+              <div className={heroStyles.heroCopy} data-profile-reveal>
+                <div className={heroStyles.availability}>
                   <i />
                   {content.hero.availabilityLabel}
                 </div>
@@ -207,11 +208,13 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                 </h1>
                 <p>{content.hero.description}</p>
 
-                <div className={styles.heroActions}>
+                <div className={heroStyles.heroActions}>
                   {content.hero.actions.map((action) => (
                     <Link
                       className={
-                        action.tone === 'primary' ? styles.primaryAction : styles.secondaryAction
+                        action.tone === 'primary'
+                          ? heroStyles.primaryAction
+                          : heroStyles.secondaryAction
                       }
                       href={action.href}
                       key={action.id}
@@ -222,7 +225,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                   ))}
                 </div>
 
-                <div aria-label="Profile summary" className={styles.heroSignals}>
+                <div aria-label="Profile summary" className={heroStyles.heroSignals}>
                   {content.hero.signals.map((signal) => (
                     <span key={signal.id}>
                       <strong>{signal.value}</strong>
@@ -232,7 +235,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                 </div>
               </div>
 
-              <div className={styles.heroVisual} data-profile-reveal>
+              <div className={heroStyles.heroVisual} data-profile-reveal>
                 <ProfileConsole profile={content.profile} />
               </div>
             </PublicPageHeroFrame>
