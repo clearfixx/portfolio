@@ -8,6 +8,7 @@ import { EngineeringProfileMotion } from './EngineeringProfileMotion'
 
 import styles from '@/app/(frontend)/styles/pages/about.module.scss'
 
+import ctaStyles from './EngineeringProfileCta.module.scss'
 import heroStyles from './EngineeringProfileHero.module.scss'
 import consoleStyles from './EngineeringProfileConsole.module.scss'
 import operatingSystemStyles from './EngineeringProfileOperatingSystem.module.scss'
@@ -581,8 +582,8 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
               ) : null}
 
               {content.cta.enabled ? (
-                <section className={styles.cta} data-profile-reveal>
-                  <div aria-hidden="true" className={styles.ctaGrid} />
+                <section className={ctaStyles.cta} data-profile-reveal>
+                  <div aria-hidden="true" className={ctaStyles.ctaGrid} />
                   <span>{content.cta.eyebrow}</span>
                   <h2>
                     {content.cta.title}
