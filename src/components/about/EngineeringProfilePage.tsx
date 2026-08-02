@@ -8,6 +8,7 @@ import { EngineeringProfileMotion } from './EngineeringProfileMotion'
 
 import styles from '@/app/(frontend)/styles/pages/about.module.scss'
 
+import careerStyles from './EngineeringProfileCareer.module.scss'
 import principlesStyles from './EngineeringProfilePrinciples.module.scss'
 import personalSignalsStyles from './EngineeringProfilePersonalSignals.module.scss'
 // about-live-data-integration-v2
@@ -239,18 +240,18 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                 title={content.career.title}
               />
 
-              <ol className={styles.timelineList}>
+              <ol className={careerStyles.timelineList}>
                 {content.career.items.map((entry, index) => (
                   <li key={entry.id}>
-                    <div className={styles.timelineNode}>
+                    <div className={careerStyles.timelineNode}>
                       <i />
                       <span>{String(index + 1).padStart(2, '0')}</span>
                     </div>
-                    <span className={styles.period}>{entry.period}</span>
+                    <span className={careerStyles.period}>{entry.period}</span>
                     <h3>{entry.role}</h3>
                     <p>{entry.description}</p>
                     {entry.stack.length > 0 ? (
-                      <div className={styles.tags}>
+                      <div className={careerStyles.tags}>
                         {entry.stack.map((technology) => (
                           <span key={technology}>{technology}</span>
                         ))}

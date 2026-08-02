@@ -482,110 +482,6 @@
   line-height: 1.6;
 }
 
-.timelineList {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  margin: 0;
-  padding: clamp(2rem, 4vw, 3.4rem) clamp(1.4rem, 3vw, 2.4rem) 2rem;
-  list-style: none;
-}
-
-.timelineList::before {
-  position: absolute;
-  top: 3.1rem;
-  right: 3rem;
-  left: 3rem;
-  height: 1px;
-  content: '';
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--profile-cyan) 12%,
-    var(--profile-purple) 88%,
-    transparent
-  );
-  opacity: 0.55;
-}
-
-.timelineList li {
-  position: relative;
-  min-width: 0;
-  padding: 0 1rem 1.25rem;
-}
-
-.timelineNode {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  height: 30px;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.timelineNode i {
-  display: block;
-  width: 12px;
-  height: 12px;
-  border: 3px solid #071623;
-  border-radius: 50%;
-  background: var(--profile-cyan);
-  box-shadow:
-    0 0 0 1px rgba(25, 229, 231, 0.55),
-    0 0 14px rgba(25, 229, 231, 0.42);
-}
-
-.timelineList li:nth-child(even) .timelineNode i {
-  background: var(--profile-purple);
-  box-shadow:
-    0 0 0 1px rgba(166, 108, 255, 0.58),
-    0 0 14px rgba(166, 108, 255, 0.42);
-}
-
-.timelineNode span {
-  margin-left: 0.5rem;
-  color: var(--profile-muted);
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 0.5rem;
-}
-
-.period {
-  color: var(--profile-muted);
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 0.56rem;
-}
-
-.timelineList h3 {
-  margin: 0.5rem 0 0.7rem;
-  color: var(--profile-text);
-  font-size: 0.9rem;
-}
-
-.timelineList p {
-  min-height: 7.2em;
-  margin: 0;
-  color: var(--profile-soft);
-  font-size: 0.72rem;
-  line-height: 1.62;
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  margin-top: 1rem;
-}
-
-.tags span {
-  padding: 0.28rem 0.42rem;
-  border: 1px solid rgba(111, 201, 211, 0.13);
-  border-radius: 4px;
-  color: var(--profile-muted);
-  background: rgba(7, 25, 38, 0.54);
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 0.48rem;
-}
-
 .twoColumn,
 .twoColumnWide,
 .finalGrid {
@@ -1090,8 +986,7 @@
 :global([data-theme='light']) .secondaryAction,
 :global([data-theme='light']) .systemDetail,
 :global([data-theme='light']) .focusGrid article,
-:global([data-theme='light']) .experienceSummary article,
-:global([data-theme='light']) .tags span {
+:global([data-theme='light']) .experienceSummary article {
   background: rgba(255, 255, 255, 0.74);
 }
 
@@ -1149,19 +1044,6 @@
     grid-template-columns: minmax(180px, 0.78fr) minmax(240px, 1.22fr);
   }
 
-  .timelineList {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.5rem 0;
-  }
-
-  .timelineList::before {
-    display: none;
-  }
-
-  .timelineList p {
-    min-height: 0;
-  }
-
   .operatingSteps {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1.4rem 0.7rem;
@@ -1190,10 +1072,6 @@
 
   .profileConsole {
     min-height: 430px;
-  }
-
-  .timelineList {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .finalGrid {
@@ -1247,32 +1125,8 @@
     gap: 0.6rem;
   }
 
-  .timelineList,
   .focusGrid {
     grid-template-columns: 1fr;
-  }
-
-  .timelineList {
-    padding-top: 1.5rem;
-  }
-
-  .timelineList li {
-    padding-left: 2.2rem;
-  }
-
-  .timelineNode {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  .timelineList li + li {
-    border-top: 1px solid var(--profile-border);
-    padding-top: 1.3rem;
-  }
-
-  .timelineList li + li .timelineNode {
-    top: 1.3rem;
   }
 
   .operatingSteps {
