@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 import styles from './ContactForm.module.scss'
+import captchaStyles from './ContactFormCaptcha.module.scss'
 import type { ChangeEvent, SubmitEvent, KeyboardEvent, PointerEvent } from 'react'
 
 import {
@@ -376,10 +377,10 @@ export function ContactForm({ source = 'homepage' }: ContactFormProps) {
           <input name="website" type="text" autoComplete="off" tabIndex={-1} />
         </label>
 
-        <div className={`${styles.captcha}${errors.captcha ? ' is-invalid' : ''}`}>
-          <label className={styles.captchaControl} onPointerDown={handleCaptchaPointerDown}>
+        <div className={`${captchaStyles.captcha}${errors.captcha ? ' is-invalid' : ''}`}>
+          <label className={captchaStyles.captchaControl} onPointerDown={handleCaptchaPointerDown}>
             <input
-              className={styles.captchaInput}
+              className={captchaStyles.captchaInput}
               name="captcha"
               type="checkbox"
               checked={captchaChecked}
@@ -389,8 +390,8 @@ export function ContactForm({ source = 'homepage' }: ContactFormProps) {
               onKeyDown={handleCaptchaKeyDown}
               onChange={handleCaptchaChange}
             />
-            <span className={styles.captchaBox} aria-hidden="true" />
-            <span id="contact-captcha-copy" className={styles.captchaCopy}>
+            <span className={captchaStyles.captchaBox} aria-hidden="true" />
+            <span id="contact-captcha-copy" className={captchaStyles.captchaCopy}>
               <strong>{errors.captcha ?? 'I am human'}</strong>
               <span>Simple interaction verification</span>
             </span>

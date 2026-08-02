@@ -4,6 +4,7 @@
 /* Parent ContactCTA section scope remains global until ContactCTA is migrated. */
 
 /* migrated from src/app/(frontend)/styles/sections/_light-theme-polish.scss */
+
 :global(html[data-theme='light']) {
   .field select,
   .privacy {
@@ -26,6 +27,7 @@
 }
 
 /* migrated from src/app/(frontend)/styles/sections/_contact.scss */
+
 .fieldIcon svg,
 .submit svg,
 .privacy svg {
@@ -374,115 +376,6 @@
   color: rgb(var(--contact-error-rgb) / 88%);
 }
 
-.captcha {
-  border: 1px solid rgb(var(--rgb-accent-border) / 20%);
-  border-radius: 12px;
-  background: rgb(var(--rgb-surface-overlay) / 58%);
-  transition:
-    border-color 180ms ease,
-    background 180ms ease,
-    box-shadow 180ms ease;
-}
-
-.captchaControl {
-  display: flex;
-  min-height: 66px;
-  align-items: center;
-  gap: 14px;
-  padding: 12px 14px;
-  cursor: pointer;
-}
-
-.captchaInput {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.captchaBox {
-  position: relative;
-  display: grid;
-  width: 28px;
-  height: 28px;
-  flex: 0 0 auto;
-  place-items: center;
-  border: 1px solid rgb(var(--rgb-accent-border) / 36%);
-  border-radius: 7px;
-  background: rgb(var(--rgb-surface-control-hover) / 72%);
-  color: rgb(var(--rgb-on-accent));
-  transition:
-    border-color 180ms ease,
-    background 180ms ease,
-    box-shadow 180ms ease,
-    transform 180ms ease;
-}
-
-.captchaBox::after {
-  content: '';
-  width: 10px;
-  height: 6px;
-  border-left: 2px solid currentColor;
-  border-bottom: 2px solid currentColor;
-  opacity: 0;
-  transform: translateY(-1px) rotate(-45deg) scale(0.75);
-  transition:
-    opacity 150ms ease,
-    transform 150ms ease;
-}
-
-.captchaInput:checked + .captchaBox {
-  border-color: rgb(var(--rgb-accent) / 76%);
-  background: rgb(var(--rgb-accent));
-  box-shadow: 0 0 22px rgb(var(--rgb-accent) / 22%);
-}
-
-.captchaInput:checked + .captchaBox::after {
-  opacity: 1;
-  transform: translateY(-1px) rotate(-45deg) scale(1);
-}
-
-.captchaInput:focus-visible + .captchaBox {
-  outline: 2px solid rgb(var(--rgb-accent) / 76%);
-  outline-offset: 3px;
-}
-
-.captchaCopy {
-  display: grid;
-  gap: 3px;
-}
-
-.captchaCopy strong {
-  color: rgb(var(--rgb-text-strong));
-  font-size: 0.94rem;
-  line-height: 1.2;
-}
-
-.captchaCopy span {
-  color: rgb(var(--rgb-text-soft) / 56%);
-  font-size: 0.8rem;
-  line-height: 1.3;
-}
-
-.captcha:global(.is-invalid) {
-  border-color: rgb(var(--contact-error-rgb) / 78%);
-  background:
-    linear-gradient(90deg, rgb(var(--contact-error-rgb) / 8%), transparent 54%),
-    rgb(var(--rgb-surface-overlay) / 64%);
-  box-shadow: 0 0 0 3px rgb(var(--contact-error-rgb) / 8%);
-}
-
-.captcha:global(.is-invalid) .captchaBox {
-  border-color: rgb(var(--contact-error-rgb) / 78%);
-  color: rgb(var(--contact-error-rgb));
-}
-
-.captcha:global(.is-invalid) .captchaCopy strong {
-  color: rgb(var(--contact-error-rgb));
-}
-
 .feedback {
   min-height: 1.4em;
   margin: 2px 0 0;
@@ -504,10 +397,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .submit,
-  .captcha,
-  .captchaBox,
-  .captchaBox::after {
+  .submit {
     transition: none;
   }
 }
