@@ -8,6 +8,7 @@ import { EngineeringProfileMotion } from './EngineeringProfileMotion'
 
 import styles from '@/app/(frontend)/styles/pages/about.module.scss'
 
+import experienceStyles from './EngineeringProfileExperience.module.scss'
 import careerStyles from './EngineeringProfileCareer.module.scss'
 import principlesStyles from './EngineeringProfilePrinciples.module.scss'
 import personalSignalsStyles from './EngineeringProfilePersonalSignals.module.scss'
@@ -409,15 +410,18 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
           {hasExperienceColumn ? (
             <div className={styles.twoColumnWide}>
               {content.experience.enabled ? (
-                <section className={`${styles.panel} ${styles.experience}`} data-profile-reveal>
+                <section
+                  className={`${styles.panel} ${experienceStyles.experience}`}
+                  data-profile-reveal
+                >
                   <SectionHeading
                     description={content.experience.description}
                     eyebrow={content.experience.eyebrow}
                     title={content.experience.title}
                   />
 
-                  <div className={styles.experienceTable}>
-                    <div className={styles.experienceHeader}>
+                  <div className={experienceStyles.experienceTable}>
+                    <div className={experienceStyles.experienceHeader}>
                       <span>Area</span>
                       <span>Level</span>
                       <span>Signal</span>
@@ -425,16 +429,18 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                     </div>
 
                     {content.experience.items.map((entry) => (
-                      <div className={styles.experienceRow} key={entry.id}>
+                      <div className={experienceStyles.experienceRow} key={entry.id}>
                         <strong>{entry.area}</strong>
                         <span>{entry.level}</span>
                         <div
                           aria-label={`${entry.area}: ${entry.level}`}
-                          className={styles.experienceSignal}
+                          className={experienceStyles.experienceSignal}
                         >
                           {Array.from({ length: 6 }, (_, index) => (
                             <i
-                              className={index < entry.score ? styles.activeSignal : undefined}
+                              className={
+                                index < entry.score ? experienceStyles.activeSignal : undefined
+                              }
                               key={index}
                             />
                           ))}
@@ -445,7 +451,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                   </div>
 
                   {content.experience.summary.length > 0 ? (
-                    <div className={styles.experienceSummary}>
+                    <div className={experienceStyles.experienceSummary}>
                       {content.experience.summary.map((item) => (
                         <article key={item.id}>
                           <span>{item.label}</span>

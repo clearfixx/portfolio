@@ -634,107 +634,6 @@
   box-shadow: 0 0 8px rgba(166, 108, 255, 0.7);
 }
 
-.experience {
-  display: flex;
-  flex-direction: column;
-}
-
-.experienceTable {
-  padding: 1rem;
-}
-
-.experienceHeader,
-.experienceRow {
-  display: grid;
-  grid-template-columns: minmax(150px, 1fr) minmax(110px, 0.7fr) minmax(120px, 0.7fr) minmax(
-      140px,
-      0.9fr
-    );
-  gap: 0.85rem;
-  align-items: center;
-}
-
-.experienceHeader {
-  padding: 0.5rem 0.85rem 0.75rem;
-  color: var(--profile-muted);
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 0.5rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.experienceRow {
-  min-height: 50px;
-  padding: 0.7rem 0.85rem;
-  border-top: 1px solid rgba(99, 216, 225, 0.09);
-  color: var(--profile-soft);
-  font-size: 0.68rem;
-}
-
-.experienceRow strong {
-  color: var(--profile-text);
-  font-size: 0.71rem;
-}
-
-.experienceSignal {
-  display: flex;
-  gap: 0.3rem;
-}
-
-.experienceSignal i {
-  width: 7px;
-  height: 7px;
-  border: 1px solid rgba(99, 216, 225, 0.2);
-  border-radius: 50%;
-  background: transparent;
-}
-
-.experienceSignal .activeSignal {
-  border-color: var(--profile-cyan);
-  background: var(--profile-cyan);
-  box-shadow: 0 0 8px rgba(25, 229, 231, 0.55);
-}
-
-.experienceSummary {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.7rem;
-  margin-top: auto;
-  padding: 0 1rem 1rem;
-}
-
-.experienceSummary article {
-  min-height: 132px;
-  padding: 1rem;
-  border: 1px solid rgba(99, 216, 225, 0.11);
-  border-radius: 8px;
-  background:
-    linear-gradient(145deg, rgba(25, 229, 231, 0.025), transparent 58%), rgba(4, 18, 29, 0.54);
-}
-
-.experienceSummary span {
-  color: var(--profile-cyan);
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 0.5rem;
-  font-weight: 740;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-}
-
-.experienceSummary strong {
-  display: block;
-  margin-top: 0.55rem;
-  color: var(--profile-text);
-  font-size: 0.76rem;
-}
-
-.experienceSummary p {
-  margin: 0.45rem 0 0;
-  color: var(--profile-muted);
-  font-size: 0.63rem;
-  line-height: 1.5;
-}
-
 .primaryFocus {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(170px, 0.75fr);
@@ -985,8 +884,7 @@
 
 :global([data-theme='light']) .secondaryAction,
 :global([data-theme='light']) .systemDetail,
-:global([data-theme='light']) .focusGrid article,
-:global([data-theme='light']) .experienceSummary article {
+:global([data-theme='light']) .focusGrid article {
   background: rgba(255, 255, 255, 0.74);
 }
 
@@ -1137,28 +1035,6 @@
   .primaryFocus {
     grid-template-columns: 1fr;
   }
-
-  .experienceHeader {
-    display: none;
-  }
-
-  .experienceSummary {
-    grid-template-columns: 1fr;
-  }
-
-  .experienceSummary article {
-    min-height: 0;
-  }
-
-  .experienceRow {
-    grid-template-columns: 1fr 1fr;
-    gap: 0.55rem 1rem;
-    padding-block: 1rem;
-  }
-
-  .experienceRow > span:last-child {
-    grid-column: 1 / -1;
-  }
 }
 
 @media (max-width: 520px) {
@@ -1195,14 +1071,6 @@
 
   .operatingSteps small {
     margin-top: -0.5rem;
-  }
-
-  .experienceRow {
-    grid-template-columns: 1fr;
-  }
-
-  .experienceRow > span:last-child {
-    grid-column: auto;
   }
 
   .cta {
