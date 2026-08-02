@@ -6,8 +6,7 @@ import type { AboutPageViewModel, AboutProfileIconName, AboutProfileViewModel } 
 import { PublicBreadcrumbs, PublicPageHeroFrame, PublicPageShell } from '@/components/public-page'
 import { EngineeringProfileMotion } from './EngineeringProfileMotion'
 
-import styles from '@/app/(frontend)/styles/pages/about.module.scss'
-
+import shellStyles from './EngineeringProfileShell.module.scss'
 import ctaStyles from './EngineeringProfileCta.module.scss'
 import heroStyles from './EngineeringProfileHero.module.scss'
 import consoleStyles from './EngineeringProfileConsole.module.scss'
@@ -106,7 +105,7 @@ function SectionHeading({
   title: string
 }) {
   return (
-    <header className={styles.sectionHeading}>
+    <header className={shellStyles.sectionHeading}>
       <span>{eyebrow}</span>
       <div>
         <h2>{title}</h2>
@@ -192,8 +191,8 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
 
   return (
     <EngineeringProfileMotion>
-      <main className={styles.page} id="main-content">
-        <PublicPageShell className={styles.shell} variant="index">
+      <main className={shellStyles.page} id="main-content">
+        <PublicPageShell className={shellStyles.shell} variant="index">
           <PublicBreadcrumbs items={[{ label: content.breadcrumbLabel }]} />
 
           {content.hero.enabled ? (
@@ -243,7 +242,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
           ) : null}
 
           {content.career.enabled ? (
-            <section className={styles.panel} data-profile-reveal id="career">
+            <section className={shellStyles.panel} data-profile-reveal id="career">
               <SectionHeading
                 description={content.career.description}
                 eyebrow={content.career.eyebrow}
@@ -274,9 +273,9 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
           ) : null}
 
           {hasThinkingColumn ? (
-            <div className={styles.twoColumn}>
+            <div className={shellStyles.twoColumn}>
               {content.principles.enabled ? (
-                <section className={styles.panel} data-profile-reveal>
+                <section className={shellStyles.panel} data-profile-reveal>
                   <SectionHeading
                     description={content.principles.description}
                     eyebrow={content.principles.eyebrow}
@@ -299,7 +298,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
 
               {content.operatingSystem.enabled ? (
                 <section
-                  className={`${styles.panel} ${operatingSystemStyles.operatingSystem}`}
+                  className={`${shellStyles.panel} ${operatingSystemStyles.operatingSystem}`}
                   data-profile-reveal
                 >
                   <SectionHeading
@@ -417,10 +416,10 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
           ) : null}
 
           {hasExperienceColumn ? (
-            <div className={styles.twoColumnWide}>
+            <div className={shellStyles.twoColumnWide}>
               {content.experience.enabled ? (
                 <section
-                  className={`${styles.panel} ${experienceStyles.experience}`}
+                  className={`${shellStyles.panel} ${experienceStyles.experience}`}
                   data-profile-reveal
                 >
                   <SectionHeading
@@ -474,7 +473,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
               ) : null}
 
               {content.currentFocus.enabled ? (
-                <section className={styles.panel} data-profile-reveal>
+                <section className={shellStyles.panel} data-profile-reveal>
                   <SectionHeading
                     description={content.currentFocus.description}
                     eyebrow={content.currentFocus.eyebrow}
@@ -547,10 +546,10 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
           ) : null}
 
           {hasFinalGrid ? (
-            <div className={styles.finalGrid}>
+            <div className={shellStyles.finalGrid}>
               {content.personalSignals.enabled ? (
                 <section
-                  className={`${styles.panel} ${personalSignalsStyles.beyond}`}
+                  className={`${shellStyles.panel} ${personalSignalsStyles.beyond}`}
                   data-profile-reveal
                 >
                   <SectionHeading
