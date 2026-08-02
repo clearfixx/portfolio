@@ -8,6 +8,7 @@ import { EngineeringProfileMotion } from './EngineeringProfileMotion'
 
 import styles from '@/app/(frontend)/styles/pages/about.module.scss'
 
+import operatingSystemStyles from './EngineeringProfileOperatingSystem.module.scss'
 import currentFocusStyles from './EngineeringProfileCurrentFocus.module.scss'
 import experienceStyles from './EngineeringProfileExperience.module.scss'
 import careerStyles from './EngineeringProfileCareer.module.scss'
@@ -291,7 +292,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
 
               {content.operatingSystem.enabled ? (
                 <section
-                  className={`${styles.panel} ${styles.operatingSystem}`}
+                  className={`${styles.panel} ${operatingSystemStyles.operatingSystem}`}
                   data-profile-reveal
                 >
                   <SectionHeading
@@ -300,10 +301,10 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                     title={content.operatingSystem.title}
                   />
 
-                  <ol className={styles.operatingSteps}>
+                  <ol className={operatingSystemStyles.operatingSteps}>
                     {content.operatingSystem.steps.map((step, index) => (
                       <li key={step.id}>
-                        <div className={styles.stepNode}>
+                        <div className={operatingSystemStyles.stepNode}>
                           <span>{step.code}</span>
                           <ProfileIcon
                             name={
@@ -322,7 +323,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                     ))}
                   </ol>
 
-                  <div className={styles.systemDetail}>
+                  <div className={operatingSystemStyles.systemDetail}>
                     <div>
                       <span>{content.operatingSystem.currentStage.label}</span>
                       <strong>{content.operatingSystem.currentStage.title}</strong>
@@ -337,10 +338,10 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                     ) : null}
                   </div>
 
-                  <div className={styles.operatingInsights}>
+                  <div className={operatingSystemStyles.operatingInsights}>
                     <article>
                       <header>
-                        <span className={styles.operatingInsightIcon}>
+                        <span className={operatingSystemStyles.operatingInsightIcon}>
                           <ProfileIcon name="architecture" size={18} />
                         </span>
                         <div>
@@ -365,7 +366,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
 
                     <article>
                       <header>
-                        <span className={styles.operatingInsightIcon}>
+                        <span className={operatingSystemStyles.operatingInsightIcon}>
                           <ProfileIcon name="layers" size={18} />
                         </span>
                         <div>
@@ -392,7 +393,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                   {content.operatingSystem.telemetry.length > 0 ? (
                     <div
                       aria-label="Engineering process status"
-                      className={styles.operatingTelemetry}
+                      className={operatingSystemStyles.operatingTelemetry}
                     >
                       {content.operatingSystem.telemetry.map((item) => (
                         <span data-tone={item.tone} key={item.id}>
