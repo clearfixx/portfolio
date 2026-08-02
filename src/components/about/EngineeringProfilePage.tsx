@@ -230,11 +230,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
           ) : null}
 
           {content.career.enabled ? (
-            <section
-              className={`${styles.panel} ${styles.timeline}`}
-              data-profile-reveal
-              id="career"
-            >
+            <section className={styles.panel} data-profile-reveal id="career">
               <SectionHeading
                 description={content.career.description}
                 eyebrow={content.career.eyebrow}
@@ -267,7 +263,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
           {hasThinkingColumn ? (
             <div className={styles.twoColumn}>
               {content.principles.enabled ? (
-                <section className={`${styles.panel} ${styles.principles}`} data-profile-reveal>
+                <section className={styles.panel} data-profile-reveal>
                   <SectionHeading
                     description={content.principles.description}
                     eyebrow={content.principles.eyebrow}
@@ -460,7 +456,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
               ) : null}
 
               {content.currentFocus.enabled ? (
-                <section className={`${styles.panel} ${styles.currentFocus}`} data-profile-reveal>
+                <section className={styles.panel} data-profile-reveal>
                   <SectionHeading
                     description={content.currentFocus.description}
                     eyebrow={content.currentFocus.eyebrow}
