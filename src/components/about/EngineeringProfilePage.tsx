@@ -8,6 +8,7 @@ import { EngineeringProfileMotion } from './EngineeringProfileMotion'
 
 import styles from '@/app/(frontend)/styles/pages/about.module.scss'
 
+import currentFocusStyles from './EngineeringProfileCurrentFocus.module.scss'
 import experienceStyles from './EngineeringProfileExperience.module.scss'
 import careerStyles from './EngineeringProfileCareer.module.scss'
 import principlesStyles from './EngineeringProfilePrinciples.module.scss'
@@ -472,7 +473,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                     title={content.currentFocus.title}
                   />
 
-                  <article className={styles.primaryFocus}>
+                  <article className={currentFocusStyles.primaryFocus}>
                     <div>
                       <span>{content.currentFocus.primaryLabel}</span>
                       <h3>{content.currentFocus.primaryProject.title}</h3>
@@ -482,7 +483,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                         <ProfileIcon name="arrow" size={14} />
                       </Link>
                     </div>
-                    <div aria-hidden="true" className={styles.systemOrb}>
+                    <div aria-hidden="true" className={currentFocusStyles.systemOrb}>
                       <span />
                       <i />
                       <b />
@@ -490,18 +491,26 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                   </article>
 
                   {content.currentFocus.cards.length > 0 ? (
-                    <div className={styles.focusGrid}>
+                    <div className={currentFocusStyles.focusGrid}>
                       {content.currentFocus.cards.map((card) => (
-                        <article className={styles.focusCard} data-tone={card.tone} key={card.id}>
-                          <div className={styles.focusCardRail}>
+                        <article
+                          className={currentFocusStyles.focusCard}
+                          data-tone={card.tone}
+                          key={card.id}
+                        >
+                          <div className={currentFocusStyles.focusCardRail}>
                             <span>{card.eyebrow}</span>
-                            <b className={card.tone === 'purple' ? styles.isQueued : undefined}>
+                            <b
+                              className={
+                                card.tone === 'purple' ? currentFocusStyles.isQueued : undefined
+                              }
+                            >
                               <i />
                               {card.status}
                             </b>
                           </div>
 
-                          <span className={styles.focusCardIcon}>
+                          <span className={currentFocusStyles.focusCardIcon}>
                             <ProfileIcon name={card.icon} size={24} />
                           </span>
 
@@ -509,7 +518,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                           <p>{card.description}</p>
 
                           {card.tags.length > 0 ? (
-                            <div className={styles.focusTags}>
+                            <div className={currentFocusStyles.focusTags}>
                               {card.tags.map((tag) => (
                                 <span key={tag}>{tag}</span>
                               ))}
