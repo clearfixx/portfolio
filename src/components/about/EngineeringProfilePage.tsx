@@ -8,6 +8,7 @@ import { EngineeringProfileMotion } from './EngineeringProfileMotion'
 
 import styles from '@/app/(frontend)/styles/pages/about.module.scss'
 
+import personalSignalsStyles from './EngineeringProfilePersonalSignals.module.scss'
 // about-live-data-integration-v2
 
 function ProfileIcon({ name, size = 18 }: { name: AboutProfileIconName; size?: number }) {
@@ -523,14 +524,17 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
           {hasFinalGrid ? (
             <div className={styles.finalGrid}>
               {content.personalSignals.enabled ? (
-                <section className={`${styles.panel} ${styles.beyond}`} data-profile-reveal>
+                <section
+                  className={`${styles.panel} ${personalSignalsStyles.beyond}`}
+                  data-profile-reveal
+                >
                   <SectionHeading
                     description={content.personalSignals.description}
                     eyebrow={content.personalSignals.eyebrow}
                     title={content.personalSignals.title}
                   />
 
-                  <div className={styles.personalSignals}>
+                  <div className={personalSignalsStyles.personalSignals}>
                     {content.personalSignals.items.map((item, index) => (
                       <article key={item.id}>
                         <span>{String(index + 1).padStart(2, '0')}</span>
@@ -542,7 +546,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                     ))}
                   </div>
 
-                  <div aria-hidden="true" className={styles.signalCore}>
+                  <div aria-hidden="true" className={personalSignalsStyles.signalCore}>
                     <span />
                     <span />
                     <span />

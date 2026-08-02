@@ -1041,117 +1041,6 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 }
 
-.beyond {
-  min-height: 430px;
-}
-
-.personalSignals {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.4rem 1rem;
-  width: 72%;
-  padding: 1.25rem;
-}
-
-.personalSignals article {
-  display: grid;
-  grid-template-columns: 34px minmax(0, 1fr);
-  gap: 0.75rem;
-  min-height: 100px;
-  align-items: start;
-  padding: 0.85rem;
-  border-radius: 7px;
-  transition: background 160ms ease;
-}
-
-.personalSignals article:hover {
-  background: rgba(25, 229, 231, 0.035);
-}
-
-.personalSignals article > span {
-  display: grid;
-  width: 28px;
-  height: 28px;
-  place-items: center;
-  border: 1px solid rgba(166, 108, 255, 0.23);
-  border-radius: 50%;
-  color: var(--profile-purple);
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 0.48rem;
-}
-
-.personalSignals h3 {
-  margin: 0;
-  color: var(--profile-text);
-  font-size: 0.82rem;
-}
-
-.personalSignals p {
-  margin: 0.4rem 0 0;
-  color: var(--profile-muted);
-  font-size: 0.68rem;
-  line-height: 1.55;
-}
-
-.signalCore {
-  position: absolute;
-  right: 5%;
-  bottom: 11%;
-  display: grid;
-  width: 220px;
-  height: 220px;
-  place-items: center;
-}
-
-.signalCore span,
-.signalCore i,
-.signalCore b {
-  position: absolute;
-  border-radius: 50%;
-}
-
-.signalCore span {
-  border: 1px solid rgba(25, 229, 231, 0.13);
-  animation: orbitRotate 18s linear infinite;
-}
-
-.signalCore span:nth-child(1) {
-  inset: 0;
-}
-
-.signalCore span:nth-child(2) {
-  inset: 28px;
-  border-style: dashed;
-  border-color: rgba(166, 108, 255, 0.23);
-  animation-direction: reverse;
-  animation-duration: 14s;
-}
-
-.signalCore span:nth-child(3) {
-  inset: 60px;
-}
-
-.signalCore i {
-  width: 74px;
-  height: 74px;
-  background:
-    radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.22), transparent 18%),
-    radial-gradient(circle at 40% 36%, #1da8b8, #08445e 48%, #031522 72%);
-  box-shadow:
-    0 0 38px rgba(25, 229, 231, 0.16),
-    -18px 12px 44px rgba(166, 108, 255, 0.12);
-}
-
-.signalCore b {
-  width: 9px;
-  height: 9px;
-  background: var(--profile-purple);
-  transform: translate(86px, -8px);
-  box-shadow: 0 0 12px rgba(166, 108, 255, 0.8);
-}
-
 .cta {
   position: relative;
   display: grid;
@@ -1337,17 +1226,6 @@
   .operatingSteps::before {
     display: none;
   }
-
-  .personalSignals {
-    width: 100%;
-    padding-right: 13rem;
-  }
-
-  .signalCore {
-    right: 1.5rem;
-    width: 180px;
-    height: 180px;
-  }
 }
 
 @media (max-width: 1020px) {
@@ -1376,10 +1254,6 @@
 
   .finalGrid {
     grid-template-columns: 1fr;
-  }
-
-  .personalSignals {
-    padding-right: 14rem;
   }
 }
 
@@ -1431,8 +1305,7 @@
 
   .timelineList,
   .principleGrid,
-  .focusGrid,
-  .personalSignals {
+  .focusGrid {
     grid-template-columns: 1fr;
   }
 
@@ -1488,17 +1361,6 @@
 
   .experienceRow > span:last-child {
     grid-column: 1 / -1;
-  }
-
-  .personalSignals {
-    padding-right: 1rem;
-  }
-
-  .signalCore {
-    position: relative;
-    right: auto;
-    bottom: auto;
-    margin: 0 auto 2rem;
   }
 }
 
@@ -2382,5 +2244,3 @@
   background-clip: text;
   -webkit-background-clip: text;
 }
-
-/* public-pages-consistency-runtime-skeletons-v1-8:about-hero:end */
