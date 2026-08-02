@@ -602,61 +602,6 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
 }
 
-.principleGrid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.65rem;
-  padding: 1rem;
-}
-
-.principleGrid article {
-  min-height: 160px;
-  padding: 1rem;
-  border: 1px solid rgba(99, 216, 225, 0.1);
-  border-radius: 8px;
-  background: rgba(4, 18, 29, 0.58);
-  transition:
-    border-color 180ms ease,
-    background 180ms ease,
-    transform 180ms ease;
-}
-
-.principleGrid article:hover {
-  border-color: rgba(25, 229, 231, 0.3);
-  background: rgba(25, 229, 231, 0.04);
-  transform: translateY(-3px);
-}
-
-.iconBox {
-  display: grid;
-  width: 34px;
-  height: 34px;
-  place-items: center;
-  border: 1px solid rgba(166, 108, 255, 0.27);
-  border-radius: 7px;
-  color: var(--profile-purple);
-  background: rgba(166, 108, 255, 0.055);
-}
-
-.principleGrid article:nth-child(3n + 1) .iconBox {
-  border-color: rgba(25, 229, 231, 0.27);
-  color: var(--profile-cyan);
-  background: rgba(25, 229, 231, 0.05);
-}
-
-.principleGrid h3 {
-  margin: 0.9rem 0 0.45rem;
-  color: var(--profile-text);
-  font-size: 0.82rem;
-}
-
-.principleGrid p {
-  margin: 0;
-  color: var(--profile-muted);
-  font-size: 0.67rem;
-  line-height: 1.55;
-}
-
 .operatingSteps {
   position: relative;
   display: grid;
@@ -1143,7 +1088,6 @@
 }
 
 :global([data-theme='light']) .secondaryAction,
-:global([data-theme='light']) .principleGrid article,
 :global([data-theme='light']) .systemDetail,
 :global([data-theme='light']) .focusGrid article,
 :global([data-theme='light']) .experienceSummary article,
@@ -1304,7 +1248,6 @@
   }
 
   .timelineList,
-  .principleGrid,
   .focusGrid {
     grid-template-columns: 1fr;
   }

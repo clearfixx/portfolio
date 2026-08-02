@@ -8,6 +8,7 @@ import { EngineeringProfileMotion } from './EngineeringProfileMotion'
 
 import styles from '@/app/(frontend)/styles/pages/about.module.scss'
 
+import principlesStyles from './EngineeringProfilePrinciples.module.scss'
 import personalSignalsStyles from './EngineeringProfilePersonalSignals.module.scss'
 // about-live-data-integration-v2
 
@@ -271,10 +272,10 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                     title={content.principles.title}
                   />
 
-                  <div className={styles.principleGrid}>
+                  <div className={principlesStyles.principleGrid}>
                     {content.principles.items.map((principle) => (
                       <article key={principle.id}>
-                        <span className={styles.iconBox}>
+                        <span className={principlesStyles.iconBox}>
                           <ProfileIcon name={principle.icon} />
                         </span>
                         <h3>{principle.title}</h3>
