@@ -8,6 +8,7 @@ import { EngineeringProfileMotion } from './EngineeringProfileMotion'
 
 import styles from '@/app/(frontend)/styles/pages/about.module.scss'
 
+import consoleStyles from './EngineeringProfileConsole.module.scss'
 import operatingSystemStyles from './EngineeringProfileOperatingSystem.module.scss'
 import currentFocusStyles from './EngineeringProfileCurrentFocus.module.scss'
 import experienceStyles from './EngineeringProfileExperience.module.scss'
@@ -126,23 +127,25 @@ function ProfileConsole({ profile }: { profile: AboutProfileViewModel }) {
   return (
     <div
       aria-label={`${profile.name} engineering profile identity`}
-      className={styles.profileConsole}
+      className={consoleStyles.profileConsole}
     >
-      <div aria-hidden="true" className={styles.consoleGrid} />
-      <div aria-hidden="true" className={styles.consoleCorners}>
+      <div aria-hidden="true" className={consoleStyles.consoleGrid} />
+      <div aria-hidden="true" className={consoleStyles.consoleCorners}>
         <i />
         <i />
         <i />
         <i />
       </div>
 
-      <div className={styles.identityVisual}>
-        <div aria-hidden="true" className={styles.identityScanner} />
-        <div className={`${styles.avatar}${profile.portrait ? ` ${styles.avatarWithImage}` : ''}`}>
+      <div className={consoleStyles.identityVisual}>
+        <div aria-hidden="true" className={consoleStyles.identityScanner} />
+        <div
+          className={`${consoleStyles.avatar}${profile.portrait ? ` ${consoleStyles.avatarWithImage}` : ''}`}
+        >
           {profile.portrait ? (
             <Image
               alt={profile.portrait.alt}
-              className={styles.avatarImage}
+              className={consoleStyles.avatarImage}
               fill
               priority
               sizes="160px"
@@ -153,13 +156,13 @@ function ProfileConsole({ profile }: { profile: AboutProfileViewModel }) {
           )}
           <small>ENGINEER</small>
         </div>
-        <div className={styles.onlineStatus}>
+        <div className={consoleStyles.onlineStatus}>
           <i />
           {profile.statusLabel}
         </div>
       </div>
 
-      <dl className={styles.identityDetails}>
+      <dl className={consoleStyles.identityDetails}>
         {details.map(([label, value]) => (
           <div key={label}>
             <dt>{label}</dt>
@@ -168,7 +171,7 @@ function ProfileConsole({ profile }: { profile: AboutProfileViewModel }) {
         ))}
       </dl>
 
-      <div aria-hidden="true" className={styles.consoleTelemetry}>
+      <div aria-hidden="true" className={consoleStyles.consoleTelemetry}>
         <span>
           <i />
           <i />
