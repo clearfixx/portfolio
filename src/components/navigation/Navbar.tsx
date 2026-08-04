@@ -6,6 +6,7 @@ import { type KeyboardEvent, type MouseEvent, useEffect, useMemo, useRef, useSta
 
 import { ThemeToggle } from '@/components/theme/ThemeToggle'
 
+import { isNavigationRouteActive } from './navigation-route-state'
 import styles from './Navbar.module.scss'
 import type { NavigationViewModel } from '@/lib/cms/navigation'
 
@@ -81,28 +82,6 @@ function getActiveSectionId(items: ScrollItem[]) {
   }
 
   return activeSectionId
-}
-
-function getRoutePath(href: string) {
-  if (!href.startsWith('/')) {
-    return undefined
-  }
-
-  return href.split('#')[0]?.split('?')[0] || '/'
-}
-
-function isRouteActive(pathname: string, item: RouteItem) {
-  const routePath = getRoutePath(item.href)
-
-  if (!routePath || routePath === '/') {
-    return false
-  }
-
-  if (item.match === 'prefix') {
-    return pathname === routePath || pathname.startsWith(`${routePath}/`)
-  }
-
-  return pathname === routePath
 }
 
 export function Navbar({ navigation }: NavbarProps) {
@@ -368,7 +347,7 @@ export function Navbar({ navigation }: NavbarProps) {
   }
 
   const pagesMenuActive =
-    navigation.pagesMenu?.items.some((item) => isRouteActive(pathname, item)) ?? false
+    navigation.pagesMenu?.items.some((item) => isNavigationRouteActive(pathname, item)) ?? false
   const ctaActive =
     pathname === '/' &&
     Boolean(navigation.cta?.sectionId && activeSection === navigation.cta.sectionId)
@@ -412,7 +391,7 @@ export function Navbar({ navigation }: NavbarProps) {
                 <span className={styles.dropdownEyebrow}>Internal pages</span>
 
                 {navigation.pagesMenu.items.map((item) => {
-                  const isActive = isRouteActive(pathname, item)
+                  const isActive = isNavigationRouteActive(pathname, item)
                   const className = `${styles.dropdownItem} ${isActive ? 'is-active' : ''}`
                   const content = (
                     <>
@@ -571,7 +550,7 @@ export function Navbar({ navigation }: NavbarProps) {
                   <span className={styles.mobileGroupLabel}>{navigation.pagesMenu.label}</span>
                   <nav className={styles.mobileLinks} aria-label="Internal pages">
                     {navigation.pagesMenu.items.map((item) => {
-                      const isActive = isRouteActive(pathname, item)
+                      const isActive = isNavigationRouteActive(pathname, item)
                       const className = `${styles.mobileLink} ${styles.mobileLinkPage} ${
                         isActive ? 'is-active' : ''
                       }`
