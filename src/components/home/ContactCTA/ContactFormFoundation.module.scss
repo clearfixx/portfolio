@@ -1,0 +1,232 @@
+/* Shared contact form structure, fields, and motion scope. */
+
+:global(html[data-theme='light']) {
+.field select {
+    color: rgb(var(--rgb-text-muted));
+  }
+
+
+.field input::placeholder,
+.field textarea::placeholder,
+.fieldIcon,
+.counter {
+    color: rgb(var(--rgb-text-dim));
+  }
+
+
+.field input,
+.field select,
+.field textarea {
+    border-color: rgb(var(--rgb-border) / 24%);
+    background: rgb(var(--rgb-surface-overlay) / 92%);
+  }
+}
+
+.fieldIcon svg {
+  width: 20px;
+  height: 20px;
+}
+
+
+.form {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 14px;
+}
+
+
+.field {
+  position: relative;
+  display: block;
+}
+
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  border: 1px solid rgb(var(--rgb-accent-border) / 20%);
+  border-radius: 10px;
+  background: rgb(var(--rgb-surface-overlay) / 72%);
+  color: rgb(var(--rgb-text-strong));
+  font: inherit;
+  outline: none;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+
+.field input,
+.field select {
+  height: 54px;
+  padding: 0 18px 0 54px;
+}
+
+
+.field textarea {
+  min-height: 150px;
+  resize: vertical;
+  padding: 18px 18px 42px 54px;
+}
+
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: rgb(var(--rgb-text-soft) / 48%);
+}
+
+
+.field select {
+  color: rgb(var(--rgb-text-soft) / 72%);
+  appearance: none;
+  cursor: pointer;
+}
+
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: rgb(var(--rgb-accent) / 48%);
+  background: rgb(var(--rgb-surface-control-hover) / 88%);
+  box-shadow: 0 0 0 3px rgb(var(--rgb-accent) / 8%);
+}
+
+
+.fieldIcon {
+  position: absolute;
+  top: 17px;
+  left: 18px;
+  z-index: 2;
+  color: rgb(var(--rgb-text-soft) / 62%);
+}
+
+
+.fieldMessage .fieldIcon {
+  top: 19px;
+}
+
+
+.counter {
+  position: absolute;
+  right: 18px;
+  bottom: 15px;
+  color: rgb(var(--rgb-text-soft) / 45%);
+  font-size: 0.85rem;
+}
+
+
+@media (max-width: 520px) {
+
+.field input,
+.field select {
+    height: 50px;
+  }
+
+
+.field textarea {
+    min-height: 140px;
+  }
+}
+
+
+.form {
+  --contact-error-rgb: var(--rgb-danger, 255 92 92);
+}
+
+
+.field:global(.is-invalid) input,
+.field:global(.is-invalid) textarea {
+  border-color: rgb(var(--contact-error-rgb) / 78%);
+  background:
+    linear-gradient(90deg, rgb(var(--contact-error-rgb) / 7%), transparent 42%),
+    rgb(var(--rgb-surface-overlay) / 76%);
+  box-shadow:
+    0 0 0 3px rgb(var(--contact-error-rgb) / 8%),
+    0 0 24px rgb(var(--contact-error-rgb) / 8%);
+}
+
+
+.field:global(.is-invalid) .fieldIcon {
+  color: rgb(var(--contact-error-rgb));
+}
+
+
+.field:global(.is-invalid) input::placeholder,
+.field:global(.is-invalid) textarea::placeholder {
+  color: rgb(var(--contact-error-rgb) / 88%);
+  opacity: 1;
+}
+
+
+/* migrated from src/app/(frontend)/styles/sections/_motion-choreography.scss */
+
+
+.scope {
+  :global(#contact) :global(.portfolio-section__body) & {
+    .field,
+    .form button {
+      opacity: 0;
+      transform: translate3d(0, 8px, 0);
+      transition:
+        opacity var(--motion-duration-reveal) var(--motion-ease-standard),
+        transform var(--motion-duration-reveal) var(--motion-ease-standard);
+    }
+
+    @for $index from 2 through 6 {
+      .field:nth-child(#{$index}) {
+        transition-delay: calc(var(--motion-stagger-tight) * #{$index - 1});
+      }
+    }
+  }
+
+  :global(#contact) :global(.portfolio-section__body)[data-motion-state='visible'] & {
+    .field,
+    .form button {
+      opacity: 1;
+      transform: none;
+    }
+
+    .field,
+    .form button {
+      transition-delay: calc(var(--motion-stagger-default) * 2);
+    }
+  }
+}
+
+@media (max-width: 640px) {
+
+.form {
+    grid-template-columns: 1fr;
+  }
+
+.field,
+.form button {
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 767px), (max-height: 759px), (pointer: coarse) {
+
+html[data-motion-ready='true'] {
+
+#projects,
+#engineer-profile,
+#skills-technologies,
+#insights,
+#contact,
+:global(.site-footer) {
+
+.field,
+.form button {
+        opacity: 1;
+        transform: none;
+        transition: none;
+        transition-delay: 0ms;
+      }
+}
+}
+}

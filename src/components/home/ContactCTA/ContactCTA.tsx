@@ -22,8 +22,7 @@ import type {
 
 import { ContactForm } from './ContactForm'
 import styles from './ContactCTA.module.scss'
-import formStyles from './ContactForm.module.scss'
-
+import formStyles from './ContactFormFoundation.module.scss'
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>
 
 type ContactCTAProps = {

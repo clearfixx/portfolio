@@ -4,8 +4,7 @@ import { useEffect, useId, useRef, useState } from 'react'
 
 import type { KeyboardEvent, SVGProps } from 'react'
 
-import styles from './ContactCTA/ContactForm.module.scss'
-
+import foundationStyles from './ContactCTA/ContactFormFoundation.module.scss'
 import selectStyles from './ProjectTypeSelect.module.scss'
 const projectTypeOptions = [
   { value: 'website', label: 'Website' },
@@ -203,11 +202,14 @@ export function ProjectTypeSelect({
   return (
     <div
       ref={rootRef}
-      className={`${styles.field} ${selectStyles.select}${
+      className={`${foundationStyles.field} ${selectStyles.select}${
         isOpen ? ' is-open' : ''
       }${invalid ? ' is-invalid' : ''}`}
     >
-      <span className={`${styles.fieldIcon} ${selectStyles.selectIcon}`} aria-hidden="true">
+      <span
+        className={`${foundationStyles.fieldIcon} ${selectStyles.selectIcon}`}
+        aria-hidden="true"
+      >
         <LayersIcon />
       </span>
 

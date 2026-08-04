@@ -2,7 +2,7 @@ import Image from 'next/image'
 import type { ComponentType, SVGProps } from 'react'
 
 import { ContactForm } from '@/components/home/ContactCTA/ContactForm'
-import contactFormStyles from '@/components/home/ContactCTA/ContactForm.module.scss'
+import contactFormStyles from '../home/ContactCTA/ContactFormFoundation.module.scss'
 import {
   ClockIcon,
   GithubIcon,

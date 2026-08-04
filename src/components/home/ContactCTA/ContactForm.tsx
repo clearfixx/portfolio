@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 import styles from './ContactForm.module.scss'
+import foundationStyles from './ContactFormFoundation.module.scss'
 import captchaStyles from './ContactFormCaptcha.module.scss'
 import type { ChangeEvent, SubmitEvent, KeyboardEvent, PointerEvent } from 'react'
 
@@ -280,15 +281,15 @@ export function ContactForm({ source = 'homepage' }: ContactFormProps) {
 
   return (
     <form
-      className={styles.form}
+      className={foundationStyles.form}
       aria-busy={isSubmitting}
       noValidate
       onSubmit={handleSubmit}
       data-contact-form-source={source}
     >
       <fieldset className={styles.fieldset} disabled={isSubmitting}>
-        <label className={`${styles.field}${errors.name ? ' is-invalid' : ''}`}>
-          <span className={styles.fieldIcon}>
+        <label className={`${foundationStyles.field}${errors.name ? ' is-invalid' : ''}`}>
+          <span className={foundationStyles.fieldIcon}>
             <ContactUserIcon />
           </span>
           <span className="sr-only">Your Name</span>
@@ -311,8 +312,8 @@ export function ContactForm({ source = 'homepage' }: ContactFormProps) {
           </span>
         </label>
 
-        <label className={`${styles.field}${errors.email ? ' is-invalid' : ''}`}>
-          <span className={styles.fieldIcon}>
+        <label className={`${foundationStyles.field}${errors.email ? ' is-invalid' : ''}`}>
+          <span className={foundationStyles.fieldIcon}>
             <MailIcon />
           </span>
           <span className="sr-only">Your Email</span>
@@ -345,9 +346,9 @@ export function ContactForm({ source = 'homepage' }: ContactFormProps) {
         />
 
         <label
-          className={`${styles.field} ${styles.fieldMessage}${errors.message ? ' is-invalid' : ''}`}
+          className={`${foundationStyles.field} ${foundationStyles.fieldMessage}${errors.message ? ' is-invalid' : ''}`}
         >
-          <span className={styles.fieldIcon}>
+          <span className={foundationStyles.fieldIcon}>
             <MessageIcon />
           </span>
           <span className="sr-only">Message</span>
@@ -367,7 +368,7 @@ export function ContactForm({ source = 'homepage' }: ContactFormProps) {
           <span id="contact-message-error" className="sr-only">
             {errors.message ?? ''}
           </span>
-          <span className={styles.counter}>
+          <span className={foundationStyles.counter}>
             {messageLength} / {MAX_MESSAGE_LENGTH}
           </span>
         </label>
