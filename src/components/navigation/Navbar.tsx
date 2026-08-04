@@ -8,6 +8,7 @@ import { ThemeToggle } from '@/components/theme/ThemeToggle'
 
 import { isNavigationRouteActive } from './navigation-route-state'
 import styles from './Navbar.module.scss'
+import mobileStyles from './NavbarMobileNavigation.module.scss'
 import dropdownStyles from './NavbarDropdown.module.scss'
 import type { NavigationViewModel } from '@/lib/cms/navigation'
 
@@ -488,9 +489,9 @@ export function Navbar({ navigation }: NavbarProps) {
       </button>
 
       {isMenuOpen ? (
-        <div className={styles.mobileNavigation}>
+        <div className={mobileStyles.mobileNavigation}>
           <button
-            className={styles.mobileBackdrop}
+            className={mobileStyles.mobileBackdrop}
             type="button"
             aria-label="Close navigation menu"
             tabIndex={-1}
@@ -499,14 +500,14 @@ export function Navbar({ navigation }: NavbarProps) {
 
           <aside
             ref={menuPanelRef}
-            className={styles.mobilePanel}
+            className={mobileStyles.mobilePanel}
             id="mobile-navigation-panel"
             role="dialog"
             aria-modal="true"
             aria-labelledby="mobile-navigation-title"
             tabIndex={-1}
           >
-            <div className={styles.mobileHeader}>
+            <div className={mobileStyles.mobileHeader}>
               <div>
                 <span>PORTFOLIO // NAV</span>
                 <strong id="mobile-navigation-title">Navigation</strong>
@@ -514,7 +515,7 @@ export function Navbar({ navigation }: NavbarProps) {
 
               <button
                 ref={menuCloseRef}
-                className={styles.mobileClose}
+                className={mobileStyles.mobileClose}
                 type="button"
                 aria-label="Close navigation menu"
                 onClick={() => closeMenu(true)}
@@ -524,17 +525,17 @@ export function Navbar({ navigation }: NavbarProps) {
               </button>
             </div>
 
-            <div className={styles.mobileGroups}>
+            <div className={mobileStyles.mobileGroups}>
               {navigation.landingItems.length > 0 ? (
-                <section className={styles.mobileGroup}>
-                  <span className={styles.mobileGroupLabel}>On this page</span>
-                  <nav className={styles.mobileLinks} aria-label="Homepage sections">
+                <section className={mobileStyles.mobileGroup}>
+                  <span className={mobileStyles.mobileGroupLabel}>On this page</span>
+                  <nav className={mobileStyles.mobileLinks} aria-label="Homepage sections">
                     {navigation.landingItems.map((item, index) => {
                       const isActive = pathname === '/' && activeSection === item.sectionId
 
                       return (
                         <Link
-                          className={`${styles.mobileLink} ${isActive ? 'is-active' : ''}`}
+                          className={`${mobileStyles.mobileLink} ${isActive ? 'is-active' : ''}`}
                           href={item.href}
                           key={item.id}
                           aria-current={isActive ? 'location' : undefined}
@@ -551,12 +552,14 @@ export function Navbar({ navigation }: NavbarProps) {
               ) : null}
 
               {navigation.pagesMenu ? (
-                <section className={styles.mobileGroup}>
-                  <span className={styles.mobileGroupLabel}>{navigation.pagesMenu.label}</span>
-                  <nav className={styles.mobileLinks} aria-label="Internal pages">
+                <section className={mobileStyles.mobileGroup}>
+                  <span className={mobileStyles.mobileGroupLabel}>
+                    {navigation.pagesMenu.label}
+                  </span>
+                  <nav className={mobileStyles.mobileLinks} aria-label="Internal pages">
                     {navigation.pagesMenu.items.map((item) => {
                       const isActive = isNavigationRouteActive(pathname, item)
-                      const className = `${styles.mobileLink} ${styles.mobileLinkPage} ${
+                      const className = `${mobileStyles.mobileLink} ${mobileStyles.mobileLinkPage} ${
                         isActive ? 'is-active' : ''
                       }`
                       const content = (
@@ -597,8 +600,8 @@ export function Navbar({ navigation }: NavbarProps) {
               ) : null}
             </div>
 
-            <div className={styles.mobileFooter}>
-              <div className={styles.mobileTheme}>
+            <div className={mobileStyles.mobileFooter}>
+              <div className={mobileStyles.mobileTheme}>
                 <div>
                   <span>Interface theme</span>
                   <strong>Dark / Light</strong>
@@ -609,7 +612,7 @@ export function Navbar({ navigation }: NavbarProps) {
               {navigation.cta ? (
                 navigation.cta.external ? (
                   <a
-                    className={styles.mobileCta}
+                    className={mobileStyles.mobileCta}
                     href={navigation.cta.href}
                     target={navigation.cta.newTab ? '_blank' : undefined}
                     rel={navigation.cta.newTab ? 'noreferrer' : undefined}
@@ -620,7 +623,7 @@ export function Navbar({ navigation }: NavbarProps) {
                   </a>
                 ) : (
                   <Link
-                    className={styles.mobileCta}
+                    className={mobileStyles.mobileCta}
                     href={navigation.cta.href}
                     target={navigation.cta.newTab ? '_blank' : undefined}
                     rel={navigation.cta.newTab ? 'noreferrer' : undefined}

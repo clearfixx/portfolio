@@ -1,0 +1,363 @@
+/* Mobile navigation overlay and drawer. */
+
+/* navbar-base-layer:end */
+
+/* navbar-mobile-drawer-layer:start */
+/* Mobile navigation overlay and drawer. Source order: layout → responsive → legacy overrides. */
+
+/* migrated from src/app/(frontend)/styles/base/_responsive-system.scss */
+
+
+.mobileNavigation {
+  display: none;
+}
+
+
+.mobileNavigation {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: block;
+}
+
+
+.mobileBackdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: rgb(var(--rgb-black) / 66%);
+  backdrop-filter: blur(5px);
+  cursor: default;
+  animation: mobile-nav-backdrop-in 220ms ease both;
+}
+
+
+.mobilePanel {
+  position: absolute;
+  inset: 0 0 0 auto;
+  display: flex;
+  width: min(88vw, 390px);
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  flex-direction: column;
+  border-left: 1px solid rgb(var(--rgb-cyan) / 22%);
+  padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right))
+    max(20px, env(safe-area-inset-bottom)) 20px;
+  background:
+    radial-gradient(circle at 80% 5%, rgb(var(--rgb-purple-blue) / 16%), transparent 30%),
+    radial-gradient(circle at 10% 20%, rgb(var(--rgb-cyan) / 10%), transparent 28%),
+    rgb(var(--rgb-canvas) / 97%);
+  box-shadow: -32px 0 80px rgb(var(--rgb-black) / 48%);
+  animation: mobile-nav-panel-in 320ms var(--motion-ease-standard, ease) both;
+}
+
+
+.mobilePanel::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgb(var(--rgb-cyan) / 3%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--rgb-cyan) / 3%) 1px, transparent 1px);
+  background-size: 42px 42px;
+  content: '';
+  mask-image: linear-gradient(180deg, rgb(var(--rgb-black)), transparent 80%);
+}
+
+
+.mobileHeader,
+.mobileLinks,
+.mobileFooter {
+  position: relative;
+  z-index: 1;
+}
+
+
+.mobileHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid rgb(var(--rgb-cyan) / 14%);
+  padding-bottom: 22px;
+}
+
+
+.mobileHeader > div {
+  display: grid;
+  gap: 7px;
+}
+
+
+.mobileHeader span,
+.mobileTheme span {
+  color: rgb(var(--rgb-cyan));
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+
+.mobileHeader strong {
+  color: rgb(var(--rgb-text-bright));
+  font-size: clamp(1.8rem, 8vw, 2.5rem);
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+
+.mobileClose {
+  position: relative;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgb(var(--rgb-cyan) / 20%);
+  border-radius: 10px;
+  background: rgb(var(--rgb-white) / 3%);
+  color: rgb(var(--rgb-text-bright));
+  cursor: pointer;
+}
+
+
+.mobileClose span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 19px;
+  height: 1.5px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+
+.mobileClose span:first-child {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+
+.mobileClose span:last-child {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+
+.mobileLinks {
+  display: grid;
+  margin-top: 26px;
+}
+
+
+.mobileLink {
+  display: grid;
+  min-height: 68px;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  border-bottom: 1px solid rgb(var(--rgb-cyan) / 11%);
+  color: rgb(var(--rgb-text-muted));
+}
+
+
+.mobileLink > span {
+  color: rgb(var(--rgb-cyan) / 60%);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+
+.mobileLink strong {
+  color: inherit;
+  font-size: 1.08rem;
+  letter-spacing: -0.02em;
+}
+
+
+.mobileLink svg {
+  color: rgb(var(--rgb-cyan) / 54%);
+  transition: transform 180ms ease;
+}
+
+
+.mobileLink:global(.is-active) {
+  color: rgb(var(--rgb-cyan));
+}
+
+
+.mobileLink:global(.is-active) strong {
+  text-shadow: 0 0 18px rgb(var(--rgb-cyan) / 28%);
+}
+
+
+.mobileFooter {
+  display: grid;
+  gap: 14px;
+  margin-top: auto;
+  padding-top: 28px;
+}
+
+
+.mobileTheme {
+  display: flex;
+  min-height: 66px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border: 1px solid rgb(var(--rgb-cyan) / 14%);
+  border-radius: 12px;
+  padding: 10px 11px 10px 16px;
+  background: rgb(var(--rgb-white) / 2.5%);
+}
+
+
+.mobileTheme > div {
+  display: grid;
+  gap: 5px;
+}
+
+
+.mobileTheme strong {
+  color: rgb(var(--rgb-text-bright));
+  font-size: 0.88rem;
+}
+
+
+.mobileCta {
+  display: flex;
+  min-height: 52px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border: 1px solid rgb(var(--rgb-cyan) / 34%);
+  border-radius: 10px;
+  padding: 0 17px;
+  background:
+    linear-gradient(135deg, rgb(var(--rgb-cyan) / 18%), rgb(var(--rgb-purple-blue) / 10%)),
+    rgb(var(--rgb-surface-control) / 82%);
+  color: rgb(var(--rgb-text-bright));
+  font-size: 0.92rem;
+  font-weight: 850;
+}
+
+
+@media (max-width: 400px) {
+
+.mobilePanel {
+    width: 100%;
+    border-left: 0;
+    padding-inline: 16px;
+  }
+}
+
+
+@media (hover: none) {
+
+.mobileLink {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+.mobileBackdrop,
+.mobilePanel {
+    animation: none;
+  }
+}
+
+.mobileLink:focus-visible,
+.mobileCta:focus-visible {
+  border-radius: 8px;
+  outline: 2px solid rgb(var(--rgb-cyan));
+  outline-offset: 4px;
+}
+
+
+.mobileGroups {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 28px;
+  margin-top: 26px;
+}
+
+
+.mobileGroup {
+  display: grid;
+  gap: 8px;
+}
+
+
+.mobileGroupLabel {
+  color: rgb(var(--rgb-cyan) / 72%);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.66rem;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+
+.mobileLinks {
+  margin-top: 0;
+}
+
+
+.mobileLinkPage > span {
+  color: rgb(var(--rgb-purple-blue) / 78%);
+}
+
+
+.mobileLinkPage:global(.is-active) > span {
+  color: rgb(var(--rgb-cyan));
+}
+
+
+@media (max-width: 900px) {
+
+.mobileGroups {
+    padding-bottom: 8px;
+  }
+}
+
+
+@media (max-width: 420px) {
+
+.mobileGroups {
+    gap: 22px;
+  }
+
+
+.mobileLink {
+    min-height: 62px;
+  }
+}
+
+
+/* Mobile drawer keyframes copied from global sources. */
+@keyframes mobile-nav-backdrop-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mobile-nav-panel-in {
+  from {
+    opacity: 0.7;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
