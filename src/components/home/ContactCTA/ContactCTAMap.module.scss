@@ -1,0 +1,264 @@
+@use '../../../app/(frontend)/styles/abstracts/mixins' as ui;
+
+/* Contact CTA map panel. */
+
+.mapPanel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgb(var(--rgb-accent-border) / 24%);
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgb(var(--rgb-accent-soft) / 8%), transparent 42%),
+    linear-gradient(
+      180deg,
+      rgb(var(--rgb-surface-elevated) / 92%),
+      rgb(var(--rgb-surface-soft) / 95%)
+    );
+  box-shadow:
+    inset 0 1px 0 rgb(var(--rgb-white) / 4%),
+    0 24px 80px rgb(var(--rgb-black) / 24%);
+}
+
+
+.mapPanel {
+  min-height: 560px;
+}
+
+
+.mapImage {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-position: 44% 50%;
+  object-fit: cover;
+  opacity: 0.82;
+  transform: scale(1.04);
+}
+
+
+.mapOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgb(var(--rgb-surface-overlay) / 58%) 0%, transparent 24%),
+    radial-gradient(circle at 37% 53%, rgb(var(--rgb-accent) / 8%), transparent 32%),
+    linear-gradient(
+      90deg,
+      rgb(var(--rgb-surface-overlay) / 2%),
+      rgb(var(--rgb-surface-overlay) / 46%) 64%,
+      rgb(var(--rgb-surface-overlay) / 82%)
+    ),
+    linear-gradient(
+      180deg,
+      rgb(var(--rgb-surface-overlay) / 8%),
+      rgb(var(--rgb-surface-overlay) / 38%)
+    );
+}
+
+.mapPanel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgb(var(--rgb-accent-grid) / 5.5%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--rgb-accent-grid) / 5.5%) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(135deg, rgb(var(--rgb-black)), transparent 76%);
+  opacity: 0.46;
+}
+
+
+.pin {
+  position: absolute;
+  left: 38%;
+  top: 53%;
+  z-index: 3;
+  display: grid;
+  width: 72px;
+  height: 72px;
+  place-items: center;
+  color: rgb(var(--rgb-accent));
+  transform: translate(-50%, -50%);
+}
+
+
+.pin svg {
+  position: relative;
+  z-index: 2;
+  width: 66px;
+  height: 66px;
+  fill: rgb(var(--rgb-accent) / 16%);
+  stroke: currentColor;
+  stroke-width: 1.5;
+  filter: drop-shadow(0 0 22px rgb(var(--rgb-accent) / 88%));
+}
+
+
+.pin span,
+.pin::before,
+.pin::after {
+  content: '';
+  position: absolute;
+  border-radius: 999px;
+  border: 1px solid rgb(var(--rgb-accent) / 36%);
+}
+
+
+.pin span {
+  inset: 47px 14px 8px;
+  background: rgb(var(--rgb-accent) / 18%);
+  filter: blur(3px);
+}
+
+
+.pin::before {
+  inset: 44px 10px 2px;
+}
+
+
+.pin::after {
+  inset: 38px 2px -4px;
+  opacity: 0.56;
+}
+
+
+.locationBadge {
+  @include ui.inline-control($gap: 12px, $justify: null);
+
+  position: absolute;
+  left: 28px;
+  bottom: 28px;
+  z-index: 5;
+  border: 1px solid rgb(var(--rgb-accent) / 45%);
+  border-radius: 10px;
+  padding: 14px 18px;
+  background: rgb(var(--rgb-surface-badge) / 88%);
+  color: rgb(var(--rgb-text-strong));
+  font-size: 0.98rem;
+  font-weight: 800;
+  box-shadow: 0 0 34px rgb(var(--rgb-accent) / 12%);
+  backdrop-filter: blur(14px);
+}
+
+
+.locationBadge svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: rgb(var(--rgb-accent));
+}
+
+@media (max-width: 1180px) {
+
+
+.mapPanel {
+    min-height: 560px;
+  }
+}
+
+@media (max-width: 760px) {
+
+.mapPanel {
+    min-height: 680px;
+  }
+
+
+.mapImage {
+    object-position: center;
+    transform: scale(1.18);
+  }
+
+
+.locationBadge {
+    left: 20px;
+    bottom: 24px;
+  }
+
+
+.pin {
+    left: 50%;
+    top: 30%;
+  }
+}
+
+@media (max-width: 520px) {
+
+.mapPanel {
+    min-height: 760px;
+  }
+}
+
+html[data-motion-ready='true'] {
+#contact :global(.portfolio-section__body) {
+.mapPanel {
+      opacity: 0;
+      transition:
+        opacity var(--motion-duration-section) var(--motion-ease-standard),
+        transform var(--motion-duration-section) var(--motion-ease-standard);
+    }
+
+
+.mapPanel {
+      transform: translate3d(-18px, 0, 0);
+    }
+
+&[data-motion-state='visible'] {
+.mapPanel {
+        opacity: 1;
+        transform: none;
+      }
+}
+}
+}
+
+@media (prefers-reduced-motion: reduce) {
+html[data-motion-ready='true'] {
+#projects,
+#engineer-profile,
+#skills-technologies,
+#insights,
+#contact,
+:global(.site-footer) {
+.mapPanel {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+}
+}
+}
+
+@media (max-width: 900px) {
+.mapPanel {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 640px) {
+.mapPanel {
+    border-radius: 14px;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 767px), (max-height: 759px), (pointer: coarse) {
+html[data-motion-ready='true'] {
+#projects,
+#engineer-profile,
+#skills-technologies,
+#insights,
+#contact,
+:global(.site-footer) {
+.mapPanel {
+        opacity: 1;
+        transform: none;
+        transition: none;
+        transition-delay: 0ms;
+      }
+}
+}
+}

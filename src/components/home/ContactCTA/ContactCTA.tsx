@@ -22,6 +22,7 @@ import type {
 
 import { ContactForm } from './ContactForm'
 import styles from './ContactCTA.module.scss'
+import mapStyles from './ContactCTAMap.module.scss'
 import formStyles from './ContactFormFoundation.module.scss'
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>
 
@@ -76,9 +77,9 @@ function ContactChannelItem({ channel }: { channel: ContactChannelViewModel }) {
 
 function ContactMap({ content }: { content: ContactSectionViewModel }) {
   return (
-    <div className={styles.mapPanel}>
+    <div className={mapStyles.mapPanel}>
       <Image
-        className={styles.mapImage}
+        className={mapStyles.mapImage}
         src="/images/contact/kyiv-map.png"
         alt=""
         aria-hidden="true"
@@ -88,15 +89,15 @@ function ContactMap({ content }: { content: ContactSectionViewModel }) {
         sizes="(max-width: 1180px) 100vw, 56vw"
       />
 
-      <div className={styles.mapOverlay} aria-hidden="true" />
+      <div className={mapStyles.mapOverlay} aria-hidden="true" />
 
-      <div className={styles.pin} aria-hidden="true">
+      <div className={mapStyles.pin} aria-hidden="true">
         <PinIcon />
         <span />
       </div>
 
       {content.location ? (
-        <div className={styles.locationBadge}>
+        <div className={mapStyles.locationBadge}>
           <PinIcon />
           {content.location}
         </div>
