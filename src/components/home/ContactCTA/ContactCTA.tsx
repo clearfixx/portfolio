@@ -22,6 +22,7 @@ import type {
 
 import { ContactForm } from './ContactForm'
 import styles from './ContactCTA.module.scss'
+import channelStyles from './ContactCTAChannels.module.scss'
 import mapStyles from './ContactCTAMap.module.scss'
 import formStyles from './ContactFormFoundation.module.scss'
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>
@@ -49,10 +50,10 @@ function ContactChannelItem({ channel }: { channel: ContactChannelViewModel }) {
   const Icon = CHANNEL_ICONS[channel.icon]
   const content = (
     <>
-      <span className={styles.channelIcon}>
+      <span className={channelStyles.channelIcon}>
         <Icon />
       </span>
-      <span className={styles.channelCopy}>
+      <span className={channelStyles.channelCopy}>
         <span>{channel.label}</span>
         <strong>{channel.value}</strong>
       </span>
@@ -62,7 +63,7 @@ function ContactChannelItem({ channel }: { channel: ContactChannelViewModel }) {
   if (channel.href) {
     return (
       <a
-        className={styles.channel}
+        className={channelStyles.channel}
         href={channel.href}
         rel={channel.external ? 'noreferrer' : undefined}
         target={channel.external ? '_blank' : undefined}
@@ -72,7 +73,7 @@ function ContactChannelItem({ channel }: { channel: ContactChannelViewModel }) {
     )
   }
 
-  return <div className={styles.channel}>{content}</div>
+  return <div className={channelStyles.channel}>{content}</div>
 }
 
 function ContactMap({ content }: { content: ContactSectionViewModel }) {
@@ -103,27 +104,27 @@ function ContactMap({ content }: { content: ContactSectionViewModel }) {
         </div>
       ) : null}
 
-      <div className={styles.contactCard}>
+      <div className={channelStyles.contactCard}>
         {content.channels.length > 0 ? (
-          <div className={styles.channels}>
+          <div className={channelStyles.channels}>
             {content.channels.map((channel) => (
               <ContactChannelItem channel={channel} key={channel.id} />
             ))}
           </div>
         ) : (
-          <p className={styles.empty} role="status">
+          <p className={channelStyles.empty} role="status">
             Contact details are being updated.
           </p>
         )}
 
         {content.socialLinks.length > 0 ? (
-          <div className={styles.socials} aria-label="Social links">
+          <div className={channelStyles.socials} aria-label="Social links">
             {content.socialLinks.map((social) => {
               const Icon = SOCIAL_ICONS[social.icon]
 
               return (
                 <a
-                  className={styles.socialLink}
+                  className={channelStyles.socialLink}
                   href={social.href}
                   key={social.id}
                   target="_blank"
@@ -137,7 +138,7 @@ function ContactMap({ content }: { content: ContactSectionViewModel }) {
           </div>
         ) : null}
 
-        <div className={styles.availability} data-tone={content.availability.tone}>
+        <div className={channelStyles.availability} data-tone={content.availability.tone}>
           <span />
           {content.availability.label}
         </div>
@@ -179,7 +180,7 @@ export function ContactCTA({ content }: ContactCTAProps) {
         className={[
           styles.root,
           formStyles.scope,
-          content.form.enabled ? null : styles.channelsOnly,
+          content.form.enabled ? null : channelStyles.channelsOnly,
         ]
           .filter(Boolean)
           .join(' ')}
