@@ -17,7 +17,6 @@ type NavbarProps = {
 }
 
 type LandingItem = NavigationViewModel['landingItems'][number]
-type RouteItem = NonNullable<NavigationViewModel['pagesMenu']>['items'][number]
 type CtaItem = NonNullable<NavigationViewModel['cta']>
 type ScrollItem = {
   sectionId: string
