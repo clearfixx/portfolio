@@ -7,7 +7,7 @@ import { type KeyboardEvent, type MouseEvent, useEffect, useMemo, useRef, useSta
 import { ThemeToggle } from '@/components/theme/ThemeToggle'
 
 import { isNavigationRouteActive } from './navigation-route-state'
-import styles from './Navbar.module.scss'
+import styles from './NavbarShell.module.scss'
 import mobileStyles from './NavbarMobileNavigation.module.scss'
 import dropdownStyles from './NavbarDropdown.module.scss'
 import type { NavigationViewModel } from '@/lib/cms/navigation'
