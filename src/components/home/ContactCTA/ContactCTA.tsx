@@ -21,7 +21,7 @@ import type {
 } from '@/lib/cms/homepage'
 
 import { ContactForm } from './ContactForm'
-import styles from './ContactCTA.module.scss'
+import styles from './ContactCTAShell.module.scss'
 import channelStyles from './ContactCTAChannels.module.scss'
 import mapStyles from './ContactCTAMap.module.scss'
 import formStyles from './ContactFormFoundation.module.scss'
