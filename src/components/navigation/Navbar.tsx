@@ -8,6 +8,7 @@ import { ThemeToggle } from '@/components/theme/ThemeToggle'
 
 import { isNavigationRouteActive } from './navigation-route-state'
 import styles from './Navbar.module.scss'
+import dropdownStyles from './NavbarDropdown.module.scss'
 import type { NavigationViewModel } from '@/lib/cms/navigation'
 
 type NavbarProps = {
@@ -372,9 +373,9 @@ export function Navbar({ navigation }: NavbarProps) {
         })}
 
         {navigation.pagesMenu ? (
-          <div className={styles.dropdown} ref={pagesMenuContainerRef}>
+          <div className={dropdownStyles.dropdown} ref={pagesMenuContainerRef}>
             <button
-              className={`${styles.dropdownTrigger} ${pagesMenuActive ? 'is-active' : ''}`}
+              className={`${dropdownStyles.dropdownTrigger} ${pagesMenuActive ? 'is-active' : ''}`}
               type="button"
               ref={pagesMenuTriggerRef}
               aria-controls="navbar-pages-menu"
@@ -387,12 +388,16 @@ export function Navbar({ navigation }: NavbarProps) {
             </button>
 
             {isPagesMenuOpen ? (
-              <div className={styles.dropdownMenu} id="navbar-pages-menu" ref={pagesMenuRef}>
-                <span className={styles.dropdownEyebrow}>Internal pages</span>
+              <div
+                className={dropdownStyles.dropdownMenu}
+                id="navbar-pages-menu"
+                ref={pagesMenuRef}
+              >
+                <span className={dropdownStyles.dropdownEyebrow}>Internal pages</span>
 
                 {navigation.pagesMenu.items.map((item) => {
                   const isActive = isNavigationRouteActive(pathname, item)
-                  const className = `${styles.dropdownItem} ${isActive ? 'is-active' : ''}`
+                  const className = `${dropdownStyles.dropdownItem} ${isActive ? 'is-active' : ''}`
                   const content = (
                     <>
                       <span>
