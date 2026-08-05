@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 
 import styles from './ProjectRegistryPreview.module.scss'
 
+import statusBarStyles from './ProjectRegistryStatusBar.module.scss'
 import telemetryStyles from './ProjectRegistryTelemetry.module.scss'
 type ProjectRegistryPreviewProps = {
   project: Pick<
@@ -434,7 +435,7 @@ export function ProjectRegistryPreview({ project }: ProjectRegistryPreviewProps)
         ))}
       </div>
 
-      <footer className={styles.statusbar}>
+      <footer className={statusBarStyles.statusbar}>
         <span>
           <i />
           {PREVIEW_VARIANT_LABELS[preview.variant]}

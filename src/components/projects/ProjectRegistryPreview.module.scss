@@ -302,49 +302,6 @@
   color: rgb(var(--project-preview-secondary));
 }
 
-.statusbar {
-  display: grid;
-  min-width: 0;
-  grid-template-columns: minmax(0, 1fr) auto auto auto;
-  align-items: center;
-  gap: 10px;
-  padding: 0 10px 0 12px;
-  background:
-    linear-gradient(90deg, rgb(var(--project-preview-accent) / 15%), transparent 66%),
-    rgb(var(--rgb-canvas) / 34%);
-  color: rgb(var(--rgb-text-muted) / 76%);
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 0.44rem;
-}
-
-.statusbar > span {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.statusbar > span:first-child {
-  display: inline-flex;
-  min-width: 0;
-  align-items: center;
-  gap: 6px;
-  color: rgb(var(--project-preview-accent));
-}
-
-.statusbar > span:first-child i {
-  width: 5px;
-  height: 5px;
-  flex: 0 0 5px;
-  border-radius: 50%;
-  background: currentColor;
-  box-shadow: 0 0 8px currentColor;
-}
-
-.statusbar strong {
-  color: rgb(var(--rgb-text-strong));
-  font-size: 0.5rem;
-}
-
 @media (max-width: 1240px) {
   .tab:not(.active) {
     display: none;
@@ -371,9 +328,7 @@
     inset: 9px;
   }
 
-  .branch,
-  .statusbar > span:nth-child(2),
-  .statusbar > span:nth-child(3) {
+  .branch {
     display: none;
   }
 
