@@ -12,6 +12,7 @@ import {
 } from 'simple-icons/icons'
 
 import actionStyles from './BlogArticleActions.module.scss'
+import progressStyles from './BlogArticleReadingProgress.module.scss'
 import feedbackStyles from './BlogArticleFeedback.module.scss'
 import shareStyles from './BlogArticleShareMenu.module.scss'
 import type { BlogFeedbackCounts } from '@/lib/cms'
@@ -202,7 +203,7 @@ export function BlogArticleActions({
 
     return (
       <div
-        className={`${actionStyles.progressMeter} ${isComplete ? actionStyles.progressMeterComplete : ''}`}
+        className={`${progressStyles.progressMeter} ${isComplete ? progressStyles.progressMeterComplete : ''}`}
         aria-label={isComplete ? 'Reading completed' : `${roundedProgress}% read`}
       >
         <div>
