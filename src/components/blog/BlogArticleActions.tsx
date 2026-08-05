@@ -12,6 +12,7 @@ import {
 } from 'simple-icons/icons'
 
 import actionStyles from './BlogArticleActions.module.scss'
+import feedbackStyles from './BlogArticleFeedback.module.scss'
 import shareStyles from './BlogArticleShareMenu.module.scss'
 import type { BlogFeedbackCounts } from '@/lib/cms'
 
@@ -332,29 +333,29 @@ export function BlogArticleActions({
         </span>
       </div>
 
-      <div className={actionStyles.feedbackButtons}>
+      <div className={feedbackStyles.feedbackButtons}>
         <button
           aria-pressed={feedback === 'helpful'}
-          className={actionStyles.feedbackPositive}
+          className={feedbackStyles.feedbackPositive}
           disabled={isSubmitting}
           onClick={() => saveFeedback('helpful')}
           type="button"
         >
           <ActionIcon name="thumb-up" />
           Helpful
-          <span className={actionStyles.feedbackCount}>{counts.helpful}</span>
+          <span className={feedbackStyles.feedbackCount}>{counts.helpful}</span>
         </button>
 
         <button
           aria-pressed={feedback === 'not-helpful'}
-          className={actionStyles.feedbackNegative}
+          className={feedbackStyles.feedbackNegative}
           disabled={isSubmitting}
           onClick={() => saveFeedback('not-helpful')}
           type="button"
         >
           <ActionIcon name="thumb-down" />
           Not helpful
-          <span className={actionStyles.feedbackCount}>{counts.notHelpful}</span>
+          <span className={feedbackStyles.feedbackCount}>{counts.notHelpful}</span>
         </button>
       </div>
 

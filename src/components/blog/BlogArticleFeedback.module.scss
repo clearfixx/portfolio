@@ -1,0 +1,134 @@
+/* Blog article feedback controls and counters. */
+
+.feedbackButtons {
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+}
+
+
+.feedbackPositive {
+  color: var(--article-cyan) !important;
+  border-color: rgba(19, 242, 227, 0.32) !important;
+}
+
+
+.feedbackNegative {
+  color: #bb7cff !important;
+  border-color: rgba(168, 92, 255, 0.3) !important;
+}
+
+
+.feedbackNegative:hover {
+  border-color: rgba(168, 92, 255, 0.52) !important;
+  background: rgba(168, 92, 255, 0.09) !important;
+  color: #ca97ff !important;
+}
+
+
+.feedbackPositive[aria-pressed='true'] {
+  background: rgba(19, 242, 227, 0.13) !important;
+  box-shadow: 0 0 22px rgba(19, 242, 227, 0.1);
+}
+
+
+.feedbackNegative[aria-pressed='true'] {
+  background: rgba(168, 92, 255, 0.14) !important;
+  box-shadow: 0 0 22px rgba(168, 92, 255, 0.11);
+}
+
+@media (max-width: 650px) {
+.feedbackButtons {
+    grid-column: 1;
+  }
+
+
+.feedbackButtons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+
+.feedbackCount {
+  display: inline-grid;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  place-items: center;
+  margin-left: 0.08rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  color: currentColor;
+  font-size: 0.6rem;
+  font-weight: 850;
+}
+
+
+.feedbackButtons {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.55rem;
+  min-width: max-content;
+}
+
+
+.feedbackButtons button {
+  min-width: 8.8rem;
+}
+
+
+.feedbackCount {
+  min-width: 1.25rem;
+  height: 1.25rem;
+  margin-left: 0.12rem;
+  font-size: 0.56rem;
+}
+
+@media (max-width: 1180px) {
+
+
+.feedbackButtons {
+    grid-area: feedback;
+  }
+}
+
+@media (max-width: 760px) {
+
+
+.feedbackButtons {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-width: 0;
+  }
+
+
+.feedbackButtons button {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+
+@media (max-width: 460px) {
+
+.feedbackButtons {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+:global([data-theme='light']) .feedbackPositive {
+  color: #087f8c !important;
+  border-color: rgba(8, 127, 140, 0.28) !important;
+}
+
+
+:global([data-theme='light']) .feedbackNegative {
+  color: #7847c7 !important;
+  border-color: rgba(120, 71, 199, 0.28) !important;
+}
+
+
+:global([data-theme='light']) .feedbackCount {
+  background: rgba(35, 79, 96, 0.08);
+}
