@@ -12,6 +12,7 @@ import {
 } from 'simple-icons/icons'
 
 import actionStyles from './BlogArticleActions.module.scss'
+import shareStyles from './BlogArticleShareMenu.module.scss'
 import type { BlogFeedbackCounts } from '@/lib/cms'
 
 type BlogArticleActionsProps = {
@@ -357,11 +358,11 @@ export function BlogArticleActions({
         </button>
       </div>
 
-      <div className={actionStyles.shareMenu} ref={shareMenuRef}>
+      <div className={shareStyles.shareMenu} ref={shareMenuRef}>
         <button
           aria-expanded={shareMenuOpen}
           aria-haspopup="menu"
-          className={actionStyles.shareMenuTrigger}
+          className={shareStyles.shareMenuTrigger}
           onClick={() => setShareMenuOpen((current) => !current)}
           type="button"
         >
@@ -369,20 +370,20 @@ export function BlogArticleActions({
           Share article
           <ChevronDown
             aria-hidden="true"
-            className={actionStyles.shareChevron}
+            className={shareStyles.shareChevron}
             size={15}
             strokeWidth={1.9}
           />
         </button>
 
         {shareMenuOpen ? (
-          <div className={actionStyles.shareDropdown} role="menu">
-            <div className={actionStyles.shareDropdownHeader}>
+          <div className={shareStyles.shareDropdown} role="menu">
+            <div className={shareStyles.shareDropdownHeader}>
               <strong>Share article</strong>
               <span>Choose a destination</span>
             </div>
 
-            <div className={actionStyles.shareDropdownList}>
+            <div className={shareStyles.shareDropdownList}>
               {shareItems.map((item) => (
                 <button
                   data-share-target={item.target}
@@ -397,7 +398,7 @@ export function BlogArticleActions({
               ))}
             </div>
 
-            <div className={actionStyles.shareDropdownFooter}>
+            <div className={shareStyles.shareDropdownFooter}>
               <button onClick={copyLink} role="menuitem" type="button">
                 <ActionIcon name="copy" />
                 <span>{copied ? 'Link copied' : 'Copy link'}</span>
