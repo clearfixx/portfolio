@@ -1,37 +1,6 @@
-.overview,
 .richText,
 .takeaways {
   scroll-margin-top: 7rem;
-}
-
-.overview {
-  padding-top: 2rem;
-}
-
-.overview > p:last-of-type {
-  color: #b6c7d0;
-  line-height: 1.8;
-}
-
-.note {
-  margin-top: 1.2rem;
-  padding: 1rem 1.1rem;
-  border: 1px solid rgba(19, 242, 227, 0.27);
-  border-radius: 10px;
-  background: rgba(19, 242, 227, 0.045);
-}
-
-.note span {
-  color: var(--article-cyan);
-  font-size: 0.7rem;
-  font-weight: 800;
-}
-
-.note p {
-  margin: 0.45rem 0 0;
-  color: #9db0b9;
-  font-size: 0.78rem;
-  line-height: 1.65;
 }
 
 .richText {
@@ -161,12 +130,10 @@
   color: #0b1e2a;
 }
 
-:global([data-theme='light']) .overview > p:last-of-type,
 :global([data-theme='light']) .richText {
   color: #4d6570;
 }
 
-:global([data-theme='light']) .note,
 :global([data-theme='light']) .takeaways article {
   border-color: rgba(35, 79, 96, 0.15);
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(245, 250, 251, 0.93));
@@ -175,12 +142,6 @@
     0 18px 46px rgba(30, 70, 85, 0.09);
 }
 
-:global([data-theme='light']) .note {
-  border-color: rgba(8, 127, 140, 0.22);
-  background: rgba(8, 127, 140, 0.055);
-}
-
-:global([data-theme='light']) .note p,
 :global([data-theme='light']) .takeaways article p {
   color: #617984;
 }

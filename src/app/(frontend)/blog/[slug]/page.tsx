@@ -25,6 +25,7 @@ import relatedStyles from './BlogArticleRelated.module.scss'
 import railStyles from './BlogArticleRail.module.scss'
 import layoutStyles from './BlogArticleLayout.module.scss'
 import contentStyles from './BlogArticleContent.module.scss'
+import overviewStyles from './BlogArticleOverview.module.scss'
 import coverStyles from './BlogArticleCover.module.scss'
 import heroStyles from './BlogArticleHero.module.scss'
 export const revalidate = 300
@@ -340,11 +341,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </div>
                 )}
 
-                <section className={contentStyles.overview} data-article-reveal id="overview">
+                <section className={overviewStyles.overview} data-article-reveal id="overview">
                   <p className={discussionStyles.sectionEyebrow}>Overview</p>
                   <p>{post.excerpt}</p>
 
-                  <div className={contentStyles.note}>
+                  <div className={overviewStyles.note}>
                     <span>Engineering note</span>
                     <p>
                       The strongest architecture decisions are the ones that remain understandable
