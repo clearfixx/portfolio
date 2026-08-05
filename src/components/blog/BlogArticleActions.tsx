@@ -11,7 +11,7 @@ import {
   siX,
 } from 'simple-icons/icons'
 
-import actionStyles from './BlogArticleActions.module.scss'
+import actionStyles from './BlogArticleActionsShell.module.scss'
 import progressStyles from './BlogArticleReadingProgress.module.scss'
 import feedbackStyles from './BlogArticleFeedback.module.scss'
 import shareStyles from './BlogArticleShareMenu.module.scss'
