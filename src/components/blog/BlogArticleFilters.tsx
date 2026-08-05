@@ -13,6 +13,7 @@ import {
 } from 'react'
 import iconStyles from './BlogIcon.module.scss'
 import filterStyles from './BlogArticleFilters.module.scss'
+import selectStyles from './BlogArticleFilterSelect.module.scss'
 type FilterOption = {
   label: string
   slug: string
@@ -112,7 +113,7 @@ function FilterSelect({ allLabel, ariaLabel, name, onChange, options, value }: F
   }
 
   return (
-    <div className={filterStyles.filterSelect} ref={rootRef}>
+    <div className={selectStyles.filterSelect} ref={rootRef}>
       <input name={name} type="hidden" value={value} />
 
       <button
@@ -120,13 +121,13 @@ function FilterSelect({ allLabel, ariaLabel, name, onChange, options, value }: F
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         aria-label={ariaLabel}
-        className={filterStyles.filterSelectButton}
+        className={selectStyles.filterSelectButton}
         id={buttonId}
         onClick={() => setIsOpen((current) => !current)}
         type="button"
       >
         <span>{selectedLabel}</span>
-        <span className={filterStyles.filterSelectChevron}>
+        <span className={selectStyles.filterSelectChevron}>
           <FilterIcon name="chevron" />
         </span>
       </button>
@@ -134,14 +135,14 @@ function FilterSelect({ allLabel, ariaLabel, name, onChange, options, value }: F
       {isOpen ? (
         <div
           aria-labelledby={buttonId}
-          className={filterStyles.filterSelectMenu}
+          className={selectStyles.filterSelectMenu}
           id={listboxId}
           role="listbox"
           tabIndex={-1}
         >
           <button
             aria-selected={value === ''}
-            className={filterStyles.filterSelectOption}
+            className={selectStyles.filterSelectOption}
             onClick={(event) => selectValue('', event)}
             role="option"
             type="button"
@@ -153,7 +154,7 @@ function FilterSelect({ allLabel, ariaLabel, name, onChange, options, value }: F
           {options.map((option) => (
             <button
               aria-selected={value === option.slug}
-              className={filterStyles.filterSelectOption}
+              className={selectStyles.filterSelectOption}
               key={option.slug}
               onClick={(event) => selectValue(option.slug, event)}
               role="option"
@@ -214,7 +215,7 @@ export function BlogArticleFilters({
   }
 
   return (
-    <form className={filterStyles.filters} onSubmit={submitFilters}>
+    <form className={filterStyles.filters} data-blog-article-filters onSubmit={submitFilters}>
       <label className={filterStyles.search}>
         <span className={filterStyles.srOnly}>Search articles</span>
         <FilterIcon name="search" />
