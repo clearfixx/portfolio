@@ -12,7 +12,7 @@ import {
   useTransition,
 } from 'react'
 import iconStyles from './BlogIcon.module.scss'
-import filterStyles from './BlogArticleFilters.module.scss'
+import filterStyles from './BlogArticleFiltersShell.module.scss'
 import selectStyles from './BlogArticleFilterSelect.module.scss'
 type FilterOption = {
   label: string
