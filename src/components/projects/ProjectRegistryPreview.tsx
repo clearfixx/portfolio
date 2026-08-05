@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 
 import styles from './ProjectRegistryPreview.module.scss'
 
+import telemetryStyles from './ProjectRegistryTelemetry.module.scss'
 type ProjectRegistryPreviewProps = {
   project: Pick<
     ProjectDirectoryItem,
@@ -423,10 +424,10 @@ export function ProjectRegistryPreview({ project }: ProjectRegistryPreviewProps)
         </ol>
       </div>
 
-      <div className={styles.telemetry}>
+      <div className={telemetryStyles.telemetry}>
         {preview.telemetry.map((item, index) => (
           <span key={item.label}>
-            <i className={index === 0 ? styles.live : undefined} />
+            <i className={index === 0 ? telemetryStyles.live : undefined} />
             <small>{item.label}</small>
             <strong>{item.value}</strong>
           </span>
