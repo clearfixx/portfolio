@@ -288,7 +288,10 @@ export function ContactForm({ source = 'homepage' }: ContactFormProps) {
       data-contact-form-source={source}
     >
       <fieldset className={styles.fieldset} disabled={isSubmitting}>
-        <label className={`${foundationStyles.field}${errors.name ? ' is-invalid' : ''}`}>
+        <label
+          data-contact-form-field
+          className={`${foundationStyles.field}${errors.name ? ' is-invalid' : ''}`}
+        >
           <span className={foundationStyles.fieldIcon}>
             <ContactUserIcon />
           </span>
@@ -312,7 +315,10 @@ export function ContactForm({ source = 'homepage' }: ContactFormProps) {
           </span>
         </label>
 
-        <label className={`${foundationStyles.field}${errors.email ? ' is-invalid' : ''}`}>
+        <label
+          data-contact-form-field
+          className={`${foundationStyles.field}${errors.email ? ' is-invalid' : ''}`}
+        >
           <span className={foundationStyles.fieldIcon}>
             <MailIcon />
           </span>
@@ -346,6 +352,7 @@ export function ContactForm({ source = 'homepage' }: ContactFormProps) {
         />
 
         <label
+          data-contact-form-field
           className={`${foundationStyles.field} ${foundationStyles.fieldMessage}${errors.message ? ' is-invalid' : ''}`}
         >
           <span className={foundationStyles.fieldIcon}>
@@ -399,7 +406,7 @@ export function ContactForm({ source = 'homepage' }: ContactFormProps) {
           </label>
         </div>
 
-        <button className={styles.submit} type="submit">
+        <button className={styles.submit} data-contact-form-submit type="submit">
           {isSubmitting ? 'Sending…' : 'Start the conversation'}
           <ArrowUpRightIcon />
         </button>

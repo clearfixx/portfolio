@@ -202,6 +202,7 @@ export function ProjectTypeSelect({
   return (
     <div
       ref={rootRef}
+      data-contact-form-field
       className={`${foundationStyles.field} ${selectStyles.select}${
         isOpen ? ' is-open' : ''
       }${invalid ? ' is-invalid' : ''}`}

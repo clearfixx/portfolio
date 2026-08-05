@@ -2,7 +2,7 @@ import Image from 'next/image'
 import type { ComponentType, SVGProps } from 'react'
 
 import { ContactForm } from '@/components/home/ContactCTA/ContactForm'
-import contactFormStyles from '../home/ContactCTA/ContactFormFoundation.module.scss'
+import contactMotionStyles from '../home/ContactCTA/ContactFormMotionScope.module.scss'
 import {
   ClockIcon,
   GithubIcon,
@@ -240,7 +240,7 @@ function ContactFormPanel({ content }: { content: ContactsPageViewModel }) {
         <p>{content.form.description}</p>
       </header>
 
-      <div className={`${contactFormStyles.scope} ${formPanelStyles.formScope}`}>
+      <div className={`${contactMotionStyles.scope} ${formPanelStyles.formScope}`}>
         <ContactForm source="contact-page" />
       </div>
     </section>

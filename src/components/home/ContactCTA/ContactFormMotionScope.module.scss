@@ -1,0 +1,58 @@
+/* Shared contact form reveal choreography. */
+
+/* migrated from src/app/(frontend)/styles/sections/_motion-choreography.scss */
+
+
+.scope {
+  :global(#contact) :global(.portfolio-section__body) & {
+    :global([data-contact-form-field]),
+    :global([data-contact-form-submit]) {
+      opacity: 0;
+      transform: translate3d(0, 8px, 0);
+      transition:
+        opacity var(--motion-duration-reveal) var(--motion-ease-standard),
+        transform var(--motion-duration-reveal) var(--motion-ease-standard);
+    }
+
+    @for $index from 2 through 6 {
+      :global([data-contact-form-field]):nth-child(#{$index}) {
+        transition-delay: calc(var(--motion-stagger-tight) * #{$index - 1});
+      }
+    }
+  }
+
+  :global(#contact) :global(.portfolio-section__body)[data-motion-state='visible'] & {
+    :global([data-contact-form-field]),
+    :global([data-contact-form-submit]) {
+      opacity: 1;
+      transform: none;
+    }
+
+    :global([data-contact-form-field]),
+    :global([data-contact-form-submit]) {
+      transition-delay: calc(var(--motion-stagger-default) * 2);
+    }
+  }
+}
+
+@media (max-width: 767px), (max-height: 759px), (pointer: coarse) {
+
+html[data-motion-ready='true'] {
+
+#projects,
+#engineer-profile,
+#skills-technologies,
+#insights,
+#contact,
+:global(.site-footer) {
+
+:global([data-contact-form-field]),
+:global([data-contact-form-submit]) {
+        opacity: 1;
+        transform: none;
+        transition: none;
+        transition-delay: 0ms;
+      }
+}
+}
+}

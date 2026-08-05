@@ -24,7 +24,7 @@ import { ContactForm } from './ContactForm'
 import styles from './ContactCTAShell.module.scss'
 import channelStyles from './ContactCTAChannels.module.scss'
 import mapStyles from './ContactCTAMap.module.scss'
-import formStyles from './ContactFormFoundation.module.scss'
+import motionStyles from './ContactFormMotionScope.module.scss'
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>
 
 type ContactCTAProps = {
@@ -179,7 +179,7 @@ export function ContactCTA({ content }: ContactCTAProps) {
       <div
         className={[
           styles.root,
-          formStyles.scope,
+          motionStyles.scope,
           content.form.enabled ? null : channelStyles.channelsOnly,
         ]
           .filter(Boolean)
