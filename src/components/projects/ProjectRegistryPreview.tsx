@@ -2,8 +2,7 @@ import { ActivityIcon, CodeIcon, LayersIcon, PackageIcon } from '@/components/ic
 import type { ProjectDirectoryItem } from '@/lib/cms/public-projects'
 import type { ReactNode } from 'react'
 
-import styles from './ProjectRegistryPreview.module.scss'
-
+import styles from './ProjectRegistryShell.module.scss'
 import workspaceStyles from './ProjectRegistryWorkspace.module.scss'
 import headerStyles from './ProjectRegistryHeader.module.scss'
 import statusBarStyles from './ProjectRegistryStatusBar.module.scss'
