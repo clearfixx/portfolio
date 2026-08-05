@@ -25,6 +25,7 @@ import relatedStyles from './BlogArticleRelated.module.scss'
 import railStyles from './BlogArticleRail.module.scss'
 import layoutStyles from './BlogArticleLayout.module.scss'
 import contentStyles from './BlogArticleContent.module.scss'
+import takeawayStyles from './BlogArticleTakeaways.module.scss'
 import overviewStyles from './BlogArticleOverview.module.scss'
 import coverStyles from './BlogArticleCover.module.scss'
 import heroStyles from './BlogArticleHero.module.scss'
@@ -360,7 +361,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
                 {keyTakeaways.length > 0 ? (
                   <section
-                    className={contentStyles.takeaways}
+                    className={takeawayStyles.takeaways}
                     data-article-reveal
                     id="key-takeaways"
                   >
