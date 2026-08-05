@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 
 import styles from './ProjectRegistryPreview.module.scss'
 
+import headerStyles from './ProjectRegistryHeader.module.scss'
 import statusBarStyles from './ProjectRegistryStatusBar.module.scss'
 import telemetryStyles from './ProjectRegistryTelemetry.module.scss'
 type ProjectRegistryPreviewProps = {
@@ -375,25 +376,25 @@ export function ProjectRegistryPreview({ project }: ProjectRegistryPreviewProps)
       className={`${styles.preview} ${previewVariantClass[preview.variant]}`}
       data-preview={preview.variant}
     >
-      <header className={styles.header}>
-        <span className={styles.windowControls}>
+      <header className={headerStyles.header}>
+        <span className={headerStyles.windowControls}>
           <i />
           <i />
           <i />
         </span>
 
-        <div className={styles.tabs}>
-          <span className={`${styles.tab} ${styles.active}`}>
+        <div className={headerStyles.tabs}>
+          <span className={headerStyles.tab} data-active>
             <CodeIcon aria-hidden="true" size={12} />
             {preview.fileName}
           </span>
-          <span className={styles.tab}>
+          <span className={headerStyles.tab}>
             <LayersIcon aria-hidden="true" size={12} />
             {preview.secondaryFile}
           </span>
         </div>
 
-        <span className={styles.branch}>main</span>
+        <span className={headerStyles.branch}>main</span>
       </header>
 
       <div className={styles.workspace}>
