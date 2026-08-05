@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 
 import styles from './ProjectRegistryPreview.module.scss'
 
+import workspaceStyles from './ProjectRegistryWorkspace.module.scss'
 import headerStyles from './ProjectRegistryHeader.module.scss'
 import statusBarStyles from './ProjectRegistryStatusBar.module.scss'
 import telemetryStyles from './ProjectRegistryTelemetry.module.scss'
@@ -151,22 +152,23 @@ function buildPreview(project: ProjectRegistryPreviewProps['project']): PreviewD
       variant,
       lines: [
         <>
-          <span className={styles.keyword}>export const</span>{' '}
-          <span className={styles.variable}>checkout</span> ={' '}
-          <span className={styles.functionToken}>createFlow</span>({'{'}
+          <span className={workspaceStyles.keyword}>export const</span>{' '}
+          <span className={workspaceStyles.variable}>checkout</span> ={' '}
+          <span className={workspaceStyles.functionToken}>createFlow</span>({'{'}
         </>,
         <>
           {'  '}storefront:{' '}
-          <span className={styles.stringToken}>&apos;{primaryTechnology}&apos;</span>,
+          <span className={workspaceStyles.stringToken}>&apos;{primaryTechnology}&apos;</span>,
         </>,
         <>
-          {'  '}payments: <span className={styles.stringToken}>&apos;secured&apos;</span>,
+          {'  '}payments: <span className={workspaceStyles.stringToken}>&apos;secured&apos;</span>,
         </>,
         <>
-          {'  '}inventory: <span className={styles.stringToken}>&apos;realtime&apos;</span>,
+          {'  '}inventory: <span className={workspaceStyles.stringToken}>&apos;realtime&apos;</span>
+          ,
         </>,
         <>
-          {'  '}progress: <span className={styles.numberToken}>{project.progress}</span>,
+          {'  '}progress: <span className={workspaceStyles.numberToken}>{project.progress}</span>,
         </>,
         <>{'}'})</>,
       ],
@@ -188,22 +190,22 @@ function buildPreview(project: ProjectRegistryPreviewProps['project']): PreviewD
       variant,
       lines: [
         <>
-          <span className={styles.keyword}>export const</span>{' '}
-          <span className={styles.variable}>network</span> ={' '}
-          <span className={styles.functionToken}>connectCommunity</span>({'{'}
+          <span className={workspaceStyles.keyword}>export const</span>{' '}
+          <span className={workspaceStyles.variable}>network</span> ={' '}
+          <span className={workspaceStyles.functionToken}>connectCommunity</span>({'{'}
         </>,
         <>
           {'  '}identity:{' '}
-          <span className={styles.stringToken}>&apos;{primaryTechnology}&apos;</span>,
+          <span className={workspaceStyles.stringToken}>&apos;{primaryTechnology}&apos;</span>,
         </>,
         <>
-          {'  '}presence: <span className={styles.stringToken}>&apos;realtime&apos;</span>,
+          {'  '}presence: <span className={workspaceStyles.stringToken}>&apos;realtime&apos;</span>,
         </>,
         <>
-          {'  '}spaces: <span className={styles.stringToken}>&apos;federated&apos;</span>,
+          {'  '}spaces: <span className={workspaceStyles.stringToken}>&apos;federated&apos;</span>,
         </>,
         <>
-          {'  '}progress: <span className={styles.numberToken}>{project.progress}</span>,
+          {'  '}progress: <span className={workspaceStyles.numberToken}>{project.progress}</span>,
         </>,
         <>{'}'})</>,
       ],
@@ -225,21 +227,21 @@ function buildPreview(project: ProjectRegistryPreviewProps['project']): PreviewD
       variant,
       lines: [
         <>
-          <span className={styles.keyword}>const</span>{' '}
-          <span className={styles.variable}>pipeline</span> ={' '}
-          <span className={styles.functionToken}>composeModel</span>({'{'}
+          <span className={workspaceStyles.keyword}>const</span>{' '}
+          <span className={workspaceStyles.variable}>pipeline</span> ={' '}
+          <span className={workspaceStyles.functionToken}>composeModel</span>({'{'}
         </>,
         <>
-          {'  '}source: <span className={styles.stringToken}>&apos;events&apos;</span>,
+          {'  '}source: <span className={workspaceStyles.stringToken}>&apos;events&apos;</span>,
         </>,
         <>
-          {'  '}inference: <span className={styles.stringToken}>&apos;edge&apos;</span>,
+          {'  '}inference: <span className={workspaceStyles.stringToken}>&apos;edge&apos;</span>,
         </>,
         <>
-          {'  '}cache: <span className={styles.stringToken}>&apos;vector&apos;</span>,
+          {'  '}cache: <span className={workspaceStyles.stringToken}>&apos;vector&apos;</span>,
         </>,
         <>
-          {'  '}progress: <span className={styles.numberToken}>{project.progress}</span>,
+          {'  '}progress: <span className={workspaceStyles.numberToken}>{project.progress}</span>,
         </>,
         <>{'}'})</>,
       ],
@@ -261,21 +263,21 @@ function buildPreview(project: ProjectRegistryPreviewProps['project']): PreviewD
       variant,
       lines: [
         <>
-          <span className={styles.decorator}>@Module</span>({'{'}
+          <span className={workspaceStyles.decorator}>@Module</span>({'{'}
         </>,
         <>
-          {'  '}imports: [<span className={styles.classToken}>{primaryTechnology}</span>],
+          {'  '}imports: [<span className={workspaceStyles.classToken}>{primaryTechnology}</span>],
         </>,
         <>
-          {'  '}providers: [<span className={styles.classToken}>ProjectService</span>],
+          {'  '}providers: [<span className={workspaceStyles.classToken}>ProjectService</span>],
         </>,
         <>
-          {'  '}exports: [<span className={styles.classToken}>ProjectService</span>],
+          {'  '}exports: [<span className={workspaceStyles.classToken}>ProjectService</span>],
         </>,
         <>{'}'})</>,
         <>
-          <span className={styles.keyword}>export class</span>{' '}
-          <span className={styles.classToken}>RuntimeModule</span> {'{}'}
+          <span className={workspaceStyles.keyword}>export class</span>{' '}
+          <span className={workspaceStyles.classToken}>RuntimeModule</span> {'{}'}
         </>,
       ],
     }
@@ -299,26 +301,27 @@ function buildPreview(project: ProjectRegistryPreviewProps['project']): PreviewD
       variant,
       lines: [
         <>
-          <span className={styles.keyword}>export const</span>{' '}
-          <span className={styles.variable}>platform</span> ={' '}
-          <span className={styles.functionToken}>defineSystem</span>({'{'}
+          <span className={workspaceStyles.keyword}>export const</span>{' '}
+          <span className={workspaceStyles.variable}>platform</span> ={' '}
+          <span className={workspaceStyles.functionToken}>defineSystem</span>({'{'}
         </>,
         <>
-          {'  '}id: <span className={styles.stringToken}>&apos;{project.slug}&apos;</span>,
+          {'  '}id: <span className={workspaceStyles.stringToken}>&apos;{project.slug}&apos;</span>,
         </>,
         <>
           {'  '}modules: [
-          <span className={styles.stringToken}>
+          <span className={workspaceStyles.stringToken}>
             &apos;{primaryTechnology}&apos;, &apos;{secondaryTechnology}&apos;, &apos;
             {tertiaryTechnology}&apos;
           </span>
           ],
         </>,
         <>
-          {'  '}stage: <span className={styles.stringToken}>&apos;{project.stage}&apos;</span>,
+          {'  '}stage:{' '}
+          <span className={workspaceStyles.stringToken}>&apos;{project.stage}&apos;</span>,
         </>,
         <>
-          {'  '}progress: <span className={styles.numberToken}>{project.progress}</span>,
+          {'  '}progress: <span className={workspaceStyles.numberToken}>{project.progress}</span>,
         </>,
         <>{'}'})</>,
       ],
@@ -342,25 +345,27 @@ function buildPreview(project: ProjectRegistryPreviewProps['project']): PreviewD
     variant,
     lines: [
       <>
-        <span className={styles.keyword}>export const</span>{' '}
-        <span className={styles.variable}>product</span> ={' '}
-        <span className={styles.functionToken}>defineProject</span>({'{'}
+        <span className={workspaceStyles.keyword}>export const</span>{' '}
+        <span className={workspaceStyles.variable}>product</span> ={' '}
+        <span className={workspaceStyles.functionToken}>defineProject</span>({'{'}
       </>,
       <>
-        {'  '}name: <span className={styles.stringToken}>&apos;{project.title}&apos;</span>,
+        {'  '}name: <span className={workspaceStyles.stringToken}>&apos;{project.title}&apos;</span>
+        ,
       </>,
       <>
         {'  '}stack: [
-        <span className={styles.stringToken}>
+        <span className={workspaceStyles.stringToken}>
           &apos;{primaryTechnology}&apos;, &apos;{secondaryTechnology}&apos;
         </span>
         ],
       </>,
       <>
-        {'  '}stage: <span className={styles.stringToken}>&apos;{project.stage}&apos;</span>,
+        {'  '}stage:{' '}
+        <span className={workspaceStyles.stringToken}>&apos;{project.stage}&apos;</span>,
       </>,
       <>
-        {'  '}progress: <span className={styles.numberToken}>{project.progress}</span>,
+        {'  '}progress: <span className={workspaceStyles.numberToken}>{project.progress}</span>,
       </>,
       <>{'}'})</>,
     ],
@@ -397,9 +402,9 @@ export function ProjectRegistryPreview({ project }: ProjectRegistryPreviewProps)
         <span className={headerStyles.branch}>main</span>
       </header>
 
-      <div className={styles.workspace}>
-        <aside className={styles.activity}>
-          <span className={styles.active}>
+      <div className={workspaceStyles.workspace}>
+        <aside className={workspaceStyles.activity}>
+          <span className={workspaceStyles.active}>
             <CodeIcon aria-hidden="true" size={15} />
           </span>
           <span>
@@ -413,10 +418,10 @@ export function ProjectRegistryPreview({ project }: ProjectRegistryPreviewProps)
           </span>
         </aside>
 
-        <ol className={styles.code}>
+        <ol className={workspaceStyles.code}>
           {preview.lines.map((line, index) => (
             <li
-              className={index + 1 === preview.activeLine ? styles.active : undefined}
+              className={index + 1 === preview.activeLine ? workspaceStyles.active : undefined}
               key={index}
             >
               <span>{String(index + 1).padStart(2, '0')}</span>
