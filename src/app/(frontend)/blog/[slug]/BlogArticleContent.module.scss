@@ -1,95 +1,17 @@
-/* Blog article cover, overview, rich text and takeaways. */
-
-.cover,
-.coverFallback {
-  position: relative;
-  min-height: clamp(280px, 36vw, 440px);
-  margin: 0;
-  overflow: hidden;
-  border: 1px solid var(--article-line-strong);
-  border-radius: 14px;
-  background: #071421;
-}
-
-
-.cover img {
-  object-fit: cover;
-}
-
-
-.cover figcaption {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 0.7rem 1rem;
-  background: rgba(3, 10, 17, 0.78);
-  color: #90a5af;
-  font-size: 0.65rem;
-}
-
-
-.coverFallback {
-  display: grid;
-  place-items: center;
-  background:
-    radial-gradient(circle at center, rgba(168, 92, 255, 0.18), transparent 46%),
-    linear-gradient(rgba(19, 242, 227, 0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(19, 242, 227, 0.055) 1px, transparent 1px), #071421;
-  background-size:
-    auto,
-    28px 28px,
-    28px 28px,
-    auto;
-}
-
-
-.coverFallback div {
-  display: flex;
-  gap: 1.2rem;
-}
-
-
-.coverFallback span {
-  display: grid;
-  width: 5.5rem;
-  height: 5.5rem;
-  place-items: center;
-  border: 1px solid rgba(19, 242, 227, 0.35);
-  border-radius: 12px;
-  color: var(--article-cyan);
-  font-size: 0.72rem;
-  font-weight: 800;
-}
-
-
-.coverFallback strong {
-  position: absolute;
-  bottom: 1.2rem;
-  color: #718792;
-  font-size: 0.67rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-
 .overview,
 .richText,
 .takeaways {
   scroll-margin-top: 7rem;
 }
 
-
 .overview {
   padding-top: 2rem;
 }
-
 
 .overview > p:last-of-type {
   color: #b6c7d0;
   line-height: 1.8;
 }
-
 
 .note {
   margin-top: 1.2rem;
@@ -99,13 +21,11 @@
   background: rgba(19, 242, 227, 0.045);
 }
 
-
 .note span {
   color: var(--article-cyan);
   font-size: 0.7rem;
   font-weight: 800;
 }
-
 
 .note p {
   margin: 0.45rem 0 0;
@@ -114,14 +34,12 @@
   line-height: 1.65;
 }
 
-
 .richText {
   padding-top: 1.5rem;
   color: #aebfc8;
   font-size: 0.95rem;
   line-height: 1.82;
 }
-
 
 .richText :global(h2) {
   margin: 2.5rem 0 0.8rem;
@@ -131,23 +49,19 @@
   letter-spacing: -0.035em;
 }
 
-
 .richText :global(h3) {
   margin: 2rem 0 0.65rem;
   color: #e5edf1;
   font-size: 1.3rem;
 }
 
-
 .richText :global(p) {
   margin: 0.9rem 0;
 }
 
-
 .richText :global(a) {
   color: var(--article-cyan);
 }
-
 
 .richText :global(blockquote) {
   margin: 1.5rem 0;
@@ -156,7 +70,6 @@
   background: rgba(168, 92, 255, 0.06);
   color: #c1cdd3;
 }
-
 
 .richText :global(pre) {
   overflow-x: auto;
@@ -168,11 +81,9 @@
   color: #b9e6e3;
 }
 
-
 .richText :global(code) {
   font-family: var(--font-geist-mono), monospace;
 }
-
 
 .richText :global(img) {
   max-width: 100%;
@@ -180,18 +91,15 @@
   border-radius: 10px;
 }
 
-
 .takeaways {
   padding-top: 2rem;
 }
-
 
 .takeaways > div {
   display: grid;
   gap: 0.75rem;
   margin-top: 0.85rem;
 }
-
 
 .takeaways article {
   position: relative;
@@ -206,7 +114,6 @@
   background: var(--article-panel);
 }
 
-
 .takeaways article::before {
   position: absolute;
   inset: 0 auto 0 0;
@@ -215,11 +122,9 @@
   content: '';
 }
 
-
 .takeaways article:nth-child(2)::before {
   background: var(--article-violet);
 }
-
 
 .takeaways article span {
   display: flex;
@@ -230,7 +135,6 @@
   font-weight: 800;
 }
 
-
 .takeaways article span::after {
   width: 1px;
   height: 1.1rem;
@@ -238,16 +142,13 @@
   content: '';
 }
 
-
 .takeaways article:nth-child(odd) span {
   color: var(--article-cyan);
 }
 
-
 .takeaways article:nth-child(odd) span::after {
   background: rgba(19, 242, 227, 0.34);
 }
-
 
 .takeaways article p {
   margin: 0;
@@ -255,25 +156,10 @@
   font-size: 0.76rem;
 }
 
-@media (max-width: 650px) {
-
-
-.coverFallback div {
-    gap: 0.55rem;
-  }
-
-
-.coverFallback span {
-    width: 4rem;
-    height: 4rem;
-  }
-}
-
 :global([data-theme='light']) .richText :global(h2),
 :global([data-theme='light']) .richText :global(h3) {
   color: #0b1e2a;
 }
-
 
 :global([data-theme='light']) .overview > p:last-of-type,
 :global([data-theme='light']) .richText {
@@ -289,35 +175,6 @@
     0 18px 46px rgba(30, 70, 85, 0.09);
 }
 
-
-:global([data-theme='light']) .cover,
-:global([data-theme='light']) .coverFallback {
-  border-color: rgba(8, 127, 140, 0.24);
-  background: #e8f0f3;
-  box-shadow: 0 20px 55px rgba(30, 70, 85, 0.11);
-}
-
-
-:global([data-theme='light']) .coverFallback {
-  background:
-    radial-gradient(circle at center, rgba(120, 71, 199, 0.12), transparent 48%),
-    linear-gradient(rgba(8, 127, 140, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(8, 127, 140, 0.07) 1px, transparent 1px), #edf4f6;
-  background-size:
-    auto,
-    28px 28px,
-    28px 28px,
-    auto;
-}
-
-
-:global([data-theme='light']) .coverFallback span {
-  border-color: rgba(8, 127, 140, 0.28);
-  background: rgba(255, 255, 255, 0.68);
-  color: #087f8c;
-}
-
-
 :global([data-theme='light']) .note {
   border-color: rgba(8, 127, 140, 0.22);
   background: rgba(8, 127, 140, 0.055);
@@ -328,18 +185,15 @@
   color: #617984;
 }
 
-
 :global([data-theme='light']) .richText :global(a) {
   color: #087f8c;
 }
-
 
 :global([data-theme='light']) .richText :global(blockquote) {
   border-left-color: #7847c7;
   background: rgba(120, 71, 199, 0.06);
   color: #455e69;
 }
-
 
 :global([data-theme='light']) .richText :global(pre) {
   border-color: rgba(35, 79, 96, 0.16);
@@ -348,16 +202,13 @@
   box-shadow: 0 18px 38px rgba(20, 45, 57, 0.15);
 }
 
-
 :global([data-theme='light']) .takeaways article:nth-child(2) {
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(249, 246, 253, 0.93));
 }
 
-
 /* blog-author-profile-cms-v1:end */
 
 /* blog-tiptap-public-renderer-v1 */
-
 
 .richText :global(ul),
 .richText :global(ol) {
@@ -367,16 +218,13 @@
   padding-left: 1.45rem;
 }
 
-
 .richText :global(li) {
   padding-left: 0.25rem;
 }
 
-
 .richText :global(li::marker) {
   color: var(--article-cyan);
 }
-
 
 .richText :global(hr) {
   height: 1px;
@@ -391,7 +239,6 @@
   );
 }
 
-
 .richText :global(.blog-rich-text-table) {
   overflow-x: auto;
   margin: 1.5rem 0;
@@ -399,13 +246,11 @@
   border-radius: 10px;
 }
 
-
 .richText :global(table) {
   width: 100%;
   border-collapse: collapse;
   min-width: 34rem;
 }
-
 
 .richText :global(th),
 .richText :global(td) {
@@ -416,35 +261,29 @@
   vertical-align: top;
 }
 
-
 .richText :global(th) {
   color: #e9f4f5;
   background: rgba(19, 242, 227, 0.055);
   font-size: 0.78rem;
 }
 
-
 .richText :global(tr:last-child td) {
   border-bottom: 0;
 }
-
 
 .richText :global(th:last-child),
 .richText :global(td:last-child) {
   border-right: 0;
 }
 
-
 .richText :global(u) {
   text-decoration-color: rgba(19, 242, 227, 0.65);
   text-underline-offset: 0.18em;
 }
 
-
 .richText :global(s) {
   color: #7f949f;
 }
-
 
 .richText :global(p code),
 .richText :global(li code) {
@@ -456,15 +295,12 @@
   font-size: 0.88em;
 }
 
-
 /* blog-code-syntax-highlighting-v1 */
-
 
 .richText :global(pre[data-language]) {
   position: relative;
   padding-top: 2.65rem;
 }
-
 
 .richText :global(pre[data-language]::before) {
   position: absolute;
@@ -479,20 +315,17 @@
   text-transform: uppercase;
 }
 
-
 .richText :global(.hljs) {
   display: block;
   color: #b8ccd4;
   tab-size: 2;
 }
 
-
 .richText :global(.hljs-comment),
 .richText :global(.hljs-quote) {
   color: #607987;
   font-style: italic;
 }
-
 
 .richText :global(.hljs-keyword),
 .richText :global(.hljs-selector-tag),
@@ -502,7 +335,6 @@
   color: #c792ea;
 }
 
-
 .richText :global(.hljs-string),
 .richText :global(.hljs-attr),
 .richText :global(.hljs-addition),
@@ -511,14 +343,12 @@
   color: #8ff0c8;
 }
 
-
 .richText :global(.hljs-title),
 .richText :global(.hljs-title.function_),
 .richText :global(.hljs-title.class_),
 .richText :global(.hljs-function) {
   color: #82cfff;
 }
-
 
 .richText :global(.hljs-number),
 .richText :global(.hljs-built_in),
@@ -528,56 +358,46 @@
   color: #f2a66f;
 }
 
-
 .richText :global(.hljs-params),
 .richText :global(.hljs-property),
 .richText :global(.hljs-attribute) {
   color: #d7e5ea;
 }
 
-
 .richText :global(.hljs-meta),
 .richText :global(.hljs-meta .hljs-keyword) {
   color: #61e7df;
 }
-
 
 .richText :global(.hljs-regexp),
 .richText :global(.hljs-selector-pseudo) {
   color: #ff8fa3;
 }
 
-
 .richText :global(.hljs-deletion) {
   color: #ff7588;
 }
-
 
 .richText :global(.hljs-emphasis) {
   font-style: italic;
 }
 
-
 .richText :global(.hljs-strong) {
   font-weight: 800;
 }
-
 
 :global([data-theme='light']) .richText :global(pre[data-language]::before) {
   color: #6f8290;
 }
 
-
 :global([data-theme='light']) .richText :global(.hljs) {
   color: #29404d;
 }
-
 
 :global([data-theme='light']) .richText :global(.hljs-comment),
 :global([data-theme='light']) .richText :global(.hljs-quote) {
   color: #758995;
 }
-
 
 :global([data-theme='light']) .richText :global(.hljs-keyword),
 :global([data-theme='light']) .richText :global(.hljs-selector-tag),
@@ -587,7 +407,6 @@
   color: #7b43c4;
 }
 
-
 :global([data-theme='light']) .richText :global(.hljs-string),
 :global([data-theme='light']) .richText :global(.hljs-attr),
 :global([data-theme='light']) .richText :global(.hljs-addition),
@@ -596,14 +415,12 @@
   color: #087b66;
 }
 
-
 :global([data-theme='light']) .richText :global(.hljs-title),
 :global([data-theme='light']) .richText :global(.hljs-title.function_),
 :global([data-theme='light']) .richText :global(.hljs-title.class_),
 :global([data-theme='light']) .richText :global(.hljs-function) {
   color: #006f9c;
 }
-
 
 :global([data-theme='light']) .richText :global(.hljs-number),
 :global([data-theme='light']) .richText :global(.hljs-built_in),
@@ -613,19 +430,16 @@
   color: #a44d0b;
 }
 
-
 :global([data-theme='light']) .richText :global(.hljs-params),
 :global([data-theme='light']) .richText :global(.hljs-property),
 :global([data-theme='light']) .richText :global(.hljs-attribute) {
   color: #314c5b;
 }
 
-
 :global([data-theme='light']) .richText :global(.hljs-meta),
 :global([data-theme='light']) .richText :global(.hljs-meta .hljs-keyword) {
   color: #007e83;
 }
-
 
 :global([data-theme='light']) .richText :global(.hljs-regexp),
 :global([data-theme='light']) .richText :global(.hljs-selector-pseudo),

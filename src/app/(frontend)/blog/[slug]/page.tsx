@@ -25,6 +25,7 @@ import relatedStyles from './BlogArticleRelated.module.scss'
 import railStyles from './BlogArticleRail.module.scss'
 import layoutStyles from './BlogArticleLayout.module.scss'
 import contentStyles from './BlogArticleContent.module.scss'
+import coverStyles from './BlogArticleCover.module.scss'
 import heroStyles from './BlogArticleHero.module.scss'
 export const revalidate = 300
 
@@ -318,7 +319,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
               <div className={layoutStyles.articleColumn}>
                 {cover?.url ? (
-                  <figure className={contentStyles.cover}>
+                  <figure className={coverStyles.cover}>
                     <Image
                       alt={cover.alt}
                       fill
@@ -329,7 +330,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     {cover.caption ? <figcaption>{cover.caption}</figcaption> : null}
                   </figure>
                 ) : (
-                  <div className={contentStyles.coverFallback} aria-hidden="true">
+                  <div className={coverStyles.coverFallback} aria-hidden="true">
                     <div>
                       <span>AUTH</span>
                       <span>API</span>
