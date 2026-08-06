@@ -10,7 +10,7 @@ import shellStyles from './EngineeringProfileShell.module.scss'
 import ctaStyles from './EngineeringProfileCta.module.scss'
 import heroStyles from './EngineeringProfileHero.module.scss'
 import consoleStyles from './EngineeringProfileConsole.module.scss'
-import operatingSystemStyles from './EngineeringProfileOperatingSystem.module.scss'
+import operatingShellStyles from './EngineeringProfileOperatingShell.module.scss'
 import operatingStepsStyles from './EngineeringProfileOperatingSteps.module.scss'
 import operatingDetailStyles from './EngineeringProfileOperatingDetail.module.scss'
 import operatingInsightsStyles from './EngineeringProfileOperatingInsights.module.scss'
@@ -303,7 +303,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
 
               {content.operatingSystem.enabled ? (
                 <section
-                  className={`${shellStyles.panel} ${operatingSystemStyles.operatingSystem}`}
+                  className={`${shellStyles.panel} ${operatingShellStyles.operatingSystem}`}
                   data-profile-reveal
                 >
                   <SectionHeading
