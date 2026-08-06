@@ -1,6 +1,5 @@
 /* Blog article right rail cards and sticky layout. */
 
-.tagsCard,
 .seriesCard {
   border: 1px solid var(--article-line);
   border-radius: 12px;
@@ -15,7 +14,6 @@
   gap: 1rem;
 }
 
-.tagsCard,
 .seriesCard {
   padding: 1rem;
 }
@@ -28,7 +26,6 @@
   line-height: 1.55;
 }
 
-.tagsCard > p,
 .seriesCard > p {
   display: flex;
   gap: 0.4rem;
@@ -39,21 +36,6 @@
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-}
-
-.tagsCard > div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.42rem;
-}
-
-.tagsCard a {
-  padding: 0.38rem 0.5rem;
-  border: 1px solid var(--article-line);
-  border-radius: 5px;
-  color: #8fa2ac;
-  font-size: 0.6rem;
-  text-decoration: none;
 }
 
 .seriesCard strong {
@@ -85,7 +67,6 @@
   gap: 1.15rem;
 }
 
-.tagsCard,
 .seriesCard {
   padding: 1.25rem 1.2rem;
 }
@@ -95,19 +76,9 @@
   line-height: 1.65;
 }
 
-.tagsCard > p,
 .seriesCard > p {
   margin-bottom: 1rem;
   font-size: 0.66rem;
-}
-
-.tagsCard > div {
-  gap: 0.5rem;
-}
-
-.tagsCard a {
-  padding: 0.44rem 0.58rem;
-  font-size: 0.64rem;
 }
 
 .seriesCard strong {
@@ -115,7 +86,6 @@
   line-height: 1.45;
 }
 
-:global([data-theme='light']) .tagsCard,
 :global([data-theme='light']) .seriesCard {
   border-color: rgba(35, 79, 96, 0.15);
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(245, 250, 251, 0.93));
@@ -124,8 +94,7 @@
     0 18px 46px rgba(30, 70, 85, 0.09);
 }
 
-:global([data-theme='light']) .seriesCard span,
-:global([data-theme='light']) .tagsCard a {
+:global([data-theme='light']) .seriesCard span {
   color: #657c86;
 }
 
@@ -133,7 +102,6 @@
   color: #17303c;
 }
 
-:global([data-theme='light']) .tagsCard > p,
 :global([data-theme='light']) .seriesCard > p {
   color: #087f8c;
 }

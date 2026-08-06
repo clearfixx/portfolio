@@ -23,6 +23,7 @@ import pageShellStyles from './BlogArticlePageShell.module.scss'
 import discussionStyles from './BlogArticleDiscussion.module.scss'
 import relatedStyles from './BlogArticleRelated.module.scss'
 import railStyles from './BlogArticleRail.module.scss'
+import tagsCardStyles from './BlogArticleTagsCard.module.scss'
 import progressCardStyles from './BlogArticleProgressCard.module.scss'
 import authorCardStyles from './BlogArticleAuthorCard.module.scss'
 import layoutStyles from './BlogArticleLayout.module.scss'
@@ -448,7 +449,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </div>
 
                 {tags.length > 0 ? (
-                  <div className={railStyles.tagsCard}>
+                  <div className={tagsCardStyles.tagsCard}>
                     <p>
                       <ArticleIcon name="tag" />
                       Tags
