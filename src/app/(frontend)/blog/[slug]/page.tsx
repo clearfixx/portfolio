@@ -23,6 +23,7 @@ import pageShellStyles from './BlogArticlePageShell.module.scss'
 import discussionStyles from './BlogArticleDiscussion.module.scss'
 import relatedStyles from './BlogArticleRelated.module.scss'
 import railStyles from './BlogArticleRail.module.scss'
+import authorCardStyles from './BlogArticleAuthorCard.module.scss'
 import layoutStyles from './BlogArticleLayout.module.scss'
 import contentStyles from './BlogArticleRichText.module.scss'
 import takeawayStyles from './BlogArticleTakeaways.module.scss'
@@ -408,8 +409,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </div>
 
               <aside className={railStyles.rightRail}>
-                <div className={railStyles.authorCard}>
-                  <div className={railStyles.authorAvatar}>
+                <div className={authorCardStyles.authorCard}>
+                  <div className={authorCardStyles.authorAvatar}>
                     {authorPortrait?.url ? (
                       <Image
                         alt={authorPortrait.alt || `Portrait of ${authorName}`}
