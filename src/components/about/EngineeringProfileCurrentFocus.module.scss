@@ -1,27 +1,3 @@
-/* About page current focus section. */
-
-.primaryFocus {
-  display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(170px, 0.75fr);
-  gap: 1rem;
-  min-height: 240px;
-  margin: 1rem;
-  padding: clamp(1.2rem, 3vw, 2rem);
-  overflow: hidden;
-  border: 1px solid rgba(166, 108, 255, 0.2);
-  border-radius: 9px;
-  background:
-    radial-gradient(circle at 90% 20%, rgba(166, 108, 255, 0.17), transparent 34%),
-    linear-gradient(135deg, rgba(166, 108, 255, 0.05), rgba(25, 229, 231, 0.025));
-}
-
-
-.primaryFocus > div:first-child {
-  align-self: center;
-}
-
-
-.primaryFocus span,
 .focusGrid span {
   color: var(--profile-purple);
   font-family: var(--font-geist-mono), monospace;
@@ -31,91 +7,16 @@
   text-transform: uppercase;
 }
 
-
-.primaryFocus h3,
 .focusGrid h3 {
   margin: 0.45rem 0;
   color: var(--profile-text);
 }
 
-
-.primaryFocus h3 {
-  font-size: 1.25rem;
-}
-
-
-.primaryFocus p,
 .focusGrid p {
   margin: 0;
   color: var(--profile-soft);
   line-height: 1.55;
 }
-
-
-.primaryFocus p {
-  max-width: 480px;
-  font-size: 0.72rem;
-}
-
-
-.primaryFocus a {
-  display: inline-flex;
-  gap: 0.45rem;
-  align-items: center;
-  margin-top: 1rem;
-  color: var(--profile-cyan);
-  font-size: 0.68rem;
-  font-weight: 720;
-  text-decoration: none;
-}
-
-
-.systemOrb {
-  position: relative;
-  display: grid;
-  min-height: 170px;
-  place-items: center;
-}
-
-
-.systemOrb span,
-.systemOrb i,
-.systemOrb b {
-  position: absolute;
-  border-radius: 24%;
-  transform: rotate(30deg);
-}
-
-
-.systemOrb span {
-  width: 110px;
-  height: 110px;
-  border: 1px solid rgba(166, 108, 255, 0.5);
-  box-shadow:
-    inset 0 0 28px rgba(166, 108, 255, 0.08),
-    0 0 32px rgba(166, 108, 255, 0.08);
-  animation: focusFloat 6s ease-in-out infinite;
-}
-
-
-.systemOrb i {
-  width: 72px;
-  height: 72px;
-  border: 1px solid rgba(25, 229, 231, 0.5);
-  box-shadow: inset 0 0 22px rgba(25, 229, 231, 0.08);
-  animation: focusFloat 6s ease-in-out -1.8s infinite reverse;
-}
-
-
-.systemOrb b {
-  width: 28px;
-  height: 28px;
-  background: linear-gradient(135deg, var(--profile-cyan), var(--profile-purple));
-  box-shadow:
-    0 0 22px rgba(25, 229, 231, 0.25),
-    0 0 35px rgba(166, 108, 255, 0.2);
-}
-
 
 .focusGrid {
   display: grid;
@@ -123,7 +24,6 @@
   gap: 0.75rem;
   padding: 0 1rem 1rem;
 }
-
 
 .focusGrid article {
   position: relative;
@@ -135,18 +35,15 @@
   background: rgba(4, 18, 29, 0.56);
 }
 
-
 .focusGrid h3 {
   max-width: 240px;
   font-size: 0.82rem;
 }
 
-
 .focusGrid p {
   max-width: 250px;
   font-size: 0.66rem;
 }
-
 
 .focusGrid svg {
   position: absolute;
@@ -156,7 +53,6 @@
   opacity: 0.65;
 }
 
-
 .focusGrid article:nth-child(2) svg {
   color: var(--profile-purple);
 }
@@ -165,30 +61,15 @@
   background: rgba(255, 255, 255, 0.74);
 }
 
-
-:global([data-theme='light']) .primaryFocus {
-  background:
-    radial-gradient(circle at 90% 20%, rgba(127, 74, 198, 0.1), transparent 34%),
-    linear-gradient(135deg, rgba(127, 74, 198, 0.04), rgba(8, 127, 140, 0.025));
-}
-
 @media (max-width: 760px) {
-
-
-.focusGrid {
-    grid-template-columns: 1fr;
-  }
-
-.primaryFocus {
+  .focusGrid {
     grid-template-columns: 1fr;
   }
 }
-
 
 .focusGrid {
   gap: 0.85rem;
 }
-
 
 .focusCard {
   display: flex;
@@ -201,14 +82,12 @@
     linear-gradient(145deg, rgba(25, 229, 231, 0.025), transparent 54%), rgba(4, 18, 29, 0.66) !important;
 }
 
-
 .focusCard:nth-child(2) {
   border-color: rgba(166, 108, 255, 0.18) !important;
   background:
     radial-gradient(circle at 100% 0%, rgba(166, 108, 255, 0.1), transparent 42%),
     linear-gradient(145deg, rgba(166, 108, 255, 0.03), transparent 54%), rgba(4, 18, 29, 0.66) !important;
 }
-
 
 .focusCardRail {
   display: flex;
@@ -221,17 +100,14 @@
   background: rgba(3, 15, 25, 0.4);
 }
 
-
 .focusCardRail > span {
   color: var(--profile-cyan);
   font-size: 0.48rem;
 }
 
-
 .focusCard:nth-child(2) .focusCardRail > span {
   color: var(--profile-purple);
 }
-
 
 .focusCardRail b {
   display: inline-flex;
@@ -245,7 +121,6 @@
   text-transform: uppercase;
 }
 
-
 .focusCardRail b i {
   width: 5px;
   height: 5px;
@@ -254,11 +129,9 @@
   box-shadow: 0 0 8px currentColor;
 }
 
-
 .focusCardRail .isQueued {
   color: var(--profile-purple);
 }
-
 
 .focusCardIcon {
   display: grid;
@@ -275,20 +148,17 @@
     0 8px 22px rgba(0, 0, 0, 0.12);
 }
 
-
 .focusCard:nth-child(2) .focusCardIcon {
   border-color: rgba(166, 108, 255, 0.28);
   color: var(--profile-purple);
   background: rgba(166, 108, 255, 0.055);
 }
 
-
 .focusCard h3 {
   max-width: none;
   margin: 0.85rem 1rem 0;
   font-size: 0.88rem;
 }
-
 
 .focusCard p {
   max-width: none;
@@ -297,14 +167,12 @@
   line-height: 1.6;
 }
 
-
 .focusTags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
   margin: 0.85rem 1rem 1rem;
 }
-
 
 .focusTags span {
   padding: 0.28rem 0.42rem;
@@ -317,7 +185,6 @@
   letter-spacing: 0.02em;
   text-transform: none;
 }
-
 
 .focusCard footer {
   display: flex;
@@ -336,7 +203,6 @@
   text-transform: uppercase;
 }
 
-
 .focusCard footer strong {
   color: var(--profile-text);
   font-size: 0.5rem;
@@ -353,24 +219,19 @@
 }
 
 @media (max-width: 760px) {
-
-
-.focusCard {
+  .focusCard {
     min-height: 270px;
   }
 }
 
 @media (max-width: 520px) {
-
-
-.focusCard footer {
+  .focusCard footer {
     align-items: flex-start;
     flex-direction: column;
     justify-content: center;
     padding-block: 0.65rem;
   }
 }
-
 
 /* engineering-profile-runtime-and-content-polish-v5:end */
 
@@ -381,7 +242,6 @@
  * place their SVG inside a dedicated visual module, so restore normal flow.
  */
 
-
 .focusCardIcon svg {
   position: static;
   right: auto;
@@ -391,12 +251,10 @@
   opacity: 1;
 }
 
-
 /*
  * Research deck: each card now has a real visual anchor instead of a small
  * icon floating above a large text block.
  */
-
 
 .focusCard {
   position: relative;
@@ -407,7 +265,6 @@
   align-items: start;
   overflow: hidden;
 }
-
 
 .focusCard::before {
   position: absolute;
@@ -426,7 +283,6 @@
   content: '';
 }
 
-
 .focusCard:nth-child(2)::before {
   background: linear-gradient(
     to bottom,
@@ -438,13 +294,11 @@
   box-shadow: 0 0 14px rgba(166, 108, 255, 0.4);
 }
 
-
 .focusCardRail {
   grid-column: 1 / -1;
   grid-row: 1;
   min-height: 44px;
 }
-
 
 .focusCardIcon {
   position: relative;
@@ -461,7 +315,6 @@
   isolation: isolate;
 }
 
-
 .focusCardIcon::before,
 .focusCardIcon::after {
   position: absolute;
@@ -470,14 +323,12 @@
   content: '';
 }
 
-
 .focusCardIcon::before {
   inset: -14px;
   z-index: -2;
   border: 1px solid rgba(25, 229, 231, 0.11);
   transform: rotate(13deg);
 }
-
 
 .focusCardIcon::after {
   inset: 10px;
@@ -486,16 +337,13 @@
   border-radius: 14px;
 }
 
-
 .focusCard:nth-child(2) .focusCardIcon::before {
   border-color: rgba(166, 108, 255, 0.14);
 }
 
-
 .focusCard:nth-child(2) .focusCardIcon::after {
   border-color: rgba(166, 108, 255, 0.24);
 }
-
 
 .focusCard h3,
 .focusCard p,
@@ -506,7 +354,6 @@
   margin-left: 0;
 }
 
-
 .focusCard h3 {
   grid-row: 2;
   align-self: end;
@@ -515,14 +362,12 @@
   line-height: 1.24;
 }
 
-
 .focusCard p {
   grid-row: 3;
   margin-top: 0.65rem;
   font-size: 0.7rem;
   line-height: 1.65;
 }
-
 
 .focusTags {
   grid-row: 5;
@@ -531,13 +376,11 @@
   margin-bottom: 1rem;
 }
 
-
 .focusCard footer {
   grid-column: 1 / -1;
   grid-row: 6;
   min-height: 48px;
 }
-
 
 .focusCard footer strong {
   padding: 0.24rem 0.44rem;
@@ -546,12 +389,10 @@
   background: rgba(99, 216, 225, 0.035);
 }
 
-
 .focusCard:nth-child(2) footer strong {
   border-color: rgba(166, 108, 255, 0.16);
   background: rgba(166, 108, 255, 0.045);
 }
-
 
 .focusCard::after {
   position: absolute;
@@ -569,7 +410,6 @@
   pointer-events: none;
 }
 
-
 .focusCard:nth-child(2)::after {
   border-color: rgba(166, 108, 255, 0.065);
   box-shadow:
@@ -577,103 +417,75 @@
     0 0 0 56px rgba(166, 108, 255, 0.009);
 }
 
-
 .focusCard > * {
   position: relative;
   z-index: 1;
 }
 
-
 @media (max-width: 1240px) {
-
-.focusCard {
+  .focusCard {
     grid-template-columns: 112px minmax(0, 1fr);
   }
 
-
-.focusCardIcon {
+  .focusCardIcon {
     width: 76px;
     height: 76px;
   }
 }
 
-
 @media (max-width: 760px) {
-
-.focusCard {
+  .focusCard {
     min-height: 0;
     grid-template-columns: 92px minmax(0, 1fr);
     grid-template-rows: 44px auto auto auto auto 52px;
   }
 
-
-.focusCardIcon {
+  .focusCardIcon {
     width: 66px;
     height: 66px;
   }
 
-
-.focusCardIcon svg {
+  .focusCardIcon svg {
     width: 25px;
     height: 25px;
   }
 }
 
-
 @media (max-width: 520px) {
-
-.focusCard {
+  .focusCard {
     grid-template-columns: 1fr;
     grid-template-rows: 44px auto auto auto auto auto;
   }
 
-
-.focusCardIcon {
+  .focusCardIcon {
     grid-column: 1;
     grid-row: 2;
     justify-self: start;
     margin: 1.4rem 1.2rem 0.4rem;
   }
 
-
-.focusCard h3,
-.focusCard p,
-.focusTags {
+  .focusCard h3,
+  .focusCard p,
+  .focusTags {
     grid-column: 1;
     margin-right: 1.2rem;
     margin-left: 1.2rem;
   }
 
-
-.focusCard h3 {
+  .focusCard h3 {
     grid-row: 3;
     margin-top: 0.75rem;
   }
 
-
-.focusCard p {
+  .focusCard p {
     grid-row: 4;
   }
 
-
-.focusTags {
+  .focusTags {
     grid-row: 5;
   }
 
-
-.focusCard footer {
+  .focusCard footer {
     grid-row: 6;
-  }
-}
-
-
-@keyframes focusFloat {
-  0%,
-  100% {
-    transform: translateY(-4px) rotate(30deg);
-  }
-
-  50% {
-    transform: translateY(7px) rotate(38deg);
   }
 }

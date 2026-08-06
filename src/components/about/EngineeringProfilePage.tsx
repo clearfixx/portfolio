@@ -12,6 +12,7 @@ import heroStyles from './EngineeringProfileHero.module.scss'
 import consoleStyles from './EngineeringProfileConsole.module.scss'
 import operatingSystemStyles from './EngineeringProfileOperatingSystem.module.scss'
 import currentFocusStyles from './EngineeringProfileCurrentFocus.module.scss'
+import primaryFocusStyles from './EngineeringProfilePrimaryFocus.module.scss'
 import experienceStyles from './EngineeringProfileExperience.module.scss'
 import careerStyles from './EngineeringProfileCareer.module.scss'
 import principlesStyles from './EngineeringProfilePrinciples.module.scss'
@@ -480,7 +481,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                     title={content.currentFocus.title}
                   />
 
-                  <article className={currentFocusStyles.primaryFocus}>
+                  <article className={primaryFocusStyles.primaryFocus}>
                     <div>
                       <span>{content.currentFocus.primaryLabel}</span>
                       <h3>{content.currentFocus.primaryProject.title}</h3>
@@ -490,7 +491,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                         <ProfileIcon name="arrow" size={14} />
                       </Link>
                     </div>
-                    <div aria-hidden="true" className={currentFocusStyles.systemOrb}>
+                    <div aria-hidden="true" className={primaryFocusStyles.systemOrb}>
                       <span />
                       <i />
                       <b />
