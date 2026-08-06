@@ -11,6 +11,7 @@ import ctaStyles from './EngineeringProfileCta.module.scss'
 import heroStyles from './EngineeringProfileHero.module.scss'
 import consoleStyles from './EngineeringProfileConsole.module.scss'
 import operatingSystemStyles from './EngineeringProfileOperatingSystem.module.scss'
+import operatingInsightsStyles from './EngineeringProfileOperatingInsights.module.scss'
 import operatingTelemetryStyles from './EngineeringProfileOperatingTelemetry.module.scss'
 import focusDeckStyles from './EngineeringProfileFocusDeck.module.scss'
 import primaryFocusStyles from './EngineeringProfilePrimaryFocus.module.scss'
@@ -346,10 +347,10 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                     ) : null}
                   </div>
 
-                  <div className={operatingSystemStyles.operatingInsights}>
+                  <div className={operatingInsightsStyles.operatingInsights}>
                     <article>
                       <header>
-                        <span className={operatingSystemStyles.operatingInsightIcon}>
+                        <span className={operatingInsightsStyles.operatingInsightIcon}>
                           <ProfileIcon name="architecture" size={18} />
                         </span>
                         <div>
@@ -374,7 +375,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
 
                     <article>
                       <header>
-                        <span className={operatingSystemStyles.operatingInsightIcon}>
+                        <span className={operatingInsightsStyles.operatingInsightIcon}>
                           <ProfileIcon name="layers" size={18} />
                         </span>
                         <div>
