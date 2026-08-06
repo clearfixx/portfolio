@@ -29,6 +29,7 @@ import takeawayStyles from './BlogArticleTakeaways.module.scss'
 import overviewStyles from './BlogArticleOverview.module.scss'
 import coverStyles from './BlogArticleCover.module.scss'
 import heroStyles from './BlogArticleHero.module.scss'
+import statusCardStyles from './BlogArticleStatusCard.module.scss'
 export const revalidate = 300
 
 const longDateFormatter = new Intl.DateTimeFormat('en', {
@@ -282,10 +283,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </div>
               </div>
 
-              <aside className={heroStyles.statusCard} aria-label="Article status">
+              <aside
+                aria-label="Article status"
+                className={statusCardStyles.statusCard}
+                data-article-status-card
+              >
                 <div>
                   <span>Status</span>
-                  <strong className={heroStyles.liveStatus}>
+                  <strong className={statusCardStyles.liveStatus}>
                     <i aria-hidden="true" />
                     Published
                   </strong>
@@ -296,7 +301,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </div>
                 <div>
                   <span>Difficulty</span>
-                  <strong className={heroStyles.difficulty}>{difficulty}</strong>
+                  <strong className={statusCardStyles.difficulty}>{difficulty}</strong>
                 </div>
                 <div>
                   <span>Version</span>
