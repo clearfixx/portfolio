@@ -12,6 +12,7 @@ import type { BlogPost, Category, Media } from '@/payload-types'
 import { getHomepageContent, getPublishedBlogPosts, getSiteFooterGitHubFeed } from '@/lib/cms'
 import iconStyles from '@/components/blog/BlogIcon.module.scss'
 import newsletterStyles from './BlogNewsletter.module.scss'
+import newsletterPipelineStyles from './BlogNewsletterPipeline.module.scss'
 import articleCardStyles from './BlogArticleCards.module.scss'
 import mediaStyles from './BlogArticleMedia.module.scss'
 import shellStyles from './BlogPageShell.module.scss'
@@ -157,36 +158,36 @@ function JournalIcon({ name, size = 14 }: { name: JournalIconName; size?: number
 
 function NewsletterPipeline() {
   return (
-    <div aria-hidden="true" className={newsletterStyles.newsletterPipeline}>
-      <div className={newsletterStyles.pipelineTrack}>
-        <span className={newsletterStyles.pipelineLine} />
-        <span className={newsletterStyles.pipelineSignal} />
+    <div aria-hidden="true" className={newsletterPipelineStyles.newsletterPipeline}>
+      <div className={newsletterPipelineStyles.pipelineTrack}>
+        <span className={newsletterPipelineStyles.pipelineLine} />
+        <span className={newsletterPipelineStyles.pipelineSignal} />
       </div>
 
-      <div className={newsletterStyles.pipelineNodes}>
+      <div className={newsletterPipelineStyles.pipelineNodes}>
         <div>
-          <span className={newsletterStyles.pipelineIcon}>
+          <span className={newsletterPipelineStyles.pipelineIcon}>
             <JournalIcon name="arrow" size={15} />
           </span>
           <strong>Commit</strong>
           <small>main</small>
         </div>
         <div>
-          <span className={newsletterStyles.pipelineIcon}>
+          <span className={newsletterPipelineStyles.pipelineIcon}>
             <JournalIcon name="radio" size={15} />
           </span>
           <strong>Publish</strong>
           <small>journal</small>
         </div>
         <div>
-          <span className={newsletterStyles.pipelineIcon}>
+          <span className={newsletterPipelineStyles.pipelineIcon}>
             <JournalIcon name="folder" size={15} />
           </span>
           <strong>Feed</strong>
           <small>RSS</small>
         </div>
         <div>
-          <span className={newsletterStyles.pipelineIcon}>
+          <span className={newsletterPipelineStyles.pipelineIcon}>
             <JournalIcon name="book" size={15} />
           </span>
           <strong>Inbox</strong>
