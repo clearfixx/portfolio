@@ -11,6 +11,7 @@ import ctaStyles from './EngineeringProfileCta.module.scss'
 import heroStyles from './EngineeringProfileHero.module.scss'
 import consoleStyles from './EngineeringProfileConsole.module.scss'
 import operatingSystemStyles from './EngineeringProfileOperatingSystem.module.scss'
+import operatingStepsStyles from './EngineeringProfileOperatingSteps.module.scss'
 import operatingDetailStyles from './EngineeringProfileOperatingDetail.module.scss'
 import operatingInsightsStyles from './EngineeringProfileOperatingInsights.module.scss'
 import operatingTelemetryStyles from './EngineeringProfileOperatingTelemetry.module.scss'
@@ -311,10 +312,10 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                     title={content.operatingSystem.title}
                   />
 
-                  <ol className={operatingSystemStyles.operatingSteps}>
+                  <ol className={operatingStepsStyles.operatingSteps}>
                     {content.operatingSystem.steps.map((step, index) => (
                       <li key={step.id}>
-                        <div className={operatingSystemStyles.stepNode}>
+                        <div className={operatingStepsStyles.stepNode}>
                           <span>{step.code}</span>
                           <ProfileIcon
                             name={
