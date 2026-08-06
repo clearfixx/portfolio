@@ -11,6 +11,7 @@ import ctaStyles from './EngineeringProfileCta.module.scss'
 import heroStyles from './EngineeringProfileHero.module.scss'
 import consoleStyles from './EngineeringProfileConsole.module.scss'
 import operatingSystemStyles from './EngineeringProfileOperatingSystem.module.scss'
+import operatingDetailStyles from './EngineeringProfileOperatingDetail.module.scss'
 import operatingInsightsStyles from './EngineeringProfileOperatingInsights.module.scss'
 import operatingTelemetryStyles from './EngineeringProfileOperatingTelemetry.module.scss'
 import focusDeckStyles from './EngineeringProfileFocusDeck.module.scss'
@@ -332,7 +333,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                     ))}
                   </ol>
 
-                  <div className={operatingSystemStyles.systemDetail}>
+                  <div className={operatingDetailStyles.systemDetail}>
                     <div>
                       <span>{content.operatingSystem.currentStage.label}</span>
                       <strong>{content.operatingSystem.currentStage.title}</strong>
