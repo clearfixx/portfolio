@@ -11,7 +11,7 @@ import ctaStyles from './EngineeringProfileCta.module.scss'
 import heroStyles from './EngineeringProfileHero.module.scss'
 import consoleStyles from './EngineeringProfileConsole.module.scss'
 import operatingSystemStyles from './EngineeringProfileOperatingSystem.module.scss'
-import currentFocusStyles from './EngineeringProfileCurrentFocus.module.scss'
+import focusDeckStyles from './EngineeringProfileFocusDeck.module.scss'
 import primaryFocusStyles from './EngineeringProfilePrimaryFocus.module.scss'
 import experienceStyles from './EngineeringProfileExperience.module.scss'
 import careerStyles from './EngineeringProfileCareer.module.scss'
@@ -499,18 +499,18 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                   </article>
 
                   {content.currentFocus.cards.length > 0 ? (
-                    <div className={currentFocusStyles.focusGrid}>
+                    <div className={focusDeckStyles.focusGrid}>
                       {content.currentFocus.cards.map((card) => (
                         <article
-                          className={currentFocusStyles.focusCard}
+                          className={focusDeckStyles.focusCard}
                           data-tone={card.tone}
                           key={card.id}
                         >
-                          <div className={currentFocusStyles.focusCardRail}>
+                          <div className={focusDeckStyles.focusCardRail}>
                             <span>{card.eyebrow}</span>
                             <b
                               className={
-                                card.tone === 'purple' ? currentFocusStyles.isQueued : undefined
+                                card.tone === 'purple' ? focusDeckStyles.isQueued : undefined
                               }
                             >
                               <i />
@@ -518,7 +518,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                             </b>
                           </div>
 
-                          <span className={currentFocusStyles.focusCardIcon}>
+                          <span className={focusDeckStyles.focusCardIcon}>
                             <ProfileIcon name={card.icon} size={24} />
                           </span>
 
@@ -526,7 +526,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                           <p>{card.description}</p>
 
                           {card.tags.length > 0 ? (
-                            <div className={currentFocusStyles.focusTags}>
+                            <div className={focusDeckStyles.focusTags}>
                               {card.tags.map((tag) => (
                                 <span key={tag}>{tag}</span>
                               ))}
