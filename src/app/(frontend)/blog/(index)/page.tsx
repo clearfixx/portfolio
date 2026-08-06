@@ -11,7 +11,7 @@ import { TechnicalPreviewPlaceholder } from '@/components/blog/TechnicalPreviewP
 import type { BlogPost, Category, Media } from '@/payload-types'
 import { getHomepageContent, getPublishedBlogPosts, getSiteFooterGitHubFeed } from '@/lib/cms'
 import iconStyles from '@/components/blog/BlogIcon.module.scss'
-import newsletterStyles from './BlogNewsletter.module.scss'
+import newsletterShellStyles from './BlogNewsletterShell.module.scss'
 import newsletterFormStyles from './BlogNewsletterForm.module.scss'
 import newsletterPipelineStyles from './BlogNewsletterPipeline.module.scss'
 import articleCardStyles from './BlogArticleCards.module.scss'
@@ -818,8 +818,8 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             </section>
           ) : null}
 
-          <section className={newsletterStyles.newsletter}>
-            <div className={newsletterStyles.newsletterCopy}>
+          <section className={newsletterShellStyles.newsletter}>
+            <div className={newsletterShellStyles.newsletterCopy}>
               <p>
                 <span aria-hidden="true">{'//'}</span>
                 Journal updates
