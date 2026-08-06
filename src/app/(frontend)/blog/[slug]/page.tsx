@@ -28,7 +28,7 @@ import contentStyles from './BlogArticleRichText.module.scss'
 import takeawayStyles from './BlogArticleTakeaways.module.scss'
 import overviewStyles from './BlogArticleOverview.module.scss'
 import coverStyles from './BlogArticleCover.module.scss'
-import heroStyles from './BlogArticleHero.module.scss'
+import heroShellStyles from './BlogArticleHeroShell.module.scss'
 import statusCardStyles from './BlogArticleStatusCard.module.scss'
 export const revalidate = 300
 
@@ -253,17 +253,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <article aria-labelledby="article-page-title">
             <BlogArticleReveal />
 
-            <PublicPageHeroFrame className={heroStyles.heroGrid} variant="detail">
-              <div className={heroStyles.heroCopy}>
-                <p className={heroStyles.eyebrow}>
+            <PublicPageHeroFrame className={heroShellStyles.heroGrid} variant="detail">
+              <div className={heroShellStyles.heroCopy}>
+                <p className={heroShellStyles.eyebrow}>
                   <span aria-hidden="true">{'//'}</span>
                   {categoryLabel(post)}
                 </p>
 
                 <h1 id="article-page-title">{post.title}</h1>
-                <p className={heroStyles.excerpt}>{post.excerpt}</p>
+                <p className={heroShellStyles.excerpt}>{post.excerpt}</p>
 
-                <div className={heroStyles.heroMeta}>
+                <div className={heroShellStyles.heroMeta}>
                   <span>
                     <ArticleIcon name="calendar" />
                     {publishedAt}
