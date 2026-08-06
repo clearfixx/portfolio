@@ -22,6 +22,7 @@ import type { BlogPost, Category, Media } from '@/payload-types'
 import pageShellStyles from './BlogArticlePageShell.module.scss'
 import discussionStyles from './BlogArticleDiscussion.module.scss'
 import relatedStyles from './BlogArticleRelated.module.scss'
+import articleNavigationStyles from './BlogArticleNavigation.module.scss'
 import railShellStyles from './BlogArticleRailShell.module.scss'
 import seriesCardStyles from './BlogArticleSeriesCard.module.scss'
 import tagsCardStyles from './BlogArticleTagsCard.module.scss'
@@ -392,7 +393,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   title={post.title}
                 />
 
-                <nav className={relatedStyles.articleNavigation} aria-label="Article navigation">
+                <nav
+                  className={articleNavigationStyles.articleNavigation}
+                  aria-label="Article navigation"
+                >
                   {previousPost ? (
                     <Link href={`/blog/${previousPost.slug}`}>
                       <span>Previous article</span>
