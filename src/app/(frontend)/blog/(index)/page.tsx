@@ -12,6 +12,7 @@ import type { BlogPost, Category, Media } from '@/payload-types'
 import { getHomepageContent, getPublishedBlogPosts, getSiteFooterGitHubFeed } from '@/lib/cms'
 import iconStyles from '@/components/blog/BlogIcon.module.scss'
 import newsletterStyles from './BlogNewsletter.module.scss'
+import newsletterFormStyles from './BlogNewsletterForm.module.scss'
 import newsletterPipelineStyles from './BlogNewsletterPipeline.module.scss'
 import articleCardStyles from './BlogArticleCards.module.scss'
 import mediaStyles from './BlogArticleMedia.module.scss'
@@ -831,7 +832,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
             <NewsletterPipeline />
 
-            <form>
+            <form className={newsletterFormStyles.newsletterForm}>
               <label>
                 <span className={paginationStyles.srOnly}>Email address</span>
                 <input placeholder="Enter your email" type="email" />
