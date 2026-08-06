@@ -23,6 +23,7 @@ import pageShellStyles from './BlogArticlePageShell.module.scss'
 import discussionStyles from './BlogArticleDiscussion.module.scss'
 import relatedStyles from './BlogArticleRelated.module.scss'
 import railStyles from './BlogArticleRail.module.scss'
+import seriesCardStyles from './BlogArticleSeriesCard.module.scss'
 import tagsCardStyles from './BlogArticleTagsCard.module.scss'
 import progressCardStyles from './BlogArticleProgressCard.module.scss'
 import authorCardStyles from './BlogArticleAuthorCard.module.scss'
@@ -464,7 +465,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </div>
                 ) : null}
 
-                <div className={railStyles.seriesCard}>
+                <div className={seriesCardStyles.seriesCard}>
                   <p>
                     <ArticleIcon name="folder" />
                     Series
