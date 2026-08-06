@@ -11,6 +11,7 @@ import ctaStyles from './EngineeringProfileCta.module.scss'
 import heroStyles from './EngineeringProfileHero.module.scss'
 import consoleStyles from './EngineeringProfileConsole.module.scss'
 import operatingSystemStyles from './EngineeringProfileOperatingSystem.module.scss'
+import operatingTelemetryStyles from './EngineeringProfileOperatingTelemetry.module.scss'
 import focusDeckStyles from './EngineeringProfileFocusDeck.module.scss'
 import primaryFocusStyles from './EngineeringProfilePrimaryFocus.module.scss'
 import experienceStyles from './EngineeringProfileExperience.module.scss'
@@ -400,7 +401,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                   {content.operatingSystem.telemetry.length > 0 ? (
                     <div
                       aria-label="Engineering process status"
-                      className={operatingSystemStyles.operatingTelemetry}
+                      className={operatingTelemetryStyles.operatingTelemetry}
                     >
                       {content.operatingSystem.telemetry.map((item) => (
                         <span data-tone={item.tone} key={item.id}>
