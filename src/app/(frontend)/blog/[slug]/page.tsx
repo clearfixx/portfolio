@@ -22,7 +22,7 @@ import type { BlogPost, Category, Media } from '@/payload-types'
 import pageShellStyles from './BlogArticlePageShell.module.scss'
 import discussionStyles from './BlogArticleDiscussion.module.scss'
 import relatedStyles from './BlogArticleRelated.module.scss'
-import railStyles from './BlogArticleRail.module.scss'
+import railShellStyles from './BlogArticleRailShell.module.scss'
 import seriesCardStyles from './BlogArticleSeriesCard.module.scss'
 import tagsCardStyles from './BlogArticleTagsCard.module.scss'
 import progressCardStyles from './BlogArticleProgressCard.module.scss'
@@ -411,7 +411,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </nav>
               </div>
 
-              <aside className={railStyles.rightRail}>
+              <aside className={railShellStyles.rightRail}>
                 <div className={authorCardStyles.authorCard}>
                   <div className={authorCardStyles.authorAvatar}>
                     {authorPortrait?.url ? (
