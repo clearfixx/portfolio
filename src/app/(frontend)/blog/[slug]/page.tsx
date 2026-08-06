@@ -23,6 +23,7 @@ import pageShellStyles from './BlogArticlePageShell.module.scss'
 import discussionStyles from './BlogArticleDiscussion.module.scss'
 import relatedStyles from './BlogArticleRelated.module.scss'
 import railStyles from './BlogArticleRail.module.scss'
+import progressCardStyles from './BlogArticleProgressCard.module.scss'
 import authorCardStyles from './BlogArticleAuthorCard.module.scss'
 import layoutStyles from './BlogArticleLayout.module.scss'
 import contentStyles from './BlogArticleRichText.module.scss'
@@ -437,7 +438,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </Link>
                 </div>
 
-                <div className={railStyles.progressCard}>
+                <div className={progressCardStyles.progressCard}>
                   <p>Reading progress</p>
                   <BlogArticleActions mode="progress" slug={post.slug} title={post.title} />
                   <div>
