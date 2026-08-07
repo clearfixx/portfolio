@@ -21,7 +21,7 @@ import {
 import type { BlogPost, Category, Media } from '@/payload-types'
 import pageShellStyles from './BlogArticlePageShell.module.scss'
 import discussionStyles from './BlogArticleDiscussion.module.scss'
-import relatedStyles from './BlogArticleRelated.module.scss'
+import relatedSectionStyles from './BlogArticleRelatedSection.module.scss'
 import articleNavigationStyles from './BlogArticleNavigation.module.scss'
 import railShellStyles from './BlogArticleRailShell.module.scss'
 import seriesCardStyles from './BlogArticleSeriesCard.module.scss'
@@ -482,7 +482,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             {relatedPosts.length > 0 ? (
               <section
-                className={relatedStyles.related}
+                className={relatedSectionStyles.related}
                 data-article-reveal
                 id="related-articles"
                 aria-labelledby="related-articles-title"
@@ -498,11 +498,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
                     return (
                       <Link
-                        className={relatedStyles.relatedCard}
+                        className={relatedSectionStyles.relatedCard}
                         href={`/blog/${relatedPost.slug}`}
                         key={relatedPost.id}
                       >
-                        <div className={relatedStyles.relatedImage}>
+                        <div className={relatedSectionStyles.relatedImage}>
                           {relatedCover?.url ? (
                             <Image
                               alt={relatedCover.alt}
@@ -518,7 +518,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                           )}
                         </div>
 
-                        <div className={relatedStyles.relatedContent}>
+                        <div className={relatedSectionStyles.relatedContent}>
                           <span>{categoryLabel(relatedPost)}</span>
                           <h3>{relatedPost.title}</h3>
                           <p>
