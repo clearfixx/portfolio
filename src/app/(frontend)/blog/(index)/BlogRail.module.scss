@@ -33,33 +33,6 @@
   flex: 0 0 auto;
 }
 
-.railList {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.railList {
-  display: grid;
-  gap: 0.6rem;
-  margin-top: 0.8rem;
-}
-
-.railList li,
-.railList a {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  color: #aebdc6;
-  font-size: 0.68rem;
-  text-decoration: none;
-}
-
-.railList strong {
-  color: #6f8490;
-  font-weight: 500;
-}
-
 @media (max-width: 1180px) {
   .rail {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -98,40 +71,6 @@
   color: #087f8c;
 }
 
-:global([data-theme='light']) .railList li,
-:global([data-theme='light']) .railList a {
-  color: #29434f;
-}
-
-:global([data-theme='light']) .railList strong {
-  color: #718791;
-}
-
-:global([data-theme='light']) .railList a {
-  border-radius: 7px;
-  transition:
-    background 150ms ease,
-    color 150ms ease,
-    transform 150ms ease;
-}
-
-:global([data-theme='light']) .railList a {
-  padding: 0.4rem 0.45rem;
-  margin-inline: -0.45rem;
-}
-
-:global([data-theme='light']) .railList a:hover {
-  background: rgba(8, 127, 140, 0.065);
-  color: #087f8c;
-  transform: translateX(2px);
-}
-
 .railCard {
   padding: 1rem;
-}
-
-.railList a {
-  padding: 0.4rem 0.45rem;
-  margin-inline: -0.45rem;
-  border-radius: 7px;
 }

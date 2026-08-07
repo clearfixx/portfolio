@@ -24,6 +24,7 @@ import featuredStyles from './BlogFeaturedArticle.module.scss'
 import toolbarStyles from './BlogArticleToolbar.module.scss'
 import railStyles from './BlogRail.module.scss'
 
+import railIndexListStyles from './BlogRailIndexList.module.scss'
 import railTagsStyles from './BlogRailTags.module.scss'
 import railSeriesStyles from './BlogRailSeries.module.scss'
 import railTransmissionsStyles from './BlogRailTransmissions.module.scss'
@@ -663,7 +664,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   <JournalIcon name="folder" size={14} />
                   Topics
                 </h2>
-                <ul className={railStyles.railList}>
+                <ul className={railIndexListStyles.railList}>
                   {categories.map((item) => (
                     <li key={item.slug}>
                       <Link href={withQuery(queryState, { page: undefined, topic: item.slug })}>
@@ -712,7 +713,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   <JournalIcon name="archive" size={14} />
                   Archive
                 </h2>
-                <ul className={railStyles.railList}>
+                <ul className={railIndexListStyles.railList}>
                   {archive.map((item) => (
                     <li key={item.year}>
                       <span>{item.year}</span>
