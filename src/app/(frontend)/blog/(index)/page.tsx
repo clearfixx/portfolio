@@ -25,6 +25,7 @@ import toolbarStyles from './BlogArticleToolbar.module.scss'
 import railStyles from './BlogRail.module.scss'
 
 import paginationStyles from './BlogPagination.module.scss'
+import paginationNavigationStyles from './BlogPaginationNavigation.module.scss'
 const blogRailIconClassName = [iconStyles.icon, railStyles.icon].join(' ')
 export const revalidate = 300
 
@@ -732,7 +733,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 <span>{registryPosts.length} indexed entries</span>
               </div>
 
-              <nav className={paginationStyles.pagination} aria-label="Blog pagination">
+              <nav className={paginationNavigationStyles.pagination} aria-label="Blog pagination">
                 <Link
                   aria-disabled={currentPage === 1}
                   aria-label="First page"
@@ -755,7 +756,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   const hasGap = previousPage !== undefined && pageNumber - previousPage > 1
 
                   return (
-                    <span className={paginationStyles.paginationItem} key={pageNumber}>
+                    <span className={paginationNavigationStyles.paginationItem} key={pageNumber}>
                       {hasGap ? <i aria-hidden="true">…</i> : null}
                       <Link
                         aria-current={pageNumber === currentPage ? 'page' : undefined}
