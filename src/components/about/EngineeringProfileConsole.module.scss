@@ -30,13 +30,11 @@
   mask-image: linear-gradient(to bottom, black, transparent 92%);
 }
 
-
 .consoleCorners {
   position: absolute;
   inset: 10px;
   pointer-events: none;
 }
-
 
 .consoleCorners i {
   position: absolute;
@@ -46,14 +44,12 @@
   opacity: 0.7;
 }
 
-
 .consoleCorners i:nth-child(1) {
   top: 0;
   left: 0;
   border-top: 2px solid;
   border-left: 2px solid;
 }
-
 
 .consoleCorners i:nth-child(2) {
   top: 0;
@@ -62,7 +58,6 @@
   border-right: 2px solid;
 }
 
-
 .consoleCorners i:nth-child(3) {
   right: 0;
   bottom: 0;
@@ -70,14 +65,12 @@
   border-bottom: 2px solid;
 }
 
-
 .consoleCorners i:nth-child(4) {
   bottom: 0;
   left: 0;
   border-bottom: 2px solid;
   border-left: 2px solid;
 }
-
 
 .identityVisual {
   position: relative;
@@ -88,14 +81,12 @@
   border-right: 1px solid var(--profile-border);
 }
 
-
 .identityVisual::before,
 .identityVisual::after {
   position: absolute;
   content: '';
   border-radius: 50%;
 }
-
 
 .identityVisual::before {
   width: 260px;
@@ -106,14 +97,12 @@
     0 0 0 56px rgba(166, 108, 255, 0.018);
 }
 
-
 .identityVisual::after {
   width: 164px;
   height: 164px;
   border: 1px dashed rgba(166, 108, 255, 0.32);
   animation: orbitRotate 18s linear infinite;
 }
-
 
 .avatar {
   position: relative;
@@ -135,7 +124,6 @@
     0 20px 55px rgba(0, 0, 0, 0.28);
 }
 
-
 .avatar::before {
   position: absolute;
   inset: 12px;
@@ -143,7 +131,6 @@
   border-radius: 6px 6px 24px;
   content: '';
 }
-
 
 .avatar span {
   font-family: var(--font-geist-mono), monospace;
@@ -155,7 +142,6 @@
     10px 8px 25px rgba(166, 108, 255, 0.18);
 }
 
-
 .avatar small {
   margin-top: 0.5rem;
   color: var(--profile-cyan);
@@ -163,7 +149,6 @@
   font-size: 0.56rem;
   letter-spacing: 0.22em;
 }
-
 
 .identityScanner {
   position: absolute;
@@ -176,7 +161,6 @@
   box-shadow: 0 0 18px rgba(25, 229, 231, 0.8);
   animation: profileScan 5.5s ease-in-out infinite;
 }
-
 
 .onlineStatus {
   position: absolute;
@@ -197,7 +181,6 @@
   text-transform: uppercase;
 }
 
-
 .onlineStatus i {
   width: 6px;
   height: 6px;
@@ -205,40 +188,6 @@
   background: var(--profile-cyan);
   box-shadow: 0 0 10px rgba(25, 229, 231, 0.85);
 }
-
-
-.identityDetails {
-  display: grid;
-  align-content: center;
-  margin: 0;
-  padding: clamp(2rem, 4vw, 3.5rem);
-}
-
-
-.identityDetails div {
-  display: grid;
-  grid-template-columns: minmax(90px, 0.55fr) minmax(0, 1fr);
-  gap: 1rem;
-  padding: 0.9rem 0;
-  border-bottom: 1px solid rgba(99, 216, 225, 0.11);
-}
-
-
-.identityDetails dt {
-  color: var(--profile-muted);
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.08em;
-}
-
-
-.identityDetails dd {
-  margin: 0;
-  color: var(--profile-text);
-  font-size: 0.8rem;
-  line-height: 1.45;
-}
-
 
 .consoleTelemetry {
   position: absolute;
@@ -254,12 +203,10 @@
   letter-spacing: 0.08em;
 }
 
-
 .consoleTelemetry span {
   display: flex;
   gap: 4px;
 }
-
 
 .consoleTelemetry i {
   width: 18px;
@@ -267,11 +214,9 @@
   background: rgba(25, 229, 231, 0.2);
 }
 
-
 .consoleTelemetry i:nth-child(2) {
   background: rgba(166, 108, 255, 0.5);
 }
-
 
 :global([data-theme='light']) .profileConsole {
   background:
@@ -283,77 +228,53 @@
     0 28px 70px rgba(30, 70, 85, 0.1);
 }
 
-
 :global([data-theme='light']) .avatar {
   background:
     linear-gradient(145deg, rgba(8, 127, 140, 0.055), rgba(127, 74, 198, 0.06)),
     rgba(255, 255, 255, 0.9);
 }
 
-
 :global([data-theme='light']) .onlineStatus {
   background: rgba(255, 255, 255, 0.9);
 }
 
 @media (max-width: 1240px) {
-
-
-.profileConsole {
+  .profileConsole {
     grid-template-columns: minmax(180px, 0.78fr) minmax(240px, 1.22fr);
   }
 }
 
 @media (max-width: 1020px) {
-
-
-.profileConsole {
+  .profileConsole {
     min-height: 430px;
   }
 }
 
 @media (max-width: 760px) {
-
-
-.profileConsole {
+  .profileConsole {
     grid-template-columns: 1fr;
   }
 
-
-.identityVisual {
+  .identityVisual {
     min-height: 340px;
     border-right: 0;
     border-bottom: 1px solid var(--profile-border);
   }
 
-
-.consoleTelemetry {
+  .consoleTelemetry {
     display: none;
   }
 }
 
 @media (max-width: 520px) {
-
-.profileConsole {
+  .profileConsole {
     min-height: 0;
   }
-
-
-.identityDetails {
-    padding: 1.25rem;
-  }
-
-
-.identityDetails div {
-    grid-template-columns: 1fr;
-    gap: 0.35rem;
-  }
 }
-
 
 /* engineering-profile-emergency-recovery-v7:end */
 
 /* about-live-data-integration-v2:start */
-
 
 .avatarWithImage {
   position: relative;
@@ -361,13 +282,11 @@
   overflow: hidden;
 }
 
-
 .avatarImage {
   z-index: 0;
   object-fit: cover;
   object-position: center;
 }
-
 
 .avatarWithImage::after {
   position: absolute;
@@ -380,20 +299,17 @@
   pointer-events: none;
 }
 
-
 .avatarWithImage > small {
   position: relative;
   z-index: 2;
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
 }
 
-
 :global([data-theme='light']) .avatarWithImage::after {
   background:
     linear-gradient(180deg, transparent 48%, rgba(226, 238, 244, 0.82)),
     linear-gradient(135deg, rgba(0, 127, 133, 0.08), transparent 46%);
 }
-
 
 @keyframes profileScan {
   0%,

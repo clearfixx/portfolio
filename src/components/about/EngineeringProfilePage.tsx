@@ -10,6 +10,7 @@ import shellStyles from './EngineeringProfileShell.module.scss'
 import ctaStyles from './EngineeringProfileCta.module.scss'
 import heroStyles from './EngineeringProfileHero.module.scss'
 import consoleStyles from './EngineeringProfileConsole.module.scss'
+import identityDetailsStyles from './EngineeringProfileIdentityDetails.module.scss'
 import operatingShellStyles from './EngineeringProfileOperatingShell.module.scss'
 import operatingStepsStyles from './EngineeringProfileOperatingSteps.module.scss'
 import operatingDetailStyles from './EngineeringProfileOperatingDetail.module.scss'
@@ -168,7 +169,7 @@ function ProfileConsole({ profile }: { profile: AboutProfileViewModel }) {
         </div>
       </div>
 
-      <dl className={consoleStyles.identityDetails}>
+      <dl className={identityDetailsStyles.identityDetails}>
         {details.map(([label, value]) => (
           <div key={label}>
             <dt>{label}</dt>

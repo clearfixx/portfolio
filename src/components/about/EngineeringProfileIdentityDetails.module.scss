@@ -1,0 +1,47 @@
+/* Previous and next engineering profile identity details. */
+
+.identityDetails {
+  display: grid;
+  align-content: center;
+  margin: 0;
+  padding: clamp(2rem, 4vw, 3.5rem);
+}
+
+
+.identityDetails div {
+  display: grid;
+  grid-template-columns: minmax(90px, 0.55fr) minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgba(99, 216, 225, 0.11);
+}
+
+
+.identityDetails dt {
+  color: var(--profile-muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+}
+
+
+.identityDetails dd {
+  margin: 0;
+  color: var(--profile-text);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 520px) {
+
+
+.identityDetails {
+    padding: 1.25rem;
+  }
+
+
+.identityDetails div {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+}
