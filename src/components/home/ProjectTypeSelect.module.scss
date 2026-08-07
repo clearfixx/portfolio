@@ -5,11 +5,9 @@
   z-index: 4;
 }
 
-
 .select:global(.is-open) {
   z-index: 30;
 }
-
 
 .selectTrigger {
   display: flex;
@@ -32,12 +30,10 @@
     box-shadow 180ms ease;
 }
 
-
 .selectTrigger:hover {
   border-color: rgb(var(--rgb-accent-border) / 36%);
   background: rgb(var(--rgb-surface-control-hover) / 72%);
 }
-
 
 .selectTrigger:focus-visible,
 .select:global(.is-open) .selectTrigger {
@@ -46,7 +42,6 @@
   box-shadow: 0 0 0 3px rgb(var(--rgb-accent) / 8%);
 }
 
-
 .selectValue {
   min-width: 0;
   overflow: hidden;
@@ -54,11 +49,9 @@
   white-space: nowrap;
 }
 
-
 .selectValue[data-placeholder='true'] {
   color: rgb(var(--rgb-text-soft) / 72%);
 }
-
 
 .selectChevron {
   width: 8px;
@@ -71,11 +64,9 @@
   transition: transform 180ms ease;
 }
 
-
 .select:global(.is-open) .selectChevron {
   transform: translateY(2px) rotate(225deg);
 }
-
 
 .selectList {
   position: absolute;
@@ -100,7 +91,6 @@
   animation: contact-select-enter 160ms ease-out both;
 }
 
-
 .selectOption {
   display: flex;
   min-height: 44px;
@@ -118,17 +108,14 @@
     color 140ms ease;
 }
 
-
 .selectOption[data-active='true'] {
   background: rgb(var(--rgb-accent) / 10%);
 }
-
 
 .selectOption[aria-selected='true'] {
   background: rgb(var(--rgb-accent) / 14%);
   color: rgb(var(--rgb-accent));
 }
-
 
 .selectCheck {
   flex: 0 0 auto;
@@ -140,37 +127,30 @@
     transform 140ms ease;
 }
 
-
 .selectOption[aria-selected='true'] .selectCheck {
   opacity: 1;
   transform: scale(1);
 }
 
-
 @media (max-width: 520px) {
-
-.selectTrigger {
+  .selectTrigger {
     height: 50px;
   }
 
-
-.selectList {
+  .selectList {
     max-height: min(252px, 46vh);
   }
 }
 
-
 @media (prefers-reduced-motion: reduce) {
-
-.selectTrigger,
-.selectChevron,
-.selectOption,
-.selectCheck {
+  .selectTrigger,
+  .selectChevron,
+  .selectOption,
+  .selectCheck {
     transition: none;
   }
 
-
-.selectList {
+  .selectList {
     animation: none;
   }
 }
@@ -190,11 +170,22 @@
   color: rgb(var(--contact-error-rgb));
 }
 
-
 .select:global(.is-invalid) .selectValue[data-placeholder='true'] {
   color: rgb(var(--contact-error-rgb) / 88%);
 }
 
 .selectIcon {
   pointer-events: none;
+}
+
+@keyframes contact-select-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }

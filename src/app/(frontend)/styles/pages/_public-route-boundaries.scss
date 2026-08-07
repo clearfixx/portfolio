@@ -1,0 +1,14 @@
+/*
+ * Public route -> global SiteFooter compatibility boundaries.
+ *
+ * These selectors intentionally remain global because PublicPageShell owns the
+ * route root while SiteFooter is rendered as its adjacent sibling.
+ */
+
+.projects-page + .site-footer {
+  margin-top: 22px;
+}
+
+.project-page + .site-footer {
+  margin-top: 0;
+}

@@ -43,13 +43,40 @@ Adjust the relative path for the module location.
 A page-sized module is only a transition state. Target roughly 300–600 lines per
 ownership slice and split by rendered component, not by arbitrary selector type.
 
-Current split targets:
+Public-route ownership baseline completed in the CSS ownership refactor:
 
-- About: hero/profile console, journey, capabilities, philosophy/CTA.
-- Blog: hero/editor, featured article, registry, taxonomy rail, newsletter.
-- Contacts: hero/status console, channels, form/editor, process/social.
-- Projects: index hero, directory controls, project row, registry preview, CTA.
-- Public page shell: shell, breadcrumbs, hero frame, shared loading primitives.
+- About is split by hero, profile-console slices, career, operating-system slices,
+  focus, experience, personal signals, CTA, and page shell.
+- Blog index/detail are split by rendered ownership slice, including hero,
+  newsletter, pagination, rails, article content, actions, related content, and
+  discussion primitives.
+- Contacts, Projects, navigation, public-page primitives, and technical previews
+  use colocated CSS Modules.
+- Homepage section Sass and Payload compatibility Sass remain explicit global
+  migration queues; do not split them mechanically.
+
+Intentional shared CSS Modules:
+
+- `src/components/blog/BlogIcon.module.scss` — shared icon primitive.
+- `src/components/home/ContactCTA/ContactFormFoundation.module.scss` — shared
+  field structure consumed by `ContactForm` and `ProjectTypeSelect`.
+- `src/components/home/ContactCTA/ContactFormMotionScope.module.scss` — shared
+  reveal choreography consumed by the homepage `ContactCTA` and `/contacts`
+  page around the same `ContactForm`.
+
+## Automated ownership audit
+
+`pnpm check:styles` validates both Sass boundaries and the CSS Module import graph:
+
+- every CSS Module must have at least one React/TypeScript owner;
+- multi-owner modules must be explicitly allowlisted as intentional shared
+  primitives;
+- global Sass cannot import CSS Modules;
+- components cannot introduce new non-module Sass imports outside the approved
+  layout entrypoints.
+
+Keep the shared-module allowlist small. If an exception stops being shared, remove
+it instead of leaving a permanent bypass.
 
 ## Admin UI
 

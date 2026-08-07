@@ -8,5 +8,4 @@
  *   @use '../abstracts/module-api' as module;
  *   .button { @include module.interactive; }
  */
-@forward 'functions';
 @forward 'mixins';

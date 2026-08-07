@@ -17,12 +17,10 @@
 @use './sections/delivery-pipeline';
 @use './sections/social';
 @use './sections/testimonials';
-@use './sections/contact';
 @use './sections/site-footer';
 @use './sections/insights-trust';
 @use './sections/cookie-consent';
-@use './pages/public-pages';
-@use './pages/projects';
+@use './pages/public-route-boundaries';
 @use './sections/light-theme-polish';
 @use './base/ui-polish-closeout';
 @use './sections/motion-choreography';
