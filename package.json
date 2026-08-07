@@ -28,13 +28,14 @@
     "check:env": "node scripts/check-environment.mjs",
     "check:env:production": "node scripts/check-environment.mjs --production",
     "test:regression": "pnpm run test:e2e",
-    "verify": "pnpm run check:env && pnpm run lint && pnpm run typecheck && pnpm run test:int && pnpm run test:regression && pnpm run build",
-    "verify:production": "pnpm run check:env:production && pnpm run lint && pnpm run typecheck && pnpm run test:int && pnpm run test:regression && pnpm run build",
+    "verify": "pnpm run check:env && pnpm run check:styles && pnpm run lint && pnpm run typecheck && pnpm run test:int && pnpm run test:regression && pnpm run build",
+    "verify:production": "pnpm run check:env:production && pnpm run check:styles && pnpm run lint && pnpm run typecheck && pnpm run test:int && pnpm run test:regression && pnpm run build",
     "jobs:github-feed": "cross-env NODE_OPTIONS=--no-deprecation payload jobs:run --cron \"* * * * *\" --queue dss-github-feed --handle-schedules",
     "jobs:x-feed": "cross-env NODE_OPTIONS=--no-deprecation payload jobs:run --cron \"* * * * *\" --queue dss-x-feed --handle-schedules",
     "jobs:instagram-feed": "cross-env NODE_OPTIONS=--no-deprecation payload jobs:run --cron \"* * * * *\" --queue dss-instagram-feed --handle-schedules",
     "seed:dss-case-study": "cross-env NODE_OPTIONS=--no-deprecation tsx scripts/seed-dss-universe-case-study.ts",
-    "seed:about": "cross-env NODE_OPTIONS=--no-deprecation tsx scripts/seed-about-page.ts"
+    "seed:about": "cross-env NODE_OPTIONS=--no-deprecation tsx scripts/seed-about-page.ts",
+    "check:styles": "node scripts/check-style-boundaries.mjs"
   },
   "dependencies": {
     "@dss-feeds/github-feed": "file:../dss-feeds/packages/github-feed",

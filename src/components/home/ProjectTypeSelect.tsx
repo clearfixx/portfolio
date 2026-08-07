@@ -4,6 +4,8 @@ import { useEffect, useId, useRef, useState } from 'react'
 
 import type { KeyboardEvent, SVGProps } from 'react'
 
+import foundationStyles from './ContactCTA/ContactFormFoundation.module.scss'
+import selectStyles from './ProjectTypeSelect.module.scss'
 const projectTypeOptions = [
   { value: 'website', label: 'Website' },
   { value: 'web-app', label: 'Web App' },
@@ -200,11 +202,15 @@ export function ProjectTypeSelect({
   return (
     <div
       ref={rootRef}
-      className={`contact-cta__field contact-cta__select${
+      data-contact-form-field
+      className={`${foundationStyles.field} ${selectStyles.select}${
         isOpen ? ' is-open' : ''
       }${invalid ? ' is-invalid' : ''}`}
     >
-      <span className="contact-cta__field-icon" aria-hidden="true">
+      <span
+        className={`${foundationStyles.fieldIcon} ${selectStyles.selectIcon}`}
+        aria-hidden="true"
+      >
         <LayersIcon />
       </span>
 
@@ -216,7 +222,7 @@ export function ProjectTypeSelect({
 
       <button
         ref={triggerRef}
-        className="contact-cta__select-trigger"
+        className={selectStyles.selectTrigger}
         type="button"
         role="combobox"
         data-contact-field="projectType"
@@ -241,12 +247,12 @@ export function ProjectTypeSelect({
       >
         <span
           id={valueId}
-          className="contact-cta__select-value"
+          className={selectStyles.selectValue}
           data-placeholder={selectedOption ? undefined : 'true'}
         >
           {selectedOption?.label ?? placeholder}
         </span>
-        <span className="contact-cta__select-chevron" aria-hidden="true" />
+        <span className={selectStyles.selectChevron} aria-hidden="true" />
       </button>
 
       {errorId ? (
@@ -258,7 +264,7 @@ export function ProjectTypeSelect({
       {isOpen ? (
         <ul
           id={listboxId}
-          className="contact-cta__select-list"
+          className={selectStyles.selectList}
           role="listbox"
           aria-labelledby={labelId}
         >
@@ -270,7 +276,7 @@ export function ProjectTypeSelect({
               <li
                 id={`${listboxId}-option-${index}`}
                 key={option.value}
-                className="contact-cta__select-option"
+                className={selectStyles.selectOption}
                 role="option"
                 aria-selected={isSelected}
                 data-active={isActive ? 'true' : undefined}
@@ -283,7 +289,7 @@ export function ProjectTypeSelect({
                 }}
               >
                 <span>{option.label}</span>
-                <span className="contact-cta__select-check" aria-hidden="true">
+                <span className={selectStyles.selectCheck} aria-hidden="true">
                   ✓
                 </span>
               </li>

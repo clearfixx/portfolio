@@ -5,6 +5,11 @@ import { usePathname } from 'next/navigation'
 import { type KeyboardEvent, type MouseEvent, useEffect, useMemo, useRef, useState } from 'react'
 
 import { ThemeToggle } from '@/components/theme/ThemeToggle'
+
+import { isNavigationRouteActive } from './navigation-route-state'
+import styles from './NavbarShell.module.scss'
+import mobileStyles from './NavbarMobileNavigation.module.scss'
+import dropdownStyles from './NavbarDropdown.module.scss'
 import type { NavigationViewModel } from '@/lib/cms/navigation'
 
 type NavbarProps = {
@@ -12,7 +17,6 @@ type NavbarProps = {
 }
 
 type LandingItem = NavigationViewModel['landingItems'][number]
-type RouteItem = NonNullable<NavigationViewModel['pagesMenu']>['items'][number]
 type CtaItem = NonNullable<NavigationViewModel['cta']>
 type ScrollItem = {
   sectionId: string
@@ -79,28 +83,6 @@ function getActiveSectionId(items: ScrollItem[]) {
   }
 
   return activeSectionId
-}
-
-function getRoutePath(href: string) {
-  if (!href.startsWith('/')) {
-    return undefined
-  }
-
-  return href.split('#')[0]?.split('?')[0] || '/'
-}
-
-function isRouteActive(pathname: string, item: RouteItem) {
-  const routePath = getRoutePath(item.href)
-
-  if (!routePath || routePath === '/') {
-    return false
-  }
-
-  if (item.match === 'prefix') {
-    return pathname === routePath || pathname.startsWith(`${routePath}/`)
-  }
-
-  return pathname === routePath
 }
 
 export function Navbar({ navigation }: NavbarProps) {
@@ -366,20 +348,20 @@ export function Navbar({ navigation }: NavbarProps) {
   }
 
   const pagesMenuActive =
-    navigation.pagesMenu?.items.some((item) => isRouteActive(pathname, item)) ?? false
+    navigation.pagesMenu?.items.some((item) => isNavigationRouteActive(pathname, item)) ?? false
   const ctaActive =
     pathname === '/' &&
     Boolean(navigation.cta?.sectionId && activeSection === navigation.cta.sectionId)
 
   return (
-    <div className="navbar">
-      <nav className="navbar__links" aria-label="Main navigation">
+    <div className={styles.navbar}>
+      <nav className={styles.links} aria-label="Main navigation">
         {navigation.landingItems.map((item) => {
           const isActive = pathname === '/' && activeSection === item.sectionId
 
           return (
             <Link
-              className={`navbar__link ${isActive ? 'is-active' : ''}`}
+              className={`${styles.link} ${isActive ? 'is-active' : ''}`}
               href={item.href}
               key={item.id}
               aria-current={isActive ? 'location' : undefined}
@@ -391,9 +373,9 @@ export function Navbar({ navigation }: NavbarProps) {
         })}
 
         {navigation.pagesMenu ? (
-          <div className="navbar__dropdown" ref={pagesMenuContainerRef}>
+          <div className={dropdownStyles.dropdown} ref={pagesMenuContainerRef}>
             <button
-              className={`navbar__dropdown-trigger ${pagesMenuActive ? 'is-active' : ''}`}
+              className={`${dropdownStyles.dropdownTrigger} ${pagesMenuActive ? 'is-active' : ''}`}
               type="button"
               ref={pagesMenuTriggerRef}
               aria-controls="navbar-pages-menu"
@@ -406,12 +388,16 @@ export function Navbar({ navigation }: NavbarProps) {
             </button>
 
             {isPagesMenuOpen ? (
-              <div className="navbar__dropdown-menu" id="navbar-pages-menu" ref={pagesMenuRef}>
-                <span className="navbar__dropdown-eyebrow">Internal pages</span>
+              <div
+                className={dropdownStyles.dropdownMenu}
+                id="navbar-pages-menu"
+                ref={pagesMenuRef}
+              >
+                <span className={dropdownStyles.dropdownEyebrow}>Internal pages</span>
 
                 {navigation.pagesMenu.items.map((item) => {
-                  const isActive = isRouteActive(pathname, item)
-                  const className = `navbar__dropdown-item ${isActive ? 'is-active' : ''}`
+                  const isActive = isNavigationRouteActive(pathname, item)
+                  const className = `${dropdownStyles.dropdownItem} ${isActive ? 'is-active' : ''}`
                   const content = (
                     <>
                       <span>
@@ -453,11 +439,11 @@ export function Navbar({ navigation }: NavbarProps) {
         ) : null}
       </nav>
 
-      <div className="navbar__actions">
+      <div className={styles.actions}>
         {navigation.cta ? (
           navigation.cta.external ? (
             <a
-              className={`lets-talk ${ctaActive ? 'is-active' : ''}`}
+              className={`${styles.letsTalk} ${ctaActive ? 'is-active' : ''}`}
               href={navigation.cta.href}
               target={navigation.cta.newTab ? '_blank' : undefined}
               rel={navigation.cta.newTab ? 'noreferrer' : undefined}
@@ -467,7 +453,7 @@ export function Navbar({ navigation }: NavbarProps) {
             </a>
           ) : (
             <Link
-              className={`lets-talk ${ctaActive ? 'is-active' : ''}`}
+              className={`${styles.letsTalk} ${ctaActive ? 'is-active' : ''}`}
               href={navigation.cta.href}
               aria-current={ctaActive ? 'location' : undefined}
               target={navigation.cta.newTab ? '_blank' : undefined}
@@ -485,7 +471,7 @@ export function Navbar({ navigation }: NavbarProps) {
 
       <button
         ref={menuToggleRef}
-        className="navbar__mobile-toggle"
+        className={styles.mobileToggle}
         type="button"
         aria-controls="mobile-navigation-panel"
         aria-expanded={isMenuOpen}
@@ -502,9 +488,9 @@ export function Navbar({ navigation }: NavbarProps) {
       </button>
 
       {isMenuOpen ? (
-        <div className="mobile-navigation">
+        <div className={mobileStyles.mobileNavigation}>
           <button
-            className="mobile-navigation__backdrop"
+            className={mobileStyles.mobileBackdrop}
             type="button"
             aria-label="Close navigation menu"
             tabIndex={-1}
@@ -513,14 +499,14 @@ export function Navbar({ navigation }: NavbarProps) {
 
           <aside
             ref={menuPanelRef}
-            className="mobile-navigation__panel"
+            className={mobileStyles.mobilePanel}
             id="mobile-navigation-panel"
             role="dialog"
             aria-modal="true"
             aria-labelledby="mobile-navigation-title"
             tabIndex={-1}
           >
-            <div className="mobile-navigation__header">
+            <div className={mobileStyles.mobileHeader}>
               <div>
                 <span>PORTFOLIO // NAV</span>
                 <strong id="mobile-navigation-title">Navigation</strong>
@@ -528,7 +514,7 @@ export function Navbar({ navigation }: NavbarProps) {
 
               <button
                 ref={menuCloseRef}
-                className="mobile-navigation__close"
+                className={mobileStyles.mobileClose}
                 type="button"
                 aria-label="Close navigation menu"
                 onClick={() => closeMenu(true)}
@@ -538,17 +524,17 @@ export function Navbar({ navigation }: NavbarProps) {
               </button>
             </div>
 
-            <div className="mobile-navigation__groups">
+            <div className={mobileStyles.mobileGroups}>
               {navigation.landingItems.length > 0 ? (
-                <section className="mobile-navigation__group">
-                  <span className="mobile-navigation__group-label">On this page</span>
-                  <nav className="mobile-navigation__links" aria-label="Homepage sections">
+                <section className={mobileStyles.mobileGroup}>
+                  <span className={mobileStyles.mobileGroupLabel}>On this page</span>
+                  <nav className={mobileStyles.mobileLinks} aria-label="Homepage sections">
                     {navigation.landingItems.map((item, index) => {
                       const isActive = pathname === '/' && activeSection === item.sectionId
 
                       return (
                         <Link
-                          className={`mobile-navigation__link ${isActive ? 'is-active' : ''}`}
+                          className={`${mobileStyles.mobileLink} ${isActive ? 'is-active' : ''}`}
                           href={item.href}
                           key={item.id}
                           aria-current={isActive ? 'location' : undefined}
@@ -565,14 +551,14 @@ export function Navbar({ navigation }: NavbarProps) {
               ) : null}
 
               {navigation.pagesMenu ? (
-                <section className="mobile-navigation__group">
-                  <span className="mobile-navigation__group-label">
+                <section className={mobileStyles.mobileGroup}>
+                  <span className={mobileStyles.mobileGroupLabel}>
                     {navigation.pagesMenu.label}
                   </span>
-                  <nav className="mobile-navigation__links" aria-label="Internal pages">
+                  <nav className={mobileStyles.mobileLinks} aria-label="Internal pages">
                     {navigation.pagesMenu.items.map((item) => {
-                      const isActive = isRouteActive(pathname, item)
-                      const className = `mobile-navigation__link mobile-navigation__link--page ${
+                      const isActive = isNavigationRouteActive(pathname, item)
+                      const className = `${mobileStyles.mobileLink} ${mobileStyles.mobileLinkPage} ${
                         isActive ? 'is-active' : ''
                       }`
                       const content = (
@@ -613,8 +599,8 @@ export function Navbar({ navigation }: NavbarProps) {
               ) : null}
             </div>
 
-            <div className="mobile-navigation__footer">
-              <div className="mobile-navigation__theme">
+            <div className={mobileStyles.mobileFooter}>
+              <div className={mobileStyles.mobileTheme}>
                 <div>
                   <span>Interface theme</span>
                   <strong>Dark / Light</strong>
@@ -625,7 +611,7 @@ export function Navbar({ navigation }: NavbarProps) {
               {navigation.cta ? (
                 navigation.cta.external ? (
                   <a
-                    className="mobile-navigation__cta"
+                    className={mobileStyles.mobileCta}
                     href={navigation.cta.href}
                     target={navigation.cta.newTab ? '_blank' : undefined}
                     rel={navigation.cta.newTab ? 'noreferrer' : undefined}
@@ -636,7 +622,7 @@ export function Navbar({ navigation }: NavbarProps) {
                   </a>
                 ) : (
                   <Link
-                    className="mobile-navigation__cta"
+                    className={mobileStyles.mobileCta}
                     href={navigation.cta.href}
                     target={navigation.cta.newTab ? '_blank' : undefined}
                     rel={navigation.cta.newTab ? 'noreferrer' : undefined}

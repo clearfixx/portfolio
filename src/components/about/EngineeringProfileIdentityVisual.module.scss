@@ -1,0 +1,226 @@
+/* Engineering profile identity visual, avatar, scanner, and status. */
+
+
+.identityVisual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100%;
+  overflow: hidden;
+  border-right: 1px solid var(--profile-border);
+}
+
+
+.identityVisual::before,
+.identityVisual::after {
+  position: absolute;
+  content: '';
+  border-radius: 50%;
+}
+
+
+.identityVisual::before {
+  width: 260px;
+  height: 260px;
+  border: 1px solid rgba(25, 229, 231, 0.14);
+  box-shadow:
+    0 0 0 28px rgba(25, 229, 231, 0.025),
+    0 0 0 56px rgba(166, 108, 255, 0.018);
+}
+
+
+.identityVisual::after {
+  width: 164px;
+  height: 164px;
+  border: 1px dashed rgba(166, 108, 255, 0.32);
+  animation: orbitRotate 18s linear infinite;
+}
+
+
+.avatar {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: 170px;
+  height: 220px;
+  place-items: center;
+  align-content: center;
+  overflow: hidden;
+  border: 1px solid rgba(25, 229, 231, 0.3);
+  border-radius: 9px 9px 32px;
+  color: var(--profile-text);
+  background:
+    linear-gradient(145deg, rgba(25, 229, 231, 0.06), rgba(166, 108, 255, 0.08)),
+    rgba(4, 18, 29, 0.88);
+  box-shadow:
+    inset 0 0 50px rgba(25, 229, 231, 0.04),
+    0 20px 55px rgba(0, 0, 0, 0.28);
+}
+
+
+.avatar::before {
+  position: absolute;
+  inset: 12px;
+  border: 1px dashed rgba(118, 213, 222, 0.15);
+  border-radius: 6px 6px 24px;
+  content: '';
+}
+
+
+.avatar span {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 3.8rem;
+  font-weight: 820;
+  letter-spacing: -0.09em;
+  text-shadow:
+    0 0 22px rgba(25, 229, 231, 0.2),
+    10px 8px 25px rgba(166, 108, 255, 0.18);
+}
+
+
+.avatar small {
+  margin-top: 0.5rem;
+  color: var(--profile-cyan);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.56rem;
+  letter-spacing: 0.22em;
+}
+
+
+.identityScanner {
+  position: absolute;
+  z-index: 3;
+  top: -12%;
+  right: 10%;
+  left: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--profile-cyan), transparent);
+  box-shadow: 0 0 18px rgba(25, 229, 231, 0.8);
+  animation: profileScan 5.5s ease-in-out infinite;
+}
+
+
+.onlineStatus {
+  position: absolute;
+  z-index: 4;
+  right: 1rem;
+  bottom: 1rem;
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid rgba(25, 229, 231, 0.2);
+  border-radius: 999px;
+  color: var(--profile-cyan);
+  background: rgba(3, 15, 24, 0.86);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+
+.onlineStatus i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--profile-cyan);
+  box-shadow: 0 0 10px rgba(25, 229, 231, 0.85);
+}
+
+
+:global([data-theme='light']) .avatar {
+  background:
+    linear-gradient(145deg, rgba(8, 127, 140, 0.055), rgba(127, 74, 198, 0.06)),
+    rgba(255, 255, 255, 0.9);
+}
+
+
+:global([data-theme='light']) .onlineStatus {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 760px) {
+
+
+.identityVisual {
+    min-height: 340px;
+    border-right: 0;
+    border-bottom: 1px solid var(--profile-border);
+  }
+}
+
+
+/* engineering-profile-emergency-recovery-v7:end */
+
+/* about-live-data-integration-v2:start */
+
+
+.avatarWithImage {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+
+.avatarImage {
+  z-index: 0;
+  object-fit: cover;
+  object-position: center;
+}
+
+
+.avatarWithImage::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 45%, rgba(2, 12, 20, 0.76)),
+    linear-gradient(135deg, rgba(19, 242, 227, 0.08), transparent 46%);
+  content: '';
+  pointer-events: none;
+}
+
+
+.avatarWithImage > small {
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
+}
+
+
+:global([data-theme='light']) .avatarWithImage::after {
+  background:
+    linear-gradient(180deg, transparent 48%, rgba(226, 238, 244, 0.82)),
+    linear-gradient(135deg, rgba(0, 127, 133, 0.08), transparent 46%);
+}
+
+
+@keyframes profileScan {
+  0%,
+  14% {
+    top: 8%;
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  72% {
+    top: 88%;
+    opacity: 0.9;
+  }
+
+  86%,
+  100% {
+    top: 88%;
+    opacity: 0;
+  }
+}
+
+@keyframes orbitRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}

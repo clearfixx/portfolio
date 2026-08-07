@@ -1,0 +1,114 @@
+@use '../../../app/(frontend)/styles/abstracts/_mixins' as ui;
+
+/* Shared contact form and project type select controls. */
+/* Parent ContactCTA section scope remains global until ContactCTA is migrated. */
+
+/* migrated from src/app/(frontend)/styles/sections/_light-theme-polish.scss */
+
+:global(html[data-theme='light']) {
+  .privacy {
+    color: rgb(var(--rgb-text-muted));
+  }
+}
+
+/* migrated from src/app/(frontend)/styles/sections/_contact.scss */
+
+.submit svg,
+.privacy svg {
+  width: 20px;
+  height: 20px;
+}
+
+.submit {
+  @include ui.action-control($min-height: 56px);
+  @include ui.focus-ring(rgb(var(--rgb-accent) / 72%));
+
+  border: 0;
+  background: linear-gradient(135deg, rgb(var(--rgb-cta-start)), rgb(var(--rgb-cta-end)));
+  color: rgb(var(--rgb-on-accent));
+  cursor: pointer;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  box-shadow:
+    0 0 30px rgb(var(--rgb-accent) / 18%),
+    inset 0 1px 0 rgb(var(--rgb-white) / 34%);
+}
+
+.submit:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 42px rgb(var(--rgb-accent) / 28%),
+    inset 0 1px 0 rgb(var(--rgb-white) / 42%);
+}
+
+.privacy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin: 6px 0 0;
+  color: rgb(var(--rgb-text-soft) / 52%);
+  font-size: 0.88rem;
+}
+
+.fieldset {
+  display: grid;
+  min-width: 0;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  gap: 14px;
+}
+
+.fieldset:disabled {
+  opacity: 0.76;
+}
+
+.submit:disabled {
+  cursor: wait;
+  transform: none;
+}
+
+.honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.feedback {
+  min-height: 1.4em;
+  margin: 2px 0 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.feedback[data-state='submitting'] {
+  color: rgb(var(--rgb-text-soft) / 72%);
+}
+
+.feedback[data-state='success'] {
+  color: rgb(var(--rgb-success));
+}
+
+.feedback[data-state='error'] {
+  color: rgb(var(--contact-error-rgb));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .submit {
+    transition: none;
+  }
+}
+
+/* migrated from src/app/(frontend)/styles/base/_responsive-system.scss */
+
+@media (max-width: 640px) {
+  .submit {
+    width: 100%;
+  }
+}

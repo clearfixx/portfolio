@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
+import styles from './PublicIndexCard.module.scss'
+
 type PublicIndexCardProps = {
   accent?: 'cyan' | 'violet'
   badges?: string[]
@@ -23,28 +25,28 @@ export function PublicIndexCard({
   title,
 }: PublicIndexCardProps) {
   return (
-    <Link className={`public-index-card public-index-card--${accent}`} href={href}>
-      <span className="public-index-card__line" aria-hidden="true" />
+    <Link className={styles.card} data-accent={accent} href={href}>
+      <span className={styles.line} aria-hidden="true" />
 
-      <div className="public-index-card__top">
+      <div className={styles.top}>
         <span>{eyebrow}</span>
         <span aria-hidden="true">↗</span>
       </div>
 
-      <div className="public-index-card__body">
+      <div className={styles.body}>
         <h2>{title}</h2>
         <p>{excerpt}</p>
       </div>
 
       {badges.length > 0 ? (
-        <ul className="public-index-card__badges" aria-label={`${title} metadata`}>
+        <ul className={styles.badges} aria-label={`${title} metadata`}>
           {badges.map((badge) => (
             <li key={badge}>{badge}</li>
           ))}
         </ul>
       ) : null}
 
-      <div className="public-index-card__footer">
+      <div className={styles.footer}>
         <span>{meta}</span>
         <strong>
           {ctaLabel}

@@ -39,7 +39,15 @@ import { ProjectCodePreview } from './ProjectCodePreview'
 import { ProjectRichText } from './ProjectRichText'
 import { ProjectVisualPlaceholder } from './ProjectVisualPlaceholder'
 import { ProjectScreenshotCarousel } from './ProjectScreenshotCarousel'
-
+import shellStyles from './ProjectDetailShell.module.scss'
+import workspaceStyles from './ProjectDetailWorkspace.module.scss'
+import heroStyles from './ProjectDetailHero.module.scss'
+import overviewStyles from './ProjectDetailOverview.module.scss'
+import architectureStyles from './ProjectDetailArchitecture.module.scss'
+import lowerStyles from './ProjectDetailLower.module.scss'
+import sidebarStyles from './ProjectDetailSidebar.module.scss'
+import roadmapStyles from './ProjectDetailRoadmap.module.scss'
+import ctaStyles from './ProjectDetailCta.module.scss'
 type ProjectDetailProps = {
   project: Project
   versions: ProjectVersion[]
@@ -204,21 +212,21 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
   const codeLanguage = project.caseStudyCode?.language || 'typescript'
 
   return (
-    <article className="project-case">
-      <PublicPageHeroFrame className="project-case__hero" variant="detail">
-        <div className="project-case__hero-copy">
-          <p className={`project-case__status is-${project.stage}`}>
+    <article className={shellStyles.caseStudy}>
+      <PublicPageHeroFrame className={heroStyles.hero} variant="detail">
+        <div className={heroStyles.heroCopy}>
+          <p className={heroStyles.status} data-stage={project.stage}>
             <span aria-hidden="true" />
             {stageLabel}
           </p>
 
           <h1 id="project-page-title">{project.title}</h1>
-          <p className="project-case__tagline">{project.cardTagline || project.excerpt}</p>
-          <p className="project-case__excerpt">{project.excerpt}</p>
+          <p className={heroStyles.tagline}>{project.cardTagline || project.excerpt}</p>
+          <p className={heroStyles.excerpt}>{project.excerpt}</p>
 
           {technologies.length > 0 ? (
             <ul
-              className="project-case__hero-stack"
+              className={heroStyles.heroStack}
               id="project-tech-stack"
               aria-label="Project technology stack"
             >
@@ -228,10 +236,10 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
             </ul>
           ) : null}
 
-          <div className="project-case__hero-actions">
+          <div className={heroStyles.heroActions}>
             {liveLink ? (
               <a
-                className="project-case__button project-case__button--primary"
+                className={`${heroStyles.button} ${heroStyles.primaryButton}`}
                 href={liveLink.href}
                 rel={isExternalLink(liveLink.href) ? 'noreferrer' : undefined}
                 target={isExternalLink(liveLink.href) ? '_blank' : undefined}
@@ -243,7 +251,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
 
             {githubLink ? (
               <a
-                className="project-case__button"
+                className={heroStyles.button}
                 href={githubLink.href}
                 rel="noreferrer"
                 target="_blank"
@@ -253,14 +261,14 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
               </a>
             ) : null}
 
-            <a className="project-case__button" href="#project-overview">
+            <a className={heroStyles.button} href="#project-overview">
               <FileTextIcon aria-hidden="true" size={16} />
               Case study
             </a>
           </div>
         </div>
 
-        <div className="project-case__hero-media">
+        <div className={heroStyles.heroMedia}>
           {heroSlides.length > 0 ? (
             <ProjectMediaCarousel priority slides={heroSlides} />
           ) : (
@@ -273,9 +281,9 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
         </div>
       </PublicPageHeroFrame>
 
-      <div className="project-case__workspace">
-        <div className="project-case__workspace-main">
-          <nav className="project-case__tabs" aria-label="Project sections">
+      <div className={workspaceStyles.workspace}>
+        <div className={workspaceStyles.workspaceMain}>
+          <nav className={workspaceStyles.tabs} aria-label="Project sections">
             <a href="#project-overview">Overview</a>
             {highlights.length > 0 ? <a href="#project-features">Features</a> : null}
             {technologies.length > 0 ? <a href="#project-tech-stack">Tech stack</a> : null}
@@ -284,29 +292,26 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
             {versions.length > 0 ? <a href="#project-changelog">Changelog</a> : null}
           </nav>
 
-          <section
-            className="project-case-panel project-case__overview-panel"
-            id="project-overview"
-          >
-            <header className="project-case-panel__header">
+          <section className={workspaceStyles.panel} id="project-overview">
+            <header className={workspaceStyles.panelHeader}>
               <h2>About the project</h2>
               <CodeIcon aria-hidden="true" size={24} />
             </header>
 
-            <div className="project-case__overview">
-              <div className="project-case__overview-copy">
-                <div className="project-case__rich-text">
+            <div className={overviewStyles.overview}>
+              <div>
+                <div className={overviewStyles.richText}>
                   <ProjectRichText data={project.description} />
                 </div>
 
                 {highlights.length > 0 ? (
-                  <div className="project-case__overview-highlights">
+                  <div className={overviewStyles.overviewHighlights}>
                     {highlights.slice(0, 4).map((highlight, index) => {
                       const HighlightIcon = resolveFeatureIcon(highlight.icon, index)
 
                       return (
                         <article key={highlight.id ?? highlight.title}>
-                          <span className="project-case__overview-icon">
+                          <span className={overviewStyles.overviewIcon}>
                             <HighlightIcon aria-hidden="true" size={27} />
                           </span>
                           <div>
@@ -329,16 +334,13 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
           </section>
 
           {highlights.length > 0 ? (
-            <section
-              className="project-case-panel project-case__features-panel"
-              id="project-features"
-            >
-              <header className="project-case-panel__header">
+            <section className={workspaceStyles.panel} id="project-features">
+              <header className={workspaceStyles.panelHeader}>
                 <h2>Core features</h2>
                 <a href="#project-features">See all features →</a>
               </header>
 
-              <div className="project-case__features">
+              <div className={overviewStyles.features}>
                 {highlights.map((highlight, index) => {
                   const FeatureIcon = resolveFeatureIcon(highlight.icon, index)
 
@@ -357,10 +359,10 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
           ) : null}
         </div>
 
-        <aside className="project-case__workspace-sidebar">
-          <section className="project-case-card">
+        <aside className={workspaceStyles.workspaceSidebar}>
+          <section className={sidebarStyles.card}>
             <p>Project status</p>
-            <strong className={`project-case-card__status is-${project.stage}`}>
+            <strong className={sidebarStyles.cardStatus} data-stage={project.stage}>
               <span aria-hidden="true" />
               {stageLabel}
             </strong>
@@ -403,7 +405,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
             </dl>
           </section>
 
-          <section className="project-case-card project-case-card--metrics">
+          <section className={`${sidebarStyles.card} ${sidebarStyles.metricsCard}`}>
             <p>Key metrics</p>
 
             <dl>
@@ -416,7 +418,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
               ))}
             </dl>
 
-            <div className="project-case-card__coverage">
+            <div className={sidebarStyles.coverage}>
               <div>
                 <span>Delivery progress</span>
                 <strong>{progress}%</strong>
@@ -430,22 +432,25 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
       </div>
 
       {architecture.length > 0 || roadmap.length > 0 ? (
-        <div className="project-case__systems">
+        <div className={architectureStyles.systems}>
           {architecture.length > 0 ? (
-            <section className="project-case-panel" id="project-architecture">
-              <header className="project-case-panel__header">
+            <section className={workspaceStyles.panel} id="project-architecture">
+              <header className={workspaceStyles.panelHeader}>
                 <h2>Architecture overview</h2>
                 <a href="#project-architecture">View full diagram →</a>
               </header>
 
-              <div className="project-case__architecture-flow">
+              <div className={architectureStyles.architectureFlow}>
                 {architecture.map((group, index) => {
                   const ArchitectureIcon = resolveArchitectureIcon(group.icon, index)
 
                   return (
-                    <div className="project-case__architecture-step" key={group.id ?? group.title}>
+                    <div
+                      className={architectureStyles.architectureStep}
+                      key={group.id ?? group.title}
+                    >
                       <article>
-                        <span className="project-case__architecture-icon">
+                        <span className={architectureStyles.architectureIcon}>
                           <ArchitectureIcon aria-hidden="true" size={36} />
                         </span>
                         <strong>{group.title}</strong>
@@ -464,16 +469,16 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
           ) : null}
 
           {roadmap.length > 0 ? (
-            <section className="project-case-panel" id="project-roadmap">
-              <header className="project-case-panel__header">
+            <section className={workspaceStyles.panel} id="project-roadmap">
+              <header className={workspaceStyles.panelHeader}>
                 <h2>Roadmap</h2>
                 <a href="#project-roadmap">View full roadmap →</a>
               </header>
 
-              <ol className="project-case__roadmap">
+              <ol className={roadmapStyles.roadmap}>
                 {roadmap.map((milestone) => (
                   <li
-                    className={`is-${milestone.status}`}
+                    data-status={milestone.status}
                     key={milestone.id ?? `${milestone.version}-${milestone.title}`}
                   >
                     <span aria-hidden="true" />
@@ -496,18 +501,18 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
       <div
         className={
           versions.length > 0
-            ? 'project-case__lower'
-            : 'project-case__lower project-case__lower--screenshots-only'
+            ? lowerStyles.lower
+            : `${lowerStyles.lower} ${lowerStyles.lowerScreenshotsOnly}`
         }
       >
         {versions.length > 0 ? (
-          <section className="project-case-panel" id="project-changelog">
-            <header className="project-case-panel__header">
+          <section className={workspaceStyles.panel} id="project-changelog">
+            <header className={workspaceStyles.panelHeader}>
               <h2>Recent changelog</h2>
               <a href="#project-changelog">View full changelog →</a>
             </header>
 
-            <ol className="project-case__changelog">
+            <ol className={lowerStyles.changelog}>
               {versions.slice(0, 6).map((version) => (
                 <li key={version.id}>
                   <strong>v{version.version}</strong>
@@ -524,8 +529,11 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
           </section>
         ) : null}
 
-        <section className="project-case-panel project-case__screenshots" id="project-gallery">
-          <header className="project-case-panel__header">
+        <section
+          className={`${workspaceStyles.panel} ${lowerStyles.screenshots}`}
+          id="project-gallery"
+        >
+          <header className={workspaceStyles.panelHeader}>
             <h2>Screenshots</h2>
             {screenshotSlides.length > 0 ? (
               <a href="#project-gallery">View full gallery →</a>
@@ -544,7 +552,7 @@ export function ProjectDetail({ project, versions }: ProjectDetailProps) {
         </section>
       </div>
 
-      <section className="project-case__cta">
+      <section className={ctaStyles.cta}>
         <p>Interested in this project?</p>
         <h2>Let&apos;s build something amazing together.</h2>
         <div>

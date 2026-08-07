@@ -2,6 +2,7 @@ import Image from 'next/image'
 import type { ComponentType, SVGProps } from 'react'
 
 import { ContactForm } from '@/components/home/ContactCTA/ContactForm'
+import contactMotionStyles from '../home/ContactCTA/ContactFormMotionScope.module.scss'
 import {
   ClockIcon,
   GithubIcon,
@@ -19,8 +20,17 @@ import type {
   ContactsPageViewModel,
   ContactsStatusIcon,
 } from '@/lib/cms'
+import pageStyles from './ContactsPageShell.module.scss'
 
-import styles from '@/app/(frontend)/styles/pages/contacts.module.scss'
+import socialStyles from './ContactsSocialSection.module.scss'
+
+import processStyles from './ContactsProcessSection.module.scss'
+
+import formPanelStyles from './ContactsFormPanel.module.scss'
+
+import channelsStyles from './ContactsChannelsPanel.module.scss'
+
+import statusStyles from './ContactsStatusConsole.module.scss'
 
 // contacts-page-foundation-v1
 
@@ -86,10 +96,10 @@ function StatusConsole({ content }: { content: ContactsPageViewModel }) {
   return (
     <aside
       aria-label="Contact channel status"
-      className={styles.statusConsole}
+      className={statusStyles.statusConsole}
       data-status={content.status.availability.tone}
     >
-      <div aria-hidden="true" className={styles.consoleGrid} />
+      <div aria-hidden="true" className={statusStyles.consoleGrid} />
 
       <header>
         <div>
@@ -128,47 +138,47 @@ function ChannelsPanel({ content }: { content: ContactsPageViewModel }) {
   return (
     <section
       aria-labelledby="contacts-channels-title"
-      className={styles.channelsPanel}
+      className={channelsStyles.channelsPanel}
       data-motion="rise"
     >
       <Image
         alt=""
         aria-hidden="true"
-        className={styles.mapImage}
+        className={channelsStyles.mapImage}
         fill
         loading="lazy"
         quality={75}
         sizes="(max-width: 980px) 100vw, 46vw"
         src="/images/contact/kyiv-map.png"
       />
-      <div aria-hidden="true" className={styles.mapOverlay} />
-      <div aria-hidden="true" className={styles.mapSignal}>
+      <div aria-hidden="true" className={channelsStyles.mapOverlay} />
+      <div aria-hidden="true" className={channelsStyles.mapSignal}>
         <span />
         <i />
         <b />
       </div>
 
-      <header className={styles.panelHeading}>
+      <header className={channelsStyles.panelHeading}>
         <span>{content.channels.eyebrow}</span>
         <h2 id="contacts-channels-title">{content.channels.title}</h2>
         <p>{content.channels.description}</p>
       </header>
 
-      <div className={styles.channelDeck}>
+      <div className={channelsStyles.channelDeck}>
         {content.contact.channels.length > 0 ? (
           content.contact.channels.map((channel) => {
             const Icon = CHANNEL_ICONS[channel.icon]
             const channelContent = (
               <>
-                <span className={styles.channelIcon}>
+                <span className={channelsStyles.channelIcon}>
                   <Icon />
                 </span>
-                <span className={styles.channelCopy}>
+                <span className={channelsStyles.channelCopy}>
                   <small>{channel.label}</small>
                   <strong>{channel.value}</strong>
                 </span>
                 {channel.href ? (
-                  <span aria-hidden="true" className={styles.channelArrow}>
+                  <span aria-hidden="true" className={channelsStyles.channelArrow}>
                     ↗
                   </span>
                 ) : null}
@@ -177,7 +187,7 @@ function ChannelsPanel({ content }: { content: ContactsPageViewModel }) {
 
             return channel.href ? (
               <a
-                className={styles.channel}
+                className={channelsStyles.channel}
                 href={channel.href}
                 key={channel.id}
                 rel={channel.external ? 'noreferrer' : undefined}
@@ -186,17 +196,17 @@ function ChannelsPanel({ content }: { content: ContactsPageViewModel }) {
                 {channelContent}
               </a>
             ) : (
-              <div className={styles.channel} key={channel.id}>
+              <div className={channelsStyles.channel} key={channel.id}>
                 {channelContent}
               </div>
             )
           })
         ) : (
-          <p className={styles.emptyState}>Contact channels are being updated.</p>
+          <p className={channelsStyles.emptyState}>Contact channels are being updated.</p>
         )}
       </div>
 
-      <div className={styles.locationBadge}>
+      <div className={channelsStyles.locationBadge}>
         <PinIcon />
         {content.contact.location ?? 'Remote / Ukraine'}
       </div>
@@ -207,7 +217,10 @@ function ChannelsPanel({ content }: { content: ContactsPageViewModel }) {
 function ContactFormPanel({ content }: { content: ContactsPageViewModel }) {
   if (!content.form.enabled) {
     return (
-      <section className={`${styles.formPanel} ${styles.formUnavailable}`} data-motion="rise">
+      <section
+        className={`${formPanelStyles.formPanel} ${formPanelStyles.formUnavailable}`}
+        data-motion="rise"
+      >
         <span>{content.form.eyebrow}</span>
         <h2>{content.form.title}</h2>
         <p>The public form is currently disabled. Use one of the direct channels instead.</p>
@@ -216,14 +229,18 @@ function ContactFormPanel({ content }: { content: ContactsPageViewModel }) {
   }
 
   return (
-    <section aria-labelledby="contacts-form-title" className={styles.formPanel} data-motion="rise">
-      <header className={styles.panelHeading}>
+    <section
+      aria-labelledby="contacts-form-title"
+      className={formPanelStyles.formPanel}
+      data-motion="rise"
+    >
+      <header className={formPanelStyles.panelHeading}>
         <span>{content.form.eyebrow}</span>
         <h2 id="contacts-form-title">{content.form.title}</h2>
         <p>{content.form.description}</p>
       </header>
 
-      <div className={`contact-cta ${styles.formScope}`}>
+      <div className={`${contactMotionStyles.scope} ${formPanelStyles.formScope}`}>
         <ContactForm source="contact-page" />
       </div>
     </section>
@@ -232,8 +249,12 @@ function ContactFormPanel({ content }: { content: ContactsPageViewModel }) {
 
 function ProcessSection({ content }: { content: ContactsPageViewModel }) {
   return (
-    <section aria-labelledby="contacts-process-title" className={styles.process} data-motion="rise">
-      <header className={styles.sectionHeading}>
+    <section
+      aria-labelledby="contacts-process-title"
+      className={processStyles.process}
+      data-motion="rise"
+    >
+      <header className={processStyles.sectionHeading}>
         <div>
           <span>{content.process.eyebrow}</span>
           <h2 id="contacts-process-title">{content.process.title}</h2>
@@ -244,7 +265,7 @@ function ProcessSection({ content }: { content: ContactsPageViewModel }) {
       <ol>
         {content.process.steps.map((step, index) => (
           <li key={step.id}>
-            <div className={styles.stepRail}>
+            <div className={processStyles.stepRail}>
               <span>{step.code}</span>
               <i />
             </div>
@@ -272,7 +293,7 @@ function SocialSection({ content }: { content: ContactsPageViewModel }) {
   return (
     <section
       aria-labelledby="contacts-social-title"
-      className={styles.socialPanel}
+      className={socialStyles.socialPanel}
       data-motion="rise"
     >
       <div>
@@ -295,7 +316,7 @@ function SocialSection({ content }: { content: ContactsPageViewModel }) {
         })}
 
         {emailChannel?.href ? (
-          <a className={styles.emailSocialLink} href={emailChannel.href}>
+          <a className={socialStyles.emailSocialLink} href={emailChannel.href}>
             <MailIcon />
             <span>Send a direct email</span>
             <b aria-hidden="true">↗</b>
@@ -323,27 +344,27 @@ export function ContactsPage({ content }: { content: ContactsPageViewModel }) {
   }
 
   return (
-    <main className={styles.page} id="main-content">
-      <PublicPageShell className={styles.shell} variant="index">
+    <main className={pageStyles.page} id="main-content">
+      <PublicPageShell className={pageStyles.shell} variant="index">
         <PublicBreadcrumbs items={[{ label: content.breadcrumbLabel }]} />
 
         <PublicPageHeroFrame
           aria-labelledby="contacts-page-title"
-          className={styles.hero}
+          className={pageStyles.hero}
           variant="index"
         >
-          <div className={styles.heroCopy} data-motion="rise">
-            <p className={styles.eyebrow}>
+          <div className={pageStyles.heroCopy} data-motion="rise">
+            <p className={pageStyles.eyebrow}>
               <span aria-hidden="true">{'//'}</span>
               {content.hero.eyebrow}
             </p>
             <h1 id="contacts-page-title">
               <SplitTitle title={content.hero.title} />
             </h1>
-            <p className={styles.heroDescription}>{content.hero.description}</p>
+            <p className={pageStyles.heroDescription}>{content.hero.description}</p>
 
             {heroChannels.length > 0 ? (
-              <div aria-label="Preferred contact channels" className={styles.heroActions}>
+              <div aria-label="Preferred contact channels" className={pageStyles.heroActions}>
                 {heroChannels.map((channel) => {
                   const Icon = CHANNEL_ICONS[channel.icon]
 
@@ -353,7 +374,7 @@ export function ContactsPage({ content }: { content: ContactsPageViewModel }) {
 
                   return (
                     <a
-                      className={styles.heroAction}
+                      className={pageStyles.heroAction}
                       href={channel.href}
                       key={channel.id}
                       rel={channel.external ? 'noreferrer' : undefined}
@@ -372,12 +393,12 @@ export function ContactsPage({ content }: { content: ContactsPageViewModel }) {
             ) : null}
           </div>
 
-          <div className={styles.heroVisual} data-motion="rise">
+          <div className={pageStyles.heroVisual} data-motion="rise">
             <StatusConsole content={content} />
           </div>
         </PublicPageHeroFrame>
 
-        <div className={styles.workspace}>
+        <div className={pageStyles.workspace}>
           <ChannelsPanel content={content} />
           <ContactFormPanel content={content} />
         </div>

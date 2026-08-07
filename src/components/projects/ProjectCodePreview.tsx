@@ -1,5 +1,8 @@
 import { common, createLowlight } from 'lowlight'
 
+import previewShellStyles from './ProjectCodePreviewShell.module.scss'
+
+import codeStyles from './ProjectCodePreviewCode.module.scss'
 type HighlightNode = {
   type: 'element' | 'root' | 'text'
   value?: string
@@ -21,6 +24,41 @@ type ProjectCodePreviewProps = {
 }
 
 const lowlight = createLowlight(common)
+
+const highlightClassMap: Record<string, string> = {
+  function_: codeStyles.functionTitle,
+  'hljs-attr': codeStyles.attr,
+  'hljs-built_in': codeStyles.builtIn,
+  'hljs-bullet': codeStyles.bullet,
+  'hljs-comment': codeStyles.comment,
+  'hljs-function': codeStyles.functionGroup,
+  'hljs-keyword': codeStyles.keyword,
+  'hljs-link': codeStyles.link,
+  'hljs-literal': codeStyles.literal,
+  'hljs-meta': codeStyles.meta,
+  'hljs-number': codeStyles.number,
+  'hljs-operator': codeStyles.operator,
+  'hljs-params': codeStyles.params,
+  'hljs-property': codeStyles.property,
+  'hljs-punctuation': codeStyles.punctuation,
+  'hljs-quote': codeStyles.quote,
+  'hljs-section': codeStyles.section,
+  'hljs-selector-tag': codeStyles.selectorTag,
+  'hljs-string': codeStyles.string,
+  'hljs-symbol': codeStyles.symbol,
+  'hljs-template-variable': codeStyles.templateVariable,
+  'hljs-title': codeStyles.title,
+  'hljs-type': codeStyles.type,
+  'hljs-variable': codeStyles.variable,
+}
+
+function getHighlightClassName(classNames: string[]) {
+  const localClassNames = classNames
+    .map((className) => highlightClassMap[className])
+    .filter((className): className is string => Boolean(className))
+
+  return localClassNames.length > 0 ? localClassNames.join(' ') : undefined
+}
 
 const languageAliases: Record<string, string> = {
   bash: 'bash',
@@ -104,22 +142,20 @@ export function ProjectCodePreview({ code, filePath, language }: ProjectCodePrev
   const lines = highlightCode(code, language)
 
   return (
-    <div className="project-case__code-card">
-      <div className="project-case__code-header">
+    <div className={previewShellStyles.card}>
+      <div className={previewShellStyles.header}>
         <span>{filePath}</span>
         <strong>{language}</strong>
       </div>
 
-      <ol className="project-code-highlight">
+      <ol className={codeStyles.code}>
         {lines.map((line, lineIndex) => (
           <li key={lineIndex}>
             <code>
               {line.length > 0
                 ? line.map((fragment, fragmentIndex) => (
                     <span
-                      className={
-                        fragment.classNames.length > 0 ? fragment.classNames.join(' ') : undefined
-                      }
+                      className={getHighlightClassName(fragment.classNames)}
                       key={`${lineIndex}-${fragmentIndex}`}
                     >
                       {fragment.text}

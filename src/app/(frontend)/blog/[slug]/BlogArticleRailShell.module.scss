@@ -1,0 +1,27 @@
+.rightRail {
+  position: sticky;
+  top: 7rem;
+  display: grid;
+  gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .rightRail {
+    position: static;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 650px) {
+  .rightRail {
+    grid-template-columns: 1fr;
+  }
+}
+
+.rightRail {
+  gap: 1.15rem;
+}
+
+.rightRail {
+  min-width: 0;
+}

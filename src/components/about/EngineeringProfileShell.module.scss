@@ -1,0 +1,104 @@
+.page {
+  --profile-cyan: #19e5e7;
+  --profile-cyan-soft: rgba(25, 229, 231, 0.12);
+  --profile-purple: #a66cff;
+  --profile-purple-soft: rgba(166, 108, 255, 0.12);
+  --profile-panel: rgba(5, 18, 30, 0.74);
+  --profile-panel-strong: rgba(5, 18, 30, 0.92);
+  --profile-border: rgba(99, 216, 225, 0.15);
+  --profile-text: #eaf8fb;
+  --profile-soft: #9ab0ba;
+  --profile-muted: #728a96;
+  position: relative;
+  overflow: clip;
+  color: var(--profile-text);
+}
+
+.shell {
+  padding-bottom: clamp(5rem, 8vw, 8rem);
+}
+
+.panel {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 700ms ease,
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.page :global([data-profile-visible='true']) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.panel {
+  position: relative;
+  margin-top: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--profile-border);
+  border-radius: 12px;
+  background:
+    linear-gradient(135deg, rgba(25, 229, 231, 0.018), transparent 35%), var(--profile-panel);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+.twoColumn,
+.twoColumnWide,
+.finalGrid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.twoColumn {
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.35fr);
+}
+
+.twoColumnWide {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+}
+
+.finalGrid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+/* Light theme */
+
+:global([data-theme='light']) .page {
+  --profile-panel: rgba(255, 255, 255, 0.84);
+  --profile-panel-strong: rgba(255, 255, 255, 0.96);
+  --profile-border: rgba(37, 92, 108, 0.16);
+  --profile-text: #102833;
+  --profile-soft: #526b76;
+  --profile-muted: #718791;
+  --profile-cyan: #087f8c;
+  --profile-cyan-soft: rgba(8, 127, 140, 0.1);
+  --profile-purple: #7f4ac6;
+  --profile-purple-soft: rgba(127, 74, 198, 0.09);
+}
+
+@media (max-width: 1020px) {
+  .twoColumn,
+  .twoColumnWide,
+  .finalGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .finalGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page * {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .panel {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,192 @@
+@use '../../../app/(frontend)/styles/abstracts/mixins' as ui;
+
+/* Homepage contact section shell and presentation. */
+
+/* migrated from src/app/(frontend)/styles/sections/_light-theme-polish.scss */
+
+:global(html[data-theme='light']) {
+  .formHeader p {
+    color: rgb(var(--rgb-text-muted));
+  }
+}
+
+/* migrated from src/app/(frontend)/styles/sections/_contact.scss */
+.root {
+  display: grid;
+  grid-template-columns: minmax(0, 1.28fr) minmax(360px, 0.92fr);
+  gap: 28px;
+}
+
+.root :global(.sr-only) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.titleAccent {
+  color: rgb(var(--rgb-accent));
+}
+
+.formPanel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgb(var(--rgb-accent-border) / 24%);
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgb(var(--rgb-accent-soft) / 8%), transparent 42%),
+    linear-gradient(
+      180deg,
+      rgb(var(--rgb-surface-elevated) / 92%),
+      rgb(var(--rgb-surface-soft) / 95%)
+    );
+  box-shadow:
+    inset 0 1px 0 rgb(var(--rgb-white) / 4%),
+    0 24px 80px rgb(var(--rgb-black) / 24%);
+}
+
+.formPanel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgb(var(--rgb-accent-grid) / 5.5%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--rgb-accent-grid) / 5.5%) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(135deg, rgb(var(--rgb-black)), transparent 76%);
+  opacity: 0.46;
+}
+
+.formPanel {
+  padding: 34px;
+}
+
+.formHeader {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 24px;
+}
+
+.formHeader h3 {
+  margin: 0;
+  color: rgb(var(--rgb-accent));
+  font-size: clamp(1.45rem, 2vw, 2rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.formHeader p {
+  max-width: 440px;
+  margin: 12px 0 0;
+  color: rgb(var(--rgb-text-soft) / 68%);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 1180px) {
+  .root {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .formPanel {
+    padding: 24px;
+  }
+}
+
+/* migrated from src/app/(frontend)/styles/sections/_motion-choreography.scss */
+
+html[data-motion-ready='true'] {
+  #contact :global(.portfolio-section__body) {
+    .formPanel {
+      opacity: 0;
+      transition:
+        opacity var(--motion-duration-section) var(--motion-ease-standard),
+        transform var(--motion-duration-section) var(--motion-ease-standard);
+    }
+
+    .formPanel {
+      transform: translate3d(18px, 0, 0);
+      transition-delay: calc(var(--motion-stagger-default) * 1);
+    }
+
+    .formHeader {
+      opacity: 0;
+      transform: translate3d(0, 8px, 0);
+      transition:
+        opacity var(--motion-duration-reveal) var(--motion-ease-standard),
+        transform var(--motion-duration-reveal) var(--motion-ease-standard);
+    }
+
+    &[data-motion-state='visible'] {
+      .formPanel,
+      .formHeader {
+        opacity: 1;
+        transform: none;
+      }
+
+      .formHeader {
+        transition-delay: calc(var(--motion-stagger-default) * 2);
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-motion-ready='true'] {
+    #projects,
+    #engineer-profile,
+    #skills-technologies,
+    #insights,
+    #contact,
+    :global(.site-footer) {
+      .formPanel,
+      .formHeader {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+  }
+}
+
+/* migrated from src/app/(frontend)/styles/base/_responsive-system.scss */
+
+@media (max-width: 900px) {
+  .formPanel {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .formPanel {
+    border-radius: 14px;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 767px), (max-height: 759px), (pointer: coarse) {
+  html[data-motion-ready='true'] {
+    #projects,
+    #engineer-profile,
+    #skills-technologies,
+    #insights,
+    #contact,
+    :global(.site-footer) {
+      .formPanel,
+      .formHeader {
+        opacity: 1;
+        transform: none;
+        transition: none;
+        transition-delay: 0ms;
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+/* Blog article reveal motion. */
+
+.articleReveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 520ms ease,
+    transform 520ms ease;
+}
+
+
+.articleRevealVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+.articleReveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

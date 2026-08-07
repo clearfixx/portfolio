@@ -1,0 +1,14 @@
+/* Shared blog article section eyebrow. */
+
+.sectionEyebrow {
+  margin: 0;
+  color: var(--article-cyan);
+  font-size: 0.67rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+:global([data-theme='light']) .sectionEyebrow {
+  color: #087f8c;
+}

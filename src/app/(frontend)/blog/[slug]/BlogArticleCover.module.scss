@@ -1,0 +1,119 @@
+/* Blog article cover and fallback artwork. */
+
+/* Blog article cover, overview, rich text and takeaways. */
+
+
+.cover,
+.coverFallback {
+  position: relative;
+  min-height: clamp(280px, 36vw, 440px);
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--article-line-strong);
+  border-radius: 14px;
+  background: #071421;
+}
+
+
+.cover img {
+  object-fit: cover;
+}
+
+
+.cover figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0.7rem 1rem;
+  background: rgba(3, 10, 17, 0.78);
+  color: #90a5af;
+  font-size: 0.65rem;
+}
+
+
+.coverFallback {
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at center, rgba(168, 92, 255, 0.18), transparent 46%),
+    linear-gradient(rgba(19, 242, 227, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(19, 242, 227, 0.055) 1px, transparent 1px), #071421;
+  background-size:
+    auto,
+    28px 28px,
+    28px 28px,
+    auto;
+}
+
+
+.coverFallback div {
+  display: flex;
+  gap: 1.2rem;
+}
+
+
+.coverFallback span {
+  display: grid;
+  width: 5.5rem;
+  height: 5.5rem;
+  place-items: center;
+  border: 1px solid rgba(19, 242, 227, 0.35);
+  border-radius: 12px;
+  color: var(--article-cyan);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+
+.coverFallback strong {
+  position: absolute;
+  bottom: 1.2rem;
+  color: #718792;
+  font-size: 0.67rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+
+@media (max-width: 650px) {
+
+
+.coverFallback div {
+    gap: 0.55rem;
+  }
+
+
+.coverFallback span {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+
+:global([data-theme='light']) .cover,
+:global([data-theme='light']) .coverFallback {
+  border-color: rgba(8, 127, 140, 0.24);
+  background: #e8f0f3;
+  box-shadow: 0 20px 55px rgba(30, 70, 85, 0.11);
+}
+
+
+:global([data-theme='light']) .coverFallback {
+  background:
+    radial-gradient(circle at center, rgba(120, 71, 199, 0.12), transparent 48%),
+    linear-gradient(rgba(8, 127, 140, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(8, 127, 140, 0.07) 1px, transparent 1px), #edf4f6;
+  background-size:
+    auto,
+    28px 28px,
+    28px 28px,
+    auto;
+}
+
+
+:global([data-theme='light']) .coverFallback span {
+  border-color: rgba(8, 127, 140, 0.28);
+  background: rgba(255, 255, 255, 0.68);
+  color: #087f8c;
+}

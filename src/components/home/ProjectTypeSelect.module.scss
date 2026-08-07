@@ -1,0 +1,191 @@
+/* Custom project type select control. */
+
+.select {
+  position: relative;
+  z-index: 4;
+}
+
+.select:global(.is-open) {
+  z-index: 30;
+}
+
+.selectTrigger {
+  display: flex;
+  width: 100%;
+  height: 54px;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid rgb(var(--rgb-accent-border) / 20%);
+  border-radius: 10px;
+  padding: 0 18px 0 54px;
+  background: rgb(var(--rgb-surface-overlay) / 72%);
+  color: rgb(var(--rgb-text-strong));
+  cursor: pointer;
+  font: inherit;
+  outline: none;
+  text-align: left;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.selectTrigger:hover {
+  border-color: rgb(var(--rgb-accent-border) / 36%);
+  background: rgb(var(--rgb-surface-control-hover) / 72%);
+}
+
+.selectTrigger:focus-visible,
+.select:global(.is-open) .selectTrigger {
+  border-color: rgb(var(--rgb-accent) / 48%);
+  background: rgb(var(--rgb-surface-control-hover) / 88%);
+  box-shadow: 0 0 0 3px rgb(var(--rgb-accent) / 8%);
+}
+
+.selectValue {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.selectValue[data-placeholder='true'] {
+  color: rgb(var(--rgb-text-soft) / 72%);
+}
+
+.selectChevron {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-right: 2px solid rgb(var(--rgb-text-soft) / 58%);
+  border-bottom: 2px solid rgb(var(--rgb-text-soft) / 58%);
+  margin-left: 16px;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 180ms ease;
+}
+
+.select:global(.is-open) .selectChevron {
+  transform: translateY(2px) rotate(225deg);
+}
+
+.selectList {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  left: 0;
+  z-index: 40;
+  max-height: min(280px, 50vh);
+  overflow-y: auto;
+  margin: 0;
+  border: 1px solid rgb(var(--rgb-accent-border) / 34%);
+  border-radius: 12px;
+  padding: 6px;
+  background:
+    linear-gradient(135deg, rgb(var(--rgb-accent-soft) / 8%), transparent 46%),
+    rgb(var(--rgb-surface-elevated) / 98%);
+  box-shadow:
+    0 18px 48px rgb(var(--rgb-black) / 28%),
+    0 0 28px rgb(var(--rgb-accent) / 8%);
+  list-style: none;
+  backdrop-filter: blur(18px);
+  animation: contact-select-enter 160ms ease-out both;
+}
+
+.selectOption {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: rgb(var(--rgb-text-strong));
+  cursor: pointer;
+  font-size: 0.96rem;
+  line-height: 1.25;
+  transition:
+    background 140ms ease,
+    color 140ms ease;
+}
+
+.selectOption[data-active='true'] {
+  background: rgb(var(--rgb-accent) / 10%);
+}
+
+.selectOption[aria-selected='true'] {
+  background: rgb(var(--rgb-accent) / 14%);
+  color: rgb(var(--rgb-accent));
+}
+
+.selectCheck {
+  flex: 0 0 auto;
+  color: rgb(var(--rgb-accent));
+  opacity: 0;
+  transform: scale(0.75);
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease;
+}
+
+.selectOption[aria-selected='true'] .selectCheck {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (max-width: 520px) {
+  .selectTrigger {
+    height: 50px;
+  }
+
+  .selectList {
+    max-height: min(252px, 46vh);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .selectTrigger,
+  .selectChevron,
+  .selectOption,
+  .selectCheck {
+    transition: none;
+  }
+
+  .selectList {
+    animation: none;
+  }
+}
+
+.select:global(.is-invalid) .selectTrigger {
+  border-color: rgb(var(--contact-error-rgb) / 78%);
+  background:
+    linear-gradient(90deg, rgb(var(--contact-error-rgb) / 7%), transparent 42%),
+    rgb(var(--rgb-surface-overlay) / 76%);
+  box-shadow:
+    0 0 0 3px rgb(var(--contact-error-rgb) / 8%),
+    0 0 24px rgb(var(--contact-error-rgb) / 8%);
+}
+
+.select:global(.is-invalid) .selectChevron,
+.select:global(.is-invalid) .selectValue {
+  color: rgb(var(--contact-error-rgb));
+}
+
+.select:global(.is-invalid) .selectValue[data-placeholder='true'] {
+  color: rgb(var(--contact-error-rgb) / 88%);
+}
+
+.selectIcon {
+  pointer-events: none;
+}
+
+@keyframes contact-select-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

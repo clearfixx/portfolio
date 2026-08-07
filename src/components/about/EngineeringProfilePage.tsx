@@ -6,8 +6,25 @@ import type { AboutPageViewModel, AboutProfileIconName, AboutProfileViewModel } 
 import { PublicBreadcrumbs, PublicPageHeroFrame, PublicPageShell } from '@/components/public-page'
 import { EngineeringProfileMotion } from './EngineeringProfileMotion'
 
-import styles from '@/app/(frontend)/styles/pages/about.module.scss'
-
+import shellStyles from './EngineeringProfileShell.module.scss'
+import sectionHeadingStyles from './EngineeringProfileSectionHeading.module.scss'
+import ctaStyles from './EngineeringProfileCta.module.scss'
+import heroStyles from './EngineeringProfileHero.module.scss'
+import consoleShellStyles from './EngineeringProfileConsoleShell.module.scss'
+import identityVisualStyles from './EngineeringProfileIdentityVisual.module.scss'
+import consoleTelemetryStyles from './EngineeringProfileConsoleTelemetry.module.scss'
+import identityDetailsStyles from './EngineeringProfileIdentityDetails.module.scss'
+import operatingShellStyles from './EngineeringProfileOperatingShell.module.scss'
+import operatingStepsStyles from './EngineeringProfileOperatingSteps.module.scss'
+import operatingDetailStyles from './EngineeringProfileOperatingDetail.module.scss'
+import operatingInsightsStyles from './EngineeringProfileOperatingInsights.module.scss'
+import operatingTelemetryStyles from './EngineeringProfileOperatingTelemetry.module.scss'
+import focusDeckStyles from './EngineeringProfileFocusDeck.module.scss'
+import primaryFocusStyles from './EngineeringProfilePrimaryFocus.module.scss'
+import experienceStyles from './EngineeringProfileExperience.module.scss'
+import careerStyles from './EngineeringProfileCareer.module.scss'
+import principlesStyles from './EngineeringProfilePrinciples.module.scss'
+import personalSignalsStyles from './EngineeringProfilePersonalSignals.module.scss'
 // about-live-data-integration-v2
 
 function ProfileIcon({ name, size = 18 }: { name: AboutProfileIconName; size?: number }) {
@@ -97,7 +114,7 @@ function SectionHeading({
   title: string
 }) {
   return (
-    <header className={styles.sectionHeading}>
+    <header className={sectionHeadingStyles.sectionHeading}>
       <span>{eyebrow}</span>
       <div>
         <h2>{title}</h2>
@@ -120,23 +137,25 @@ function ProfileConsole({ profile }: { profile: AboutProfileViewModel }) {
   return (
     <div
       aria-label={`${profile.name} engineering profile identity`}
-      className={styles.profileConsole}
+      className={consoleShellStyles.profileConsole}
     >
-      <div aria-hidden="true" className={styles.consoleGrid} />
-      <div aria-hidden="true" className={styles.consoleCorners}>
+      <div aria-hidden="true" className={consoleShellStyles.consoleGrid} />
+      <div aria-hidden="true" className={consoleShellStyles.consoleCorners}>
         <i />
         <i />
         <i />
         <i />
       </div>
 
-      <div className={styles.identityVisual}>
-        <div aria-hidden="true" className={styles.identityScanner} />
-        <div className={`${styles.avatar}${profile.portrait ? ` ${styles.avatarWithImage}` : ''}`}>
+      <div className={identityVisualStyles.identityVisual}>
+        <div aria-hidden="true" className={identityVisualStyles.identityScanner} />
+        <div
+          className={`${identityVisualStyles.avatar}${profile.portrait ? ` ${identityVisualStyles.avatarWithImage}` : ''}`}
+        >
           {profile.portrait ? (
             <Image
               alt={profile.portrait.alt}
-              className={styles.avatarImage}
+              className={identityVisualStyles.avatarImage}
               fill
               priority
               sizes="160px"
@@ -147,13 +166,13 @@ function ProfileConsole({ profile }: { profile: AboutProfileViewModel }) {
           )}
           <small>ENGINEER</small>
         </div>
-        <div className={styles.onlineStatus}>
+        <div className={identityVisualStyles.onlineStatus}>
           <i />
           {profile.statusLabel}
         </div>
       </div>
 
-      <dl className={styles.identityDetails}>
+      <dl className={identityDetailsStyles.identityDetails}>
         {details.map(([label, value]) => (
           <div key={label}>
             <dt>{label}</dt>
@@ -162,7 +181,7 @@ function ProfileConsole({ profile }: { profile: AboutProfileViewModel }) {
         ))}
       </dl>
 
-      <div aria-hidden="true" className={styles.consoleTelemetry}>
+      <div aria-hidden="true" className={consoleTelemetryStyles.consoleTelemetry}>
         <span>
           <i />
           <i />
@@ -181,14 +200,14 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
 
   return (
     <EngineeringProfileMotion>
-      <main className={styles.page} id="main-content">
-        <PublicPageShell className={styles.shell} variant="index">
+      <main className={shellStyles.page} id="main-content">
+        <PublicPageShell className={shellStyles.shell} variant="index">
           <PublicBreadcrumbs items={[{ label: content.breadcrumbLabel }]} />
 
           {content.hero.enabled ? (
-            <PublicPageHeroFrame className={styles.hero} variant="index">
-              <div className={styles.heroCopy} data-profile-reveal>
-                <div className={styles.availability}>
+            <PublicPageHeroFrame className={heroStyles.hero} variant="index">
+              <div className={heroStyles.heroCopy} data-profile-reveal>
+                <div className={heroStyles.availability}>
                   <i />
                   {content.hero.availabilityLabel}
                 </div>
@@ -198,11 +217,13 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                 </h1>
                 <p>{content.hero.description}</p>
 
-                <div className={styles.heroActions}>
+                <div className={heroStyles.heroActions}>
                   {content.hero.actions.map((action) => (
                     <Link
                       className={
-                        action.tone === 'primary' ? styles.primaryAction : styles.secondaryAction
+                        action.tone === 'primary'
+                          ? heroStyles.primaryAction
+                          : heroStyles.secondaryAction
                       }
                       href={action.href}
                       key={action.id}
@@ -213,7 +234,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                   ))}
                 </div>
 
-                <div aria-label="Profile summary" className={styles.heroSignals}>
+                <div aria-label="Profile summary" className={heroStyles.heroSignals}>
                   {content.hero.signals.map((signal) => (
                     <span key={signal.id}>
                       <strong>{signal.value}</strong>
@@ -223,36 +244,32 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                 </div>
               </div>
 
-              <div className={styles.heroVisual} data-profile-reveal>
+              <div className={heroStyles.heroVisual} data-profile-reveal>
                 <ProfileConsole profile={content.profile} />
               </div>
             </PublicPageHeroFrame>
           ) : null}
 
           {content.career.enabled ? (
-            <section
-              className={`${styles.panel} ${styles.timeline}`}
-              data-profile-reveal
-              id="career"
-            >
+            <section className={shellStyles.panel} data-profile-reveal id="career">
               <SectionHeading
                 description={content.career.description}
                 eyebrow={content.career.eyebrow}
                 title={content.career.title}
               />
 
-              <ol className={styles.timelineList}>
+              <ol className={careerStyles.timelineList}>
                 {content.career.items.map((entry, index) => (
                   <li key={entry.id}>
-                    <div className={styles.timelineNode}>
+                    <div className={careerStyles.timelineNode}>
                       <i />
                       <span>{String(index + 1).padStart(2, '0')}</span>
                     </div>
-                    <span className={styles.period}>{entry.period}</span>
+                    <span className={careerStyles.period}>{entry.period}</span>
                     <h3>{entry.role}</h3>
                     <p>{entry.description}</p>
                     {entry.stack.length > 0 ? (
-                      <div className={styles.tags}>
+                      <div className={careerStyles.tags}>
                         {entry.stack.map((technology) => (
                           <span key={technology}>{technology}</span>
                         ))}
@@ -265,19 +282,19 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
           ) : null}
 
           {hasThinkingColumn ? (
-            <div className={styles.twoColumn}>
+            <div className={shellStyles.twoColumn}>
               {content.principles.enabled ? (
-                <section className={`${styles.panel} ${styles.principles}`} data-profile-reveal>
+                <section className={shellStyles.panel} data-profile-reveal>
                   <SectionHeading
                     description={content.principles.description}
                     eyebrow={content.principles.eyebrow}
                     title={content.principles.title}
                   />
 
-                  <div className={styles.principleGrid}>
+                  <div className={principlesStyles.principleGrid}>
                     {content.principles.items.map((principle) => (
                       <article key={principle.id}>
-                        <span className={styles.iconBox}>
+                        <span className={principlesStyles.iconBox}>
                           <ProfileIcon name={principle.icon} />
                         </span>
                         <h3>{principle.title}</h3>
@@ -290,7 +307,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
 
               {content.operatingSystem.enabled ? (
                 <section
-                  className={`${styles.panel} ${styles.operatingSystem}`}
+                  className={`${shellStyles.panel} ${operatingShellStyles.operatingSystem}`}
                   data-profile-reveal
                 >
                   <SectionHeading
@@ -299,10 +316,10 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                     title={content.operatingSystem.title}
                   />
 
-                  <ol className={styles.operatingSteps}>
+                  <ol className={operatingStepsStyles.operatingSteps}>
                     {content.operatingSystem.steps.map((step, index) => (
                       <li key={step.id}>
-                        <div className={styles.stepNode}>
+                        <div className={operatingStepsStyles.stepNode}>
                           <span>{step.code}</span>
                           <ProfileIcon
                             name={
@@ -321,7 +338,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                     ))}
                   </ol>
 
-                  <div className={styles.systemDetail}>
+                  <div className={operatingDetailStyles.systemDetail}>
                     <div>
                       <span>{content.operatingSystem.currentStage.label}</span>
                       <strong>{content.operatingSystem.currentStage.title}</strong>
@@ -336,10 +353,10 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                     ) : null}
                   </div>
 
-                  <div className={styles.operatingInsights}>
+                  <div className={operatingInsightsStyles.operatingInsights}>
                     <article>
                       <header>
-                        <span className={styles.operatingInsightIcon}>
+                        <span className={operatingInsightsStyles.operatingInsightIcon}>
                           <ProfileIcon name="architecture" size={18} />
                         </span>
                         <div>
@@ -364,7 +381,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
 
                     <article>
                       <header>
-                        <span className={styles.operatingInsightIcon}>
+                        <span className={operatingInsightsStyles.operatingInsightIcon}>
                           <ProfileIcon name="layers" size={18} />
                         </span>
                         <div>
@@ -391,7 +408,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                   {content.operatingSystem.telemetry.length > 0 ? (
                     <div
                       aria-label="Engineering process status"
-                      className={styles.operatingTelemetry}
+                      className={operatingTelemetryStyles.operatingTelemetry}
                     >
                       {content.operatingSystem.telemetry.map((item) => (
                         <span data-tone={item.tone} key={item.id}>
@@ -408,17 +425,20 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
           ) : null}
 
           {hasExperienceColumn ? (
-            <div className={styles.twoColumnWide}>
+            <div className={shellStyles.twoColumnWide}>
               {content.experience.enabled ? (
-                <section className={`${styles.panel} ${styles.experience}`} data-profile-reveal>
+                <section
+                  className={`${shellStyles.panel} ${experienceStyles.experience}`}
+                  data-profile-reveal
+                >
                   <SectionHeading
                     description={content.experience.description}
                     eyebrow={content.experience.eyebrow}
                     title={content.experience.title}
                   />
 
-                  <div className={styles.experienceTable}>
-                    <div className={styles.experienceHeader}>
+                  <div className={experienceStyles.experienceTable}>
+                    <div className={experienceStyles.experienceHeader}>
                       <span>Area</span>
                       <span>Level</span>
                       <span>Signal</span>
@@ -426,16 +446,18 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                     </div>
 
                     {content.experience.items.map((entry) => (
-                      <div className={styles.experienceRow} key={entry.id}>
+                      <div className={experienceStyles.experienceRow} key={entry.id}>
                         <strong>{entry.area}</strong>
                         <span>{entry.level}</span>
                         <div
                           aria-label={`${entry.area}: ${entry.level}`}
-                          className={styles.experienceSignal}
+                          className={experienceStyles.experienceSignal}
                         >
                           {Array.from({ length: 6 }, (_, index) => (
                             <i
-                              className={index < entry.score ? styles.activeSignal : undefined}
+                              className={
+                                index < entry.score ? experienceStyles.activeSignal : undefined
+                              }
                               key={index}
                             />
                           ))}
@@ -446,7 +468,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                   </div>
 
                   {content.experience.summary.length > 0 ? (
-                    <div className={styles.experienceSummary}>
+                    <div className={experienceStyles.experienceSummary}>
                       {content.experience.summary.map((item) => (
                         <article key={item.id}>
                           <span>{item.label}</span>
@@ -460,14 +482,14 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
               ) : null}
 
               {content.currentFocus.enabled ? (
-                <section className={`${styles.panel} ${styles.currentFocus}`} data-profile-reveal>
+                <section className={shellStyles.panel} data-profile-reveal>
                   <SectionHeading
                     description={content.currentFocus.description}
                     eyebrow={content.currentFocus.eyebrow}
                     title={content.currentFocus.title}
                   />
 
-                  <article className={styles.primaryFocus}>
+                  <article className={primaryFocusStyles.primaryFocus}>
                     <div>
                       <span>{content.currentFocus.primaryLabel}</span>
                       <h3>{content.currentFocus.primaryProject.title}</h3>
@@ -477,7 +499,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                         <ProfileIcon name="arrow" size={14} />
                       </Link>
                     </div>
-                    <div aria-hidden="true" className={styles.systemOrb}>
+                    <div aria-hidden="true" className={primaryFocusStyles.systemOrb}>
                       <span />
                       <i />
                       <b />
@@ -485,18 +507,26 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                   </article>
 
                   {content.currentFocus.cards.length > 0 ? (
-                    <div className={styles.focusGrid}>
+                    <div className={focusDeckStyles.focusGrid}>
                       {content.currentFocus.cards.map((card) => (
-                        <article className={styles.focusCard} data-tone={card.tone} key={card.id}>
-                          <div className={styles.focusCardRail}>
+                        <article
+                          className={focusDeckStyles.focusCard}
+                          data-tone={card.tone}
+                          key={card.id}
+                        >
+                          <div className={focusDeckStyles.focusCardRail}>
                             <span>{card.eyebrow}</span>
-                            <b className={card.tone === 'purple' ? styles.isQueued : undefined}>
+                            <b
+                              className={
+                                card.tone === 'purple' ? focusDeckStyles.isQueued : undefined
+                              }
+                            >
                               <i />
                               {card.status}
                             </b>
                           </div>
 
-                          <span className={styles.focusCardIcon}>
+                          <span className={focusDeckStyles.focusCardIcon}>
                             <ProfileIcon name={card.icon} size={24} />
                           </span>
 
@@ -504,7 +534,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                           <p>{card.description}</p>
 
                           {card.tags.length > 0 ? (
-                            <div className={styles.focusTags}>
+                            <div className={focusDeckStyles.focusTags}>
                               {card.tags.map((tag) => (
                                 <span key={tag}>{tag}</span>
                               ))}
@@ -525,16 +555,19 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
           ) : null}
 
           {hasFinalGrid ? (
-            <div className={styles.finalGrid}>
+            <div className={shellStyles.finalGrid}>
               {content.personalSignals.enabled ? (
-                <section className={`${styles.panel} ${styles.beyond}`} data-profile-reveal>
+                <section
+                  className={`${shellStyles.panel} ${personalSignalsStyles.beyond}`}
+                  data-profile-reveal
+                >
                   <SectionHeading
                     description={content.personalSignals.description}
                     eyebrow={content.personalSignals.eyebrow}
                     title={content.personalSignals.title}
                   />
 
-                  <div className={styles.personalSignals}>
+                  <div className={personalSignalsStyles.personalSignals}>
                     {content.personalSignals.items.map((item, index) => (
                       <article key={item.id}>
                         <span>{String(index + 1).padStart(2, '0')}</span>
@@ -546,7 +579,7 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
                     ))}
                   </div>
 
-                  <div aria-hidden="true" className={styles.signalCore}>
+                  <div aria-hidden="true" className={personalSignalsStyles.signalCore}>
                     <span />
                     <span />
                     <span />
@@ -557,8 +590,8 @@ export function EngineeringProfilePage({ content }: { content: AboutPageViewMode
               ) : null}
 
               {content.cta.enabled ? (
-                <section className={styles.cta} data-profile-reveal>
-                  <div aria-hidden="true" className={styles.ctaGrid} />
+                <section className={ctaStyles.cta} data-profile-reveal>
+                  <div aria-hidden="true" className={ctaStyles.ctaGrid} />
                   <span>{content.cta.eyebrow}</span>
                   <h2>
                     {content.cta.title}

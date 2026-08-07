@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import styles from './PublicBreadcrumbs.module.scss'
+
 export type PublicBreadcrumbItem = {
   href?: string
   label: string
@@ -11,7 +13,7 @@ type PublicBreadcrumbsProps = {
 }
 
 export function PublicBreadcrumbs({ className, items }: PublicBreadcrumbsProps) {
-  const classes = ['public-breadcrumbs', className].filter(Boolean).join(' ')
+  const classes = [styles.breadcrumbs, className].filter(Boolean).join(' ')
 
   return (
     <nav className={classes} aria-label="Breadcrumb">
@@ -24,8 +26,8 @@ export function PublicBreadcrumbs({ className, items }: PublicBreadcrumbsProps) 
           const isCurrent = index === items.length - 1
 
           return (
-            <li className={isCurrent ? 'is-current' : undefined} key={`${item.label}-${index}`}>
-              <span className="public-breadcrumbs__separator" aria-hidden="true">
+            <li data-current={isCurrent || undefined} key={`${item.label}-${index}`}>
+              <span className={styles.separator} aria-hidden="true">
                 /
               </span>
 
@@ -33,7 +35,7 @@ export function PublicBreadcrumbs({ className, items }: PublicBreadcrumbsProps) 
                 <Link href={item.href}>{item.label}</Link>
               ) : (
                 <span
-                  className="public-breadcrumbs__current"
+                  className={styles.current}
                   aria-current={isCurrent ? 'page' : undefined}
                   title={isCurrent ? item.label : undefined}
                 >

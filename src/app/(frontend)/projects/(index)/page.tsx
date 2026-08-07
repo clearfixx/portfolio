@@ -1,12 +1,9 @@
-import { LayersIcon } from '@/components/icons/project'
-import { ProjectsRegistryEditor } from '@/components/projects/ProjectsRegistryEditor'
 import type { Metadata } from 'next'
-import Image from 'next/image'
 
 import { SiteFooter } from '@/components/home'
 import { StreamedMotionBoundary } from '@/components/motion'
-import { ProjectDirectory, ProjectsIndexCTA } from '@/components/projects'
-import { PublicBreadcrumbs, PublicPageHeroFrame, PublicPageShell } from '@/components/public-page'
+import { ProjectDirectory, ProjectsIndexCTA, ProjectsIndexHero } from '@/components/projects'
+import { PublicBreadcrumbs, PublicPageShell } from '@/components/public-page'
 import { getHomepageContent, getProjects, getSiteFooterGitHubFeed } from '@/lib/cms'
 import { buildProjectDirectoryItems, getProjectImage } from '@/lib/cms/public-projects'
 
@@ -64,68 +61,16 @@ export default async function ProjectsPage() {
       <PublicPageShell className="projects-page" variant="index">
         <PublicBreadcrumbs items={[{ label: 'Projects' }]} />
 
-        <PublicPageHeroFrame className="projects-index-hero" variant="index">
-          <div className="projects-index-hero__copy">
-            <p className="projects-index-hero__eyebrow">
-              <LayersIcon aria-hidden="true" size={15} />
-              Project registry
-            </p>
-
-            <h1>
-              All <span>Projects</span>
-            </h1>
-
-            <p className="projects-index-hero__description">
-              A collection of systems I&apos;ve designed, built, and shipped. From idea to
-              production.
-            </p>
-
-            <section className="projects-index-metrics" aria-label="Project metrics">
-              <article>
-                <span>Total projects</span>
-                <strong>{items.length}</strong>
-                <small>and counting</small>
-              </article>
-
-              <article>
-                <span>Open source</span>
-                <strong>{openSourceCount}</strong>
-                <small>projects</small>
-              </article>
-
-              <article>
-                <span>Years building</span>
-                <strong>{yearsBuilding}</strong>
-                <small>of experience</small>
-              </article>
-
-              <article>
-                <span>Code commitments</span>
-                <strong>{codeCommitments}</strong>
-                <small>across all projects</small>
-              </article>
-            </section>
-          </div>
-
-          <div className="projects-index-hero__visual">
-            {heroImage ? (
-              <Image
-                alt={heroImage.alt}
-                fill
-                priority
-                sizes="(max-width: 900px) 100vw, 42vw"
-                src={heroImage.src}
-              />
-            ) : (
-              <ProjectsRegistryEditor
-                activeCount={items.filter((item) => item.stage !== 'archived').length}
-                featuredTitle={heroItem?.title ?? 'Portfolio'}
-                progress={heroItem?.progress ?? 0}
-                projectCount={items.length}
-              />
-            )}
-          </div>
-        </PublicPageHeroFrame>
+        <ProjectsIndexHero
+          activeCount={items.filter((item) => item.stage !== 'archived').length}
+          codeCommitments={codeCommitments}
+          featuredTitle={heroItem?.title ?? 'Portfolio'}
+          heroImage={heroImage}
+          openSourceCount={openSourceCount}
+          progress={heroItem?.progress ?? 0}
+          projectCount={items.length}
+          yearsBuilding={yearsBuilding}
+        />
 
         <ProjectDirectory items={items} />
 

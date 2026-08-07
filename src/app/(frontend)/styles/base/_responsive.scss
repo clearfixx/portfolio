@@ -14,14 +14,6 @@
     grid-template-columns: minmax(0, 1fr) 144px;
     gap: 12px;
   }
-
-  .navbar {
-    gap: 34px;
-  }
-
-  .navbar__links {
-    gap: 34px;
-  }
 }
 
 @media (max-width: 1180px) {
@@ -59,29 +51,6 @@
 @media (max-width: 720px) {
   :root {
     --container-padding: 18px;
-  }
-
-  .site-header__inner {
-    min-height: 66px;
-  }
-
-  .logo__content,
-  .navbar__actions {
-    display: none;
-  }
-
-  .logo__mark {
-    width: 58px;
-    height: 36px;
-  }
-
-  .navbar,
-  .navbar__links {
-    gap: 12px;
-  }
-
-  .navbar__link {
-    font-size: 10px;
   }
 
   .home-hero {

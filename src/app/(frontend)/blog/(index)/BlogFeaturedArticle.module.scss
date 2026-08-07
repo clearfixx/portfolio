@@ -1,0 +1,115 @@
+/* Blog featured article card and metadata. */
+
+.featuredSection {
+  margin-top: 0;
+}
+
+
+.featuredCard {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.92fr) minmax(0, 1.08fr);
+  min-height: 252px;
+  border: 1px solid var(--journal-line-strong);
+  border-radius: 12px;
+  background: var(--journal-panel);
+  color: inherit;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+
+.featuredContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.45rem, 2.5vw, 2.35rem);
+}
+
+
+.featuredContent h2 {
+  margin: 0.7rem 0 0;
+  font-size: clamp(1.8rem, 3vw, 3.15rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+
+.featuredContent > p {
+  margin: 1rem 0 0;
+  color: var(--journal-muted);
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  align-items: center;
+  margin-top: 1.4rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--journal-line);
+  color: #748994;
+  font-size: 0.64rem;
+}
+
+
+.metaRow strong {
+  margin-left: auto;
+  color: var(--journal-cyan);
+}
+
+.metaRow span,
+.metaRow strong {
+  display: inline-flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+@media (max-width: 650px) {
+
+
+.featuredCard {
+    grid-template-columns: 1fr;
+  }
+
+
+.featuredMedia {
+    min-height: 240px;
+  }
+}
+
+:global([data-theme='light']) .featuredContent h2 {
+  color: #0b1e2a;
+}
+
+:global([data-theme='light']) .featuredContent > p {
+  color: #526974;
+}
+
+:global([data-theme='light']) .featuredCard {
+  border-color: rgba(35, 79, 96, 0.15);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(245, 250, 251, 0.92));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 18px 45px rgba(30, 70, 85, 0.09);
+}
+
+:global([data-theme='light']) .featuredCard:hover {
+  border-color: rgba(8, 127, 140, 0.32);
+  box-shadow: 0 22px 54px rgba(30, 70, 85, 0.13);
+}
+
+:global([data-theme='light']) .featuredContent h2 {
+  color: #112935;
+}
+
+:global([data-theme='light']) .metaRow {
+  color: #687f89;
+}
+
+
+:global([data-theme='light']) .metaRow {
+  border-top-color: rgba(35, 79, 96, 0.12);
+}

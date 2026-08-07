@@ -10,9 +10,27 @@ import { BlogRegistryEditor } from '@/components/blog/BlogRegistryEditor'
 import { TechnicalPreviewPlaceholder } from '@/components/blog/TechnicalPreviewPlaceholder'
 import type { BlogPost, Category, Media } from '@/payload-types'
 import { getHomepageContent, getPublishedBlogPosts, getSiteFooterGitHubFeed } from '@/lib/cms'
-
-import styles from '@/app/(frontend)/styles/pages/blog.module.scss'
-
+import iconStyles from '@/components/blog/BlogIcon.module.scss'
+import newsletterShellStyles from './BlogNewsletterShell.module.scss'
+import newsletterFormStyles from './BlogNewsletterForm.module.scss'
+import newsletterPipelineStyles from './BlogNewsletterPipeline.module.scss'
+import articleCardStyles from './BlogArticleCards.module.scss'
+import mediaStyles from './BlogArticleMedia.module.scss'
+import shellStyles from './BlogPageShell.module.scss'
+import heroStyles from './BlogHero.module.scss'
+import heroMetricsStyles from './BlogHeroMetrics.module.scss'
+import sectionHeaderStyles from './BlogSectionHeader.module.scss'
+import featuredStyles from './BlogFeaturedArticle.module.scss'
+import toolbarStyles from './BlogArticleToolbar.module.scss'
+import railShellStyles from './BlogRailShell.module.scss'
+import railIndexListStyles from './BlogRailIndexList.module.scss'
+import railTagsStyles from './BlogRailTags.module.scss'
+import railSeriesStyles from './BlogRailSeries.module.scss'
+import railTransmissionsStyles from './BlogRailTransmissions.module.scss'
+import paginationShellStyles from './BlogPaginationShell.module.scss'
+import paginationControlsStyles from './BlogPaginationControls.module.scss'
+import paginationNavigationStyles from './BlogPaginationNavigation.module.scss'
+const blogRailIconClassName = [iconStyles.icon, railShellStyles.icon].join(' ')
 export const revalidate = 300
 
 export const metadata: Metadata = {
@@ -131,7 +149,7 @@ function JournalIcon({ name, size = 14 }: { name: JournalIconName; size?: number
   return (
     <svg
       aria-hidden="true"
-      className={styles.icon}
+      className={blogRailIconClassName}
       fill="none"
       height={size}
       viewBox="0 0 24 24"
@@ -146,36 +164,36 @@ function JournalIcon({ name, size = 14 }: { name: JournalIconName; size?: number
 
 function NewsletterPipeline() {
   return (
-    <div aria-hidden="true" className={styles.newsletterPipeline}>
-      <div className={styles.pipelineTrack}>
-        <span className={styles.pipelineLine} />
-        <span className={styles.pipelineSignal} />
+    <div aria-hidden="true" className={newsletterPipelineStyles.newsletterPipeline}>
+      <div className={newsletterPipelineStyles.pipelineTrack}>
+        <span className={newsletterPipelineStyles.pipelineLine} />
+        <span className={newsletterPipelineStyles.pipelineSignal} />
       </div>
 
-      <div className={styles.pipelineNodes}>
+      <div className={newsletterPipelineStyles.pipelineNodes}>
         <div>
-          <span className={styles.pipelineIcon}>
+          <span className={newsletterPipelineStyles.pipelineIcon}>
             <JournalIcon name="arrow" size={15} />
           </span>
           <strong>Commit</strong>
           <small>main</small>
         </div>
         <div>
-          <span className={styles.pipelineIcon}>
+          <span className={newsletterPipelineStyles.pipelineIcon}>
             <JournalIcon name="radio" size={15} />
           </span>
           <strong>Publish</strong>
           <small>journal</small>
         </div>
         <div>
-          <span className={styles.pipelineIcon}>
+          <span className={newsletterPipelineStyles.pipelineIcon}>
             <JournalIcon name="folder" size={15} />
           </span>
           <strong>Feed</strong>
           <small>RSS</small>
         </div>
         <div>
-          <span className={styles.pipelineIcon}>
+          <span className={newsletterPipelineStyles.pipelineIcon}>
             <JournalIcon name="book" size={15} />
           </span>
           <strong>Inbox</strong>
@@ -276,7 +294,15 @@ function collectArchive(posts: BlogPost[]) {
     .sort((a, b) => Number(b.year) - Number(a.year))
 }
 
-function ArticleImage({ post, priority = false }: { post: BlogPost; priority?: boolean }) {
+function ArticleImage({
+  className,
+  post,
+  priority = false,
+}: {
+  className?: string
+  post: BlogPost
+  priority?: boolean
+}) {
   const media = coverOf(post)
   const src = media && typeof media.url === 'string' ? media.url : null
   const alt = media?.alt || post.title
@@ -284,7 +310,7 @@ function ArticleImage({ post, priority = false }: { post: BlogPost; priority?: b
   if (!src) {
     return (
       <TechnicalPreviewPlaceholder
-        className={styles.imageFallback}
+        className={[mediaStyles.imageFallback, className].filter(Boolean).join(' ')}
         label={categoryLabel(post)}
         variant="code"
       />
@@ -292,7 +318,7 @@ function ArticleImage({ post, priority = false }: { post: BlogPost; priority?: b
   }
 
   return (
-    <div className={styles.imageFrame}>
+    <div className={[mediaStyles.imageFrame, className].filter(Boolean).join(' ')}>
       <Image
         alt={alt}
         fill
@@ -389,16 +415,16 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   return (
     <StreamedMotionBoundary>
       <PublicPageShell className="journal-page" variant="index">
-        <div className={`${styles.page} ${styles.container}`}>
+        <div className={`${shellStyles.page} ${shellStyles.container}`}>
           <PublicBreadcrumbs items={[{ label: 'Blog' }]} />
 
           <PublicPageHeroFrame
             aria-labelledby="blog-page-title"
-            className={styles.hero}
+            className={heroStyles.hero}
             variant="index"
           >
-            <div className={styles.heroCopy}>
-              <p className={styles.eyebrow}>
+            <div className={heroStyles.heroCopy}>
+              <p className={heroStyles.eyebrow}>
                 <span aria-hidden="true">{'//'}</span>
                 Engineering journal
               </p>
@@ -411,54 +437,54 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 from building complex systems.
               </p>
 
-              <dl className={styles.metrics}>
-                <div className={styles.metricCard}>
+              <dl className={heroMetricsStyles.metrics}>
+                <div className={heroMetricsStyles.metricCard}>
                   <span
-                    className={`${styles.metricIcon} ${styles.metricIconCyan}`}
+                    className={`${heroMetricsStyles.metricIcon} ${heroMetricsStyles.metricIconCyan}`}
                     aria-hidden="true"
                   >
                     <JournalIcon name="archive" size={18} />
                   </span>
-                  <div className={styles.metricCopy}>
+                  <div className={heroMetricsStyles.metricCopy}>
                     <dd>{String(posts.length).padStart(2, '0')}</dd>
                     <dt>Articles</dt>
                   </div>
                 </div>
 
-                <div className={styles.metricCard}>
+                <div className={heroMetricsStyles.metricCard}>
                   <span
-                    className={`${styles.metricIcon} ${styles.metricIconViolet}`}
+                    className={`${heroMetricsStyles.metricIcon} ${heroMetricsStyles.metricIconViolet}`}
                     aria-hidden="true"
                   >
                     <JournalIcon name="book" size={18} />
                   </span>
-                  <div className={styles.metricCopy}>
+                  <div className={heroMetricsStyles.metricCopy}>
                     <dd>{String(categories.length).padStart(2, '0')}</dd>
                     <dt>Topics</dt>
                   </div>
                 </div>
 
-                <div className={styles.metricCard}>
+                <div className={heroMetricsStyles.metricCard}>
                   <span
-                    className={`${styles.metricIcon} ${styles.metricIconCyan}`}
+                    className={`${heroMetricsStyles.metricIcon} ${heroMetricsStyles.metricIconCyan}`}
                     aria-hidden="true"
                   >
                     <JournalIcon name="folder" size={18} />
                   </span>
-                  <div className={styles.metricCopy}>
+                  <div className={heroMetricsStyles.metricCopy}>
                     <dd>{String(series.length).padStart(2, '0')}</dd>
                     <dt>Series</dt>
                   </div>
                 </div>
 
-                <div className={styles.metricCard}>
+                <div className={heroMetricsStyles.metricCard}>
                   <span
-                    className={`${styles.metricIcon} ${styles.metricIconViolet}`}
+                    className={`${heroMetricsStyles.metricIcon} ${heroMetricsStyles.metricIconViolet}`}
                     aria-hidden="true"
                   >
                     <JournalIcon name="radio" size={18} />
                   </span>
-                  <div className={styles.metricCopy}>
+                  <div className={heroMetricsStyles.metricCopy}>
                     <dd>Online</dd>
                     <dt>Status</dt>
                   </div>
@@ -466,7 +492,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               </dl>
             </div>
 
-            <div className={styles.editorWrap}>
+            <div className={heroMetricsStyles.editorWrap}>
               <BlogRegistryEditor
                 articleCount={posts.length}
                 featuredTitle={featuredPost?.title || 'No featured article'}
@@ -476,11 +502,14 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             </div>
           </PublicPageHeroFrame>
 
-          <div className={styles.contentLayout}>
-            <div className={styles.mainColumn}>
+          <div className={shellStyles.contentLayout}>
+            <div className={shellStyles.mainColumn}>
               {featuredPost ? (
-                <section className={styles.featuredSection} aria-labelledby="featured-title">
-                  <header className={styles.sectionHeader}>
+                <section
+                  className={featuredStyles.featuredSection}
+                  aria-labelledby="featured-title"
+                >
+                  <header className={sectionHeaderStyles.sectionHeader}>
                     <p>
                       <span aria-hidden="true">{'//'}</span>
                       Featured article
@@ -488,16 +517,20 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   </header>
 
                   <Link
-                    className={styles.featuredCard}
+                    className={featuredStyles.featuredCard}
                     href={featuredPost.slug ? `/blog/${featuredPost.slug}` : '/blog'}
                   >
-                    <ArticleImage post={featuredPost} priority />
-                    <div className={styles.featuredContent}>
-                      <span className={styles.category}>{categoryLabel(featuredPost)}</span>
+                    <ArticleImage
+                      className={featuredStyles.featuredMedia}
+                      post={featuredPost}
+                      priority
+                    />
+                    <div className={featuredStyles.featuredContent}>
+                      <span className={mediaStyles.category}>{categoryLabel(featuredPost)}</span>
                       <h2 id="featured-title">{featuredPost.title}</h2>
                       <p>{featuredPost.excerpt}</p>
 
-                      <div className={styles.metaRow}>
+                      <div className={featuredStyles.metaRow}>
                         <span>
                           <JournalIcon name="calendar" size={12} />
                           {publishedLabel(featuredPost)}
@@ -520,8 +553,8 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 </section>
               ) : null}
 
-              <section className={styles.articlesSection} aria-labelledby="articles-title">
-                <header className={styles.sectionHeader}>
+              <section className={toolbarStyles.articlesSection} aria-labelledby="articles-title">
+                <header className={sectionHeaderStyles.sectionHeader}>
                   <div>
                     <p>
                       <span aria-hidden="true">{'//'}</span>
@@ -532,8 +565,8 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   <span>{registryPosts.length} entries</span>
                 </header>
 
-                <div className={styles.toolbar}>
-                  <nav className={styles.tabs} aria-label="Article sorting">
+                <div className={toolbarStyles.toolbar}>
+                  <nav className={toolbarStyles.tabs} aria-label="Article sorting">
                     {(['latest', 'popular', 'updated'] as const).map((sort) => (
                       <Link
                         aria-current={selectedSort === sort ? 'page' : undefined}
@@ -556,26 +589,26 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   />
                 </div>
 
-                <ul className={styles.articleGrid}>
+                <ul className={articleCardStyles.articleGrid}>
                   {visiblePosts.map((post) => (
                     <li key={post.id}>
-                      <Link className={styles.articleCard} href={`/blog/${post.slug}`}>
+                      <Link className={articleCardStyles.articleCard} href={`/blog/${post.slug}`}>
                         <ArticleImage post={post} />
-                        <span aria-hidden="true" className={styles.cardIndex}>
+                        <span aria-hidden="true" className={articleCardStyles.cardIndex}>
                           {String(
                             (currentPage - 1) * POSTS_PER_PAGE +
                               visiblePosts.findIndex((item) => item.id === post.id) +
                               1,
                           ).padStart(2, '0')}
                         </span>
-                        <div className={styles.articleContent}>
+                        <div className={articleCardStyles.articleContent}>
                           <div>
-                            <span className={styles.category}>{categoryLabel(post)}</span>
+                            <span className={mediaStyles.category}>{categoryLabel(post)}</span>
                             <h3>{post.title}</h3>
                             <p>{post.excerpt}</p>
                           </div>
 
-                          <div className={styles.articleMeta}>
+                          <div className={articleCardStyles.articleMeta}>
                             <span>
                               <JournalIcon name="calendar" size={12} />
                               {publishedLabel(post)}
@@ -598,13 +631,13 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               </section>
             </div>
 
-            <aside className={styles.rail}>
-              <section className={styles.railCard}>
+            <aside className={railShellStyles.rail}>
+              <section className={railShellStyles.railCard}>
                 <h2>
                   <JournalIcon name="radio" size={14} />
                   Latest transmissions
                 </h2>
-                <ul className={styles.transmissions}>
+                <ul className={railTransmissionsStyles.transmissions}>
                   {posts.slice(0, 5).map((post) => (
                     <li key={post.id}>
                       <Link href={post.slug ? `/blog/${post.slug}` : '/blog'}>
@@ -618,19 +651,19 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   ))}
                 </ul>
 
-                <div className={styles.sync}>
+                <div className={railTransmissionsStyles.sync}>
                   <span aria-hidden="true" />
                   <JournalIcon name="radio" size={12} />
                   Journal_sync: <strong>online</strong>
                 </div>
               </section>
 
-              <section className={styles.railCard}>
+              <section className={railShellStyles.railCard}>
                 <h2>
                   <JournalIcon name="folder" size={14} />
                   Topics
                 </h2>
-                <ul className={styles.railList}>
+                <ul className={railIndexListStyles.railList}>
                   {categories.map((item) => (
                     <li key={item.slug}>
                       <Link href={withQuery(queryState, { page: undefined, topic: item.slug })}>
@@ -642,12 +675,12 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 </ul>
               </section>
 
-              <section className={styles.railCard}>
+              <section className={railShellStyles.railCard}>
                 <h2>
                   <JournalIcon name="book" size={14} />
                   Series
                 </h2>
-                <ul className={styles.seriesList}>
+                <ul className={railSeriesStyles.seriesList}>
                   {series.map((item) => (
                     <li key={item.slug}>
                       <Link href={withQuery(queryState, { page: undefined, series: item.slug })}>
@@ -662,24 +695,24 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 </ul>
               </section>
 
-              <section className={styles.railCard}>
+              <section className={railShellStyles.railCard}>
                 <h2>
                   <JournalIcon name="tag" size={14} />
                   Popular tags
                 </h2>
-                <ul className={styles.tags}>
+                <ul className={railTagsStyles.tags}>
                   {tags.slice(0, 14).map((tag) => (
                     <li key={tag.slug}>{tag.label}</li>
                   ))}
                 </ul>
               </section>
 
-              <section className={styles.railCard}>
+              <section className={railShellStyles.railCard}>
                 <h2>
                   <JournalIcon name="archive" size={14} />
                   Archive
                 </h2>
-                <ul className={styles.railList}>
+                <ul className={railIndexListStyles.railList}>
                   {archive.map((item) => (
                     <li key={item.year}>
                       <span>{item.year}</span>
@@ -692,8 +725,11 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           </div>
 
           {totalPages > 1 ? (
-            <section className={styles.paginationSection} aria-label="Journal pagination">
-              <div className={styles.paginationSummary}>
+            <section
+              className={paginationShellStyles.paginationSection}
+              aria-label="Journal pagination"
+            >
+              <div className={paginationShellStyles.paginationSummary}>
                 <p>
                   <span aria-hidden="true">{'//'}</span>
                   Journal index
@@ -704,7 +740,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 <span>{registryPosts.length} indexed entries</span>
               </div>
 
-              <nav className={styles.pagination} aria-label="Blog pagination">
+              <nav className={paginationNavigationStyles.pagination} aria-label="Blog pagination">
                 <Link
                   aria-disabled={currentPage === 1}
                   aria-label="First page"
@@ -727,7 +763,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   const hasGap = previousPage !== undefined && pageNumber - previousPage > 1
 
                   return (
-                    <span className={styles.paginationItem} key={pageNumber}>
+                    <span className={paginationNavigationStyles.paginationItem} key={pageNumber}>
                       {hasGap ? <i aria-hidden="true">…</i> : null}
                       <Link
                         aria-current={pageNumber === currentPage ? 'page' : undefined}
@@ -759,7 +795,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 </Link>
               </nav>
 
-              <div className={styles.paginationControls}>
+              <div className={paginationControlsStyles.paginationControls}>
                 <form>
                   {params.q ? <input name="q" type="hidden" value={params.q} /> : null}
                   {params.topic ? <input name="topic" type="hidden" value={params.topic} /> : null}
@@ -790,8 +826,8 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             </section>
           ) : null}
 
-          <section className={styles.newsletter}>
-            <div className={styles.newsletterCopy}>
+          <section className={newsletterShellStyles.newsletter}>
+            <div className={newsletterShellStyles.newsletterCopy}>
               <p>
                 <span aria-hidden="true">{'//'}</span>
                 Journal updates
@@ -804,9 +840,9 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
             <NewsletterPipeline />
 
-            <form>
+            <form className={newsletterFormStyles.newsletterForm}>
               <label>
-                <span className={styles.srOnly}>Email address</span>
+                <span className={newsletterFormStyles.srOnly}>Email address</span>
                 <input placeholder="Enter your email" type="email" />
               </label>
               <button type="submit">

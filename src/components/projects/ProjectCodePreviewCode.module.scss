@@ -1,0 +1,77 @@
+/* Project source-code renderer and local lowlight token theme. */
+
+
+.code {
+  margin: 0;
+  padding: 20px 19px 22px 52px;
+  color: rgb(var(--rgb-text-soft));
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.73rem;
+  line-height: 1.7;
+}
+
+
+.code li::marker {
+  color: rgb(var(--rgb-text-muted) / 52%);
+}
+
+
+.code code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: inherit;
+  font: inherit;
+}
+
+
+.code .comment,
+.code .quote {
+  color: rgb(var(--rgb-text-muted) / 68%);
+  font-style: italic;
+}
+
+
+.code .keyword,
+.code .selectorTag,
+.code .literal,
+.code .section,
+.code .link {
+  color: rgb(var(--rgb-violet));
+}
+
+
+.code .string,
+.code .attr,
+.code .templateVariable,
+.code .type {
+  color: rgb(var(--rgb-cyan));
+}
+
+
+.code .number,
+.code .symbol,
+.code .bullet,
+.code .meta {
+  color: rgb(var(--rgb-warning));
+}
+
+
+.code .title,
+.code .title.functionTitle,
+.code .functionGroup .title,
+.code .builtIn {
+  color: rgb(var(--rgb-teal));
+}
+
+
+.code .variable,
+.code .property,
+.code .params {
+  color: rgb(var(--rgb-text-strong));
+}
+
+
+.code .punctuation,
+.code .operator {
+  color: rgb(var(--rgb-text-soft));
+}

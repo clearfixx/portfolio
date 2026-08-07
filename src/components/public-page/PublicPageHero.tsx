@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react'
 
+import styles from './PublicPageHero.module.scss'
+
 type PublicPageHeroProps = {
   aside?: ReactNode
   description: string
@@ -18,20 +20,20 @@ export function PublicPageHero({
   titleId,
 }: PublicPageHeroProps) {
   return (
-    <header className="public-page-hero">
-      <div className="public-page-hero__copy">
-        <p className="public-page-hero__eyebrow">
+    <header className={styles.hero}>
+      <div className={styles.copy}>
+        <p className={styles.eyebrow}>
           <span aria-hidden="true">{'//'}</span>
           {eyebrow}
         </p>
 
         <h1 id={titleId}>{title}</h1>
-        <p className="public-page-hero__description">{description}</p>
+        <p className={styles.description}>{description}</p>
 
-        {meta ? <div className="public-page-hero__meta">{meta}</div> : null}
+        {meta ? <div className={styles.meta}>{meta}</div> : null}
       </div>
 
-      {aside ? <div className="public-page-hero__aside">{aside}</div> : null}
+      {aside ? <div className={styles.aside}>{aside}</div> : null}
     </header>
   )
 }

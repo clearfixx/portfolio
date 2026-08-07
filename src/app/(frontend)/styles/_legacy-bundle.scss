@@ -1,0 +1,29 @@
+/*
+ * Legacy global component bundle.
+ *
+ * This file preserves the previous cascade and import order while making the
+ * remaining CSS Modules migration inventory explicit. Move one ownership slice
+ * at a time into a colocated *.module.scss file, then remove its @use here.
+ */
+@use './sections/portfolio-section';
+@use './sections/portfolio-stack';
+@use './sections/hero';
+@use './sections/hero-refinement';
+@use './sections/hero-background';
+@use './sections/current-mission';
+@use './sections/featured-projects';
+@use './sections/engineer-profile';
+@use './sections/skills-technologies';
+@use './sections/delivery-pipeline';
+@use './sections/social';
+@use './sections/testimonials';
+@use './sections/site-footer';
+@use './sections/insights-trust';
+@use './sections/cookie-consent';
+@use './pages/public-route-boundaries';
+@use './sections/light-theme-polish';
+@use './base/ui-polish-closeout';
+@use './sections/motion-choreography';
+@use './base/responsive-system';
+@use './components/tooltip';
+@use './components/projects-registry-editor';

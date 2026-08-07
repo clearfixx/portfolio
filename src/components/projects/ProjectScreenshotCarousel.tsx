@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useEffect, useMemo, useRef, useState } from 'react'
 
 import type { ProjectMediaSlide } from './ProjectMediaCarousel'
+import styles from './ProjectScreenshotCarousel.module.scss'
 
 type ProjectScreenshotCarouselProps = {
   slides: ProjectMediaSlide[]
@@ -83,10 +84,10 @@ export function ProjectScreenshotCarousel({ slides }: ProjectScreenshotCarouselP
   }
 
   return (
-    <div className="project-screenshot-carousel">
+    <div className={styles.carousel}>
       <button
         aria-label="Show previous screenshots"
-        className="project-screenshot-carousel__arrow project-screenshot-carousel__arrow--previous"
+        className={`${styles.arrow} ${styles.previous}`}
         disabled={activeIndex === 0}
         type="button"
         onClick={() => goTo(activeIndex - 1)}
@@ -94,11 +95,11 @@ export function ProjectScreenshotCarousel({ slides }: ProjectScreenshotCarouselP
         <ChevronLeftIcon aria-hidden="true" size={22} />
       </button>
 
-      <div className="project-screenshot-carousel__viewport" ref={viewportRef}>
-        <div className="project-screenshot-carousel__track">
+      <div className={styles.viewport} ref={viewportRef}>
+        <div className={styles.track}>
           {slides.map((slide, index) => (
             <figure
-              className="project-screenshot-carousel__slide"
+              className={styles.slide}
               data-slide-index={index}
               key={`${slide.src}-${index}`}
               style={{ flexBasis: getSlideBasis(visibleSlides) }}
@@ -119,7 +120,7 @@ export function ProjectScreenshotCarousel({ slides }: ProjectScreenshotCarouselP
 
       <button
         aria-label="Show next screenshots"
-        className="project-screenshot-carousel__arrow project-screenshot-carousel__arrow--next"
+        className={`${styles.arrow} ${styles.next}`}
         disabled={activeIndex === maxIndex}
         type="button"
         onClick={() => goTo(activeIndex + 1)}
@@ -128,12 +129,12 @@ export function ProjectScreenshotCarousel({ slides }: ProjectScreenshotCarouselP
       </button>
 
       {pageIndexes.length > 1 ? (
-        <div className="project-screenshot-carousel__pagination" aria-label="Screenshot pages">
+        <div className={styles.pagination} aria-label="Screenshot pages">
           {pageIndexes.map((index) => (
             <button
               aria-label={`Show screenshot group ${index + 1}`}
               aria-pressed={index === activeIndex}
-              className={index === activeIndex ? 'is-active' : undefined}
+              className={index === activeIndex ? styles.active : undefined}
               key={index}
               type="button"
               onClick={() => goTo(index)}

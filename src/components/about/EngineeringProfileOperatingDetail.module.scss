@@ -1,0 +1,81 @@
+/* Engineering profile operating-system current-stage detail. */
+
+.systemDetail {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(180px, 0.75fr);
+  gap: 1rem;
+  margin: 0 1rem 1rem;
+  padding: 1.15rem;
+  border: 1px solid rgba(99, 216, 225, 0.12);
+  border-radius: 8px;
+  background: rgba(3, 15, 25, 0.56);
+}
+
+
+.systemDetail span {
+  color: var(--profile-muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+
+.systemDetail strong {
+  display: block;
+  margin-top: 0.45rem;
+  color: var(--profile-cyan);
+  font-size: 0.82rem;
+}
+
+
+.systemDetail p {
+  margin: 0.5rem 0 0;
+  color: var(--profile-soft);
+  font-size: 0.7rem;
+  line-height: 1.58;
+}
+
+
+.systemDetail ul {
+  display: grid;
+  align-content: center;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+
+.systemDetail li {
+  position: relative;
+  padding-left: 1rem;
+  color: var(--profile-muted);
+  font-size: 0.64rem;
+}
+
+
+.systemDetail li::before {
+  position: absolute;
+  top: 0.48em;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  content: '';
+  background: var(--profile-purple);
+  box-shadow: 0 0 8px rgba(166, 108, 255, 0.7);
+}
+
+
+:global([data-theme='light']) .systemDetail {
+  background: rgba(255, 255, 255, 0.74);
+}
+
+@media (max-width: 760px) {
+
+
+.systemDetail {
+    grid-template-columns: 1fr;
+  }
+}

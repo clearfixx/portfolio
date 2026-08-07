@@ -1,24 +1,5 @@
 /* Phase 3.2 Hero refinement — closer to approved mockup */
 
-.logo__mark {
-  svg {
-    // width: 80px;
-    // height: 80px;
-  }
-
-  position: relative;
-  width: auto;
-  height: auto;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  color: var(--color-teal);
-  font-size: 28px;
-  font-weight: 900;
-  letter-spacing: -0.06em;
-}
-
 // .logo__mark::before {
 //   content: '[ ';
 //   margin-right: 0px;
@@ -35,24 +16,6 @@
 //   font-weight: 200;
 //   font-size: 35px;
 // }
-
-.logo__mark span {
-  color: var(--color-teal);
-}
-
-.logo__name {
-  font-size: 17px;
-}
-
-.logo__role {
-  color: var(--color-text);
-  font-size: 13px;
-  line-height: 1;
-}
-
-.logo__role i {
-  margin-left: 6px;
-}
 
 .home-hero__grid {
   grid-template-columns: 310px minmax(440px, 1fr) 400px;

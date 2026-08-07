@@ -2,6 +2,11 @@ import { ActivityIcon, CodeIcon, LayersIcon, PackageIcon } from '@/components/ic
 import type { ProjectDirectoryItem } from '@/lib/cms/public-projects'
 import type { ReactNode } from 'react'
 
+import styles from './ProjectRegistryShell.module.scss'
+import workspaceStyles from './ProjectRegistryWorkspace.module.scss'
+import headerStyles from './ProjectRegistryHeader.module.scss'
+import statusBarStyles from './ProjectRegistryStatusBar.module.scss'
+import telemetryStyles from './ProjectRegistryTelemetry.module.scss'
 type ProjectRegistryPreviewProps = {
   project: Pick<
     ProjectDirectoryItem,
@@ -34,6 +39,15 @@ const PREVIEW_VARIANT_LABELS: Record<PreviewVariant, string> = {
   platform: 'Platform registry',
   product: 'Product runtime',
   service: 'Service module',
+}
+
+const previewVariantClass: Record<PreviewVariant, string> = {
+  commerce: styles.commerce,
+  community: styles.community,
+  data: styles.data,
+  platform: styles.platform,
+  product: styles.product,
+  service: styles.service,
 }
 
 function includesAny(value: string, terms: string[]) {
@@ -137,21 +151,23 @@ function buildPreview(project: ProjectRegistryPreviewProps['project']): PreviewD
       variant,
       lines: [
         <>
-          <span className="is-keyword">export const</span>{' '}
-          <span className="is-variable">checkout</span> ={' '}
-          <span className="is-function">createFlow</span>({'{'}
+          <span className={workspaceStyles.keyword}>export const</span>{' '}
+          <span className={workspaceStyles.variable}>checkout</span> ={' '}
+          <span className={workspaceStyles.functionToken}>createFlow</span>({'{'}
         </>,
         <>
-          {'  '}storefront: <span className="is-string">&apos;{primaryTechnology}&apos;</span>,
+          {'  '}storefront:{' '}
+          <span className={workspaceStyles.stringToken}>&apos;{primaryTechnology}&apos;</span>,
         </>,
         <>
-          {'  '}payments: <span className="is-string">&apos;secured&apos;</span>,
+          {'  '}payments: <span className={workspaceStyles.stringToken}>&apos;secured&apos;</span>,
         </>,
         <>
-          {'  '}inventory: <span className="is-string">&apos;realtime&apos;</span>,
+          {'  '}inventory: <span className={workspaceStyles.stringToken}>&apos;realtime&apos;</span>
+          ,
         </>,
         <>
-          {'  '}progress: <span className="is-number">{project.progress}</span>,
+          {'  '}progress: <span className={workspaceStyles.numberToken}>{project.progress}</span>,
         </>,
         <>{'}'})</>,
       ],
@@ -173,21 +189,22 @@ function buildPreview(project: ProjectRegistryPreviewProps['project']): PreviewD
       variant,
       lines: [
         <>
-          <span className="is-keyword">export const</span>{' '}
-          <span className="is-variable">network</span> ={' '}
-          <span className="is-function">connectCommunity</span>({'{'}
+          <span className={workspaceStyles.keyword}>export const</span>{' '}
+          <span className={workspaceStyles.variable}>network</span> ={' '}
+          <span className={workspaceStyles.functionToken}>connectCommunity</span>({'{'}
         </>,
         <>
-          {'  '}identity: <span className="is-string">&apos;{primaryTechnology}&apos;</span>,
+          {'  '}identity:{' '}
+          <span className={workspaceStyles.stringToken}>&apos;{primaryTechnology}&apos;</span>,
         </>,
         <>
-          {'  '}presence: <span className="is-string">&apos;realtime&apos;</span>,
+          {'  '}presence: <span className={workspaceStyles.stringToken}>&apos;realtime&apos;</span>,
         </>,
         <>
-          {'  '}spaces: <span className="is-string">&apos;federated&apos;</span>,
+          {'  '}spaces: <span className={workspaceStyles.stringToken}>&apos;federated&apos;</span>,
         </>,
         <>
-          {'  '}progress: <span className="is-number">{project.progress}</span>,
+          {'  '}progress: <span className={workspaceStyles.numberToken}>{project.progress}</span>,
         </>,
         <>{'}'})</>,
       ],
@@ -209,20 +226,21 @@ function buildPreview(project: ProjectRegistryPreviewProps['project']): PreviewD
       variant,
       lines: [
         <>
-          <span className="is-keyword">const</span> <span className="is-variable">pipeline</span> ={' '}
-          <span className="is-function">composeModel</span>({'{'}
+          <span className={workspaceStyles.keyword}>const</span>{' '}
+          <span className={workspaceStyles.variable}>pipeline</span> ={' '}
+          <span className={workspaceStyles.functionToken}>composeModel</span>({'{'}
         </>,
         <>
-          {'  '}source: <span className="is-string">&apos;events&apos;</span>,
+          {'  '}source: <span className={workspaceStyles.stringToken}>&apos;events&apos;</span>,
         </>,
         <>
-          {'  '}inference: <span className="is-string">&apos;edge&apos;</span>,
+          {'  '}inference: <span className={workspaceStyles.stringToken}>&apos;edge&apos;</span>,
         </>,
         <>
-          {'  '}cache: <span className="is-string">&apos;vector&apos;</span>,
+          {'  '}cache: <span className={workspaceStyles.stringToken}>&apos;vector&apos;</span>,
         </>,
         <>
-          {'  '}progress: <span className="is-number">{project.progress}</span>,
+          {'  '}progress: <span className={workspaceStyles.numberToken}>{project.progress}</span>,
         </>,
         <>{'}'})</>,
       ],
@@ -244,21 +262,21 @@ function buildPreview(project: ProjectRegistryPreviewProps['project']): PreviewD
       variant,
       lines: [
         <>
-          <span className="is-decorator">@Module</span>({'{'}
+          <span className={workspaceStyles.decorator}>@Module</span>({'{'}
         </>,
         <>
-          {'  '}imports: [<span className="is-class">{primaryTechnology}</span>],
+          {'  '}imports: [<span className={workspaceStyles.classToken}>{primaryTechnology}</span>],
         </>,
         <>
-          {'  '}providers: [<span className="is-class">ProjectService</span>],
+          {'  '}providers: [<span className={workspaceStyles.classToken}>ProjectService</span>],
         </>,
         <>
-          {'  '}exports: [<span className="is-class">ProjectService</span>],
+          {'  '}exports: [<span className={workspaceStyles.classToken}>ProjectService</span>],
         </>,
         <>{'}'})</>,
         <>
-          <span className="is-keyword">export class</span>{' '}
-          <span className="is-class">RuntimeModule</span> {'{}'}
+          <span className={workspaceStyles.keyword}>export class</span>{' '}
+          <span className={workspaceStyles.classToken}>RuntimeModule</span> {'{}'}
         </>,
       ],
     }
@@ -282,26 +300,27 @@ function buildPreview(project: ProjectRegistryPreviewProps['project']): PreviewD
       variant,
       lines: [
         <>
-          <span className="is-keyword">export const</span>{' '}
-          <span className="is-variable">platform</span> ={' '}
-          <span className="is-function">defineSystem</span>({'{'}
+          <span className={workspaceStyles.keyword}>export const</span>{' '}
+          <span className={workspaceStyles.variable}>platform</span> ={' '}
+          <span className={workspaceStyles.functionToken}>defineSystem</span>({'{'}
         </>,
         <>
-          {'  '}id: <span className="is-string">&apos;{project.slug}&apos;</span>,
+          {'  '}id: <span className={workspaceStyles.stringToken}>&apos;{project.slug}&apos;</span>,
         </>,
         <>
           {'  '}modules: [
-          <span className="is-string">
+          <span className={workspaceStyles.stringToken}>
             &apos;{primaryTechnology}&apos;, &apos;{secondaryTechnology}&apos;, &apos;
             {tertiaryTechnology}&apos;
           </span>
           ],
         </>,
         <>
-          {'  '}stage: <span className="is-string">&apos;{project.stage}&apos;</span>,
+          {'  '}stage:{' '}
+          <span className={workspaceStyles.stringToken}>&apos;{project.stage}&apos;</span>,
         </>,
         <>
-          {'  '}progress: <span className="is-number">{project.progress}</span>,
+          {'  '}progress: <span className={workspaceStyles.numberToken}>{project.progress}</span>,
         </>,
         <>{'}'})</>,
       ],
@@ -325,25 +344,27 @@ function buildPreview(project: ProjectRegistryPreviewProps['project']): PreviewD
     variant,
     lines: [
       <>
-        <span className="is-keyword">export const</span>{' '}
-        <span className="is-variable">product</span> ={' '}
-        <span className="is-function">defineProject</span>({'{'}
+        <span className={workspaceStyles.keyword}>export const</span>{' '}
+        <span className={workspaceStyles.variable}>product</span> ={' '}
+        <span className={workspaceStyles.functionToken}>defineProject</span>({'{'}
       </>,
       <>
-        {'  '}name: <span className="is-string">&apos;{project.title}&apos;</span>,
+        {'  '}name: <span className={workspaceStyles.stringToken}>&apos;{project.title}&apos;</span>
+        ,
       </>,
       <>
         {'  '}stack: [
-        <span className="is-string">
+        <span className={workspaceStyles.stringToken}>
           &apos;{primaryTechnology}&apos;, &apos;{secondaryTechnology}&apos;
         </span>
         ],
       </>,
       <>
-        {'  '}stage: <span className="is-string">&apos;{project.stage}&apos;</span>,
+        {'  '}stage:{' '}
+        <span className={workspaceStyles.stringToken}>&apos;{project.stage}&apos;</span>,
       </>,
       <>
-        {'  '}progress: <span className="is-number">{project.progress}</span>,
+        {'  '}progress: <span className={workspaceStyles.numberToken}>{project.progress}</span>,
       </>,
       <>{'}'})</>,
     ],
@@ -356,33 +377,33 @@ export function ProjectRegistryPreview({ project }: ProjectRegistryPreviewProps)
   return (
     <div
       aria-hidden="true"
-      className={`project-preview project-preview--${preview.variant}`}
+      className={`${styles.preview} ${previewVariantClass[preview.variant]}`}
       data-preview={preview.variant}
     >
-      <header className="project-preview__header">
-        <span className="project-preview__window-controls">
+      <header className={headerStyles.header}>
+        <span className={headerStyles.windowControls}>
           <i />
           <i />
           <i />
         </span>
 
-        <div className="project-preview__tabs">
-          <span className="project-preview__tab is-active">
+        <div className={headerStyles.tabs}>
+          <span className={headerStyles.tab} data-active>
             <CodeIcon aria-hidden="true" size={12} />
             {preview.fileName}
           </span>
-          <span className="project-preview__tab">
+          <span className={headerStyles.tab}>
             <LayersIcon aria-hidden="true" size={12} />
             {preview.secondaryFile}
           </span>
         </div>
 
-        <span className="project-preview__branch">main</span>
+        <span className={headerStyles.branch}>main</span>
       </header>
 
-      <div className="project-preview__workspace">
-        <aside className="project-preview__activity">
-          <span className="is-active">
+      <div className={workspaceStyles.workspace}>
+        <aside className={workspaceStyles.activity}>
+          <span className={workspaceStyles.active}>
             <CodeIcon aria-hidden="true" size={15} />
           </span>
           <span>
@@ -396,9 +417,12 @@ export function ProjectRegistryPreview({ project }: ProjectRegistryPreviewProps)
           </span>
         </aside>
 
-        <ol className="project-preview__code">
+        <ol className={workspaceStyles.code}>
           {preview.lines.map((line, index) => (
-            <li className={index + 1 === preview.activeLine ? 'is-active' : undefined} key={index}>
+            <li
+              className={index + 1 === preview.activeLine ? workspaceStyles.active : undefined}
+              key={index}
+            >
               <span>{String(index + 1).padStart(2, '0')}</span>
               <code>{line}</code>
             </li>
@@ -406,17 +430,17 @@ export function ProjectRegistryPreview({ project }: ProjectRegistryPreviewProps)
         </ol>
       </div>
 
-      <div className="project-preview__telemetry">
+      <div className={telemetryStyles.telemetry}>
         {preview.telemetry.map((item, index) => (
           <span key={item.label}>
-            <i className={index === 0 ? 'is-live' : undefined} />
+            <i className={index === 0 ? telemetryStyles.live : undefined} />
             <small>{item.label}</small>
             <strong>{item.value}</strong>
           </span>
         ))}
       </div>
 
-      <footer className="project-preview__statusbar">
+      <footer className={statusBarStyles.statusbar}>
         <span>
           <i />
           {PREVIEW_VARIANT_LABELS[preview.variant]}
@@ -429,4 +453,4 @@ export function ProjectRegistryPreview({ project }: ProjectRegistryPreviewProps)
   )
 }
 
-// project-preview-system-v33
+// project-registry-preview-css-module-v1

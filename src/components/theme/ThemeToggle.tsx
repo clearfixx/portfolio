@@ -3,6 +3,8 @@
 import { useTheme } from 'next-themes'
 import { useSyncExternalStore } from 'react'
 
+import styles from './ThemeToggle.module.scss'
+
 type ThemeViewTransition = {
   finished: Promise<void>
 }
@@ -112,17 +114,17 @@ export function ThemeToggle() {
 
   return (
     <button
-      className="theme-toggle"
+      className={styles.toggle}
       type="button"
       aria-label={isThemeReady ? `Switch to ${nextTheme} theme` : 'Toggle color theme'}
       aria-pressed={isThemeReady ? isLightTheme : undefined}
       onClick={toggleTheme}
     >
-      <span className="theme-toggle__icon theme-toggle__icon--moon">
+      <span className={`${styles.icon} ${styles.moon}`}>
         <MoonIcon />
       </span>
 
-      <span className="theme-toggle__icon theme-toggle__icon--sun">
+      <span className={`${styles.icon} ${styles.sun}`}>
         <SunIcon />
       </span>
     </button>

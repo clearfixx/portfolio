@@ -1,0 +1,9 @@
+.frame {
+  position: relative;
+  border-bottom: 1px solid rgb(var(--rgb-cyan) / 14%);
+  padding-bottom: var(--public-page-hero-divider-space);
+}
+
+.frame[data-public-page-hero-variant='detail'] {
+  border-bottom-color: rgb(var(--rgb-cyan) / 16%);
+}

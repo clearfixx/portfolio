@@ -1,0 +1,45 @@
+/* Public empty-state primitive. */
+
+.emptyState {
+  display: grid;
+  min-height: 320px;
+  place-items: center;
+  align-content: center;
+  gap: 8px;
+  border: 1px dashed rgb(var(--rgb-cyan) / 24%);
+  border-radius: 18px;
+  padding: 44px;
+  background: rgb(var(--rgb-surface-card) / 46%);
+  text-align: center;
+}
+
+.signal {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-bottom: 12px;
+  background: rgb(var(--rgb-cyan));
+  box-shadow: 0 0 18px rgb(var(--rgb-cyan) / 78%);
+}
+
+.emptyState p {
+  margin: 0;
+  color: rgb(var(--rgb-cyan));
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.emptyState h2 {
+  margin: 0;
+  color: rgb(var(--rgb-text-strong));
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  letter-spacing: -0.04em;
+}
+
+.emptyState > span:last-child {
+  max-width: 540px;
+  color: rgb(var(--rgb-text-muted));
+}

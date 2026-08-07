@@ -1,0 +1,326 @@
+/* navbar-base-layer:start */
+/* Base desktop navigation and mobile menu trigger. Source order: layout → responsive → legacy overrides. */
+
+/* migrated from src/app/(frontend)/styles/base/_layout.scss */
+
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 42px;
+  position: relative;
+}
+
+.links {
+  display: flex;
+  gap: 42px;
+}
+
+.link {
+  position: relative;
+  color: rgb(var(--rgb-nav-link));
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 88px;
+  transition: all ease-in-out 0.3s;
+  // transition:
+  //   color 380ms var(--ease-out),
+  //   text-shadow 380ms var(--ease-out),
+  //   transform 380ms var(--ease-out);
+}
+
+.link:hover {
+  color: rgb(var(--rgb-nav-link-hover));
+  transform: translateY(-1px);
+}
+
+.link:global(.is-active) {
+  color: var(--color-cyan);
+  transition:
+    color 380ms var(--ease-out),
+    text-shadow 380ms var(--ease-out),
+    transform 380ms var(--ease-out);
+}
+
+.link:global(.is-active)::after {
+  position: absolute;
+  left: 50%;
+  bottom: 0px;
+  width: 54px;
+  height: 1px;
+  background: var(--color-cyan);
+  box-shadow: 0 0 14px var(--color-cyan);
+  content: '';
+  transform: translateX(-50%);
+}
+
+.link:global(.is-active)::before {
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-cyan);
+  content: '';
+  transform: translateX(-50%);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.letsTalk {
+  display: inline-flex;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid rgb(var(--rgb-cyan) / 26%);
+  border-radius: 6px;
+  padding: 0 19px 0 21px;
+  background:
+    linear-gradient(180deg, rgb(var(--rgb-white) / 5.5%), rgb(var(--rgb-white) / 1.6%)),
+    rgb(var(--rgb-surface-control) / 78%);
+  box-shadow:
+    inset 0 1px 0 rgb(var(--rgb-white) / 6%),
+    0 0 22px rgb(var(--rgb-cyan) / 12%);
+  color: rgb(var(--rgb-text-cta));
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  transition:
+    border-color 180ms var(--ease-out),
+    color 180ms var(--ease-out),
+    box-shadow 180ms var(--ease-out),
+    transform 180ms var(--ease-out);
+}
+
+.letsTalk:hover {
+  border-color: rgb(var(--rgb-cyan) / 48%);
+  color: var(--color-cyan);
+  box-shadow: 0 0 24px rgb(var(--rgb-cyan) / 18%);
+  transform: translateY(-1px);
+}
+
+/* migrated from src/app/(frontend)/styles/base/_responsive.scss */
+@media (max-width: 1440px) {
+  .navbar {
+    gap: 34px;
+  }
+
+  .links {
+    gap: 34px;
+  }
+}
+
+@media (max-width: 720px) {
+  .actions {
+    display: none;
+  }
+
+  .navbar,
+  .links {
+    gap: 12px;
+  }
+
+  .link {
+    font-size: 10px;
+  }
+}
+
+/* migrated from src/app/(frontend)/styles/base/_ui-polish-closeout.scss */
+
+.link:focus-visible {
+  outline: none;
+  box-shadow: none;
+  text-decoration-line: underline;
+  text-decoration-color: rgb(var(--rgb-cyan) / 92%);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 8px;
+}
+
+.link {
+  transition:
+    color 360ms var(--ease-out),
+    text-shadow 360ms var(--ease-out),
+    transform 240ms var(--ease-out);
+}
+
+.link::after {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 54px;
+  height: 1px;
+  background: var(--color-cyan);
+  box-shadow: 0 0 14px var(--color-cyan);
+  content: '';
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) scaleX(0.24);
+  transform-origin: center;
+  transition:
+    opacity 260ms var(--ease-out),
+    transform 380ms var(--ease-out),
+    box-shadow 380ms var(--ease-out);
+}
+
+.link::before {
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-cyan);
+  content: '';
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) scale(0.35);
+  transition:
+    opacity 240ms var(--ease-out),
+    transform 360ms var(--ease-out);
+}
+
+.link:global(.is-active)::after {
+  opacity: 1;
+  transform: translateX(-50%) scaleX(1);
+}
+
+.link:global(.is-active)::before {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link,
+  .link::before,
+  .link::after {
+    transition: none;
+  }
+}
+
+/* migrated from src/app/(frontend)/styles/base/_responsive-system.scss */
+
+.mobileToggle {
+  display: none;
+}
+
+.mobileToggle {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border: 1px solid rgb(var(--rgb-cyan) / 24%);
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgb(var(--rgb-white) / 5%), rgb(var(--rgb-white) / 1.5%)),
+    rgb(var(--rgb-surface-control) / 88%);
+  color: rgb(var(--rgb-text-bright));
+  box-shadow:
+    inset 0 1px 0 rgb(var(--rgb-white) / 5%),
+    0 0 20px rgb(var(--rgb-cyan) / 8%);
+  cursor: pointer;
+}
+
+.mobileToggle span {
+  position: absolute;
+  left: 50%;
+  width: 20px;
+  height: 1.5px;
+  border-radius: 999px;
+  background: currentColor;
+  transform: translateX(-50%);
+}
+
+.mobileToggle span:nth-child(1) {
+  top: 15px;
+}
+
+.mobileToggle span:nth-child(2) {
+  top: 22px;
+  width: 14px;
+  margin-left: 3px;
+  background: rgb(var(--rgb-cyan));
+}
+
+.mobileToggle span:nth-child(3) {
+  top: 29px;
+}
+
+@media (max-width: 1320px) {
+  .navbar {
+    gap: 24px;
+  }
+
+  .links {
+    gap: 24px;
+  }
+
+  .link {
+    min-height: 80px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 900px) {
+  .navbar {
+    margin-left: auto;
+  }
+
+  .links,
+  .actions {
+    display: none;
+  }
+
+  .mobileToggle {
+    display: grid;
+  }
+}
+
+@media (max-width: 640px) {
+  .mobileToggle {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (hover: none) {
+  .letsTalk:hover {
+    transform: none;
+  }
+}
+/* navbar-mobile-drawer-layer:end */
+
+/*
+ * Navbar CMS navigation layer.
+ *
+ * Base navbar, site-header, mobile drawer geometry, and document
+ * scroll/hash behavior remain global during this migration stage.
+ */
+
+.links {
+  align-items: stretch;
+}
+
+.link:focus-visible,
+.letsTalk:focus-visible {
+  border-radius: 8px;
+  outline: 2px solid rgb(var(--rgb-cyan));
+  outline-offset: 4px;
+}
+
+.letsTalk:global(.is-active) {
+  border-color: rgb(var(--rgb-cyan) / 58%);
+  color: var(--color-cyan);
+  box-shadow:
+    inset 0 1px 0 rgb(var(--rgb-white) / 7%),
+    0 0 28px rgb(var(--rgb-cyan) / 18%);
+}

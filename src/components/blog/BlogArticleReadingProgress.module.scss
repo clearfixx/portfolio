@@ -1,0 +1,55 @@
+/* Blog article reading progress meter. */
+
+.progressMeter {
+  display: grid;
+  gap: 0.52rem;
+}
+
+
+.progressMeter > div {
+  position: relative;
+  width: 100%;
+  height: 0.25rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.065);
+}
+
+
+.progressMeter span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--article-cyan), var(--article-violet));
+  box-shadow: 0 0 14px rgba(19, 242, 227, 0.2);
+  transition: width 180ms ease-out;
+}
+
+
+.progressMeter strong {
+  color: #9db0b9;
+  font-size: 0.65rem;
+}
+
+
+.progressMeterComplete span {
+  background: linear-gradient(90deg, #74f0a9, var(--article-cyan));
+}
+
+
+.progressMeterComplete strong {
+  color: #74f0a9;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+.progressMeter span {
+    transition: none;
+  }
+}
+
+
+:global([data-theme='light']) .progressMeter > div {
+  background: rgba(35, 79, 96, 0.09);
+}

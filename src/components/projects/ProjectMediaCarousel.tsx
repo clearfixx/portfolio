@@ -4,6 +4,8 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@/components/icons/project'
 import Image from 'next/image'
 import { useState } from 'react'
 
+import styles from './ProjectMediaCarousel.module.scss'
+
 export type ProjectMediaSlide = {
   src: string
   alt: string
@@ -40,8 +42,8 @@ export function ProjectMediaCarousel({
   }
 
   return (
-    <div className={`project-media-carousel project-media-carousel--${variant}`}>
-      <div className="project-media-carousel__stage">
+    <div className={styles.carousel} data-variant={variant}>
+      <div className={styles.stage}>
         <Image
           alt={activeSlide.alt}
           fill
@@ -56,7 +58,7 @@ export function ProjectMediaCarousel({
           <>
             <button
               aria-label="Show previous project image"
-              className="project-media-carousel__arrow project-media-carousel__arrow--previous"
+              className={`${styles.arrow} ${styles.previous}`}
               type="button"
               onClick={showPrevious}
             >
@@ -64,7 +66,7 @@ export function ProjectMediaCarousel({
             </button>
             <button
               aria-label="Show next project image"
-              className="project-media-carousel__arrow project-media-carousel__arrow--next"
+              className={`${styles.arrow} ${styles.next}`}
               type="button"
               onClick={showNext}
             >
@@ -73,18 +75,18 @@ export function ProjectMediaCarousel({
           </>
         ) : null}
 
-        <span className="project-media-carousel__counter">
+        <span className={styles.counter}>
           {String(activeIndex + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
         </span>
       </div>
 
       {hasNavigation ? (
-        <div className="project-media-carousel__thumbs" aria-label="Project image thumbnails">
+        <div className={styles.thumbs} aria-label="Project image thumbnails">
           {slides.map((slide, index) => (
             <button
               aria-label={`Show project image ${index + 1}`}
               aria-pressed={index === activeIndex}
-              className={index === activeIndex ? 'is-active' : undefined}
+              className={index === activeIndex ? styles.active : undefined}
               key={`${slide.src}-${index}`}
               type="button"
               onClick={() => setActiveIndex(index)}

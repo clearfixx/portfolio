@@ -1,0 +1,31 @@
+/* Previous and next blog rail tags. */
+
+.tags {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+}
+
+
+.tags li {
+  padding: 0.32rem 0.45rem;
+  border: 1px solid var(--journal-line);
+  border-radius: 4px;
+  color: #9fb0b9;
+  font-size: 0.56rem;
+}
+
+
+:global([data-theme='light']) .tags li {
+  border-color: rgba(35, 79, 96, 0.14);
+  background: rgba(247, 250, 251, 0.88);
+  color: #536c77;
+}

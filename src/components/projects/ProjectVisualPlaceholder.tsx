@@ -1,5 +1,7 @@
 import type { Project } from '@/payload-types'
 
+import styles from './ProjectVisualPlaceholder.module.scss'
+
 type ProjectVisualPlaceholderProps = {
   project: Project
   technologies: string[]
@@ -43,7 +45,7 @@ export function ProjectVisualPlaceholder({
     ]
 
     return (
-      <div className="project-visual-placeholder project-visual-placeholder--screenshots">
+      <div className={`${styles.placeholder} ${styles.screenshots}`}>
         {panels.map((panel) => (
           <article key={panel.eyebrow}>
             <header>
@@ -51,15 +53,15 @@ export function ProjectVisualPlaceholder({
               <i aria-hidden="true" />
             </header>
 
-            <div className="project-visual-placeholder__window">
-              <div className="project-visual-placeholder__rail" aria-hidden="true">
+            <div className={styles.window}>
+              <div className={styles.rail} aria-hidden="true">
                 <span />
                 <span />
                 <span />
                 <span />
               </div>
 
-              <div className="project-visual-placeholder__content">
+              <div className={styles.content}>
                 <small>{project.slug}</small>
                 <strong>{panel.title}</strong>
 
@@ -79,10 +81,10 @@ export function ProjectVisualPlaceholder({
   return (
     <div
       aria-label={`${project.title} project media placeholder`}
-      className="project-visual-placeholder project-visual-placeholder--hero"
+      className={`${styles.placeholder} ${styles.hero}`}
       role="img"
     >
-      <header className="project-visual-placeholder__chrome">
+      <header className={styles.chrome}>
         <span aria-hidden="true">
           <i />
           <i />
@@ -91,17 +93,17 @@ export function ProjectVisualPlaceholder({
         <code>{project.slug}/project.preview.tsx</code>
       </header>
 
-      <div className="project-visual-placeholder__hero-body">
+      <div className={styles.heroBody}>
         <aside aria-hidden="true">
           <strong>PROJECT</strong>
-          <span className="is-active" />
+          <span className={styles.active} />
           <span />
           <span />
           <span />
           <span />
         </aside>
 
-        <div className="project-visual-placeholder__hero-main">
+        <div className={styles.heroMain}>
           <p>PROJECT_PREVIEW</p>
           <h2>{project.title}</h2>
           <span>{project.cardTagline || project.excerpt}</span>

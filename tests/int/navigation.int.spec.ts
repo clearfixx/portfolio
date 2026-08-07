@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import type { Homepage, Navigation as NavigationGlobal } from '@/payload-types'
+import { isNavigationRouteActive } from '@/components/navigation/navigation-route-state'
 import { buildNavigationViewModel } from '@/lib/cms/navigation'
 
 function asHomepage(value: Partial<Homepage>): Homepage {
@@ -211,5 +212,77 @@ describe('navigation view model', () => {
     ])
     expect(result.pagesMenu?.items.map((item) => item.href)).toEqual(['/projects', '/articles'])
     expect(result.cta?.href).toBe('/#contact')
+  })
+})
+
+describe('navigation route state', () => {
+  const createRouteItem = ({ href, match }: { href: string; match: 'exact' | 'prefix' }) => ({
+    href,
+    match,
+  })
+
+  it('keeps Explore active for the canonical Articles index and detail routes', () => {
+    const item = createRouteItem({
+      href: '/articles',
+      match: 'prefix',
+    })
+
+    expect(isNavigationRouteActive('/articles', item)).toBe(true)
+    expect(isNavigationRouteActive('/articles/css-modules', item)).toBe(true)
+  })
+
+  it('treats the legacy Blog item as the Articles route family', () => {
+    const legacyItem = createRouteItem({
+      href: '/blog',
+      match: 'exact',
+    })
+
+    expect(isNavigationRouteActive('/articles', legacyItem)).toBe(true)
+    expect(isNavigationRouteActive('/articles/css-modules', legacyItem)).toBe(true)
+    expect(isNavigationRouteActive('/blog/legacy-post', legacyItem)).toBe(true)
+  })
+
+  it('preserves exact and prefix matching for other internal pages', () => {
+    expect(
+      isNavigationRouteActive(
+        '/projects/portfolio',
+        createRouteItem({
+          href: '/projects',
+          match: 'prefix',
+        }),
+      ),
+    ).toBe(true)
+
+    expect(
+      isNavigationRouteActive(
+        '/about/history',
+        createRouteItem({
+          href: '/about',
+          match: 'exact',
+        }),
+      ),
+    ).toBe(false)
+  })
+
+  it('ignores external links and normalizes trailing slashes', () => {
+    expect(
+      isNavigationRouteActive(
+        '/contacts/',
+        createRouteItem({
+          href: '/contacts/',
+          match: 'exact',
+        }),
+      ),
+    ).toBe(true)
+
+    expect(
+      isNavigationRouteActive(
+        '/articles',
+        createRouteItem({
+          href: 'https://example.com/articles',
+          match: 'prefix',
+        }),
+      ),
+    ).toBe(false)
   })
 })

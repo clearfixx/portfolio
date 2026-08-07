@@ -1,0 +1,84 @@
+/* Engineering profile operating-system telemetry strip. */
+
+.operatingTelemetry {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0 1rem 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(99, 216, 225, 0.1);
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, rgba(25, 229, 231, 0.025), rgba(166, 108, 255, 0.025)),
+    rgba(3, 15, 25, 0.48);
+}
+
+
+.operatingTelemetry > span {
+  display: grid;
+  grid-template-columns: 7px minmax(0, 1fr);
+  gap: 0.25rem 0.55rem;
+  min-height: 62px;
+  align-content: center;
+  padding: 0.75rem 0.9rem;
+  color: var(--profile-muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.46rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+
+.operatingTelemetry > span + span {
+  border-left: 1px solid rgba(99, 216, 225, 0.09);
+}
+
+
+.operatingTelemetry i {
+  width: 6px;
+  height: 6px;
+  align-self: center;
+  border-radius: 50%;
+  background: var(--profile-cyan);
+  box-shadow: 0 0 9px rgba(25, 229, 231, 0.58);
+}
+
+
+.operatingTelemetry > span:nth-child(2) i {
+  background: var(--profile-purple);
+  box-shadow: 0 0 9px rgba(166, 108, 255, 0.58);
+}
+
+
+.operatingTelemetry strong {
+  grid-column: 2;
+  color: var(--profile-text);
+  font-size: 0.58rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+
+:global([data-theme='light']) .operatingTelemetry {
+  background-color: rgba(255, 255, 255, 0.74) !important;
+}
+
+
+@media (max-width: 760px) {
+
+
+.operatingTelemetry {
+    grid-template-columns: 1fr;
+  }
+
+
+.operatingTelemetry > span + span {
+    border-top: 1px solid rgba(99, 216, 225, 0.09);
+    border-left: 0;
+  }
+}
+
+
+.operatingTelemetry > span[data-tone='purple'] > i {
+  background: rgb(var(--rgb-purple));
+  box-shadow: 0 0 16px rgb(var(--rgb-purple) / 64%);
+}

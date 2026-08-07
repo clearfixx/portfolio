@@ -1,0 +1,130 @@
+/* Site header shell, progress indicator, and scroll state. */
+
+/* migrated from src/app/(frontend)/styles/base/_layout.scss */
+.header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  border-bottom: 1px solid transparent;
+  background: transparent;
+  transition:
+    background 260ms var(--ease-out),
+    border-color 260ms var(--ease-out),
+    backdrop-filter 260ms var(--ease-out);
+}
+
+
+.progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  width: 100%;
+  height: 2px;
+  overflow: hidden;
+  pointer-events: none;
+  background: rgb(var(--rgb-header-cyan) / 8%);
+}
+
+
+.progressBar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgb(var(--rgb-header-cyan) / 15%),
+    rgb(var(--rgb-header-cyan) / 95%),
+    rgb(var(--rgb-progress-purple) / 80%)
+  );
+  box-shadow: 0 0 14px rgb(var(--rgb-header-cyan) / 55%);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 90ms linear;
+}
+
+
+.scrolled {
+  border-color: rgb(var(--rgb-cyan) / 14%);
+  background: rgb(var(--rgb-header-scrolled) / var(--header-scrolled-opacity));
+  backdrop-filter: blur(22px);
+}
+
+
+.inner {
+  display: flex;
+  min-height: 88px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+/* migrated from src/app/(frontend)/styles/base/_responsive.scss */
+@media (max-width: 720px) {
+.inner {
+    min-height: 66px;
+  }
+
+}
+
+/* migrated from src/app/(frontend)/styles/base/_ui-polish-closeout.scss */
+.header {
+  background-color: transparent;
+  -webkit-backdrop-filter: blur(0);
+  backdrop-filter: blur(0);
+  transition:
+    background-color 300ms ease-in-out,
+    border-color 300ms ease-in-out,
+    -webkit-backdrop-filter 300ms ease-in-out,
+    backdrop-filter 300ms ease-in-out;
+}
+
+
+.header.scrolled {
+  background-color: rgb(var(--rgb-header-scrolled) / var(--header-scrolled-opacity));
+  -webkit-backdrop-filter: blur(22px);
+  backdrop-filter: blur(22px);
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+.header {
+    transition: none;
+  }
+
+}
+
+/* migrated from src/app/(frontend)/styles/base/_responsive-system.scss */
+@media (max-width: 1320px) {
+.inner {
+    min-height: 80px;
+    gap: 22px;
+  }
+
+}
+
+@media (max-width: 900px) {
+.header {
+    background: rgb(var(--rgb-header-scrolled) / 88%);
+    backdrop-filter: blur(18px);
+  }
+
+
+.inner {
+    min-height: 72px;
+    gap: 16px;
+  }
+
+
+.progress {
+    height: 2px;
+  }
+
+}
+
+@media (max-width: 640px) {
+.inner {
+    min-height: 64px;
+  }
+
+}

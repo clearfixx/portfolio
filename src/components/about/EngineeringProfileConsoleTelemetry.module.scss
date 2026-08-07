@@ -1,0 +1,43 @@
+/* Engineering profile console telemetry. */
+
+
+.consoleTelemetry {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.8rem;
+  left: calc(44% + 1rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--profile-muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.48rem;
+  letter-spacing: 0.08em;
+}
+
+
+.consoleTelemetry span {
+  display: flex;
+  gap: 4px;
+}
+
+
+.consoleTelemetry i {
+  width: 18px;
+  height: 2px;
+  background: rgba(25, 229, 231, 0.2);
+}
+
+
+.consoleTelemetry i:nth-child(2) {
+  background: rgba(166, 108, 255, 0.5);
+}
+
+
+@media (max-width: 760px) {
+
+
+.consoleTelemetry {
+    display: none;
+  }
+}

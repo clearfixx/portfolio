@@ -1,0 +1,17 @@
+/*
+ * Stable global frontend foundation.
+ *
+ * These styles establish runtime tokens, document defaults, layout primitives,
+ * motion/loading infrastructure, and the application-wide navigation shell.
+ * Component-specific styles must not be added here.
+ */
+@use './abstracts/variables';
+
+@use './base/base';
+@use './base/layout';
+@use './base/utilities';
+@use './base/animations';
+@use './base/motion';
+@use './base/loading';
+@use './base/responsive';
+@use './navigation/navbar.scss';

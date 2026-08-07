@@ -19,9 +19,23 @@ import {
   getSiteFooterGitHubFeed,
 } from '@/lib/cms'
 import type { BlogPost, Category, Media } from '@/payload-types'
-
-import styles from '@/app/(frontend)/styles/pages/blog-article.module.scss'
-
+import pageShellStyles from './BlogArticlePageShell.module.scss'
+import discussionStyles from './BlogArticleDiscussion.module.scss'
+import sectionEyebrowStyles from './BlogArticleSectionEyebrow.module.scss'
+import relatedSectionStyles from './BlogArticleRelatedSection.module.scss'
+import articleNavigationStyles from './BlogArticleNavigation.module.scss'
+import railShellStyles from './BlogArticleRailShell.module.scss'
+import seriesCardStyles from './BlogArticleSeriesCard.module.scss'
+import tagsCardStyles from './BlogArticleTagsCard.module.scss'
+import progressCardStyles from './BlogArticleProgressCard.module.scss'
+import authorCardStyles from './BlogArticleAuthorCard.module.scss'
+import layoutStyles from './BlogArticleLayout.module.scss'
+import contentStyles from './BlogArticleRichText.module.scss'
+import takeawayStyles from './BlogArticleTakeaways.module.scss'
+import overviewStyles from './BlogArticleOverview.module.scss'
+import coverStyles from './BlogArticleCover.module.scss'
+import heroShellStyles from './BlogArticleHeroShell.module.scss'
+import statusCardStyles from './BlogArticleStatusCard.module.scss'
 export const revalidate = 300
 
 const longDateFormatter = new Intl.DateTimeFormat('en', {
@@ -229,7 +243,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   return (
     <>
       <PublicPageShell className="journal-article-page" variant="detail">
-        <div className={`${styles.page} ${styles.container}`}>
+        <div className={`${pageShellStyles.page} ${pageShellStyles.container}`}>
           <PublicBreadcrumbs
             items={[
               {
@@ -245,17 +259,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <article aria-labelledby="article-page-title">
             <BlogArticleReveal />
 
-            <PublicPageHeroFrame className={styles.heroGrid} variant="detail">
-              <div className={styles.heroCopy}>
-                <p className={styles.eyebrow}>
+            <PublicPageHeroFrame className={heroShellStyles.heroGrid} variant="detail">
+              <div className={heroShellStyles.heroCopy}>
+                <p className={heroShellStyles.eyebrow}>
                   <span aria-hidden="true">{'//'}</span>
                   {categoryLabel(post)}
                 </p>
 
                 <h1 id="article-page-title">{post.title}</h1>
-                <p className={styles.excerpt}>{post.excerpt}</p>
+                <p className={heroShellStyles.excerpt}>{post.excerpt}</p>
 
-                <div className={styles.heroMeta}>
+                <div className={heroShellStyles.heroMeta}>
                   <span>
                     <ArticleIcon name="calendar" />
                     {publishedAt}
@@ -275,10 +289,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </div>
               </div>
 
-              <aside className={styles.statusCard} aria-label="Article status">
+              <aside
+                aria-label="Article status"
+                className={statusCardStyles.statusCard}
+                data-article-status-card
+              >
                 <div>
                   <span>Status</span>
-                  <strong className={styles.liveStatus}>
+                  <strong className={statusCardStyles.liveStatus}>
                     <i aria-hidden="true" />
                     Published
                   </strong>
@@ -289,7 +307,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </div>
                 <div>
                   <span>Difficulty</span>
-                  <strong className={styles.difficulty}>{difficulty}</strong>
+                  <strong className={statusCardStyles.difficulty}>{difficulty}</strong>
                 </div>
                 <div>
                   <span>Version</span>
@@ -298,11 +316,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </aside>
             </PublicPageHeroFrame>
 
-            <div className={styles.articleGrid}>
-              <aside className={styles.leftRail}>
+            <div className={layoutStyles.articleGrid}>
+              <aside className={layoutStyles.leftRail}>
                 <BlogArticleToc items={tocItems} />
 
-                <div className={styles.leftCta}>
+                <div className={layoutStyles.leftCta}>
                   <span>Enjoying the read?</span>
                   <p>Get new architecture notes and implementation lessons.</p>
                   <Link href="/contacts">
@@ -312,9 +330,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </div>
               </aside>
 
-              <div className={styles.articleColumn}>
+              <div className={layoutStyles.articleColumn}>
                 {cover?.url ? (
-                  <figure className={styles.cover}>
+                  <figure className={coverStyles.cover}>
                     <Image
                       alt={cover.alt}
                       fill
@@ -325,7 +343,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     {cover.caption ? <figcaption>{cover.caption}</figcaption> : null}
                   </figure>
                 ) : (
-                  <div className={styles.coverFallback} aria-hidden="true">
+                  <div className={coverStyles.coverFallback} aria-hidden="true">
                     <div>
                       <span>AUTH</span>
                       <span>API</span>
@@ -335,11 +353,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </div>
                 )}
 
-                <section className={styles.overview} data-article-reveal id="overview">
-                  <p className={styles.sectionEyebrow}>Overview</p>
+                <section className={overviewStyles.overview} data-article-reveal id="overview">
+                  <p className={sectionEyebrowStyles.sectionEyebrow} data-article-section-eyebrow>
+                    Overview
+                  </p>
                   <p>{post.excerpt}</p>
 
-                  <div className={styles.note}>
+                  <div className={overviewStyles.note}>
                     <span>Engineering note</span>
                     <p>
                       The strongest architecture decisions are the ones that remain understandable
@@ -348,13 +368,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </div>
                 </section>
 
-                <section className={styles.richText} id="article-content">
+                <section className={contentStyles.richText} id="article-content">
                   <BlogPostRichText data={post.content} />
                 </section>
 
                 {keyTakeaways.length > 0 ? (
-                  <section className={styles.takeaways} data-article-reveal id="key-takeaways">
-                    <p className={styles.sectionEyebrow}>Key takeaways</p>
+                  <section
+                    className={takeawayStyles.takeaways}
+                    data-article-reveal
+                    id="key-takeaways"
+                  >
+                    <p className={sectionEyebrowStyles.sectionEyebrow} data-article-section-eyebrow>
+                      Key takeaways
+                    </p>
                     <div>
                       {keyTakeaways.map((takeaway, index) => (
                         <article key={takeaway.id ?? `${post.id}-takeaway-${index}`}>
@@ -372,7 +398,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   title={post.title}
                 />
 
-                <nav className={styles.articleNavigation} aria-label="Article navigation">
+                <nav
+                  className={articleNavigationStyles.articleNavigation}
+                  aria-label="Article navigation"
+                >
                   {previousPost ? (
                     <Link href={`/blog/${previousPost.slug}`}>
                       <span>Previous article</span>
@@ -391,9 +420,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </nav>
               </div>
 
-              <aside className={styles.rightRail}>
-                <div className={styles.authorCard}>
-                  <div className={styles.authorAvatar}>
+              <aside className={railShellStyles.rightRail}>
+                <div className={authorCardStyles.authorCard}>
+                  <div className={authorCardStyles.authorAvatar}>
                     {authorPortrait?.url ? (
                       <Image
                         alt={authorPortrait.alt || `Portrait of ${authorName}`}
@@ -420,7 +449,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </Link>
                 </div>
 
-                <div className={styles.progressCard}>
+                <div className={progressCardStyles.progressCard}>
                   <p>Reading progress</p>
                   <BlogArticleActions mode="progress" slug={post.slug} title={post.title} />
                   <div>
@@ -430,7 +459,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </div>
 
                 {tags.length > 0 ? (
-                  <div className={styles.tagsCard}>
+                  <div className={tagsCardStyles.tagsCard}>
                     <p>
                       <ArticleIcon name="tag" />
                       Tags
@@ -445,7 +474,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </div>
                 ) : null}
 
-                <div className={styles.seriesCard}>
+                <div className={seriesCardStyles.seriesCard}>
                   <p>
                     <ArticleIcon name="folder" />
                     Series
@@ -458,13 +487,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             {relatedPosts.length > 0 ? (
               <section
-                className={styles.related}
+                className={relatedSectionStyles.related}
                 data-article-reveal
                 id="related-articles"
                 aria-labelledby="related-articles-title"
               >
                 <header>
-                  <p className={styles.sectionEyebrow}>Continue reading</p>
+                  <p className={sectionEyebrowStyles.sectionEyebrow} data-article-section-eyebrow>
+                    Continue reading
+                  </p>
                   <h2 id="related-articles-title">Related articles</h2>
                 </header>
 
@@ -474,11 +505,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
                     return (
                       <Link
-                        className={styles.relatedCard}
+                        className={relatedSectionStyles.relatedCard}
                         href={`/blog/${relatedPost.slug}`}
                         key={relatedPost.id}
                       >
-                        <div className={styles.relatedImage}>
+                        <div className={relatedSectionStyles.relatedImage}>
                           {relatedCover?.url ? (
                             <Image
                               alt={relatedCover.alt}
@@ -494,7 +525,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                           )}
                         </div>
 
-                        <div className={styles.relatedContent}>
+                        <div className={relatedSectionStyles.relatedContent}>
                           <span>{categoryLabel(relatedPost)}</span>
                           <h3>{relatedPost.title}</h3>
                           <p>
@@ -508,9 +539,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </section>
             ) : null}
 
-            <section className={styles.discuss} data-article-reveal>
+            <section className={discussionStyles.discuss} data-article-reveal>
               <div>
-                <p className={styles.sectionEyebrow}>Questions?</p>
+                <p className={sectionEyebrowStyles.sectionEyebrow} data-article-section-eyebrow>
+                  Questions?
+                </p>
                 <h2>Let&apos;s discuss the implementation.</h2>
                 <p>Have a question about the architecture or want to build something similar?</p>
               </div>

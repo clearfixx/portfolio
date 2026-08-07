@@ -1,0 +1,142 @@
+/* Engineering profile operating-system process steps. */
+
+/* About page operating system section. */
+
+
+.operatingSteps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.45rem;
+  margin: 0;
+  padding: 2rem 1.2rem 1.35rem;
+  list-style: none;
+}
+
+
+.operatingSteps::before {
+  position: absolute;
+  top: 3.2rem;
+  right: 3.5rem;
+  left: 3.5rem;
+  height: 1px;
+  content: '';
+  background: linear-gradient(90deg, var(--profile-cyan), var(--profile-purple));
+  opacity: 0.5;
+}
+
+
+.operatingSteps li {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  min-width: 0;
+  text-align: center;
+}
+
+
+.stepNode {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border: 1px solid rgba(25, 229, 231, 0.34);
+  border-radius: 50%;
+  color: var(--profile-cyan);
+  background: #061522;
+  box-shadow:
+    0 0 0 6px rgba(25, 229, 231, 0.035),
+    0 0 22px rgba(25, 229, 231, 0.08);
+}
+
+
+.stepNode span {
+  position: absolute;
+  top: -0.4rem;
+  right: 0.1rem;
+  color: var(--profile-muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.43rem;
+}
+
+
+.operatingSteps li:nth-child(even) .stepNode {
+  border-color: rgba(166, 108, 255, 0.38);
+  color: var(--profile-purple);
+  box-shadow:
+    0 0 0 6px rgba(166, 108, 255, 0.035),
+    0 0 22px rgba(166, 108, 255, 0.08);
+}
+
+
+.operatingSteps strong {
+  margin-top: 0.75rem;
+  color: var(--profile-text);
+  font-size: 0.59rem;
+  white-space: nowrap;
+}
+
+
+.operatingSteps small {
+  margin-top: 0.3rem;
+  color: var(--profile-muted);
+  font-size: 0.48rem;
+  line-height: 1.35;
+}
+
+
+:global([data-theme='light']) .stepNode {
+  background: #fff;
+}
+
+
+@media (max-width: 1240px) {
+
+.operatingSteps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.4rem 0.7rem;
+  }
+
+
+.operatingSteps::before {
+    display: none;
+  }
+}
+
+
+@media (max-width: 760px) {
+
+.operatingSteps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+@media (max-width: 520px) {
+
+.operatingSteps {
+    grid-template-columns: 1fr;
+  }
+
+
+.operatingSteps li {
+    grid-template-columns: 50px minmax(0, 1fr);
+    gap: 0.75rem;
+    justify-items: start;
+    align-items: center;
+    text-align: left;
+  }
+
+
+.operatingSteps strong,
+.operatingSteps small {
+    grid-column: 2;
+    margin: 0;
+  }
+
+
+.operatingSteps small {
+    margin-top: -0.5rem;
+  }
+}
