@@ -1,0 +1,40 @@
+/* Project source-code preview shell and sticky file header. */
+
+/*
+ * Project source-code preview and local lowlight token theme.
+ * No global hljs classes are emitted by the component.
+ */
+
+
+.card {
+  min-height: 270px;
+  max-height: 330px;
+  overflow: auto;
+  border: 1px solid rgb(var(--rgb-cyan) / 16%);
+  border-radius: 7px;
+  background: rgb(var(--rgb-surface-code) / 96%);
+  box-shadow: inset 0 1px 0 rgb(var(--rgb-white) / 3%);
+}
+
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(var(--rgb-cyan) / 10%);
+  padding: 0 14px;
+  background: rgb(var(--rgb-surface-code) / 98%);
+  color: rgb(var(--rgb-text-muted));
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.59rem;
+}
+
+
+.header strong {
+  color: rgb(var(--rgb-cyan));
+  text-transform: capitalize;
+}
