@@ -1,0 +1,48 @@
+/* Engineering profile shared section heading. */
+
+
+.sectionHeading {
+  display: grid;
+  grid-template-columns: minmax(140px, 0.36fr) minmax(0, 1fr);
+  gap: clamp(1rem, 4vw, 4rem);
+  align-items: start;
+  padding: clamp(1.3rem, 2.8vw, 2rem);
+  border-bottom: 1px solid var(--profile-border);
+}
+
+
+.sectionHeading > span {
+  color: var(--profile-cyan);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.58rem;
+  font-weight: 760;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+
+.sectionHeading h2 {
+  margin: 0;
+  color: var(--profile-text);
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+  font-weight: 660;
+  letter-spacing: -0.025em;
+}
+
+
+.sectionHeading p {
+  max-width: 720px;
+  margin: 0.55rem 0 0;
+  color: var(--profile-muted);
+  font-size: 0.83rem;
+  line-height: 1.6;
+}
+
+
+@media (max-width: 760px) {
+
+.sectionHeading {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+}

@@ -1,4 +1,4 @@
-/* Previous and next engineering profile identity details. */
+/* Engineering profile identity details. */
 
 .identityDetails {
   display: grid;
@@ -6,7 +6,6 @@
   margin: 0;
   padding: clamp(2rem, 4vw, 3.5rem);
 }
-
 
 .identityDetails div {
   display: grid;
@@ -16,14 +15,12 @@
   border-bottom: 1px solid rgba(99, 216, 225, 0.11);
 }
 
-
 .identityDetails dt {
   color: var(--profile-muted);
   font-family: var(--font-geist-mono), monospace;
   font-size: 0.58rem;
   letter-spacing: 0.08em;
 }
-
 
 .identityDetails dd {
   margin: 0;
@@ -33,14 +30,11 @@
 }
 
 @media (max-width: 520px) {
-
-
-.identityDetails {
+  .identityDetails {
     padding: 1.25rem;
   }
 
-
-.identityDetails div {
+  .identityDetails div {
     grid-template-columns: 1fr;
     gap: 0.35rem;
   }

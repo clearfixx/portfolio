@@ -7,9 +7,12 @@ import { PublicBreadcrumbs, PublicPageHeroFrame, PublicPageShell } from '@/compo
 import { EngineeringProfileMotion } from './EngineeringProfileMotion'
 
 import shellStyles from './EngineeringProfileShell.module.scss'
+import sectionHeadingStyles from './EngineeringProfileSectionHeading.module.scss'
 import ctaStyles from './EngineeringProfileCta.module.scss'
 import heroStyles from './EngineeringProfileHero.module.scss'
-import consoleStyles from './EngineeringProfileConsole.module.scss'
+import consoleShellStyles from './EngineeringProfileConsoleShell.module.scss'
+import identityVisualStyles from './EngineeringProfileIdentityVisual.module.scss'
+import consoleTelemetryStyles from './EngineeringProfileConsoleTelemetry.module.scss'
 import identityDetailsStyles from './EngineeringProfileIdentityDetails.module.scss'
 import operatingShellStyles from './EngineeringProfileOperatingShell.module.scss'
 import operatingStepsStyles from './EngineeringProfileOperatingSteps.module.scss'
@@ -111,7 +114,7 @@ function SectionHeading({
   title: string
 }) {
   return (
-    <header className={shellStyles.sectionHeading}>
+    <header className={sectionHeadingStyles.sectionHeading}>
       <span>{eyebrow}</span>
       <div>
         <h2>{title}</h2>
@@ -134,25 +137,25 @@ function ProfileConsole({ profile }: { profile: AboutProfileViewModel }) {
   return (
     <div
       aria-label={`${profile.name} engineering profile identity`}
-      className={consoleStyles.profileConsole}
+      className={consoleShellStyles.profileConsole}
     >
-      <div aria-hidden="true" className={consoleStyles.consoleGrid} />
-      <div aria-hidden="true" className={consoleStyles.consoleCorners}>
+      <div aria-hidden="true" className={consoleShellStyles.consoleGrid} />
+      <div aria-hidden="true" className={consoleShellStyles.consoleCorners}>
         <i />
         <i />
         <i />
         <i />
       </div>
 
-      <div className={consoleStyles.identityVisual}>
-        <div aria-hidden="true" className={consoleStyles.identityScanner} />
+      <div className={identityVisualStyles.identityVisual}>
+        <div aria-hidden="true" className={identityVisualStyles.identityScanner} />
         <div
-          className={`${consoleStyles.avatar}${profile.portrait ? ` ${consoleStyles.avatarWithImage}` : ''}`}
+          className={`${identityVisualStyles.avatar}${profile.portrait ? ` ${identityVisualStyles.avatarWithImage}` : ''}`}
         >
           {profile.portrait ? (
             <Image
               alt={profile.portrait.alt}
-              className={consoleStyles.avatarImage}
+              className={identityVisualStyles.avatarImage}
               fill
               priority
               sizes="160px"
@@ -163,7 +166,7 @@ function ProfileConsole({ profile }: { profile: AboutProfileViewModel }) {
           )}
           <small>ENGINEER</small>
         </div>
-        <div className={consoleStyles.onlineStatus}>
+        <div className={identityVisualStyles.onlineStatus}>
           <i />
           {profile.statusLabel}
         </div>
@@ -178,7 +181,7 @@ function ProfileConsole({ profile }: { profile: AboutProfileViewModel }) {
         ))}
       </dl>
 
-      <div aria-hidden="true" className={consoleStyles.consoleTelemetry}>
+      <div aria-hidden="true" className={consoleTelemetryStyles.consoleTelemetry}>
         <span>
           <i />
           <i />

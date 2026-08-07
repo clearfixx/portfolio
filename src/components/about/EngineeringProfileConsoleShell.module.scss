@@ -1,0 +1,125 @@
+/* Engineering profile console shell and decorative frame. */
+
+/* About page profile console. */
+
+
+.profileConsole {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(210px, 0.88fr) minmax(270px, 1.12fr);
+  min-height: 440px;
+  overflow: hidden;
+  border: 1px solid rgba(25, 229, 231, 0.3);
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 10% 95%, rgba(166, 108, 255, 0.16), transparent 38%),
+    radial-gradient(circle at 92% 4%, rgba(25, 229, 231, 0.13), transparent 32%),
+    linear-gradient(145deg, rgba(7, 26, 40, 0.98), rgba(2, 12, 22, 0.98));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    0 30px 90px rgba(0, 0, 0, 0.32);
+  isolation: isolate;
+}
+
+
+.consoleGrid {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.44;
+  background-image:
+    linear-gradient(rgba(101, 205, 216, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(101, 205, 216, 0.055) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(to bottom, black, transparent 92%);
+}
+
+
+.consoleCorners {
+  position: absolute;
+  inset: 10px;
+  pointer-events: none;
+}
+
+
+.consoleCorners i {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border-color: var(--profile-cyan);
+  opacity: 0.7;
+}
+
+
+.consoleCorners i:nth-child(1) {
+  top: 0;
+  left: 0;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+
+
+.consoleCorners i:nth-child(2) {
+  top: 0;
+  right: 0;
+  border-top: 2px solid;
+  border-right: 2px solid;
+}
+
+
+.consoleCorners i:nth-child(3) {
+  right: 0;
+  bottom: 0;
+  border-right: 2px solid;
+  border-bottom: 2px solid;
+}
+
+
+.consoleCorners i:nth-child(4) {
+  bottom: 0;
+  left: 0;
+  border-bottom: 2px solid;
+  border-left: 2px solid;
+}
+
+
+:global([data-theme='light']) .profileConsole {
+  background:
+    radial-gradient(circle at 10% 95%, rgba(127, 74, 198, 0.09), transparent 38%),
+    radial-gradient(circle at 92% 4%, rgba(8, 127, 140, 0.08), transparent 32%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(239, 247, 250, 0.98));
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 28px 70px rgba(30, 70, 85, 0.1);
+}
+
+
+@media (max-width: 1240px) {
+
+.profileConsole {
+    grid-template-columns: minmax(180px, 0.78fr) minmax(240px, 1.22fr);
+  }
+}
+
+
+@media (max-width: 1020px) {
+
+.profileConsole {
+    min-height: 430px;
+  }
+}
+
+@media (max-width: 760px) {
+
+.profileConsole {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+@media (max-width: 520px) {
+
+.profileConsole {
+    min-height: 0;
+  }
+}
