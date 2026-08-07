@@ -22,8 +22,7 @@ import heroMetricsStyles from './BlogHeroMetrics.module.scss'
 import sectionHeaderStyles from './BlogSectionHeader.module.scss'
 import featuredStyles from './BlogFeaturedArticle.module.scss'
 import toolbarStyles from './BlogArticleToolbar.module.scss'
-import railStyles from './BlogRail.module.scss'
-
+import railShellStyles from './BlogRailShell.module.scss'
 import railIndexListStyles from './BlogRailIndexList.module.scss'
 import railTagsStyles from './BlogRailTags.module.scss'
 import railSeriesStyles from './BlogRailSeries.module.scss'
@@ -31,7 +30,7 @@ import railTransmissionsStyles from './BlogRailTransmissions.module.scss'
 import paginationShellStyles from './BlogPaginationShell.module.scss'
 import paginationControlsStyles from './BlogPaginationControls.module.scss'
 import paginationNavigationStyles from './BlogPaginationNavigation.module.scss'
-const blogRailIconClassName = [iconStyles.icon, railStyles.icon].join(' ')
+const blogRailIconClassName = [iconStyles.icon, railShellStyles.icon].join(' ')
 export const revalidate = 300
 
 export const metadata: Metadata = {
@@ -632,8 +631,8 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               </section>
             </div>
 
-            <aside className={railStyles.rail}>
-              <section className={railStyles.railCard}>
+            <aside className={railShellStyles.rail}>
+              <section className={railShellStyles.railCard}>
                 <h2>
                   <JournalIcon name="radio" size={14} />
                   Latest transmissions
@@ -659,7 +658,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 </div>
               </section>
 
-              <section className={railStyles.railCard}>
+              <section className={railShellStyles.railCard}>
                 <h2>
                   <JournalIcon name="folder" size={14} />
                   Topics
@@ -676,7 +675,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 </ul>
               </section>
 
-              <section className={railStyles.railCard}>
+              <section className={railShellStyles.railCard}>
                 <h2>
                   <JournalIcon name="book" size={14} />
                   Series
@@ -696,7 +695,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 </ul>
               </section>
 
-              <section className={railStyles.railCard}>
+              <section className={railShellStyles.railCard}>
                 <h2>
                   <JournalIcon name="tag" size={14} />
                   Popular tags
@@ -708,7 +707,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 </ul>
               </section>
 
-              <section className={railStyles.railCard}>
+              <section className={railShellStyles.railCard}>
                 <h2>
                   <JournalIcon name="archive" size={14} />
                   Archive
