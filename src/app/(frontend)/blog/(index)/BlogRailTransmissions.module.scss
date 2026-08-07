@@ -1,0 +1,121 @@
+/* Previous and next blog rail transmissions. */
+
+.transmissions {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+
+.transmissions {
+  display: grid;
+  gap: 0.72rem;
+  margin-top: 0.85rem;
+}
+
+
+.transmissions a {
+  display: grid;
+  grid-template-columns: 7px minmax(0, 1fr);
+  gap: 0.65rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+
+.transmissions a > span {
+  width: 6px;
+  height: 6px;
+  margin-top: 0.35rem;
+  border-radius: 50%;
+  background: var(--journal-cyan);
+  box-shadow: 0 0 10px rgba(24, 226, 229, 0.65);
+}
+
+
+.transmissions div {
+  display: grid;
+  gap: 0.12rem;
+}
+
+
+.transmissions strong {
+  font-size: 0.7rem;
+  line-height: 1.3;
+}
+
+
+.transmissions small {
+  color: #718691;
+  font-size: 0.57rem;
+}
+
+
+.sync {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+  margin: 1rem -1rem -1rem;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--journal-line);
+  color: #758995;
+  font-size: 0.59rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+
+.sync > span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #55e89a;
+  box-shadow: 0 0 10px rgba(85, 232, 154, 0.6);
+}
+
+
+.sync strong {
+  color: var(--journal-cyan);
+}
+
+:global([data-theme='light']) .transmissions strong {
+  color: #29434f;
+}
+
+:global([data-theme='light']) .transmissions small {
+  color: #718791;
+}
+
+:global([data-theme='light']) .transmissions a {
+  border-radius: 7px;
+  transition:
+    background 150ms ease,
+    color 150ms ease,
+    transform 150ms ease;
+}
+
+
+:global([data-theme='light']) .transmissions a {
+  padding: 0.35rem 0.4rem;
+  margin-inline: -0.4rem;
+}
+
+:global([data-theme='light']) .transmissions a:hover {
+  background: rgba(8, 127, 140, 0.065);
+  color: #087f8c;
+  transform: translateX(2px);
+}
+
+
+:global([data-theme='light']) .sync {
+  border-color: rgba(35, 79, 96, 0.11);
+  background: rgba(237, 246, 247, 0.72);
+  color: #647b85;
+}
+
+
+.transmissions a {
+  padding: 0.35rem 0.4rem;
+  margin-inline: -0.4rem;
+  border-radius: 7px;
+}

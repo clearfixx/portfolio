@@ -24,6 +24,7 @@ import featuredStyles from './BlogFeaturedArticle.module.scss'
 import toolbarStyles from './BlogArticleToolbar.module.scss'
 import railStyles from './BlogRail.module.scss'
 
+import railTransmissionsStyles from './BlogRailTransmissions.module.scss'
 import paginationShellStyles from './BlogPaginationShell.module.scss'
 import paginationControlsStyles from './BlogPaginationControls.module.scss'
 import paginationNavigationStyles from './BlogPaginationNavigation.module.scss'
@@ -634,7 +635,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   <JournalIcon name="radio" size={14} />
                   Latest transmissions
                 </h2>
-                <ul className={railStyles.transmissions}>
+                <ul className={railTransmissionsStyles.transmissions}>
                   {posts.slice(0, 5).map((post) => (
                     <li key={post.id}>
                       <Link href={post.slug ? `/blog/${post.slug}` : '/blog'}>
@@ -648,7 +649,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   ))}
                 </ul>
 
-                <div className={railStyles.sync}>
+                <div className={railTransmissionsStyles.sync}>
                   <span aria-hidden="true" />
                   <JournalIcon name="radio" size={12} />
                   Journal_sync: <strong>online</strong>
