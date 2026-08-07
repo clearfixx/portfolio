@@ -7,6 +7,7 @@ import { CookieConsent } from '@/components/privacy/CookieConsent'
 import { ThemeProvider } from '@/components/theme/ThemeProvider'
 import { Tooltip } from '@/components/ui'
 import { getSeo, getSiteSettings } from '@/lib/cms'
+import { FALLBACK_SITE_URL, normalizeSiteLanguage } from '@/lib/config'
 
 import './styles.scss'
 
@@ -16,10 +17,8 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
-const fallbackSiteUrl = 'http://localhost:3000'
-
 function getMetadataBase(): URL {
-  return new URL(process.env.NEXT_PUBLIC_SITE_URL ?? fallbackSiteUrl)
+  return new URL(process.env.NEXT_PUBLIC_SITE_URL ?? FALLBACK_SITE_URL)
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -81,11 +80,14 @@ type RootLayoutProps = {
 }
 
 export default async function RootLayout({ children }: RootLayoutProps) {
+  const siteSettings = await getSiteSettings()
+  const documentLanguage = normalizeSiteLanguage(siteSettings.defaultLanguage)
+
   return (
     <html
       className={inter.variable}
       data-scroll-behavior="smooth"
-      lang="en"
+      lang={documentLanguage}
       suppressHydrationWarning
     >
       <body>

@@ -25,6 +25,13 @@ type FindOneCollectionOptions<TCollection extends CollectionSlug> = Omit<
   'limit' | 'page'
 >
 
+type FindAllCollectionOptions<TCollection extends CollectionSlug> = Omit<
+  FindCollectionOptions<TCollection>,
+  'limit' | 'page'
+> & {
+  pageSize?: number
+}
+
 type CountCollectionOptions<TCollection extends CollectionSlug> = {
   collection: TCollection
   where?: Where
@@ -93,6 +100,30 @@ export async function findCollectionDocs<TCollection extends CollectionSlug>(
   const result = await findCollection(options)
 
   return result.docs
+}
+
+export async function findAllCollectionDocs<TCollection extends CollectionSlug>({
+  pageSize = 100,
+  ...options
+}: FindAllCollectionOptions<TCollection>): Promise<Array<DataFromCollectionSlug<TCollection>>> {
+  const docs: Array<DataFromCollectionSlug<TCollection>> = []
+  let page = 1
+
+  while (true) {
+    const result = await findCollection({
+      ...options,
+      limit: pageSize,
+      page,
+    })
+
+    docs.push(...result.docs)
+
+    if (!result.hasNextPage) {
+      return docs
+    }
+
+    page = result.nextPage ?? page + 1
+  }
 }
 
 export async function findOneCollection<TCollection extends CollectionSlug>({

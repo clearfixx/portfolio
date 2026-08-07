@@ -9,7 +9,13 @@ import { BlogArticleFilters } from '@/components/blog/BlogArticleFilters'
 import { BlogRegistryEditor } from '@/components/blog/BlogRegistryEditor'
 import { TechnicalPreviewPlaceholder } from '@/components/blog/TechnicalPreviewPlaceholder'
 import type { BlogPost, Category, Media } from '@/payload-types'
-import { getHomepageContent, getPublishedBlogPosts, getSiteFooterGitHubFeed } from '@/lib/cms'
+import {
+  getHomepageContent,
+  getPublishedBlogPosts,
+  getSiteFooterGitHubFeed,
+  getSiteSettings,
+} from '@/lib/cms'
+import { PUBLIC_CONTENT, siteLanguageToIntlLocale } from '@/lib/config'
 import iconStyles from '@/components/blog/BlogIcon.module.scss'
 import newsletterShellStyles from './BlogNewsletterShell.module.scss'
 import newsletterFormStyles from './BlogNewsletterForm.module.scss'
@@ -41,15 +47,6 @@ export const metadata: Metadata = {
     canonical: '/blog',
   },
 }
-
-const POSTS_PER_PAGE = 6
-const MAX_INDEX_POSTS = 250
-
-const dateFormatter = new Intl.DateTimeFormat('en', {
-  day: '2-digit',
-  month: 'short',
-  year: 'numeric',
-})
 
 type BlogPageProps = {
   searchParams: Promise<{
@@ -211,13 +208,13 @@ const coverOf = (post: BlogPost): Media | null =>
   typeof post.coverImage === 'object' && post.coverImage ? post.coverImage : null
 
 const categoryName = (category: Category | null): string => {
-  if (!category) return 'Engineering'
-  return category.title || 'Engineering'
+  if (!category) return 'Uncategorized'
+  return category.title || 'Uncategorized'
 }
 
 const categoryLabel = (post: BlogPost) => categoryName(categoryOf(post))
 
-const publishedLabel = (post: BlogPost) =>
+const publishedLabel = (post: BlogPost, dateFormatter: Intl.DateTimeFormat) =>
   post.publishedAt ? dateFormatter.format(new Date(post.publishedAt)) : 'Publication pending'
 
 const validPage = (value: string | undefined) => {
@@ -346,12 +343,21 @@ function withQuery(
 
 export default async function BlogPage({ searchParams }: BlogPageProps) {
   const params = await searchParams
-  const [posts, homepageContent, githubFeed] = await Promise.all([
-    getPublishedBlogPosts(MAX_INDEX_POSTS),
+  const [posts, homepageContent, githubFeed, siteSettings] = await Promise.all([
+    getPublishedBlogPosts(PUBLIC_CONTENT.blog.indexQueryLimit),
     getHomepageContent(),
     getSiteFooterGitHubFeed(),
+    getSiteSettings(),
   ])
 
+  const dateFormatter = new Intl.DateTimeFormat(
+    siteLanguageToIntlLocale(siteSettings.defaultLanguage),
+    {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    },
+  )
   const footerContent = homepageContent.siteFooter
   const categories = collectCategories(posts)
   const series = collectSeries(posts)
@@ -389,7 +395,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const featuredPost =
     filteredPosts.find((post) => post.isFeatured) || filteredPosts[0] || posts[0] || null
   const registryPosts = filteredPosts.filter((post) => post.id !== featuredPost?.id)
-  const totalPages = Math.max(1, Math.ceil(registryPosts.length / POSTS_PER_PAGE))
+  const totalPages = Math.max(1, Math.ceil(registryPosts.length / PUBLIC_CONTENT.blog.postsPerPage))
   const currentPage = Math.min(validPage(params.page), totalPages)
   const compactPages =
     totalPages <= 5
@@ -401,8 +407,8 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           : [1, currentPage - 1, currentPage, currentPage + 1, totalPages]
 
   const visiblePosts = registryPosts.slice(
-    (currentPage - 1) * POSTS_PER_PAGE,
-    currentPage * POSTS_PER_PAGE,
+    (currentPage - 1) * PUBLIC_CONTENT.blog.postsPerPage,
+    currentPage * PUBLIC_CONTENT.blog.postsPerPage,
   )
 
   const queryState = {
@@ -533,7 +539,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                       <div className={featuredStyles.metaRow}>
                         <span>
                           <JournalIcon name="calendar" size={12} />
-                          {publishedLabel(featuredPost)}
+                          {publishedLabel(featuredPost, dateFormatter)}
                         </span>
                         <span>
                           <JournalIcon name="clock" size={12} />
@@ -596,7 +602,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                         <ArticleImage post={post} />
                         <span aria-hidden="true" className={articleCardStyles.cardIndex}>
                           {String(
-                            (currentPage - 1) * POSTS_PER_PAGE +
+                            (currentPage - 1) * PUBLIC_CONTENT.blog.postsPerPage +
                               visiblePosts.findIndex((item) => item.id === post.id) +
                               1,
                           ).padStart(2, '0')}
@@ -611,7 +617,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                           <div className={articleCardStyles.articleMeta}>
                             <span>
                               <JournalIcon name="calendar" size={12} />
-                              {publishedLabel(post)}
+                              {publishedLabel(post, dateFormatter)}
                             </span>
                             <span>
                               <JournalIcon name="clock" size={12} />
@@ -644,7 +650,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                         <span aria-hidden="true" />
                         <div>
                           <strong>{post.title}</strong>
-                          <small>{publishedLabel(post)}</small>
+                          <small>{publishedLabel(post, dateFormatter)}</small>
                         </div>
                       </Link>
                     </li>

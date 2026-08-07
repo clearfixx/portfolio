@@ -4,7 +4,13 @@ import { SiteFooter } from '@/components/home'
 import { StreamedMotionBoundary } from '@/components/motion'
 import { ProjectDirectory, ProjectsIndexCTA, ProjectsIndexHero } from '@/components/projects'
 import { PublicBreadcrumbs, PublicPageShell } from '@/components/public-page'
-import { getHomepageContent, getProjects, getSiteFooterGitHubFeed } from '@/lib/cms'
+import {
+  getHomepageContent,
+  getProjects,
+  getSiteFooterGitHubFeed,
+  getSiteSettings,
+} from '@/lib/cms'
+import { PUBLIC_CONTENT } from '@/lib/config'
 import { buildProjectDirectoryItems, getProjectImage } from '@/lib/cms/public-projects'
 
 export const revalidate = 300
@@ -37,10 +43,11 @@ function readMetric(metrics: HomepageMetric[], searchTerms: string[], fallback: 
 }
 
 export default async function ProjectsPage() {
-  const [projects, homepageContent, githubFeed] = await Promise.all([
-    getProjects(48),
+  const [projects, homepageContent, githubFeed, siteSettings] = await Promise.all([
+    getProjects(PUBLIC_CONTENT.projects.indexQueryLimit),
     getHomepageContent(),
     getSiteFooterGitHubFeed(),
+    getSiteSettings(),
   ])
 
   const items = buildProjectDirectoryItems(projects)
@@ -52,7 +59,7 @@ export default async function ProjectsPage() {
   ).length
   const homepageMetrics = ((homepageContent.hero as { metrics?: HomepageMetric[] } | undefined)
     ?.metrics ?? []) as HomepageMetric[]
-  const yearsBuilding = readMetric(homepageMetrics, ['year'], '12+')
+  const yearsBuilding = readMetric(homepageMetrics, ['year'], '—')
   const codeCommitments = readMetric(homepageMetrics, ['commit'], '—')
   const footerContent = homepageContent.siteFooter
 
@@ -64,7 +71,7 @@ export default async function ProjectsPage() {
         <ProjectsIndexHero
           activeCount={items.filter((item) => item.stage !== 'archived').length}
           codeCommitments={codeCommitments}
-          featuredTitle={heroItem?.title ?? 'Portfolio'}
+          featuredTitle={heroItem?.title ?? siteSettings.siteName}
           heroImage={heroImage}
           openSourceCount={openSourceCount}
           progress={heroItem?.progress ?? 0}

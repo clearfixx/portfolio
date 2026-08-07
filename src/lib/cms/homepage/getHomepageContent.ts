@@ -1,3 +1,5 @@
+import { PUBLIC_CONTENT } from '@/lib/config'
+
 import {
   getContact,
   getPublishedBlogPosts,
@@ -33,8 +35,6 @@ import type {
   SiteFooterViewModel,
 } from './types'
 
-const FEATURED_PROJECT_LIMIT = 3
-
 export type HomepageContent = {
   contact: ContactSectionViewModel | null
   currentMission: CurrentMissionViewModel | null
@@ -63,8 +63,8 @@ export async function getHomepageContent(): Promise<HomepageContent> {
     getProfile(),
     getProjectsCount(),
     getSocial(),
-    getPublishedBlogPosts(6),
-    getApprovedTestimonials(6),
+    getPublishedBlogPosts(PUBLIC_CONTENT.homepage.articleLimit),
+    getApprovedTestimonials(PUBLIC_CONTENT.homepage.testimonialLimit),
     getSiteSettings(),
   ])
 
@@ -78,14 +78,16 @@ export async function getHomepageContent(): Promise<HomepageContent> {
   const selectedTechStack = getSelectedTechStack(homepage.selectedTechStack)
   const selectedFeaturedProjects = getSelectedFeaturedProjects(homepage.featuredProjects).slice(
     0,
-    FEATURED_PROJECT_LIMIT,
+    PUBLIC_CONTENT.homepage.featuredProjectLimit,
   )
 
   const [technologies, projects] = await Promise.all([
-    selectedTechStack.length > 0 ? Promise.resolve(selectedTechStack) : getFeaturedTechStack(8),
+    selectedTechStack.length > 0
+      ? Promise.resolve(selectedTechStack)
+      : getFeaturedTechStack(PUBLIC_CONTENT.homepage.featuredTechStackLimit),
     selectedFeaturedProjects.length > 0
       ? Promise.resolve(selectedFeaturedProjects)
-      : getFeaturedProjects(FEATURED_PROJECT_LIMIT),
+      : getFeaturedProjects(PUBLIC_CONTENT.homepage.featuredProjectLimit),
   ])
 
   return {

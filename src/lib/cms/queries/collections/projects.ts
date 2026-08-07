@@ -2,6 +2,7 @@ import type { Project, ProjectVersion } from '@/payload-types'
 
 import {
   countCollection,
+  findAllCollectionDocs,
   findCollectionDocs,
   findOneCollection,
   publishedOnly,
@@ -48,6 +49,23 @@ export async function getFeaturedProjects(
 
 export async function getLatestProjects(limit = 3): Promise<Project[]> {
   return getProjects(limit)
+}
+
+export type ProjectSitemapEntry = Pick<Project, 'slug' | 'updatedAt'>
+
+export async function getPublishedProjectSitemapEntries(): Promise<ProjectSitemapEntry[]> {
+  const docs = await findAllCollectionDocs({
+    collection: 'projects',
+    depth: 0,
+    select: {
+      slug: true,
+      updatedAt: true,
+    },
+    sort: '-publishedAt',
+    where: publishedOnly(),
+  })
+
+  return docs as ProjectSitemapEntry[]
 }
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {

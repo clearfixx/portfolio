@@ -17,7 +17,9 @@ import {
   getProfile,
   getPublishedBlogPosts,
   getSiteFooterGitHubFeed,
+  getSiteSettings,
 } from '@/lib/cms'
+import { PUBLIC_CONTENT, siteLanguageToIntlLocale } from '@/lib/config'
 import type { BlogPost, Category, Media } from '@/payload-types'
 import pageShellStyles from './BlogArticlePageShell.module.scss'
 import discussionStyles from './BlogArticleDiscussion.module.scss'
@@ -37,12 +39,6 @@ import coverStyles from './BlogArticleCover.module.scss'
 import heroShellStyles from './BlogArticleHeroShell.module.scss'
 import statusCardStyles from './BlogArticleStatusCard.module.scss'
 export const revalidate = 300
-
-const longDateFormatter = new Intl.DateTimeFormat('en', {
-  day: '2-digit',
-  month: 'short',
-  year: 'numeric',
-})
 
 type BlogPostPageProps = {
   params: Promise<{
@@ -139,10 +135,8 @@ function initialsFromName(name: string): string {
   return initials || 'PF'
 }
 
-function publishedLabel(post: BlogPost): string {
-  return post.publishedAt
-    ? longDateFormatter.format(new Date(post.publishedAt))
-    : 'Publication pending'
+function publishedLabel(post: BlogPost, dateFormatter: Intl.DateTimeFormat): string {
+  return post.publishedAt ? dateFormatter.format(new Date(post.publishedAt)) : 'Publication pending'
 }
 
 function viewLabel(value: number | null | undefined): string {
@@ -185,18 +179,27 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params
 
-  const [post, allPosts, homepageContent, githubFeed, profile] = await Promise.all([
+  const [post, allPosts, homepageContent, githubFeed, profile, siteSettings] = await Promise.all([
     getBlogPostBySlug(slug),
-    getPublishedBlogPosts(250),
+    getPublishedBlogPosts(PUBLIC_CONTENT.blog.indexQueryLimit),
     getHomepageContent(),
     getSiteFooterGitHubFeed(),
     getProfile(),
+    getSiteSettings(),
   ])
 
   if (!post) {
     notFound()
   }
 
+  const dateFormatter = new Intl.DateTimeFormat(
+    siteLanguageToIntlLocale(siteSettings.defaultLanguage),
+    {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    },
+  )
   const feedbackCounts = await getBlogFeedbackCounts(post.id)
   const postIndex = allPosts.findIndex((entry) => entry.id === post.id)
   const previousPost = postIndex >= 0 ? allPosts[postIndex + 1] : null
@@ -214,13 +217,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
       return sameCategory || sameSeries
     })
-    .slice(0, 3)
+    .slice(0, PUBLIC_CONTENT.blog.relatedPostsLimit)
 
   const cover = mediaFrom(post.coverImage)
   const footerContent = homepageContent.siteFooter
-  const publishedAt = publishedLabel(post)
-  const updatedAt = longDateFormatter.format(new Date(post.updatedAt))
-  const readingTime = post.readingTime ?? 5
+  const publishedAt = publishedLabel(post, dateFormatter)
+  const updatedAt = dateFormatter.format(new Date(post.updatedAt))
+  const readingTime = post.readingTime ?? null
   const tags = post.tags ?? []
   const series = post.series || 'Independent note'
   const difficulty = post.difficulty || 'intermediate'
@@ -274,10 +277,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     <ArticleIcon name="calendar" />
                     {publishedAt}
                   </span>
-                  <span>
-                    <ArticleIcon name="clock" />
-                    {readingTime} min read
-                  </span>
+                  {readingTime !== null ? (
+                    <span>
+                      <ArticleIcon name="clock" />
+                      {readingTime} min read
+                    </span>
+                  ) : null}
                   <span>
                     <ArticleIcon name="eye" />
                     {viewLabel(post.views)}
@@ -308,10 +313,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <div>
                   <span>Difficulty</span>
                   <strong className={statusCardStyles.difficulty}>{difficulty}</strong>
-                </div>
-                <div>
-                  <span>Version</span>
-                  <strong>v1.0</strong>
                 </div>
               </aside>
             </PublicPageHeroFrame>
@@ -529,7 +530,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                           <span>{categoryLabel(relatedPost)}</span>
                           <h3>{relatedPost.title}</h3>
                           <p>
-                            {publishedLabel(relatedPost)} · {relatedPost.readingTime ?? 5} min read
+                            {publishedLabel(relatedPost, dateFormatter)}
+                            {relatedPost.readingTime != null
+                              ? ` · ${relatedPost.readingTime} min read`
+                              : ''}
                           </p>
                         </div>
                       </Link>
