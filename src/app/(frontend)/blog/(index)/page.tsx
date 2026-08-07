@@ -25,6 +25,7 @@ import toolbarStyles from './BlogArticleToolbar.module.scss'
 import railStyles from './BlogRail.module.scss'
 
 import paginationStyles from './BlogPagination.module.scss'
+import paginationControlsStyles from './BlogPaginationControls.module.scss'
 import paginationNavigationStyles from './BlogPaginationNavigation.module.scss'
 const blogRailIconClassName = [iconStyles.icon, railStyles.icon].join(' ')
 export const revalidate = 300
@@ -788,7 +789,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 </Link>
               </nav>
 
-              <div className={paginationStyles.paginationControls}>
+              <div className={paginationControlsStyles.paginationControls}>
                 <form>
                   {params.q ? <input name="q" type="hidden" value={params.q} /> : null}
                   {params.topic ? <input name="topic" type="hidden" value={params.topic} /> : null}
