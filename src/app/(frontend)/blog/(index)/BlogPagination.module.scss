@@ -107,7 +107,7 @@
   gap: 0.25rem;
 }
 
-.paginationControls label > span:not(.srOnly) {
+.paginationControls label > span {
   color: #6f8490;
   font-size: 0.52rem;
   letter-spacing: 0.08em;
@@ -137,35 +137,23 @@
   background: rgba(24, 226, 229, 0.05);
 }
 
-.srOnly {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
 @media (max-width: 1180px) {
-.paginationSection {
+  .paginationSection {
     grid-template-columns: 1fr;
   }
 
-.paginationControls {
+  .paginationControls {
     justify-content: center;
   }
 
-.paginationSummary {
+  .paginationSummary {
     justify-items: center;
     text-align: center;
   }
 }
 
 @media (max-width: 900px) {
-.paginationControls {
+  .paginationControls {
     flex-wrap: wrap;
   }
 }
@@ -290,7 +278,7 @@
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.96);
 }
 
-:global([data-theme='light']) .paginationControls label > span:not(.srOnly) {
+:global([data-theme='light']) .paginationControls label > span {
   color: #728791;
 }
 
@@ -323,25 +311,25 @@
 }
 
 @media (max-width: 1180px) {
-:global([data-theme='light']) .paginationSection {
+  :global([data-theme='light']) .paginationSection {
     grid-template-columns: 1fr;
   }
 
-:global([data-theme='light']) .paginationControls {
+  :global([data-theme='light']) .paginationControls {
     justify-content: center;
   }
 }
 
 @media (max-width: 650px) {
-:global([data-theme='light']) .paginationSection {
+  :global([data-theme='light']) .paginationSection {
     padding: 1rem;
   }
 
-:global([data-theme='light']) .pagination {
+  :global([data-theme='light']) .pagination {
     flex-wrap: wrap;
   }
 
-:global([data-theme='light']) .paginationControls form {
+  :global([data-theme='light']) .paginationControls form {
     width: 100%;
     justify-content: center;
   }

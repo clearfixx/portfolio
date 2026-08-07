@@ -834,7 +834,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
             <form className={newsletterFormStyles.newsletterForm}>
               <label>
-                <span className={paginationStyles.srOnly}>Email address</span>
+                <span className={newsletterFormStyles.srOnly}>Email address</span>
                 <input placeholder="Enter your email" type="email" />
               </label>
               <button type="submit">
