@@ -1,0 +1,68 @@
+/* Technical preview terminal variant. */
+
+
+.terminal {
+  display: grid;
+  align-content: center;
+  gap: 0.42rem;
+  padding: 1rem 1.15rem;
+  background-image:
+    linear-gradient(rgba(19, 242, 227, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(19, 242, 227, 0.035) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+
+.terminal p {
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+  margin: 0;
+  color: #80939f;
+  font-size: 0.58rem;
+}
+
+
+.terminal p:first-child {
+  color: #d1d9df;
+}
+
+
+.terminal p > span,
+.terminal p > i {
+  color: #62e6dc;
+  font-style: normal;
+}
+
+
+.terminal .ready {
+  margin-top: 0.25rem;
+  color: #9ff3b9;
+}
+
+
+.terminal .ready span {
+  color: #74f0a9;
+  text-shadow: 0 0 12px rgba(116, 240, 169, 0.8);
+}
+
+:global([data-theme='light']) .terminal {
+  background-image:
+    linear-gradient(rgba(8, 127, 140, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(8, 127, 140, 0.055) 1px, transparent 1px);
+}
+
+:global([data-theme='light']) .terminal p {
+  color: #617984;
+}
+
+
+:global([data-theme='light']) .terminal p:first-child {
+  color: #263f4b;
+}
+
+
+:global([data-theme='light']) .terminal p > span,
+:global([data-theme='light']) .terminal p > i {
+  color: #087f8c;
+}

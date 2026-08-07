@@ -1,5 +1,6 @@
-import styles from './TechnicalPreviewPlaceholder.module.scss'
-
+import previewShellStyles from './TechnicalPreviewShell.module.scss'
+import terminalStyles from './TechnicalPreviewTerminal.module.scss'
+import codeStyles from './TechnicalPreviewCode.module.scss'
 type TechnicalPreviewPlaceholderProps = {
   className?: string
   label?: string
@@ -14,11 +15,11 @@ export function TechnicalPreviewPlaceholder({
   return (
     <div
       aria-hidden="true"
-      className={`${styles.preview}${className ? ` ${className}` : ''}`}
+      className={`${previewShellStyles.preview}${className ? ` ${className}` : ''}`}
       data-variant={variant}
     >
-      <header className={styles.titlebar}>
-        <span className={styles.trafficLights}>
+      <header className={previewShellStyles.titlebar}>
+        <span className={previewShellStyles.trafficLights}>
           <i />
           <i />
           <i />
@@ -28,7 +29,7 @@ export function TechnicalPreviewPlaceholder({
       </header>
 
       {variant === 'terminal' ? (
-        <div className={styles.terminal}>
+        <div className={terminalStyles.terminal}>
           <p>
             <span>$</span>
             pnpm build
@@ -45,13 +46,13 @@ export function TechnicalPreviewPlaceholder({
             <i>✓</i>
             Route manifest generated
           </p>
-          <p className={styles.ready}>
+          <p className={terminalStyles.ready}>
             <span>●</span>
             system ready
           </p>
         </div>
       ) : (
-        <ol className={styles.code}>
+        <ol className={codeStyles.code}>
           <li>
             <span>1</span>
             <code>
@@ -73,7 +74,7 @@ export function TechnicalPreviewPlaceholder({
         </ol>
       )}
 
-      <footer className={styles.statusbar}>
+      <footer className={previewShellStyles.statusbar}>
         <span>main*</span>
         <span>UTF-8</span>
         <span>Portfolio</span>

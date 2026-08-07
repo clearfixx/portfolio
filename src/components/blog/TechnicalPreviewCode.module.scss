@@ -1,0 +1,87 @@
+/* Technical preview code variant. */
+
+
+.code {
+  display: grid;
+  align-content: center;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 1rem 1.1rem;
+  list-style: none;
+  background-image:
+    linear-gradient(rgba(19, 242, 227, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(19, 242, 227, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+
+.code li {
+  display: grid;
+  grid-template-columns: 1.2rem minmax(0, 1fr);
+  gap: 0.65rem;
+  color: #8194a0;
+  font-size: 0.56rem;
+}
+
+
+.code li > span {
+  color: #405560;
+  text-align: right;
+}
+
+
+.code code {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+.code b {
+  color: #c586c0;
+  font-weight: 500;
+}
+
+
+.code em {
+  color: #4ec9b0;
+  font-style: normal;
+}
+
+
+.code strong {
+  color: #9cdcfe;
+  font-weight: 500;
+}
+
+
+:global([data-theme='light']) .code {
+  background-image:
+    linear-gradient(rgba(8, 127, 140, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(8, 127, 140, 0.055) 1px, transparent 1px);
+}
+
+
+:global([data-theme='light']) .code li {
+  color: #617984;
+}
+
+
+:global([data-theme='light']) .code li > span {
+  color: #9aabb3;
+}
+
+
+:global([data-theme='light']) .code b {
+  color: #7e4eb2;
+}
+
+
+:global([data-theme='light']) .code em {
+  color: #087f8c;
+}
+
+
+:global([data-theme='light']) .code strong {
+  color: #286b9b;
+}

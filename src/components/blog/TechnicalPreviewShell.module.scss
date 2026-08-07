@@ -1,0 +1,124 @@
+/* Technical preview shell, title bar, traffic lights, and status bar. */
+
+
+.preview {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  min-height: 150px;
+  grid-template-rows: 2rem minmax(0, 1fr) 1.35rem;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 72% 34%, rgba(168, 92, 255, 0.14), transparent 16rem), #07111d;
+  color: #aebdca;
+  font-family: var(--font-geist-mono), monospace;
+}
+
+
+.titlebar {
+  display: grid;
+  grid-template-columns: 4.8rem minmax(0, 1fr) auto;
+  gap: 0.6rem;
+  align-items: center;
+  border-bottom: 1px solid rgba(118, 164, 190, 0.11);
+  padding: 0 0.7rem;
+  background: rgba(255, 255, 255, 0.018);
+}
+
+
+.titlebar strong {
+  overflow: hidden;
+  color: #c8d4de;
+  font-size: 0.56rem;
+  font-weight: 650;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+.titlebar small {
+  color: #617581;
+  font-size: 0.46rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+
+.trafficLights {
+  display: flex;
+  gap: 0.35rem;
+}
+
+
+.trafficLights i {
+  width: 0.48rem;
+  height: 0.48rem;
+  border-radius: 50%;
+  background: #ff5f57;
+}
+
+
+.trafficLights i:nth-child(2) {
+  background: #febc2e;
+}
+
+
+.trafficLights i:nth-child(3) {
+  background: #28c840;
+}
+
+
+.statusbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0 0.65rem;
+  background: #093c4c;
+  color: #bfeaf0;
+  font-size: 0.43rem;
+}
+
+
+@media (max-width: 650px) {
+
+.titlebar {
+    grid-template-columns: 4rem minmax(0, 1fr);
+  }
+
+
+.titlebar small {
+    display: none;
+  }
+}
+
+
+/* portfolio-technical-preview-light-theme-v1:start */
+
+:global([data-theme='light']) .preview {
+  background:
+    radial-gradient(circle at 72% 34%, rgba(120, 71, 199, 0.12), transparent 16rem), #eaf1f4;
+  color: #516a75;
+}
+
+
+:global([data-theme='light']) .titlebar {
+  border-bottom-color: rgba(35, 79, 96, 0.11);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+
+:global([data-theme='light']) .titlebar strong {
+  color: #304a56;
+}
+
+
+:global([data-theme='light']) .titlebar small {
+  color: #7f949d;
+}
+
+
+:global([data-theme='light']) .statusbar {
+  background: #d6e9ed;
+  color: #315e67;
+}

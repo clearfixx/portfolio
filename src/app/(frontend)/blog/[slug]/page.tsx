@@ -21,6 +21,7 @@ import {
 import type { BlogPost, Category, Media } from '@/payload-types'
 import pageShellStyles from './BlogArticlePageShell.module.scss'
 import discussionStyles from './BlogArticleDiscussion.module.scss'
+import sectionEyebrowStyles from './BlogArticleSectionEyebrow.module.scss'
 import relatedSectionStyles from './BlogArticleRelatedSection.module.scss'
 import articleNavigationStyles from './BlogArticleNavigation.module.scss'
 import railShellStyles from './BlogArticleRailShell.module.scss'
@@ -353,7 +354,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 )}
 
                 <section className={overviewStyles.overview} data-article-reveal id="overview">
-                  <p className={discussionStyles.sectionEyebrow}>Overview</p>
+                  <p className={sectionEyebrowStyles.sectionEyebrow} data-article-section-eyebrow>
+                    Overview
+                  </p>
                   <p>{post.excerpt}</p>
 
                   <div className={overviewStyles.note}>
@@ -375,7 +378,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     data-article-reveal
                     id="key-takeaways"
                   >
-                    <p className={discussionStyles.sectionEyebrow}>Key takeaways</p>
+                    <p className={sectionEyebrowStyles.sectionEyebrow} data-article-section-eyebrow>
+                      Key takeaways
+                    </p>
                     <div>
                       {keyTakeaways.map((takeaway, index) => (
                         <article key={takeaway.id ?? `${post.id}-takeaway-${index}`}>
@@ -488,7 +493,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 aria-labelledby="related-articles-title"
               >
                 <header>
-                  <p className={discussionStyles.sectionEyebrow}>Continue reading</p>
+                  <p className={sectionEyebrowStyles.sectionEyebrow} data-article-section-eyebrow>
+                    Continue reading
+                  </p>
                   <h2 id="related-articles-title">Related articles</h2>
                 </header>
 
@@ -534,7 +541,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             <section className={discussionStyles.discuss} data-article-reveal>
               <div>
-                <p className={discussionStyles.sectionEyebrow}>Questions?</p>
+                <p className={sectionEyebrowStyles.sectionEyebrow} data-article-section-eyebrow>
+                  Questions?
+                </p>
                 <h2>Let&apos;s discuss the implementation.</h2>
                 <p>Have a question about the architecture or want to build something similar?</p>
               </div>
