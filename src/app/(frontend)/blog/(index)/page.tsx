@@ -24,6 +24,7 @@ import featuredStyles from './BlogFeaturedArticle.module.scss'
 import toolbarStyles from './BlogArticleToolbar.module.scss'
 import railStyles from './BlogRail.module.scss'
 
+import railTagsStyles from './BlogRailTags.module.scss'
 import railSeriesStyles from './BlogRailSeries.module.scss'
 import railTransmissionsStyles from './BlogRailTransmissions.module.scss'
 import paginationShellStyles from './BlogPaginationShell.module.scss'
@@ -699,7 +700,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   <JournalIcon name="tag" size={14} />
                   Popular tags
                 </h2>
-                <ul className={railStyles.tags}>
+                <ul className={railTagsStyles.tags}>
                   {tags.slice(0, 14).map((tag) => (
                     <li key={tag.slug}>{tag.label}</li>
                   ))}
