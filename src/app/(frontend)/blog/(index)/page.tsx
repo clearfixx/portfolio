@@ -24,7 +24,7 @@ import featuredStyles from './BlogFeaturedArticle.module.scss'
 import toolbarStyles from './BlogArticleToolbar.module.scss'
 import railStyles from './BlogRail.module.scss'
 
-import paginationStyles from './BlogPagination.module.scss'
+import paginationShellStyles from './BlogPaginationShell.module.scss'
 import paginationControlsStyles from './BlogPaginationControls.module.scss'
 import paginationNavigationStyles from './BlogPaginationNavigation.module.scss'
 const blogRailIconClassName = [iconStyles.icon, railStyles.icon].join(' ')
@@ -722,8 +722,11 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           </div>
 
           {totalPages > 1 ? (
-            <section className={paginationStyles.paginationSection} aria-label="Journal pagination">
-              <div className={paginationStyles.paginationSummary}>
+            <section
+              className={paginationShellStyles.paginationSection}
+              aria-label="Journal pagination"
+            >
+              <div className={paginationShellStyles.paginationSummary}>
                 <p>
                   <span aria-hidden="true">{'//'}</span>
                   Journal index
