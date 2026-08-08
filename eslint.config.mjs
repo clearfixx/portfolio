@@ -24,6 +24,23 @@ const eslintConfig = [
     },
   },
   {
+    files: ['src/migrations/**/*.ts'],
+    rules: {
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          vars: 'all',
+          args: 'after-used',
+          ignoreRestSiblings: false,
+          argsIgnorePattern: '^(?:_|payload$|req$)',
+          varsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^(_|ignore)',
+        },
+      ],
+    },
+  },
+  {
     ignores: ['.next/**', 'src/payload-types.ts', 'src/payload-generated-schema.ts'],
   },
 ]

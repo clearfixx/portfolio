@@ -78,12 +78,16 @@ pnpm build
 pnpm lint
 pnpm generate:types
 pnpm generate:importmap
+pnpm db:migrate:status
+pnpm db:migrate:create <migration-name>
+pnpm build:production
 Documentation
 
 Project documentation lives in:
 
 docs/STACK.md
 docs/ARCHITECTURE.md
+docs/DATABASE_MIGRATIONS.md
 v1.0 Scope
 
 Included:

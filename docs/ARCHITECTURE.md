@@ -118,6 +118,21 @@ storage credentials
 
 Payload stores configuration, not sensitive secrets.
 
+Database Schema Management
+
+PostgreSQL schema evolution follows two complementary workflows:
+
+- local development uses Payload / Drizzle push mode as a disposable sandbox;
+- staging and production use committed Payload migrations.
+
+The migration directory is `src/migrations`.
+
+Each completed schema feature should produce one reviewed migration committed alongside its
+Payload config and generated types. Production deployment must run pending migrations before
+starting the new application version.
+
+See `docs/DATABASE_MIGRATIONS.md` for the full workflow and baseline safety rules.
+
 Users
 
 There is no public registration.
