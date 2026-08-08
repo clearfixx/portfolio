@@ -7,7 +7,17 @@ import styles from './ProjectsIndexCTA.module.scss'
 
 type IconProps = SVGProps<SVGSVGElement>
 
+type ProjectsIndexCTAContent = {
+  terminalLabel: string
+  terminalCommand: string
+  terminalPrompt: string
+  identityLines?: Array<{ id?: string | null; text: string }> | null
+  eyebrow: string
+  title: string
+}
+
 type ProjectsIndexCTAProps = {
+  content: ProjectsIndexCTAContent
   socialLinks: SiteFooterSocialLinkViewModel[]
 }
 
@@ -29,7 +39,7 @@ const labelMap: Partial<Record<SiteFooterSocialIcon, string>> = {
   x: 'X',
 }
 
-export function ProjectsIndexCTA({ socialLinks }: ProjectsIndexCTAProps) {
+export function ProjectsIndexCTA({ content, socialLinks }: ProjectsIndexCTAProps) {
   const visibleLinks = [...socialLinks]
     .sort((left, right) => preferredOrder.indexOf(left.icon) - preferredOrder.indexOf(right.icon))
     .slice(0, 4)
@@ -37,23 +47,22 @@ export function ProjectsIndexCTA({ socialLinks }: ProjectsIndexCTAProps) {
   return (
     <section aria-labelledby="projects-registry-cta-title" className={styles.cta}>
       <div className={styles.terminal}>
-        <p>TERMINAL</p>
+        <p>{content.terminalLabel}</p>
 
         <div>
-          <code>visitor@portfolio:~$ whoami</code>
-          <span>&gt; Software engineer</span>
-          <span>&gt; System builder</span>
-          <span>&gt; Problem solver</span>
-          <span>&gt; Lifelong learner</span>
+          <code>{content.terminalCommand}</code>
+          {content.identityLines?.map((line) => (
+            <span key={line.id ?? line.text}>&gt; {line.text}</span>
+          ))}
           <code>
-            visitor@portfolio:~$ <i aria-hidden="true" />
+            {content.terminalPrompt} <i aria-hidden="true" />
           </code>
         </div>
       </div>
 
       <div className={styles.content}>
-        <p>Have an idea?</p>
-        <h2 id="projects-registry-cta-title">Let&apos;s build something amazing together.</h2>
+        <p>{content.eyebrow}</p>
+        <h2 id="projects-registry-cta-title">{content.title}</h2>
 
         {visibleLinks.length > 0 ? (
           <div className={styles.links}>

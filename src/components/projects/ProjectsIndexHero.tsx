@@ -11,7 +11,23 @@ type ProjectsIndexHeroImage = {
   src: string
 }
 
+type ProjectsIndexHeroContent = {
+  eyebrow: string
+  title: string
+  titleAccent: string
+  description: string
+  totalProjectsLabel: string
+  totalProjectsHint: string
+  openSourceLabel: string
+  openSourceHint: string
+  yearsBuildingLabel: string
+  yearsBuildingHint: string
+  codeCommitmentsLabel: string
+  codeCommitmentsHint: string
+}
+
 type ProjectsIndexHeroProps = {
+  content: ProjectsIndexHeroContent
   activeCount: number
   codeCommitments: string
   featuredTitle: string
@@ -23,6 +39,7 @@ type ProjectsIndexHeroProps = {
 }
 
 export function ProjectsIndexHero({
+  content,
   activeCount,
   codeCommitments,
   featuredTitle,
@@ -37,40 +54,38 @@ export function ProjectsIndexHero({
       <div className={styles.copy}>
         <p className={styles.eyebrow}>
           <LayersIcon aria-hidden="true" size={15} />
-          Project registry
+          {content.eyebrow}
         </p>
 
         <h1>
-          All <span>Projects</span>
+          {content.title} <span>{content.titleAccent}</span>
         </h1>
 
-        <p className={styles.description}>
-          A collection of systems I&apos;ve designed, built, and shipped. From idea to production.
-        </p>
+        <p className={styles.description}>{content.description}</p>
 
         <section className={styles.metrics} aria-label="Project metrics">
           <article>
-            <span>Total projects</span>
+            <span>{content.totalProjectsLabel}</span>
             <strong>{projectCount}</strong>
-            <small>and counting</small>
+            <small>{content.totalProjectsHint}</small>
           </article>
 
           <article>
-            <span>Open source</span>
+            <span>{content.openSourceLabel}</span>
             <strong>{openSourceCount}</strong>
-            <small>projects</small>
+            <small>{content.openSourceHint}</small>
           </article>
 
           <article>
-            <span>Years building</span>
+            <span>{content.yearsBuildingLabel}</span>
             <strong>{yearsBuilding}</strong>
-            <small>of experience</small>
+            <small>{content.yearsBuildingHint}</small>
           </article>
 
           <article>
-            <span>Code commitments</span>
+            <span>{content.codeCommitmentsLabel}</span>
             <strong>{codeCommitments}</strong>
-            <small>across all projects</small>
+            <small>{content.codeCommitmentsHint}</small>
           </article>
         </section>
       </div>

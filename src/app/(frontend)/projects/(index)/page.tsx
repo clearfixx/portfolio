@@ -7,6 +7,7 @@ import { PublicBreadcrumbs, PublicPageShell } from '@/components/public-page'
 import {
   getHomepageContent,
   getProjects,
+  getPublicPages,
   getSiteFooterGitHubFeed,
   getSiteSettings,
 } from '@/lib/cms'
@@ -15,12 +16,23 @@ import { buildProjectDirectoryItems, getProjectImage } from '@/lib/cms/public-pr
 
 export const revalidate = 300
 
-export const metadata: Metadata = {
-  title: 'Projects',
-  description: 'Selected software products, experiments, and engineering case studies.',
-  alternates: {
-    canonical: '/projects',
-  },
+export async function generateMetadata(): Promise<Metadata> {
+  const publicPages = await getPublicPages()
+  const seo = publicPages.projects.seo
+
+  return {
+    title: seo.metaTitle,
+    description: seo.metaDescription,
+    alternates: {
+      canonical: seo.canonical,
+    },
+    openGraph: {
+      type: 'website',
+      title: seo.metaTitle,
+      description: seo.metaDescription,
+      url: seo.canonical,
+    },
+  }
 }
 
 type HomepageMetric = {
@@ -43,11 +55,12 @@ function readMetric(metrics: HomepageMetric[], searchTerms: string[], fallback: 
 }
 
 export default async function ProjectsPage() {
-  const [projects, homepageContent, githubFeed, siteSettings] = await Promise.all([
+  const [projects, homepageContent, githubFeed, siteSettings, publicPages] = await Promise.all([
     getProjects(PUBLIC_CONTENT.projects.indexQueryLimit),
     getHomepageContent(),
     getSiteFooterGitHubFeed(),
     getSiteSettings(),
+    getPublicPages(),
   ])
 
   const items = buildProjectDirectoryItems(projects)
@@ -62,13 +75,16 @@ export default async function ProjectsPage() {
   const yearsBuilding = readMetric(homepageMetrics, ['year'], '—')
   const codeCommitments = readMetric(homepageMetrics, ['commit'], '—')
   const footerContent = homepageContent.siteFooter
+  const pageContent = publicPages.projects.index
+  const ctaContent = publicPages.projects.cta
 
   return (
     <StreamedMotionBoundary>
       <PublicPageShell className="projects-page" variant="index">
-        <PublicBreadcrumbs items={[{ label: 'Projects' }]} />
+        <PublicBreadcrumbs items={[{ label: pageContent.breadcrumbLabel }]} />
 
         <ProjectsIndexHero
+          content={pageContent}
           activeCount={items.filter((item) => item.stage !== 'archived').length}
           codeCommitments={codeCommitments}
           featuredTitle={heroItem?.title ?? siteSettings.siteName}
@@ -82,7 +98,7 @@ export default async function ProjectsPage() {
         <ProjectDirectory items={items} />
 
         {footerContent ? (
-          <ProjectsIndexCTA socialLinks={footerContent.profile.socialLinks} />
+          <ProjectsIndexCTA content={ctaContent} socialLinks={footerContent.profile.socialLinks} />
         ) : null}
       </PublicPageShell>
 

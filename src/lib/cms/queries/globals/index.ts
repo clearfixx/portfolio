@@ -4,6 +4,7 @@ import type {
   Homepage,
   Navigation,
   Profile,
+  PublicPage,
   Seo,
   SiteSetting,
   Social,
@@ -51,6 +52,15 @@ export async function getProfile(): Promise<Profile> {
   return payload.findGlobal({
     slug: 'profile',
     depth: 1,
+  })
+}
+
+export async function getPublicPages(): Promise<PublicPage> {
+  const payload = await getPayloadClient()
+
+  return payload.findGlobal({
+    slug: 'public-pages',
+    depth: 0,
   })
 }
 

@@ -12,6 +12,7 @@ import type { BlogPost, Category, Media } from '@/payload-types'
 import {
   getHomepageContent,
   getPublishedBlogPosts,
+  getPublicPages,
   getSiteFooterGitHubFeed,
   getSiteSettings,
 } from '@/lib/cms'
@@ -39,13 +40,23 @@ import paginationNavigationStyles from './BlogPaginationNavigation.module.scss'
 const blogRailIconClassName = [iconStyles.icon, railShellStyles.icon].join(' ')
 export const revalidate = 300
 
-export const metadata: Metadata = {
-  title: 'Engineering Journal',
-  description:
-    'Architecture notes, implementation details, system design decisions, and lessons learned while building production software.',
-  alternates: {
-    canonical: '/blog',
-  },
+export async function generateMetadata(): Promise<Metadata> {
+  const publicPages = await getPublicPages()
+  const seo = publicPages.blog.seo
+
+  return {
+    title: seo.metaTitle,
+    description: seo.metaDescription,
+    alternates: {
+      canonical: seo.canonical,
+    },
+    openGraph: {
+      type: 'website',
+      title: seo.metaTitle,
+      description: seo.metaDescription,
+      url: seo.canonical,
+    },
+  }
 }
 
 type BlogPageProps = {
@@ -343,11 +354,12 @@ function withQuery(
 
 export default async function BlogPage({ searchParams }: BlogPageProps) {
   const params = await searchParams
-  const [posts, homepageContent, githubFeed, siteSettings] = await Promise.all([
+  const [posts, homepageContent, githubFeed, siteSettings, publicPages] = await Promise.all([
     getPublishedBlogPosts(PUBLIC_CONTENT.blog.indexQueryLimit),
     getHomepageContent(),
     getSiteFooterGitHubFeed(),
     getSiteSettings(),
+    getPublicPages(),
   ])
 
   const dateFormatter = new Intl.DateTimeFormat(
@@ -359,6 +371,8 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
     },
   )
   const footerContent = homepageContent.siteFooter
+  const pageContent = publicPages.blog.index
+  const postsPerPage = pageContent.postsPerPage
   const categories = collectCategories(posts)
   const series = collectSeries(posts)
   const tags = collectTags(posts)
@@ -395,7 +409,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const featuredPost =
     filteredPosts.find((post) => post.isFeatured) || filteredPosts[0] || posts[0] || null
   const registryPosts = filteredPosts.filter((post) => post.id !== featuredPost?.id)
-  const totalPages = Math.max(1, Math.ceil(registryPosts.length / PUBLIC_CONTENT.blog.postsPerPage))
+  const totalPages = Math.max(1, Math.ceil(registryPosts.length / postsPerPage))
   const currentPage = Math.min(validPage(params.page), totalPages)
   const compactPages =
     totalPages <= 5
@@ -407,8 +421,8 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           : [1, currentPage - 1, currentPage, currentPage + 1, totalPages]
 
   const visiblePosts = registryPosts.slice(
-    (currentPage - 1) * PUBLIC_CONTENT.blog.postsPerPage,
-    currentPage * PUBLIC_CONTENT.blog.postsPerPage,
+    (currentPage - 1) * postsPerPage,
+    currentPage * postsPerPage,
   )
 
   const queryState = {
@@ -422,7 +436,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
     <StreamedMotionBoundary>
       <PublicPageShell className="journal-page" variant="index">
         <div className={`${shellStyles.page} ${shellStyles.container}`}>
-          <PublicBreadcrumbs items={[{ label: 'Blog' }]} />
+          <PublicBreadcrumbs items={[{ label: pageContent.breadcrumbLabel }]} />
 
           <PublicPageHeroFrame
             aria-labelledby="blog-page-title"
@@ -432,16 +446,13 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             <div className={heroStyles.heroCopy}>
               <p className={heroStyles.eyebrow}>
                 <span aria-hidden="true">{'//'}</span>
-                Engineering journal
+                {pageContent.eyebrow}
               </p>
               <h1 id="blog-page-title">
-                Engineering Journal.
-                <span>Build. Document. Share.</span>
+                {pageContent.title}
+                <span>{pageContent.titleAccent}</span>
               </h1>
-              <p>
-                Real architecture, production notes, implementation details, and lessons learned
-                from building complex systems.
-              </p>
+              <p>{pageContent.description}</p>
 
               <dl className={heroMetricsStyles.metrics}>
                 <div className={heroMetricsStyles.metricCard}>
@@ -518,7 +529,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   <header className={sectionHeaderStyles.sectionHeader}>
                     <p>
                       <span aria-hidden="true">{'//'}</span>
-                      Featured article
+                      {pageContent.featuredLabel}
                     </p>
                   </header>
 
@@ -564,9 +575,9 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   <div>
                     <p>
                       <span aria-hidden="true">{'//'}</span>
-                      Latest articles
+                      {pageContent.articlesEyebrow}
                     </p>
-                    <h2 id="articles-title">Notes from the build process.</h2>
+                    <h2 id="articles-title">{pageContent.articlesTitle}</h2>
                   </div>
                   <span>{registryPosts.length} entries</span>
                 </header>
@@ -602,7 +613,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                         <ArticleImage post={post} />
                         <span aria-hidden="true" className={articleCardStyles.cardIndex}>
                           {String(
-                            (currentPage - 1) * PUBLIC_CONTENT.blog.postsPerPage +
+                            (currentPage - 1) * postsPerPage +
                               visiblePosts.findIndex((item) => item.id === post.id) +
                               1,
                           ).padStart(2, '0')}

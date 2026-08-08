@@ -15,6 +15,7 @@ import {
   getBlogPostBySlug,
   getHomepageContent,
   getProfile,
+  getPublicPages,
   getPublishedBlogPosts,
   getSiteFooterGitHubFeed,
   getSiteSettings,
@@ -101,10 +102,10 @@ function ArticleIcon({ name, size = 14 }: { name: ArticleIconName; size?: number
   )
 }
 
-function categoryLabel(post: BlogPost): string {
+function categoryLabel(post: BlogPost, fallbackCategory: string): string {
   return typeof post.category === 'object' && post.category
     ? (post.category as Category).title
-    : 'Engineering'
+    : fallbackCategory
 }
 
 function mediaFrom(value: number | Media | null | undefined): Media | null {
@@ -179,14 +180,16 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params
 
-  const [post, allPosts, homepageContent, githubFeed, profile, siteSettings] = await Promise.all([
-    getBlogPostBySlug(slug),
-    getPublishedBlogPosts(PUBLIC_CONTENT.blog.indexQueryLimit),
-    getHomepageContent(),
-    getSiteFooterGitHubFeed(),
-    getProfile(),
-    getSiteSettings(),
-  ])
+  const [post, allPosts, homepageContent, githubFeed, profile, siteSettings, publicPages] =
+    await Promise.all([
+      getBlogPostBySlug(slug),
+      getPublishedBlogPosts(PUBLIC_CONTENT.blog.indexQueryLimit),
+      getHomepageContent(),
+      getSiteFooterGitHubFeed(),
+      getProfile(),
+      getSiteSettings(),
+      getPublicPages(),
+    ])
 
   if (!post) {
     notFound()
@@ -221,11 +224,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const cover = mediaFrom(post.coverImage)
   const footerContent = homepageContent.siteFooter
+  const articleContent = publicPages.blog.article
   const publishedAt = publishedLabel(post, dateFormatter)
   const updatedAt = dateFormatter.format(new Date(post.updatedAt))
   const readingTime = post.readingTime ?? null
   const tags = post.tags ?? []
-  const series = post.series || 'Independent note'
+  const series = post.series || articleContent.fallbackSeries
   const difficulty = post.difficulty || 'intermediate'
   const authorName = profile.name.trim() || 'Portfolio author'
   const authorRole = profile.role.trim() || 'Software Engineer'
@@ -251,7 +255,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             items={[
               {
                 href: '/blog',
-                label: 'Blog',
+                label: articleContent.breadcrumbLabel,
               },
               {
                 label: post.title,
@@ -266,7 +270,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <div className={heroShellStyles.heroCopy}>
                 <p className={heroShellStyles.eyebrow}>
                   <span aria-hidden="true">{'//'}</span>
-                  {categoryLabel(post)}
+                  {categoryLabel(post, articleContent.fallbackCategory)}
                 </p>
 
                 <h1 id="article-page-title">{post.title}</h1>
@@ -322,10 +326,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <BlogArticleToc items={tocItems} />
 
                 <div className={layoutStyles.leftCta}>
-                  <span>Enjoying the read?</span>
-                  <p>Get new architecture notes and implementation lessons.</p>
-                  <Link href="/contacts">
-                    Let&apos;s talk
+                  <span>{articleContent.ctaEyebrow}</span>
+                  <p>{articleContent.ctaDescription}</p>
+                  <Link href={articleContent.ctaHref}>
+                    {articleContent.ctaLabel}
                     <ArticleIcon name="arrow" size={13} />
                   </Link>
                 </div>
@@ -350,22 +354,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                       <span>API</span>
                       <span>DATA</span>
                     </div>
-                    <strong>Engineering system map</strong>
+                    <strong>{articleContent.fallbackCoverTitle}</strong>
                   </div>
                 )}
 
                 <section className={overviewStyles.overview} data-article-reveal id="overview">
                   <p className={sectionEyebrowStyles.sectionEyebrow} data-article-section-eyebrow>
-                    Overview
+                    {articleContent.overviewLabel}
                   </p>
                   <p>{post.excerpt}</p>
 
                   <div className={overviewStyles.note}>
-                    <span>Engineering note</span>
-                    <p>
-                      The strongest architecture decisions are the ones that remain understandable
-                      after the implementation grows.
-                    </p>
+                    <span>{articleContent.engineeringNoteLabel}</span>
+                    <p>{articleContent.engineeringNote}</p>
                   </div>
                 </section>
 
@@ -520,14 +521,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                             />
                           ) : (
                             <TechnicalPreviewPlaceholder
-                              label={categoryLabel(relatedPost)}
+                              label={categoryLabel(relatedPost, articleContent.fallbackCategory)}
                               variant="terminal"
                             />
                           )}
                         </div>
 
                         <div className={relatedSectionStyles.relatedContent}>
-                          <span>{categoryLabel(relatedPost)}</span>
+                          <span>{categoryLabel(relatedPost, articleContent.fallbackCategory)}</span>
                           <h3>{relatedPost.title}</h3>
                           <p>
                             {publishedLabel(relatedPost, dateFormatter)}

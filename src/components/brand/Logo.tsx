@@ -11,6 +11,7 @@ type SiteLogoProps = {
   rightBracketFill?: string
   letterAFill?: string
   LetterKFill?: string
+  showContent?: boolean
 }
 
 export function Logo({
@@ -22,6 +23,7 @@ export function Logo({
   rightBracketFill = '#9b5cff',
   letterAFill = '#ffffff',
   LetterKFill = '#ffffff',
+  showContent = true,
 }: SiteLogoProps) {
   return (
     <Link
@@ -64,13 +66,15 @@ export function Logo({
         </svg>
       </span>
 
-      <span className={styles.content}>
-        <span className={styles.name}>Andrii Kulahin</span>
+      {showContent ? (
+        <span className={styles.content}>
+          <span className={styles.name}>Andrii Kulahin</span>
 
-        <span className={styles.role}>
-          Software Engineer <i aria-hidden="true" />
+          <span className={styles.role}>
+            Software Engineer <i aria-hidden="true" />
+          </span>
         </span>
-      </span>
+      ) : null}
     </Link>
   )
 }

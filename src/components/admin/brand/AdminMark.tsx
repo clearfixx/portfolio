@@ -27,6 +27,7 @@ export function AdminMark({
         className="portfolio-admin-brand-mark__logo"
         height={height}
         href={href}
+        showContent={false}
         width={width}
       />
     </span>

@@ -889,15 +889,10 @@ select,
 }
 
 .portfolio-admin-brand-mark > a,
-.portfolio-admin-brand-mark .logo,
-.portfolio-admin-brand-mark .logo__mark {
+.portfolio-admin-brand-mark__logo {
   display: block;
   width: 100%;
   height: 100%;
-}
-
-.portfolio-admin-brand-mark .logo__content {
-  display: none;
 }
 
 .portfolio-admin-brand-mark svg {
@@ -1141,7 +1136,7 @@ select,
 }
 
 .portfolio-admin-brand-mark > a,
-.portfolio-admin-brand-mark .logo {
+.portfolio-admin-brand-mark__logo {
   color: inherit;
   text-decoration: none;
 }

@@ -7,7 +7,6 @@
 export const PUBLIC_CONTENT = {
   blog: {
     indexQueryLimit: 250,
-    postsPerPage: 6,
     relatedPostsLimit: 3,
   },
   homepage: {

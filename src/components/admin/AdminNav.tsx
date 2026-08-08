@@ -54,7 +54,7 @@ const FIXED_GROUPS: Array<{ label: string; slugs: string[] }> = [
   },
   {
     label: 'Website',
-    slugs: ['homepage', 'navigation', 'about', 'profile', 'contact', 'social'],
+    slugs: ['homepage', 'public-pages', 'navigation', 'about', 'profile', 'contact', 'social'],
   },
   {
     label: 'Optimization',
@@ -81,6 +81,7 @@ const LABEL_OVERRIDES: Record<string, string> = {
   'newsletter-subscribers': 'Newsletter Subscribers',
   notifications: 'Notifications',
   profile: 'Profile',
+  'public-pages': 'Public Pages',
   projects: 'Projects',
   'project-versions': 'Project Versions',
   seo: 'SEO',
