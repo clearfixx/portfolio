@@ -102,6 +102,10 @@ export const Profile: GlobalConfig = {
           name: 'key',
           type: 'text',
           required: true,
+          admin: {
+            description:
+              'Stable machine-readable identifier. Use "commits" for the commit metric consumed by the Projects index.',
+          },
         },
         {
           name: 'label',

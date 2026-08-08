@@ -218,12 +218,10 @@ const categoryOf = (post: BlogPost): Category | null =>
 const coverOf = (post: BlogPost): Media | null =>
   typeof post.coverImage === 'object' && post.coverImage ? post.coverImage : null
 
-const categoryName = (category: Category | null): string => {
-  if (!category) return 'Uncategorized'
-  return category.title || 'Uncategorized'
+const categoryName = (category: Category | null, fallbackCategory: string): string => {
+  if (!category) return fallbackCategory
+  return category.title || fallbackCategory
 }
-
-const categoryLabel = (post: BlogPost) => categoryName(categoryOf(post))
 
 const publishedLabel = (post: BlogPost, dateFormatter: Intl.DateTimeFormat) =>
   post.publishedAt ? dateFormatter.format(new Date(post.publishedAt)) : 'Publication pending'
@@ -233,7 +231,7 @@ const validPage = (value: string | undefined) => {
   return Number.isFinite(parsed) && parsed > 0 ? parsed : 1
 }
 
-function collectCategories(posts: BlogPost[]): TaxonomyEntry[] {
+function collectCategories(posts: BlogPost[], fallbackCategory: string): TaxonomyEntry[] {
   const map = new Map<string, TaxonomyEntry>()
 
   posts.forEach((post) => {
@@ -242,7 +240,7 @@ function collectCategories(posts: BlogPost[]): TaxonomyEntry[] {
 
     map.set(category.slug, {
       count: (map.get(category.slug)?.count || 0) + 1,
-      label: categoryName(category),
+      label: categoryName(category, fallbackCategory),
       slug: category.slug,
     })
   })
@@ -304,10 +302,12 @@ function collectArchive(posts: BlogPost[]) {
 
 function ArticleImage({
   className,
+  fallbackCategory,
   post,
   priority = false,
 }: {
   className?: string
+  fallbackCategory: string
   post: BlogPost
   priority?: boolean
 }) {
@@ -319,7 +319,7 @@ function ArticleImage({
     return (
       <TechnicalPreviewPlaceholder
         className={[mediaStyles.imageFallback, className].filter(Boolean).join(' ')}
-        label={categoryLabel(post)}
+        label={categoryName(categoryOf(post), fallbackCategory)}
         variant="code"
       />
     )
@@ -372,8 +372,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   )
   const footerContent = homepageContent.siteFooter
   const pageContent = publicPages.blog.index
+  const fallbackCategory = publicPages.blog.article.fallbackCategory
+  const categoryLabel = (post: BlogPost) => categoryName(categoryOf(post), fallbackCategory)
   const postsPerPage = pageContent.postsPerPage
-  const categories = collectCategories(posts)
+  const categories = collectCategories(posts, fallbackCategory)
   const series = collectSeries(posts)
   const tags = collectTags(posts)
   const archive = collectArchive(posts)
@@ -539,6 +541,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   >
                     <ArticleImage
                       className={featuredStyles.featuredMedia}
+                      fallbackCategory={fallbackCategory}
                       post={featuredPost}
                       priority
                     />
@@ -610,7 +613,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   {visiblePosts.map((post) => (
                     <li key={post.id}>
                       <Link className={articleCardStyles.articleCard} href={`/blog/${post.slug}`}>
-                        <ArticleImage post={post} />
+                        <ArticleImage fallbackCategory={fallbackCategory} post={post} />
                         <span aria-hidden="true" className={articleCardStyles.cardIndex}>
                           {String(
                             (currentPage - 1) * postsPerPage +

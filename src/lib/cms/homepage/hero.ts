@@ -121,6 +121,7 @@ function getManualMetric(profile: Profile): HeroTelemetryItem | undefined {
   if (!metric) return undefined
 
   return {
+    key: cleanText(metric.key, 'manual'),
     label: cleanText(metric.label, 'Engineering metric'),
     suffix: metric.suffix?.trim() || '',
     value: metric.value,
@@ -149,21 +150,25 @@ function getTelemetry(
     activity,
     stats: [
       {
+        key: 'projects',
         label: 'Projects shipped',
         suffix: projectsCount > 0 ? '+' : '',
         value: Math.max(0, projectsCount),
       },
       manualMetric || {
+        key: 'technologies',
         label: 'Core technologies',
         suffix: '',
         value: Math.max(0, technologiesCount),
       },
       {
+        key: 'experience',
         label: 'Years coding',
         suffix: experienceYears > 0 ? '+' : '',
         value: experienceYears,
       },
       {
+        key: 'debug',
         label: 'Debug sessions',
         suffix: '∞',
         value: null,

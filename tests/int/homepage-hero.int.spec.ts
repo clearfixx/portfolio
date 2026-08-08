@@ -134,21 +134,25 @@ describe('homepage hero content', () => {
     ])
     expect(result.telemetry.stats).toEqual([
       {
+        key: 'projects',
         label: 'Projects shipped',
         suffix: '+',
         value: 18,
       },
       {
+        key: 'commits',
         label: 'Commits pushed',
         suffix: '+',
         value: 6241,
       },
       {
+        key: 'experience',
         label: 'Years coding',
         suffix: '+',
         value: 12,
       },
       {
+        key: 'debug',
         label: 'Debug sessions',
         suffix: '∞',
         value: null,
@@ -194,11 +198,13 @@ describe('homepage hero content', () => {
 
     expect(result.headline.title).toBe("I don't just build websites.")
     expect(result.telemetry.stats[0]).toEqual({
+      key: 'projects',
       label: 'Projects shipped',
       suffix: '',
       value: 0,
     })
     expect(result.telemetry.stats[1]).toEqual({
+      key: 'technologies',
       label: 'Core technologies',
       suffix: '',
       value: 0,

@@ -8,6 +8,7 @@ export type HeroTechItem = {
 }
 
 export type HeroTelemetryItem = {
+  key: string
   label: string
   suffix: string
   value: number | null

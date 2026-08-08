@@ -11,6 +11,7 @@ import {
   getSiteFooterGitHubFeed,
   getSiteSettings,
 } from '@/lib/cms'
+import type { HeroTelemetryItem } from '@/lib/cms/homepage'
 import { PUBLIC_CONTENT } from '@/lib/config'
 import { buildProjectDirectoryItems, getProjectImage } from '@/lib/cms/public-projects'
 
@@ -35,23 +36,14 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-type HomepageMetric = {
-  label?: string | null
-  value?: string | number | null
-}
+function readTelemetryMetric(metrics: HeroTelemetryItem[], key: string, fallback: string): string {
+  const metric = metrics.find((item) => item.key === key)
 
-function readMetric(metrics: HomepageMetric[], searchTerms: string[], fallback: string) {
-  const metric = metrics.find((item) => {
-    const label = item.label?.toLocaleLowerCase() ?? ''
-
-    return searchTerms.some((term) => label.includes(term))
-  })
-
-  if (metric?.value === null || metric?.value === undefined || metric.value === '') {
+  if (!metric || metric.value === null) {
     return fallback
   }
 
-  return String(metric.value)
+  return `${metric.value}${metric.suffix}`
 }
 
 export default async function ProjectsPage() {
@@ -70,10 +62,9 @@ export default async function ProjectsPage() {
   const openSourceCount = items.filter((item) =>
     item.links.some((link) => link.type === 'github'),
   ).length
-  const homepageMetrics = ((homepageContent.hero as { metrics?: HomepageMetric[] } | undefined)
-    ?.metrics ?? []) as HomepageMetric[]
-  const yearsBuilding = readMetric(homepageMetrics, ['year'], '—')
-  const codeCommitments = readMetric(homepageMetrics, ['commit'], '—')
+  const heroTelemetry = homepageContent.hero.telemetry.stats
+  const yearsBuilding = readTelemetryMetric(heroTelemetry, 'experience', '—')
+  const codeCommitments = readTelemetryMetric(heroTelemetry, 'commits', '—')
   const footerContent = homepageContent.siteFooter
   const pageContent = publicPages.projects.index
   const ctaContent = publicPages.projects.cta

@@ -125,15 +125,13 @@ function normalizeProfileStatus(value: string | null | undefined): ProfileStatus
 }
 
 function initialsFromName(name: string): string {
-  const initials = name
+  return name
     .trim()
     .split(/\s+/)
     .filter(Boolean)
     .slice(0, 2)
     .map((part) => part[0]?.toUpperCase())
     .join('')
-
-  return initials || 'PF'
 }
 
 function publishedLabel(post: BlogPost, dateFormatter: Intl.DateTimeFormat): string {
@@ -231,10 +229,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const tags = post.tags ?? []
   const series = post.series || articleContent.fallbackSeries
   const difficulty = post.difficulty || 'intermediate'
-  const authorName = profile.name.trim() || 'Portfolio author'
-  const authorRole = profile.role.trim() || 'Software Engineer'
-  const authorBio =
-    profile.shortBio?.trim() || profile.fullBio?.trim() || 'Profile details are being updated.'
+  const authorName = profile.name.trim() || siteSettings.siteName
+  const authorRole = profile.role.trim()
+  const authorBio = profile.shortBio?.trim() || profile.fullBio?.trim() || null
   const authorStatus = normalizeProfileStatus(profile.status)
   const authorStatusLabel = profile.availability?.trim() || PROFILE_STATUS_LABELS[authorStatus]
   const authorPortrait = mediaFrom(profile.portrait)
@@ -438,13 +435,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </div>
                   <div>
                     <strong>{authorName}</strong>
-                    <span>{authorRole}</span>
+                    {authorRole ? <span>{authorRole}</span> : null}
                     <small data-status={authorStatus}>
                       <i aria-hidden="true" />
                       {authorStatusLabel}
                     </small>
                   </div>
-                  <p>{authorBio}</p>
+                  {authorBio ? <p>{authorBio}</p> : null}
                   <Link href="/about">
                     View full profile
                     <ArticleIcon name="arrow" size={13} />
@@ -454,10 +451,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <div className={progressCardStyles.progressCard}>
                   <p>Reading progress</p>
                   <BlogArticleActions mode="progress" slug={post.slug} title={post.title} />
-                  <div>
-                    <span>Estimated time</span>
-                    <strong>{readingTime} min</strong>
-                  </div>
+                  {readingTime !== null ? (
+                    <div>
+                      <span>Estimated time</span>
+                      <strong>{readingTime} min</strong>
+                    </div>
+                  ) : null}
                 </div>
 
                 {tags.length > 0 ? (
